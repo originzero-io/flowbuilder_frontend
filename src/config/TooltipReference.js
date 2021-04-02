@@ -1,0 +1,11 @@
+export const SETTINGS = "settings";
+export const GUIDES = "guides";
+export const PROFILE = "profile";
+export const UNDO = "undo";
+export const REDO = "redo";
+export const SAVE = "save";
+export const CHANGE_THEME = "change_theme";
+export const CHANGE_FLAG_COLOR = "change_flag_color";
+export const MINI_MAP = "minimap";
+export const DELETE_ALL = "delete_all";
+export const ROTATE_ALL = "rotate_all";
