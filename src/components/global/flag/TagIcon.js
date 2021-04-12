@@ -1,5 +1,5 @@
 import React from 'react'
-import tagIcon from "../../assets/icons/Tag.png";
+import tagIcon from "../../../assets/icons/Tag.png";
 
 export default function TagIcon() {
     return (

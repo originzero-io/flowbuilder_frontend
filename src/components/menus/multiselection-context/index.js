@@ -7,8 +7,8 @@ import { setMultiSelectionContextMenu } from "../../../REDUX/actions/menuActions
 
 export default function MultiSelectionContextMenu() {
   const selected = useStoreState((state) => state.selectedElements);
-  const multiSelectionMenu = useSelector((state) => state.multiSelectionMenuReducer);
-  const theme = useSelector((state) => state.themeReducer);
+  const {multiSelectionMenu} = useSelector((state) => state.menuConfigReducer);
+  const {theme} = useSelector((state) => state.guiConfigReducer);
   const elements = useSelector((state) => state.elementReducer);
   const dispatch = useDispatch();
   const deleteItems = () => {

@@ -1,12 +1,17 @@
 import * as actionTypes from "../constants/flowConstants";
-import NodeClass from "../../globals/works/NodeClass";
+import NodeClass from "../../app-global/works/NodeClass";
 const nodeClass = new NodeClass("nodeClass was created by redux store");
 const initialElements = [];
+const flowConfig = {
+  reactFlowInstance: null,
+  miniMapDisplay: "visible",
+  groupBarDisplay:"hidden",
+  clickedElement: {},
+};
 
 export const nodeClassReducer = (state = nodeClass, action) => {
   return state;
 };
-
 export const elementReducer = (state = initialElements, action) => {
   switch (action.type) {
     case actionTypes.SET_ELEMENTS:
@@ -15,27 +20,16 @@ export const elementReducer = (state = initialElements, action) => {
       return state;
   }
 };
-export const reactFlowInstanceReducer = (state = null, action) => {
+export const flowConfigReducer = (state = flowConfig, action) => {
   switch (action.type) {
     case actionTypes.SET_REACT_FLOW_INSTANCE:
-      console.log("set_reactflow_action", action.payload);
-      return action.payload;
-    default:
-      return state;
-  }
-};
-export const clickedElementReducer = (state = {}, action) => {
-  switch (action.type) {
-    case actionTypes.SET_CLICKED_ELEMENT:
-      return action.payload;
-    default:
-      return state;
-  }
-};
-export const miniMapDisplayReducer = (state = "visible", action) => {
-  switch (action.type) {
+      return { ...state, reactFlowInstance: action.payload };
     case actionTypes.SET_MINIMAP_DISPLAY:
-      return action.payload;
+      return { ...state, miniMapDisplay: action.payload };
+    case actionTypes.SET_GROUPBAR_DISPLAY:
+      return { ...state, groupBarDisplay: action.payload };
+    case actionTypes.SET_CLICKED_ELEMENT:
+      return { ...state, clickedElement: action.payload };
     default:
       return state;
   }

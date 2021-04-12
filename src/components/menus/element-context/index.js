@@ -7,18 +7,18 @@ import { setElements } from "../../../REDUX/actions/flowActions";
 export default function ElementMenu() {
 
   const elements = useSelector((state) => state.elementReducer);
-  const showElementMenu = useSelector((state) => state.elementMenuReducer);
+  const {elementMenu} = useSelector((state) => state.menuConfigReducer);
   const theme = useSelector((state) => state.themeReducer);
   const dispatch = useDispatch();
 
   const deleteItem = () => {
-    const { element } = showElementMenu;
+    const { element } = elementMenu;
     const newElements = elements.filter((els) => els.id !== element.id);
     dispatch(setElements(newElements));
     dispatch(setElementContextMenu(false));
   };
   const rotateItem = () => {
-    const { element } = showElementMenu;
+    const { element } = elementMenu;
     const currentAlign = element.data.align;
     let newAlign;
     if (currentAlign === "vertical") {
@@ -45,8 +45,8 @@ export default function ElementMenu() {
   }
   return (
     <div>
-      {showElementMenu.state === true && (
-        <Menu x={showElementMenu.x} y={showElementMenu.y} theme={theme}>
+      {elementMenu.state === true && (
+        <Menu x={elementMenu.x} y={elementMenu.y} theme={theme}>
           <MenuItem>Save</MenuItem>
           <MenuItem>Edit</MenuItem>
           <MenuItem onClick={rotateItem}>Rotate</MenuItem>

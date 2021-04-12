@@ -3,7 +3,7 @@ import notificationIcon from "../../assets/icons/Notification.png";
 import NodeGod from "./NodeGod";
 import { useSelector, useDispatch } from "react-redux";
 
-const NotificationNode = (self) => {
+const CalculateNode = (self) => {
   
   const {flagColor} = useSelector((state) => state.guiConfigReducer);
 
@@ -17,11 +17,12 @@ const NotificationNode = (self) => {
         flagColor={flagColor}
         align={align}
         setAlign={setAlign}
-        io="target"
-        collapsable={false}
-      ></NodeGod>
+        io="both"
+        collapsable={true}
+        >
+      </NodeGod>
     </>
   );
 };
 
-export default NotificationNode;
+export default CalculateNode;

@@ -1,18 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getOutgoers, useUpdateNodeInternals } from "react-flow-renderer";
 import setVariable from "../../assets/icons/Set_Variables.png";
-import { getNodesAndEdges } from "../../globals/helpers/elementController";
+import { getNodesAndEdges } from "../../app-global/helpers/elementController";
 import useDidMountEffect from "../../hooks/useDidMountEffect";
 import NodeGod from "./NodeGod";
 import { Label } from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { setElements } from "../../REDUX/actions/flowActions";
-import updateNodeHandles from "../../globals/helpers/updateNodeHandles"
+import updateNodeHandles from "../../app-global/helpers/updateNodeHandles"
 
 const SetVariables = (self) => {
-  const flagColor = useSelector((state) => state.flagColorReducer);
+  const {flagColor} = useSelector((state) => state.guiConfigReducer);
   const elements = useSelector((state) => state.elementReducer);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
+  const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
   const dispatch = useDispatch();
   const [values, setValues] = useState([
     {
@@ -74,7 +75,6 @@ const SetVariables = (self) => {
     const updatedElements = updateNodeHandles(name, value, self, elements);
     dispatch(setElements(updatedElements))
   };
-
   return (
     <>
       <NodeGod

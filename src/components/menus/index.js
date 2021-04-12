@@ -1,19 +1,17 @@
 import React from "react";
-import MainMenu from "./nav-menus/MainMenu";
-import UtilitiesMenu from "./nav-menus/UtilitiesMenu";
-import ConfigurationMenu from "./nav-menus/ConfigurationMenu";
-import PanelContextMenu from "./panel-context/PanelContextMenu";
-import MultiSelectionContextMenu from "./multiselection-context/MultiSelectionContextMenu";
-import ElementContextMenu from "./element-context/ElementContextMenu";
+import NavMenus from "./nav-menus"
+import PanelContextMenu from "./panel-context";
+import MultiSelectionContextMenu from "./multiselection-context";
+import ElementContextMenu from "./element-context";
+import GroupBar from "./group-bar";
 export default function AppMenu() {
   return (
     <>
-      <MainMenu/>
-      <ConfigurationMenu/>
-      <UtilitiesMenu/>
+      <NavMenus/>
       <PanelContextMenu />
       <MultiSelectionContextMenu />
-      <ElementContextMenu/>
+      <ElementContextMenu />
+      <GroupBar/>
     </>
   );
 }

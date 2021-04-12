@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect } from "react";
 import ReactFlow, {
   addEdge,
   Background,
@@ -11,12 +11,14 @@ import ReactFlow, {
 } from "react-flow-renderer";
 import { useDispatch, useSelector,useStore } from "react-redux";
 import uuid from "react-uuid";
-import CustomNodes from "../../config/CustomNodes";
+import nodeTypes from "../nodes/index";
 import initialElements from "../../config/initial-elements";
-import { getDataFromDb } from "../../globals/db";
-import adjustScreen from "../../globals/dom/adjustScreen";
-import enableEventListeners from "../../globals/dom/enableEventListeners";
-import { loadFunctionsToNode } from "../../globals/helpers/loadFunctionsToNode";
+import { getDataFromDb } from "../../app-global/db";
+import adjustScreen from "../../app-global/dom/adjustScreen";
+import enableEventListeners from "../../app-global/dom/enableEventListeners";
+import { loadFunctionsToNode } from "../../app-global/helpers/loadFunctionsToNode";
+import { openNotification as notification } from "../../app-global/dom/notification";
+
 import {
   setClickedElement,
   setElements,
@@ -24,21 +26,22 @@ import {
 } from "../../REDUX/actions/flowActions";
 import {
   setElementContextMenu,
+  setGroupMenu,
   setMultiSelectionContextMenu,
   setPanelContextMenu,
 } from "../../REDUX/actions/menuActions";
-import { setNodeList,setRecentList } from "../../REDUX/actions/nodeListActions";
-import { openNotification as notification } from "../../globals/dom/notification";
+import { setNodeList } from "../../REDUX/actions/nodeListActions";
 import * as themeColor from '../../config/ThemeReference'
-
+import { closeAllGroupMenu } from "../../REDUX/actions/guiActions";
+import AppMenu from "../menus/index"
+import ControlButtons from "./ControlButtons";
 export default function FlowEditor({ reactFlowWrapper }) {
-  const reactFlowInstance = useSelector((state) => state.reactFlowInstanceReducer);
-  const flagColor = useSelector((state) => state.flagColorReducer);
-  const theme = useSelector((state) => state.themeReducer);
+  const {theme,flagColor} = useSelector((state) => state.guiConfigReducer);
+  const {reactFlowInstance,miniMapDisplay} = useSelector((state) => state.flowConfigReducer);
   const elements = useSelector((state) => state.elementReducer);
-  const miniMapDisplay = useSelector((state) => state.miniMapDisplayReducer);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
+  const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
   const dispatch = useDispatch();
   const store = useStore();
   const onConnect = (params) => {
@@ -47,11 +50,12 @@ export default function FlowEditor({ reactFlowWrapper }) {
       notification("ERROR!", "Kendisine bağlanamaz", "error");
     }
     else {
+      const color = elements.filter(els => els.id === params.source)[0].data.group.color
       const edge = {
         ...params,
         sourceX: 10,
         sourceY: 10,
-        style: { stroke: flagColor, strokeWidth: "2px" },
+        style: { stroke: color, strokeWidth: "2px" },
         data: { source: "", target: "", payload: "Anaks" },
       };
       const newElements = addEdge(edge, elements);
@@ -123,8 +127,9 @@ export default function FlowEditor({ reactFlowWrapper }) {
         onChange: nodeFunction,
         targetCount: 1,
         sourceCount: 1,
-        align: "vertical",
-        expand:false
+        align: "horizontal",
+        expand: false,
+        group:{name:nodeGroups[2].name,color:nodeGroups[2].color}
       },
     };
     dispatch(setElements([...elements, newNode]));
@@ -135,8 +140,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
       if (node.name === type) {
         return {
           ...node,
-          recent:true,
-          date: Date.now()
+          createdDate: Date.now()
         }
       }
       else {
@@ -151,6 +155,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
 
   const onDoubleClick = (event, element) => {
     dispatch(setPanelContextMenu(false));
+    dispatch(setGroupMenu(false));
+    dispatch(closeAllGroupMenu(true));
   };
   const onNodeContextMenu = (e, node) => {
     e.preventDefault();
@@ -180,7 +186,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
       dispatch(
         setPanelContextMenu({
           state: true,
-          x: e.clientX - 200,
+          x: e.clientX - 250,
           y: e.clientY,
         })
       );
@@ -201,7 +207,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         setPanelContextMenu({
           state: true,
           x: e.clientX,
-          y: e.clientY - 150,
+          y: e.clientY - 400,
         })
       );
     }
@@ -218,20 +224,20 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
 
   useEffect(() => {
-    const control = document.getElementsByClassName("react-flow__controls")[0]
-      .style;
-    let icons = document.querySelectorAll(".react-flow__controls-button");
-    if (theme === "dark") {
-      control.setProperty("background", "rgba(53, 59, 72,0.5)", "important");
-      icons.forEach((icon) => {
-        icon.children[0].style.setProperty("fill", "#dcdcdc", "important");
-      });
-    } else {
-      control.setProperty("background", "rgba(189, 195, 199,0.5)", "important");
-      icons.forEach((icon) => {
-        icon.children[0].style.setProperty("fill", "black", "important");
-      });
-    }
+    // const control = document.getElementsByClassName("react-flow__controls")[0]
+    //   .style;
+    // let icons = document.querySelectorAll(".react-flow__controls-button");
+    // if (theme === "dark") {
+    //   control.setProperty("background", "rgba(53, 59, 72,0.5)", "important");
+    //   icons.forEach((icon) => {
+    //     icon.children[0].style.setProperty("fill", "#dcdcdc", "important");
+    //   });
+    // } else {
+    //   control.setProperty("background", "rgba(189, 195, 199,0.5)", "important");
+    //   icons.forEach((icon) => {
+    //     icon.children[0].style.setProperty("fill", "black", "important");
+    //   });
+    // }
   }, [theme]);
 
   const onSelectionContextMenu = (e, nodes) => {
@@ -310,10 +316,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
 
   //enableEventListeners();
   const onNodeDoubleClick = (event,node) => {
-    console.log("node", node)
     const newElements = elements.map(element => {
       if (element.id === node.id) {
-        console.log("bu benim:",element.type)
         return {
           ...element,
           data: {
@@ -329,7 +333,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   return (
     <>
       <ReactFlow
-        nodeTypes={CustomNodes}
+        nodeTypes={nodeTypes}
         style={{
           background: theme === "light" ? themeColor.LIGHT_PANE : themeColor.DARK_PANE,
         }}
@@ -342,7 +346,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         onDoubleClick={onDoubleClick}
         onPaneContextMenu={onPaneContext}
         onPaneClick={onPaneClick}
-        onNodeDoubleClick={onNodeDoubleClick}
+        //onNodeDoubleClick={onNodeDoubleClick}
         onSelectionContextMenu={onSelectionContextMenu}
         onNodeContextMenu={onNodeContextMenu} //*node sağ tıklama
         onEdgeContextMenu={onNodeContextMenu} //*edge sağ tıklama
@@ -363,12 +367,19 @@ export default function FlowEditor({ reactFlowWrapper }) {
         zoomActivationKeyCode={90}
         zoomOnDoubleClick={false}
         connectionLineStyle={{ stroke: "#3498db", strokeWidth: 2 }}
+        snapToGrid={true}
+        snapGrid={[30,30]}
       >
-        <Controls/>
+        <AppMenu/>
+        <Controls>
+          <ControlButtons theme={theme}/>
+        </Controls>
         <Background
-          gap={50}
+          variant="lines"
+          gap={80}
           color={theme === "light" ? "#7f8c8d" : "rgb(170,170,170)"}
-          size={theme === "light" ? "2px" : "1.5px"}
+          // size={theme === "light" ? "2px" : "1.5px"}
+          size={theme === "light" ? "0.1px" : "0.1px"}
         />
         <MiniMap
           nodeColor="gray"

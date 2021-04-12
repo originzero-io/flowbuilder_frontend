@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import htov from "../../assets/icons/h_to_v.png";
-import vtoh from "../../assets/icons/v_to_h.png";
+import htov from "../../../assets/icons/h_to_v.png";
+import vtoh from "../../../assets/icons/v_to_h.png";
 import styled from "styled-components";
 const Button = styled.div`
   cursor: pointer;

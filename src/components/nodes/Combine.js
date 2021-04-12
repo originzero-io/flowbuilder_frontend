@@ -4,10 +4,10 @@ import NodeGod from "./NodeGod";
 import { useSelector, useDispatch } from "react-redux";
 import { Label } from "./styles";
 import { setElements } from "../../REDUX/actions/flowActions";
-import updateNodeHandles from "../../globals/helpers/updateNodeHandles"
+import updateNodeHandles from "../../app-global/helpers/updateNodeHandles"
 const CombineNode = (self) => {
   const elements = useSelector((state) => state.elementReducer);
-  const flagColor = useSelector((state) => state.flagColorReducer);
+  const {flagColor} = useSelector((state) => state.guiConfigReducer);
   const dispatch = useDispatch();
   const [handleCount, setHandleCount] = useState({
     targetCount: 1,

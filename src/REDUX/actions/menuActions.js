@@ -11,3 +11,7 @@ export const setMultiSelectionContextMenu = (data) => ({
   type: actionTypes.SET_MULTISELECTION_CONTEXT,
   payload: data,
 });
+export const setGroupMenu = (data) => ({
+  type: actionTypes.SET_OPEN_GROUP_PANEL,
+  payload: data,
+});

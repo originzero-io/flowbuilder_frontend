@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { NodeWrapper, NodeElement, Container } from "./style";
 import { useDispatch,useSelector } from "react-redux";
-import Icon from "../../global/Icon";
+import Icon from "../../nodes/global/NodeIcon";
 import FavIcon from "../../style-components/FavIcon";
 import { Label } from "../../nodes/styles";
 import styled from "styled-components";
 import { addFav } from "../../../REDUX/actions/nodeListActions";
-import { FavoriteIcon } from "../../icon-components/SvgIcons";
+import { FavoriteIcon } from "../../global/SvgIcons";
 const SearchBar = styled.input`
   border-radius: 4px;
-  border: none;
   width: 100%;
   padding-left: 6px;
   opacity: 1;
@@ -23,11 +22,9 @@ const SearchBar = styled.input`
 `;
 export default function AllNodes({ nodeList, favClick, onDragStart }) {
   const [searched, setSearched] = useState(nodeList);
-  const flagColor = useSelector((state)=>state.flagColorReducer)
-  const dispatch = useDispatch();
   const searchHandle = (e) => {
     const value = e.target.value;
-    const filtered = nodeList.filter((node) => node.name.includes(value));
+    const filtered = nodeList.filter((node) => node.name.toLowerCase().includes(value.toLowerCase()));
     setSearched(filtered);
   };
   useEffect(() => {

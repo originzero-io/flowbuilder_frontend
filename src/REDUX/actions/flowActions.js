@@ -16,3 +16,9 @@ export const setMiniMapDisplay = (data) => ({
   type: action.SET_MINIMAP_DISPLAY,
   payload: data
 });
+export const setGroupBarDisplay = (data) => ({
+  type: action.SET_GROUPBAR_DISPLAY,
+  payload: data
+});
+
+

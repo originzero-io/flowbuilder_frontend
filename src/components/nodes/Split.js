@@ -6,7 +6,7 @@ import useDidMountEffect from "../../hooks/useDidMountEffect";
 import NodeGod from "./NodeGod";
 import { Label } from "./styles";
 import { setElements } from "../../REDUX/actions/flowActions";
-import updateNodeHandles from "../../globals/helpers/updateNodeHandles"
+import updateNodeHandles from "../../app-global/helpers/updateNodeHandles"
 const SplitNode = (self) => {
   const flagColor = useSelector((state) => state.flagColorReducer);
   const elements = useSelector((state) => state.elementReducer);

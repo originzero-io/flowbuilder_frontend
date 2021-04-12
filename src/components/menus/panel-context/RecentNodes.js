@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { NodeWrapper, NodeElement } from "./style";
-import Icon from "../../global/Icon";
+import Icon from "../../nodes/global/NodeIcon";
 import { Label } from "../../nodes/styles";
-import { useSelector,useDispatch } from "react-redux";
-import { FavoriteIcon } from "../../icon-components/SvgIcons";
-import {setNodeList} from "../../../REDUX/actions/nodeListActions"
-import _ from "lodash"
+import { FavoriteIcon } from "../../global/SvgIcons";
+import sortBy from "lodash/sortBy"
 export default function RecentNodes({ nodeList, favClick, onDragStart }) {
-  const recent = nodeList.filter((node) => node.recent === true);
+  const recent = nodeList.filter((node) => node.createdDate !== undefined);
   const [recentNodes,setRecentNodes] = useState([])
   useEffect(() => {
-    const sortByDate = _.sortBy(recent, 'date').reverse().slice(0,3);
+    const sortByDate = sortBy(recent, 'createdDate').reverse().slice(0,3);
     setRecentNodes(sortByDate);
   },[recent])
   return (

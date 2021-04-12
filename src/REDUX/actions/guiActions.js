@@ -12,3 +12,7 @@ export const setAlignAll = (data) => ({
   type: action.SET_ALIGN_ALL,
   payload: data
 });
+export const closeAllGroupMenu = (data) => ({
+  type: action.SET_CLOSE_ALL_GROUPS,
+  payload: data
+});

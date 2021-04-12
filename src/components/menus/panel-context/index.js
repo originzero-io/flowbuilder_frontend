@@ -1,22 +1,15 @@
 import React, { useCallback, useState, useContext } from "react";
-import * as types from "../../../config/NodeTypes";
+import * as types from "../../nodes/constant/nodeTypes";
 import { NodeWrapper, NodeElement, Container } from "./style";
-import setVariables from "../../../assets/icons/Set_Variables.png";
-import combineIcon from "../../../assets/icons/Combine.png";
-import splitIcon from "../../../assets/icons/Split.png";
-import notificationIcon from "../../../assets/icons/Notification.png";
-import Icon from "../../global/Icon";
-import FavIcon from "../../style-components/FavIcon";
-import { Label } from "../../nodes/styles";
 import { useSelector,useDispatch } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import AllNodes from "./AllNodes";
 import FavoriteNodes from "./FavoriteNodes";
-import {addFav} from "../../../REDUX/actions/nodeListActions"
+import {setNodeList} from "../../../REDUX/actions/nodeListActions"
 import RecentNodes from "./RecentNodes";
 const PanelContextMenu = () => {
-  const panelMenu = useSelector((state) => state.panelMenuReducer);
-  const theme = useSelector((state) => state.themeReducer);
+  const {panelMenu} = useSelector((state) => state.menuConfigReducer);
+  const {theme} = useSelector((state) => state.guiConfigReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
   const dispatch = useDispatch();
   const onDragStart = (event, nodeType) => {
@@ -35,7 +28,7 @@ const PanelContextMenu = () => {
         return node;
       }
     })
-    dispatch(addFav(newList))
+    dispatch(setNodeList(newList))
   };
   return (
     <div>

@@ -1,8 +1,8 @@
 import React from "react";
 import { NodeWrapper, NodeElement } from "./style";
-import Icon from "../../global/Icon";
+import Icon from "../../nodes/global/NodeIcon";
 import { Label } from "../../nodes/styles";
-import { FavoriteIcon } from "../../icon-components/SvgIcons";
+import { FavoriteIcon } from "../../global/SvgIcons";
 
 export default function FavoriteNodes({ nodeList,favClick,onDragStart }) {
   const favoriteNodes = nodeList.filter((node) => node.fav === true);

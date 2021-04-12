@@ -38,7 +38,7 @@ const Circle = styled.div`
 
 export default function MainMenu() {
   //const dispatch = useDispatch();
-  const theme = useSelector((state) => state.themeReducer);
+  const {theme} = useSelector((state) => state.guiConfigReducer);
   const elements = useSelector((state) => state.elementReducer);
 
   return (
@@ -69,15 +69,6 @@ export default function MainMenu() {
         <Divider />
         <MenuItem theme={theme}>Devices</MenuItem>
         <Divider/>
-        <DropdownWrapper>
-          <MenuItem theme={theme}>Dropdown</MenuItem>
-          <DropdownList theme={theme}>
-            <DropDownItem>Weather App</DropDownItem>
-            <DropDownItem>Sport App</DropDownItem>
-            <DropDownItem>Gaming App</DropDownItem>
-          </DropdownList>
-        </DropdownWrapper>
-        
       </Menu>
     </div>
   );

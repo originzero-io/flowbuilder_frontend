@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import collapseIcon from "../../assets/icons/collapseIcon.png";
-import expandIcon from "../../assets/icons/expandIcon.png";
+import collapseIcon from "../../../assets/icons/collapseIcon.png";
+import expandIcon from "../../../assets/icons/expandIcon.png";
 
 export default function CollapseButton({expand,expandMenu}) {
   return (

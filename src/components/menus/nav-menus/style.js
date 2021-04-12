@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { DropdownList } from "../../style-components/DropdownComponent";
 import * as themeColor from "../../../config/ThemeReference"
 export const MenuIndex = styled.div`
-  position: fixed;
-  width: 300px;
+  position: absolute;
+  width: 250px;
   z-index: 6;
   display: flex;
   flex-direction: row;

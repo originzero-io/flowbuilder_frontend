@@ -6,30 +6,25 @@ const initialState = {
     y: 0,
     element:{}
   }
+const menuConfig = {
+  panelMenu: initialState,
+  multiSelectionMenu: initialState,
+  elementMenu: initialState,
+  groupMenu: initialState
+}
 
-export const panelMenuReducer = (state = initialState, action) => {
+export const menuConfigReducer = (state=menuConfig, action) => {
   switch (action.type) {
     case actionTypes.SET_PANEL_CONTEXT:
-      return action.payload;
-    default:
-      return state;
-  }
-};
-
-export const multiSelectionMenuReducer = (state = initialState, action) => {
-  switch (action.type) {
+      return {...state,panelMenu:action.payload}
     case actionTypes.SET_MULTISELECTION_CONTEXT:
-      return action.payload;
-    default:
-      return state;
-  }
-};
-
-export const elementMenuReducer = (state = initialState, action) => {
-  switch (action.type) {
+      return {...state,multiSelectionMenu:action.payload}
     case actionTypes.SET_ELEMENT_CONTEXT:
-      return action.payload;
+      return {...state,elementMenu:action.payload}
+    case actionTypes.SET_OPEN_GROUP_PANEL:
+      return {...state,groupMenu:action.payload}
     default:
       return state;
   }
-};
+}
+

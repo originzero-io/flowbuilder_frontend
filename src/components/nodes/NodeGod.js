@@ -1,8 +1,8 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Handle, useUpdateNodeInternals } from "react-flow-renderer";
-import CollapseButton from "../global/CollapseButton";
+import CollapseButton from "../global/buttons/CollapseButton";
 import { useSelector, useDispatch } from "react-redux";
-import { InfoIcon } from "../icon-components/SvgIcons";
+import { InfoIcon } from "../global/SvgIcons";
 import NodeHeader from "./global/NodeHeader";
 import NodeLogo from "./global/NodeLogo";
 import {
@@ -11,6 +11,7 @@ import {
   NodeWrapper,
   SourceWrapper,
   TargetWrapper,
+  Info,
 } from "./styles";
 const NodeGod = ({
   self,
@@ -20,12 +21,12 @@ const NodeGod = ({
   setAlign,
   io,
   children,
-  collapsable
+  collapsable,
 }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sourceArray = [];
   const targetArray = [];
-
+  const { alignAll } = useSelector((state) => state.guiConfigReducer);
   for (let index = 0; index < self.data.targetCount; index++) {
     if (io === "target" || io === "both") {
       targetArray.push(index);
@@ -44,45 +45,43 @@ const NodeGod = ({
     setExpand(!expand);
   };
   useEffect(() => {
-    setExpand(self.data.expand)
-  }, [self.data.expand])
-  const alignAll = useSelector((state) => state.alignAllReducer);
+    setExpand(self.data.expand);
+  }, [self.data.expand]);
   useEffect(() => {
-    setAlign(alignAll)
-  }, [alignAll])
+    setAlign(alignAll);
+  }, [alignAll]);
   useEffect(() => {
-    setAlign(self.data.align)
-  },[self.data.align])
+    setAlign(self.data.align);
+  }, [self.data.align]);
   const { selected } = self.data;
   return (
     <NodeWrapper align={align} selected={selected}>
       <TargetWrapper align={align}>
-        <>
-          {targetArray.map((i, index) => {
-            return (
-              <Handle
-                key={index}
-                type="target"
-                position={align === "vertical" ? "top" : "left"}
-                id={`target${index + 1}`}
-                className={`${
-                  align === "vertical"
-                    ? "node-handle vertical"
-                    : "node-handle horizontal"
-                }`}
-                style={{
-                  borderColor: flagColor,
-                }}
-              />
-            );
-          })}
-        </>
+        {targetArray.map((i, index) => {
+          return (
+            <Handle
+              key={index}
+              type="target"
+              position={align === "vertical" ? "top" : "left"}
+              id={`target${index + 1}`}
+              className={`${
+                align === "vertical"
+                  ? "node-handle vertical"
+                  : "node-handle horizontal"
+              }`}
+              style={{
+                borderColor: flagColor,
+              }}
+            />
+          );
+        })}
       </TargetWrapper>
       <NodeArea>
         <NodeHeader
+          self={self}
           iconSrc={iconSrc}
           label={self.data.label}
-          flagColor={flagColor}
+          flagColor={self.data.group.color}
           align={align}
           setAlign={setAlign}
           collapsable={collapsable}
@@ -96,44 +95,30 @@ const NodeGod = ({
             <NodeLogo src={iconSrc} />
           </NodeContent>
         )}
-        <div
-          style={{
-            width: "10px",
-            position: "absolute",
-            right: "5px",
-            bottom: "0",
-            cursor: "pointer",
-          }}
-        >
-          <InfoIcon
-            width={"10px"}
-            height={"10px"}
-            color={flagColor}
-            draggable={false}
-          />
-        </div>
+        <Info>
+          <InfoIcon color={flagColor} draggable={false} />
+        </Info>
       </NodeArea>
+
       <SourceWrapper align={align}>
-        <>
-          {sourceArray.map((i, index) => {
-            return (
-              <Handle
-                key={index}
-                type="source"
-                position={align === "vertical" ? "bottom" : "right"}
-                id={`source${index + 1}`}
-                className={`${
-                  align === "vertical"
-                    ? "node-handle vertical"
-                    : "node-handle horizontal"
-                }`}
-                style={{
-                  borderColor: flagColor,
-                }}
-              />
-            );
-          })}
-        </>
+        {sourceArray.map((i, index) => {
+          return (
+            <Handle
+              key={index}
+              type="source"
+              position={align === "vertical" ? "bottom" : "right"}
+              id={`source${index + 1}`}
+              className={`${
+                align === "vertical"
+                  ? "node-handle vertical"
+                  : "node-handle horizontal"
+              }`}
+              style={{
+                borderColor: flagColor,
+              }}
+            />
+          );
+        })}
       </SourceWrapper>
     </NodeWrapper>
   );
