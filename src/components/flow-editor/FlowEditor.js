@@ -51,13 +51,14 @@ export default function FlowEditor({ reactFlowWrapper }) {
     if (params.source === params.target) {
       notification("ERROR!", "Kendisine bağlanamaz", "error");
     } else {
-      const color = elements.filter((els) => els.id === params.source)[0].data
-        .group.color;
+      const sourceColor = elements.filter((els) => els.id === params.source)[0].data.group.color;
+      const targetColor = elements.filter((els) => els.id === params.target)[0].data.group.color;
+      const gradient = `linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(0,212,255,1) 100%);`  
       const edge = {
         ...params,
         sourceX: 10,
         sourceY: 10,
-        style: { stroke: color, strokeWidth: "2px" },
+        style: { stroke:sourceColor, strokeWidth: "2px"},
         data: { source: "", target: "", payload: "Anaks" },
       };
       const newElements = addEdge(edge, elements);
