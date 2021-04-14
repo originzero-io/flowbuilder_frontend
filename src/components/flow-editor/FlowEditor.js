@@ -187,7 +187,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
       );
     }
     //soldan taşma
-    //debelop
     else if (clientX < 200) {
       dispatch(
         setPanelContextMenu({
