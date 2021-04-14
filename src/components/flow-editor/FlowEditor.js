@@ -197,7 +197,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
       );
     }
     //alttan taşma
-      //test
     else if (windowHeight < clientY + 150) {
       dispatch(
         setPanelContextMenu({
