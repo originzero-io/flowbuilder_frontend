@@ -17,14 +17,6 @@ export default function ControlButtons({ theme }) {
     const {reactFlowInstance,miniMapDisplay,groupBarDisplay} = useSelector((state) => state.flowConfigReducer);
   const {alignAll} = useSelector((state) => state.guiConfigReducer);
   const dispatch = useDispatch();
-
-  const changeTheme = () => {
-    if (theme === "dark") {
-      dispatch(setTheme("light"));
-    } else {
-      dispatch(setTheme("dark"));
-    }
-  };
   const saveFlow = useCallback(() => {
     saveToDb(reactFlowInstance);
   }, [reactFlowInstance]);

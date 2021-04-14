@@ -1,7 +1,7 @@
 import React, { useState, useContext, useCallback } from "react";
 import styled from "styled-components";
 import { getDataFromDb, saveToDb } from "../../../app-global/db/index";
-import Divider from "../../global/Divider";
+import Divider from "../../style-components/Divider";
 import { MenuIndex, MenuItem } from "./style";
 import * as tooltip from "../../../config/TooltipReference";
 import Tooltip from "../../global/Tooltip";
@@ -40,44 +40,12 @@ export default function UtilitiesMenu() {
       dispatch(setTheme("dark"));
     }
   };
-  const saveFlow = useCallback(() => {
-    saveToDb(reactFlowInstance);
-  }, [reactFlowInstance]);
-  const changeFlagColor = (e) => {
-    dispatch(setFlagColor(e.target.value));
-  };
-  const mapDisplayHandle = () => {
-    if (miniMapDisplay === "visible") {
-      dispatch(setMiniMapDisplay("hidden"));
-    } else {
-      dispatch(setMiniMapDisplay("visible"));
-    }
-  };
-  const deleteAllNodes = () => {
-    dispatch(setElements([]))
-  };
-  const rotateAllHandle = () => {
-    if (alignAll === "vertical") {
-      dispatch(setAlignAll("horizontal"))
-    }
-    else {
-      dispatch(setAlignAll("vertical"))
-    }
-  };
-  const handleFullScreen = () => {
-    document.documentElement.requestFullscreen().catch(console.log);
-  };
 
   return (
     <Menu theme={theme}>
       <MenuItem theme={theme} onClick={changeTheme} data-tip="Change Theme" data-for={tooltip.CHANGE_THEME}>
         <i className="fas fa-sun"></i>
       </MenuItem>
-      {/* <MenuItem onClick={mapDisplayHandle} data-tip="Map" data-for={tooltip.MINI_MAP}>
-        <MapIcon
-          color={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        ></MapIcon>
-      </MenuItem> */}
       
       <Tooltip id={tooltip.REDO} place="top" type={theme === "dark" ? "light" : "dark"}></Tooltip>
       <Tooltip id={tooltip.UNDO} place="top" type={theme==="dark" ? "light" : "dark"}></Tooltip>

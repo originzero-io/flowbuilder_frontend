@@ -9,7 +9,7 @@ import ReactFlow, {
   updateEdge,
   useStoreState,
 } from "react-flow-renderer";
-import { useDispatch, useSelector,useStore } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import uuid from "react-uuid";
 import nodeTypes from "../nodes/index";
 import initialElements from "../../config/initial-elements";
@@ -31,26 +31,28 @@ import {
   setPanelContextMenu,
 } from "../../REDUX/actions/menuActions";
 import { setNodeList } from "../../REDUX/actions/nodeListActions";
-import * as themeColor from '../../config/ThemeReference'
+import * as themeColor from "../../config/ThemeReference";
 import { closeAllGroupMenu } from "../../REDUX/actions/guiActions";
-import AppMenu from "../menus/index"
+import AppMenu from "../menus/index";
 import ControlButtons from "./ControlButtons";
 export default function FlowEditor({ reactFlowWrapper }) {
-  const {theme,flagColor} = useSelector((state) => state.guiConfigReducer);
-  const {reactFlowInstance,miniMapDisplay} = useSelector((state) => state.flowConfigReducer);
+  const { theme, flagColor } = useSelector((state) => state.guiConfigReducer);
+  const { reactFlowInstance, miniMapDisplay } = useSelector(
+    (state) => state.flowConfigReducer
+  );
   const elements = useSelector((state) => state.elementReducer);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
   const dispatch = useDispatch();
   const store = useStore();
-  const onConnect = (params) => {
-    console.log("params",params)
+  const onConnectHandle = (params) => {
+    console.log("params", params);
     if (params.source === params.target) {
       notification("ERROR!", "Kendisine bağlanamaz", "error");
-    }
-    else {
-      const color = elements.filter(els => els.id === params.source)[0].data.group.color
+    } else {
+      const color = elements.filter((els) => els.id === params.source)[0].data
+        .group.color;
       const edge = {
         ...params,
         sourceX: 10,
@@ -80,16 +82,16 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setElements(newElements));
   }, [flagColor]);
 
-  const onEdgeUpdate = (oldEdge, newConnection) => {
+  const onEdgeUpdateHandle = (oldEdge, newConnection) => {
     const elementArray = store.getState().elementReducer;
-    const newElements = updateEdge(oldEdge, newConnection, elementArray)
-    dispatch(setElements(newElements));  
-  }
-  const onElementsRemove = (elementsToRemove) => {
-    const newElements = removeElements(elementsToRemove,elements)
+    const newElements = updateEdge(oldEdge, newConnection, elementArray);
     dispatch(setElements(newElements));
-  }
-  const onLoad = (_reactFlowInstance) => {
+  };
+  const onElementsRemoveHandle = (elementsToRemove) => {
+    const newElements = removeElements(elementsToRemove, elements);
+    dispatch(setElements(newElements));
+  };
+  const onLoadHandle = (_reactFlowInstance) => {
     dispatch(setReactFlowInstance(_reactFlowInstance));
     const data = getDataFromDb(nodeClass);
     data
@@ -98,17 +100,17 @@ export default function FlowEditor({ reactFlowWrapper }) {
         dispatch(setElements(flow.elements));
       })
       .catch((err) => {
-        console.log("ERROR ON DB",err);
+        console.log("ERROR ON DB", err);
         dispatch(setElements(initialElements));
       });
   };
 
-  const onDragOver = (event) => {
+  const onDragOverHandle = (event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
   };
 
-  const onDrop = (event) => {
+  const onDropHandle = (event) => {
     event.preventDefault();
     const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
     const type = event.dataTransfer.getData("application/reactflow");
@@ -129,36 +131,28 @@ export default function FlowEditor({ reactFlowWrapper }) {
         sourceCount: 1,
         align: "horizontal",
         expand: false,
-        group:{name:nodeGroups[2].name,color:nodeGroups[2].color}
+        group: { name: nodeGroups[2].name, color: nodeGroups[2].color },
       },
     };
     dispatch(setElements([...elements, newNode]));
     updateRecentStatus(type);
   };
   const updateRecentStatus = (type) => {
-    const newList = nodeList.map(node => {
-      if (node.name === type) {
-        return {
-          ...node,
-          createdDate: Date.now()
-        }
-      }
-      else {
-        return node;
-      }
-    })
-    dispatch(setNodeList(newList))
-  }
-  const onElementClick = (event, element) => {
+    const newList = nodeList.map((node) => {
+      return node.name === type ? { ...node, createdDate: Date.now() } : node;
+    });
+    dispatch(setNodeList(newList));
+  };
+  const onElementClickHandle = (event, element) => {
     dispatch(setClickedElement(element));
   };
 
-  const onDoubleClick = (event, element) => {
+  const onDoubleClickHandle = (event, element) => {
     dispatch(setPanelContextMenu(false));
     dispatch(setGroupMenu(false));
     dispatch(closeAllGroupMenu(true));
   };
-  const onNodeContextMenu = (e, node) => {
+  const onNodeContextMenuHandle = (e, node) => {
     e.preventDefault();
     dispatch(
       setElementContextMenu({
@@ -169,12 +163,12 @@ export default function FlowEditor({ reactFlowWrapper }) {
       })
     );
   };
-  const onPaneClick = (e) => {
+  const onPaneClickHandle = (e) => {
     dispatch(setMultiSelectionContextMenu(false));
     dispatch(setElementContextMenu(false));
   };
 
-  const onPaneContext = (e) => {
+  const onPaneContextHandle = (e) => {
     e.preventDefault();
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
@@ -240,7 +234,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     // }
   }, [theme]);
 
-  const onSelectionContextMenu = (e, nodes) => {
+  const onSelectionContextMenuHandle = (e, nodes) => {
     e.preventDefault();
     dispatch(
       setMultiSelectionContextMenu({
@@ -315,43 +309,44 @@ export default function FlowEditor({ reactFlowWrapper }) {
   }, [selected]);
 
   //enableEventListeners();
-  const onNodeDoubleClick = (event,node) => {
-    const newElements = elements.map(element => {
+  const onNodeDoubleClickHandle = (event, node) => {
+    const newElements = elements.map((element) => {
       if (element.id === node.id) {
         return {
           ...element,
           data: {
             ...element.data,
-            expand:!element.data.expand
-          }
-        }
+            expand: !element.data.expand,
+          },
+        };
       }
       return element;
-    })
-    dispatch(setElements(newElements))
-  }
+    });
+    dispatch(setElements(newElements));
+  };
   return (
     <>
       <ReactFlow
         nodeTypes={nodeTypes}
         style={{
-          background: theme === "light" ? themeColor.LIGHT_PANE : themeColor.DARK_PANE,
+          background:
+            theme === "light" ? themeColor.LIGHT_PANE : themeColor.DARK_PANE,
         }}
-        onLoad={onLoad}
-        onDrop={onDrop}
+        onLoad={onLoadHandle}
+        onDrop={onDropHandle}
         elements={elements}
-        onConnect={onConnect}
-        onElementsRemove={onElementsRemove}
-        onElementClick={onElementClick}
-        onDoubleClick={onDoubleClick}
-        onPaneContextMenu={onPaneContext}
-        onPaneClick={onPaneClick}
+        onConnect={onConnectHandle}
+        onElementsRemove={onElementsRemoveHandle}
+        onElementClick={onElementClickHandle}
+        onDoubleClick={onDoubleClickHandle}
+        onPaneContextMenu={onPaneContextHandle}
+        onPaneClick={onPaneClickHandle}
         //onNodeDoubleClick={onNodeDoubleClick}
-        onSelectionContextMenu={onSelectionContextMenu}
-        onNodeContextMenu={onNodeContextMenu} //*node sağ tıklama
-        onEdgeContextMenu={onNodeContextMenu} //*edge sağ tıklama
-        onDragOver={onDragOver}
-        onEdgeUpdate={onEdgeUpdate}
+        onSelectionContextMenu={onSelectionContextMenuHandle}
+        onNodeContextMenu={onNodeContextMenuHandle} //*node sağ tıklama
+        onEdgeContextMenu={onNodeContextMenuHandle} //*edge sağ tıklama
+        onDragOver={onDragOverHandle}
+        onEdgeUpdate={onEdgeUpdateHandle}
         //onNodeDragStart={(e, node) => console.log(node)}
         //onNodeDrag={(e, node) => console.log(node)}
         //onNodeDragStop={(e, node) => console.log(node)}
@@ -368,17 +363,16 @@ export default function FlowEditor({ reactFlowWrapper }) {
         zoomOnDoubleClick={false}
         connectionLineStyle={{ stroke: "#3498db", strokeWidth: 2 }}
         snapToGrid={true}
-        snapGrid={[30,30]}
+        snapGrid={[30, 30]}
       >
-        <AppMenu/>
+        <AppMenu />
         <Controls>
-          <ControlButtons theme={theme}/>
+          <ControlButtons theme={theme} />
         </Controls>
         <Background
           variant="lines"
           gap={80}
           color={theme === "light" ? "#7f8c8d" : "rgb(170,170,170)"}
-          // size={theme === "light" ? "2px" : "1.5px"}
           size={theme === "light" ? "0.1px" : "0.1px"}
         />
         <MiniMap

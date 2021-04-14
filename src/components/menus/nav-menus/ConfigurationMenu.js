@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Divider from "../../global/Divider";
+import Divider from "../../style-components/Divider";
 import Switch from "react-switch";
 import * as tooltip from "../../../config/TooltipReference";
 import { MenuIndex, MenuItem } from "./style";
@@ -58,7 +58,7 @@ export default function ConfigurationMenu() {
   return (
     <Menu theme={theme}>
       <DropdownWrapper>
-        <Switch
+        {/* <Switch
           onChange={onChangeHandle}
           checked={checked}
           onColor="#86d3ff"
@@ -70,7 +70,7 @@ export default function ConfigurationMenu() {
           activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
           height={20}
           width={48}
-        />
+        /> */}
         <MenuItem data-tip="Settings" data-for={tooltip.SETTINGS}>
           <SettingsIcon
             width={"25px"}
@@ -119,7 +119,7 @@ export default function ConfigurationMenu() {
         </DropdownList>
       </DropdownWrapper>
 
-      <Tooltip
+      {/* <Tooltip
         id={tooltip.SETTINGS}
         place="bottom"
         type={theme === "dark" ? "light" : "dark"}
@@ -133,7 +133,7 @@ export default function ConfigurationMenu() {
         id={tooltip.PROFILE}
         place="bottom"
         type={theme === "dark" ? "light" : "dark"}
-      ></Tooltip>
+      ></Tooltip> */}
     </Menu>
   );
 }

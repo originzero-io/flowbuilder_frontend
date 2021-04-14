@@ -82,6 +82,8 @@ body {
 .react-flow__controls-button {
   background-color: transparent !important;
   border-bottom: none !important;
+  width:20px !important;
+  height:20px !important;
 }
 .react-flow__controls-button:hover {
   transform: scale(1.1) !important;

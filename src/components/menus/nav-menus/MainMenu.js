@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import icon from "../../../assets/icons/Set_Variables.png";
-import Divider from "../../global/Divider";
+import Divider from "../../style-components/Divider";
 import { MenuIndex, MenuItem} from "./style";
 import {DropdownWrapper,DropdownList,DropDownItem} from "../../style-components/DropdownComponent"
 import { useSelector, useStore, useDispatch } from "react-redux";
