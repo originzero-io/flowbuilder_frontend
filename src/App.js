@@ -7,7 +7,7 @@ import {
   FlowWrapper,
 } from "./components/style-components/AppWrapper";
 import GroupBar from "./components/menus/group-bar/index";
-import FlowEditor from "./components/flow-editor/FlowEditor";
+import FlowEditor from "./components/flow-editor";
 import { useSelector, useDispatch } from "react-redux";
 const App = () => {
   const nodeClass = useSelector((state) => state.nodeClassReducer);

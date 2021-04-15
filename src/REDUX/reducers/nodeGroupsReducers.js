@@ -19,17 +19,35 @@ const nodeGroups = [
     nodes: [],
     color: "#f39c12",
   },
+  {
+    id: 4,
+    name: "group_4",
+    nodes: [],
+    color: "#32cd59",
+  },
+  {
+    id: 5,
+    name: "group_5",
+    nodes: [],
+    color: "#32cdae",
+  },
+  {
+    id: 6,
+    name: "group_6",
+    nodes: [],
+    color: "#f7f7f7",
+  },
 ];
 export const nodeGroupsReducer = (state = nodeGroups, { type, payload }) => {
   switch (type) {
     case actionTypes.ADD_GROUP:
       return [...state, payload];
     case actionTypes.UPDATE_GROUP:
-      return [...state, payload];
+      return state.map(state=>state.id === payload.id ? payload : state);
     case actionTypes.DELETE_GROUP:
-      return state.filter(s=>s.id !== payload);
+      return state.filter(state=>state.id !== payload);
     case actionTypes.ADD_NODE_TO_GROUP:
-      return payload;
+      return state.map(state => state.id === payload.group.id ? {...state, nodes:[...state.nodes,payload.self]} : state)
     default:
       return state;
   }

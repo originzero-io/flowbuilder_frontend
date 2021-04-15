@@ -11,7 +11,10 @@ export const Container = styled.div`
   color: rgb(22, 162, 165);
 `;
 
-export const GroupItem = styled.div`
+export const GroupItem = styled.button`
+  background:none;
+  border:1px solid rgb(255,255,255,0.1);
+  width:100%;
   padding: 2px 6px 2px 6px;
   display: flex;
   justify-content: space-between;
@@ -53,7 +56,8 @@ export const Title = styled.div`
 export const IconWrapper = styled.div`
   cursor: pointer;
 `;
-export const Label = styled.div``;
+export const Label = styled.div`
+`;
 
 export const InputWrapper = styled.div`
   position: relative;

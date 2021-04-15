@@ -36,11 +36,11 @@ const Circle = styled.div`
   align-items: center;
 `;
 
-export default function MainMenu() {
+const MainMenu = () => {
   //const dispatch = useDispatch();
   const {theme} = useSelector((state) => state.guiConfigReducer);
-  const elements = useSelector((state) => state.elementReducer);
-
+  //const elements = useSelector((state) => state.elementReducer);
+  console.log("main menuuuu")
   return (
     <div>
       <Menu theme={theme}>
@@ -52,7 +52,7 @@ export default function MainMenu() {
             height={"30px"}
             draggable={false}
             style={{ maxWidth: "100%", maxHeight: "100%" }}
-          ></img>
+          />
         </Circle>
 
         <DropdownWrapper>
@@ -73,3 +73,5 @@ export default function MainMenu() {
     </div>
   );
 }
+
+export default React.memo(MainMenu);

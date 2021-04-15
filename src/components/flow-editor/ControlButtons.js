@@ -39,7 +39,6 @@ export default function ControlButtons({ theme }) {
     }
     else {
       dispatch(setAlignAll("vertical"))
-      //developing commit
     }
   };
   return (

@@ -11,8 +11,6 @@ import GroupMenu from "../../menus/group-menu";
 export default function NodeHeader({
   self,
   iconSrc,
-  label,
-  flagColor,
   align,
   setAlign,
   collapsable,
@@ -23,32 +21,20 @@ export default function NodeHeader({
   const [showGroup, setShowGroup] = useState(false);
   const {closeAllGroupMenu} = useSelector(state=>state.guiConfigReducer)
   const groupHandle = (e) => {
-    // dispatch(
-    //   setGroupMenu({
-    //     state: true,
-    //     x: e.clientX,
-    //     y: e.clientY,
-    //   })
-    // )
     setShowGroup(!showGroup);
   };
-  // useEffect(() => {
-  //   setShowGroup(closeAllGroupMenu);
-  // }, [closeAllGroupMenu])
   return (
     <div>
       <Header>
         <Icon src={iconSrc} />
-        <Label>{label}</Label>
+        <Label>{self.data.label}</Label>
         {collapsable && (
           <CollapseButton expandMenu={expandMenu} expand={expand} />
         )}
         <RotateButton align={align} setAlign={setAlign} />
-        <Flag flagColor={flagColor} onClick={groupHandle}>
-        
-        </Flag>
+        <Flag flagColor={self.data.group.color} onClick={groupHandle}/>
         {showGroup && (
-            <GroupMenu/>
+          <GroupMenu self={self}/>
         )}
       </Header>
       <Divider />

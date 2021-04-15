@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import ReactFlow, {
   addEdge,
-  Background,
-  Controls,
   isEdge,
-  MiniMap,
   removeElements,
   updateEdge,
   useStoreState,
@@ -18,7 +15,6 @@ import adjustScreen from "../../app-global/dom/adjustScreen";
 import enableEventListeners from "../../app-global/dom/enableEventListeners";
 import { loadFunctionsToNode } from "../../app-global/helpers/loadFunctionsToNode";
 import { openNotification as notification } from "../../app-global/dom/notification";
-
 import {
   setClickedElement,
   setElements,
@@ -33,8 +29,7 @@ import {
 import { setNodeList } from "../../REDUX/actions/nodeListActions";
 import * as themeColor from "../../config/ThemeReference";
 import { closeAllGroupMenu } from "../../REDUX/actions/guiActions";
-import AppMenu from "../menus/index";
-import ControlButtons from "./ControlButtons";
+import FlowContent from "./FlowContent";
 export default function FlowEditor({ reactFlowWrapper }) {
   const { theme, flagColor } = useSelector((state) => state.guiConfigReducer);
   const { reactFlowInstance, miniMapDisplay } = useSelector(
@@ -43,7 +38,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const elements = useSelector((state) => state.elementReducer);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
-  const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
+  const selectedElements = useStoreState((state) => state.selectedElements);
+
   const dispatch = useDispatch();
   const store = useStore();
   const onConnectHandle = (params) => {
@@ -51,14 +47,15 @@ export default function FlowEditor({ reactFlowWrapper }) {
     if (params.source === params.target) {
       notification("ERROR!", "Kendisine bağlanamaz", "error");
     } else {
-      const sourceColor = elements.filter((els) => els.id === params.source)[0].data.group.color;
-      const targetColor = elements.filter((els) => els.id === params.target)[0].data.group.color;
-      const gradient = `linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(0,212,255,1) 100%);`  
+      const sourceColor = elements.filter((els) => els.id === params.source)[0]
+        .data.group.color;
+      const targetColor = elements.filter((els) => els.id === params.target)[0]
+        .data.group.color;
       const edge = {
         ...params,
         sourceX: 10,
         sourceY: 10,
-        style: { stroke:sourceColor, strokeWidth: "2px"},
+        style: { stroke: sourceColor, strokeWidth: "2px" },
         data: { source: "", target: "", payload: "Anaks" },
       };
       const newElements = addEdge(edge, elements);
@@ -132,7 +129,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         sourceCount: 1,
         align: "horizontal",
         expand: false,
-        group: { name: nodeGroups[2].name, color: nodeGroups[2].color },
+        group: {},
       },
     };
     dispatch(setElements([...elements, newNode]));
@@ -153,20 +150,17 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setGroupMenu(false));
     dispatch(closeAllGroupMenu(true));
   };
-  const onNodeContextMenuHandle = (e, node) => {
-    e.preventDefault();
-    dispatch(
-      setElementContextMenu({
-        state: true,
-        x: e.clientX,
-        y: e.clientY,
-        element: node,
-      })
-    );
+  const onNodeContextMenuHandle = (event, node) => {
+    event.preventDefault();
+    if (selectedElements && selectedElements.length > 1) {
+      openMultiSelectionContextMenu(event);
+    } else {
+      openElementContextMenu(event, node);
+    }
   };
   const onPaneClickHandle = (e) => {
-    dispatch(setMultiSelectionContextMenu(false));
-    dispatch(setElementContextMenu(false));
+    closeMultiSelectionContextMenu();
+    closeElementContextMenu();
   };
 
   const onPaneContextHandle = (e) => {
@@ -245,12 +239,11 @@ export default function FlowEditor({ reactFlowWrapper }) {
       })
     );
   };
-  const selected = useStoreState((state) => state.selectedElements);
 
   useEffect(() => {
     let newElements = [];
-    if (selected !== null) {
-      const selectedIDArray = selected.map((s) => s.id);
+    if (selectedElements !== null) {
+      const selectedIDArray = selectedElements.map((s) => s.id);
       const elementIDArray = elements.map((e) => e.id);
       const selectedElementsIDArray = elementIDArray.filter((elementId) =>
         selectedIDArray.includes(elementId)
@@ -307,9 +300,9 @@ export default function FlowEditor({ reactFlowWrapper }) {
       });
     }
     dispatch(setElements(newElements));
-  }, [selected]);
+  }, [selectedElements]);
 
-  //enableEventListeners();
+  enableEventListeners();
   const onNodeDoubleClickHandle = (event, node) => {
     const newElements = elements.map((element) => {
       if (element.id === node.id) {
@@ -324,6 +317,32 @@ export default function FlowEditor({ reactFlowWrapper }) {
       return element;
     });
     dispatch(setElements(newElements));
+  };
+
+  const openMultiSelectionContextMenu = (event) => {
+    dispatch(
+      setMultiSelectionContextMenu({
+        state: true,
+        x: event.clientX,
+        y: event.clientY,
+      })
+    );
+  };
+  const closeMultiSelectionContextMenu = () => {
+    dispatch(setMultiSelectionContextMenu(false));
+  };
+  const openElementContextMenu = (event, node) => {
+    dispatch(
+      setElementContextMenu({
+        state: true,
+        x: event.clientX,
+        y: event.clientY,
+        element: node,
+      })
+    );
+  };
+  const closeElementContextMenu = () => {
+    dispatch(setElementContextMenu(false));
   };
   return (
     <>
@@ -342,20 +361,11 @@ export default function FlowEditor({ reactFlowWrapper }) {
         onDoubleClick={onDoubleClickHandle}
         onPaneContextMenu={onPaneContextHandle}
         onPaneClick={onPaneClickHandle}
-        //onNodeDoubleClick={onNodeDoubleClick}
         onSelectionContextMenu={onSelectionContextMenuHandle}
         onNodeContextMenu={onNodeContextMenuHandle} //*node sağ tıklama
         onEdgeContextMenu={onNodeContextMenuHandle} //*edge sağ tıklama
         onDragOver={onDragOverHandle}
         onEdgeUpdate={onEdgeUpdateHandle}
-        //onNodeDragStart={(e, node) => console.log(node)}
-        //onNodeDrag={(e, node) => console.log(node)}
-        //onNodeDragStop={(e, node) => console.log(node)}
-        //onNodeMouseEnter={(e, node) => console.log(node)} //hover
-        //onNodeMouseLeave={(e, node) => console.log(node)} //hover leave
-        //onConnectEnd={(e) => console.log(e)}
-        //onMove={(flowTransform) => console.log(flowTransform)} //return x,y,zoom
-        //onSelectionChange={(els) => console.log(els)}
         deleteKeyCode={46}
         minZoom={0.3}
         maxZoom={4}
@@ -365,26 +375,17 @@ export default function FlowEditor({ reactFlowWrapper }) {
         connectionLineStyle={{ stroke: "#3498db", strokeWidth: 2 }}
         snapToGrid={true}
         snapGrid={[30, 30]}
+        //onNodeDoubleClick={onNodeDoubleClick}
+        //onNodeDragStart={(e, node) => console.log(node)}
+        //onNodeDrag={(e, node) => console.log(node)}
+        //onNodeDragStop={(e, node) => console.log(node)}
+        //onNodeMouseEnter={(e, node) => console.log(node)} //hover
+        //onNodeMouseLeave={(e, node) => console.log(node)} //hover leave
+        //onConnectEnd={(e) => console.log(e)}
+        //onMove={(flowTransform) => console.log(flowTransform)} //return x,y,zoom
+        //onSelectionChange={(els) => console.log(els)}
       >
-        <AppMenu />
-        <Controls>
-          <ControlButtons theme={theme} />
-        </Controls>
-        <Background
-          variant="lines"
-          gap={80}
-          color={theme === "light" ? "#7f8c8d" : "rgb(170,170,170)"}
-          size={theme === "light" ? "0.1px" : "0.1px"}
-        />
-        <MiniMap
-          nodeColor="gray"
-          maskColor="rgba(189, 195, 199,0.5)"
-          style={{
-            visibility: miniMapDisplay,
-            background: "rgba(53, 59, 72,0.8)",
-            borderRadius: "8px",
-          }}
-        />
+        <FlowContent theme={theme} miniMapDisplay={miniMapDisplay} />
       </ReactFlow>
     </>
   );

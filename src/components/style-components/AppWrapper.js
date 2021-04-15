@@ -15,7 +15,7 @@ export const FlowWrapper = styled.div`
   width:100%;
 `;
 export const GroupBarWrapper = styled.div`
-  width: ${({visible})=>visible === "visible" ? "180px" : "0px"};
+  width: ${({visible})=>visible === "visible" ? "200px" : "0px"};
   //width:180px;
   height:70vh;
   background:rgba(43,46,53,1);

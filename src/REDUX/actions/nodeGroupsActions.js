@@ -12,7 +12,7 @@ export const deleteGroup= (data) => ({
   type: action.DELETE_GROUP,
   payload: data
 });
-export const addNodeToGroup= (data) => ({
+export const addNodeToGroup= (self,group) => ({
   type: action.ADD_NODE_TO_GROUP,
-  payload: data
+  payload: {self,group}
 });

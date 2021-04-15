@@ -76,12 +76,11 @@ const NodeGod = ({
           );
         })}
       </TargetWrapper>
+      
       <NodeArea>
         <NodeHeader
           self={self}
           iconSrc={iconSrc}
-          label={self.data.label}
-          flagColor={self.data.group.color}
           align={align}
           setAlign={setAlign}
           collapsable={collapsable}
@@ -95,6 +94,7 @@ const NodeGod = ({
             <NodeLogo src={iconSrc} />
           </NodeContent>
         )}
+        
         <Info>
           <InfoIcon color={flagColor} draggable={false} />
         </Info>

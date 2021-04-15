@@ -11,6 +11,7 @@ import {
 import uuid from "react-uuid";
 import NodeGod from "../../nodes/NodeGod";
 import { setElements } from "../../../REDUX/actions/flowActions";
+import { updateGroup } from "../../../REDUX/actions/nodeGroupsActions";
 import styled from "styled-components";
 import { ColorBox, Label } from "../group-bar/style";
 const Container = styled.div`
@@ -46,12 +47,9 @@ const Content = styled.div`
   background: rgba(43,46,53,0.6);
   margin-top: 2px;
 `;
-export default function GroupMenu() {
-  const { groupMenu } = useSelector((state) => state.menuConfigReducer);
+export default function GroupMenu({self}) {
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
   const elements = useSelector((state) => state.elementReducer);
-  const { theme } = useSelector((state) => state.guiConfigReducer);
-  const { clickedElement } = useSelector((state) => state.flowConfigReducer);
   const dispatch = useDispatch();
   const [searched, setSearched] = useState([]);
   const searchHandle = (e) => {
@@ -65,7 +63,7 @@ export default function GroupMenu() {
   };
   const selectGroup = (group) => {
     const newElements = elements.map((els) => {
-      if (els.id === clickedElement.id) {
+      if (els.id === self.id) {
         return {
           ...els,
           data: {
@@ -77,6 +75,8 @@ export default function GroupMenu() {
       return els;
     });
     dispatch(setElements(newElements));
+    dispatch(addNodeToGroup(self,group)) 
+    
   };
   useEffect(() => {
     setSearched(nodeGroups);

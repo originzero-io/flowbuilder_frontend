@@ -58,19 +58,6 @@ export default function ConfigurationMenu() {
   return (
     <Menu theme={theme}>
       <DropdownWrapper>
-        {/* <Switch
-          onChange={onChangeHandle}
-          checked={checked}
-          onColor="#86d3ff"
-          onHandleColor="#2693e6"
-          handleDiameter={30}
-          uncheckedIcon={false}
-          checkedIcon={false}
-          boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-          activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-          height={20}
-          width={48}
-        /> */}
         <MenuItem data-tip="Settings" data-for={tooltip.SETTINGS}>
           <SettingsIcon
             width={"25px"}
@@ -78,12 +65,9 @@ export default function ConfigurationMenu() {
             color={
               theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
             }
-          ></SettingsIcon>
+          />
         </MenuItem>
         <DropdownList theme={theme}>
-          <DropDownItem>
-            <Switch></Switch>
-          </DropDownItem>
           <DropDownItem>Settings 2</DropDownItem>
           <DropDownItem>Settings 3</DropDownItem>
           <DropDownItem>Settings 4</DropDownItem>
@@ -99,7 +83,7 @@ export default function ConfigurationMenu() {
           color={
             theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
           }
-        ></GuideIcon>
+        />
       </MenuItem>
       <DropdownWrapper>
         <Circle theme={theme} data-tip="Profile" data-for={tooltip.PROFILE}>
@@ -109,7 +93,7 @@ export default function ConfigurationMenu() {
             color={
               theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
             }
-          ></ProfileIcon>
+          />
         </Circle>
         <DropdownList theme={theme} align="right">
           <DropDownItem>Profile</DropDownItem>
