@@ -7,7 +7,7 @@ import {
 import { setElements } from "../../../REDUX/actions/flowActions";
 import { DeleteButton, ColorFlag, GroupItem, Label } from "./style";
 import styled from "styled-components";
-import { useStoreActions } from "react-flow-renderer";
+import { useStoreActions,isNode } from "react-flow-renderer";
 const Form = styled.form`
   margin: 0 10px 0 10px;
   display: flex;
@@ -109,7 +109,7 @@ export default function GroupList({ theme }) {
     setSelectedElements(nodes);
   };
   const selectNonGroupsHandle = () => {
-    const nonGroups = elements.filter((els) => els.data.group.id === undefined);
+    const nonGroups = elements.filter((els) => isNode(els) && els.data.group.id === undefined);
     setSelectedElements(nonGroups);
   };
   return (
@@ -136,9 +136,6 @@ export default function GroupList({ theme }) {
                     <ItemButton onClick={() => groupItemClickHandle(group)}>
                       edit
                     </ItemButton>
-                    {/* <div onClick={() => groupItemClickHandle(group)}>
-                      <i className="fas fa-edit"></i>
-                    </div> */}
                   </>
                 )}
                 <ColorFlag type="color" value={group.color} />

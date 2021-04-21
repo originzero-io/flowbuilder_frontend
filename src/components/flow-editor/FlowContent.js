@@ -1,14 +1,14 @@
 import React from "react";
 import { Background, Controls, MiniMap } from "react-flow-renderer";
 import AppMenu from "../menus/index";
-import ControlButtons from "./ControlButtons";
+import ControlButtons from "./control-menu/ControlButtons";
 const FlowContent = ({ theme, miniMapDisplay }) => {
   return (
     <>
       <AppMenu />
-      <Controls>
+      {/* <Controls>
         <ControlButtons theme={theme} />
-      </Controls>
+      </Controls> */}
       <Background
         variant="lines"
         gap={80}
@@ -21,7 +21,7 @@ const FlowContent = ({ theme, miniMapDisplay }) => {
         style={{
           visibility: miniMapDisplay,
           background: "rgba(53, 59, 72,0.8)",
-          borderRadius: "8px",
+          borderRadius: "4px",
         }}
       />
     </>

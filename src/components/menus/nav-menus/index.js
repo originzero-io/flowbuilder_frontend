@@ -1,13 +1,13 @@
-import React from 'react'
-import ConfigurationMenu from "./ConfigurationMenu"
-import MainMenu from "./MainMenu"
-import UtilitiesMenu from "./UtilitiesMenu"
+import React from "react";
+import ConfigurationMenu from "./ConfigurationMenu";
+import MainMenu from "./MainMenu";
+import ControlMenu from "./ControlMenu";
 export default function NavMenus() {
-    return (
-        <>
-          <MainMenu/>  
-          <ConfigurationMenu/>  
-          <UtilitiesMenu/>  
-        </>
-    )
+  return (
+    <>
+      <MainMenu />
+      <ConfigurationMenu />
+      <ControlMenu />
+    </>
+  );
 }

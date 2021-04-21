@@ -103,7 +103,7 @@ export default function ConfigurationMenu() {
         </DropdownList>
       </DropdownWrapper>
 
-      {/* <Tooltip
+      <Tooltip
         id={tooltip.SETTINGS}
         place="bottom"
         type={theme === "dark" ? "light" : "dark"}
@@ -117,7 +117,7 @@ export default function ConfigurationMenu() {
         id={tooltip.PROFILE}
         place="bottom"
         type={theme === "dark" ? "light" : "dark"}
-      ></Tooltip> */}
+      ></Tooltip>
     </Menu>
   );
 }

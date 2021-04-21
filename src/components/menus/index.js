@@ -11,7 +11,7 @@ const AppMenu = () => {
       <PanelContextMenu />
       <MultiSelectionContextMenu />
       <ElementContextMenu />
-      <GroupBar/>
+      <GroupBar />
     </>
   );
 }
