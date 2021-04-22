@@ -212,23 +212,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
     }
   };
 
-  useEffect(() => {
-    // const control = document.getElementsByClassName("react-flow__controls")[0]
-    //   .style;
-    // let icons = document.querySelectorAll(".react-flow__controls-button");
-    // if (theme === "dark") {
-    //   control.setProperty("background", "rgba(53, 59, 72,0.5)", "important");
-    //   icons.forEach((icon) => {
-    //     icon.children[0].style.setProperty("fill", "#dcdcdc", "important");
-    //   });
-    // } else {
-    //   control.setProperty("background", "rgba(189, 195, 199,0.5)", "important");
-    //   icons.forEach((icon) => {
-    //     icon.children[0].style.setProperty("fill", "black", "important");
-    //   });
-    // }
-  }, [theme]);
-
   const onSelectionContextMenuHandle = (e, nodes) => {
     e.preventDefault();
     dispatch(
@@ -302,7 +285,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setElements(newElements));
   }, [selectedElements]);
 
-  enableEventListeners();
+  //enableEventListeners();
   const onNodeDoubleClickHandle = (event, node) => {
     const newElements = elements.map((element) => {
       if (element.id === node.id) {

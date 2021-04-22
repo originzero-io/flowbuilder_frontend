@@ -19,8 +19,6 @@ export default function FavoriteNodes({ nodeList,favClick,onDragStart }) {
               <Icon src={node.icon} width={"40vmin"} height={"40vmin"} />
               <Label>{node.name}</Label>
               <FavoriteIcon
-                width={"25px"}
-                height={"25px"}
                 favClick={favClick}
                 nodeId={node.id}
                 color={node.fav === true ? "rgb(218,168,0)" : "rgb(30,30,30)"}

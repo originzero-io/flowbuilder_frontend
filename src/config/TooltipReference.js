@@ -9,3 +9,7 @@ export const CHANGE_FLAG_COLOR = "change_flag_color";
 export const MINI_MAP = "minimap";
 export const DELETE_ALL = "delete_all";
 export const ROTATE_ALL = "rotate_all";
+export const ZOOM_IN = "zoom_in";
+export const ZOOM_OUT = "zoom_out";
+export const FIT_VIEW = "fit_view";
+export const LOCK_SCREEN = "lock_screen";

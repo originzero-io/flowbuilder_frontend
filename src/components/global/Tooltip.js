@@ -11,6 +11,7 @@ export default function Tooltip({id,place,type,others}) {
         effect="solid"
         delayHide={120}
         delayShow={50}
+      className="custom-tooltip"
         {...others}
       />
     </>

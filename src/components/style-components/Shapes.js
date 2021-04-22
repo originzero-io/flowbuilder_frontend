@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { readBuilderProgram } from "typescript";
 
 export const Circle = styled.div`
   width: 20px;
@@ -10,8 +11,8 @@ export const Circle = styled.div`
 `;
 export const Triangle = styled.div`
   margin: -2px -2px;
-  border-top-color: ${(props) => props.color};
-  border-right-color: ${(props) => props.color};
+  border-top-color: ${(props) => props.color || "rgb(80,80,80)"};
+  border-right-color: ${(props) => props.color || "rgb(80,80,80)"};
   border-bottom-color: transparent;
   border-left-color: transparent;
   border-style: solid;
