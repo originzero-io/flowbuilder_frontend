@@ -129,6 +129,6 @@ input[type="color"]::-webkit-color-swatch {
 
 
 .custom-tooltip{
-  padding:10px !important;
+  padding:8px !important;
   font-size:10px !important; 
 }

@@ -28,7 +28,7 @@ import {
 } from "../../REDUX/actions/menuActions";
 import { setNodeList } from "../../REDUX/actions/nodeListActions";
 import * as themeColor from "../../config/ThemeReference";
-import { closeAllGroupMenu } from "../../REDUX/actions/guiActions";
+import { closeAllNodeGroupMenu } from "../../REDUX/actions/guiActions";
 import FlowContent from "./FlowContent";
 export default function FlowEditor({ reactFlowWrapper }) {
   const { theme, flagColor } = useSelector((state) => state.guiConfigReducer);
@@ -38,10 +38,12 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const elements = useSelector((state) => state.elementReducer);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
+  const {nodeGroupMenuDisplay} = useSelector((state) => state.guiConfigReducer);
   const selectedElements = useStoreState((state) => state.selectedElements);
 
   const dispatch = useDispatch();
   const store = useStore();
+  
   const onConnectHandle = (params) => {
     console.log("params", params);
     if (params.source === params.target) {
@@ -148,7 +150,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const onDoubleClickHandle = (event, element) => {
     dispatch(setPanelContextMenu(false));
     dispatch(setGroupMenu(false));
-    dispatch(closeAllGroupMenu(true));
   };
   const onNodeContextMenuHandle = (event, node) => {
     event.preventDefault();
@@ -161,6 +162,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const onPaneClickHandle = (e) => {
     closeMultiSelectionContextMenu();
     closeElementContextMenu();
+    dispatch(closeAllNodeGroupMenu(true));
   };
 
   const onPaneContextHandle = (e) => {
