@@ -20,7 +20,7 @@ export const GroupItem = styled.button`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "whitesmoke")};
+  color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
   margin: 4px;
   border-radius: 4px;
   user-select: none;
@@ -47,9 +47,9 @@ export const Header = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
 `;
 export const Title = styled.div`
-  color: whitesmoke;
   margin-left: 6px;
   user-select: none;
 `;
@@ -62,6 +62,7 @@ export const Label = styled.div`
 export const InputWrapper = styled.div`
   position: relative;
   margin-top: 3px;
+  
 `;
 export const Input = styled.input`
   border-radius: 4px;
@@ -71,7 +72,7 @@ export const Input = styled.input`
   background-color: transparent;
   border: 1px solid #636e72;
   user-select: none;
-  color: whitesmoke;
+  color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
   font-size: 11px;
   &:focus {
     box-shadow: 0px 0px 44px -4px rgba(0, 0, 0, 0.75);

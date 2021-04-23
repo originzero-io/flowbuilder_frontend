@@ -43,7 +43,7 @@ export default function NewGroupForm({ theme }) {
   };
   return (
     <AddGroupWrapper onSubmit={addNewGroup}>
-      <Header>
+      <Header theme={theme}>
         <IconWrapper onClick={() => setFormOpen(!formOpen)}>
           {formOpen === true ? (
             <CancelIcon
@@ -69,6 +69,7 @@ export default function NewGroupForm({ theme }) {
       {formOpen && (
         <InputWrapper>
           <Input
+            theme={theme}
             placeholder="Add Group Name"
             required
             onChange={groupHandle}

@@ -1,15 +1,13 @@
 import React, { useState,useEffect, Component } from "react";
 import Icon from "./NodeIcon";
-//import CollapseButton from "../global/CollapseButton";
 import Flag from "./NodeFlag";
 import { Header, Label,FeatureIcons } from "../styles";
 import { useSelector, useDispatch } from "react-redux";
 import RotateButton from "../../global/buttons/RotateButton";
-import CollapseButton from "../../global/buttons/CollapseButton";
 import GroupMenu from "../../menus/group-menu";
 import { closeAllNodeGroupMenu } from "../../../REDUX/actions/guiActions";
 import { GroupFlagIcon, NameEditIcon, SetVariablesIcon, NotificationIcon, CombineIcon, SplitIcon, CalculateIcon } from "../../global/SvgIcons"
-import setIconInstance from "./iconConstant"
+import getIconComponent from "./iconConstant";
 export default function NodeHeader({
   self,
   align,
@@ -38,14 +36,13 @@ export default function NodeHeader({
     setHover(false);
   }
 
-  const NodeIcon = setIconInstance(self.type)
-  
+  const NodeIcon = getIconComponent(self.type)
+
   return (
     <>
       <Header onMouseEnter={onMouseEnterHandle} onMouseLeave={onMouseLeaveHandle} selected={selectedElements} onDoubleClick={onClick}>
-        <NodeIcon />
+        {/* <NodeIcon/> */}
         <Label>{self.data.label}</Label>
-        
         <FeatureIcons>
           {
             hover && (
@@ -55,9 +52,7 @@ export default function NodeHeader({
               </>
             )
           }
-          </FeatureIcons>
-          
-        
+        </FeatureIcons>   
         <Flag self={self} onClick={groupHandle}/>
         {showGroup &&(
           <GroupMenu self={self}/>

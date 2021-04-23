@@ -1,17 +1,5 @@
-import React, { useState } from "react";
-import htov from "../../../assets/icons/h_to_v.png";
-import vtoh from "../../../assets/icons/v_to_h.png";
-import styled from "styled-components";
-const Button = styled.div`
-  cursor: pointer;
-  img {
-    filter: brightness(10000%);
-  }
-  &:hover img {
-    filter: grayscale(100%);
-    //filter:hue-rotate(215deg);
-  }
-`;
+import React from "react";
+import { HorizontalToVerticalIcon,VerticalToHorizontalIcon } from "../SvgIcons";
 export default function RotateButton({ align, setAlign }) {
   const rotateHandle = () => {
     if (align === "vertical") {
@@ -21,13 +9,10 @@ export default function RotateButton({ align, setAlign }) {
     }
   };
   return (
-    <Button onClick={rotateHandle}>
-      <img
-        src={align === "vertical" ? htov : vtoh}
-        width={"15vh"}
-        height={"15vh"}
-        draggable={false}
-      ></img>
-    </Button>
+    <div onClick={rotateHandle}>
+      {
+        align === "horizontal" ? <HorizontalToVerticalIcon/> : <VerticalToHorizontalIcon/>
+      }
+    </div>
   );
 }

@@ -29,7 +29,7 @@ const NonGroups = styled.button`
   padding: 3px;
   width: 100%;
   font-size: 10px;
-  color: whitesmoke;
+  color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
   &:hover {
     background: orange;
   }
@@ -160,7 +160,7 @@ export default function GroupList({ theme }) {
           );
         })}
       </>
-      <NonGroups onClick={selectNonGroupsHandle}>Non-Groups</NonGroups>
+      <NonGroups onClick={selectNonGroupsHandle} theme={theme}>Non-Groups</NonGroups>
     </>
   );
 }

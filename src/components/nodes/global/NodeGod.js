@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Handle, useUpdateNodeInternals } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
 import { InfoIcon } from "../../global/SvgIcons";
 import NodeHeader from "./../global/NodeHeader";
-import NodeLogo from "./../global/NodeLogo";
 import {
   NodeArea,
   NodeContent,
@@ -15,8 +14,6 @@ import {
 import setIconInstance from "./iconConstant"
 const NodeGod = ({
   self,
-  iconSrc,
-  flagColor,
   align,
   setAlign,
   io,
@@ -52,7 +49,6 @@ const NodeGod = ({
     setAlign(self.data.align);
   }, [self.data.align]);
 
-
   const expandHandle = () => {
     if (collapsable) {
       setExpand(!expand);
@@ -76,7 +72,7 @@ const NodeGod = ({
                   : "node-handle horizontal"
               }`}
               style={{
-                borderColor: flagColor,
+                backgroundColor:self.data.group.color
               }}
             />
           );
@@ -92,17 +88,17 @@ const NodeGod = ({
           selectedElements={selected}
           onClick = {expandHandle}
         />
-        <NodeContent>
-          {
-            expand === true ? (
-              children
-            ) : (
-              <NodeIcon width="70px" height="70px" color="gray"/>
-            )
-          }
-        </NodeContent>
+        {expand === true ? (
+          <NodeContent>
+            {children}
+          </NodeContent>
+        ) : (
+            <NodeContent type="logo">
+              <NodeIcon width="70px" height="70px"/>
+            </NodeContent>
+        )}
         <Info>
-          <InfoIcon color={flagColor} draggable={false} />
+          <InfoIcon color={self.data.group.color || "whitesmoke"} draggable={false} />
         </Info>
       </NodeArea>
 
@@ -120,7 +116,7 @@ const NodeGod = ({
                   : "node-handle horizontal"
               }`}
               style={{
-                borderColor: flagColor,
+                backgroundColor: self.data.group.color,
               }}
             />
           );

@@ -39,21 +39,28 @@ export const Header = styled.div`
     #323232 0%,
     ${(props) => (props.selected === true ? "#108080" : "#404040")} 80%
   );
-  padding-left:3px;
+  padding:3px;
 `;
 export const Label = styled.div`
   color: rgb(220, 220, 220);
-  width: 60%;
   padding-left: 5px;
   font-family: "Prime-Light";
+  width:80%;
 `;
 export const FeatureIcons = styled.div`
   display:flex;
+  align-items:center;
+  justify-content:space-between;
   width:20%;
 `;
 
 export const NodeContent = styled.div`
   padding:10px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  flex-grow:${props=>props.type === "logo" ? "1" : "none"};
 `;
 
 export const TargetWrapper = styled.div`

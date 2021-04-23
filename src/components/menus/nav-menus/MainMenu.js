@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import icon from "../../../assets/icons/Set_Variables.png";
 import Divider from "../../style-components/Divider";
 import { MenuIndex, MenuItem} from "./style";
 import {DropdownWrapper,DropdownList,DropDownItem} from "../../style-components/DropdownComponent"
 import { useSelector, useStore, useDispatch } from "react-redux";
 import * as themeColor from "../../../config/ThemeReference"
+import { SetVariablesIcon } from "../../global/SvgIcons";
 
 const Menu = styled(MenuIndex)`
   top: 10px;
@@ -38,38 +38,22 @@ const Circle = styled.div`
 `;
 
 const MainMenu = () => {
-  //const dispatch = useDispatch();
   const {theme} = useSelector((state) => state.guiConfigReducer);
-  //const elements = useSelector((state) => state.elementReducer);
-  console.log("main menuuuu")
   return (
     <div>
       <Menu theme={theme}>
         <Circle theme={theme}>
-          <img
+          {/* <img
             src={icon}
             alt="noimg"
             width={"30px"}
             height={"30px"}
             draggable={false}
             style={{ maxWidth: "100%", maxHeight: "100%" }}
-          />
+          /> */}
+          <SetVariablesIcon/>
         </Circle>
         <MenuItem theme={theme}>Home</MenuItem>
-        {/* <DropdownWrapper>
-          <MenuItem theme={theme}>Flow</MenuItem>
-          <DropdownList theme={theme}>
-            <DropDownItem>Flow 1</DropDownItem>
-            <DropDownItem>Flow 2</DropDownItem>
-            <DropDownItem>Flow 3</DropDownItem>
-          </DropdownList>
-        </DropdownWrapper>
-
-        <Divider />
-        <MenuItem theme={theme}>Dashboard</MenuItem>
-        <Divider />
-        <MenuItem theme={theme}>Devices</MenuItem>
-        <Divider/> */}
       </Menu>
     </div>
   );

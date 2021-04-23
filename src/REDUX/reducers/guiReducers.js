@@ -2,7 +2,6 @@ import * as actionTypes from "../constants/guiConstants";
 
 const guiConfig = {
   theme: "dark",
-  flagColor: "rgb(44,206,166)",
   alignAll: "horizontal",
   nodeGroupMenuDisplay:false
 }

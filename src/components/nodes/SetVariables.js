@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getOutgoers, useUpdateNodeInternals } from "react-flow-renderer";
-import setVariable from "../../assets/icons/Set_Variables.png";
 import { getNodesAndEdges } from "../../app-global/helpers/elementController";
 import useDidMountEffect from "../../hooks/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
@@ -10,7 +9,6 @@ import { setElements } from "../../REDUX/actions/flowActions";
 import updateNodeHandles from "../../app-global/helpers/updateNodeHandles"
 
 const SetVariables = (self) => {
-  const {flagColor} = useSelector((state) => state.guiConfigReducer);
   const elements = useSelector((state) => state.elementReducer);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
@@ -79,8 +77,6 @@ const SetVariables = (self) => {
     <>
       <NodeGod
         self={self}
-        iconSrc={setVariable}
-        flagColor={flagColor}
         align={align}
         setAlign={setAlign}
         io="source"
@@ -94,7 +90,7 @@ const SetVariables = (self) => {
             value={text}
             onChange={textChange}
           />
-          <input type="checkbox" onChange={checkboxChange} />
+          <input type="checkbox" onChange={checkboxChange} value={checked} />
         </div>
         <Label>Source Length</Label>
         <input

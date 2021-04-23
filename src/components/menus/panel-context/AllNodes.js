@@ -30,6 +30,7 @@ export default function AllNodes({ nodeList, favClick, onDragStart }) {
   useEffect(() => {
     setSearched(nodeList);
   }, [nodeList]);
+  //const IconComponent = node.icon;
   return (
     <>
       <NodeWrapper>
@@ -41,7 +42,7 @@ export default function AllNodes({ nodeList, favClick, onDragStart }) {
               onDragStart={(event) => onDragStart(event, node.name)}
               draggable
             >
-              <Icon src={node.icon} width={"40vmin"} height={"40vmin"} />
+              <>{node.icon}</>
               <Label>{node.name}</Label>
               <FavoriteIcon
                 width={"25px"}

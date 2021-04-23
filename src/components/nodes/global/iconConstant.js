@@ -4,6 +4,7 @@ import {
   CombineIcon,
   SplitIcon,
   CalculateIcon,
+  ExcelReadIcon,
 } from "../../global/SvgIcons";
 
 const icons = {
@@ -14,10 +15,11 @@ const icons = {
   "Split": SplitIcon,
   "Excel Read": SplitIcon,
   "Serial Read": SplitIcon,
+  "Excel Read": ExcelReadIcon,
 };
 
-const setIconInstance = (type) => {
-    return icons[type]    
-}
+const getIconComponent = (type) => {
+  return icons[type];
+};
 
-export default setIconInstance;
+export default getIconComponent;

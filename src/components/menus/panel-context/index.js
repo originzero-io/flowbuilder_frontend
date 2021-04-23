@@ -31,7 +31,7 @@ const PanelContextMenu = () => {
     dispatch(setNodeList(newList))
   };
   return (
-    <div>
+    <>
       {panelMenu.state === true && (
         <Container x={panelMenu.x} y={panelMenu.y} theme={theme}>
           <Tabs
@@ -55,7 +55,7 @@ const PanelContextMenu = () => {
           </Tabs>
         </Container>
       )}
-    </div>
+    </>
   );
 };
 

@@ -21,7 +21,7 @@ export default function RecentNodes({ nodeList, favClick, onDragStart }) {
               onDragStart={(event) => onDragStart(event, node.name)}
               draggable
             >
-              <Icon src={node.icon} width={"40vmin"} height={"40vmin"} />
+              <>{node.icon}</>
               <Label>{node.name}</Label>
               <FavoriteIcon
                 width={"25px"}
