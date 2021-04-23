@@ -24,8 +24,8 @@ export default function RotateButton({ align, setAlign }) {
     <Button onClick={rotateHandle}>
       <img
         src={align === "vertical" ? htov : vtoh}
-        width={"20vh"}
-        height={"20vh"}
+        width={"15vh"}
+        height={"15vh"}
         draggable={false}
       ></img>
     </Button>

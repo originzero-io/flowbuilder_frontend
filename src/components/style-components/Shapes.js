@@ -10,7 +10,7 @@ export const Circle = styled.div`
   background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
 `;
 export const Triangle = styled.div`
-  margin: -2px -2px;
+  margin: 0px 0px;
   border-top-color: ${(props) => props.color || "rgb(80,80,80)"};
   border-right-color: ${(props) => props.color || "rgb(80,80,80)"};
   border-bottom-color: transparent;

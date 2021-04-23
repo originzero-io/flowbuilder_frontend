@@ -1,25 +1,27 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect, Component } from "react";
 import Icon from "./NodeIcon";
 //import CollapseButton from "../global/CollapseButton";
-import Flag from "../../global/flag";
-import { Header, Label, Divider } from "../styles";
+import Flag from "./NodeFlag";
+import { Header, Label,FeatureIcons } from "../styles";
 import { useSelector, useDispatch } from "react-redux";
 import RotateButton from "../../global/buttons/RotateButton";
 import CollapseButton from "../../global/buttons/CollapseButton";
 import GroupMenu from "../../menus/group-menu";
 import { closeAllNodeGroupMenu } from "../../../REDUX/actions/guiActions";
+import { GroupFlagIcon, NameEditIcon, SetVariablesIcon, NotificationIcon, CombineIcon, SplitIcon, CalculateIcon } from "../../global/SvgIcons"
+import setIconInstance from "./iconConstant"
 export default function NodeHeader({
   self,
-  iconSrc,
   align,
   setAlign,
   collapsable,
-  expand,
-  expandMenu,
+  selectedElements,
+  onClick
 }) {
   const dispatch = useDispatch();
   const [showGroup, setShowGroup] = useState(false);
-  const {nodeGroupMenuDisplay} = useSelector(state=>state.guiConfigReducer)
+  const [hover, setHover] = useState(false);
+  const { nodeGroupMenuDisplay } = useSelector(state => state.guiConfigReducer)
   const groupHandle = (e) => {
     setShowGroup(!showGroup);
     dispatch(closeAllNodeGroupMenu(false));
@@ -29,21 +31,38 @@ export default function NodeHeader({
       setShowGroup(!nodeGroupMenuDisplay);
     }
   }, [nodeGroupMenuDisplay])
+  const onMouseEnterHandle = () => {
+    setHover(true);
+  }
+  const onMouseLeaveHandle = () => {
+    setHover(false);
+  }
+
+  const NodeIcon = setIconInstance(self.type)
+  
   return (
     <>
-      <Header>
-        <Icon src={iconSrc} />
+      <Header onMouseEnter={onMouseEnterHandle} onMouseLeave={onMouseLeaveHandle} selected={selectedElements} onDoubleClick={onClick}>
+        <NodeIcon />
         <Label>{self.data.label}</Label>
-        {collapsable && (
-          <CollapseButton expandMenu={expandMenu} expand={expand} />
-        )}
-        <RotateButton align={align} setAlign={setAlign} />
-        <Flag flagColor={self.data.group.color} onClick={groupHandle}/>
+        
+        <FeatureIcons>
+          {
+            hover && (
+              <>
+                <NameEditIcon/>
+                <RotateButton align={align} setAlign={setAlign} />
+              </>
+            )
+          }
+          </FeatureIcons>
+          
+        
+        <Flag self={self} onClick={groupHandle}/>
         {showGroup &&(
           <GroupMenu self={self}/>
         )}
       </Header>
-      <Divider />
     </>
   );
 }

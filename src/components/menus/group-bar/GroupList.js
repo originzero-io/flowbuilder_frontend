@@ -117,7 +117,7 @@ export default function GroupList({ theme }) {
       <>
         {nodeGroups.map((group) => {
           return (
-            <>
+            <div key={group.id}>
               <GroupItem
                 key={group.id}
                 theme={theme}
@@ -141,7 +141,7 @@ export default function GroupList({ theme }) {
                 <ColorFlag type="color" value={group.color} />
               </GroupItem>
               {clickedItem.id === group.id && clickedItem.state && (
-                <Form onSubmit={onSubmitHandle}>
+                <Form key={group.id} onSubmit={onSubmitHandle}>
                   <Submit type="submit" value="Edit" />
                   <Input
                     name="name"
@@ -156,7 +156,7 @@ export default function GroupList({ theme }) {
                   />
                 </Form>
               )}
-            </>
+            </div>
           );
         })}
       </>

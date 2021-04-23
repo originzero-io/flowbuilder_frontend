@@ -9,17 +9,16 @@ import {
   addNodeToGroup,
 } from "../../../REDUX/actions/nodeGroupsActions";
 import uuid from "react-uuid";
-import NodeGod from "../../nodes/NodeGod";
 import { setElements } from "../../../REDUX/actions/flowActions";
 import { updateGroup } from "../../../REDUX/actions/nodeGroupsActions";
 import styled from "styled-components";
 import { ColorBox, Label } from "../group-bar/style";
 const Container = styled.div`
-  position:absolute;
+  position: absolute;
   right: -110px;
   top: -2px;
   min-width: 100px;
-`
+`;
 const SearchBar = styled.input`
   border-radius: 4px;
   width: 70%;
@@ -39,22 +38,24 @@ const GroupItem = styled.div`
   display: flex;
   justify-content: space-around;
   padding: 2px;
-  &:hover{
+  &:hover {
     background: #273c75;
   }
 `;
 const Content = styled.div`
-  background: rgba(43,46,53,0.6);
+  background: rgba(43, 46, 53, 0.6);
   margin-top: 2px;
 `;
-export default function GroupMenu({self}) {
+export default function GroupMenu({ self }) {
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
   const elements = useSelector((state) => state.elementReducer);
   const dispatch = useDispatch();
   const [searched, setSearched] = useState([]);
   const searchHandle = (e) => {
     const value = e.target.value;
-    const filtered = nodeGroups.filter((group) => group.name.toLowerCase().includes(value.toLowerCase()));
+    const filtered = nodeGroups.filter((group) =>
+      group.name.toLowerCase().includes(value.toLowerCase())
+    );
     if (value === "") {
       setSearched([]);
     } else {
@@ -62,6 +63,13 @@ export default function GroupMenu({self}) {
     }
   };
   const selectGroup = (group) => {
+    //?Daha önce seçtiği tüm gruplardan silinsin
+    // const eles =  elements.map(els => {
+    //     return els.data.group.nodes.filter(node=>node.id===self.id)
+    // })
+    // console.log("eles:",eles)
+
+    //console.log("group:", group);
     const newElements = elements.map((els) => {
       if (els.id === self.id) {
         return {
@@ -75,8 +83,7 @@ export default function GroupMenu({self}) {
       return els;
     });
     dispatch(setElements(newElements));
-    dispatch(addNodeToGroup(self,group)) 
-    
+    dispatch(addNodeToGroup(self, group));
   };
   useEffect(() => {
     setSearched(nodeGroups);
@@ -94,7 +101,7 @@ export default function GroupMenu({self}) {
       <Content>
         {searched.map((group) => {
           return (
-            <GroupItem onClick={() => selectGroup(group)}>
+            <GroupItem key={group.id} onClick={() => selectGroup(group)}>
               <Label>{group.name}</Label>
               <ColorBox color={group.color} />
             </GroupItem>

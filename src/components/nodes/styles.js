@@ -7,13 +7,13 @@ export const NodeWrapper = styled.div`
   padding: 2px 2px;
   padding-bottom: 0px; //Added by "My name is Anıl Akseki"
   font-size: 12px;
-  border-radius: 2px;
+  border-radius: 4px;
   text-align: center;
   background-color: #000000;
   background-image: linear-gradient(
     355deg,
     #323232 0%,
-    ${(props) => (props.selected === true ? "#808080" : "#505050")} 80%
+    #505050 80%
   );
   box-shadow: 0.261px 1.5px 3px 0px rgba(0, 0, 0, 0.996);
 `;
@@ -29,20 +29,31 @@ export const Header = styled.div`
   align-items: center;
   text-align: start; //Added by "My name is Anıl Akseki"
   position:relative;
+  margin:-2px;
+  border-top-right-radius:3px;
+  border-top-left-radius:3px;
+  box-shadow: 0.1px 0.5px 0.6px 0px rgba(0, 0, 0, 0.7);
+  background-color: #000000;
+  background-image: linear-gradient(
+    355deg,
+    #323232 0%,
+    ${(props) => (props.selected === true ? "#108080" : "#404040")} 80%
+  );
+  padding-left:3px;
 `;
 export const Label = styled.div`
   color: rgb(220, 220, 220);
-  width: 100%;
-  padding-left: 10px;
+  width: 60%;
+  padding-left: 5px;
   font-family: "Prime-Light";
+`;
+export const FeatureIcons = styled.div`
+  display:flex;
+  width:20%;
 `;
 
 export const NodeContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-grow: ${(props) => (props.type === "logo" ? "1" : "none")};
+  padding:10px;
 `;
 
 export const TargetWrapper = styled.div`

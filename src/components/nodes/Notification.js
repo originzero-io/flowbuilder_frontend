@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import notificationIcon from "../../assets/icons/Notification.png";
-import NodeGod from "./NodeGod";
+import NodeGod from "./global/NodeGod";
 import { useSelector, useDispatch } from "react-redux";
 
 const NotificationNode = (self) => {

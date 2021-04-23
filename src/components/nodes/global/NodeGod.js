@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Handle, useUpdateNodeInternals } from "react-flow-renderer";
-import CollapseButton from "../global/buttons/CollapseButton";
 import { useSelector, useDispatch } from "react-redux";
-import { InfoIcon } from "../global/SvgIcons";
-import NodeHeader from "./global/NodeHeader";
-import NodeLogo from "./global/NodeLogo";
+import { InfoIcon } from "../../global/SvgIcons";
+import NodeHeader from "./../global/NodeHeader";
+import NodeLogo from "./../global/NodeLogo";
 import {
   NodeArea,
   NodeContent,
@@ -12,7 +11,8 @@ import {
   SourceWrapper,
   TargetWrapper,
   Info,
-} from "./styles";
+} from "../styles";
+import setIconInstance from "./iconConstant"
 const NodeGod = ({
   self,
   iconSrc,
@@ -41,9 +41,7 @@ const NodeGod = ({
     updateNodeInternals(self.id);
   }, [self.data.targetCount, self.data.sourceCount, align]);
   const [expand, setExpand] = useState(false);
-  const expandMenu = () => {
-    setExpand(!expand);
-  };
+
   useEffect(() => {
     setExpand(self.data.expand);
   }, [self.data.expand]);
@@ -53,7 +51,15 @@ const NodeGod = ({
   useEffect(() => {
     setAlign(self.data.align);
   }, [self.data.align]);
+
+
+  const expandHandle = () => {
+    if (collapsable) {
+      setExpand(!expand);
+    }
+  }
   const { selected } = self.data;
+  const NodeIcon = setIconInstance(self.type)
   return (
     <NodeWrapper align={align} selected={selected}>
       <TargetWrapper align={align}>
@@ -80,21 +86,21 @@ const NodeGod = ({
       <NodeArea>
         <NodeHeader
           self={self}
-          iconSrc={iconSrc}
           align={align}
           setAlign={setAlign}
           collapsable={collapsable}
-          expand={expand}
-          expandMenu={expandMenu}
+          selectedElements={selected}
+          onClick = {expandHandle}
         />
-        {expand === true ? (
-          <NodeContent>{children}</NodeContent>
-        ) : (
-          <NodeContent type="logo">
-            <NodeLogo src={iconSrc} />
-          </NodeContent>
-        )}
-        
+        <NodeContent>
+          {
+            expand === true ? (
+              children
+            ) : (
+              <NodeIcon width="70px" height="70px" color="gray"/>
+            )
+          }
+        </NodeContent>
         <Info>
           <InfoIcon color={flagColor} draggable={false} />
         </Info>

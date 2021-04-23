@@ -17,17 +17,17 @@ export const FlowWrapper = styled.div`
 export const GroupBarWrapper = styled.div`
   width: ${({visible})=>visible === "visible" ? "200px" : "0px"};
   //width:180px;
-  height:70vh;
-  background:rgba(43,46,53,1);
+  max-height:70vh;
   transition:width .4s ease;
-  padding-top:10px;
+  padding:10px;
   //overflow:hidden;
   position:absolute;
   right:0px;
   top:9vh;
   z-index:5;
-  border-top-left-radius:6px;
-  border-bottom-left-radius:6px;
+  border: 1px solid rgba(120,120,120,0.4);
+  border-top-left-radius:4px;
+  border-bottom-left-radius:4px;
   //overflow:auto;
   //visibility: ${({visible})=>visible};
 `;

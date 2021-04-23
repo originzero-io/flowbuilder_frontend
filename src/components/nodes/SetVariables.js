@@ -3,7 +3,7 @@ import { getOutgoers, useUpdateNodeInternals } from "react-flow-renderer";
 import setVariable from "../../assets/icons/Set_Variables.png";
 import { getNodesAndEdges } from "../../app-global/helpers/elementController";
 import useDidMountEffect from "../../hooks/useDidMountEffect";
-import NodeGod from "./NodeGod";
+import NodeGod from "./global/NodeGod";
 import { Label } from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { setElements } from "../../REDUX/actions/flowActions";

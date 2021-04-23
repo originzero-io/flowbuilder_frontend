@@ -15,6 +15,7 @@ const Menu = styled(MenuIndex)`
       ? themeColor.DARK_MENU_BACKGROUND
       : themeColor.LIGHT_MENU_BACKGROUND};
   border-radius: 6px;
+  width:70px;
 `;
 const Circle = styled.div`
   width: 50px;
@@ -54,8 +55,8 @@ const MainMenu = () => {
             style={{ maxWidth: "100%", maxHeight: "100%" }}
           />
         </Circle>
-
-        <DropdownWrapper>
+        <MenuItem theme={theme}>Home</MenuItem>
+        {/* <DropdownWrapper>
           <MenuItem theme={theme}>Flow</MenuItem>
           <DropdownList theme={theme}>
             <DropDownItem>Flow 1</DropDownItem>
@@ -68,7 +69,7 @@ const MainMenu = () => {
         <MenuItem theme={theme}>Dashboard</MenuItem>
         <Divider />
         <MenuItem theme={theme}>Devices</MenuItem>
-        <Divider/>
+        <Divider/> */}
       </Menu>
     </div>
   );

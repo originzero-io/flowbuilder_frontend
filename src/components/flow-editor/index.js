@@ -131,7 +131,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         sourceCount: 1,
         align: "horizontal",
         expand: false,
-        group: {},
+        group: {nodes:[]},
       },
     };
     dispatch(setElements([...elements, newNode]));
@@ -358,8 +358,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
         zoomActivationKeyCode={90}
         zoomOnDoubleClick={false}
         connectionLineStyle={{ stroke: "#3498db", strokeWidth: 2 }}
-        snapToGrid={true}
-        snapGrid={[30, 30]}
+        // snapToGrid={true}
+        // snapGrid={[60, 60]}
         //onNodeDoubleClick={onNodeDoubleClick}
         //onNodeDragStart={(e, node) => console.log(node)}
         //onNodeDrag={(e, node) => console.log(node)}

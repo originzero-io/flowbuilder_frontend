@@ -3,7 +3,7 @@ import { getOutgoers } from "react-flow-renderer";
 import {useSelector,useDispatch} from "react-redux"
 import splitIcon from "../../assets/icons/Split.png";
 import useDidMountEffect from "../../hooks/useDidMountEffect";
-import NodeGod from "./NodeGod";
+import NodeGod from "./global/NodeGod";
 import { Label } from "./styles";
 import { setElements } from "../../REDUX/actions/flowActions";
 import updateNodeHandles from "../../app-global/helpers/updateNodeHandles"

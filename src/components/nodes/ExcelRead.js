@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import notificationIcon from "../../assets/icons/Notification.png";
 import NodeGod from "./global/NodeGod";
 import { useSelector, useDispatch } from "react-redux";
 
-const CalculateNode = (self) => {
+const ExcelReadNode = (self) => {
   
   const {flagColor} = useSelector((state) => state.guiConfigReducer);
 
@@ -17,12 +17,11 @@ const CalculateNode = (self) => {
         flagColor={flagColor}
         align={align}
         setAlign={setAlign}
-        io="both"
-        collapsable={true}
-        >
-      </NodeGod>
+        io="source"
+        collapsable={false}
+      ></NodeGod>
     </>
   );
 };
 
-export default CalculateNode;
+export default ExcelReadNode;
