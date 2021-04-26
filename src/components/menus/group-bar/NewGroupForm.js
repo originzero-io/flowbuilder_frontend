@@ -18,10 +18,17 @@ import {
   SubmitIcon,
   AddIcon,
   CancelIcon,
+  NonGroupIcon,
 } from "../../global/SvgIcons";
+import { useStoreActions, isNode } from "react-flow-renderer";
+
 export default function NewGroupForm({ theme }) {
   const [groupInfo, setGroupInfo] = useState({});
   const [formOpen, setFormOpen] = useState(false);
+  const elements = useSelector((state) => state.elementReducer);
+  const setSelectedElements = useStoreActions(
+    (actions) => actions.setSelectedElements
+  );
   const dispatch = useDispatch();
   const groupHandle = (event) => {
     const { name, value } = event.target;
@@ -40,6 +47,13 @@ export default function NewGroupForm({ theme }) {
         color: groupInfo.color,
       })
     );
+  };
+  const selectNonGroupsHandle = () => {
+    console.log("fkjsdhfjsd")
+    const nonGroups = elements.filter(
+      (els) => isNode(els) && els.data.group.id === undefined
+    );
+    setSelectedElements(nonGroups);
   };
   return (
     <AddGroupWrapper onSubmit={addNewGroup}>
@@ -64,6 +78,7 @@ export default function NewGroupForm({ theme }) {
           )}
         </IconWrapper>
         <Title>Groups</Title>
+        <NonGroupIcon width="40px" height="40px" onClick={selectNonGroupsHandle} theme={theme}/>
       </Header>
 
       {formOpen && (
@@ -75,7 +90,7 @@ export default function NewGroupForm({ theme }) {
             onChange={groupHandle}
             name="name"
             value={groupInfo.name}
-            maxLength={14}
+            maxLength={18}
           />
           <ColorInput
             type="color"
@@ -96,7 +111,7 @@ export default function NewGroupForm({ theme }) {
           </Submit>
         </InputWrapper>
       )}
-      <Divider></Divider>
+      <Divider/>
     </AddGroupWrapper>
   );
 }

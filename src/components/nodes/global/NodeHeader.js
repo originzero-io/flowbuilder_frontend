@@ -47,7 +47,7 @@ export default function NodeHeader({
           {
             hover && (
               <>
-                <NameEditIcon/>
+                <NameEditIcon theme="dark"/>
                 <RotateButton align={align} setAlign={setAlign} />
               </>
             )

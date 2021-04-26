@@ -15,20 +15,16 @@ export const FlowWrapper = styled.div`
   width:100%;
 `;
 export const GroupBarWrapper = styled.div`
-  width: ${({visible})=>visible === "visible" ? "200px" : "0px"};
-  //width:180px;
-  max-height:70vh;
-  transition:width .4s ease;
+  width: ${({visible})=>visible === "visible" ? "250px" : "0px"};
+  max-height:50vh;
+  transition:width .3s ease;
   padding:10px;
-  //overflow:hidden;
-  position:absolute;
-  right:0px;
-  top:9vh;
   z-index:5;
-  border: 1px solid rgba(120,120,120,0.4);
-  border-top-left-radius:4px;
-  border-bottom-left-radius:4px;
-  //overflow:auto;
-  //visibility: ${({visible})=>visible};
+  /* border: 1px solid rgba(120,120,120,0.4); */
+  border-top-left-radius:6px;
+  border-bottom-left-radius:6px;
+  background:rgba(0,0,0,0.3);
+  overflow-y:auto;
+  overflow-x:hidden;
 `;
 

@@ -5,24 +5,11 @@ import {
   updateGroup,
 } from "../../../REDUX/actions/nodeGroupsActions";
 import { setElements } from "../../../REDUX/actions/flowActions";
-import { DeleteButton, ColorFlag, GroupItem, Label } from "./style";
+import { DeleteButton, ColorFlag, GroupItem, GroupColor, Label } from "./style";
 import styled from "styled-components";
-import { useStoreActions,isNode } from "react-flow-renderer";
-const Form = styled.form`
-  margin: 0 10px 0 10px;
-  display: flex;
-  justify-content: flex-end;
-  background: gray;
-`;
-const Input = styled.input`
-  width: 30%;
-  font-size: 8px;
-`;
-const Submit = styled.input`
-  font-size: 8px;
-  background: transparent;
-  border: none;
-`;
+import { useStoreActions, isNode } from "react-flow-renderer";
+import { DeleteIcon, NameEditIcon } from "../../global/SvgIcons";
+import EditForm from "./EditForm";
 const NonGroups = styled.button`
   background: transparent;
   border: 1px solid orange;
@@ -34,22 +21,13 @@ const NonGroups = styled.button`
     background: orange;
   }
 `;
-const ItemButton = styled.div`
-  border: 1px solid whitesmoke;
-  border-radius: 4px;
-  font-size: 8px;
-  padding: 2px;
-  &:hover {
-    background-color: #e67e22;
-    border-color: #e67e22;
-  }
-`;
 
 export default function GroupList({ theme }) {
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
   const elements = useSelector((state) => state.elementReducer);
   const dispatch = useDispatch();
-  const [hover, setHover] = useState({});
+  const [itemHover, setItemHover] = useState(null);
+  const [flagHover, setFlagHover] = useState(null);
   const [clickedItem, setClickedItem] = useState({ state: false });
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
@@ -79,38 +57,9 @@ export default function GroupList({ theme }) {
       setClickedItem({ state: false, ...group });
     } else setClickedItem({ state: true, ...group });
   };
-  const onSubmitHandle = (event) => {
-    event.preventDefault();
-    console.log(clickedItem);
-    dispatch(updateGroup(clickedItem));
-    const newArray = elements.map((els) => {
-      if (els.data.group.name === clickedItem.name) {
-        return {
-          ...els,
-          data: {
-            ...els.data,
-            group: { name: clickedItem.name, color: clickedItem.color },
-          },
-        };
-      } else {
-        return els;
-      }
-    });
-    dispatch(setElements(newArray));
-  };
-  const updateChangeHandle = (event) => {
-    const { name, value } = event.target;
-    setClickedItem({
-      ...clickedItem,
-      [name]: value,
-    });
-  };
+  
   const selectItems = (nodes) => {
     setSelectedElements(nodes);
-  };
-  const selectNonGroupsHandle = () => {
-    const nonGroups = elements.filter((els) => isNode(els) && els.data.group.id === undefined);
-    setSelectedElements(nonGroups);
   };
   return (
     <>
@@ -121,46 +70,30 @@ export default function GroupList({ theme }) {
               <GroupItem
                 key={group.id}
                 theme={theme}
-                onMouseEnter={() => setHover(group.id)}
-                onMouseLeave={() => setHover(null)}
+                onMouseEnter={() => setItemHover(group.id)}
+                onMouseLeave={() => setItemHover(null)}
+                onClick={() => selectItems(group.nodes)}
               >
-                <DeleteButton onClick={() => deleteGroupHandle(group.id)}>
-                  X
-                </DeleteButton>
+                <GroupColor
+                  value={group.color}
+                  onMouseEnter={() => setFlagHover(group.id)}
+                  onMouseLeave={() => setFlagHover(null)}
+                />
                 <Label>{group.name}</Label>
-                {hover === group.id && (
+                {itemHover === group.id && (
                   <>
-                    <ItemButton onClick={() => selectItems(group.nodes)}>
-                      select
-                    </ItemButton>
-                    <ItemButton onClick={() => groupItemClickHandle(group)}>
-                      edit
-                    </ItemButton>
+                    <NameEditIcon width="25px" height="25px" onClick={() => groupItemClickHandle(group)} theme={theme} />
+                    <DeleteIcon theme={theme} onClick={() => deleteGroupHandle(group.id)}/>
                   </>
                 )}
-                <ColorFlag type="color" value={group.color} />
               </GroupItem>
               {clickedItem.id === group.id && clickedItem.state && (
-                <Form key={group.id} onSubmit={onSubmitHandle}>
-                  <Submit type="submit" value="Edit" />
-                  <Input
-                    name="name"
-                    value={clickedItem.name}
-                    onChange={updateChangeHandle}
-                  />
-                  <ColorFlag
-                    name="color"
-                    type="color"
-                    value={clickedItem.color}
-                    onChange={updateChangeHandle}
-                  />
-                </Form>
+                <EditForm clickedItem={clickedItem} setClickedItem={setClickedItem}/>
               )}
             </div>
           );
         })}
       </>
-      <NonGroups onClick={selectNonGroupsHandle} theme={theme}>Non-Groups</NonGroups>
     </>
   );
 }

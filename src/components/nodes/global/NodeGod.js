@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Handle, useUpdateNodeInternals } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
 import { InfoIcon } from "../../global/SvgIcons";
-import NodeHeader from "./../global/NodeHeader";
+import NodeHeader from "./NodeHeader";
 import {
   NodeArea,
   NodeContent,

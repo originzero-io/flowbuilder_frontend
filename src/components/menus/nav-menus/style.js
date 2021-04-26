@@ -16,6 +16,7 @@ export const MenuIndex = styled.div`
 export const MenuItem = styled.button`
   background: none;
   border: none;
+  user-select:none;
   margin:2px;
   color: ${(props) => (props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON)};
   cursor: pointer;

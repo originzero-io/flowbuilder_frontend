@@ -1,23 +1,24 @@
 import styled from "styled-components";
 export const Container = styled.div`
-  position: absolute;
+  //position: absolute;
   border-radius: 6px;
-  top: 30%;
-  left:-30px;
+  //top: 40%;
+  //left: -50px;
+  //right:0px;
   cursor: pointer;
   z-index: 6;
   user-select: none;
   font-size: 24px;
   color: rgb(22, 162, 165);
+  padding-right:8px;
 `;
 
-export const GroupItem = styled.button`
-  background:none;
-  border:1px solid rgb(255,255,255,0.1);
-  width:100%;
-  padding: 2px 6px 2px 6px;
+export const GroupItem = styled.div`
+  background: none;
+  //border: 1px solid rgb(255, 255, 255, 0.1);
+  width: 100%;
+  padding: 4px 6px 4px 6px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   cursor: pointer;
   color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
@@ -26,7 +27,7 @@ export const GroupItem = styled.button`
   user-select: none;
   font-size: 12px;
   &:hover {
-    background: #273c75;
+    background: rgb(15,175,143);
   }
 `;
 export const ColorBox = styled.div`
@@ -48,21 +49,26 @@ export const Header = styled.div`
   justify-content: flex-start;
   align-items: center;
   color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
+  width:100%;
 `;
 export const Title = styled.div`
   margin-left: 6px;
   user-select: none;
+  width:80%;
 `;
 export const IconWrapper = styled.div`
   cursor: pointer;
 `;
 export const Label = styled.div`
+  padding-left: 10px;
+  width:70%;
+  text-align:start;
+  font-size:16px;
 `;
 
 export const InputWrapper = styled.div`
   position: relative;
   margin-top: 3px;
-  
 `;
 export const Input = styled.input`
   border-radius: 4px;
@@ -86,6 +92,20 @@ export const ColorInput = styled.input`
   top: 0px;
   left: 0px;
 `;
+export const ColorFlag = styled.input`
+  border: none;
+  border-image: none;
+  width: 20px;
+  background: none;
+  color: transparent;
+  cursor: pointer;
+`;
+export const GroupColor = styled.div`
+  width: 22px;
+  height: 22px;
+  background: ${(props) => props.value};
+  border-radius: 2px;
+`;
 export const Submit = styled.button`
   border: none;
   background: transparent;
@@ -95,20 +115,13 @@ export const Submit = styled.button`
   cursor: pointer;
 `;
 
-export const ColorFlag = styled.input`
-  border: none;
-  border-image: none;
-  width: 20px;
-  background: none;
-  color: transparent;
-  cursor: pointer;
-`;
-export const DeleteButton = styled.button`
+export const DeleteButton = styled.div`
   border: none;
   background: none;
   padding-left: 1px;
   padding-right: 1px;
   color: #c0392b;
+  align-self: flex-end;
 `;
 export const Divider = styled.div`
   width: 90%;

@@ -31,14 +31,13 @@ import * as themeColor from "../../config/ThemeReference";
 import { closeAllNodeGroupMenu } from "../../REDUX/actions/guiActions";
 import FlowContent from "./FlowContent";
 export default function FlowEditor({ reactFlowWrapper }) {
-  const { theme, flagColor } = useSelector((state) => state.guiConfigReducer);
+  const { theme } = useSelector((state) => state.guiConfigReducer);
   const { reactFlowInstance, miniMapDisplay } = useSelector(
     (state) => state.flowConfigReducer
   );
   const elements = useSelector((state) => state.elementReducer);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
-  const {nodeGroupMenuDisplay} = useSelector((state) => state.guiConfigReducer);
   const selectedElements = useStoreState((state) => state.selectedElements);
 
   const dispatch = useDispatch();
@@ -57,30 +56,13 @@ export default function FlowEditor({ reactFlowWrapper }) {
         ...params,
         sourceX: 10,
         sourceY: 10,
-        style: { stroke: sourceColor, strokeWidth: "2px" },
+        style: { stroke: sourceColor, strokeWidth: "2.5px" },
         data: { source: "", target: "", payload: "Anaks" },
       };
       const newElements = addEdge(edge, elements);
       dispatch(setElements(newElements));
     }
   };
-
-  useEffect(() => {
-    const newElements = elements.map((els) => {
-      if (isEdge(els)) {
-        return {
-          ...els,
-          style: {
-            ...els.style,
-            stroke: flagColor,
-          },
-        };
-      } else {
-        return els;
-      }
-    });
-    dispatch(setElements(newElements));
-  }, [flagColor]);
 
   const onEdgeUpdateHandle = (oldEdge, newConnection) => {
     const elementArray = store.getState().elementReducer;
@@ -118,24 +100,25 @@ export default function FlowEditor({ reactFlowWrapper }) {
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top,
     });
-
-    const nodeFunction = loadFunctionsToNode(type, nodeClass);
-    const newNode = {
-      id: uuid(),
-      type,
-      position,
-      data: {
-        label: `${type}`,
-        onChange: nodeFunction,
-        targetCount: 1,
-        sourceCount: 1,
-        align: "horizontal",
-        expand: false,
-        group: {nodes:[]},
-      },
-    };
-    dispatch(setElements([...elements, newNode]));
-    updateRecentStatus(type);
+    if (!(type === "")) {
+      const nodeFunction = loadFunctionsToNode(type, nodeClass);
+      const newNode = {
+        id: uuid(),
+        type,
+        position,
+        data: {
+          label: `${type}`,
+          onChange: nodeFunction,
+          targetCount: 1,
+          sourceCount: 1,
+          align: "horizontal",
+          expand: false,
+          group: {nodes:[]},
+        },
+      };
+      dispatch(setElements([...elements, newNode]));
+      updateRecentStatus(type);
+    }
   };
   const updateRecentStatus = (type) => {
     const newList = nodeList.map((node) => {
@@ -288,21 +271,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   }, [selectedElements]);
 
   //enableEventListeners();
-  const onNodeDoubleClickHandle = (event, node) => {
-    const newElements = elements.map((element) => {
-      if (element.id === node.id) {
-        return {
-          ...element,
-          data: {
-            ...element.data,
-            expand: !element.data.expand,
-          },
-        };
-      }
-      return element;
-    });
-    dispatch(setElements(newElements));
-  };
 
   const openMultiSelectionContextMenu = (event) => {
     dispatch(
