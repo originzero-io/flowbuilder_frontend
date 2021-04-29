@@ -14,6 +14,7 @@ const Form = styled.form`
 const Input = styled.input`
   width: 100%;
   height: 23px;
+  font-size:16px;
   padding-left: 25px;
   background-color: transparent;
   border: 1px solid #636e72;
@@ -46,6 +47,7 @@ export default function EditForm({
       }
     });
     dispatch(setElements(newArray));
+    setEditableItem({state:false,group:{}});
   };
   const updateChangeHandle = (event) => {
     const { name, value } = event.target;
