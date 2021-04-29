@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import * as themeColor from "../../config/ThemeReference"
 export const AppWrapper = styled.div`
   width:100%;
   height:100vh;
@@ -20,10 +20,9 @@ export const GroupBarWrapper = styled.div`
   transition:width .3s ease;
   padding:10px;
   z-index:5;
-  /* border: 1px solid rgba(120,120,120,0.4); */
   border-top-left-radius:6px;
   border-bottom-left-radius:6px;
-  background:rgba(0,0,0,0.3);
+  background:${({theme})=>theme === "dark" ? themeColor.DARK_MENU_BACKGROUND : themeColor.LIGHT_MENU_BACKGROUND};
   overflow-y:auto;
   overflow-x:hidden;
 `;

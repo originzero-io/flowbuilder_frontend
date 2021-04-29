@@ -14,7 +14,7 @@ export default function GroupBarIcon({theme}) {
   };
   return (
     <Container onClick={groupBarDisplayHandle}>
-      <GroupIcon width="60px" height="60px" color="whitesmoke" theme={theme}/>
+      <GroupIcon width="50px" height="50px" color="whitesmoke" theme={theme}/>
     </Container>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NodeGod from "./global/NodeGod";
 import { useSelector, useDispatch } from "react-redux";
+import { NodeContent } from "./styles";
 
 const NotificationNode = (self) => {
   const [align, setAlign] = useState("vertical");
@@ -13,7 +14,8 @@ const NotificationNode = (self) => {
         setAlign={setAlign}
         io="target"
         collapsable={false}
-      ></NodeGod>
+      >
+      </NodeGod>
     </>
   );
 };

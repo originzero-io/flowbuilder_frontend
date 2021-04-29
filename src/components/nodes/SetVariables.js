@@ -7,6 +7,7 @@ import { Label } from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { setElements } from "../../REDUX/actions/flowActions";
 import updateNodeHandles from "../../app-global/helpers/updateNodeHandles"
+import NodeIOmanager from "./global/NodeIOManager";
 
 const SetVariables = (self) => {
   const elements = useSelector((state) => state.elementReducer);
@@ -58,21 +59,7 @@ const SetVariables = (self) => {
   useDidMountEffect(() => {
     nodeClass.doInput(values, self, outgoers);
   }, [values]);
-
-  const [handleCount, setHandleCount] = useState({
-    targetCount: 1,
-    sourceCount: 1,
-  });
-  const handleCountChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setHandleCount({
-      ...handleCount,
-      [name]: value,
-    });
-    const updatedElements = updateNodeHandles(name, value, self, elements);
-    dispatch(setElements(updatedElements))
-  };
+  
   return (
     <>
       <NodeGod
@@ -92,16 +79,7 @@ const SetVariables = (self) => {
           />
           <input type="checkbox" onChange={checkboxChange} value={checked} />
         </div>
-        <Label>Source Length</Label>
-        <input
-          type="number"
-          name="sourceCount"
-          min={1}
-          className="nodrag nowheel"
-          value={handleCount.sourceCount}
-          onChange={handleCountChange}
-          style={{ width: "145px" }}
-        />
+        <NodeIOmanager self={self} io="source"/>
       </NodeGod>
     </>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import { NodeWrapper, NodeElement } from "./style";
-import Icon from "../../nodes/global/NodeIcon";
 import { Label } from "../../nodes/styles";
 import { FavoriteIcon } from "../../global/SvgIcons";
 

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NodeWrapper, NodeElement, Container } from "./style";
 import { useDispatch,useSelector } from "react-redux";
-import Icon from "../../nodes/global/NodeIcon";
-import FavIcon from "../../style-components/FavIcon";
 import { Label } from "../../nodes/styles";
 import styled from "styled-components";
 import { addFav } from "../../../REDUX/actions/nodeListActions";

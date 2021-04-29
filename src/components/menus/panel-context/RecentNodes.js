@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NodeWrapper, NodeElement } from "./style";
-import Icon from "../../nodes/global/NodeIcon";
 import { Label } from "../../nodes/styles";
 import { FavoriteIcon } from "../../global/SvgIcons";
 import sortBy from "lodash/sortBy"

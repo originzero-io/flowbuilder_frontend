@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Handle, useUpdateNodeInternals } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
 import { InfoIcon } from "../../global/SvgIcons";
-import NodeHeader from "./NodeHeader";
+import NodeHeader from "./header/index";
 import {
   NodeArea,
   NodeContent,
@@ -86,9 +86,9 @@ const NodeGod = ({
           setAlign={setAlign}
           collapsable={collapsable}
           selectedElements={selected}
-          onClick = {expandHandle}
+          onDoubleClick = {expandHandle}
         />
-        {expand === true ? (
+        {expand ? (
           <NodeContent>
             {children}
           </NodeContent>
@@ -98,7 +98,7 @@ const NodeGod = ({
             </NodeContent>
         )}
         <Info>
-          <InfoIcon color={self.data.group.color || "whitesmoke"} draggable={false} />
+          <InfoIcon color={"whitesmoke"} draggable={false} />
         </Info>
       </NodeArea>
 

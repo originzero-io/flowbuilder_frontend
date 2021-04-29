@@ -1,3 +1,4 @@
+import { startCase } from "lodash";
 import * as actionTypes from "../constants/nodeGroupsContants";
 
 const nodeGroups = [
@@ -48,6 +49,8 @@ export const nodeGroupsReducer = (state = nodeGroups, { type, payload }) => {
       return state.filter(state=>state.id !== payload);
     case actionTypes.ADD_NODE_TO_GROUP:
       return state.map(state => state.id === payload.group.id ? {...state, nodes:[...state.nodes,payload.self]} : state)
+    case actionTypes.DELETE_NODE_CURRENT_GROUP:
+      return state.map(state=>state.id === payload.data.group.id ? {...state,nodes:state.nodes.filter(node=>node.id !== payload.id)} : state)
     default:
       return state;
   }

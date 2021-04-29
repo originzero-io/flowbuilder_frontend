@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NodeGod from "./global/NodeGod";
 import { useSelector, useDispatch } from "react-redux";
+import NodeIOManager from "./global/NodeIOManager";
 
 const CalculateNode = (self) => {
   const [align, setAlign] = useState("vertical");
@@ -12,7 +13,9 @@ const CalculateNode = (self) => {
         setAlign={setAlign}
         io="both"
         collapsable={true}
-      ></NodeGod>
+      >
+        <NodeIOManager self={self} io="both" />
+      </NodeGod>
     </>
   );
 };

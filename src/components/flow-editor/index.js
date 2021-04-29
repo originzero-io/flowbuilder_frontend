@@ -66,7 +66,24 @@ export default function FlowEditor({ reactFlowWrapper }) {
 
   const onEdgeUpdateHandle = (oldEdge, newConnection) => {
     const elementArray = store.getState().elementReducer;
-    const newElements = updateEdge(oldEdge, newConnection, elementArray);
+    console.log("store-state-elements:", elementArray)
+    console.log("new connection",newConnection)
+    const edgeColor = elementArray.filter(ela => ela.id === newConnection.source)[0].data.group.color;
+    console.log("edge-color:",edgeColor)
+    const newArray = elementArray.map(ela => {
+      if (isEdge(ela)) {
+        return {
+          ...ela,
+          style: {
+            ...ela.style,
+            stroke:edgeColor
+          }  
+        }
+      }
+      return ela;
+    })
+    console.log("new-array:",newArray)
+    const newElements = updateEdge(oldEdge, newConnection, newArray);
     dispatch(setElements(newElements));
   };
   const onElementsRemoveHandle = (elementsToRemove) => {

@@ -1,40 +1,44 @@
 import React from "react";
-import {useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setElements } from "../../../REDUX/actions/flowActions";
 import { updateGroup } from "../../../REDUX/actions/nodeGroupsActions";
-import { ColorFlag } from "./style";
-import { useStoreActions, isNode } from "react-flow-renderer";
+import { SubmitIcon } from "../../global/SvgIcons";
+import { ColorFlag, Submit } from "./style";
+import * as themeColor from "../../../config/ThemeReference";
 
 const Form = styled.form`
-  margin: 0 10px 0 10px;
-  display: flex;
-  justify-content: flex-end;
-  background: gray;
+  position:relative;
+  width:78%;
 `;
 const Input = styled.input`
-  width: 30%;
-  font-size: 8px;
+  width: 100%;
+  height: 23px;
+  padding-left: 25px;
+  background-color: transparent;
+  border: 1px solid #636e72;
+  border-radius: 2px;
+  user-select: none;
+  color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
 `;
-const Submit = styled.input`
-  font-size: 8px;
-  background: transparent;
-  border: none;
-`;
-export default function EditForm({clickedItem,setClickedItem}) {
-  const dispatch = useDispatch();
+
+export default function EditForm({
+  editableItem,
+  setEditableItem,
+  theme
+}) {
   const elements = useSelector((state) => state.elementReducer);
+  const dispatch = useDispatch();
   const onSubmitHandle = (event) => {
     event.preventDefault();
-    console.log(clickedItem);
-    dispatch(updateGroup(clickedItem));
+    dispatch(updateGroup(editableItem.group));
     const newArray = elements.map((els) => {
-      if (els.data.group.name === clickedItem.name) {
+      if (els.data.group.id === editableItem.group.id) {
         return {
           ...els,
           data: {
             ...els.data,
-            group: { name: clickedItem.name, color: clickedItem.color },
+            group: {...els.data.group, name: editableItem.group.name, color: editableItem.group.color },
           },
         };
       } else {
@@ -42,30 +46,44 @@ export default function EditForm({clickedItem,setClickedItem}) {
       }
     });
     dispatch(setElements(newArray));
-    };
-    const updateChangeHandle = (event) => {
-        const { name, value } = event.target;
-        setClickedItem({
-          ...clickedItem,
-          [name]: value,
-        });
   };
-  
+  const updateChangeHandle = (event) => {
+    const { name, value } = event.target;
+    setEditableItem({
+      ...editableItem,
+      group: {
+        ...editableItem.group,
+        [name]: value,
+      }
+    });
+  };
   return (
     <>
       <Form onSubmit={onSubmitHandle}>
-        <Submit type="submit" value="Edit" />
         <Input
-          name="name"
-          value={clickedItem.name}
+          theme={theme}
+          placeholder="edit name"
+          required
           onChange={updateChangeHandle}
+          name="name"
+          value={editableItem.group.name}
+          maxLength={18}
         />
         <ColorFlag
-          name="color"
           type="color"
-          value={clickedItem.color}
           onChange={updateChangeHandle}
+          name="color"
+          value={editableItem.group.color}
         />
+        <Submit type="submit">
+          <SubmitIcon
+            width={"22px"}
+            height={"22px"}
+            color={
+              theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
+            }
+          />
+        </Submit>
       </Form>
     </>
   );

@@ -7,17 +7,22 @@ import {
   addGroup,
   deleteGroup,
   addNodeToGroup,
+  deleteNodeCurrentGroup,
 } from "../../../REDUX/actions/nodeGroupsActions";
 import uuid from "react-uuid";
 import { setElements } from "../../../REDUX/actions/flowActions";
 import { updateGroup } from "../../../REDUX/actions/nodeGroupsActions";
 import styled from "styled-components";
-import { ColorBox, Label } from "../group-bar/style";
+import { GroupColor, Label } from "../group-bar/style";
+import { isEdge, isNode } from "react-flow-renderer";
 const Container = styled.div`
   position: absolute;
   right: -110px;
   top: -2px;
   min-width: 100px;
+  display:flex;
+  flex-direction:column;
+  flex-wrap:nowrap;
 `;
 const SearchBar = styled.input`
   border-radius: 4px;
@@ -37,9 +42,10 @@ const GroupItem = styled.div`
   color: white;
   display: flex;
   justify-content: space-around;
+  align-items:center;
   padding: 2px;
   &:hover {
-    background: #273c75;
+    background: rgb(15,175,143);
   }
 `;
 const Content = styled.div`
@@ -63,33 +69,41 @@ export default function GroupMenu({ self }) {
     }
   };
   const selectGroup = (group) => {
-    //?Daha önce seçtiği tüm gruplardan silinsin
-    // const eles =  elements.map(els => {
-    //     return els.data.group.nodes.filter(node=>node.id===self.id)
-    // })
-    // console.log("eles:",eles)
-
-    //console.log("group:", group);
-    const newElements = elements.map((els) => {
-      if (els.id === self.id) {
-        return {
-          ...els,
-          data: {
-            ...els.data,
-            group,
-          },
-        };
+    const newElements = elements.map(els => {
+      if (isNode(els)) {
+        if (els.id === self.id) {
+          return {
+            ...els,
+            data: {
+              ...els.data,
+              group,
+            },
+          };
+        }
+        return els;
       }
-      return els;
-    });
+      if (isEdge(els)) {
+        if (els.source === self.id) {
+          return {
+            ...els,
+            style: {
+              ...els.style,
+              stroke:group.color
+            }
+          };
+        }
+        return els;
+      }
+    })
     dispatch(setElements(newElements));
+    dispatch(deleteNodeCurrentGroup(self));
     dispatch(addNodeToGroup(self, group));
   };
   useEffect(() => {
     setSearched(nodeGroups);
   }, [nodeGroups]);
   useEffect(() => {
-    setSearched([]);
+    setSearched(nodeGroups);
   }, []);
   return (
     <Container>
@@ -102,8 +116,8 @@ export default function GroupMenu({ self }) {
         {searched.map((group) => {
           return (
             <GroupItem key={group.id} onClick={() => selectGroup(group)}>
-              <Label>{group.name}</Label>
-              <ColorBox color={group.color} />
+              <Label style={{fontSize:'12px'}}>{group.name}</Label>
+              <GroupColor width="15px" height="15px" value={group.color}/>
             </GroupItem>
           );
         })}

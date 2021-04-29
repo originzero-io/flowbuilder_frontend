@@ -95,14 +95,17 @@ export const ColorInput = styled.input`
 export const ColorFlag = styled.input`
   border: none;
   border-image: none;
-  width: 20px;
+  width: 22px;
   background: none;
   color: transparent;
   cursor: pointer;
+  position:absolute;
+  left:0;
+  top:0;
 `;
 export const GroupColor = styled.div`
-  width: 22px;
-  height: 22px;
+  width: ${props=>props.width};
+  height: ${props=>props.height};
   background: ${(props) => props.value};
   border-radius: 2px;
 `;
@@ -110,7 +113,7 @@ export const Submit = styled.button`
   border: none;
   background: transparent;
   position: absolute;
-  top: 2px;
+  top: 0px;
   right: 0px;
   cursor: pointer;
 `;

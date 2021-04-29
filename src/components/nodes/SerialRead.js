@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NodeGod from "./global/NodeGod";
 import { useSelector, useDispatch } from "react-redux";
+import NodeIOManager from "./global/NodeIOManager";
 
 const SerialReadNode = (self) => {
   const [align, setAlign] = useState("vertical");
@@ -13,7 +14,9 @@ const SerialReadNode = (self) => {
         setAlign={setAlign}
         io="source"
         collapsable={false}
-      ></NodeGod>
+      >
+        <NodeIOManager self={self} io="source" />
+      </NodeGod>
     </>
   );
 };
