@@ -9,3 +9,4 @@ export const NODE_ICON = {
     primary2:"#ace100",
     secondary:"blue"
 }
+export const HOVER_COLOR = "rgb(14, 183, 150)";

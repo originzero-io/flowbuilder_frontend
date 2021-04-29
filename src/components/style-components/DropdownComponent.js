@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import * as themeColor from "../../config/ThemeReference"
 export const DropdownWrapper = styled.div`
   position: relative;
 `;
@@ -10,7 +10,7 @@ export const DropdownList = styled.ul`
   display: flex;
   //justify-content: space-around;
   flex-direction: column;
-  min-width: 110px;
+  min-width: 120px;
   background: ${(props) => props.theme === "dark" ? "rgb(53, 59, 72)" : "rgb(189, 195, 199)"};
   color: ${(props) => (props.theme === "dark" ? "#dcdcdc" : "black")};
   right: ${(props) => (props.align === "right" ? "-50px" : "none")};;
@@ -25,7 +25,7 @@ export const DropDownItem = styled.li`
   padding: 8px;
   user-select: none;
   cursor: pointer;
-  &:hover {
-    letter-spacing:2px;
+  &:hover{
+    background:${themeColor.HOVER_COLOR}
   }
 `;

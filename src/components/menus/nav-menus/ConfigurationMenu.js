@@ -8,6 +8,7 @@ import {
   SettingsIcon,
   GuideIcon,
   ProfileIcon,
+  ShareIcon,
 } from "../../global/SvgIcons";
 import Tooltip from "../../global/Tooltip";
 import { useSelector, useDispatch } from "react-redux";
@@ -58,20 +59,16 @@ export default function ConfigurationMenu() {
   return (
     <Menu theme={theme}>
       <DropdownWrapper>
-        <MenuItem data-tip="Settings" data-for={tooltip.SETTINGS}>
-          <SettingsIcon
-            width={"25px"}
-            height={"25px"}
-            color={
-              theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-            }
+        <MenuItem data-tip="Share" data-for={tooltip.SHARE}>
+          <ShareIcon
+            width="25px"
+            height="25px"
+            theme={theme}
           />
         </MenuItem>
         <DropdownList theme={theme}>
-          <DropDownItem>Settings 2</DropDownItem>
-          <DropDownItem>Settings 3</DropDownItem>
-          <DropDownItem>Settings 4</DropDownItem>
-          <DropDownItem>Settings 5</DropDownItem>
+          <DropDownItem>Import Flow</DropDownItem>
+          <DropDownItem>Export Flow</DropDownItem>
         </DropdownList>
       </DropdownWrapper>
 

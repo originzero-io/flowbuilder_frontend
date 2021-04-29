@@ -1,4 +1,4 @@
-export const SETTINGS = "settings";
+export const SHARE = "share";
 export const GUIDES = "guides";
 export const PROFILE = "profile";
 export const UNDO = "undo";

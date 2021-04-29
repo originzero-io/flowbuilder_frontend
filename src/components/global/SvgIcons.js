@@ -202,7 +202,7 @@ export function InfoIcon({ color }) {
     </>
   );
 }
-export function DeleteIcon({ theme,onClick }) {
+export function DeleteIcon({ theme, onClick }) {
   return (
     <>
       <svg
@@ -389,7 +389,7 @@ export function UnLockIcon({ theme }) {
   );
 }
 
-export function NameEditIcon({ width, height,onClick,theme }) {
+export function NameEditIcon({ width, height, onClick, theme }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1335,7 +1335,7 @@ export function GroupIcon({ width, height, color, theme }) {
   );
 }
 
-export function NonGroupIcon({ width, height, color,onClick,theme }) {
+export function NonGroupIcon({ width, height, color, onClick, theme }) {
   return (
     <svg
       id="Layer_1"
@@ -1344,12 +1344,27 @@ export function NonGroupIcon({ width, height, color,onClick,theme }) {
       viewBox="0 0 234 234"
       width={width}
       height={height}
-      style={{ cursor: 'pointer' }}
+      style={{ cursor: "pointer" }}
       onClick={onClick}
     >
-      <circle cx="180.83" cy="102.87" r="26.72" fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON} />
-      <circle cx="66.33" cy="49.44" r="26.72" fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON} />
-      <circle cx="66.33" cy="179.21" r="26.72" fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}/>
+      <circle
+        cx="180.83"
+        cy="102.87"
+        r="26.72"
+        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+      />
+      <circle
+        cx="66.33"
+        cy="49.44"
+        r="26.72"
+        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+      />
+      <circle
+        cx="66.33"
+        cy="179.21"
+        r="26.72"
+        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+      />
       <line
         x1="91.03"
         y1="137.28"
@@ -1380,7 +1395,12 @@ export function NonGroupIcon({ width, height, color,onClick,theme }) {
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
-      <circle cx="104.5" cy="114.32" r="26.72" fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON} />
+      <circle
+        cx="104.5"
+        cy="114.32"
+        r="26.72"
+        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+      />
       <path
         d="M201,176.62a33.11,33.11,0,1,1-33.11-33.1A33.11,33.11,0,0,1,201,176.62Z"
         transform="translate(-8 -7)"
@@ -1400,6 +1420,21 @@ export function NonGroupIcon({ width, height, color,onClick,theme }) {
         strokeLinejoin="round"
         strokeWidth="7px"
       />
+    </svg>
+  );
+}
+export function ShareIcon({ width, height, onClick, theme }) {
+  return (
+    <svg
+      fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={width}
+      height={height}
+      onClick={onClick}
+    >
+      {" "}
+      <path d="M 18 2 A 3 3 0 0 0 15 5 A 3 3 0 0 0 15.054688 5.5605469 L 7.9394531 9.7109375 A 3 3 0 0 0 6 9 A 3 3 0 0 0 3 12 A 3 3 0 0 0 6 15 A 3 3 0 0 0 7.9355469 14.287109 L 15.054688 18.439453 A 3 3 0 0 0 15 19 A 3 3 0 0 0 18 22 A 3 3 0 0 0 21 19 A 3 3 0 0 0 18 16 A 3 3 0 0 0 16.0625 16.712891 L 8.9453125 12.560547 A 3 3 0 0 0 9 12 A 3 3 0 0 0 8.9453125 11.439453 L 16.060547 7.2890625 A 3 3 0 0 0 18 8 A 3 3 0 0 0 21 5 A 3 3 0 0 0 18 2 z" />
     </svg>
   );
 }
