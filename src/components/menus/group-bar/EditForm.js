@@ -6,6 +6,7 @@ import { updateGroup } from "../../../REDUX/actions/nodeGroupsActions";
 import { SubmitIcon } from "../../global/SvgIcons";
 import { ColorFlag, Submit } from "./style";
 import * as themeColor from "../../../config/ThemeReference";
+import { isEdge, isNode } from "react-flow-renderer";
 
 const Form = styled.form`
   position:relative;
@@ -15,7 +16,8 @@ const Input = styled.input`
   width: 100%;
   height: 23px;
   font-size:16px;
-  padding-left: 25px;
+  //padding-left: 25px;
+  padding:12px 10px 12px 30px;
   background-color: transparent;
   border: 1px solid #636e72;
   border-radius: 2px;
@@ -33,17 +35,33 @@ export default function EditForm({
   const onSubmitHandle = (event) => {
     event.preventDefault();
     dispatch(updateGroup(editableItem.group));
+
+    let updatedNodeId;
     const newArray = elements.map((els) => {
-      if (els.data.group.id === editableItem.group.id) {
-        return {
-          ...els,
-          data: {
-            ...els.data,
-            group: {...els.data.group, name: editableItem.group.name, color: editableItem.group.color },
-          },
-        };
-      } else {
-        return els;
+      if (isNode(els)) {
+        if (els.data.group.id === editableItem.group.id) {
+          updatedNodeId = els.id;
+          return {
+            ...els,
+            data: {
+              ...els.data,
+              group: { ...els.data.group, name: editableItem.group.name, color: editableItem.group.color },
+            },
+          };
+        }
+        else return els;
+      }
+      else if (isEdge(els)) {
+        if (els.source === updatedNodeId) {
+          return {
+            ...els,
+            style: {
+              ...els.style,
+              stroke: editableItem.group.color
+            }
+          }
+        }
+        else return els;
       }
     });
     dispatch(setElements(newArray));
@@ -69,7 +87,7 @@ export default function EditForm({
           onChange={updateChangeHandle}
           name="name"
           value={editableItem.group.name}
-          maxLength={18}
+          maxLength={12}
         />
         <ColorFlag
           type="color"

@@ -96,11 +96,12 @@ export const ColorFlag = styled.input`
   border: none;
   border-image: none;
   width: 22px;
+  height:26px;
   background: none;
   color: transparent;
   cursor: pointer;
   position:absolute;
-  left:0;
+  left:0px;
   top:0;
 `;
 export const GroupColor = styled.div`

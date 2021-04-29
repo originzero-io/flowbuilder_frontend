@@ -31,8 +31,8 @@ export default function MultiSelectionContextMenu() {
       {multiSelectionMenu.state === true && (
         <Menu x={multiSelectionMenu.x} y={multiSelectionMenu.y} theme={theme}>
           <MenuItem onClick={deleteItems}>Delete</MenuItem>
-          <MenuItem onClick={groupHandle}>{"Group->"}
-          {showGroup && <GroupMenu self={self} />}</MenuItem>
+          <MenuItem onClick={groupHandle}>{"Group->"}</MenuItem>
+          {showGroup && <GroupMenu self={self} multiSelection={selected} />}
         </Menu>
       )}
     </div>

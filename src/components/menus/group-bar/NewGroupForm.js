@@ -49,7 +49,6 @@ export default function NewGroupForm({ theme }) {
     );
   };
   const selectNonGroupsHandle = () => {
-    console.log("fkjsdhfjsd")
     const nonGroups = elements.filter(
       (els) => isNode(els) && els.data.group.id === undefined
     );

@@ -5,9 +5,8 @@ import {
   updateGroup,
 } from "../../../REDUX/actions/nodeGroupsActions";
 import { setElements } from "../../../REDUX/actions/flowActions";
-import { ColorFlag, GroupItem, GroupColor, Label, Submit } from "./style";
-import styled from "styled-components";
-import { useStoreActions } from "react-flow-renderer";
+import { GroupItem, GroupColor, Label} from "./style";
+import { isEdge, isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon, NameEditIcon, SubmitIcon } from "../../global/SvgIcons";
 import EditForm from "./EditForm";
 
@@ -25,17 +24,32 @@ export default function GroupList({ theme }) {
   const deleteIconClickHandle = (groupId) => {
     if (confirm("Are you sure?")) {
       dispatch(deleteGroup(groupId));
+      let clearedNodeId;
       const newArray = elements.map((els) => {
-        if (els.data.group.id === groupId) {
-          return {
-            ...els,
-            data: {
-              ...els.data,
-              group: {},
-            },
-          };
-        } else {
-          return els;
+        if (isNode(els)) {
+          if (els.data.group.id === groupId) {
+            clearedNodeId = els.id;
+            return {
+              ...els,
+              data: {
+                ...els.data,
+                group: {},
+              },
+            };
+          }
+          else return els;
+        }
+        else if (isEdge(els)) {
+          if (els.source === clearedNodeId) {
+            return {
+              ...els,
+              style: {
+                ...els.style,
+                stroke: 'whitesmoke'
+              }
+            }
+          }
+          else return els;
         }
       });
       dispatch(setElements(newArray));

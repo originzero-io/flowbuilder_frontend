@@ -20,9 +20,9 @@ const Container = styled.div`
   right: -110px;
   top: -2px;
   min-width: 100px;
-  display:flex;
-  flex-direction:column;
-  flex-wrap:nowrap;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 `;
 const SearchBar = styled.input`
   border-radius: 4px;
@@ -42,17 +42,17 @@ const GroupItem = styled.div`
   color: white;
   display: flex;
   justify-content: space-around;
-  align-items:center;
+  align-items: center;
   padding: 2px;
   &:hover {
-    background: rgb(15,175,143);
+    background: rgb(15, 175, 143);
   }
 `;
 const Content = styled.div`
   background: rgba(43, 46, 53, 0.6);
   margin-top: 2px;
 `;
-export default function GroupMenu({ self }) {
+export default function GroupMenu({ self, multiSelection }) {
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
   const elements = useSelector((state) => state.elementReducer);
   const dispatch = useDispatch();
@@ -69,7 +69,15 @@ export default function GroupMenu({ self }) {
     }
   };
   const selectGroup = (group) => {
-    const newElements = elements.map(els => {
+    if (multiSelection) {
+      multiSelectionHandle(group);
+    } else {
+      singleSelectionHandle(group);
+    }
+  };
+
+  const singleSelectionHandle = (group) => {
+    const newElements = elements.map((els) => {
       if (isNode(els)) {
         if (els.id === self.id) {
           return {
@@ -88,16 +96,21 @@ export default function GroupMenu({ self }) {
             ...els,
             style: {
               ...els.style,
-              stroke:group.color
-            }
+              stroke: group.color,
+            },
           };
         }
         return els;
       }
-    })
+    });
     dispatch(setElements(newElements));
     dispatch(deleteNodeCurrentGroup(self));
     dispatch(addNodeToGroup(self, group));
+  };
+
+  const multiSelectionHandle = (group) => {
+    console.log("group:", group);
+    console.log("multi-selection-array", multiSelection);
   };
   useEffect(() => {
     setSearched(nodeGroups);
@@ -116,8 +129,8 @@ export default function GroupMenu({ self }) {
         {searched.map((group) => {
           return (
             <GroupItem key={group.id} onClick={() => selectGroup(group)}>
-              <Label style={{fontSize:'12px'}}>{group.name}</Label>
-              <GroupColor width="15px" height="15px" value={group.color}/>
+              <Label style={{ fontSize: "12px" }}>{group.name}</Label>
+              <GroupColor width="15px" height="15px" value={group.color} />
             </GroupItem>
           );
         })}
