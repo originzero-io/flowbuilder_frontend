@@ -48,5 +48,13 @@ export const expandNode = (self) => ({
   type: action.EXPAND_NODE,
   payload: {self}
 });
+export const changeNodeName = (self,editedName) => ({
+  type: action.CHANGE_NODE_NAME,
+  payload: {self,editedName}
+});
+export const setNodeEnable = (self,checked) => ({
+  type: action.SET_NODE_ENABLE,
+  payload: {self,checked}
+});
 
 

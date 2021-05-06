@@ -77,6 +77,32 @@ export const elementReducer = (state = initialElements, {type,payload}) => {
         }
         return state;
       });
+    case actionTypes.CHANGE_NODE_NAME:
+      return state.map(state => {
+        if (state.id === payload.self.id) {
+          return {
+            ...state,
+            data: {
+              ...state.data,
+              label:payload.editedName
+            }
+          }
+        }
+        return state;
+      });
+    case actionTypes.SET_NODE_ENABLE:
+      return state.map(state => {
+        if (state.id === payload.self.id) {
+          return {
+            ...state,
+            data: {
+              ...state.data,
+              enable:payload.checked
+            }
+          }
+        }
+        return state;
+      });
     default:
       return state;
   }

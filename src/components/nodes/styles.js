@@ -16,6 +16,9 @@ export const NodeWrapper = styled.div`
     #505050 80%
   );
   box-shadow: 0.261px 1.5px 3px 0px rgba(0, 0, 0, 0.996);
+  //opacity:0.5;
+  opacity: ${(props) => (props.enable ? "1" : "0.5")};
+
 `;
 
 export const NodeArea = styled.div`
@@ -25,7 +28,7 @@ export const NodeArea = styled.div`
 export const Header = styled.div`
   display: flex;
   min-width: 190px;
-  //justify-content: space-between;
+  justify-content: space-between;
   align-items: center;
   text-align: start; //Added by "My name is Anıl Akseki"
   position:relative;
@@ -33,7 +36,6 @@ export const Header = styled.div`
   border-top-right-radius:3px;
   border-top-left-radius:3px;
   box-shadow: 0.1px 0.5px 0.6px 0px rgba(0, 0, 0, 0.7);
-  background-color: #000000;
   background-image: linear-gradient(
     355deg,
     #323232 0%,
@@ -41,17 +43,22 @@ export const Header = styled.div`
   );
   padding:3px;
 `;
+export const Content = styled.div`
+  width:60%;
+`;
 export const Label = styled.div`
   color: rgb(220, 220, 220);
   padding-left: 5px;
   font-family: "Prime-Light";
-  width:80%;
 `;
-export const FeatureIcons = styled.div`
+export const FeatureIconsWrapper = styled.div`
   display:flex;
   align-items:center;
   justify-content:space-between;
-  width:20%;
+  width:60px;
+  position:absolute;
+  right:20px;
+  padding-left:5px;
 `;
 
 export const NodeContent = styled.div`

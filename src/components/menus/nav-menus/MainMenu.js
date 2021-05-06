@@ -5,8 +5,8 @@ import { MenuIndex, MenuItem} from "./style";
 import {DropdownWrapper,DropdownList,DropDownItem} from "../../style-components/DropdownComponent"
 import { useSelector, useStore, useDispatch } from "react-redux";
 import * as themeColor from "../../../config/ThemeReference"
-import { SetVariablesIcon } from "../../global/SvgIcons";
-
+import { SetVariablesIcon,Logo } from "../../global/SvgIcons";
+import logo from "../../../assets/images/logo.png"
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;
@@ -18,8 +18,8 @@ const Menu = styled(MenuIndex)`
   width:70px;
 `;
 const Circle = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   background: ${(props) =>
     props.theme === "dark"
       ? "rgba(53, 59, 72,0.5)"
@@ -43,15 +43,7 @@ const MainMenu = () => {
     <div>
       <Menu theme={theme}>
         <Circle theme={theme}>
-          {/* <img
-            src={icon}
-            alt="noimg"
-            width={"30px"}
-            height={"30px"}
-            draggable={false}
-            style={{ maxWidth: "100%", maxHeight: "100%" }}
-          /> */}
-          <SetVariablesIcon/>
+          <Logo theme={theme}/>
         </Circle>
         <MenuItem theme={theme}>Home</MenuItem>
       </Menu>

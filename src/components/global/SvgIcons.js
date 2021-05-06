@@ -1,5 +1,37 @@
 import React from "react";
 import * as themeColor from "../../config/ThemeReference";
+export function Logo({ theme }) {
+  return (
+    <>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 156.74 220.09"
+        width="26px"
+        height="30px"
+        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+      >
+        <polygon
+          points="22.18 1.52 1.09 149.46 10.18 154.33 35.21 80.46 75.34 80.27 58.65 140.83 100.09 141.02 56.68 18.96 22.18 1.52"    
+          stroke="#000"
+          strokeMiterlimit={10}
+          strokeWidth="2px"
+        />
+        <polygon
+          points="113.73 48.63 143.82 144.4 155.64 70.15 113.73 48.63"
+          stroke="#000"
+          strokeMiterlimit={10}
+          strokeWidth="2px"
+        />
+        <polygon
+          points="59.49 179.83 132.9 218.55 139.09 179.83 59.49 179.83"
+          stroke="#000"
+          strokeMiterlimit={10}
+          strokeWidth="2px"
+        />
+      </svg>
+    </>
+  );
+}
 export function RedoIcon({ theme }) {
   return (
     <>
@@ -315,8 +347,8 @@ export function SubmitIcon({ width, height, color }) {
       fill={color}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 30 30"
-      width="25px"
-      height="25px"
+      width={width}
+      height={height}
     >
       {" "}
       <path d="M15,3C8.373,3,3,8.373,3,15s5.373,12,12,12s12-5.373,12-12S21.627,3,15,3z M20.707,15.707l-4,4 C16.512,19.902,16.256,20,16,20s-0.512-0.098-0.707-0.293c-0.391-0.391-0.391-1.023,0-1.414L17.586,16H10c-0.552,0-1-0.447-1-1 s0.448-1,1-1h7.586l-2.293-2.293c-0.391-0.391-0.391-1.023,0-1.414s1.023-0.391,1.414,0l4,4 C21.098,14.684,21.098,15.316,20.707,15.707z" />
@@ -409,8 +441,8 @@ export function NameEditIcon({ width, height, onClick, theme }) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 240 240"
-      width={width || "12px"}
-      height={height || "12px"}
+      width={width}
+      height={height}
       onClick={onClick}
     >
       <g id="surface3197349">
@@ -548,7 +580,7 @@ export function GroupFlagIcon({ color, id }) {
   );
 }
 
-export function SetVariablesIcon({ width, height, color }) {
+export function SetVariablesIcon({ width, height, enable }) {
   return (
     <svg
       data-name="Layer 1"
@@ -556,6 +588,7 @@ export function SetVariablesIcon({ width, height, color }) {
       viewBox="0 0 236.71 203.61"
       width={width || "27px"}
       height={height || "27px"}
+      style={ enable ? {} : {filter:"grayscale(100%)"}}
     >
       <path
         d="M68.51,225.44H49a22.36,22.36,0,0,1-16.5-6.51q-6.53-6.51-6.52-16.51V139.19L7.08,121.67v-3.25L25.94,101V44.86q0-10,6.52-16.51A22.36,22.36,0,0,1,49,21.84H68.51V35.42c-1,0-2.72-.05-5.23-.16s-4.43-.17-5.78-.17q-15.84,0-15.83,11.68V98.88a16.83,16.83,0,0,1-5.51,12.35q-5.73,4.38-11.34,8.87L36.16,129q5.51,5.4,5.51,12.25v59.4q0,11.56,15.83,11.57c1.35,0,3.27-.05,5.78-.17s4.25-.16,5.23-.16Z"
@@ -576,7 +609,7 @@ export function SetVariablesIcon({ width, height, color }) {
   );
 }
 
-export function NotificationIcon({ width, height, color }) {
+export function NotificationIcon({ width, height, enable }) {
   return (
     <svg
       data-name="Layer 1"
@@ -584,17 +617,18 @@ export function NotificationIcon({ width, height, color }) {
       viewBox="0 0 233.35 223.06"
       width={width || "27px"}
       height={height || "27px"}
+      style={ enable ? {} : {filter:"grayscale(100%)"}}
     >
       <path
         d="M32,151s-2-21,13-29M31.91,110.5C11.82,121,13.38,151,13.38,151m205.17-.31s2-21-13-29m31.62,29s1.56-30-18.53-40.5M95,202s29.25,52,63.12,0M115,16V32m0,1c-10,3-44,21-44,45,0,20.26-3.27,57.53-4.52,71a15.92,15.92,0,0,1-3.88,9A249.49,249.49,0,0,1,45,176.12C32.05,188.2,41.92,189,42,189H210c-2.47,0,0,0,0,0,.39-.26,7.79-5.69-.5-13.25C201,168,197,167,189,156c-7.83-10.77-6.08-50.31-6-51.95A.06.06,0,0,0,183,104c-1.86-.22-53.55-7.08-34-66.91,0-.08,0-.09,0-.1L136,33a.07.07,0,0,1,0-.06L135.63,16a.05.05,0,0,0,0-.05C127.23,6,115,16,115,16"
         transform="translate(-8.6 -6.81)"
         fill="none"
-        stroke={color || themeColor.NODE_ICON.primary}
+        stroke={themeColor.NODE_ICON.primary}
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="9.5px"
       />
-      <circle cx="181.55" cy="51.69" r="32.5" fill={color || "#c0392b"} />
+      <circle cx="181.55" cy="51.69" r="32.5" fill={"#c0392b"} />
       <path
         d="M194.6,42.27h-7.91V34.21h7.91Zm-.07,39.48h-7.77V47.23h7.77Z"
         transform="translate(-8.6 -6.81)"
@@ -604,7 +638,7 @@ export function NotificationIcon({ width, height, color }) {
   );
 }
 
-export function CombineIcon({ width, height, color }) {
+export function CombineIcon({ width, height,enable }) {
   return (
     <svg
       data-name="Layer 1"
@@ -612,12 +646,13 @@ export function CombineIcon({ width, height, color }) {
       viewBox="0 0 236.01 215.36"
       width={width || "27px"}
       height={height || "27px"}
+      style={ enable ? {} : {filter:"grayscale(100%)"}}
     >
       <path
         d="M192.52,124.35l46.75.14m0-.25-22-23.5M217.4,148l22-23.5m-119-33.3a44.25,44.25,0,1,0,27.28-9.41,44.17,44.17,0,0,0-27.28,9.41m7.78,34.84a19.25,19.25,0,1,1,19.25,19.25A19.25,19.25,0,0,1,128.14,126.06Zm-115.22-78c0-.42,0-.83,0-1.25a24.21,24.21,0,1,1,0,1.25m51.4,78.11a24.25,24.25,0,1,1-24.25-24.25,24.25,24.25,0,0,1,24.25,24.25m-47.5,78a24.25,24.25,0,1,1,24.25,24.25A24.25,24.25,0,0,1,16.82,204.17Zm86.57-78.11H64.32m55.91,34.74A207.66,207.66,0,0,0,95.5,189.74c-9.07,13.06-22.15,14.87-30.18,14.53M63.64,47.82C72,47.6,85.17,49.58,94.37,62.23a209.72,209.72,0,0,0,26,29"
         transform="translate(-8.14 -17.81)"
         fill="none"
-        stroke={color || themeColor.NODE_ICON.primary}
+        stroke={themeColor.NODE_ICON.primary}
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="9.5px"
@@ -626,7 +661,7 @@ export function CombineIcon({ width, height, color }) {
   );
 }
 
-export function SplitIcon({ width, height, color }) {
+export function SplitIcon({ width, height, enable }) {
   return (
     <svg
       data-name="Layer 1"
@@ -634,12 +669,13 @@ export function SplitIcon({ width, height, color }) {
       viewBox="0 0 235.93 215.36"
       width={width || "27px"}
       height={height || "27px"}
+      style={ enable ? {} : {filter:"grayscale(100%)"}}
     >
       <path
         d="M84.88,159.33a44.25,44.25,0,1,1,17-34.84,44,44,0,0,1-17,34.84m-27-54.09A19.25,19.25,0,1,0,77.1,124.49,19.25,19.25,0,0,0,57.85,105.24Zm134.47,97.25A24.25,24.25,0,1,0,168.1,228c13.39,0,24.9-11,24.25-24.25,0-.42,0-.83,0-1.25m-51.41-78.11a24.25,24.25,0,1,0,24.25-24.25,24.25,24.25,0,0,0-24.25,24.25M164.16,22.13a24.25,24.25,0,1,0,24.25,24.25A24.25,24.25,0,0,0,164.16,22.13ZM140.91,124.49,102,125m37.92-78.72c-8-.34-21.11,1.47-30.18,14.53A207.66,207.66,0,0,1,85,89.75m-.13,69.58a209.72,209.72,0,0,1,26,29c9.2,12.65,22.37,14.63,30.73,14.41M190.9,46.37l46.75.13m0-.25-22-23.5M215.78,70l22-23.5m-.13,79-46.75-.13m46.75-.12-22-23.5m.13,47.28,22-23.5M192.9,203.37l46.75.13m0-.25-22-23.5m.13,47.28,22-23.5"
         transform="translate(-8.6 -17.38)"
         fill="none"
-        stroke={color || themeColor.NODE_ICON.primary}
+        stroke={themeColor.NODE_ICON.primary}
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="9.5px"
@@ -648,13 +684,14 @@ export function SplitIcon({ width, height, color }) {
   );
 }
 
-export function CalculateIcon({ width, height, color }) {
+export function CalculateIcon({ width, height, enable }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 240 202"
       width={width || "27px"}
       height={height || "27px"}
+      style={enable ? {} : {filter:"grayscale(100%)"}}
     >
       <g id="Layer_2" data-name="Layer 2">
         <path d="M124.5,41.5" transform="translate(-4.5 -20.5)" fill="none" />
@@ -775,13 +812,14 @@ export function CalculateIcon({ width, height, color }) {
   );
 }
 
-export function ExcelReadIcon({ width, height, color }) {
+export function ExcelReadIcon({ width, height, enable }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 240 240"
       width={width || "27px"}
       height={height || "27px"}
+      style={ enable ? {} : {filter:"grayscale(100%)"}}
     >
       <g id="surface2967139">
         <path
@@ -1135,6 +1173,7 @@ export function VerticalToHorizontalIcon({ width, height, color }) {
     </svg>
   );
 }
+
 export function GroupIcon({ width, height, color, theme }) {
   return (
     <svg

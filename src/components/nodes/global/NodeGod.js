@@ -33,9 +33,9 @@ const NodeGod = ({ self, io, children, collapsable }) => {
   }, [self.data.targetCount, self.data.sourceCount, align]);
 
   const NodeIcon = setIconInstance(self.type);
-
+  const { enable } = self.data;
   return (
-    <NodeWrapper align={align} selected={selected}>
+    <NodeWrapper align={align} selected={selected} enable={enable}>
       <TargetWrapper align={align}>
         {targetArray.map((i, index) => {
           return (
@@ -67,7 +67,7 @@ const NodeGod = ({ self, io, children, collapsable }) => {
           <NodeContent>{children}</NodeContent>
         ) : (
           <NodeContent type="logo">
-            <NodeIcon width="70px" height="70px" />
+            <NodeIcon width="70px" height="70px" enable={self.data.enable} />
           </NodeContent>
         )}
         <Info>

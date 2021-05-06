@@ -132,6 +132,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
           sourceCount: 1,
           align: "horizontal",
           expand: false,
+          enable: true,
           group: {nodes:[]},
         },
       };
