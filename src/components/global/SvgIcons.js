@@ -116,30 +116,30 @@ export function SettingsIcon({ color }) {
     </>
   );
 }
-export function GuideIcon({ color }) {
+export function GuideIcon({ color, width, height }) {
   return (
     <>
       <svg
         fill={color}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 128 128"
-        width="25px"
-        height="25px"
+        width={width}
+        height={height}
       >
         <path d="M8,127h90c7.2,0,13-5.8,13-13V26c0-7.2-5.8-13-13-13H53.9c-1.6,0-2.9,1.3-2.9,2.9c0,0,0,0,0,0c0.1,8.6,1.8,17.2,5.7,25 l2.1,4.3c0.4,0.8,0.5,1.7,0.2,2.5c-0.6,1.5-2.2,2.3-3.6,1.9l-12.6-3.6l-6.6,13.4c-0.5,1-1.5,1.7-2.7,1.7h0c-1.1,0-2.2-0.6-2.7-1.7 l-1-1.9C23.4,44.6,20,30.2,20,15.9c0-1.6-1.3-2.9-2.9-2.9h-2.9c-1.6,0-3.1-1.2-3.2-2.8C10.9,8.4,12.3,7,14,7h86c9.4,0,17,7.6,17,17 v90c0,1.7,1.4,3.1,3.2,3c1.6-0.1,2.8-1.5,2.8-3.2V24c0-12.7-10.3-23-23-23H14c-5,0-9,4-9,9v114C5,125.7,6.3,127,8,127z M28,76h55 c1.7,0,3,1.3,3,3s-1.3,3-3,3H28c-1.7,0-3-1.3-3-3S26.3,76,28,76z M28,96h35c1.7,0,3,1.3,3,3s-1.3,3-3,3H28c-1.7,0-3-1.3-3-3 S26.3,96,28,96z" />
       </svg>
     </>
   );
 }
-export function ProfileIcon({ color }) {
+export function ProfileIcon({ color, width, height }) {
   return (
     <>
       <svg
         fill={color}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 64 64"
-        width="25px"
-        height="25px"
+        width={width}
+        height={height}
       >
         <path fill="#72caaf" d="M31 5A28 28 0 1 0 31 61A28 28 0 1 0 31 5Z" />
         <path
@@ -219,21 +219,36 @@ export function DeleteIcon({ theme, onClick }) {
     </>
   );
 }
-export function FavoriteIcon({ color, favClick, nodeId }) {
-  const id = nodeId;
+export function LikeNodeIcon({ color, favClick, node }) {
+  return (
+    <>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 50 50"
+        width="25px"
+        height="25px"
+        onClick={() => favClick(node)}
+      >
+        <path d="M50,19.3c-0.1-0.4-0.5-0.7-0.9-0.7l-17-1l-6.2-16C25.8,1.3,25.4,1,25,1c-0.4,0-0.8,0.3-0.9,0.6l-6.2,16l-17,1 c-0.4,0-0.8,0.3-0.9,0.7s0,0.8,0.3,1.1l13.2,10.8L9,47.7c-0.1,0.4,0,0.8,0.4,1.1c0.3,0.2,0.8,0.3,1.1,0L25,39.5l14.5,9.3 c0.2,0.1,0.4,0.2,0.5,0.2c0.2,0,0.4-0.1,0.6-0.2c0.3-0.2,0.5-0.7,0.4-1.1l-4.5-16.6l13.2-10.8C50,20.1,50.1,19.7,50,19.3z M32,28h-6 v6h-2v-6h-6v-2h6v-6h2v6h6V28z" />
+      </svg>
+    </>
+  );
+}
+export function DislikeNodeIcon({ color, favClick, node }) {
   return (
     <>
       <svg
         fill={color}
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 50 50"
+        viewBox="0 0 500.75 480"
         width="25px"
         height="25px"
-        style={{ cursor: "pointer", transition: "fill 0.3s ease" }}
-        onClick={() => favClick(id)}
+        onClick={() => favClick(node)}
       >
-        {" "}
-        <path d="M50,19.3c-0.1-0.4-0.5-0.7-0.9-0.7l-17-1l-6.2-16C25.8,1.3,25.4,1,25,1c-0.4,0-0.8,0.3-0.9,0.6l-6.2,16l-17,1 c-0.4,0-0.8,0.3-0.9,0.7s0,0.8,0.3,1.1l13.2,10.8L9,47.7c-0.1,0.4,0,0.8,0.4,1.1c0.3,0.2,0.8,0.3,1.1,0L25,39.5l14.5,9.3 c0.2,0.1,0.4,0.2,0.5,0.2c0.2,0,0.4-0.1,0.6-0.2c0.3-0.2,0.5-0.7,0.4-1.1l-4.5-16.6l13.2-10.8C50,20.1,50.1,19.7,50,19.3z M32,28h-6 v6h-2v-6h-6v-2h6v-6h2v6h6V28z" />
+        <path
+          d="M500,193a9.61,9.61,0,0,0-9-7L321,176,259,16c-1-3-5-6-9-6s-8,3-9,6L179,176,9,186a9.61,9.61,0,0,0-9,7,11.28,11.28,0,0,0,3,11L135,312,90,477a10,10,0,0,0,4,11c3,2,8,3,11,0l145-93,145,93c2,1,4,2,5,2,2,0,4-1,6-2,3-2,5-7,4-11L365,311,497,203C500,201,501,197,500,193ZM260,280H240m-60,0V260H320v20Z"
+          transform="translate(0.37 -10)"
+        />
       </svg>
     </>
   );
@@ -1128,6 +1143,7 @@ export function GroupIcon({ width, height, color, theme }) {
       viewBox="0 0 236 236"
       width={width}
       height={height}
+      className="group-bar-icon"
     >
       <path
         d="M147.81,86"

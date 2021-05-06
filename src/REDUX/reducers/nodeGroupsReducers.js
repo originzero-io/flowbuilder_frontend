@@ -1,6 +1,6 @@
 import { startCase } from "lodash";
 import * as actionTypes from "../constants/nodeGroupsContants";
-
+import without from "lodash/without"
 const nodeGroups = [
   {
     id: 1,
@@ -24,7 +24,7 @@ const nodeGroups = [
     id: 4,
     name: "group_4",
     nodes: [],
-    color: "#32cd59",
+    color: "#6c5ce7",
   },
   {
     id: 5,
@@ -36,7 +36,7 @@ const nodeGroups = [
     id: 6,
     name: "group_6",
     nodes: [],
-    color: "#f7f7f7",
+    color: "tomato",
   },
 ];
 export const nodeGroupsReducer = (state = nodeGroups, { type, payload }) => {
@@ -47,10 +47,16 @@ export const nodeGroupsReducer = (state = nodeGroups, { type, payload }) => {
       return state.map(state=>state.id === payload.id ? payload : state);
     case actionTypes.DELETE_GROUP:
       return state.filter(state=>state.id !== payload);
-    case actionTypes.ADD_NODE_TO_GROUP:
+    case actionTypes.ADD_NODE_TO_GROUP_SINGLE:
       return state.map(state => state.id === payload.group.id ? {...state, nodes:[...state.nodes,payload.self]} : state)
-    case actionTypes.DELETE_NODE_CURRENT_GROUP:
+    case actionTypes.ADD_NODE_TO_GROUP_MULTIPLE:
+      return state.map(state => state.id === payload.group.id ? {...state, nodes:[...state.nodes,...payload.selected]} : state)
+    case actionTypes.DELETE_NODE_CURRENT_GROUP_SINGLE:
       return state.map(state=>state.id === payload.data.group.id ? {...state,nodes:state.nodes.filter(node=>node.id !== payload.id)} : state)
+    case actionTypes.DELETE_NODE_CURRENT_GROUP_MULTIPLE:
+      console.log("payload group:",payload.group)
+      console.log("payload selected ids:",payload.selectedIds)
+      return state.map(state=>state.id === payload.group.id ? {...state,nodes:state.nodes.filter(node=>!payload.selectedIds.includes(node.id))} : state)
     default:
       return state;
   }

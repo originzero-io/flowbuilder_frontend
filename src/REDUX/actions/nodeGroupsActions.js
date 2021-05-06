@@ -12,11 +12,19 @@ export const deleteGroup= (data) => ({
   type: action.DELETE_GROUP,
   payload: data
 });
-export const deleteNodeCurrentGroup= (self) => ({
-  type: action.DELETE_NODE_CURRENT_GROUP,
+export const deleteNodeCurrentGroupSingle= (self) => ({
+  type: action.DELETE_NODE_CURRENT_GROUP_SINGLE,
   payload: self
 });
-export const addNodeToGroup= (self,group) => ({
-  type: action.ADD_NODE_TO_GROUP,
+export const deleteNodeCurrentGroupMultiple= (selectedIds,group) => ({
+  type: action.DELETE_NODE_CURRENT_GROUP_MULTIPLE,
+  payload: {selectedIds,group}
+});
+export const addNodeToGroupSingle= (self,group) => ({
+  type: action.ADD_NODE_TO_GROUP_SINGLE,
   payload: {self,group}
+});
+export const addNodeToGroupMultiple= (selected,group) => ({
+  type: action.ADD_NODE_TO_GROUP_MULTIPLE,
+  payload: {selected,group}
 });

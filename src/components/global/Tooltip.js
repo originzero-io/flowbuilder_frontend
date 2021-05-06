@@ -1,13 +1,14 @@
 import React from "react";
 import ReactTooltip from "react-tooltip";
-
-export default function Tooltip({id,place,type,others}) {
+import {useSelector} from "react-redux"
+export default function Tooltip({ id, place, others }) {
+  const { theme } = useSelector((state) => state.guiConfigReducer);
   return (
     <>
       <ReactTooltip
         id={id}
         place={place}
-        type={type}
+        type={theme==="dark" ? "light" : "dark"}
         effect="solid"
         delayHide={120}
         delayShow={50}

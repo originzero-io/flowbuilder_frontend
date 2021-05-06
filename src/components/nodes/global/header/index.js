@@ -7,14 +7,11 @@ import GroupMenu from "../../../menus/group-menu";
 import { closeAllNodeGroupMenu } from "../../../../REDUX/actions/guiActions";
 import { NameEditIcon } from "../../../global/SvgIcons";
 import getIconComponent from "../iconConstant";
-export default function NodeHeader({
-  self,
-  align,
-  setAlign,
-  selectedElements,
-  onDoubleClick,
-}) {
+import { expandNode, setElements } from "../../../../REDUX/actions/flowActions";
+export default function NodeHeader({ self, selectedElements }) {
   const dispatch = useDispatch();
+  const elements = useSelector((state) => state.elementReducer);
+
   const [showGroup, setShowGroup] = useState(false);
   const [hover, setHover] = useState(false);
   const { nodeGroupMenuDisplay } = useSelector(
@@ -36,15 +33,17 @@ export default function NodeHeader({
     setHover(false);
   };
 
-  const NodeIcon = getIconComponent(self.type);
-
+  //const NodeIcon = getIconComponent(self.type);
+  const expandHandle = () => {
+    dispatch(expandNode(self));
+  };
   return (
     <>
       <Header
         onMouseEnter={onMouseEnterHandle}
         onMouseLeave={onMouseLeaveHandle}
         selected={selectedElements}
-        onDoubleClick={onDoubleClick}
+        onDoubleClick={expandHandle}
       >
         {/* <NodeIcon/> */}
         <Label>{self.data.label}</Label>
@@ -52,11 +51,11 @@ export default function NodeHeader({
           {hover && (
             <>
               <NameEditIcon theme="dark" />
-              <RotateButton align={align} setAlign={setAlign} />
+              <RotateButton self={self} />
             </>
           )}
         </FeatureIcons>
-        <Flag self={self} onClick={groupHandle}/>
+        <Flag self={self} onClick={groupHandle} />
         {showGroup && <GroupMenu self={self} />}
       </Header>
     </>

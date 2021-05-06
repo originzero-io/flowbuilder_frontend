@@ -13,3 +13,5 @@ export const ZOOM_IN = "zoom_in";
 export const ZOOM_OUT = "zoom_out";
 export const FIT_VIEW = "fit_view";
 export const LOCK_SCREEN = "lock_screen";
+export const CLOSE_ALL_NODES = "CLOSE_ALL_NODES";
+export const SELECT_ALL_NODES = "SELECT_ALL_NODES";

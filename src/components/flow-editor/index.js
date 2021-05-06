@@ -18,7 +18,9 @@ import { openNotification as notification } from "../../app-global/dom/notificat
 import {
   setClickedElement,
   setElements,
+  setExpandAllAction,
   setReactFlowInstance,
+  setZoom,
 } from "../../REDUX/actions/flowActions";
 import {
   setElementContextMenu,
@@ -314,6 +316,11 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const closeElementContextMenu = () => {
     dispatch(setElementContextMenu(false));
   };
+
+
+  const onMoveHandle = (flowTransform) => {
+    dispatch(setZoom(flowTransform.zoom))
+  }
   return (
     <>
       <ReactFlow
@@ -343,6 +350,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         zoomActivationKeyCode={90}
         zoomOnDoubleClick={false}
         connectionLineStyle={{ stroke: "#3498db", strokeWidth: 2 }}
+        onMove={onMoveHandle} //return x,y,zoom
         // snapToGrid={true}
         // snapGrid={[60, 60]}
         //onNodeDoubleClick={onNodeDoubleClick}
@@ -352,7 +360,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
         //onNodeMouseEnter={(e, node) => console.log(node)} //hover
         //onNodeMouseLeave={(e, node) => console.log(node)} //hover leave
         //onConnectEnd={(e) => console.log(e)}
-        //onMove={(flowTransform) => console.log(flowTransform)} //return x,y,zoom
         //onSelectionChange={(els) => console.log(els)}
       >
         <FlowContent theme={theme} miniMapDisplay={miniMapDisplay} />

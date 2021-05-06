@@ -6,7 +6,7 @@ import {
   Screen,
   FlowWrapper,
 } from "./components/style-components/AppWrapper";
-import GroupBar from "./components/menus/group-bar/index";
+import AppTooltips from "./components/global/AppTooltips"
 import FlowEditor from "./components/flow-editor";
 import { useSelector, useDispatch } from "react-redux";
 const App = () => {
@@ -22,17 +22,12 @@ const App = () => {
   return (
     <AppWrapper>
       <ReactFlowProvider>
-        {/* <Screen>
-          <FlowWrapper ref={reactFlowWrapper}>
-            <FlowEditor reactFlowWrapper={reactFlowWrapper} />
-          </FlowWrapper>
-          <GroupBar visible={groupBarDisplay}></GroupBar>
-        </Screen> */}
         <FlowWrapper ref={reactFlowWrapper}>
           <FlowEditor reactFlowWrapper={reactFlowWrapper} />
         </FlowWrapper>
       </ReactFlowProvider>
       <NotificationContainer />
+      <AppTooltips/>
     </AppWrapper>
   );
 };

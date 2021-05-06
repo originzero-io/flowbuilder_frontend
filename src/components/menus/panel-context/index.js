@@ -1,11 +1,11 @@
-import React, { useCallback, useState, useContext } from "react";
-import * as types from "../../nodes/constant/nodeTypes";
+import React, { useState } from "react";
+import * as themeColor from "../../../config/ThemeReference";
 import { NodeWrapper, NodeElement, Container } from "./style";
 import { useSelector,useDispatch } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import AllNodes from "./AllNodes";
 import FavoriteNodes from "./FavoriteNodes";
-import {setNodeList} from "../../../REDUX/actions/nodeListActions"
+import {addNodeToFavorites} from "../../../REDUX/actions/nodeListActions"
 import RecentNodes from "./RecentNodes";
 const PanelContextMenu = () => {
   const {panelMenu} = useSelector((state) => state.menuConfigReducer);
@@ -16,19 +16,8 @@ const PanelContextMenu = () => {
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.effectAllowed = "move";
   };
-  const favClick = (id) => {
-    const newList = nodeList.map(node => {
-      if (node.id === id) {
-        return {
-          ...node,
-          fav:!node.fav
-        }
-      }
-      else {
-        return node;
-      }
-    })
-    dispatch(setNodeList(newList))
+  const favClick = (node) => {
+    dispatch(addNodeToFavorites(node))
   };
   return (
     <>
@@ -36,7 +25,7 @@ const PanelContextMenu = () => {
         <Container x={panelMenu.x} y={panelMenu.y} theme={theme}>
           <Tabs
             selectedTabClassName="selected-tab"
-            style={{color:theme === "dark" ? "#dcdcdc" : "black"}}
+            style={{color:theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}}
           >
             <TabList>
               <Tab style={{userSelect:"none"}}>All</Tab>

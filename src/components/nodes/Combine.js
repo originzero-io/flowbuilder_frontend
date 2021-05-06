@@ -33,7 +33,7 @@ const CombineNode = (self) => {
         io="both"
         collapsable={true}
       >
-        <NodeIOManager self={self} io="source"/>
+        <NodeIOManager self={self} io="target"/>
       </NodeGod>
     </>
   );

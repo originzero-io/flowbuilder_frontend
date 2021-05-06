@@ -11,19 +11,13 @@ import {
   TargetWrapper,
   Info,
 } from "../styles";
-import setIconInstance from "./iconConstant"
-const NodeGod = ({
-  self,
-  align,
-  setAlign,
-  io,
-  children,
-  collapsable,
-}) => {
+import setIconInstance from "./iconConstant";
+const NodeGod = ({ self, io, children, collapsable }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sourceArray = [];
   const targetArray = [];
-  const { alignAll } = useSelector((state) => state.guiConfigReducer);
+  const { zoom } = useSelector((state) => state.flowConfigReducer);
+  const { selected, align, expand } = self.data;
   for (let index = 0; index < self.data.targetCount; index++) {
     if (io === "target" || io === "both") {
       targetArray.push(index);
@@ -37,25 +31,9 @@ const NodeGod = ({
   useEffect(() => {
     updateNodeInternals(self.id);
   }, [self.data.targetCount, self.data.sourceCount, align]);
-  const [expand, setExpand] = useState(false);
 
-  useEffect(() => {
-    setExpand(self.data.expand);
-  }, [self.data.expand]);
-  useEffect(() => {
-    setAlign(alignAll);
-  }, [alignAll]);
-  useEffect(() => {
-    setAlign(self.data.align);
-  }, [self.data.align]);
+  const NodeIcon = setIconInstance(self.type);
 
-  const expandHandle = () => {
-    if (collapsable) {
-      setExpand(!expand);
-    }
-  }
-  const { selected } = self.data;
-  const NodeIcon = setIconInstance(self.type)
   return (
     <NodeWrapper align={align} selected={selected}>
       <TargetWrapper align={align}>
@@ -72,33 +50,28 @@ const NodeGod = ({
                   : "node-handle horizontal"
               }`}
               style={{
-                backgroundColor:self.data.group.color
+                backgroundColor: self.data.group.color,
               }}
             />
           );
         })}
       </TargetWrapper>
-      
+
       <NodeArea>
         <NodeHeader
           self={self}
-          align={align}
-          setAlign={setAlign}
           collapsable={collapsable}
           selectedElements={selected}
-          onDoubleClick = {expandHandle}
         />
         {expand ? (
-          <NodeContent>
-            {children}
-          </NodeContent>
+          <NodeContent>{children}</NodeContent>
         ) : (
-            <NodeContent type="logo">
-              <NodeIcon width="70px" height="70px"/>
-            </NodeContent>
+          <NodeContent type="logo">
+            <NodeIcon width="70px" height="70px" />
+          </NodeContent>
         )}
         <Info>
-          <InfoIcon color={"whitesmoke"} draggable={false} />
+          <InfoIcon color="whitesmoke" />
         </Info>
       </NodeArea>
 

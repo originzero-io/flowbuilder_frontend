@@ -39,7 +39,7 @@ const SplitNode = (self) => {
       io="both"
       collapsable={true}
     >
-      <NodeIOManager self={self} io="both" />
+      <NodeIOManager self={self} io="source" />
       {/* <input
         name="source1"
         type="number"
