@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import icon from "../../../assets/icons/Set_Variables.png";
 import Divider from "../../style-components/Divider";
 import { MenuIndex, MenuItem} from "./style";
 import {DropdownWrapper,DropdownList,DropDownItem} from "../../style-components/DropdownComponent"
 import { useSelector, useStore, useDispatch } from "react-redux";
 import * as themeColor from "../../../config/ThemeReference"
-
+import { SetVariablesIcon,Logo } from "../../global/SvgIcons";
+import logo from "../../../assets/images/logo.png"
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;
@@ -15,10 +15,11 @@ const Menu = styled(MenuIndex)`
       ? themeColor.DARK_MENU_BACKGROUND
       : themeColor.LIGHT_MENU_BACKGROUND};
   border-radius: 6px;
+  width:70px;
 `;
 const Circle = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   background: ${(props) =>
     props.theme === "dark"
       ? "rgba(53, 59, 72,0.5)"
@@ -36,40 +37,18 @@ const Circle = styled.div`
   align-items: center;
 `;
 
-export default function MainMenu() {
-  //const dispatch = useDispatch();
+const MainMenu = () => {
   const {theme} = useSelector((state) => state.guiConfigReducer);
-  const elements = useSelector((state) => state.elementReducer);
-
   return (
     <div>
       <Menu theme={theme}>
         <Circle theme={theme}>
-          <img
-            src={icon}
-            alt="noimg"
-            width={"30px"}
-            height={"30px"}
-            draggable={false}
-            style={{ maxWidth: "100%", maxHeight: "100%" }}
-          ></img>
+          <Logo theme={theme}/>
         </Circle>
-
-        <DropdownWrapper>
-          <MenuItem theme={theme}>Flow</MenuItem>
-          <DropdownList theme={theme}>
-            <DropDownItem>Flow 1</DropDownItem>
-            <DropDownItem>Flow 2</DropDownItem>
-            <DropDownItem>Flow 3</DropDownItem>
-          </DropdownList>
-        </DropdownWrapper>
-
-        <Divider />
-        <MenuItem theme={theme}>Dashboard</MenuItem>
-        <Divider />
-        <MenuItem theme={theme}>Devices</MenuItem>
-        <Divider/>
+        <MenuItem theme={theme}>Home</MenuItem>
       </Menu>
     </div>
   );
 }
+
+export default React.memo(MainMenu);

@@ -1,14 +1,16 @@
 import React, { useRef, useEffect } from "react";
 import { ReactFlowProvider } from "react-flow-renderer";
 import { NotificationContainer } from "react-notifications";
+import logo from "./assets/images/logo.png"
 import {
   AppWrapper,
   Screen,
   FlowWrapper,
 } from "./components/style-components/AppWrapper";
-import GroupBar from "./components/menus/group-bar/index";
-import FlowEditor from "./components/flow-editor/FlowEditor";
+import AppTooltips from "./components/global/AppTooltips"
+import FlowEditor from "./components/flow-editor";
 import { useSelector, useDispatch } from "react-redux";
+import Favicon from "react-favicon";
 const App = () => {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const elements = useSelector((state) => state.elementReducer);
@@ -22,17 +24,13 @@ const App = () => {
   return (
     <AppWrapper>
       <ReactFlowProvider>
-        {/* <Screen>
-          <FlowWrapper ref={reactFlowWrapper}>
-            <FlowEditor reactFlowWrapper={reactFlowWrapper} />
-          </FlowWrapper>
-          <GroupBar visible={groupBarDisplay}></GroupBar>
-        </Screen> */}
         <FlowWrapper ref={reactFlowWrapper}>
           <FlowEditor reactFlowWrapper={reactFlowWrapper} />
         </FlowWrapper>
       </ReactFlowProvider>
       <NotificationContainer />
+      <AppTooltips />
+      <Favicon url={logo} />
     </AppWrapper>
   );
 };

@@ -1,58 +1,65 @@
 import * as types from "../../components/nodes/constant/nodeTypes";
-import setVariables from "../../assets/icons/Set_Variables.png";
-import combineIcon from "../../assets/icons/Combine.png";
-import splitIcon from "../../assets/icons/Split.png";
-import notificationIcon from "../../assets/icons/Notification.png";
+import {
+  SetVariablesIcon,
+  NotificationIcon,
+  CombineIcon,
+  SplitIcon,
+  CalculateIcon,
+  ExcelReadIcon,
+} from "../../components/global/SvgIcons";
+import * as actionTypes from "../constants/nodeListConstants";
+
 const panelNodeList = [
   {
     id: 1,
     name: types.SET_VARIABLES,
-    icon: setVariables,
+    icon: <SetVariablesIcon/>,
     fav: false,
   },
   {
     id: 2,
     name: types.NOTIFICATION,
-    icon: notificationIcon,
+    icon: <NotificationIcon/>,
     fav: false,
   },
   {
     id: 3,
     name: types.COMBINE,
-    icon: combineIcon,
+    icon: <CombineIcon/>,
     fav: false,
   },
   {
     id: 4,
     name: types.SPLIT,
-    icon: splitIcon,
+    icon: <SplitIcon/>,
     fav: false,
   },
   {
     id: 5,
     name: types.CALCULATE,
-    icon: splitIcon,
+    icon: <CalculateIcon/>,
     fav: false,
   },
   {
     id: 6,
     name: types.EXCEL_READ,
-    icon: splitIcon,
+    icon: <ExcelReadIcon/>,
     fav: false,
   },
   {
     id: 7,
     name: types.SERIAL_READ,
-    icon: splitIcon,
+    icon: <CalculateIcon/>,
     fav: false,
   },
 ];
-export const nodeListReducer = (state = panelNodeList, action) => {
-  switch (action.type) {
-    case "SET_LIST":
-      return action.payload;
+export const nodeListReducer = (state = panelNodeList, {type,payload}) => {
+  switch (type) {
+    case actionTypes.SET_NODE_LIST:
+      return payload;
+    case actionTypes.ADD_NODE_TO_FAVORITES:
+      return state.map(state=>state.id === payload.id ? {...state,fav:!state.fav} : state);
     default:
       return state;
   }
 };
-

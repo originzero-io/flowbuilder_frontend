@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import NodeGod from "./global/NodeGod";
 import { useSelector, useDispatch } from "react-redux";
-import { NodeContent } from "./styles";
+import NodeIOManager from "./global/NodeIOManager";
 
-const NotificationNode = (self) => {
+const SerialReadNode = (self) => {
   const [align, setAlign] = useState("vertical");
 
   return (
@@ -12,12 +12,13 @@ const NotificationNode = (self) => {
         self={self}
         align={align}
         setAlign={setAlign}
-        io="target"
+        io="source"
         collapsable={false}
       >
+        <NodeIOManager self={self} io="source" />
       </NodeGod>
     </>
   );
 };
 
-export default NotificationNode;
+export default SerialReadNode;

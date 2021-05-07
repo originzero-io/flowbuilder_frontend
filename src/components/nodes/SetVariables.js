@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getOutgoers, useUpdateNodeInternals } from "react-flow-renderer";
-import setVariable from "../../assets/icons/Set_Variables.png";
 import { getNodesAndEdges } from "../../app-global/helpers/elementController";
 import useDidMountEffect from "../../hooks/useDidMountEffect";
-import NodeGod from "./NodeGod";
+import NodeGod from "./global/NodeGod";
 import { Label } from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { setElements } from "../../REDUX/actions/flowActions";
 import updateNodeHandles from "../../app-global/helpers/updateNodeHandles"
+import NodeIOmanager from "./global/NodeIOManager";
 
 const SetVariables = (self) => {
-  const {flagColor} = useSelector((state) => state.guiConfigReducer);
   const elements = useSelector((state) => state.elementReducer);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
@@ -60,27 +59,11 @@ const SetVariables = (self) => {
   useDidMountEffect(() => {
     nodeClass.doInput(values, self, outgoers);
   }, [values]);
-
-  const [handleCount, setHandleCount] = useState({
-    targetCount: 1,
-    sourceCount: 1,
-  });
-  const handleCountChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setHandleCount({
-      ...handleCount,
-      [name]: value,
-    });
-    const updatedElements = updateNodeHandles(name, value, self, elements);
-    dispatch(setElements(updatedElements))
-  };
+  
   return (
     <>
       <NodeGod
         self={self}
-        iconSrc={setVariable}
-        flagColor={flagColor}
         align={align}
         setAlign={setAlign}
         io="source"
@@ -94,18 +77,9 @@ const SetVariables = (self) => {
             value={text}
             onChange={textChange}
           />
-          <input type="checkbox" onChange={checkboxChange} />
+          <input type="checkbox" onChange={checkboxChange} value={checked} />
         </div>
-        <Label>Source Length</Label>
-        <input
-          type="number"
-          name="sourceCount"
-          min={1}
-          className="nodrag nowheel"
-          value={handleCount.sourceCount}
-          onChange={handleCountChange}
-          style={{ width: "145px" }}
-        />
+        <NodeIOmanager self={self} io="source"/>
       </NodeGod>
     </>
   );

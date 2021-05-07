@@ -18,10 +18,17 @@ import {
   SubmitIcon,
   AddIcon,
   CancelIcon,
+  NonGroupIcon,
 } from "../../global/SvgIcons";
+import { useStoreActions, isNode } from "react-flow-renderer";
+
 export default function NewGroupForm({ theme }) {
   const [groupInfo, setGroupInfo] = useState({});
   const [formOpen, setFormOpen] = useState(false);
+  const elements = useSelector((state) => state.elementReducer);
+  const setSelectedElements = useStoreActions(
+    (actions) => actions.setSelectedElements
+  );
   const dispatch = useDispatch();
   const groupHandle = (event) => {
     const { name, value } = event.target;
@@ -41,9 +48,15 @@ export default function NewGroupForm({ theme }) {
       })
     );
   };
+  const selectNonGroupsHandle = () => {
+    const nonGroups = elements.filter(
+      (els) => isNode(els) && els.data.group.id === undefined
+    );
+    setSelectedElements(nonGroups);
+  };
   return (
     <AddGroupWrapper onSubmit={addNewGroup}>
-      <Header>
+      <Header theme={theme}>
         <IconWrapper onClick={() => setFormOpen(!formOpen)}>
           {formOpen === true ? (
             <CancelIcon
@@ -64,17 +77,19 @@ export default function NewGroupForm({ theme }) {
           )}
         </IconWrapper>
         <Title>Groups</Title>
+        <NonGroupIcon width="40px" height="40px" onClick={selectNonGroupsHandle} theme={theme}/>
       </Header>
 
       {formOpen && (
         <InputWrapper>
           <Input
+            theme={theme}
             placeholder="Add Group Name"
             required
             onChange={groupHandle}
             name="name"
             value={groupInfo.name}
-            maxLength={14}
+            maxLength={18}
           />
           <ColorInput
             type="color"
@@ -95,7 +110,7 @@ export default function NewGroupForm({ theme }) {
           </Submit>
         </InputWrapper>
       )}
-      <Divider></Divider>
+      <Divider/>
     </AddGroupWrapper>
   );
 }

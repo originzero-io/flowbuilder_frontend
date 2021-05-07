@@ -5,7 +5,6 @@ import { setElementContextMenu } from "../../../REDUX/actions/menuActions";
 import { setElements } from "../../../REDUX/actions/flowActions";
 
 export default function ElementMenu() {
-
   const elements = useSelector((state) => state.elementReducer);
   const {elementMenu} = useSelector((state) => state.menuConfigReducer);
   const theme = useSelector((state) => state.themeReducer);
@@ -47,7 +46,6 @@ export default function ElementMenu() {
     <div>
       {elementMenu.state === true && (
         <Menu x={elementMenu.x} y={elementMenu.y} theme={theme}>
-          <MenuItem>Save</MenuItem>
           <MenuItem>Edit</MenuItem>
           <MenuItem onClick={rotateItem}>Rotate</MenuItem>
           <MenuItem onClick={deleteItem}>Delete</MenuItem>

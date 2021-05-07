@@ -1,33 +1,19 @@
-import React, { useState } from "react";
-import htov from "../../../assets/icons/h_to_v.png";
-import vtoh from "../../../assets/icons/v_to_h.png";
-import styled from "styled-components";
-const Button = styled.div`
-  cursor: pointer;
-  img {
-    filter: brightness(10000%);
-  }
-  &:hover img {
-    filter: grayscale(100%);
-    //filter:hue-rotate(215deg);
-  }
-`;
-export default function RotateButton({ align, setAlign }) {
+import React from "react";
+import {useDispatch} from "react-redux"
+import { rotateNode } from "../../../REDUX/actions/flowActions";
+import { HorizontalToVerticalIcon,VerticalToHorizontalIcon } from "../SvgIcons";
+export default function RotateButton({ self }) {
+  const dispatch = useDispatch();
   const rotateHandle = () => {
-    if (align === "vertical") {
-      setAlign("horizontal");
-    } else {
-      setAlign("vertical");
-    }
+    const currentAlign = self.data.align;
+    const newPath = currentAlign === "horizontal" ? "vertical" : "horizontal"
+    dispatch(rotateNode(self,newPath))
   };
   return (
-    <Button onClick={rotateHandle}>
-      <img
-        src={align === "vertical" ? htov : vtoh}
-        width={"20vh"}
-        height={"20vh"}
-        draggable={false}
-      ></img>
-    </Button>
+    <div onClick={rotateHandle}>
+      {
+        self.data.align === "horizontal" ? <HorizontalToVerticalIcon/> : <VerticalToHorizontalIcon/>
+      }
+    </div>
   );
 }

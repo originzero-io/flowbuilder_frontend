@@ -4,14 +4,16 @@ import PanelContextMenu from "./panel-context";
 import MultiSelectionContextMenu from "./multiselection-context";
 import ElementContextMenu from "./element-context";
 import GroupBar from "./group-bar";
-export default function AppMenu() {
+const AppMenu = () => {
   return (
     <>
       <NavMenus/>
       <PanelContextMenu />
       <MultiSelectionContextMenu />
       <ElementContextMenu />
-      <GroupBar/>
+      <GroupBar />
     </>
   );
 }
+
+export default AppMenu

@@ -8,11 +8,7 @@ export const setFlagColor = (data) => ({
   type: action.SET_FLAG_COLOR,
   payload: data
 });
-export const setAlignAll = (data) => ({
-  type: action.SET_ALIGN_ALL,
-  payload: data
-});
-export const closeAllGroupMenu = (data) => ({
+export const closeAllNodeGroupMenu = (data) => ({
   type: action.SET_CLOSE_ALL_GROUPS,
   payload: data
 });

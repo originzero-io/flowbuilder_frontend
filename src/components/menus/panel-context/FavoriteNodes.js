@@ -1,9 +1,7 @@
 import React from "react";
 import { NodeWrapper, NodeElement } from "./style";
-import Icon from "../../nodes/global/NodeIcon";
 import { Label } from "../../nodes/styles";
-import { FavoriteIcon } from "../../global/SvgIcons";
-
+import FavIconManager from "./FavIconManager";
 export default function FavoriteNodes({ nodeList,favClick,onDragStart }) {
   const favoriteNodes = nodeList.filter((node) => node.fav === true);
   return (
@@ -16,15 +14,9 @@ export default function FavoriteNodes({ nodeList,favClick,onDragStart }) {
               onDragStart={(event) => onDragStart(event, node.name)}
               draggable
             >
-              <Icon src={node.icon} width={"40vmin"} height={"40vmin"} />
+              <>{node.icon}</>
               <Label>{node.name}</Label>
-              <FavoriteIcon
-                width={"25px"}
-                height={"25px"}
-                favClick={favClick}
-                nodeId={node.id}
-                color={node.fav === true ? "rgb(218,168,0)" : "rgb(30,30,30)"}
-              />
+              <FavIconManager node={node} favClick={favClick}/>
             </NodeElement>
           );
         }) : "Click the star button to fav nodes"}

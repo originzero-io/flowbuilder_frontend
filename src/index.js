@@ -7,6 +7,9 @@ import "@fortawesome/fontawesome-free/js/brands"
 import "@fortawesome/fontawesome-free/js/solid"
 import "@fortawesome/fontawesome-free/js/fontawesome"
 import 'bootstrap/dist/css/bootstrap.min.css';
+//import Popper from 'popper.js';
+//import $ from "jquery"
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'react-tabs/style/react-tabs.css';
 ///REDUX
 import { createStore, applyMiddleware, compose } from "redux";

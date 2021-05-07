@@ -6,19 +6,26 @@ import useDidMountEffect from "../../../hooks/useDidMountEffect";
 import {
   addGroup,
   deleteGroup,
-  addNodeToGroup,
+  addNodeToGroupSingle,
+  addNodeToGroupMultiple,
+  deleteNodeCurrentGroupSingle,
+  deleteNodeCurrentGroupMultiple,
 } from "../../../REDUX/actions/nodeGroupsActions";
 import uuid from "react-uuid";
-import NodeGod from "../../nodes/NodeGod";
 import { setElements } from "../../../REDUX/actions/flowActions";
+import { updateGroup } from "../../../REDUX/actions/nodeGroupsActions";
 import styled from "styled-components";
-import { ColorBox, Label } from "../group-bar/style";
+import { GroupColor, Label } from "../group-bar/style";
+import { isEdge, isNode } from "react-flow-renderer";
 const Container = styled.div`
-  position:absolute;
+  position: absolute;
   right: -110px;
   top: -2px;
   min-width: 100px;
-`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+`;
 const SearchBar = styled.input`
   border-radius: 4px;
   width: 70%;
@@ -37,26 +44,32 @@ const GroupItem = styled.div`
   color: white;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   padding: 2px;
-  &:hover{
-    background: #273c75;
+  &:hover {
+    background: rgb(15, 175, 143);
   }
 `;
 const Content = styled.div`
-  background: rgba(43,46,53,0.6);
+  background: rgba(43, 46, 53, 0.6);
   margin-top: 2px;
 `;
-export default function GroupMenu() {
-  const { groupMenu } = useSelector((state) => state.menuConfigReducer);
+export default function GroupMenu({ self, selectedElements }) {
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
   const elements = useSelector((state) => state.elementReducer);
-  const { theme } = useSelector((state) => state.guiConfigReducer);
-  const { clickedElement } = useSelector((state) => state.flowConfigReducer);
   const dispatch = useDispatch();
   const [searched, setSearched] = useState([]);
+  useEffect(() => {
+    setSearched(nodeGroups);
+  }, [nodeGroups]);
+  useEffect(() => {
+    setSearched(nodeGroups);
+  }, []);
   const searchHandle = (e) => {
     const value = e.target.value;
-    const filtered = nodeGroups.filter((group) => group.name.toLowerCase().includes(value.toLowerCase()));
+    const filtered = nodeGroups.filter((group) =>
+      group.name.toLowerCase().includes(value.toLowerCase())
+    );
     if (value === "") {
       setSearched([]);
     } else {
@@ -64,26 +77,96 @@ export default function GroupMenu() {
     }
   };
   const selectGroup = (group) => {
+    if (selectedElements) {
+      multiSelectionHandle(group);
+    } else {
+      singleSelectionHandle(group);
+    }
+  };
+
+  const singleSelectionHandle = (group) => {
+    console.log("single")
     const newElements = elements.map((els) => {
-      if (els.id === clickedElement.id) {
-        return {
-          ...els,
-          data: {
-            ...els.data,
-            group,
-          },
-        };
+      if (isNode(els)) {
+        if (els.id === self.id) {
+          return {
+            ...els,
+            data: {
+              ...els.data,
+              group,
+            },
+          };
+        }
+        return els;
       }
-      return els;
+      else if (isEdge(els)) {
+        if (els.source === self.id) {
+          return {
+            ...els,
+            style: {
+              ...els.style,
+              stroke: group.color,
+            },
+          };
+        }
+        return els;
+      }
     });
     dispatch(setElements(newElements));
+    dispatch(deleteNodeCurrentGroupSingle(self));
+    dispatch(addNodeToGroupSingle(self, group));
   };
-  useEffect(() => {
-    setSearched(nodeGroups);
-  }, [nodeGroups]);
-  useEffect(() => {
-    setSearched([]);
-  }, []);
+
+  const multiSelectionHandle = (group) => {
+    console.log("multi")
+    const selectedElementIds = selectedElements.map(m => m.id)
+    const newElements = elements.map((els) => {
+      if (isNode(els)) {
+        if (selectedElementIds.includes(els.id)) {
+          return {
+            ...els,
+            data: {
+              ...els.data,
+              group,
+            },
+          };
+        }
+        return els;
+      }
+      else if (isEdge(els)) {
+        if (selectedElementIds.includes(els.source)) {
+          return {
+            ...els,
+            style: {
+              ...els.style,
+              stroke: group.color,
+            },
+          };
+        }
+        return els;
+      }
+    });
+    console.log("selected ids:", selectedElementIds);
+    console.log("group", group);
+
+    const newGroups = nodeGroups.map((gr) => {
+      if (gr.id === group.id) {
+        return {
+          ...gr,
+          nodes: gr.nodes.filter((node) => !selectedElementIds.includes(node.id)),
+        };
+      }
+      return gr;
+    });
+
+    console.table(newGroups)
+
+    
+
+    dispatch(setElements(newElements));
+    dispatch(deleteNodeCurrentGroupMultiple(selectedElementIds,selectedElements[0].data.group));
+    dispatch(addNodeToGroupMultiple(selectedElements, group));
+  };
   return (
     <Container>
       <SearchBar
@@ -94,9 +177,9 @@ export default function GroupMenu() {
       <Content>
         {searched.map((group) => {
           return (
-            <GroupItem onClick={() => selectGroup(group)}>
-              <Label>{group.name}</Label>
-              <ColorBox color={group.color} />
+            <GroupItem key={group.id} onClick={() => selectGroup(group)}>
+              <Label style={{ fontSize: "12px" }}>{group.name}</Label>
+              <GroupColor width="15px" height="15px" value={group.color} />
             </GroupItem>
           );
         })}

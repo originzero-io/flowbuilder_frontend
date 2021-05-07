@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Handle, useUpdateNodeInternals } from "react-flow-renderer";
-import CollapseButton from "../global/buttons/CollapseButton";
 import { useSelector, useDispatch } from "react-redux";
-import { InfoIcon } from "../global/SvgIcons";
-import NodeHeader from "./global/NodeHeader";
-import NodeLogo from "./global/NodeLogo";
+import { InfoIcon } from "../../global/SvgIcons";
+import NodeHeader from "./header/index";
 import {
   NodeArea,
   NodeContent,
@@ -12,21 +10,14 @@ import {
   SourceWrapper,
   TargetWrapper,
   Info,
-} from "./styles";
-const NodeGod = ({
-  self,
-  iconSrc,
-  flagColor,
-  align,
-  setAlign,
-  io,
-  children,
-  collapsable,
-}) => {
+} from "../styles";
+import setIconInstance from "./iconConstant";
+const NodeGod = ({ self, io, children, collapsable }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sourceArray = [];
   const targetArray = [];
-  const { alignAll } = useSelector((state) => state.guiConfigReducer);
+  const { zoom } = useSelector((state) => state.flowConfigReducer);
+  const { selected, align, expand } = self.data;
   for (let index = 0; index < self.data.targetCount; index++) {
     if (io === "target" || io === "both") {
       targetArray.push(index);
@@ -40,22 +31,11 @@ const NodeGod = ({
   useEffect(() => {
     updateNodeInternals(self.id);
   }, [self.data.targetCount, self.data.sourceCount, align]);
-  const [expand, setExpand] = useState(false);
-  const expandMenu = () => {
-    setExpand(!expand);
-  };
-  useEffect(() => {
-    setExpand(self.data.expand);
-  }, [self.data.expand]);
-  useEffect(() => {
-    setAlign(alignAll);
-  }, [alignAll]);
-  useEffect(() => {
-    setAlign(self.data.align);
-  }, [self.data.align]);
-  const { selected } = self.data;
+
+  const NodeIcon = setIconInstance(self.type);
+  const { enable } = self.data;
   return (
-    <NodeWrapper align={align} selected={selected}>
+    <NodeWrapper align={align} selected={selected} enable={enable}>
       <TargetWrapper align={align}>
         {targetArray.map((i, index) => {
           return (
@@ -70,33 +50,28 @@ const NodeGod = ({
                   : "node-handle horizontal"
               }`}
               style={{
-                borderColor: flagColor,
+                backgroundColor: self.data.group.color,
               }}
             />
           );
         })}
       </TargetWrapper>
+
       <NodeArea>
         <NodeHeader
           self={self}
-          iconSrc={iconSrc}
-          label={self.data.label}
-          flagColor={self.data.group.color}
-          align={align}
-          setAlign={setAlign}
           collapsable={collapsable}
-          expand={expand}
-          expandMenu={expandMenu}
+          selectedElements={selected}
         />
-        {expand === true ? (
+        {expand ? (
           <NodeContent>{children}</NodeContent>
         ) : (
           <NodeContent type="logo">
-            <NodeLogo src={iconSrc} />
+            <NodeIcon width="70px" height="70px" enable={self.data.enable} />
           </NodeContent>
         )}
         <Info>
-          <InfoIcon color={flagColor} draggable={false} />
+          <InfoIcon color="whitesmoke" />
         </Info>
       </NodeArea>
 
@@ -114,7 +89,7 @@ const NodeGod = ({
                   : "node-handle horizontal"
               }`}
               style={{
-                borderColor: flagColor,
+                backgroundColor: self.data.group.color,
               }}
             />
           );
