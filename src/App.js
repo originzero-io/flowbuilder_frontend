@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { ReactFlowProvider } from "react-flow-renderer";
 import { NotificationContainer } from "react-notifications";
+import logo from "./assets/images/logo.png"
 import {
   AppWrapper,
   Screen,
@@ -9,6 +10,7 @@ import {
 import AppTooltips from "./components/global/AppTooltips"
 import FlowEditor from "./components/flow-editor";
 import { useSelector, useDispatch } from "react-redux";
+import Favicon from "react-favicon";
 const App = () => {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const elements = useSelector((state) => state.elementReducer);
@@ -27,7 +29,8 @@ const App = () => {
         </FlowWrapper>
       </ReactFlowProvider>
       <NotificationContainer />
-      <AppTooltips/>
+      <AppTooltips />
+      <Favicon url={logo} />
     </AppWrapper>
   );
 };

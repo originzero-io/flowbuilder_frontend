@@ -27,7 +27,7 @@ export const NodeArea = styled.div`
 `;
 export const Header = styled.div`
   display: flex;
-  min-width: 190px;
+  min-width: 200px;
   justify-content: space-between;
   align-items: center;
   text-align: start; //Added by "My name is Anıl Akseki"

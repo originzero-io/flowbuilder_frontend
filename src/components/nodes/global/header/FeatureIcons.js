@@ -20,8 +20,10 @@ export default function FeatureIcons({ self, edit, setEdit }) {
       <Switch
         checked={checked}
         onChange={enableChangeHandle}
-        onColor="#86d3ff"
-        onHandleColor="#2693e6"
+        //onColor="#86d3ff"
+        onColor="#bdc3c7"
+        //onHandleColor="#2693e6"
+        onHandleColor="#218c74"
         handleDiameter={10}
         uncheckedIcon={false}
         checkedIcon={false}

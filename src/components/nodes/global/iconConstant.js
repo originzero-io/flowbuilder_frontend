@@ -13,7 +13,6 @@ const icons = {
   "Calculate": CalculateIcon,
   "Combine": CombineIcon,
   "Split": SplitIcon,
-  "Excel Read": SplitIcon,
   "Serial Read": SplitIcon,
   "Excel Read": ExcelReadIcon,
 };
