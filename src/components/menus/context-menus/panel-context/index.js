@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as themeColor from "../../../../config/ThemeReference";
-import { NodeWrapper, NodeElement, Container } from "./style";
+import { Container } from "./style";
 import { useSelector,useDispatch } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import AllNodes from "./AllNodes";

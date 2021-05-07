@@ -7,7 +7,7 @@ const flowConfig = {
   zoom: 0,
   rotateAllPath:"horizontal",
   miniMapDisplay: "visible",
-  groupBarDisplay:"hidden",
+  groupBarDisplay: "hidden",
   clickedElement: {},
 };
 
@@ -18,6 +18,9 @@ export const elementReducer = (state = initialElements, {type,payload}) => {
   switch (type) {
     case actionTypes.SET_ELEMENTS:
       return payload;
+    case actionTypes.IMPORT_ELEMENTS:
+      return [...state,...payload];
+    
     case actionTypes.SET_ROTATE_ALL:
       return state.map(state => {
         return {
@@ -103,6 +106,8 @@ export const elementReducer = (state = initialElements, {type,payload}) => {
         }
         return state;
       });
+    
+    
     default:
       return state;
   }
