@@ -1,33 +1,32 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import { getDataFromDb, saveToDb } from "../../../../app-global/db/index";
-import Divider from "../../../style-components/Divider";
-import { MenuItem } from "../style";
-import * as tooltip from "../../../../config/TooltipReference";
+import { saveToDb } from "../../../app-global/db";
+//import Divider from "../../style-components/Divider";
+import { MenuItem } from "./style";
+import * as tooltip from "../../../config/TooltipReference";
 import {
   RedoIcon,
   UndoIcon,
   SaveIcon,
   MapIcon,
   DeleteIcon,
-  RotateIcon,
+  RotateAllIcon,
   FitViewIcon,
   ZoomInIcon,
   ZoomOutIcon,
   LockIcon,
   UnLockIcon,
-} from "../icons";
+} from "./icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setElements,
   setMiniMapDisplay,
-  setGroupBarDisplay,
   setRotateAll,
   setExpandAll,
   setRotateAllPath
-} from "../../../../REDUX/actions/flowActions";
-import {setTheme} from "../../../../REDUX/actions/guiActions";
-import * as themeColor from "../../../../config/ThemeReference";
+} from "../../../REDUX/actions/flowActions";
+import {setTheme} from "../../../REDUX/actions/guiActions";
+import * as themeColor from "../../../config/ThemeReference";
 import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
 const Menu = styled.div`
   position: absolute;
@@ -122,7 +121,7 @@ export default function ControlMenu() {
         data-tip="Rotate All"
         data-for={tooltip.ROTATE_ALL}
       >
-        <RotateIcon theme={theme} />
+        <RotateAllIcon theme={theme} />
       </MenuItem>
       <MenuItem
         theme={theme}

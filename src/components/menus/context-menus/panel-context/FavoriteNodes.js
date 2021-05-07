@@ -1,6 +1,6 @@
 import React from "react";
 import { NodeWrapper, NodeElement } from "./style";
-import { Label } from "../../nodes/styles";
+import { Label } from "../../../nodes/styles";
 import FavIconManager from "./FavIconManager";
 export default function FavoriteNodes({ nodeList,favClick,onDragStart }) {
   const favoriteNodes = nodeList.filter((node) => node.fav === true);

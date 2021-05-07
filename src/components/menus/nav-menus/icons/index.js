@@ -285,7 +285,7 @@ export function DeleteIcon({ theme, onClick }) {
       </>
     );
 }
-export function RotateIcon({ theme }) {
+export function RotateAllIcon({ theme }) {
   return (
     <>
       <svg

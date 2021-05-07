@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import * as themeColor from "../../../config/ThemeReference";
+import * as themeColor from "../../../../config/ThemeReference";
 import { NodeWrapper, NodeElement, Container } from "./style";
 import { useSelector,useDispatch } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import AllNodes from "./AllNodes";
 import FavoriteNodes from "./FavoriteNodes";
-import {addNodeToFavorites} from "../../../REDUX/actions/nodeListActions"
+import {addNodeToFavorites} from "../../../../REDUX/actions/nodeListActions"
 import RecentNodes from "./RecentNodes";
 const PanelContextMenu = () => {
   const {panelMenu} = useSelector((state) => state.menuConfigReducer);

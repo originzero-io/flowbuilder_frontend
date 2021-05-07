@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Menu, MenuItem } from "../element-context/style";
 //import { Container, AddButton,Button,Input,ColorBox,AddGroupWrapper } from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import useDidMountEffect from "../../../hooks/useDidMountEffect";
@@ -11,9 +10,7 @@ import {
   deleteNodeCurrentGroupSingle,
   deleteNodeCurrentGroupMultiple,
 } from "../../../REDUX/actions/nodeGroupsActions";
-import uuid from "react-uuid";
 import { setElements } from "../../../REDUX/actions/flowActions";
-import { updateGroup } from "../../../REDUX/actions/nodeGroupsActions";
 import styled from "styled-components";
 import { GroupColor, Label } from "../group-bar/style";
 import { isEdge, isNode } from "react-flow-renderer";

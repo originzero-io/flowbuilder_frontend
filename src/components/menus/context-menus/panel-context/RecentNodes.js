@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NodeWrapper, NodeElement } from "./style";
-import { Label } from "../../nodes/styles";
+import { Label } from "../../../nodes/styles";
 import sortBy from "lodash/sortBy"
 import FavIconManager from "./FavIconManager";
 export default function RecentNodes({ nodeList, favClick, onDragStart }) {

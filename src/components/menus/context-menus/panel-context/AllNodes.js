@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NodeWrapper, NodeElement, Container } from "./style";
-import { Label } from "../../nodes/styles";
+import { Label } from "../../../nodes/styles";
 import styled from "styled-components";
 import FavIconManager from "./FavIconManager";
 const SearchBar = styled.input`

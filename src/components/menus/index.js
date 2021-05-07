@@ -1,8 +1,8 @@
 import React from "react";
 import NavMenus from "./nav-menus"
-import PanelContextMenu from "./panel-context";
-import MultiSelectionContextMenu from "./multiselection-context";
-import ElementContextMenu from "./element-context";
+import PanelContextMenu from "./context-menus/panel-context";
+import MultiSelectionContextMenu from "./context-menus/multiselection-context";
+import ElementContextMenu from "./context-menus/element-context";
 import GroupBar from "./group-bar";
 const AppMenu = () => {
   return (
@@ -16,4 +16,4 @@ const AppMenu = () => {
   );
 }
 
-export default AppMenu
+export default AppMenu;
