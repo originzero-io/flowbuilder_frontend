@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import RotateButton from "../../../global/buttons/RotateButton";
-import { NameEditIcon } from "../../../global/SvgIcons";
+import { NameEditIcon } from "../../../global/icons";
 import { useSelector, useDispatch } from "react-redux";
 import Switch from "react-switch";
 import { setNodeEnable } from "../../../../REDUX/actions/flowActions";

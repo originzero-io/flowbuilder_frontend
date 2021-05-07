@@ -7,8 +7,9 @@ import {
 import { setElements } from "../../../REDUX/actions/flowActions";
 import { GroupItem, GroupColor, Label} from "./style";
 import { isEdge, isNode, useStoreActions } from "react-flow-renderer";
-import { DeleteIcon, NameEditIcon, SubmitIcon } from "../../global/SvgIcons";
+import { DeleteIcon } from "../nav-menus/icons";
 import EditForm from "./EditForm";
+import { NameEditIcon } from "../../global/icons";
 
 export default function GroupList({ theme }) {
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);

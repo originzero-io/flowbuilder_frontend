@@ -5,7 +5,7 @@ import {
   SplitIcon,
   CalculateIcon,
   ExcelReadIcon,
-} from "../../global/SvgIcons";
+} from "./index";
 
 const icons = {
   "Notification": NotificationIcon,

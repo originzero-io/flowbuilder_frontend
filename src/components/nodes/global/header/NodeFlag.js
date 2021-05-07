@@ -1,5 +1,5 @@
 import React from "react";
-import { GroupFlagIcon } from "../../../global/SvgIcons";
+import { GroupFlagIcon } from "../icons";
 function Flag({ self, onClick }) {
   return (
     <div onClick={onClick} style={{marginTop: "-4px", marginRight: "-4px" }}>

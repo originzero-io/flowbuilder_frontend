@@ -6,7 +6,7 @@ import {
   SplitIcon,
   CalculateIcon,
   ExcelReadIcon,
-} from "../../components/global/SvgIcons";
+} from "../../components/nodes/global/icons";
 import * as actionTypes from "../constants/nodeListConstants";
 
 const panelNodeList = [

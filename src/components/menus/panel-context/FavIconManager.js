@@ -1,5 +1,5 @@
 import React from 'react'
-import { LikeNodeIcon, DislikeNodeIcon } from '../../global/SvgIcons'
+import { LikeNodeIcon, DislikeNodeIcon } from './icons/index'
 
 export default function FavIconManager({node,favClick}) {
     return (

@@ -19,7 +19,7 @@ import {
   AddIcon,
   CancelIcon,
   NonGroupIcon,
-} from "../../global/SvgIcons";
+} from "../../global/icons/index";
 import { useStoreActions, isNode } from "react-flow-renderer";
 
 export default function NewGroupForm({ theme }) {

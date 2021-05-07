@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import RotateButton from "../../../global/buttons/RotateButton";
 import GroupMenu from "../../../menus/group-menu";
 import { closeAllNodeGroupMenu } from "../../../../REDUX/actions/guiActions";
-import { NameEditIcon } from "../../../global/SvgIcons";
-import getIconComponent from "../iconConstant";
+import getIconComponent from "../icons/iconConstant";
 import { expandNode, setElements } from "../../../../REDUX/actions/flowActions";
 import EditNameForm from "./EditNameForm";
 import Switch from "react-switch"

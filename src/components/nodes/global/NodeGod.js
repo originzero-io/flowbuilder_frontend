@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Handle, useUpdateNodeInternals } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
-import { InfoIcon } from "../../global/SvgIcons";
+import { InfoIcon } from "./icons";
 import NodeHeader from "./header/index";
 import {
   NodeArea,
@@ -11,7 +11,7 @@ import {
   TargetWrapper,
   Info,
 } from "../styles";
-import setIconInstance from "./iconConstant";
+import setIconInstance from "./icons/iconConstant";
 const NodeGod = ({ self, io, children, collapsable }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sourceArray = [];

@@ -16,7 +16,7 @@ import {
   ZoomOutIcon,
   LockIcon,
   UnLockIcon,
-} from "../../../global/SvgIcons";
+} from "../icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setElements,

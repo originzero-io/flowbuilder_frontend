@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { SubmitIcon } from "../../../global/SvgIcons";
+import { SubmitIcon } from "../../../global/icons";
 import { Submit } from "../../../menus/group-bar/style";
 import { useSelector, useDispatch } from "react-redux";
 import { isNode } from "react-flow-renderer";
@@ -8,7 +8,6 @@ import {
   changeNodeName,
   setElements,
 } from "../../../../REDUX/actions/flowActions";
-import { displayPartsToString } from "typescript";
 const Form = styled.form`
   position: relative;
 `;

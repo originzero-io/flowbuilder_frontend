@@ -2,11 +2,9 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Divider from "../../style-components/Divider";
 import { MenuIndex, MenuItem} from "./style";
-import {DropdownWrapper,DropdownList,DropDownItem} from "../../style-components/DropdownComponent"
-import { useSelector, useStore, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as themeColor from "../../../config/ThemeReference"
-import { SetVariablesIcon,Logo } from "../../global/SvgIcons";
-import logo from "../../../assets/images/logo.png"
+import { Logo } from "../../global/icons";
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;

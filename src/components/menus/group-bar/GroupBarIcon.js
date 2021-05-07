@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import { Container } from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { setGroupBarDisplay } from "../../../REDUX/actions/flowActions";
-import { GroupIcon } from "../../global/SvgIcons";
+import { GroupIcon } from "../../global/icons";
 export default function GroupBarIcon({theme}) {
   const { groupBarDisplay } = useSelector((state) => state.flowConfigReducer);
   const dispatch = useDispatch();

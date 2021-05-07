@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Divider from "../../style-components/Divider";
-import Switch from "react-switch";
 import * as tooltip from "../../../config/TooltipReference";
 import { MenuIndex, MenuItem } from "./style";
 import {
-  SettingsIcon,
   GuideIcon,
   ProfileIcon,
   ShareIcon,
-} from "../../global/SvgIcons";
-import Tooltip from "../../global/Tooltip";
+} from "./icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   DropdownWrapper,
