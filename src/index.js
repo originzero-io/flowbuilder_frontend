@@ -11,6 +11,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //import $ from "jquery"
 //import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'react-tabs/style/react-tabs.css';
+import "rc-dropdown/assets/index.css";
+
 ///REDUX
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";

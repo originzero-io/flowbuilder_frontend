@@ -105,9 +105,7 @@ export const elementReducer = (state = initialElements, {type,payload}) => {
           }
         }
         return state;
-      });
-    
-    
+      }); 
     default:
       return state;
   }

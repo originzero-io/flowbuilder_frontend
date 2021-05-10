@@ -1,20 +1,30 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import styled from "styled-components";
-import Divider from "../../style-components/Divider";
+import { VerticalDivider } from "../../style-components/Divider";
 import * as tooltip from "../../../config/TooltipReference";
 import { MenuIndex, MenuItem } from "./style";
-import { GuideIcon, ProfileIcon, ShareIcon } from "./icons";
+import { GuideIcon, LockIcon, ProfileIcon, ShareIcon } from "./icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   DropdownWrapper,
   DropdownList,
   DropDownItem,
-} from "../../style-components/DropdownComponent";
+} from "../../style-components/DropdownMenu";
 import * as themeColor from "../../../config/ThemeReference";
-import { importElements } from "../../../REDUX/actions/flowActions";
-import adjustScreen from "../../../app-global/dom/adjustScreen";
+import {
+  importElements,
+  setMiniMapDisplay,
+} from "../../../REDUX/actions/flowActions";
 import { openNotification } from "../../../app-global/dom/notification";
 import { loadFunctionsToNode } from "../../../app-global/helpers/loadFunctionsToNode";
+import { useStoreActions } from "react-flow-renderer";
+import FileInputWrapper from "../../global/FileInputWrapper";
+import { FileInput } from "../../style-components/FileInput";
+import { Circle } from "../../style-components/Shapes";
+import { setTheme } from "../../../REDUX/actions/guiActions";
+import Switch from "react-switch";
+import SwitchButton from "../../global/buttons/SwitchButton";
+
 const Menu = styled(MenuIndex)`
   background: ${(props) =>
     props.theme === "dark"
@@ -25,46 +35,16 @@ const Menu = styled(MenuIndex)`
   right: 45px;
   width: 160px;
 `;
-const Circle = styled.button`
-  width: 55px;
-  height: 55px;
-  background: transparent;
-  border-radius: 50%;
-  position: absolute;
-  top: -29px;
-  border: 7px solid
-    ${(props) => (props.theme === "dark" ? "#232323" : "#d7d7d7")};
-  text-align: center;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &:hover {
-    transform: scale(1.1);
-  }
-  &:focus + ${DropdownList} {
-    visibility: visible;
-    transform: translateY(0px);
-  }
-`;
 
-const FileInput = styled.input`
-  display:none;
-  background:yellow;
-`;
-const Box = styled.div`
-  height:30px;
-`;
-const Label = styled.label`
-  display: inline-block;
-  cursor: pointer;
-  height:30px;
-`;
 export default function ConfigurationMenu() {
   const { theme } = useSelector((state) => state.guiConfigReducer);
-  const { reactFlowInstance } = useSelector((state) => state.flowConfigReducer);
+  const { reactFlowInstance, miniMapDisplay } = useSelector(
+    (state) => state.flowConfigReducer
+  );
   const nodeClass = useSelector((state) => state.nodeClassReducer);
-
+  const setSelectedElements = useStoreActions(
+    (actions) => actions.setSelectedElements
+  );
   const dispatch = useDispatch();
 
   const downloadFlowHandle = () => {
@@ -91,7 +71,6 @@ export default function ConfigurationMenu() {
         fileReader.readAsText(e.target.files[0], "UTF-8");
         fileReader.onload = (e) => {
           const flow = JSON.parse(e.target.result);
-          adjustScreen(flow, reactFlowInstance);
           const newArray = flow.elements.map((els) => {
             return {
               ...els,
@@ -102,28 +81,52 @@ export default function ConfigurationMenu() {
             };
           });
           dispatch(importElements(newArray));
+          setSelectedElements(newArray);
         };
       } else
         openNotification("Import Error", "Bu dosya import edilemez.", "error");
     },
     [reactFlowInstance]
   );
+  const [active, setActive] = useState({
+    theme: false,
+    miniMap: true,
+  });
+  const changeTheme = (checked) => {
+    if (theme === "dark") {
+      dispatch(setTheme("light"));
+    } else {
+      dispatch(setTheme("dark"));
+    }
+    setActive({ ...active, theme: checked });
+  };
+  const changeMiniMapDisplay = (checked) => {
+    if (miniMapDisplay === "visible") {
+      dispatch(setMiniMapDisplay("hidden"));
+    } else {
+      dispatch(setMiniMapDisplay("visible"));
+    }
+    setActive({ ...active, miniMap: checked });
+  };
+
   return (
     <Menu theme={theme}>
       <DropdownWrapper>
         <MenuItem data-tip="Share" data-for={tooltip.SHARE}>
-          <ShareIcon
-            width="25px"
-            height="25px"
-            theme={theme}
-          />
+          <ShareIcon width="25px" height="25px" theme={theme} />
         </MenuItem>
         <DropdownList theme={theme}>
-          <DropDownItem>Import Flow</DropDownItem>
-          <DropDownItem><button onClick={downloadFlowHandle}>Export Flow</button></DropDownItem>
+          <DropDownItem>
+            <FileInputWrapper>
+              <FileInput type="file" onChange={fileUploadHandle} />
+              Import Flow
+            </FileInputWrapper>
+          </DropDownItem>
+          <DropDownItem onClick={downloadFlowHandle}>Export Flow</DropDownItem>
         </DropdownList>
       </DropdownWrapper>
-      <Divider />
+      <VerticalDivider />
+
       <MenuItem data-tip="Guides" data-for={tooltip.GUIDES}>
         <GuideIcon
           width="25px"
@@ -132,14 +135,6 @@ export default function ConfigurationMenu() {
             theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
           }
         />
-      </MenuItem>
-      <MenuItem>
-        <Box>
-          <Label>
-            <FileInput type="file" onChange={fileUploadHandle} />
-            <i className="fas fa-cloud-upload-alt" style={{width:'35px',height:'30px'}}/>
-          </Label>
-        </Box>
       </MenuItem>
       <DropdownWrapper>
         <Circle theme={theme} data-tip="Profile" data-for={tooltip.PROFILE}>
@@ -152,10 +147,25 @@ export default function ConfigurationMenu() {
           />
         </Circle>
         <DropdownList theme={theme} align="right">
-          <DropDownItem>Profile</DropDownItem>
-          <DropDownItem>Settings</DropDownItem>
+          <DropDownItem>
+            Theme
+            <SwitchButton
+              checked={active.theme}
+              onChange={changeTheme}
+              width={30}
+              height={15}
+            />
+          </DropDownItem>
+          <DropDownItem>
+            Mini-map
+            <SwitchButton
+              checked={active.miniMap}
+              onChange={changeMiniMapDisplay}
+              width={30}
+              height={15}
+            />
+          </DropDownItem>
           <DropDownItem>User Settings</DropDownItem>
-          <DropDownItem>Preferences</DropDownItem>
         </DropdownList>
       </DropdownWrapper>
     </Menu>

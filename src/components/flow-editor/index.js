@@ -166,6 +166,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
     closeMultiSelectionContextMenu();
     closeElementContextMenu();
     dispatch(closeAllNodeGroupMenu(true));
+    // var a = document.getElementsByClassName("rc-dropdown-menu")[0].style.display = "none"
+    // console.log(a);
   };
 
   const onPaneContextHandle = (e) => {
@@ -317,7 +319,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const closeElementContextMenu = () => {
     dispatch(setElementContextMenu(false));
   };
-
 
   const onMoveHandle = (flowTransform) => {
     dispatch(setZoom(flowTransform.zoom))

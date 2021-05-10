@@ -10,7 +10,7 @@ const menuConfig = {
   panelMenu: initialState,
   multiSelectionMenu: initialState,
   elementMenu: initialState,
-  groupMenu: initialState
+  groupMenu: initialState,
 }
 
 export const menuConfigReducer = (state=menuConfig, action) => {

@@ -19,7 +19,7 @@ export default function AppTooltips() {
           <Tooltip id={tooltip.CLOSE_ALL_NODES} place="right"/>   
           <Tooltip id={tooltip.SELECT_ALL_NODES} place="right"/>   
           <Tooltip id={tooltip.SHARE} place="left"/>  
-          <Tooltip id={tooltip.GUIDES} place="bottom"/>  
+          <Tooltip id={tooltip.GUIDES} place="bottom"/>
         </>
     )
 }

@@ -2,13 +2,13 @@ import styled from "styled-components";
 import * as themeColor from "../../config/ThemeReference"
 export const DropdownWrapper = styled.div`
   position: relative;
+  font-size:14px;
 `;
 
 export const DropdownList = styled.ul`
-  margin-top: ${(props) => (props.align === "right" ? "25px" : "10px")};
+  margin-top: ${(props) => (props.align === "right" ? "28px" : "10px")};
   position: absolute;
   display: flex;
-  //justify-content: space-around;
   flex-direction: column;
   min-width: 120px;
   background: ${(props) => props.theme === "dark" ? "rgb(53, 59, 72)" : "rgb(189, 195, 199)"};
@@ -19,12 +19,19 @@ export const DropdownList = styled.ul`
   border-radius: 4px;
   transform: translateY(-10px);
   visibility:hidden;
+
+  ${DropdownWrapper}:hover & {
+    visibility:visible;
+  }
 `;
 
 export const DropDownItem = styled.li`
   padding: 8px;
   user-select: none;
   cursor: pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   &:hover{
     background:${themeColor.HOVER_COLOR}
   }

@@ -2,7 +2,7 @@ import * as actionTypes from "../constants/guiConstants";
 
 const guiConfig = {
   theme: "light",
-  nodeGroupMenuDisplay:false
+  nodeGroupMenuDisplay: false,
 }
 export const guiConfigReducer = (state=guiConfig, action) => {
   switch (action.type) {

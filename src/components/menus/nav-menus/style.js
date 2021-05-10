@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { DropdownList } from "../../style-components/DropdownComponent";
 import * as themeColor from "../../../config/ThemeReference"
 export const MenuIndex = styled.div`
   position: absolute;
@@ -11,7 +10,7 @@ export const MenuIndex = styled.div`
   justify-content: space-around;
   align-items: center;
   font-size: 15px;
-  padding: 8px;
+  padding: 4px;
 `;
 export const MenuItem = styled.button`
   background: none;
@@ -23,8 +22,4 @@ export const MenuItem = styled.button`
   &:hover{
     transform: scale(1.1);
   }
-  &:focus + ${DropdownList}{
-    visibility:visible;
-    transform: translateY(0px);
-  } 
 `;

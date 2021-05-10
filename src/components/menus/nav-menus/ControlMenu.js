@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { saveToDb } from "../../../app-global/db";
-//import Divider from "../../style-components/Divider";
+import { HorizontalDivider } from "../../style-components/Divider";
 import { MenuItem } from "./style";
 import * as tooltip from "../../../config/TooltipReference";
 import {
@@ -23,9 +23,9 @@ import {
   setMiniMapDisplay,
   setRotateAll,
   setExpandAll,
-  setRotateAllPath
+  setRotateAllPath,
 } from "../../../REDUX/actions/flowActions";
-import {setTheme} from "../../../REDUX/actions/guiActions";
+import { setTheme } from "../../../REDUX/actions/guiActions";
 import * as themeColor from "../../../config/ThemeReference";
 import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
 const Menu = styled.div`
@@ -44,9 +44,7 @@ const Menu = styled.div`
     props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON};
 `;
 export default function ControlMenu() {
-  const { reactFlowInstance, miniMapDisplay } = useSelector(
-    (state) => state.flowConfigReducer
-  );
+  const { reactFlowInstance } = useSelector((state) => state.flowConfigReducer);
   const dispatch = useDispatch();
   const { theme } = useSelector((state) => state.guiConfigReducer);
   const { rotateAllPath } = useSelector((state) => state.flowConfigReducer);
@@ -61,13 +59,7 @@ export default function ControlMenu() {
   const saveFlow = useCallback(() => {
     saveToDb(reactFlowInstance);
   }, [reactFlowInstance]);
-  const mapDisplayHandle = () => {
-    if (miniMapDisplay === "visible") {
-      dispatch(setMiniMapDisplay("hidden"));
-    } else {
-      dispatch(setMiniMapDisplay("visible"));
-    }
-  };
+
   const deleteAllNodes = () => {
     if (confirm("Are you sure?")) {
       dispatch(setElements([]));
@@ -75,7 +67,7 @@ export default function ControlMenu() {
   };
   const closeAllNodes = () => {
     dispatch(setExpandAll(false));
-  }
+  };
 
   const rotateAllHandle = () => {
     if (rotateAllPath === "vertical") {
@@ -88,13 +80,6 @@ export default function ControlMenu() {
     dispatch(setRotateAll(rotateAllPath));
   }, [rotateAllPath]);
 
-  const changeTheme = () => {
-    if (theme === "dark") {
-      dispatch(setTheme("light"));
-    } else {
-      dispatch(setTheme("dark"));
-    }
-  };
   const zoomInHandle = () => {
     zoomIn();
   };
@@ -117,12 +102,55 @@ export default function ControlMenu() {
     <Menu theme={theme}>
       <MenuItem
         theme={theme}
+        onClick={saveFlow}
+        data-tip="Save"
+        data-for={tooltip.SAVE}
+      >
+        <SaveIcon theme={theme} />
+      </MenuItem>
+      <HorizontalDivider />
+      <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO}>
+        <UndoIcon theme={theme} />
+      </MenuItem>
+      <MenuItem theme={theme} data-tip="Redo" data-for={tooltip.REDO}>
+        <RedoIcon theme={theme} />
+      </MenuItem>
+      <HorizontalDivider />
+      <MenuItem
+        theme={theme}
+        onClick={selectAllNodes}
+        data-tip="Select All Nodes"
+        data-for={tooltip.SELECT_ALL_NODES}
+      >
+        <i class="fas fa-object-group"></i>
+      </MenuItem>
+      <MenuItem
+        theme={theme}
+        onClick={closeAllNodes}
+        data-tip="Close All Nodes"
+        data-for={tooltip.CLOSE_ALL_NODES}
+      >
+        <i class="fas fa-arrows-alt-v"></i>
+      </MenuItem>
+      <MenuItem
+        theme={theme}
         onClick={rotateAllHandle}
         data-tip="Rotate All"
         data-for={tooltip.ROTATE_ALL}
       >
         <RotateAllIcon theme={theme} />
       </MenuItem>
+
+      <MenuItem
+        theme={theme}
+        onClick={deleteAllNodes}
+        data-tip="Delete All"
+        data-for={tooltip.DELETE_ALL}
+      >
+        <DeleteIcon theme={theme} />
+      </MenuItem>
+
+      <HorizontalDivider />
       <MenuItem
         theme={theme}
         onClick={zoomInHandle}
@@ -158,60 +186,6 @@ export default function ControlMenu() {
         ) : (
           <LockIcon theme={theme} />
         )}
-      </MenuItem>
-      <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO}>
-        <UndoIcon theme={theme} />
-      </MenuItem>
-      <MenuItem theme={theme} data-tip="Redo" data-for={tooltip.REDO}>
-        <RedoIcon theme={theme} />
-      </MenuItem>
-      <MenuItem
-        theme={theme}
-        onClick={saveFlow}
-        data-tip="Save"
-        data-for={tooltip.SAVE}
-      >
-        <SaveIcon theme={theme} />
-      </MenuItem>
-      <MenuItem
-        theme={theme}
-        onClick={deleteAllNodes}
-        data-tip="Delete All"
-        data-for={tooltip.DELETE_ALL}
-      >
-        <DeleteIcon theme={theme} />
-      </MenuItem>
-      <MenuItem
-        theme={theme}
-        onClick={mapDisplayHandle}
-        data-tip="Map"
-        data-for={tooltip.MINI_MAP}
-      >
-        <MapIcon theme={theme} />
-      </MenuItem>
-      <MenuItem
-        theme={theme}
-        onClick={changeTheme}
-        data-tip="Change Theme"
-        data-for={tooltip.CHANGE_THEME}
-      >
-        <i className="fas fa-sun"></i>
-      </MenuItem>
-      <MenuItem
-        theme={theme}
-        onClick={closeAllNodes}
-        data-tip="Close All Nodes"
-        data-for={tooltip.CLOSE_ALL_NODES}
-      >
-        <i class="fas fa-arrows-alt-v"></i>
-      </MenuItem>
-      <MenuItem
-        theme={theme}
-        onClick={selectAllNodes}
-        data-tip="Select All Nodes"
-        data-for={tooltip.SELECT_ALL_NODES}
-      >
-        <i class="fas fa-object-group"></i>
       </MenuItem>
     </Menu>
   );
