@@ -112,7 +112,7 @@ export default function ConfigurationMenu() {
   return (
     <Menu theme={theme}>
       <DropdownWrapper>
-        <MenuItem data-tip="Share" data-for={tooltip.SHARE}>
+        <MenuItem>
           <ShareIcon width="25px" height="25px" theme={theme} />
         </MenuItem>
         <DropdownList theme={theme}>
@@ -125,7 +125,7 @@ export default function ConfigurationMenu() {
           <DropDownItem onClick={downloadFlowHandle}>Export Flow</DropDownItem>
         </DropdownList>
       </DropdownWrapper>
-      <VerticalDivider />
+      <VerticalDivider theme={theme} />
 
       <MenuItem data-tip="Guides" data-for={tooltip.GUIDES}>
         <GuideIcon
@@ -137,7 +137,7 @@ export default function ConfigurationMenu() {
         />
       </MenuItem>
       <DropdownWrapper>
-        <Circle theme={theme} data-tip="Profile" data-for={tooltip.PROFILE}>
+        <Circle theme={theme}>
           <ProfileIcon
             width="50px"
             height="50px"
@@ -148,7 +148,7 @@ export default function ConfigurationMenu() {
         </Circle>
         <DropdownList theme={theme} align="right">
           <DropDownItem>
-            Theme
+            Dark Theme
             <SwitchButton
               checked={active.theme}
               onChange={changeTheme}

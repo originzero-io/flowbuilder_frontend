@@ -106,6 +106,19 @@ export const elementReducer = (state = initialElements, {type,payload}) => {
         }
         return state;
       }); 
+    case actionTypes.SET_NODE_ENABLE_MULTIPLE:
+      return state.map(state => {
+        if (payload.selectedIDArray.includes(state.id)) {
+          return {
+            ...state,
+            data: {
+              ...state.data,
+              enable:!state.data.enable
+            }
+          }
+        }
+        return state;
+      });;
     default:
       return state;
   }

@@ -24,7 +24,7 @@ const Circle = styled.div`
       : "rgba(189, 195, 199,0.5)"};
   border-radius: 50%;
   position: absolute;
-  top: -6px;
+  top: -8px;
   left: -45px;
   border: 7px solid
     ${(props) => (props.theme === "dark" ? "#232323" : "#d7d7d7")};
@@ -33,6 +33,9 @@ const Circle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  &:hover{
+    transform:scale(1.1);
+  }
 `;
 
 const MainMenu = () => {

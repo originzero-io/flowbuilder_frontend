@@ -21,6 +21,7 @@ import {
   NonGroupIcon,
 } from "../../global/icons/index";
 import { useStoreActions, isNode } from "react-flow-renderer";
+import { HorizontalDivider } from "../../style-components/Divider";
 
 export default function NewGroupForm({ theme }) {
   const [groupInfo, setGroupInfo] = useState({});
@@ -110,7 +111,7 @@ export default function NewGroupForm({ theme }) {
           </Submit>
         </InputWrapper>
       )}
-      <Divider/>
+      <HorizontalDivider theme={theme}/>
     </AddGroupWrapper>
   );
 }

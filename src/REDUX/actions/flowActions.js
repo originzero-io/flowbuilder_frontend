@@ -56,6 +56,10 @@ export const setNodeEnable = (self,checked) => ({
   type: action.SET_NODE_ENABLE,
   payload: {self,checked}
 });
+export const setMultipleNodeEnable = (selectedIDArray) => ({
+  type: action.SET_NODE_ENABLE_MULTIPLE,
+  payload: {selectedIDArray}
+});
 export const importElements = (data) => ({
   type: action.IMPORT_ELEMENTS,
   payload: data

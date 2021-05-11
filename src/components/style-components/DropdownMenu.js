@@ -10,7 +10,7 @@ export const DropdownList = styled.ul`
   position: absolute;
   display: flex;
   flex-direction: column;
-  min-width: 120px;
+  min-width: 140px;
   background: ${(props) => props.theme === "dark" ? "rgb(53, 59, 72)" : "rgb(189, 195, 199)"};
   color: ${(props) => (props.theme === "dark" ? "#dcdcdc" : "black")};
   right: ${(props) => (props.align === "right" ? "-50px" : "none")};;

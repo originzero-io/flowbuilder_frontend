@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Menu, MenuItem } from "../element-context/style";
 import { useStoreState } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
-import { rotateMultiNode, setElements } from "../../../../REDUX/actions/flowActions";
+import { rotateMultiNode, setElements, setMultipleNodeEnable } from "../../../../REDUX/actions/flowActions";
 import { setMultiSelectionContextMenu } from "../../../../REDUX/actions/menuActions";
 import GroupMenu from "../../group-menu";
 
@@ -45,11 +45,17 @@ export default function MultiSelectionContextMenu() {
     setShowGroup(false);
     setOpen(false);
   }, [multiSelectionMenu.state])
+
+  const disableHandle = () => {
+    const selectedElementIds = selected.map(s => s.id);
+    dispatch(setMultipleNodeEnable(selectedElementIds));
+  }
   return (
     <div>
       {multiSelectionMenu.state && (
         <Menu x={multiSelectionMenu.x} y={multiSelectionMenu.y} theme={theme}>
           <MenuItem onClick={rotateHandle}>Rotate</MenuItem>
+          <MenuItem onClick={disableHandle}>Disable</MenuItem>
           <MenuItem onClick={groupHandle}>{open ? "Group <" : "Group >"}</MenuItem>
           <MenuItem onClick={deleteItems}>Delete</MenuItem>
           {showGroup && <GroupMenu self={self} selectedElements={selected} />}

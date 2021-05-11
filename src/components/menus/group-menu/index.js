@@ -16,7 +16,7 @@ import { GroupColor, Label } from "../group-bar/style";
 import { isEdge, isNode } from "react-flow-renderer";
 const Container = styled.div`
   position: absolute;
-  right: -110px;
+  right: -120px;
   top: -2px;
   min-width: 100px;
   display: flex;
@@ -27,18 +27,16 @@ const SearchBar = styled.input`
   border-radius: 4px;
   width: 70%;
   padding-left: 3px;
-  background-color: transparent;
+  background-color: rgb(189, 195, 199);
   border: 1px solid #636e72;
-  color: whitesmoke;
+  color: black;
   caret-color: green;
   user-select: none;
-  &:focus {
-  }
-  font-size: 8px;
+  font-size: 10px;
   outline: hidden;
 `;
 const GroupItem = styled.div`
-  color: white;
+  color: black;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -48,7 +46,7 @@ const GroupItem = styled.div`
   }
 `;
 const Content = styled.div`
-  background: rgba(43, 46, 53, 0.6);
+  background: rgb(189, 195, 199);
   margin-top: 2px;
 `;
 export default function GroupMenu({ self, selectedElements }) {

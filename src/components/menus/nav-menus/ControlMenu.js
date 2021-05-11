@@ -108,21 +108,21 @@ export default function ControlMenu() {
       >
         <SaveIcon theme={theme} />
       </MenuItem>
-      <HorizontalDivider />
+      <HorizontalDivider theme={theme} />
       <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO}>
         <UndoIcon theme={theme} />
       </MenuItem>
       <MenuItem theme={theme} data-tip="Redo" data-for={tooltip.REDO}>
         <RedoIcon theme={theme} />
       </MenuItem>
-      <HorizontalDivider />
+      <HorizontalDivider theme={theme} />
       <MenuItem
         theme={theme}
         onClick={selectAllNodes}
         data-tip="Select All Nodes"
         data-for={tooltip.SELECT_ALL_NODES}
       >
-        <i class="fas fa-object-group"></i>
+        <i className="fas fa-object-group"></i>
       </MenuItem>
       <MenuItem
         theme={theme}
@@ -130,7 +130,7 @@ export default function ControlMenu() {
         data-tip="Close All Nodes"
         data-for={tooltip.CLOSE_ALL_NODES}
       >
-        <i class="fas fa-arrows-alt-v"></i>
+        <i className="fas fa-arrows-alt-v"></i>
       </MenuItem>
       <MenuItem
         theme={theme}
@@ -150,7 +150,7 @@ export default function ControlMenu() {
         <DeleteIcon theme={theme} />
       </MenuItem>
 
-      <HorizontalDivider />
+      <HorizontalDivider theme={theme} />
       <MenuItem
         theme={theme}
         onClick={zoomInHandle}
