@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Handle, useUpdateNodeInternals } from "react-flow-renderer";
+import { getOutgoers, Handle, useUpdateNodeInternals } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
 import { InfoIcon } from "./icons";
 import NodeHeader from "./header/index";
@@ -12,11 +12,14 @@ import {
   Info,
 } from "../styles";
 import setIconInstance from "./icons/iconConstant";
+import { setMultipleNodeEnable, setOutgoersEnable } from "../../../REDUX/actions/flowActions";
 const NodeGod = ({ self, io, children, collapsable }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sourceArray = [];
   const targetArray = [];
   const { zoom } = useSelector((state) => state.flowConfigReducer);
+  const elements = useSelector((state) => state.elementReducer);
+  const dispatch = useDispatch();
   const { selected, align, expand } = self.data;
   for (let index = 0; index < self.data.targetCount; index++) {
     if (io === "target" || io === "both") {
@@ -34,6 +37,13 @@ const NodeGod = ({ self, io, children, collapsable }) => {
 
   const NodeIcon = setIconInstance(self.type);
   const { enable } = self.data;
+
+
+  useEffect(() => {
+    const outgoers = getOutgoers(self, elements);
+    const outgoersIds = outgoers.map(o => o.id);
+    dispatch(setOutgoersEnable(outgoersIds,self.data.enable));
+  }, [self.data.enable])
   return (
     <NodeWrapper align={align} selected={selected} enable={enable}>
       <TargetWrapper align={align}>

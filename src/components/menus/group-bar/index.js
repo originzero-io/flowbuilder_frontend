@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content:space-around;
   top: 20%;
-  align-items:center;
+  //align-items:center;
   max-height:70vh;
   right:${({visible})=>visible === "visible" ? "0px" : "-25px"};
 `;

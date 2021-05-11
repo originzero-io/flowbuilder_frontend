@@ -16,6 +16,8 @@ import {
   ZoomOutIcon,
   LockIcon,
   UnLockIcon,
+  SelectAllIcon,
+  ExpandAllIcon,
 } from "./icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -122,7 +124,7 @@ export default function ControlMenu() {
         data-tip="Select All Nodes"
         data-for={tooltip.SELECT_ALL_NODES}
       >
-        <i className="fas fa-object-group"></i>
+        <SelectAllIcon theme={theme}/>
       </MenuItem>
       <MenuItem
         theme={theme}
@@ -130,7 +132,7 @@ export default function ControlMenu() {
         data-tip="Close All Nodes"
         data-for={tooltip.CLOSE_ALL_NODES}
       >
-        <i className="fas fa-arrows-alt-v"></i>
+        <ExpandAllIcon theme={theme}/>
       </MenuItem>
       <MenuItem
         theme={theme}

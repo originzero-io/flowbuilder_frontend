@@ -119,6 +119,19 @@ export const elementReducer = (state = initialElements, {type,payload}) => {
         }
         return state;
       });;
+    case actionTypes.SET_OUTGOERS_ENABLE:
+      return state.map(state => {
+        if (payload.outgouersIdArray.includes(state.id)) {
+          return {
+            ...state,
+            data: {
+              ...state.data,
+              enable:payload.enable
+            }
+          }
+        }
+        return state;
+      });;
     default:
       return state;
   }

@@ -60,6 +60,10 @@ export const setMultipleNodeEnable = (selectedIDArray) => ({
   type: action.SET_NODE_ENABLE_MULTIPLE,
   payload: {selectedIDArray}
 });
+export const setOutgoersEnable = (outgouersIdArray,enable) => ({
+  type: action.SET_OUTGOERS_ENABLE,
+  payload: {outgouersIdArray,enable}
+});
 export const importElements = (data) => ({
   type: action.IMPORT_ELEMENTS,
   payload: data

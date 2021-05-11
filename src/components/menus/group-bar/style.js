@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import * as themeColor from "../../../config/ThemeReference"
 export const Container = styled.div`
   //position: absolute;
-  border-radius: 6px;
+  //border-radius: 6px;
+  border-top-left-radius:6px;
+  border-bottom-left-radius:6px;
   //top: 40%;
   //left: -50px;
   //right:0px;
@@ -9,8 +12,16 @@ export const Container = styled.div`
   z-index: 6;
   user-select: none;
   font-size: 24px;
-  color: rgb(22, 162, 165);
-  padding-right:8px;
+  padding-right:4px;
+  width:55px;
+  height:65px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:${(props) =>
+    props.theme === "dark"
+      ? themeColor.DARK_MENU_BACKGROUND
+      : themeColor.LIGHT_MENU_BACKGROUND};;
 `;
 
 export const GroupItem = styled.div`

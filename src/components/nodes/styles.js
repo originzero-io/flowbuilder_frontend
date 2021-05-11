@@ -37,8 +37,8 @@ export const Header = styled.div`
   border-top-left-radius:3px;
   box-shadow: 0.1px 0.5px 0.6px 0px rgba(0, 0, 0, 0.7);
   background-image: linear-gradient(
-    355deg,
-    #323232 0%,
+    270deg,
+    #323232 10%,
     ${(props) => (props.selected === true ? "#108080" : "#404040")} 80%
   );
   padding:3px;

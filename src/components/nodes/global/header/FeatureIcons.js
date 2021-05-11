@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import RotateButton from "../../../global/buttons/RotateButton";
+import SwitchButton from "../../../global/buttons/SwitchButton";
 import { NameEditIcon } from "../../../global/icons";
 import { useSelector, useDispatch } from "react-redux";
-import Switch from "react-switch";
-import { setNodeEnable } from "../../../../REDUX/actions/flowActions";
+import { setNodeEnable, setOutgoersEnable } from "../../../../REDUX/actions/flowActions";
+import { getIncomers, getOutgoers } from "react-flow-renderer";
+import { openNotification as notification } from "../../../../app-global/dom/notification";
+
 export default function FeatureIcons({ self, edit, setEdit }) {
   const dispatch = useDispatch();
   const elements = useSelector((state) => state.elementReducer);
@@ -12,25 +15,37 @@ export default function FeatureIcons({ self, edit, setEdit }) {
   };
   const [checked, setChecked] = useState(self.data.enable);
   const enableChangeHandle = (checked) => {
-    setChecked(checked);
-    dispatch(setNodeEnable(self,checked))
+    const incomers = getIncomers(self, elements);
+    const disableCount = incomers.filter(incomer => incomer.data.enable === false).length;
+    const enableCount = incomers.filter(incomer => incomer.data.enable === true).length;
+    if (incomers.length > 0 && incomers.length === disableCount) {
+      notification("Warning", "First, make sure that at least one of your incomers is enabled.", "warning", 5000);
+    }
+    else {
+      if (enableCount === 0) {
+        console.log("enable count",enableCount)
+        setChecked(checked);
+        dispatch(setNodeEnable(self, checked))
+        const outgoers = getOutgoers(self, elements);
+        const outgoersIds = outgoers.map(o => o.id);
+        dispatch(setOutgoersEnable(outgoersIds,checked));
+      }
+      else {
+        console.log("enable count",enableCount)
+
+        setChecked(checked);
+        dispatch(setNodeEnable(self, checked))
+      }
+      
+    }
   };
   return (
     <>
-      <Switch
+      <SwitchButton
         checked={checked}
         onChange={enableChangeHandle}
-        //onColor="#86d3ff"
-        onColor="#bdc3c7"
-        //onHandleColor="#2693e6"
-        onHandleColor="#218c74"
-        handleDiameter={10}
-        uncheckedIcon={false}
-        checkedIcon={false}
-        height={10}
         width={20}
-        className="react-switch"
-        id="material-switch"
+        height={10}
       />
       <NameEditIcon
         theme="dark"

@@ -187,113 +187,32 @@ export function GroupIcon({ width, height, color, theme }) {
     <svg
       data-name="Layer 1"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 236 236"
+      viewBox="0 0 244 228"
       width={width}
       height={height}
       className="group-bar-icon"
     >
-      <path
-        d="M147.81,86"
-        transform="translate(-8 -8)"
-        fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2px"
-      />
-      <path
-        d="M137.8,103"
-        transform="translate(-8 -8)"
-        fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2px"
-      />
-      <path
-        d="M109.94,105.54"
-        transform="translate(-8 -8)"
-        fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2px"
-      />
-      <path
-        d="M172.17,129.29"
-        transform="translate(-8 -8)"
-        fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2px"
-      />
-      <path
-        d="M148.89,126.44"
-        transform="translate(-8 -8)"
-        fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2px"
-      />
-      <path
-        d="M137.8,144.21"
-        transform="translate(-8 -8)"
-        fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2px"
-      />
-      <path
-        d="M80.86,130.36"
-        transform="translate(-8 -8)"
-        fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2px"
-      />
-      <path
-        d="M102,127.19"
-        transform="translate(-8 -8)"
-        fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2px"
-      />
-      <path
-        d="M113.35,144.21"
-        transform="translate(-8 -8)"
-        fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2px"
-      />
       <circle
-        cx="52.69"
-        cy="127.92"
+        cx="54.69"
+        cy="124.92"
         r="23"
         fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
       />
       <circle
-        cx="151.26"
-        cy="173.92"
+        cx="153.26"
+        cy="170.92"
         r="23"
         fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
       />
       <circle
-        cx="151.26"
-        cy="62.2"
+        cx="153.26"
+        cy="59.2"
         r="23"
         fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
       />
       <circle
-        cx="74.04"
-        cy="67.13"
+        cx="76.04"
+        cy="64.13"
         r="23"
         fill="none"
         stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
@@ -301,8 +220,8 @@ export function GroupIcon({ width, height, color, theme }) {
         strokeWidth="7px"
       />
       <circle
-        cx="185.76"
-        cy="126.27"
+        cx="187.76"
+        cy="123.27"
         r="23"
         fill="none"
         stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
@@ -310,8 +229,8 @@ export function GroupIcon({ width, height, color, theme }) {
         strokeWidth="7px"
       />
       <circle
-        cx="83.9"
-        cy="175.56"
+        cx="85.9"
+        cy="172.56"
         r="23"
         fill="none"
         stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
@@ -319,80 +238,70 @@ export function GroupIcon({ width, height, color, theme }) {
         strokeWidth="7px"
       />
       <line
-        x1="129.99"
-        y1="98.3"
-        x2="139.58"
-        y2="82.02"
+        x1="131.99"
+        y1="95.3"
+        x2="141.58"
+        y2="79.02"
         fill="none"
         stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
       <line
-        x1="89.15"
-        y1="84.47"
-        x2="103.3"
-        y2="100.72"
+        x1="91.15"
+        y1="81.47"
+        x2="105.3"
+        y2="97.72"
         fill="none"
         stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
       <line
-        x1="140.63"
-        y1="120.75"
-        x2="162.93"
-        y2="123.48"
+        x1="142.63"
+        y1="117.75"
+        x2="164.93"
+        y2="120.48"
         fill="none"
         stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
       <line
-        x1="139.59"
-        y1="154.09"
-        x2="129.99"
-        y2="137.78"
+        x1="141.59"
+        y1="151.09"
+        x2="131.99"
+        y2="134.78"
         fill="none"
         stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
       <line
-        x1="95.66"
-        y1="121.47"
-        x2="75.43"
-        y2="124.5"
+        x1="97.66"
+        y1="118.47"
+        x2="77.43"
+        y2="121.5"
         fill="none"
         stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
       <circle
-        cx="118.4"
-        cy="118.06"
+        cx="120.4"
+        cy="115.06"
         r="23"
         fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
       />
       <line
-        x1="95.4"
-        y1="156.39"
-        x2="106.57"
-        y2="137.78"
+        x1="97.4"
+        y1="153.39"
+        x2="108.57"
+        y2="134.78"
         fill="none"
         stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
         strokeMiterlimit="10"
         strokeWidth="7px"
-      />
-      <circle
-        cx="118"
-        cy="118"
-        r="115"
-        fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        strokeMiterlimit="10"
-        strokeWidth="6px"
-        strokeDasharray="48.561492919921875,11.65475845336914"
       />
     </svg>
   );

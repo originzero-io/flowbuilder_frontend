@@ -5,6 +5,8 @@ import { MenuIndex, MenuItem} from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import * as themeColor from "../../../config/ThemeReference"
 import { Logo } from "../../global/icons";
+import { getNodesAndEdges } from "../../../app-global/helpers/elementController";
+import { getConnectedEdges } from "react-flow-renderer";
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;
@@ -39,14 +41,21 @@ const Circle = styled.div`
 `;
 
 const MainMenu = () => {
-  const {theme} = useSelector((state) => state.guiConfigReducer);
+  const { theme } = useSelector((state) => state.guiConfigReducer);
+  const elements = useSelector((state) => state.elementReducer);
+  
+  const connectedEdgeHandle = () => {
+    const { nodes, edges } = getNodesAndEdges(elements);
+    const connectedEdges = getConnectedEdges(nodes, edges);
+    console.log("connected-edges:", connectedEdges);
+  }
   return (
     <div>
       <Menu theme={theme}>
         <Circle theme={theme}>
           <Logo theme={theme}/>
         </Circle>
-        <MenuItem theme={theme}>Home</MenuItem>
+        <MenuItem theme={theme} onClick={connectedEdgeHandle}>Home</MenuItem>
       </Menu>
     </div>
   );

@@ -13,7 +13,7 @@ export default function GroupBarIcon({theme}) {
     } else dispatch(setGroupBarDisplay("visible"));
   };
   return (
-    <Container onClick={groupBarDisplayHandle}>
+    <Container onClick={groupBarDisplayHandle} theme={theme}>
       <GroupIcon width="50px" height="50px" color="whitesmoke" theme={theme}/>
     </Container>
   );
