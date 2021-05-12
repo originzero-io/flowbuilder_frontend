@@ -33,7 +33,7 @@ import { setNodeList } from "../../REDUX/actions/nodeListActions";
 import * as themeColor from "../../config/ThemeReference";
 import { closeAllNodeGroupMenu } from "../../REDUX/actions/guiActions";
 import FlowContent from "./FlowContent";
-import { getNodesAndEdges } from "../../app-global/helpers/elementController";
+import { controlEdgeExist, getNodesAndEdges, removeEdgeFromArray } from "../../app-global/helpers/elementController";
 export default function FlowEditor({ reactFlowWrapper }) {
   const { theme } = useSelector((state) => state.guiConfigReducer);
   const { reactFlowInstance, miniMapDisplay } = useSelector(
@@ -73,48 +73,38 @@ export default function FlowEditor({ reactFlowWrapper }) {
     console.log("store-state-elements:", elementArray)
     console.log("old-edge", oldEdge);
     console.log("new connection", newConnection);
-    const { nodes, edges } = getNodesAndEdges(elementArray);
-    const connectedEdges = getConnectedEdges(nodes, edges);
-    console.log("edges:", edges);
 
-    let block = false;
-    connectedEdges.map(c => {
-      if (c.source === newConnection.source && c.target === newConnection.target && c.sourceHandle === newConnection.sourceHandle) {
-        block = true;
-      }
-    })
-
-    if (block) {
-      const newArr = elementArray.map(els => {
+    const edgeExist = controlEdgeExist(newConnection,elementArray);
+    console.log("edge-exist", edgeExist);
+    if (edgeExist) {
+      const edgeArray = elementArray.map(els => {
         if (els.source === oldEdge.source && els.target === oldEdge.target) {
           return els;
         }
         return null;
       })
-      const removeElement = newArr.filter(t => t !== null)[0];
-      const newArray = elementArray.filter(els => els.id !== removeElement.id);
-      console.log("removeElement:", removeElement);
-      console.log("newArray:", newArray);
-      dispatch(setElements(newArray));
+      const newElements = removeEdgeFromArray(edgeArray,elementArray);
+      dispatch(setElements(newElements));
     }
     else {
       const edgeColor = elementArray.filter(ela => ela.id === newConnection.source)[0].data.group.color;
-        console.log("edge-color:",edgeColor)
-        const newArray = elementArray.map(ela => {
-          if (isEdge(ela)) {
-            return {
-              ...ela,
-              style: {
-                ...ela.style,
-                stroke:edgeColor
-              }  
-            }
+      console.log("edge-color:",edgeColor) 
+      const newElements = updateEdge(oldEdge, newConnection, elementArray);
+      console.log("updated-elements", newElements);
+      const newArray = newElements.map(ela => {
+        if (ela.source === newConnection.source && ela.target === newConnection.target) {
+          return {
+            ...ela,
+            style: {
+              ...ela.style,
+              stroke:edgeColor
+            }  
           }
-          return ela;
-        })
-        console.log("new-array:",newArray)
-        const newElements = updateEdge(oldEdge, newConnection, newArray);
-        dispatch(setElements(newElements));
+        }
+        return ela;
+      })
+      console.log("new-array:",newArray)
+      dispatch(setElements(newArray));
     }
   };
 
