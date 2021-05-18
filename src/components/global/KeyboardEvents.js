@@ -7,7 +7,8 @@ export default function KeyboardEvents() {
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
   );
-  const selectAllNodesEvent = () => {
+  const selectAllNodesEvent = (key, e) => {
+    e.preventDefault();
     setSelectedElements(elements);
   };
   return (

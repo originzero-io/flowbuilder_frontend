@@ -46,6 +46,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const store = useStore();
   
   const onConnectHandle = (params) => {
+    console.log(params);
     if (params.source === params.target) {
       notification("ERROR!", "Kendisine bağlanamaz", "error");
     } else {
@@ -61,7 +62,20 @@ export default function FlowEditor({ reactFlowWrapper }) {
         data: { source: "", target: "", payload: "Anaks" },
       };
       const newElements = addEdge(edge, elements);
-      dispatch(setElements(newElements));
+      const sourceEnable = newElements.find(els => els.id === params.source).data.enable;
+      const elementArray = newElements.map(els => {
+        if (els.id === params.target) {
+          return {
+            ...els,
+            data: {
+              ...els.data,
+              enable: sourceEnable
+            }
+          }
+        }
+        return els;
+      })
+      dispatch(setElements(elementArray));
     }
   };
 
