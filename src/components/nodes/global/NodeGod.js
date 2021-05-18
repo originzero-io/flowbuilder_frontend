@@ -12,8 +12,8 @@ import {
   Info,
 } from "../styles";
 import setIconInstance from "./icons/iconConstant";
-import { setMultipleNodeEnable, setOutgoersEnable } from "../../../REDUX/actions/flowActions";
-const NodeGod = ({ self, io, children, collapsable }) => {
+import { setOutgoersEnable } from "../../../REDUX/actions/flowActions";
+const NodeGod = ({ self, ioType, children, collapsable }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sourceArray = [];
   const targetArray = [];
@@ -22,12 +22,12 @@ const NodeGod = ({ self, io, children, collapsable }) => {
   const dispatch = useDispatch();
   const { selected, align, expand } = self.data;
   for (let index = 0; index < self.data.targetCount; index++) {
-    if (io === "target" || io === "both") {
+    if (ioType === "target" || ioType === "both") {
       targetArray.push(index);
     }
   }
   for (let index = 0; index < self.data.sourceCount; index++) {
-    if (io === "source" || io === "both") {
+    if (ioType === "source" || ioType === "both") {
       sourceArray.push(index);
     }
   }

@@ -11,10 +11,10 @@ const ExcelReadNode = (self) => {
         self={self}
         align={align}
         setAlign={setAlign}
-        io="source"
+        ioType="source"
         collapsable={true}
       >
-        <NodeIOManager self={self} io="source"/>
+        <NodeIOManager self={self} ioType="source"/>
       </NodeGod>
     </>
   );

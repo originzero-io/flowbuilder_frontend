@@ -66,7 +66,7 @@ const SetVariables = (self) => {
         self={self}
         align={align}
         setAlign={setAlign}
-        io="source"
+        ioType="source"
         collapsable={true}
       >
         <Label>Payload</Label>
@@ -79,7 +79,7 @@ const SetVariables = (self) => {
           />
           <input type="checkbox" onChange={checkboxChange} value={checked} />
         </div>
-        <NodeIOmanager self={self} io="source"/>
+        <NodeIOmanager self={self} ioType="source"/>
       </NodeGod>
     </>
   );

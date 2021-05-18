@@ -23,14 +23,13 @@ export const controlEdgeExist = (newConnection,elements) => {
   const { nodes, edges } = getNodesAndEdges(elements);
   const connectedEdges = getConnectedEdges(nodes, edges);
   let exist = false;
-  connectedEdges.map(c => {
-    if (c.source === newConnection.source && c.target === newConnection.target && c.sourceHandle === newConnection.sourceHandle) {
+  connectedEdges.map(edge => {
+    if (edge.source === newConnection.source && edge.target === newConnection.target && edge.sourceHandle === newConnection.sourceHandle && edge.targetHandle === newConnection.targetHandle) {
       exist = true;
     }
   })
   return exist;
 };
-export const removeEdgeFromArray = (edgeArray,elements) => {
-  const removeElement = edgeArray.filter(t => t !== null)[0];
-  return elements.filter(els => els.id !== removeElement.id);
+export const removeEdgeFromArray = (edge, elements) => {
+  return elements.filter(els => els.id !== edge.id);
 };

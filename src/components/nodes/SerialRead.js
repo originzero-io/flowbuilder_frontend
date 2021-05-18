@@ -12,10 +12,10 @@ const SerialReadNode = (self) => {
         self={self}
         align={align}
         setAlign={setAlign}
-        io="source"
+        ioType="source"
         collapsable={false}
       >
-        <NodeIOManager self={self} io="source" />
+        <NodeIOManager self={self} ioType="source" />
       </NodeGod>
     </>
   );

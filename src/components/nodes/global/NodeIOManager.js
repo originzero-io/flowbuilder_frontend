@@ -3,7 +3,7 @@ import { Label } from "../styles";
 import { useSelector, useDispatch } from "react-redux";
 import updateNodeHandles from "../../../app-global/helpers/updateNodeHandles";
 import { setElements } from "../../../REDUX/actions/flowActions";
-export default function NodeIOManager({ self, io }) {
+export default function NodeIOManager({ self, ioType }) {
   const elements = useSelector((state) => state.elementReducer);
   const dispatch = useDispatch();
   const [handleCount, setHandleCount] = useState({
@@ -22,7 +22,7 @@ export default function NodeIOManager({ self, io }) {
   };
   return (
     <>
-      {io === "both" ? (
+      {ioType === "both" ? (
         <>
           <Label>Target Length</Label>
           <input
@@ -43,7 +43,7 @@ export default function NodeIOManager({ self, io }) {
             onChange={handleCountChange}
           />
         </>
-      ) : io === "target" ? (
+      ) : ioType === "target" ? (
         <>
           <Label>Target Length</Label>
           <input
@@ -56,7 +56,7 @@ export default function NodeIOManager({ self, io }) {
           />
         </>
       ) : (
-        io === "source" && (
+        ioType === "source" && (
           <>
             <Label>Source Length</Label>
             <input

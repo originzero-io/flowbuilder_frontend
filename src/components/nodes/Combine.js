@@ -30,10 +30,10 @@ const CombineNode = (self) => {
         self={self}
         align={align}
         setAlign={setAlign}
-        io="both"
+        ioType="both"
         collapsable={true}
       >
-        <NodeIOManager self={self} io="target"/>
+        <NodeIOManager self={self} ioType="target"/>
       </NodeGod>
     </>
   );

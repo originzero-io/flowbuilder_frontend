@@ -48,7 +48,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const store = useStore();
   
   const onConnectHandle = (params) => {
-    console.log("params", params);
+    //console.log("params", params);
     if (params.source === params.target) {
       notification("ERROR!", "Kendisine bağlanamaz", "error");
     } else {
@@ -77,20 +77,12 @@ export default function FlowEditor({ reactFlowWrapper }) {
     const edgeExist = controlEdgeExist(newConnection,elementArray);
     console.log("edge-exist", edgeExist);
     if (edgeExist) {
-      const edgeArray = elementArray.map(els => {
-        if (els.source === oldEdge.source && els.target === oldEdge.target) {
-          return els;
-        }
-        return null;
-      })
-      const newElements = removeEdgeFromArray(edgeArray,elementArray);
+      const newElements = removeEdgeFromArray(oldEdge,elementArray);
       dispatch(setElements(newElements));
     }
     else {
       const edgeColor = elementArray.filter(ela => ela.id === newConnection.source)[0].data.group.color;
-      console.log("edge-color:",edgeColor) 
       const newElements = updateEdge(oldEdge, newConnection, elementArray);
-      console.log("updated-elements", newElements);
       const newArray = newElements.map(ela => {
         if (ela.source === newConnection.source && ela.target === newConnection.target) {
           return {
@@ -103,7 +95,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
         }
         return ela;
       })
-      console.log("new-array:",newArray)
       dispatch(setElements(newArray));
     }
   };

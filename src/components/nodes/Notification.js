@@ -12,7 +12,7 @@ const NotificationNode = (self) => {
         self={self}
         align={align}
         setAlign={setAlign}
-        io="target"
+        ioType="target"
         collapsable={false}
       >
       </NodeGod>

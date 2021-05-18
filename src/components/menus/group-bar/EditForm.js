@@ -53,6 +53,8 @@ export default function EditForm({
       }
       else if (isEdge(els)) {
         if (els.source === updatedNodeId) {
+          console.log("edgeee:", els);
+          console.log("updatedNodeId:", updatedNodeId);
           return {
             ...els,
             style: {
