@@ -1,0 +1,17 @@
+/* SELECTION BOX */
+.react-flow__selection {
+  border-radius: 12px !important;
+  background-color: transparent !important;
+  background-color: rgba(180, 180, 180, 0.2) !important;
+  border:2px dashed #1dd1a1 !important
+}
+/* SELECTED NODES */
+.react-flow__nodesselection-rect {
+  padding: 20px !important;
+  border-radius: 12px !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+.react-flow__edge-path:hover {
+  stroke: #487eb0 !important;
+}

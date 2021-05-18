@@ -15,29 +15,23 @@ import setIconInstance from "./icons/iconConstant";
 import { setOutgoersEnable } from "../../../REDUX/actions/flowActions";
 const NodeGod = ({ self, ioType, children, collapsable }) => {
   const updateNodeInternals = useUpdateNodeInternals();
-  const sourceArray = [];
-  const targetArray = [];
+  const sources = [];
+  const targets = [];
   const { zoom } = useSelector((state) => state.flowConfigReducer);
   const elements = useSelector((state) => state.elementReducer);
   const dispatch = useDispatch();
-  const { selected, align, expand } = self.data;
+  const { selected, align, expand, enable} = self.data;
   for (let index = 0; index < self.data.targetCount; index++) {
-    if (ioType === "target" || ioType === "both") {
-      targetArray.push(index);
-    }
+    targets.push(index);
   }
   for (let index = 0; index < self.data.sourceCount; index++) {
-    if (ioType === "source" || ioType === "both") {
-      sourceArray.push(index);
-    }
+    sources.push(index);
   }
   useEffect(() => {
     updateNodeInternals(self.id);
   }, [self.data.targetCount, self.data.sourceCount, align]);
 
   const NodeIcon = setIconInstance(self.type);
-  const { enable } = self.data;
-
 
   useEffect(() => {
     const outgoers = getOutgoers(self, elements);
@@ -47,7 +41,7 @@ const NodeGod = ({ self, ioType, children, collapsable }) => {
   return (
     <NodeWrapper align={align} selected={selected} enable={enable}>
       <TargetWrapper align={align}>
-        {targetArray.map((i, index) => {
+        {targets.map((i, index) => {
           return (
             <Handle
               key={index}
@@ -61,6 +55,7 @@ const NodeGod = ({ self, ioType, children, collapsable }) => {
               }`}
               style={{
                 backgroundColor: self.data.group.color,
+                visibility: ioType === "target" || ioType === "both" ? "visible" : "hidden"
               }}
             />
           );
@@ -86,7 +81,7 @@ const NodeGod = ({ self, ioType, children, collapsable }) => {
       </NodeArea>
 
       <SourceWrapper align={align}>
-        {sourceArray.map((i, index) => {
+        {sources.map((i, index) => {
           return (
             <Handle
               key={index}
@@ -100,6 +95,7 @@ const NodeGod = ({ self, ioType, children, collapsable }) => {
               }`}
               style={{
                 backgroundColor: self.data.group.color,
+                visibility: ioType === "source" || ioType === "both" ? "visible" : "hidden"
               }}
             />
           );

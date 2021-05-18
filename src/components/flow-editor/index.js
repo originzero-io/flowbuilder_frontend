@@ -1,25 +1,22 @@
 import React, { useEffect } from "react";
 import ReactFlow, {
   addEdge,
-  getConnectedEdges,
   isEdge,
   removeElements,
   updateEdge,
   useStoreState,
 } from "react-flow-renderer";
-import { connect, useDispatch, useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import uuid from "react-uuid";
 import nodeTypes from "../nodes/index";
 import initialElements from "../../config/initial-elements";
 import { getDataFromDb } from "../../app-global/db";
 import adjustScreen from "../../app-global/dom/adjustScreen";
-import enableEventListeners from "../../app-global/dom/enableEventListeners";
 import { loadFunctionsToNode } from "../../app-global/helpers/loadFunctionsToNode";
 import { openNotification as notification } from "../../app-global/dom/notification";
 import {
   setClickedElement,
   setElements,
-  setExpandAllAction,
   setReactFlowInstance,
   setZoom,
 } from "../../REDUX/actions/flowActions";
@@ -32,8 +29,9 @@ import {
 import { setNodeList } from "../../REDUX/actions/nodeListActions";
 import * as themeColor from "../../config/ThemeReference";
 import { closeAllNodeGroupMenu } from "../../REDUX/actions/guiActions";
-import FlowContent from "./FlowContent";
-import { controlEdgeExist, getNodesAndEdges, removeEdgeFromArray } from "../../app-global/helpers/elementController";
+import { controlEdgeExist, removeEdgeFromArray } from "../../app-global/helpers/elementController";
+import KeyboardEvents from "../global/KeyboardEvents";
+import FlowComponents from "./FlowComponents";
 export default function FlowEditor({ reactFlowWrapper }) {
   const { theme } = useSelector((state) => state.guiConfigReducer);
   const { reactFlowInstance, miniMapDisplay } = useSelector(
@@ -48,7 +46,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const store = useStore();
   
   const onConnectHandle = (params) => {
-    //console.log("params", params);
     if (params.source === params.target) {
       notification("ERROR!", "Kendisine bağlanamaz", "error");
     } else {
@@ -100,7 +97,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
 
   const onElementsRemoveHandle = (elementsToRemove) => {
-    console.log(elementsToRemove);
     const newElements = removeElements(elementsToRemove, elements);
     dispatch(setElements(newElements));
   };
@@ -302,8 +298,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setElements(newElements));
   }, [selectedElements]);
 
-  //enableEventListeners();
-
   const openMultiSelectionContextMenu = (event) => {
     dispatch(
       setMultiSelectionContextMenu({
@@ -374,7 +368,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
         //onConnectEnd={(e) => console.log(e)}
         //onSelectionChange={(els) => console.log(els)}
       >
-        <FlowContent theme={theme} miniMapDisplay={miniMapDisplay} />
+        <FlowComponents theme={theme} miniMapDisplay={miniMapDisplay} />
+        <KeyboardEvents/>
       </ReactFlow>
     </>
   );

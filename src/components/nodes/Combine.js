@@ -7,23 +7,7 @@ import NodeIOManager from "./global/NodeIOManager";
 const CombineNode = (self) => {
   const elements = useSelector((state) => state.elementReducer);
   const dispatch = useDispatch();
-  const [handleCount, setHandleCount] = useState({
-    targetCount: 1,
-    sourceCount: 1,
-  });
-  const handleCountChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setHandleCount({
-      ...handleCount,
-      [name]: value,
-    });
-    const updatedElements = updateNodeHandles(name, value, self, elements);
-    dispatch(setElements(updatedElements));
-  };
-
   const [align, setAlign] = useState("vertical");
-
   return (
     <>
       <NodeGod

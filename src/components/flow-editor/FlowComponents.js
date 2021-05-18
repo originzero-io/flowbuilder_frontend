@@ -1,7 +1,7 @@
 import React from "react";
 import { Background, Controls, MiniMap } from "react-flow-renderer";
 import AppMenu from "../menus/index";
-const FlowContent = ({ theme, miniMapDisplay }) => {
+const FlowComponents = ({ theme, miniMapDisplay }) => {
   return (
     <>
       <AppMenu />
@@ -24,4 +24,4 @@ const FlowContent = ({ theme, miniMapDisplay }) => {
   );
 }
 
-export default React.memo(FlowContent);
+export default React.memo(FlowComponents);

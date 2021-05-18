@@ -1,7 +1,8 @@
 const enableEventListeners = () => {
   document.addEventListener("keydown", (e) => {
     if (e.ctrlKey === true && e.key === "a") {
-      console.log("CTRL+" + e.key);
+      //console.log("CTRL+" + e.key);
+      alert("Naber");
     }
     if (e.shiftKey === true) {
       //console.log("SHIFT+"+e.key)
