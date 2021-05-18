@@ -98,6 +98,7 @@ export default function GroupMenu({ self, selectedElements }) {
         if (els.source === self.id) {
           return {
             ...els,
+            group,
             style: {
               ...els.style,
               stroke: group.color,
@@ -132,6 +133,7 @@ export default function GroupMenu({ self, selectedElements }) {
         if (selectedElementIds.includes(els.source)) {
           return {
             ...els,
+            group,
             style: {
               ...els.style,
               stroke: group.color,

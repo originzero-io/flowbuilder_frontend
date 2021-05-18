@@ -28,7 +28,7 @@ import {
 } from "../../REDUX/actions/menuActions";
 import { setNodeList } from "../../REDUX/actions/nodeListActions";
 import * as themeColor from "../../config/ThemeReference";
-import { closeAllNodeGroupMenu } from "../../REDUX/actions/guiActions";
+import { closeAllNodeGroupMenu,setTheme } from "../../REDUX/actions/guiActions";
 import { controlEdgeExist, removeEdgeFromArray } from "../../app-global/helpers/elementController";
 import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
@@ -50,10 +50,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
     if (params.source === params.target) {
       notification("ERROR!", "Kendisine bağlanamaz", "error");
     } else {
-      const sourceColor = elements.filter((els) => els.id === params.source)[0]
-        .data.group.color;
-      const targetColor = elements.filter((els) => els.id === params.target)[0]
-        .data.group.color;
+      const sourceColor = elements.find((els) => els.id === params.source).data.group.color;
+      const targetColor = elements.find((els) => els.id === params.target).data.group.color;
       const edge = {
         ...params,
         sourceX: 10,
@@ -92,19 +90,19 @@ export default function FlowEditor({ reactFlowWrapper }) {
       dispatch(setElements(newElements));
     }
     else {
-      const edgeColor = elementArray.filter(ela => ela.id === newConnection.source)[0].data.group.color;
+      const edgeColor = elementArray.find(els => els.id === newConnection.source).data.group.color;
       const newElements = updateEdge(oldEdge, newConnection, elementArray);
-      const newArray = newElements.map(ela => {
-        if (ela.source === newConnection.source && ela.target === newConnection.target) {
+      const newArray = newElements.map(els => {
+        if (els.source === newConnection.source && els.target === newConnection.target) {
           return {
-            ...ela,
+            ...els,
             style: {
-              ...ela.style,
+              ...els.style,
               stroke:edgeColor
             }  
           }
         }
-        return ela;
+        return els;
       })
       dispatch(setElements(newArray));
     }
@@ -115,6 +113,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setElements(newElements));
   };
   const onLoadHandle = (_reactFlowInstance) => {
+    dispatch(setTheme(localStorage.getItem("theme")));
     dispatch(setReactFlowInstance(_reactFlowInstance));
     const data = getDataFromDb(nodeClass);
     data

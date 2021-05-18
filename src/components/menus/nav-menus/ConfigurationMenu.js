@@ -22,9 +22,7 @@ import FileInputWrapper from "../../global/FileInputWrapper";
 import { FileInput } from "../../style-components/FileInput";
 import { Circle } from "../../style-components/Shapes";
 import { setTheme } from "../../../REDUX/actions/guiActions";
-import Switch from "react-switch";
 import SwitchButton from "../../global/buttons/SwitchButton";
-
 const Menu = styled(MenuIndex)`
   background: ${(props) =>
     props.theme === "dark"
@@ -95,8 +93,10 @@ export default function ConfigurationMenu() {
   const changeTheme = (checked) => {
     if (theme === "dark") {
       dispatch(setTheme("light"));
+      localStorage.setItem("theme", "light");
     } else {
       dispatch(setTheme("dark"));
+      localStorage.setItem("theme", "dark");
     }
     setActive({ ...active, theme: checked });
   };

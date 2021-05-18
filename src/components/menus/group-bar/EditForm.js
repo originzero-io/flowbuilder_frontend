@@ -9,15 +9,15 @@ import * as themeColor from "../../../config/ThemeReference";
 import { isEdge, isNode } from "react-flow-renderer";
 
 const Form = styled.form`
-  position:relative;
-  width:78%;
+  position: relative;
+  width: 78%;
 `;
 const Input = styled.input`
   width: 100%;
   height: 23px;
-  font-size:16px;
+  font-size: 16px;
   //padding-left: 25px;
-  padding:12px 10px 12px 30px;
+  padding: 12px 10px 12px 30px;
   background-color: transparent;
   border: 1px solid #636e72;
   border-radius: 2px;
@@ -25,22 +25,15 @@ const Input = styled.input`
   color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
 `;
 
-export default function EditForm({
-  editableItem,
-  setEditableItem,
-  theme
-}) {
+export default function EditForm({ editableItem, setEditableItem, theme }) {
   const elements = useSelector((state) => state.elementReducer);
   const dispatch = useDispatch();
   const onSubmitHandle = (event) => {
     event.preventDefault();
     dispatch(updateGroup(editableItem.group));
-
-    let updatedNodeId;
     const newArray = elements.map((els) => {
       if (isNode(els)) {
         if (els.data.group.id === editableItem.group.id) {
-          updatedNodeId = els.id;
           return {
             ...els,
             data: {
@@ -52,9 +45,7 @@ export default function EditForm({
         else return els;
       }
       else if (isEdge(els)) {
-        if (els.source === updatedNodeId) {
-          console.log("edgeee:", els);
-          console.log("updatedNodeId:", updatedNodeId);
+        if (els.group.id === editableItem.group.id) {
           return {
             ...els,
             style: {
@@ -76,7 +67,7 @@ export default function EditForm({
       group: {
         ...editableItem.group,
         [name]: value,
-      }
+      },
     });
   };
   return (

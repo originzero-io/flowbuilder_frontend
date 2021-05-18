@@ -16,7 +16,7 @@ export const getNodesAndEdges = (elements) => {
   return data;
 };
 export const findElementById = (id, elements) => {
-  const result = elements.filter((element) => element.id === id)[0];
+  const result = elements.find((element) => element.id === id);
   return result;
 };
 export const controlEdgeExist = (newConnection,elements) => {

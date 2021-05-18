@@ -25,11 +25,9 @@ export default function GroupList({ theme }) {
   const deleteIconClickHandle = (groupId) => {
     if (confirm("Are you sure?")) {
       dispatch(deleteGroup(groupId));
-      let clearedNodeId;
       const newArray = elements.map((els) => {
         if (isNode(els)) {
           if (els.data.group.id === groupId) {
-            clearedNodeId = els.id;
             return {
               ...els,
               data: {
@@ -41,12 +39,13 @@ export default function GroupList({ theme }) {
           else return els;
         }
         else if (isEdge(els)) {
-          if (els.source === clearedNodeId) {
+          if (els.group.id === groupId) {
             return {
               ...els,
+              group:{},
               style: {
                 ...els.style,
-                stroke: 'whitesmoke'
+                stroke: ''
               }
             }
           }
