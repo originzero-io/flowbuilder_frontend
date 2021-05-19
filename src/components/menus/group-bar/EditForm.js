@@ -45,9 +45,10 @@ export default function EditForm({ editableItem, setEditableItem, theme }) {
         else return els;
       }
       else if (isEdge(els)) {
-        if (els.group.id === editableItem.group.id) {
+        if (els.group.id && els.group.id === editableItem.group.id) {
           return {
             ...els,
+            group: { ...els.group, name: editableItem.group.name, color: editableItem.group.color },
             style: {
               ...els.style,
               stroke: editableItem.group.color

@@ -1,5 +1,9 @@
 import * as action from "../constants/nodeGroupsContants";
 
+export const loadGroups= (data) => ({
+  type: action.LOAD_GROUPS,
+  payload: data
+});
 export const addGroup= (data) => ({
   type: action.ADD_GROUP,
   payload: data

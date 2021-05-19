@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteGroup,
+  loadGroups,
   updateGroup,
 } from "../../../REDUX/actions/nodeGroupsActions";
 import { setElements } from "../../../REDUX/actions/flowActions";
@@ -10,6 +11,7 @@ import { isEdge, isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../nav-menus/icons";
 import EditForm from "./EditForm";
 import { NameEditIcon } from "../../global/icons";
+import useDidMountEffect from "../../../hooks/useDidMountEffect";
 
 export default function GroupList({ theme }) {
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
@@ -73,6 +75,14 @@ export default function GroupList({ theme }) {
   const labelClickHandle = () => {
     setEditableItem({state:false,group:{}});
   };
+
+  useDidMountEffect(() => {
+    localStorage.setItem("groups", JSON.stringify(nodeGroups));
+  }, [nodeGroups])
+  
+  useEffect(() => {
+    dispatch(loadGroups(JSON.parse(localStorage.getItem("groups"))));
+  },[])
 
   return (
     <>

@@ -41,6 +41,8 @@ const nodeGroups = [
 ];
 export const nodeGroupsReducer = (state = nodeGroups, { type, payload }) => {
   switch (type) {
+    case actionTypes.LOAD_GROUPS:
+      return payload;
     case actionTypes.ADD_GROUP:
       return [...state, payload];
     case actionTypes.UPDATE_GROUP:

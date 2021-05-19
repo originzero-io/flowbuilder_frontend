@@ -17,6 +17,7 @@ import { openNotification as notification } from "../../app-global/dom/notificat
 import {
   setClickedElement,
   setElements,
+  setMiniMapDisplay,
   setReactFlowInstance,
   setZoom,
 } from "../../REDUX/actions/flowActions";
@@ -32,6 +33,7 @@ import { closeAllNodeGroupMenu,setTheme } from "../../REDUX/actions/guiActions";
 import { controlEdgeExist, removeEdgeFromArray } from "../../app-global/helpers/elementController";
 import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
+import { loadGroups } from "../../REDUX/actions/nodeGroupsActions";
 export default function FlowEditor({ reactFlowWrapper }) {
   const { theme } = useSelector((state) => state.guiConfigReducer);
   const { reactFlowInstance, miniMapDisplay } = useSelector(
@@ -50,13 +52,13 @@ export default function FlowEditor({ reactFlowWrapper }) {
     if (params.source === params.target) {
       notification("ERROR!", "Kendisine bağlanamaz", "error");
     } else {
-      const sourceColor = elements.find((els) => els.id === params.source).data.group.color;
-      const targetColor = elements.find((els) => els.id === params.target).data.group.color;
+      const sourceGroup = elements.find((els) => els.id === params.source).data.group;
       const edge = {
         ...params,
         sourceX: 10,
         sourceY: 10,
-        style: { stroke: sourceColor, strokeWidth: "2.5px" },
+        group: sourceGroup,
+        style: { stroke: sourceGroup.color, strokeWidth: "2.5px" },
         data: { source: "", target: "", payload: "Anaks" },
       };
       const newElements = addEdge(edge, elements);
@@ -82,7 +84,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
     console.log("store-state-elements:", elementArray)
     console.log("old-edge", oldEdge);
     console.log("new connection", newConnection);
-
     const edgeExist = controlEdgeExist(newConnection,elementArray);
     console.log("edge-exist", edgeExist);
     if (edgeExist) {
@@ -114,6 +115,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
   const onLoadHandle = (_reactFlowInstance) => {
     dispatch(setTheme(localStorage.getItem("theme")));
+    dispatch(setMiniMapDisplay(localStorage.getItem("mini-map")))
     dispatch(setReactFlowInstance(_reactFlowInstance));
     const data = getDataFromDb(nodeClass);
     data

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { VerticalDivider } from "../../style-components/Divider";
 import * as tooltip from "../../../config/TooltipReference";
@@ -88,7 +88,7 @@ export default function ConfigurationMenu() {
   );
   const [active, setActive] = useState({
     theme: false,
-    miniMap: true,
+    miniMap: false,
   });
   const changeTheme = (checked) => {
     if (theme === "dark") {
@@ -103,12 +103,22 @@ export default function ConfigurationMenu() {
   const changeMiniMapDisplay = (checked) => {
     if (miniMapDisplay === "visible") {
       dispatch(setMiniMapDisplay("hidden"));
+      localStorage.setItem("mini-map", "hidden");
     } else {
       dispatch(setMiniMapDisplay("visible"));
+      localStorage.setItem("mini-map", "visible");
     }
     setActive({ ...active, miniMap: checked });
   };
 
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    const storedMinimapDisplay = localStorage.getItem("mini-map");
+    setActive({
+      miniMap: storedMinimapDisplay === "visible" ? true : false,
+      theme: storedTheme === "dark" ? true : false,
+    });
+  }, []);
   return (
     <Menu theme={theme}>
       <DropdownWrapper>
