@@ -1,5 +1,6 @@
 import localforage from "localforage";
 import { loadFunctionsToNode } from "../helpers/loadFunctionsToNode";
+import {openNotification as notification} from "../../app-global/dom/notification"
 localforage.config({
   name: "LocalForage DB",
   storeName: "Anaks-Flow",
@@ -41,7 +42,7 @@ export const saveToDb = async (reactFlowInstance) => {
     return await localforage
       .setItem("flow", JSON.stringify(flow))
       .then((res) => {
-        alert("Save successful");
+        notification("","Save successful","success");
       })
       .catch((err) => Promise.reject(err));
   } else {

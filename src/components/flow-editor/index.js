@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import ReactFlow, {
   addEdge,
   isEdge,
+  isNode,
   removeElements,
   updateEdge,
   useStoreState,
@@ -50,15 +51,14 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const onConnectHandle = (params) => {
     console.log(params);
     if (params.source === params.target) {
-      notification("ERROR!", "Kendisine bağlanamaz", "error");
+      notification("ERROR!", "Nodes cannot connect itself.", "error");
     } else {
       const sourceGroup = elements.find((els) => els.id === params.source).data.group;
       const edge = {
         ...params,
-        sourceX: 10,
-        sourceY: 10,
+        type:"smoothstep",
         group: sourceGroup,
-        style: { stroke: sourceGroup.color, strokeWidth: "2.5px" },
+        style: { stroke: sourceGroup.color, strokeWidth: "1.4px" },
         data: { source: "", target: "", payload: "Anaks" },
       };
       const newElements = addEdge(edge, elements);
@@ -170,10 +170,12 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setNodeList(newList));
   };
   const onElementClickHandle = (event, element) => {
+    event.preventDefault();
     dispatch(setClickedElement(element));
   };
 
   const onDoubleClickHandle = (event, element) => {
+    event.preventDefault();
     dispatch(setPanelContextMenu(false));
     dispatch(setGroupMenu(false));
   };
@@ -266,7 +268,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
               ...els,
               animated: true,
             };
-          } else {
+          } else if(isNode(els)) {
             return {
               ...els,
               data: {
@@ -277,11 +279,19 @@ export default function FlowEditor({ reactFlowWrapper }) {
           }
         } else {
           if (isEdge(els)) {
-            return {
-              ...els,
-              animated: false,
-            };
-          } else {
+            if (selectedElementsIDArray.includes(els.source) || selectedElementsIDArray.includes(els.target)) {
+              return {
+                ...els,
+                animated:true
+              }
+            }
+            else {
+              return {
+                ...els,
+                animated: false,
+              };
+            }
+          } else if(isNode(els)) {
             return {
               ...els,
               data: {
@@ -292,7 +302,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
           }
         }
       });
-    } else {
+    } else if(selectedElements === null) {
       newElements = elements.map((els) => {
         if (isEdge(els)) {
           return {
@@ -365,13 +375,13 @@ export default function FlowEditor({ reactFlowWrapper }) {
         onDragOver={onDragOverHandle}
         onEdgeUpdate={onEdgeUpdateHandle}
         deleteKeyCode={46}
+        multiSelectionKeyCode={17}
         minZoom={0.3}
         maxZoom={4}
-        multiSelectionKeyCode={17}
         zoomActivationKeyCode={90}
         zoomOnDoubleClick={false}
         connectionLineStyle={{ stroke: "#3498db", strokeWidth: 2 }}
-        onMove={onMoveHandle} //return x,y,zoom
+        //onMove={onMoveHandle} //return x,y,zoom
         // snapToGrid={true}
         // snapGrid={[60, 60]}
         //onNodeDoubleClick={onNodeDoubleClick}

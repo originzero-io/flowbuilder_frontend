@@ -82,7 +82,7 @@ export default function ConfigurationMenu() {
           setSelectedElements(newArray);
         };
       } else
-        openNotification("Import Error", "Bu dosya import edilemez.", "error");
+        openNotification("Import Error", "This file cannot be imported. Please provide JSON file.", "error");
     },
     [reactFlowInstance]
   );

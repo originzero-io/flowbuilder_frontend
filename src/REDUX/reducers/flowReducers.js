@@ -19,8 +19,7 @@ export const elementReducer = (state = initialElements, {type,payload}) => {
     case actionTypes.SET_ELEMENTS:
       return payload;
     case actionTypes.IMPORT_ELEMENTS:
-      return [...state,...payload];
-    
+      return [...state,...payload];  
     case actionTypes.SET_ROTATE_ALL:
       return state.map(state => {
         return {
