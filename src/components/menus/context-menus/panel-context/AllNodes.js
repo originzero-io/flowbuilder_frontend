@@ -13,8 +13,6 @@ const SearchBar = styled.input`
   color: whitesmoke;
   caret-color: green;
   user-select: none;
-  &:focus {
-  }
 `;
 export default function AllNodes({
   nodeList,

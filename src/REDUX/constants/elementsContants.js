@@ -1,5 +1,6 @@
 export const SET_ELEMENTS = "SET_ELEMENTS";
 export const ADD_NEW_NODE = "ADD_NEW_NODE";
+export const PASTE_NODES = "PASTE_NODES";
 export const SET_ROTATE_ALL= "SET_ROTATE_ALL";
 export const SET_EXPAND_ALL = "SET_EXPAND_ALL";
 export const ROTATE_NODE = "ROTATE_NODE";

@@ -27,6 +27,10 @@ export const setEdgeType = (data) => ({
   type: action.SET_EDGE_TYPE,
   payload: data
 });
+export const setCopiedElements = (nodes) => ({
+  type: action.SET_COPIED_ELEMENTS,
+  payload: nodes
+});
 
 
 

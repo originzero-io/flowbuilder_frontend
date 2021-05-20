@@ -7,6 +7,10 @@ export const addNewNode = (node) => ({
   type: action.ADD_NEW_NODE,
   payload: node,
 });
+export const pasteNodes = (nodes) => ({
+  type: action.PASTE_NODES,
+  payload: nodes,
+});
 export const setRotateAll = (data) => ({
   type: action.SET_ROTATE_ALL,
   payload: data,

@@ -1,5 +1,5 @@
 import React from "react";
-import { NodeWrapper, NodeElement, Container, IconWrapper } from "./style";
+import { NodeElement,IconWrapper } from "./style";
 import { Label } from "../../../nodes/styles";
 import FavIconManager from "./FavIconManager";
 

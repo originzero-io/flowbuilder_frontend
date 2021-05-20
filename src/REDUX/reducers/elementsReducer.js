@@ -9,6 +9,8 @@ const elementReducer = (state = [], { type, payload }) => {
       return [...state, ...payload];
     case actionTypes.ADD_NEW_NODE:
       return [...state, payload];   
+    case actionTypes.PASTE_NODES:
+      return [...state, ...payload];   
     case actionTypes.SET_ROTATE_ALL:
       return state.map((state) => {
         if (isNode(state)) {

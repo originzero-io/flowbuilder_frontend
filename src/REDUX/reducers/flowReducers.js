@@ -9,6 +9,7 @@ const flowConfig = {
   groupBarDisplay: "hidden",
   edgeType:"smoothstep",
   clickedElement: {},
+  copiedElements: [],
 };
 
 export const nodeClassReducer = (state = nodeClass, action) => {
@@ -31,6 +32,8 @@ export const flowConfigReducer = (state = flowConfig, action) => {
       return { ...state, rotateAllPath: action.payload };
     case actionTypes.SET_EDGE_TYPE:
       return { ...state, edgeType: action.payload };
+    case actionTypes.SET_COPIED_ELEMENTS:
+      return { ...state, copiedElements: action.payload };
     default:
       return state;
   }
