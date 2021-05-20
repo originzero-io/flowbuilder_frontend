@@ -15,7 +15,7 @@ import Favicon from "react-favicon";
 import KeyboardEvents from "./components/global/KeyboardEvents";
 const App = () => {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const { groupBarDisplay } = useSelector((state) => state.flowConfigReducer);
   const dispatch = useDispatch();
   useEffect(() => {

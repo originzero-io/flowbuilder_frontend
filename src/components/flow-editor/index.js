@@ -34,17 +34,15 @@ import { closeAllNodeGroupMenu,setTheme } from "../../REDUX/actions/guiActions";
 import { controlEdgeExist, removeEdgeFromArray } from "../../app-global/helpers/elementController";
 import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
-import { loadGroups } from "../../REDUX/actions/nodeGroupsActions";
 export default function FlowEditor({ reactFlowWrapper }) {
   const { theme } = useSelector((state) => state.guiConfigReducer);
   const { reactFlowInstance, miniMapDisplay } = useSelector(
     (state) => state.flowConfigReducer
   );
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
   const selectedElements = useStoreState((state) => state.selectedElements);
-
   const dispatch = useDispatch();
   const store = useStore();
   
@@ -191,6 +189,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     closeMultiSelectionContextMenu();
     closeElementContextMenu();
     dispatch(closeAllNodeGroupMenu(true));
+    allElementsNonSelected();
   };
 
   const onPaneContextHandle = (e) => {
@@ -242,6 +241,25 @@ export default function FlowEditor({ reactFlowWrapper }) {
     }
   };
 
+  const allElementsNonSelected = () => {
+    const newElements = elements.map((els) => {
+      if (isEdge(els)) {
+        return {
+          ...els,
+          animated: false,
+        };
+      } else {
+        return {
+          ...els,
+          data: {
+            ...els.data,
+            selected: false,
+          },
+        };
+      }
+    });
+    dispatch(setElements(newElements));
+  }
   const onSelectionContextMenuHandle = (e, nodes) => {
     e.preventDefault();
     dispatch(

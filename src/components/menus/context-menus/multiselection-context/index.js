@@ -12,7 +12,7 @@ export default function MultiSelectionContextMenu() {
     (state) => state.menuConfigReducer
   );
   const { theme } = useSelector((state) => state.guiConfigReducer);
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
   const deleteItems = () => {
     if (confirm("Are you sure?")) {

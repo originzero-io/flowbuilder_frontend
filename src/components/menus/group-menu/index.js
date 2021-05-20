@@ -51,7 +51,7 @@ const Content = styled.div`
 `;
 export default function GroupMenu({ self, selectedElements }) {
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
   const [searched, setSearched] = useState([]);
   useEffect(() => {

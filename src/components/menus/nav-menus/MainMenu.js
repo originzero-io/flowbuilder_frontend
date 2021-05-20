@@ -42,7 +42,7 @@ const Circle = styled.div`
 
 const MainMenu = () => {
   const { theme } = useSelector((state) => state.guiConfigReducer);
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   
   const connectedEdgeHandle = () => {
     const { nodes, edges } = getNodesAndEdges(elements);

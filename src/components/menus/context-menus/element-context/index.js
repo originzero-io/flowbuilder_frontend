@@ -5,7 +5,7 @@ import { setElementContextMenu } from "../../../../REDUX/actions/menuActions";
 import { setElements } from "../../../../REDUX/actions/elementsActions";
 
 export default function ElementMenu() {
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const {elementMenu} = useSelector((state) => state.menuConfigReducer);
   const theme = useSelector((state) => state.themeReducer);
   const dispatch = useDispatch();

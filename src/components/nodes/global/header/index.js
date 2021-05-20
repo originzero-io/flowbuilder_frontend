@@ -12,7 +12,7 @@ import Switch from "react-switch"
 import FeatureIcons from "./FeatureIcons";
 export default function NodeHeader({ self, selectedElements }) {
   const dispatch = useDispatch();
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
 
   const [showGroup, setShowGroup] = useState(false);
   const [hover, setHover] = useState(false);

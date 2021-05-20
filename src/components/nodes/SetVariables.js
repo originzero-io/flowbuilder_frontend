@@ -10,7 +10,7 @@ import updateNodeHandles from "../../app-global/helpers/updateNodeHandles"
 import NodeIOmanager from "./global/NodeIOManager";
 
 const SetVariables = (self) => {
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
   const dispatch = useDispatch();

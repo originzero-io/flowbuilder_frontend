@@ -26,7 +26,7 @@ const Input = styled.input`
 `;
 
 export default function EditForm({ editableItem, setEditableItem, theme }) {
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
   const onSubmitHandle = (event) => {
     event.preventDefault();

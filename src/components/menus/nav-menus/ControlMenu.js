@@ -31,6 +31,7 @@ import {
 } from "../../../REDUX/actions/flowActions";
 import * as themeColor from "../../../config/ThemeReference";
 import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
+import { ActionCreators as UndoActionCreators } from 'redux-undo'
 const Menu = styled.div`
   position: absolute;
   display: flex;
@@ -51,7 +52,9 @@ export default function ControlMenu() {
   const dispatch = useDispatch();
   const { theme } = useSelector((state) => state.guiConfigReducer);
   const { rotateAllPath } = useSelector((state) => state.flowConfigReducer);
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
+  const canUndo = useSelector((state) => state.elementReducer).past.length > 0;
+  const canRedo = useSelector((state) => state.elementReducer).future.length > 0;
   const { zoomIn, zoomOut, fitView } = useZoomPanHelper();
   const setInteractive = useStoreActions((actions) => actions.setInteractive);
   const setSelectedElements = useStoreActions(
@@ -98,6 +101,12 @@ export default function ControlMenu() {
   const selectAllNodes = () => {
     setSelectedElements(elements);
   };
+  const undoHandle = () => {
+    dispatch(UndoActionCreators.undo());
+  }
+  const redoHandle = () => {
+    dispatch(UndoActionCreators.redo());
+  }
   useEffect(() => {
     setInteractive(lock);
   }, [lock]);
@@ -112,21 +121,21 @@ export default function ControlMenu() {
         <SaveIcon theme={theme} />
       </MenuItem>
       <HorizontalDivider theme={theme} />
-      <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO}>
-        <UndoIcon theme={theme} />
+      <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO} onClick={undoHandle}>
+        <UndoIcon theme={theme} disable={!canUndo} />
       </MenuItem>
-      <MenuItem theme={theme} data-tip="Redo" data-for={tooltip.REDO}>
-        <RedoIcon theme={theme} />
+      <MenuItem theme={theme} data-tip="Redo" data-for={tooltip.REDO} onClick={redoHandle}>
+        <RedoIcon theme={theme} disable={!canRedo} />
       </MenuItem>
       <HorizontalDivider theme={theme} />
-      <MenuItem
+      {/* <MenuItem
         theme={theme}
         onClick={selectAllNodes}
         data-tip="Select All Nodes"
         data-for={tooltip.SELECT_ALL_NODES}
       >
         <SelectAllIcon theme={theme} />
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem
         theme={theme}
         onClick={closeAllNodes}

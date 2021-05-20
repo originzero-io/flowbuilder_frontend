@@ -18,7 +18,7 @@ const NodeGod = ({ self, ioType, children, collapsable }) => {
   const sources = [];
   const targets = [];
   const { zoom } = useSelector((state) => state.flowConfigReducer);
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
   const { selected, align, expand, enable} = self.data;
   for (let index = 0; index < self.data.targetCount; index++) {

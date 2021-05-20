@@ -9,7 +9,7 @@ import updateNodeHandles from "../../app-global/helpers/updateNodeHandles";
 import NodeIOManager from "./global/NodeIOManager";
 const SplitNode = (self) => {
   const { flagColor } = useSelector((state) => state.guiConfigReducer);
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const dispatch = useDispatch();
   const [values, setValues] = useState([

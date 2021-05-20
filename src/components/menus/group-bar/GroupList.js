@@ -15,7 +15,7 @@ import useDidMountEffect from "../../../hooks/useDidMountEffect";
 
 export default function GroupList({ theme }) {
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
   const [hover, setHover] = useState(null);
   const [editableItem, setEditableItem] = useState({ state: false, group: {} });

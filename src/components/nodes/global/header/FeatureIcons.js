@@ -9,7 +9,7 @@ import { openNotification as notification } from "../../../../app-global/dom/not
 
 export default function FeatureIcons({ self, edit, setEdit }) {
   const dispatch = useDispatch();
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const nameEditHandle = () => {
     setEdit(!edit);
   };

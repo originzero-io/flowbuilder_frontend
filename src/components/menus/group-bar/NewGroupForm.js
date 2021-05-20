@@ -27,7 +27,7 @@ import { setElements } from "../../../REDUX/actions/elementsActions";
 export default function NewGroupForm({ theme }) {
   const [groupInfo, setGroupInfo] = useState({});
   const [formOpen, setFormOpen] = useState(false);
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
   );

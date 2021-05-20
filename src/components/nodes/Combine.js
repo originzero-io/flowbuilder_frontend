@@ -5,7 +5,7 @@ import { setElements } from "../../REDUX/actions/elementsActions";
 import updateNodeHandles from "../../app-global/helpers/updateNodeHandles";
 import NodeIOManager from "./global/NodeIOManager";
 const CombineNode = (self) => {
-  const elements = useSelector((state) => state.elementReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
   const [align, setAlign] = useState("vertical");
   return (
