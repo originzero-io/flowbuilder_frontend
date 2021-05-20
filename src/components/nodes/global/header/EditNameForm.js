@@ -7,7 +7,7 @@ import { isNode } from "react-flow-renderer";
 import {
   changeNodeName,
   setElements,
-} from "../../../../REDUX/actions/flowActions";
+} from "../../../../REDUX/actions/elementsActions";
 const Form = styled.form`
   position: relative;
 `;

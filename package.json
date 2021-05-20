@@ -29,6 +29,7 @@
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
+    "redux-undo": "^1.0.1",
     "styled-components": "^5.3.0",
     "use-reducer-thunk": "^1.0.8",
     "use-undo": "^1.0.3"

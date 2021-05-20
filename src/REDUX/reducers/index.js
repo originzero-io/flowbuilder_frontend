@@ -1,5 +1,6 @@
 import {combineReducers} from "redux";
-import {nodeClassReducer,elementReducer,flowConfigReducer} from "./flowReducers"
+import {elementReducer} from "./elementsReducer"
+import {nodeClassReducer,flowConfigReducer} from "./flowReducers"
 import {nodeGroupsReducer} from "./nodeGroupsReducers"
 import {guiConfigReducer} from "./guiReducers"
 import {menuConfigReducer} from "./menuReducers"

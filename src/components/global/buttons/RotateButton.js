@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch} from "react-redux"
-import { rotateNode } from "../../../REDUX/actions/flowActions";
+import { rotateNode } from "../../../REDUX/actions/elementsActions";
 import { HorizontalToVerticalIcon,VerticalToHorizontalIcon } from "../../nodes/global/icons";
 export default function RotateButton({ self }) {
   const dispatch = useDispatch();

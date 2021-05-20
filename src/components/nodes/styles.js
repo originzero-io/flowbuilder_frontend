@@ -16,9 +16,7 @@ export const NodeWrapper = styled.div`
     #505050 80%
   );
   box-shadow: 0.261px 1.5px 3px 0px rgba(0, 0, 0, 0.996);
-  //opacity:0.5;
   opacity: ${(props) => (props.enable ? "1" : "0.5")};
-
 `;
 
 export const NodeArea = styled.div`
@@ -78,7 +76,7 @@ export const TargetWrapper = styled.div`
   width: ${(props) => (props.align === "vertical" ? "none" : "0px")};
   height: ${(props) => (props.align === "vertical" ? "0px" : "none")};
   bottom: ${(props) => (props.align === "vertical" ? "13px" : "none")};
-  right: ${(props) => (props.align === "vertical" ? "none" : "15px")};
+  right: ${(props) => (props.align === "vertical" ? "none" : "13px")};
 `;
 export const SourceWrapper = styled.div`
   display: flex;

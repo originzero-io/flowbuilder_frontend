@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import useDidMountEffect from "../../hooks/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
 import { Label } from "./styles";
-import { setElements } from "../../REDUX/actions/flowActions";
+import { setElements } from "../../REDUX/actions/elementsActions";
 import updateNodeHandles from "../../app-global/helpers/updateNodeHandles";
 import NodeIOManager from "./global/NodeIOManager";
 const SplitNode = (self) => {

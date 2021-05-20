@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Label } from "../styles";
 import { useSelector, useDispatch } from "react-redux";
 import updateNodeHandles from "../../../app-global/helpers/updateNodeHandles";
-import { setElements } from "../../../REDUX/actions/flowActions";
+import { setElements } from "../../../REDUX/actions/elementsActions";
 export default function NodeIOManager({ self, ioType }) {
   const elements = useSelector((state) => state.elementReducer);
   const dispatch = useDispatch();

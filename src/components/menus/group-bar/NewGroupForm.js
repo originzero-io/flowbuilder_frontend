@@ -22,7 +22,7 @@ import {
 } from "../../global/icons/index";
 import { useStoreActions, isNode, isEdge } from "react-flow-renderer";
 import { HorizontalDivider } from "../../style-components/Divider";
-import { setElements } from "../../../REDUX/actions/flowActions";
+import { setElements } from "../../../REDUX/actions/elementsActions";
 
 export default function NewGroupForm({ theme }) {
   const [groupInfo, setGroupInfo] = useState({});

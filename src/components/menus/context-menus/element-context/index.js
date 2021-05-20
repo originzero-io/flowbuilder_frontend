@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Menu, MenuItem } from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { setElementContextMenu } from "../../../../REDUX/actions/menuActions";
-import { setElements } from "../../../../REDUX/actions/flowActions";
+import { setElements } from "../../../../REDUX/actions/elementsActions";
 
 export default function ElementMenu() {
   const elements = useSelector((state) => state.elementReducer);

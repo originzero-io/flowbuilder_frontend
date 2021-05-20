@@ -17,11 +17,11 @@ import { loadFunctionsToNode } from "../../app-global/helpers/loadFunctionsToNod
 import { openNotification as notification } from "../../app-global/dom/notification";
 import {
   setClickedElement,
-  setElements,
   setMiniMapDisplay,
   setReactFlowInstance,
   setZoom,
 } from "../../REDUX/actions/flowActions";
+import {setElements} from "../../REDUX/actions/elementsActions"
 import {
   setElementContextMenu,
   setGroupMenu,

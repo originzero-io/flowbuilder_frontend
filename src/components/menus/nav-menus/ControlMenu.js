@@ -22,12 +22,13 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import {
   setElements,
-  setMiniMapDisplay,
   setRotateAll,
   setExpandAll,
+} from "../../../REDUX/actions/elementsActions";
+import {
+  setMiniMapDisplay,
   setRotateAllPath,
 } from "../../../REDUX/actions/flowActions";
-import { setTheme } from "../../../REDUX/actions/guiActions";
 import * as themeColor from "../../../config/ThemeReference";
 import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
 const Menu = styled.div`
@@ -124,7 +125,7 @@ export default function ControlMenu() {
         data-tip="Select All Nodes"
         data-for={tooltip.SELECT_ALL_NODES}
       >
-        <SelectAllIcon theme={theme}/>
+        <SelectAllIcon theme={theme} />
       </MenuItem>
       <MenuItem
         theme={theme}
@@ -132,7 +133,7 @@ export default function ControlMenu() {
         data-tip="Close All Nodes"
         data-for={tooltip.CLOSE_ALL_NODES}
       >
-        <ExpandAllIcon theme={theme}/>
+        <ExpandAllIcon theme={theme} />
       </MenuItem>
       <MenuItem
         theme={theme}

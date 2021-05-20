@@ -10,7 +10,7 @@ import {
   deleteNodeCurrentGroupSingle,
   deleteNodeCurrentGroupMultiple,
 } from "../../../REDUX/actions/nodeGroupsActions";
-import { setElements } from "../../../REDUX/actions/flowActions";
+import { setElements } from "../../../REDUX/actions/elementsActions";
 import styled from "styled-components";
 import { GroupColor, Label } from "../group-bar/style";
 import { isEdge, isNode } from "react-flow-renderer";

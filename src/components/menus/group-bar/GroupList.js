@@ -5,7 +5,7 @@ import {
   loadGroups,
   updateGroup,
 } from "../../../REDUX/actions/nodeGroupsActions";
-import { setElements } from "../../../REDUX/actions/flowActions";
+import { setElements } from "../../../REDUX/actions/elementsActions";
 import { GroupItem, GroupColor, Label} from "./style";
 import { isEdge, isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../nav-menus/icons";

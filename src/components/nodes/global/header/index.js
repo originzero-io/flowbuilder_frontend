@@ -6,7 +6,7 @@ import RotateButton from "../../../global/buttons/RotateButton";
 import GroupMenu from "../../../menus/group-menu";
 import { closeAllNodeGroupMenu } from "../../../../REDUX/actions/guiActions";
 import getIconComponent from "../icons/iconConstant";
-import { expandNode, setElements } from "../../../../REDUX/actions/flowActions";
+import { expandNode, setElements } from "../../../../REDUX/actions/elementsActions";
 import EditNameForm from "./EditNameForm";
 import Switch from "react-switch"
 import FeatureIcons from "./FeatureIcons";

@@ -12,7 +12,7 @@ import {
   Info,
 } from "../styles";
 import setIconInstance from "./icons/iconConstant";
-import { setOutgoersEnable } from "../../../REDUX/actions/flowActions";
+import { setOutgoersEnable } from "../../../REDUX/actions/elementsActions";
 const NodeGod = ({ self, ioType, children, collapsable }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sources = [];

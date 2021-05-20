@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Menu, MenuItem } from "../element-context/style";
 import { useStoreState } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
-import { rotateMultiNode, setElements, setMultipleNodeEnable } from "../../../../REDUX/actions/flowActions";
+import { rotateMultiNode, setElements, setMultipleNodeEnable } from "../../../../REDUX/actions/elementsActions";
 import { setMultiSelectionContextMenu } from "../../../../REDUX/actions/menuActions";
 import GroupMenu from "../../group-menu";
 

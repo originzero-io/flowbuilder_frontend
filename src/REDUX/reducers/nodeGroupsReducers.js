@@ -1,6 +1,4 @@
-import { startCase } from "lodash";
 import * as actionTypes from "../constants/nodeGroupsContants";
-import without from "lodash/without"
 const nodeGroups = [
   {
     id: 1,

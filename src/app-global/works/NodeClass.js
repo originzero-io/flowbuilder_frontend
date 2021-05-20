@@ -9,7 +9,7 @@ import {
   findElementById
 } from "../helpers/elementController";
 import { openNotification as notification } from "../dom/notification";
-import {setElements} from "../../REDUX/actions/flowActions"
+import {setElements} from "../../REDUX/actions/elementsActions"
 export default class Node {
   elements = [];
   nodes = [];

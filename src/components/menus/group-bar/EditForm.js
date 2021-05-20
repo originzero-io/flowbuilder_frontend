@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setElements } from "../../../REDUX/actions/flowActions";
+import { setElements } from "../../../REDUX/actions/elementsActions";
 import { updateGroup } from "../../../REDUX/actions/nodeGroupsActions";
 import { SubmitIcon } from "../../global/icons";
 import { ColorFlag, Submit } from "./style";

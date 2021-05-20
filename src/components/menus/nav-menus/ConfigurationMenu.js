@@ -11,10 +11,8 @@ import {
   DropDownItem,
 } from "../../style-components/DropdownMenu";
 import * as themeColor from "../../../config/ThemeReference";
-import {
-  importElements,
-  setMiniMapDisplay,
-} from "../../../REDUX/actions/flowActions";
+import { setMiniMapDisplay } from "../../../REDUX/actions/flowActions";
+import { importElements } from "../../../REDUX/actions/elementsActions";
 import { openNotification } from "../../../app-global/dom/notification";
 import { loadFunctionsToNode } from "../../../app-global/helpers/loadFunctionsToNode";
 import { useStoreActions } from "react-flow-renderer";
@@ -82,7 +80,11 @@ export default function ConfigurationMenu() {
           setSelectedElements(newArray);
         };
       } else
-        openNotification("Import Error", "This file cannot be imported. Please provide JSON file.", "error");
+        openNotification(
+          "Import Error",
+          "This file cannot be imported. Please provide JSON file.",
+          "error"
+        );
     },
     [reactFlowInstance]
   );
