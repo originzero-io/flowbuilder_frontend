@@ -11,11 +11,11 @@ import {
   DropDownItem,
 } from "../../style-components/DropdownMenu";
 import * as themeColor from "../../../config/ThemeReference";
-import { setMiniMapDisplay } from "../../../REDUX/actions/flowActions";
-import { importElements } from "../../../REDUX/actions/elementsActions";
+import { setEdgeType, setMiniMapDisplay } from "../../../REDUX/actions/flowActions";
+import { changeEdgeType, importElements,setElements } from "../../../REDUX/actions/elementsActions";
 import { openNotification } from "../../../app-global/dom/notification";
 import { loadFunctionsToNode } from "../../../app-global/helpers/loadFunctionsToNode";
-import { useStoreActions } from "react-flow-renderer";
+import { isEdge, useStoreActions } from "react-flow-renderer";
 import FileInputWrapper from "../../global/FileInputWrapper";
 import { FileInput } from "../../style-components/FileInput";
 import { Circle } from "../../style-components/Shapes";
@@ -34,6 +34,7 @@ const Menu = styled(MenuIndex)`
 
 export default function ConfigurationMenu() {
   const { theme } = useSelector((state) => state.guiConfigReducer);
+  const elements = useSelector((state) => state.elementReducer).present;
   const { reactFlowInstance, miniMapDisplay } = useSelector(
     (state) => state.flowConfigReducer
   );
@@ -112,7 +113,10 @@ export default function ConfigurationMenu() {
     }
     setActive({ ...active, miniMap: checked });
   };
-
+  const edgeTypeHandle = (e) => {
+    dispatch(changeEdgeType(e.target.value))
+    dispatch(setEdgeType(e.target.value))
+  }
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
     const storedMinimapDisplay = localStorage.getItem("mini-map");
@@ -178,6 +182,14 @@ export default function ConfigurationMenu() {
             />
           </DropDownItem>
           <DropDownItem>User Settings</DropDownItem>
+          <DropDownItem>
+            <select onChange={edgeTypeHandle} defaultValue="smoothstep">
+              <option value="bezier">Bezier</option>
+              <option value="step">Step</option>
+              <option value="smoothstep">Smooth Step</option>
+              <option value="straight">Straight</option>
+            </select>
+          </DropDownItem>
         </DropdownList>
       </DropdownWrapper>
     </Menu>

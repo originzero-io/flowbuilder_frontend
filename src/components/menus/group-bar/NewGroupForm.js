@@ -71,29 +71,10 @@ export default function NewGroupForm({ theme }) {
     })
     dispatch(setElements(newElements));
   }
-  const edgeTypeHandle = (e) => {
-    const newElements = elements.map(els => {
-      if (isEdge(els)) {
-        return {
-          ...els,
-          type:e.target.value
-        }
-      }
-      return els;
-    })
-    dispatch(setElements(newElements));
-
-  }
   return (
     <AddGroupWrapper onSubmit={addNewGroup}>
       <label>Stroke Width:</label>
       <input type="number" onChange={strokeWidthChange} min={1} step={0.2} defaultValue={1.2} />
-      <select onClick={edgeTypeHandle}>
-        <option value="bezier">Bezier</option>
-        <option value="step">Step</option>
-        <option value="smoothstep">Smooth Step</option>
-        <option value="straight">Straight</option>
-      </select>
       <Header theme={theme}>
         <IconWrapper onClick={() => setFormOpen(!formOpen)}>
           {formOpen === true ? (

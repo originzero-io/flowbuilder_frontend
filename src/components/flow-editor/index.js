@@ -21,7 +21,7 @@ import {
   setReactFlowInstance,
   setZoom,
 } from "../../REDUX/actions/flowActions";
-import {setElements} from "../../REDUX/actions/elementsActions"
+import {addNewNode, setElements, setNodeEnable} from "../../REDUX/actions/elementsActions"
 import {
   setElementContextMenu,
   setGroupMenu,
@@ -31,12 +31,12 @@ import {
 import { setNodeList } from "../../REDUX/actions/nodeListActions";
 import * as themeColor from "../../config/ThemeReference";
 import { closeAllNodeGroupMenu,setTheme } from "../../REDUX/actions/guiActions";
-import { controlEdgeExist, removeEdgeFromArray } from "../../app-global/helpers/elementController";
+import { isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "../../app-global/helpers/elementController";
 import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
 export default function FlowEditor({ reactFlowWrapper }) {
   const { theme } = useSelector((state) => state.guiConfigReducer);
-  const { reactFlowInstance, miniMapDisplay } = useSelector(
+  const { reactFlowInstance, miniMapDisplay,edgeType,rotateAllPath } = useSelector(
     (state) => state.flowConfigReducer
   );
   const elements = useSelector((state) => state.elementReducer).present;
@@ -54,55 +54,32 @@ export default function FlowEditor({ reactFlowWrapper }) {
       const sourceGroup = elements.find((els) => els.id === params.source).data.group;
       const edge = {
         ...params,
-        type:"smoothstep",
+        type:edgeType,
         group: sourceGroup,
         style: { stroke: sourceGroup.color, strokeWidth: "1.4px" },
         data: { source: "", target: "", payload: "Anaks" },
       };
       const newElements = addEdge(edge, elements);
       const sourceEnable = newElements.find(els => els.id === params.source).data.enable;
-      const elementArray = newElements.map(els => {
-        if (els.id === params.target) {
-          return {
-            ...els,
-            data: {
-              ...els.data,
-              enable: sourceEnable
-            }
-          }
-        }
-        return els;
-      })
-      dispatch(setElements(elementArray));
+      const self = newElements.find(els => els.id === params.target);
+      dispatch(setElements(newElements));
+      dispatch(setNodeEnable(self,sourceEnable))
     }
   };
 
   const onEdgeUpdateHandle = (oldEdge, newConnection) => {
-    const elementArray = store.getState().elementReducer;
+    const elementArray = store.getState().elementReducer.present;
     console.log("store-state-elements:", elementArray)
     console.log("old-edge", oldEdge);
     console.log("new connection", newConnection);
-    const edgeExist = controlEdgeExist(newConnection,elementArray);
-    console.log("edge-exist", edgeExist);
+    const edgeExist = isEdgeExist(newConnection,elementArray);
     if (edgeExist) {
       const newElements = removeEdgeFromArray(oldEdge,elementArray);
       dispatch(setElements(newElements));
     }
     else {
-      const edgeColor = elementArray.find(els => els.id === newConnection.source).data.group.color;
       const newElements = updateEdge(oldEdge, newConnection, elementArray);
-      const newArray = newElements.map(els => {
-        if (els.source === newConnection.source && els.target === newConnection.target) {
-          return {
-            ...els,
-            style: {
-              ...els.style,
-              stroke:edgeColor
-            }  
-          }
-        }
-        return els;
-      })
+      const newArray = setSourceColorToEdge(newConnection, newElements);
       dispatch(setElements(newArray));
     }
   };
@@ -115,8 +92,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setTheme(localStorage.getItem("theme")));
     dispatch(setMiniMapDisplay(localStorage.getItem("mini-map")))
     dispatch(setReactFlowInstance(_reactFlowInstance));
-    const data = getDataFromDb(nodeClass);
-    data
+    getDataFromDb(nodeClass)
       .then((flow) => {
         adjustScreen(flow, _reactFlowInstance);
         dispatch(setElements(flow.elements));
@@ -151,13 +127,13 @@ export default function FlowEditor({ reactFlowWrapper }) {
           onChange: nodeFunction,
           targetCount: 1,
           sourceCount: 1,
-          align: "horizontal",
+          align: rotateAllPath,
           expand: false,
           enable: true,
           group: {nodes:[]},
         },
       };
-      dispatch(setElements([...elements, newNode]));
+      dispatch(addNewNode(newNode))
       updateRecentStatus(type);
     }
   };

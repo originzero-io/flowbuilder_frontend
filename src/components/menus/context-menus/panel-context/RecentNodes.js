@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NodeWrapper, NodeElement } from "./style";
-import { Label } from "../../../nodes/styles";
 import sortBy from "lodash/sortBy"
-import FavIconManager from "./FavIconManager";
-export default function RecentNodes({ nodeList, favClick, onDragStart }) {
+import NodeListItem from "./NodeListItem";
+export default function RecentNodes({ nodeList, favClick, onDragStart, addNewNode}) {
   const recent = nodeList.filter((node) => node.createdDate !== undefined);
   const [recentNodes,setRecentNodes] = useState([])
   useEffect(() => {
@@ -15,15 +14,12 @@ export default function RecentNodes({ nodeList, favClick, onDragStart }) {
       <NodeWrapper>
         {recentNodes.map((node) => {
           return (
-            <NodeElement
-              key={node.id}
-              onDragStart={(event) => onDragStart(event, node.name)}
-              draggable
-            >
-              <>{node.icon}</>
-              <Label>{node.name}</Label>
-              <FavIconManager node={node} favClick={favClick}/>
-            </NodeElement>
+            <NodeListItem
+              node={node}
+              onDragStart={onDragStart}
+              addNewNode={addNewNode}
+              favClick={favClick}
+            />
           );
         })}
       </NodeWrapper>

@@ -7,6 +7,7 @@ const flowConfig = {
   rotateAllPath:"horizontal",
   miniMapDisplay: "visible",
   groupBarDisplay: "hidden",
+  edgeType:"smoothstep",
   clickedElement: {},
 };
 
@@ -28,6 +29,8 @@ export const flowConfigReducer = (state = flowConfig, action) => {
       return { ...state, zoom: action.payload };
     case actionTypes.SET_ROTATE_ALL_PATH:
       return { ...state, rotateAllPath: action.payload };
+    case actionTypes.SET_EDGE_TYPE:
+      return { ...state, edgeType: action.payload };
     default:
       return state;
   }

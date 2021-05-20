@@ -11,7 +11,7 @@ export const getNodesAndEdges = (elements) => {
   });
   const data = {
     edges: [...edgeArray],
-    nodes: [...nodeArray]
+    nodes: [...nodeArray],
   };
   return data;
 };
@@ -19,17 +19,38 @@ export const findElementById = (id, elements) => {
   const result = elements.find((element) => element.id === id);
   return result;
 };
-export const controlEdgeExist = (newConnection,elements) => {
+export const isEdgeExist = (newConnection, elements) => {
   const { nodes, edges } = getNodesAndEdges(elements);
   const connectedEdges = getConnectedEdges(nodes, edges);
   let exist = false;
-  connectedEdges.map(edge => {
-    if (edge.source === newConnection.source && edge.target === newConnection.target && edge.sourceHandle === newConnection.sourceHandle && edge.targetHandle === newConnection.targetHandle) {
+  connectedEdges.map((edge) => {
+    if (
+      edge.source === newConnection.source &&
+      edge.target === newConnection.target &&
+      edge.sourceHandle === newConnection.sourceHandle &&
+      edge.targetHandle === newConnection.targetHandle
+    ) {
       exist = true;
     }
-  })
+  });
   return exist;
 };
 export const removeEdgeFromArray = (edge, elements) => {
-  return elements.filter(els => els.id !== edge.id);
+  return elements.filter((els) => els.id !== edge.id);
+};
+export const setSourceColorToEdge = (connection, elements) => {
+  const color = elements.find(els => els.id === connection.source).data.group.color;
+  const newElements = elements.map((els) => {
+    if (els.source === connection.source && els.target === connection.target) {
+      return {
+        ...els,
+        style: {
+          ...els.style,
+          stroke: color,
+        },
+      };
+    }
+    return els;
+  });
+  return newElements;
 };

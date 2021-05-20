@@ -1,30 +1,39 @@
 import * as actionTypes from "../constants/elementsContants";
 import undoable from "redux-undo"
+import { isEdge, isNode } from "react-flow-renderer";
 const elementReducer = (state = [], { type, payload }) => {
   switch (type) {
     case actionTypes.SET_ELEMENTS:
       return payload;
     case actionTypes.IMPORT_ELEMENTS:
       return [...state, ...payload];
+    case actionTypes.ADD_NEW_NODE:
+      return [...state, payload];   
     case actionTypes.SET_ROTATE_ALL:
       return state.map((state) => {
-        return {
-          ...state,
-          data: {
-            ...state.data,
-            align: payload,
-          },
-        };
+        if (isNode(state)) {
+          return {
+            ...state,
+            data: {
+              ...state.data,
+              align: payload,
+            },
+          };
+        }
+        else return state;
       });
     case actionTypes.SET_EXPAND_ALL:
       return state.map((state) => {
-        return {
-          ...state,
-          data: {
-            ...state.data,
-            expand: payload,
-          },
-        };
+        if (isNode(state)) {
+          return {
+            ...state,
+            data: {
+              ...state.data,
+              expand: payload,
+            },
+          };
+        }
+        else return state;
       });
     case actionTypes.ROTATE_NODE:
       return state.map((state) => {
@@ -91,6 +100,16 @@ const elementReducer = (state = [], { type, payload }) => {
         }
         return state;
       });
+    case actionTypes.CHANGE_EDGE_TYPE:
+      return state.map((state) => {
+        if (isEdge(state)) {
+          return {
+            ...state,
+            type:payload
+          };
+        }
+        return state;
+      });  
     case actionTypes.SET_NODE_ENABLE_MULTIPLE:
       return state.map((state) => {
         if (payload.selectedIDArray.includes(state.id)) {

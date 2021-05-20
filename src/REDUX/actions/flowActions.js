@@ -23,6 +23,10 @@ export const setRotateAllPath = (data) => ({
   type: action.SET_ROTATE_ALL_PATH,
   payload: data
 });
+export const setEdgeType = (data) => ({
+  type: action.SET_EDGE_TYPE,
+  payload: data
+});
 
 
 

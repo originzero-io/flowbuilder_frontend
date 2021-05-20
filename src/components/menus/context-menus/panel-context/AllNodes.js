@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { NodeWrapper, NodeElement, Container } from "./style";
-import { Label } from "../../../nodes/styles";
+import { NodeWrapper } from "./style";
 import styled from "styled-components";
-import FavIconManager from "./FavIconManager";
+import NodeListItem from "./NodeListItem";
+
 const SearchBar = styled.input`
   border-radius: 4px;
   width: 100%;
@@ -16,7 +16,12 @@ const SearchBar = styled.input`
   &:focus {
   }
 `;
-export default function AllNodes({ nodeList, favClick, onDragStart }) {
+export default function AllNodes({
+  nodeList,
+  favClick,
+  onDragStart,
+  addNewNode,
+}) {
   const [searched, setSearched] = useState(nodeList);
   const searchHandle = (e) => {
     const value = e.target.value;
@@ -28,22 +33,20 @@ export default function AllNodes({ nodeList, favClick, onDragStart }) {
   useEffect(() => {
     setSearched(nodeList);
   }, [nodeList]);
-  //const IconComponent = node.icon;
+
   return (
     <>
       <NodeWrapper>
         <SearchBar placeholder="search" onChange={searchHandle} />
         {searched.map((node) => {
           return (
-            <NodeElement
+            <NodeListItem
               key={node.id}
-              onDragStart={(event) => onDragStart(event, node.name)}
-              draggable
-            >
-              <>{node.icon}</>
-              <Label>{node.name}</Label>
-              <FavIconManager node={node} favClick={favClick}/>
-            </NodeElement>
+              node={node}
+              onDragStart={onDragStart}
+              addNewNode={addNewNode}
+              favClick={favClick}
+            />
           );
         })}
       </NodeWrapper>

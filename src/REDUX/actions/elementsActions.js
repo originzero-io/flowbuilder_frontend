@@ -3,6 +3,10 @@ export const setElements = (data) => ({
   type: action.SET_ELEMENTS,
   payload: data,
 });
+export const addNewNode = (node) => ({
+  type: action.ADD_NEW_NODE,
+  payload: node,
+});
 export const setRotateAll = (data) => ({
   type: action.SET_ROTATE_ALL,
   payload: data,
@@ -41,5 +45,9 @@ export const setOutgoersEnable = (outgouersIdArray, enable) => ({
 });
 export const importElements = (data) => ({
   type: action.IMPORT_ELEMENTS,
+  payload: data,
+});
+export const changeEdgeType = (data) => ({
+  type: action.CHANGE_EDGE_TYPE,
   payload: data,
 });
