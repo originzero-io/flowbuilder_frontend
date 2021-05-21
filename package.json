@@ -21,6 +21,7 @@
     "react-keyboard-event-handler": "^1.5.4",
     "react-notifications": "1.7.2",
     "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "react-switch": "^6.0.0",
     "react-tabs": "^3.2.2",

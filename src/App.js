@@ -1,31 +1,23 @@
-import React, { useRef, useEffect } from "react";
-import { ReactFlowProvider } from "react-flow-renderer";
+import React, { useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
 import logo from "./assets/images/logo.png";
-import {
-  AppWrapper,
-  FlowWrapper,
-} from "./components/style-components/AppWrapper";
+import {AppWrapper} from "./components/style-components/AppWrapper";
 import AppTooltips from "./components/global/AppTooltips";
-import FlowEditor from "./components/flow-editor";
-import { useSelector, useDispatch } from "react-redux";
 import Favicon from "react-favicon";
+import HomePage from "./pages/home";
+import FlowPage from "./pages/flow";
 const App = () => {
-  const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const elements = useSelector((state) => state.elementReducer).present;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    nodeClass.applyElements(elements, dispatch);
-  }, [elements]);
-  const reactFlowWrapper = useRef(null);
-
   return (
     <AppWrapper>
-      <ReactFlowProvider>
-        <FlowWrapper ref={reactFlowWrapper}>
-          <FlowEditor reactFlowWrapper={reactFlowWrapper} />
-        </FlowWrapper>
-      </ReactFlowProvider>
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route exact path="/flow">
+          <FlowPage/>
+        </Route>
+      </Switch>
       <NotificationContainer />
       <AppTooltips />
       <Favicon url={logo} />

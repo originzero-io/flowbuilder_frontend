@@ -7,6 +7,7 @@ import * as themeColor from "../../../config/ThemeReference"
 import { Logo } from "../../global/icons";
 import { getNodesAndEdges } from "../../../app-global/helpers/elementController";
 import { getConnectedEdges } from "react-flow-renderer";
+import { Link } from "react-router-dom";
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;
@@ -43,19 +44,16 @@ const Circle = styled.div`
 const MainMenu = () => {
   const { theme } = useSelector((state) => state.guiConfigReducer);
   const elements = useSelector((state) => state.elementReducer).present;
-  
-  const connectedEdgeHandle = () => {
-    const { nodes, edges } = getNodesAndEdges(elements);
-    const connectedEdges = getConnectedEdges(nodes, edges);
-    console.log("connected-edges:", connectedEdges);
-  }
+
   return (
     <div>
       <Menu theme={theme}>
         <Circle theme={theme}>
           <Logo theme={theme}/>
         </Circle>
-        <MenuItem theme={theme} onClick={connectedEdgeHandle}>Home</MenuItem>
+        <Link to="/">
+          <MenuItem theme={theme}>Home</MenuItem>
+        </Link>
       </Menu>
     </div>
   );

@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+import {BrowserRouter} from 'react-router-dom'
 import "./assets/css/index.js"
 import App from "./App";
 import "react-notifications/lib/notifications.css";
@@ -17,7 +18,9 @@ const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   rootElement
 );

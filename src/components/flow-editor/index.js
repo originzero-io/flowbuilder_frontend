@@ -138,9 +138,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const onElementClickHandle = (event, element) => {
     event.preventDefault();
     dispatch(setClickedElement(element));
-    console.log("tıklandı", element);
-
-
   };
   const onDoubleClickHandle = (event, element) => {
     event.preventDefault();
