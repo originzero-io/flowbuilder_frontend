@@ -55,3 +55,6 @@ export const changeEdgeType = (data) => ({
   type: action.CHANGE_EDGE_TYPE,
   payload: data,
 });
+export const setAllNodesDeselect = () => ({
+  type: action.SET_ALL_NODES_DESELECT,
+});

@@ -1,4 +1,24 @@
 import { getConnectedEdges, isEdge, isNode } from "react-flow-renderer";
+import uuid from "react-uuid";
+
+export const createNode = (type,position,align,func) => {
+  return {
+    id: uuid(),
+    type,
+    position,
+    data: {
+      label: `${type}`,
+      onChange: func,
+      targetCount: 1,
+      sourceCount: 1,
+      align: align,
+      expand: false,
+      enable: true,
+      group: {nodes:[]},
+    },
+  };
+}
+
 export const getNodesAndEdges = (elements) => {
   const edgeArray = [];
   const nodeArray = [];

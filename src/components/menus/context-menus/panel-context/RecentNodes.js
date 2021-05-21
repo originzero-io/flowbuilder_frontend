@@ -8,13 +8,14 @@ export default function RecentNodes({ nodeList, favClick, onDragStart, addNewNod
   useEffect(() => {
     const sortByDate = sortBy(recent, 'createdDate').reverse().slice(0,3);
     setRecentNodes(sortByDate);
-  },[recent])
+  },[nodeList])
   return (
     <>
       <NodeWrapper>
         {recentNodes.map((node) => {
           return (
             <NodeListItem
+              key={node.id}
               node={node}
               onDragStart={onDragStart}
               addNewNode={addNewNode}

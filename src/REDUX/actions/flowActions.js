@@ -31,6 +31,10 @@ export const setCopiedElements = (nodes) => ({
   type: action.SET_COPIED_ELEMENTS,
   payload: nodes
 });
+export const setPaneClickPosition = (x,y) => ({
+  type: action.SET_PANE_CLICK_POSITION,
+  payload: {x,y}
+});
 
 
 

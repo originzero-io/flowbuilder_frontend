@@ -7,16 +7,16 @@ import AllNodes from "./AllNodes";
 import FavoriteNodes from "./FavoriteNodes";
 import {addNodeToFavorites} from "../../../../REDUX/actions/nodeListActions"
 import RecentNodes from "./RecentNodes";
-import uuid from "react-uuid";
 import { loadFunctionsToNode } from "../../../../app-global/helpers/loadFunctionsToNode";
 import { addNewNode } from "../../../../REDUX/actions/elementsActions";
+import { createNode } from "../../../../app-global/helpers/elementController";
 
 const PanelContextMenu = () => {
   const { panelMenu } = useSelector((state) => state.menuConfigReducer);
   const { theme } = useSelector((state) => state.guiConfigReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const { rotateAllPath } = useSelector((state) => state.flowConfigReducer);
+  const { reactFlowInstance,rotateAllPath } = useSelector((state) => state.flowConfigReducer);
 
   const dispatch = useDispatch();
   const onDragStart = (event, nodeType) => {
@@ -28,22 +28,11 @@ const PanelContextMenu = () => {
   };
   const addNewNodeHandle = (node) => {
     const nodeFunction = loadFunctionsToNode(node.type, nodeClass);
-    const position = { x: panelMenu.x - 300, y: panelMenu.y };
-    const newNode = {
-      id: uuid(),
-      type: node.type,
-      position,
-      data: {
-        label: `${node.name}`,
-        onChange: nodeFunction,
-        targetCount: 1,
-        sourceCount: 1,
-        align: rotateAllPath,
-        expand: false,
-        enable: true,
-        group: {nodes:[]},
-      },
-    };
+    const position = reactFlowInstance.project({
+      x: panelMenu.x - 200,
+      y: panelMenu.y,
+    });
+    const newNode = createNode(node.type, position, rotateAllPath, nodeFunction);
     dispatch(addNewNode(newNode));
   }
   return (

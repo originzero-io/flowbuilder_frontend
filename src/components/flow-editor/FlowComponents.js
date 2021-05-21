@@ -4,7 +4,7 @@ import AppMenu from "../menus/index";
 const FlowComponents = ({ theme, miniMapDisplay }) => {
   return (
     <>
-      <AppMenu />
+      <AppMenu/>
       <Background
         variant="lines"
         gap={80}

@@ -10,7 +10,7 @@ import { addNewNode, pasteNodes } from "../../REDUX/actions/elementsActions";
 export default function KeyboardEvents() {
   const dispatch = useDispatch();
   const elements = useSelector((state) => state.elementReducer).present;
-  const { reactFlowInstance, rotateAllPath, copiedElements} = useSelector((state) => state.flowConfigReducer);
+  const { reactFlowInstance, rotateAllPath, copiedElements, paneClickPosition} = useSelector((state) => state.flowConfigReducer);
   const selectedElements = useStoreState((state) => state.selectedElements);
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
@@ -46,16 +46,24 @@ export default function KeyboardEvents() {
     e.preventDefault();
     dispatch(setCopiedElements(selectedElements));
   }
+  const getPosition = (index) => {
+    const position = reactFlowInstance.project({
+      x: paneClickPosition.x- index*200 - 100,
+      y: paneClickPosition.y,
+    });
+    return position;
+  }
   const pasteNodesEvent = (key, e) => {
-    e.preventDefault();
-    const newNodes = copiedElements.map(els => {
+    e.preventDefault();    
+    const newNodes = copiedElements.map((els,index) => {
       return {
         ...els,
         id: uuid(),
-        position: { x: els.position.x, y: els.position.y + 150 },
+        position:getPosition(index),
       }
     })
-    dispatch(pasteNodes(newNodes))
+    dispatch(pasteNodes(newNodes));
+    setSelectedElements(newNodes);
   }
   return (
     <>

@@ -10,6 +10,7 @@ const flowConfig = {
   edgeType:"smoothstep",
   clickedElement: {},
   copiedElements: [],
+  paneClickPosition: {x:0,y:0},
 };
 
 export const nodeClassReducer = (state = nodeClass, action) => {
@@ -34,6 +35,8 @@ export const flowConfigReducer = (state = flowConfig, action) => {
       return { ...state, edgeType: action.payload };
     case actionTypes.SET_COPIED_ELEMENTS:
       return { ...state, copiedElements: action.payload };
+    case actionTypes.SET_PANE_CLICK_POSITION:
+      return { ...state, paneClickPosition: {x:action.payload.x,y:action.payload.y} };
     default:
       return state;
   }

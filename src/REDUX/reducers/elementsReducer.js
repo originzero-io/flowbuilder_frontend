@@ -138,6 +138,24 @@ const elementReducer = (state = [], { type, payload }) => {
         }
         return state;
       });
+    case actionTypes.SET_ALL_NODES_DESELECT:
+      return state.map((state) => {
+        if (isEdge(state)) {
+          return {
+            ...state,
+            animated: false,
+          };
+        }
+        else if (isNode(state)) {
+          return {
+            ...state,
+            data: {
+              ...state.data,
+              selected: false,
+            },
+          };
+        }
+      });
     default:
       return state;
   }

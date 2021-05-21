@@ -8,7 +8,7 @@ const AppMenu = () => {
   return (
     <>
       <NavMenus/>
-      <PanelContextMenu />
+      <PanelContextMenu/>
       <MultiSelectionContextMenu />
       <ElementContextMenu />
       <GroupBar />

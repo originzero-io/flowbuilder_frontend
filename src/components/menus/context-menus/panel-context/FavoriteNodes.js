@@ -9,6 +9,7 @@ export default function FavoriteNodes({ nodeList,favClick,onDragStart, addNewNod
         {favoriteNodes.length > 0 ? favoriteNodes.map((node) => {
           return (
             <NodeListItem
+              key={node.id}
               node={node}
               onDragStart={onDragStart}
               addNewNode={addNewNode}
