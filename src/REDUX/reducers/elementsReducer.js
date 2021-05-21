@@ -156,6 +156,62 @@ const elementReducer = (state = [], { type, payload }) => {
           };
         }
       });
+    case actionTypes.SET_GROUP_SINGLE:
+      return state.map((state) => {
+        if (isNode(state)) {
+          if (state.id === payload.self.id) {
+            return {
+              ...state,
+              data: {
+                ...state.data,
+                group:payload.group,
+              },
+            };
+          }
+          return state;
+        }
+        else if (isEdge(state)) {
+          if (state.source === payload.self.id) {
+            return {
+              ...state,
+              group: payload.group,
+              style: {
+                ...state.style,
+                stroke: payload.group.color,
+              },
+            };
+          }
+          return state;
+        }
+      });
+    case actionTypes.SET_GROUP_MULTIPLE:
+      return state.map((state) => {
+        if (isNode(state)) {
+          if (payload.selectedIDArray.includes(state.id)) {
+            return {
+              ...state,
+              data: {
+                ...state.data,
+                group:payload.group,
+              },
+            };
+          }
+          return state;
+        }
+        else if (isEdge(state)) {
+          if (payload.selectedIDArray.includes(state.source)) {
+            return {
+              ...state,
+              group: payload.group,
+              style: {
+                ...state.style,
+                stroke: payload.group.color,
+              },
+            };
+          }
+          return state;
+        }
+      });
     default:
       return state;
   }

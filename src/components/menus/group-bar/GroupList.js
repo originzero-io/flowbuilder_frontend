@@ -23,7 +23,6 @@ export default function GroupList({ theme }) {
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
   );
-
   const deleteIconClickHandle = (groupId) => {
     if (confirm("Are you sure?")) {
       dispatch(deleteGroup(groupId));
@@ -77,11 +76,14 @@ export default function GroupList({ theme }) {
   };
 
   useDidMountEffect(() => {
-    localStorage.setItem("groups", JSON.stringify(nodeGroups));
+    //localStorage.setItem("groups", JSON.stringify(nodeGroups));
   }, [nodeGroups])
   
   useEffect(() => {
-    dispatch(loadGroups(JSON.parse(localStorage.getItem("groups"))));
+    const storedGroups = JSON.parse(localStorage.getItem("groups"));
+    if (storedGroups) {
+      dispatch(loadGroups(storedGroups));
+    }
   },[])
 
   return (

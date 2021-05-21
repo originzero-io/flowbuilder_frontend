@@ -3,6 +3,7 @@ import { Menu, MenuItem } from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { setElementContextMenu } from "../../../../REDUX/actions/menuActions";
 import { setElements } from "../../../../REDUX/actions/elementsActions";
+import { deleteNodeCurrentGroup } from "../../../../REDUX/actions/nodeGroupsActions";
 
 export default function ElementMenu() {
   const elements = useSelector((state) => state.elementReducer).present;
@@ -15,6 +16,7 @@ export default function ElementMenu() {
     const newElements = elements.filter((els) => els.id !== element.id);
     dispatch(setElements(newElements));
     dispatch(setElementContextMenu(false));
+    dispatch(deleteNodeCurrentGroup(element));
   };
   const rotateItem = () => {
     const { element } = elementMenu;

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 //import { Container, AddButton,Button,Input,ColorBox,AddGroupWrapper } from "./style";
 import { useSelector, useDispatch } from "react-redux";
-import useDidMountEffect from "../../../hooks/useDidMountEffect";
 import {
   addGroup,
   deleteGroup,
   addNodeToGroupSingle,
   addNodeToGroupMultiple,
-  deleteNodeCurrentGroupSingle,
+  deleteNodeCurrentGroup,
   deleteNodeCurrentGroupMultiple,
 } from "../../../REDUX/actions/nodeGroupsActions";
-import { setElements } from "../../../REDUX/actions/elementsActions";
+import { setElements, setGroupMultiple, setGroupSingle } from "../../../REDUX/actions/elementsActions";
 import styled from "styled-components";
 import { GroupColor, Label } from "../group-bar/style";
-import { isEdge, isNode } from "react-flow-renderer";
+import { isEdge, isNode,useStoreActions, useStoreState } from "react-flow-renderer";
 const Container = styled.div`
   position: absolute;
   right: -120px;
@@ -49,10 +48,14 @@ const Content = styled.div`
   background: rgb(189, 195, 199);
   margin-top: 2px;
 `;
-export default function GroupMenu({ self, selectedElements }) {
+export default function GroupMenu({ self }) {
   const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
   const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
+  const selectedElements = useStoreState((state) => state.selectedElements);
+  const setSelectedElements = useStoreActions(
+    (actions) => actions.setSelectedElements
+  );
   const [searched, setSearched] = useState([]);
   useEffect(() => {
     setSearched(nodeGroups);
@@ -72,7 +75,7 @@ export default function GroupMenu({ self, selectedElements }) {
     }
   };
   const selectGroup = (group) => {
-    if (selectedElements) {
+    if (selectedElements.length > 1) {
       multiSelectionHandle(group);
     } else {
       singleSelectionHandle(group);
@@ -80,41 +83,13 @@ export default function GroupMenu({ self, selectedElements }) {
   };
 
   const singleSelectionHandle = (group) => {
-    console.log("single")
-    const newElements = elements.map((els) => {
-      if (isNode(els)) {
-        if (els.id === self.id) {
-          return {
-            ...els,
-            data: {
-              ...els.data,
-              group,
-            },
-          };
-        }
-        return els;
-      }
-      else if (isEdge(els)) {
-        if (els.source === self.id) {
-          return {
-            ...els,
-            group,
-            style: {
-              ...els.style,
-              stroke: group.color,
-            },
-          };
-        }
-        return els;
-      }
-    });
-    dispatch(setElements(newElements));
-    dispatch(deleteNodeCurrentGroupSingle(self));
+    console.log("single",group);
+    dispatch(setGroupSingle(self, group));
+    dispatch(deleteNodeCurrentGroup(self));
     dispatch(addNodeToGroupSingle(self, group));
   };
 
   const multiSelectionHandle = (group) => {
-    console.log("multi")
     const selectedElementIds = selectedElements.map(m => m.id)
     const newElements = elements.map((els) => {
       if (isNode(els)) {
@@ -143,26 +118,14 @@ export default function GroupMenu({ self, selectedElements }) {
         return els;
       }
     });
-    console.log("selected ids:", selectedElementIds);
-    console.log("group", group);
-
-    const newGroups = nodeGroups.map((gr) => {
-      if (gr.id === group.id) {
-        return {
-          ...gr,
-          nodes: gr.nodes.filter((node) => !selectedElementIds.includes(node.id)),
-        };
-      }
-      return gr;
-    });
-
-    console.table(newGroups)
-
-    
-
-    dispatch(setElements(newElements));
-    dispatch(deleteNodeCurrentGroupMultiple(selectedElementIds,selectedElements[0].data.group));
+    dispatch(setGroupMultiple(selectedElementIds, group));
+    const nodesToRemove = selectedElements.filter(els => isNode(els));
+    nodesToRemove.map(els => {
+      dispatch(deleteNodeCurrentGroup(els));
+    })
     dispatch(addNodeToGroupMultiple(selectedElements, group));
+    const newSelected = newElements.filter(els=>selectedElementIds.includes(els.id))
+    setSelectedElements(newSelected);
   };
   return (
     <Container>

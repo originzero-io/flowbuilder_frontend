@@ -51,12 +51,8 @@ export const nodeGroupsReducer = (state = nodeGroups, { type, payload }) => {
       return state.map(state => state.id === payload.group.id ? {...state, nodes:[...state.nodes,payload.self]} : state)
     case actionTypes.ADD_NODE_TO_GROUP_MULTIPLE:
       return state.map(state => state.id === payload.group.id ? {...state, nodes:[...state.nodes,...payload.selected]} : state)
-    case actionTypes.DELETE_NODE_CURRENT_GROUP_SINGLE:
+    case actionTypes.DELETE_NODE_CURRENT_GROUP:
       return state.map(state=>state.id === payload.data.group.id ? {...state,nodes:state.nodes.filter(node=>node.id !== payload.id)} : state)
-    case actionTypes.DELETE_NODE_CURRENT_GROUP_MULTIPLE:
-      console.log("payload group:",payload.group)
-      console.log("payload selected ids:",payload.selectedIds)
-      return state.map(state=>state.id === payload.group.id ? {...state,nodes:state.nodes.filter(node=>!payload.selectedIds.includes(node.id))} : state)
     default:
       return state;
   }

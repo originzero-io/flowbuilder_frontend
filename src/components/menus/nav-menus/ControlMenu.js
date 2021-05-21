@@ -30,8 +30,9 @@ import {
   setRotateAllPath,
 } from "../../../REDUX/actions/flowActions";
 import * as themeColor from "../../../config/ThemeReference";
-import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
+import { useZoomPanHelper, useStoreActions, isNode } from "react-flow-renderer";
 import { ActionCreators as UndoActionCreators } from 'redux-undo'
+import { deleteNodeCurrentGroup } from "../../../REDUX/actions/nodeGroupsActions";
 const Menu = styled.div`
   position: absolute;
   display: flex;
@@ -69,6 +70,10 @@ export default function ControlMenu() {
   const deleteAllNodes = () => {
     if (confirm("Are you sure?")) {
       dispatch(setElements([]));
+      const nodesToRemove = elements.filter(els => isNode(els));
+      nodesToRemove.map(els => {
+        dispatch(deleteNodeCurrentGroup(els));
+      })
     }
   };
   const closeAllNodes = () => {

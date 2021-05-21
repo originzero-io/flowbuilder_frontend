@@ -58,3 +58,11 @@ export const changeEdgeType = (data) => ({
 export const setAllNodesDeselect = () => ({
   type: action.SET_ALL_NODES_DESELECT,
 });
+export const setGroupSingle = (self,group) => ({
+  type: action.SET_GROUP_SINGLE,
+  payload:{self,group}
+});
+export const setGroupMultiple = (selectedIDArray,group) => ({
+  type: action.SET_GROUP_MULTIPLE,
+  payload:{selectedIDArray,group}
+});
