@@ -59,18 +59,49 @@ export const removeEdgeFromArray = (edge, elements) => {
   return elements.filter((els) => els.id !== edge.id);
 };
 export const setSourceColorToEdge = (connection, elements) => {
-  const color = elements.find(els => els.id === connection.source).data.group.color;
+  const group = elements.find(els => els.id === connection.source).data.group;
   const newElements = elements.map((els) => {
     if (els.source === connection.source && els.target === connection.target) {
       return {
         ...els,
+        group,
         style: {
           ...els.style,
-          stroke: color,
+          stroke: group.color,
         },
       };
     }
     return els;
+  });
+  return newElements;
+};
+export const setGroupToNodes = (selectedElementIds, elements, group) => {
+  const newElements = elements.map((els) => {
+    if (isNode(els)) {
+      if (selectedElementIds.includes(els.id)) {
+        return {
+          ...els,
+          data: {
+            ...els.data,
+            group,
+          },
+        };
+      }
+      return els;
+    }
+    else if (isEdge(els)) {
+      if (selectedElementIds.includes(els.source)) {
+        return {
+          ...els,
+          group,
+          style: {
+            ...els.style,
+            stroke: group.color,
+          },
+        };
+      }
+      return els;
+    }
   });
   return newElements;
 };

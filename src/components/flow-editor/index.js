@@ -35,7 +35,7 @@ import { closeAllNodeGroupMenu,setTheme } from "../../REDUX/actions/guiActions";
 import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "../../app-global/helpers/elementController";
 import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
-import { deleteNodeCurrentGroupMultiple,deleteNodeCurrentGroup } from "../../REDUX/actions/nodeGroupsActions";
+import { deleteNodeCurrentGroup } from "../../REDUX/actions/nodeGroupsActions";
 export default function FlowEditor({ reactFlowWrapper }) {
   const { theme } = useSelector((state) => state.guiConfigReducer);
   const { reactFlowInstance, miniMapDisplay,edgeType,rotateAllPath,clickedElement } = useSelector(

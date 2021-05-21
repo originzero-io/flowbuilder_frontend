@@ -13,6 +13,7 @@ import { setElements, setGroupMultiple, setGroupSingle } from "../../../REDUX/ac
 import styled from "styled-components";
 import { GroupColor, Label } from "../group-bar/style";
 import { isEdge, isNode,useStoreActions, useStoreState } from "react-flow-renderer";
+import { setGroupToNodes } from "../../../app-global/helpers/elementController";
 const Container = styled.div`
   position: absolute;
   right: -120px;
@@ -91,39 +92,14 @@ export default function GroupMenu({ self }) {
 
   const multiSelectionHandle = (group) => {
     const selectedElementIds = selectedElements.map(m => m.id)
-    const newElements = elements.map((els) => {
-      if (isNode(els)) {
-        if (selectedElementIds.includes(els.id)) {
-          return {
-            ...els,
-            data: {
-              ...els.data,
-              group,
-            },
-          };
-        }
-        return els;
-      }
-      else if (isEdge(els)) {
-        if (selectedElementIds.includes(els.source)) {
-          return {
-            ...els,
-            group,
-            style: {
-              ...els.style,
-              stroke: group.color,
-            },
-          };
-        }
-        return els;
-      }
-    });
     dispatch(setGroupMultiple(selectedElementIds, group));
     const nodesToRemove = selectedElements.filter(els => isNode(els));
     nodesToRemove.map(els => {
       dispatch(deleteNodeCurrentGroup(els));
     })
     dispatch(addNodeToGroupMultiple(selectedElements, group));
+
+    const newElements = setGroupToNodes(selectedElementIds, elements, group);
     const newSelected = newElements.filter(els=>selectedElementIds.includes(els.id))
     setSelectedElements(newSelected);
   };
