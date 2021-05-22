@@ -1,6 +1,5 @@
 import React from "react";
-import { NodeElement,IconWrapper } from "./style";
-import { Label } from "../../../nodes/styles";
+import { NodeElement,IconWrapper,Label } from "./style";
 import FavIconManager from "./FavIconManager";
 
 export default function NodeListItem({node,onDragStart,addNewNode,favClick}) {
@@ -10,8 +9,10 @@ export default function NodeListItem({node,onDragStart,addNewNode,favClick}) {
       onDoubleClick={() => addNewNode(node)}
       draggable
     >
-      <>{node.icon}</>
-      <Label>{node.name}</Label>
+      <div style={{display:'flex',alignItems:'center'}}>
+        <>{node.icon}</>
+        <Label>{node.name}</Label>
+      </div>
       <IconWrapper>
         <div onClick={() => addNewNode(node)} >
           <i className="fas fa-plus" style={{width:'15px',height:'15px'}}></i>

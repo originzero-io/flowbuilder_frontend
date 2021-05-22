@@ -7,7 +7,7 @@ const flowConfig = {
   rotateAllPath:"horizontal",
   miniMapDisplay: "visible",
   groupBarDisplay: "hidden",
-  edgeType:"smoothstep",
+  edgeType:"bezier",
   clickedElement: {},
   copiedElements: [],
   paneClickPosition: {x:0,y:0},

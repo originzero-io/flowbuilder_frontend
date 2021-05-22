@@ -28,7 +28,7 @@ export const NodeElement = styled.div`
   padding: 6px 6px;
   font-size: 14px;
   border-radius: 4px;
-  min-width: 240px;
+  min-width: 210px;
   background-color: #000000;
   background-image: linear-gradient(355deg, #323232 0%, #505050 80%);
   box-shadow: 0.261px 1.5px 3px 0px rgba(0, 0, 0, 0.996);
@@ -36,6 +36,11 @@ export const NodeElement = styled.div`
   align-items: center;
   justify-content: space-between;
   cursor: grab;
+`;
+export const Label = styled.div`
+  color: rgb(220, 220, 220);
+  padding-left: 10px;
+  font-family: "Prime-Light";
 `;
 export const IconWrapper = styled.div`
   width:50px;
