@@ -52,7 +52,7 @@ export default function NewGroupForm({ theme }) {
   };
   const selectNonGroupsHandle = () => {
     const nonGroups = elements.filter(
-      (els) => isNode(els) && els.data.group.id === undefined
+      (els) => isNode(els) && els.data.group.id === 0
     );
     setSelectedElements(nonGroups);
   };

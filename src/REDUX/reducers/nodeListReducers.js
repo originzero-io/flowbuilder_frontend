@@ -16,6 +16,7 @@ const panelNodeList = [
     type: types.SET_VARIABLES,
     icon: <SetVariablesIcon/>,
     fav: false,
+    createdDate:undefined
   },
   {
     id: 2,
@@ -23,6 +24,7 @@ const panelNodeList = [
     type: types.NOTIFICATION,
     icon: <NotificationIcon/>,
     fav: false,
+    createdDate:undefined
   },
   {
     id: 3,
@@ -30,6 +32,7 @@ const panelNodeList = [
     type: types.COMBINE,
     icon: <CombineIcon/>,
     fav: false,
+    createdDate:undefined
   },
   {
     id: 4,
@@ -37,6 +40,7 @@ const panelNodeList = [
     type: types.SPLIT,
     icon: <SplitIcon/>,
     fav: false,
+    createdDate:undefined
   },
   {
     id: 5,
@@ -44,6 +48,7 @@ const panelNodeList = [
     type: types.CALCULATE,
     icon: <CalculateIcon/>,
     fav: false,
+    createdDate:undefined
   },
   {
     id: 6,
@@ -51,6 +56,7 @@ const panelNodeList = [
     type: types.EXCEL_READ,
     icon: <ExcelReadIcon/>,
     fav: false,
+    createdDate:undefined
   },
   {
     id: 7,
@@ -58,6 +64,7 @@ const panelNodeList = [
     type: types.SERIAL_READ,
     icon: <CalculateIcon/>,
     fav: false,
+    createdDate:undefined
   },
 ];
 export const nodeListReducer = (state = panelNodeList, {type,payload}) => {

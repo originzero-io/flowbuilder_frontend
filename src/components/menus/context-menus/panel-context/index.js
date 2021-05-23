@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as themeColor from "../../../../config/ThemeReference";
 import { Container } from "./style";
 import { useSelector,useDispatch } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import AllNodes from "./AllNodes";
 import FavoriteNodes from "./FavoriteNodes";
-import {addNodeToFavorites} from "../../../../REDUX/actions/nodeListActions"
+import {addNodeToFavorites, setNodeList} from "../../../../REDUX/actions/nodeListActions"
 import RecentNodes from "./RecentNodes";
 import { loadFunctionsToNode } from "../../../../app-global/helpers/loadFunctionsToNode";
 import { addNewNode } from "../../../../REDUX/actions/elementsActions";
 import { createNode } from "../../../../app-global/helpers/elementController";
+import useDidMountEffect  from "../../../../hooks/useDidMountEffect";
+import {loadIconsToNodeList} from "../../../../app-global/helpers/loadIconsToNodeList";
 
 const PanelContextMenu = () => {
   const { panelMenu } = useSelector((state) => state.menuConfigReducer);
@@ -35,6 +37,19 @@ const PanelContextMenu = () => {
     const newNode = createNode(node.type, position, rotateAllPath, nodeFunction);
     dispatch(addNewNode(newNode));
   }
+  useDidMountEffect(() => {
+    localStorage.setItem("node-list", JSON.stringify(nodeList));
+  }, [nodeList])
+  useEffect(() => {
+    const storedNodeList = JSON.parse(localStorage.getItem("node-list"));
+    const newList = storedNodeList.map(node => {
+      return {
+        ...node,
+        icon:loadIconsToNodeList(node.type)
+      }
+    })
+    dispatch(setNodeList(newList));
+  },[])
   return (
     <>
       {panelMenu.state === true && (
