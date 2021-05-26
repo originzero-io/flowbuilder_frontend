@@ -8,3 +8,12 @@
   padding: 8px !important;
   font-size: 12px !important;
 }
+
+
+.ant-menu-item-selected{
+  /* background:red !important;
+  color:yellow !important; */
+}
+.ant-menu-item::after{
+  /* border-right: none !important; */
+}

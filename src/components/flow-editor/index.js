@@ -9,7 +9,7 @@ import ReactFlow, {
   useStoreActions
 } from "react-flow-renderer";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import nodeTypes from "../nodes/index";
+import nodeTypes from "./nodes/index";
 import initialElements from "../../config/initial-elements";
 import { getDataFromDb } from "../../app-global/db";
 import adjustScreen from "../../app-global/dom/adjustScreen";
@@ -21,21 +21,21 @@ import {
   setPaneClickPosition,
   setReactFlowInstance,
   setZoom,
-} from "../../REDUX/actions/flowActions";
-import {addNewNode, setAllNodesDeselect, setElements, setNodeEnable} from "../../REDUX/actions/elementsActions"
+} from "../../store/actions/flowActions";
+import {addNewNode, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/actions/elementsActions"
 import {
   setElementContextMenu,
   setGroupMenu,
   setMultiSelectionContextMenu,
   setPanelContextMenu,
-} from "../../REDUX/actions/menuActions";
-import { setNodeList } from "../../REDUX/actions/nodeListActions";
+} from "../../store/actions/menuActions";
+import { setNodeList } from "../../store/actions/nodeListActions";
 import * as themeColor from "../../config/ThemeReference";
-import { closeAllNodeGroupMenu,setTheme } from "../../REDUX/actions/guiActions";
+import { closeAllNodeGroupMenu,setTheme } from "../../store/actions/guiActions";
 import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "../../app-global/helpers/elementController";
 import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
-import { deleteNodeCurrentGroup } from "../../REDUX/actions/nodeGroupsActions";
+import { deleteNodeCurrentGroup } from "../../store/actions/nodeGroupsActions";
 export default function FlowEditor({ reactFlowWrapper }) {
   const { theme } = useSelector((state) => state.guiConfigReducer);
   const { reactFlowInstance, miniMapDisplay,edgeType,rotateAllPath,clickedElement } = useSelector(

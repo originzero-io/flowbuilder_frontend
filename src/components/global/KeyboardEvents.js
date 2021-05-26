@@ -4,9 +4,9 @@ import { ActionCreators as UndoActionCreators } from 'redux-undo'
 import KeyboardEventHandler from "react-keyboard-event-handler";
 import { useStoreActions, useStoreState, useZoomPanHelper } from "react-flow-renderer";
 import { saveToDb } from "../../app-global/db";
-import { setCopiedElements, setRotateAllPath } from "../../REDUX/actions/flowActions";
+import { setCopiedElements, setRotateAllPath } from "../../store/actions/flowActions";
 import uuid from "react-uuid";
-import { addNewNode, pasteNodes } from "../../REDUX/actions/elementsActions";
+import { addNewNode, pasteNodes } from "../../store/actions/elementsActions";
 export default function KeyboardEvents() {
   const dispatch = useDispatch();
   const elements = useSelector((state) => state.elementReducer).present;

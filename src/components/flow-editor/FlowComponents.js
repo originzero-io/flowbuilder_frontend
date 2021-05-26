@@ -1,6 +1,6 @@
 import React from "react";
 import { Background, Controls, MiniMap } from "react-flow-renderer";
-import AppMenu from "../menus/index";
+import AppMenu from "./menu";
 const FlowComponents = ({ theme, miniMapDisplay }) => {
   return (
     <>

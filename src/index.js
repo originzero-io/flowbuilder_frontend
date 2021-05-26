@@ -8,11 +8,13 @@ import "@fortawesome/fontawesome-free/js/solid"
 import "@fortawesome/fontawesome-free/js/fontawesome"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-tabs/style/react-tabs.css';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+
 ///REDUX
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import reducers from "./REDUX/reducers/index";
+import reducers from "./store/reducers/index";
 import { composeWithDevTools } from 'redux-devtools-extension';
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 const rootElement = document.getElementById("root");

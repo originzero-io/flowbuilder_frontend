@@ -5,8 +5,8 @@ import {
     SplitIcon,
     CalculateIcon,
     ExcelReadIcon,
-} from "../../components/nodes/global/icons";
-import * as types from "../../components/nodes/constant/nodeTypes";
+} from "../../components/flow-editor/nodes/global/icons";
+import * as types from "../../components/flow-editor/nodes/constant/nodeTypes";
 
 export const loadIconsToNodeList = (type) => {
     if (type === types.SET_VARIABLES ) {

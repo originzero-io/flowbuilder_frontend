@@ -5,14 +5,18 @@ import logo from "./assets/images/logo.png";
 import {AppWrapper} from "./components/style-components/AppWrapper";
 import AppTooltips from "./components/global/AppTooltips";
 import Favicon from "react-favicon";
-import HomePage from "./pages/home";
-import FlowPage from "./pages/flow";
+import HomePage from "./pages/HomePage";
+import FlowPage from "./pages/FlowPage";
+import ControlPanel from "./pages/ControlPanelPage";
 const App = () => {
   return (
     <AppWrapper>
       <Switch>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route exact path="/panel">
+          <ControlPanel/>
         </Route>
         <Route exact path="/flow">
           <FlowPage/>
