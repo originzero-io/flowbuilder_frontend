@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
 import logo from "./assets/images/logo.png";
@@ -12,15 +12,11 @@ const App = () => {
   return (
     <AppWrapper>
       <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route exact path="/panel">
-          <ControlPanel/>
-        </Route>
-        <Route exact path="/flow">
-          <FlowPage/>
-        </Route>
+        <Route exact path="/" component={HomePage}/>
+        <Route exact path="/panel" component={ControlPanel}/>
+        <Route exact path="/flow" component={FlowPage}/>
+        <Route path="/flow/:flowId" component={FlowPage}/>
+        <Route path="/dashbord/:dashboardId" component={FlowPage}/>
       </Switch>
       <NotificationContainer />
       <AppTooltips />

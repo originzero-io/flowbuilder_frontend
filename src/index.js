@@ -8,7 +8,6 @@ import "@fortawesome/fontawesome-free/js/solid"
 import "@fortawesome/fontawesome-free/js/fontawesome"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-tabs/style/react-tabs.css';
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 ///REDUX
 import { createStore, applyMiddleware } from "redux";

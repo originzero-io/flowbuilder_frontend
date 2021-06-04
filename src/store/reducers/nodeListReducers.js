@@ -1,4 +1,4 @@
-import * as types from "../../components/flow-editor/nodes/constant/nodeTypes";
+import * as types from "../../components/FlowEditor/Nodes/constant/nodeTypes";
 import {
   SetVariablesIcon,
   NotificationIcon,
@@ -6,7 +6,7 @@ import {
   SplitIcon,
   CalculateIcon,
   ExcelReadIcon,
-} from "../../components/flow-editor/nodes/global/icons";
+} from "../../components/FlowEditor/Nodes/global/Icons";
 import * as actionTypes from "../constants/nodeListConstants";
 
 const panelNodeList = [

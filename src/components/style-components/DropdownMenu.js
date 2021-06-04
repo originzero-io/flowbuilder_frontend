@@ -6,7 +6,9 @@ export const DropdownWrapper = styled.div`
 `;
 
 export const DropdownList = styled.ul`
-  margin-top: ${(props) => (props.align === "right" ? "28px" : "10px")};
+  //margin-top: ${(props) => (props.align === "right" ? "30px" : "17px")};
+  //margin-top: ${(props) => (props.align === "right" ? "30px" : "17px")};
+  transform:translateY(${(props) => (props.align === "right" ? "30px" : "17px")});
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -20,7 +22,7 @@ export const DropdownList = styled.ul`
   transform: translateY(-10px);
   visibility:hidden;
 
-  ${DropdownWrapper}:hover & {
+  ${DropdownWrapper}:focus-within & {
     visibility:visible;
   }
 `;

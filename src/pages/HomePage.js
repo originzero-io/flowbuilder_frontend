@@ -8,8 +8,8 @@ export default function HomePage() {
       <Box>
         <img src={logo} width="160px" height="160px"></img>
         <Text>Hey !</Text>
-        <Link to="/flow"><h4>Go to flow</h4></Link>
-        <Link to="/panel"><h4>Go to Panel</h4></Link>
+        <Link to="/flow"><h4 style={{color:'whitesmoke'}}>Go to flow</h4></Link>
+        <Link to="/panel"><h4 style={{color:'whitesmoke'}}>Go to Panel</h4></Link>
       </Box>
     </Container>
   );

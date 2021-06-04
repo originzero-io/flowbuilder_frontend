@@ -1,5 +1,5 @@
 export const SHARE = "share";
-export const GUIDES = "guides";
+export const LEARN = "LEARN";
 export const PROFILE = "profile";
 export const UNDO = "undo";
 export const REDO = "redo";
@@ -15,3 +15,4 @@ export const FIT_VIEW = "fit_view";
 export const LOCK_SCREEN = "lock_screen";
 export const CLOSE_ALL_NODES = "CLOSE_ALL_NODES";
 export const SELECT_ALL_NODES = "SELECT_ALL_NODES";
+export const SETTINGS = "SETTINGS";

@@ -39,3 +39,9 @@ input[type="color"]::-webkit-color-swatch {
 .group-bar-icon:hover{
   transform: scale(1.1);
 }
+
+
+a{
+  text-decoration: none !important;
+  color: black !important;
+}

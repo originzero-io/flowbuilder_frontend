@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ReactFlowProvider } from "react-flow-renderer";
-import FlowEditor from "../components/flow-editor";
+import FlowEditor from "../components/FlowEditor";
 import { FlowWrapper } from "../components/style-components/AppWrapper";
 
 export default function FlowPage() {
