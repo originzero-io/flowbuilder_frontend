@@ -98,8 +98,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
     })
   };
   const onLoadHandle = (_reactFlowInstance) => {
-    dispatch(setTheme(localStorage.getItem("theme")));
-    dispatch(setMiniMapDisplay(localStorage.getItem("mini-map")))
+    dispatch(setTheme(localStorage.getItem("theme") || "light"));
+    dispatch(setMiniMapDisplay(localStorage.getItem("mini-map")) || "visible")
     dispatch(setReactFlowInstance(_reactFlowInstance));
     getDataFromDb(nodeClass)
       .then((flow) => {

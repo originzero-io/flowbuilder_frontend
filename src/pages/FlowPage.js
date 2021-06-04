@@ -4,10 +4,11 @@ import { ReactFlowProvider } from "react-flow-renderer";
 import FlowEditor from "../components/FlowEditor";
 import { FlowWrapper } from "../components/style-components/AppWrapper";
 
-export default function FlowPage() {
+export default function FlowPage({match}) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
+  console.log("params",match.params.flowId)
   useEffect(() => {
     nodeClass.applyElements(elements, dispatch);
   }, [elements]);

@@ -41,7 +41,7 @@ const PanelContextMenu = () => {
     localStorage.setItem("node-list", JSON.stringify(nodeList));
   }, [nodeList])
   useEffect(() => {
-    const storedNodeList = JSON.parse(localStorage.getItem("node-list"));
+    const storedNodeList = JSON.parse(localStorage.getItem("node-list")) || nodeList;
     const newList = storedNodeList.map(node => {
       return {
         ...node,
