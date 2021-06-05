@@ -1,5 +1,6 @@
 import React from 'react'
 import Switch from "react-switch"
+import PropTypes from "prop-types"
 export default function SwitchButton({checked,onChange,width,height}) {
     return (
         <>
@@ -18,4 +19,11 @@ export default function SwitchButton({checked,onChange,width,height}) {
             />  
         </>
     )
+}
+
+SwitchButton.propTypes = {
+    checked: PropTypes.bool.isRequired,
+    onChange: PropTypes.func.isRequired,
+    width: PropTypes.string.isRequired,
+    height: PropTypes.string.isRequired,
 }

@@ -6,7 +6,6 @@ import ReactFlow, {
   removeElements,
   updateEdge,
   useStoreState,
-  useStoreActions
 } from "react-flow-renderer";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import nodeTypes from "./Nodes/index";
@@ -20,7 +19,7 @@ import {
   setMiniMapDisplay,
   setPaneClickPosition,
   setReactFlowInstance,
-  setZoom,
+  //setZoom,
 } from "../../store/actions/flowActions";
 import {addNewNode, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/actions/elementsActions"
 import {
@@ -36,18 +35,17 @@ import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } fr
 import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
 import { deleteNodeCurrentGroup } from "../../store/actions/nodeGroupsActions";
+import PropTypes from "prop-types"
+
 export default function FlowEditor({ reactFlowWrapper }) {
   const { theme } = useSelector((state) => state.guiConfigReducer);
-  const { reactFlowInstance, miniMapDisplay,edgeType,rotateAllPath,clickedElement } = useSelector(
+  const { reactFlowInstance, miniMapDisplay,edgeType,rotateAllPath } = useSelector(
     (state) => state.flowConfigReducer
   );
   const elements = useSelector((state) => state.elementReducer).present;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
   const selectedElements = useStoreState((state) => state.selectedElements);
-  const setSelectedElements = useStoreActions(
-    (actions) => actions.setSelectedElements
-  );
   const dispatch = useDispatch();
   const store = useStore();
   const onConnectHandle = (params) => {
@@ -119,10 +117,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
 
   const onDropHandle = (event) => {
     event.preventDefault();
-    console.log("wrapper:", reactFlowWrapper);
     const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
-    console.log("reactFlowBounds-left", reactFlowBounds.left);
-    console.log("reactFlowBounds-top", reactFlowBounds.top);
     const type = event.dataTransfer.getData("application/reactflow");
     const position = reactFlowInstance.project({
       x: event.clientX - reactFlowBounds.left,
@@ -145,7 +140,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     event.preventDefault();
     dispatch(setClickedElement(element));
   };
-  const onDoubleClickHandle = (event, element) => {
+  const onDoubleClickHandle = (event) => {
     event.preventDefault();
     dispatch(setPanelContextMenu(false));
     dispatch(setGroupMenu(false));
@@ -215,7 +210,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     }
   };
 
-  const onSelectionContextMenuHandle = (e, nodes) => {
+  const onSelectionContextMenuHandle = (e) => {
     e.preventDefault();
     dispatch(
       setMultiSelectionContextMenu({
@@ -322,9 +317,10 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setElementContextMenu(false));
   };
 
-  const onMoveHandle = (flowTransform) => {
-    dispatch(setZoom(flowTransform.zoom))
-  }
+  // const onMoveHandle = (flowTransform) => {
+  //   dispatch(setZoom(flowTransform.zoom))
+  // }
+  console.log("wrapperrr:",reactFlowWrapper)
   return (
     <>
       <ReactFlow
@@ -371,4 +367,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
       </ReactFlow>
     </>
   );
+}
+
+FlowEditor.propTypes = {
+  reactFlowWrapper:PropTypes.object
 }

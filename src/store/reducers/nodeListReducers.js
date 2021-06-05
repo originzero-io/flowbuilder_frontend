@@ -1,4 +1,5 @@
 import * as types from "../../components/FlowEditor/Nodes/constant/nodeTypes";
+import React from "react";
 import {
   SetVariablesIcon,
   NotificationIcon,

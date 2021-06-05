@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { MenuIndex, MenuItem} from "./style";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import * as themeColor from "../../../../config/ThemeReference"
 import { Logo } from "../../../global/Icons";
 import { Link } from "react-router-dom";
@@ -40,8 +40,6 @@ const Circle = styled.div`
 
 const MainMenu = () => {
   const { theme } = useSelector((state) => state.guiConfigReducer);
-  const elements = useSelector((state) => state.elementReducer).present;
-
   return (
     <div>
       <Menu theme={theme}>

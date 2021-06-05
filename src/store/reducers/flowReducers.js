@@ -1,18 +1,18 @@
 import * as actionTypes from "../constants/flowConstants";
 import NodeClass from "../../app-global/works/NodeClass";
-const nodeClass = new NodeClass("nodeClass was created by redux store");
+const nodeClass = new NodeClass("nodeClass is created by redux store");
 const flowConfig = {
   reactFlowInstance: null,
   zoom: 0,
-  rotateAllPath:"horizontal",
+  rotateAllPath: "horizontal",
   miniMapDisplay: "visible",
   groupBarDisplay: "hidden",
-  edgeType:"bezier",
+  edgeType: "bezier",
   clickedElement: {},
   copiedElements: [],
-  paneClickPosition: {x:0,y:0},
+  paneClickPosition: { x: 0, y: 0 },
 };
-
+//eslint-disable-next-line
 export const nodeClassReducer = (state = nodeClass, action) => {
   return state;
 };
@@ -36,8 +36,85 @@ export const flowConfigReducer = (state = flowConfig, action) => {
     case actionTypes.SET_COPIED_ELEMENTS:
       return { ...state, copiedElements: action.payload };
     case actionTypes.SET_PANE_CLICK_POSITION:
-      return { ...state, paneClickPosition: {x:action.payload.x,y:action.payload.y} };
+      return {
+        ...state,
+        paneClickPosition: { x: action.payload.x, y: action.payload.y },
+      };
     default:
       return state;
   }
 };
+
+const flow = {
+  config: {
+    id: "1234",
+    name: "flow1",
+    author: "Anaks",
+    createdDate: "05-06-2021 10.15",
+    project: "Project 1",
+  },
+  gui: {
+    reactFlowInstance: null,
+    zoom: 0,
+    rotateAllPath: "horizontal",
+    miniMapDisplay: "visible",
+    groupBarDisplay: "hidden",
+    edgeType: "bezier",
+    clickedElement: {},
+    copiedElements: [],
+    paneClickPosition: { x: 0, y: 0 },
+    theme: "light",
+    nodeGroupMenuDisplay: false,
+  },
+  elements: [],
+};
+const activeFlows = ["1234", "13569"]
+const flows = [
+  {
+    config: {
+      id: "1234",
+      name: "flow1",
+      author: "Anaks",
+      createdDate: "05-06-2021 10.15",
+      project: "Project 1",
+    },
+    gui: {
+      reactFlowInstance: null,
+      zoom: 0,
+      rotateAllPath: "horizontal",
+      miniMapDisplay: "visible",
+      groupBarDisplay: "hidden",
+      edgeType: "bezier",
+      clickedElement: {},
+      copiedElements: [],
+      paneClickPosition: { x: 0, y: 0 },
+      theme: "light",
+      nodeGroupMenuDisplay: false,
+    },
+    elements: [],
+    teams:[]
+  },
+  {
+    config: {
+      id: "13569",
+      name: "flow1",
+      author: "Anaks",
+      createdDate: "05-06-2021 10.15",
+      project: "Project 1",
+    },
+    gui: {
+      reactFlowInstance: null,
+      zoom: 0,
+      rotateAllPath: "horizontal",
+      miniMapDisplay: "visible",
+      groupBarDisplay: "hidden",
+      edgeType: "bezier",
+      clickedElement: {},
+      copiedElements: [],
+      paneClickPosition: { x: 0, y: 0 },
+      theme: "light",
+      nodeGroupMenuDisplay: false,
+    },
+    elements: [],
+  },
+];

@@ -7,7 +7,7 @@ import { SubmitIcon } from "../../../global/Icons";
 import { ColorFlag, Submit } from "./style";
 import * as themeColor from "../../../../config/ThemeReference";
 import { isEdge, isNode } from "react-flow-renderer";
-
+import PropTypes from "prop-types"
 const Form = styled.form`
   position: relative;
   width: 78%;
@@ -101,4 +101,10 @@ export default function EditForm({ editableItem, setEditableItem, theme }) {
       </Form>
     </>
   );
+}
+
+EditForm.propTypes = {
+  editableItem: PropTypes.object.isRequired,
+  setEditableItem: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
 }

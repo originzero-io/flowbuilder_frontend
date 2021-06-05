@@ -3,12 +3,11 @@ import { getOutgoers } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
 import useDidMountEffect from "../../../hooks/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
-import { Label } from "./styles";
-import { setElements } from "../../../store/actions/elementsActions";
-import updateNodeHandles from "../../../app-global/helpers/updateNodeHandles";
+// import { Label } from "./styles";
+// import { setElements } from "../../../store/actions/elementsActions";
+// import updateNodeHandles from "../../../app-global/helpers/updateNodeHandles";
 import NodeIOManager from "./global/NodeIOManager";
 const SplitNode = (self) => {
-  const { flagColor } = useSelector((state) => state.guiConfigReducer);
   const elements = useSelector((state) => state.elementReducer).present;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const dispatch = useDispatch();

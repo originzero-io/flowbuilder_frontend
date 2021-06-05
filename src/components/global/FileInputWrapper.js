@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types"
+
 const Box = styled.div`
   height: 30px;
 `;
@@ -14,4 +16,8 @@ export default function FileInputWrapper({ children }) {
       <Label>{children}</Label>
     </Box>
   );
+}
+
+FileInputWrapper.propTypes = {
+  children: PropTypes.element.isRequired
 }

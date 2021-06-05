@@ -9,7 +9,6 @@ import { Box } from "../styles";
 import {
   Card,
   CardBody,
-  CardContent,
   CardTitle,
   CardSubtitle,
   CardText,
@@ -18,7 +17,6 @@ import {
 import Modal from "../../../global/Modal";
 import {
   CollapsibleMenu,
-  CollapsibleMenuItem,
   CollapsibleTrigger,
 } from "../../../global/Collapsible/CollapsibleMenu";
 import FormManager from "./forms/FormManager";
@@ -36,7 +34,7 @@ export default function ProjectsPanel() {
     setShowModal(true);
     setFormType(type);
   };
-  const hideModalHandle = (e) => {
+  const hideModalHandle = () => {
     setShowModal(false);
   };
 
@@ -76,8 +74,8 @@ export default function ProjectsPanel() {
           <Box onClick={() => showModalHandle("flow")}>+</Box>
           {projectFlows.map((flow) => {
             return (
-              <Link to={`/flow/${flow.id}`}>
-                <Card>
+              <Link key={flow.id} to={`/flow/${flow.id}`}>
+                <Card key={flow.id}>
                   <CardBody>
                     <CardTitle>{flow.name}</CardTitle>
                     <CardSubtitle>{flow.author}</CardSubtitle>
@@ -99,8 +97,8 @@ export default function ProjectsPanel() {
           <Box onClick={() => showModalHandle("dashboard")}>+</Box>
           {projectDashboards.map((dashboard) => {
             return (
-              <Link to={`/flow/105055`}>
-                <Card>
+              <Link key={dashboard.id} to={`/flow/105055`}>
+                <Card key={dashboard.id}>
                   <CardBody>
                     <CardTitle>{dashboard.name}</CardTitle>
                     <CardSubtitle>{dashboard.author}</CardSubtitle>

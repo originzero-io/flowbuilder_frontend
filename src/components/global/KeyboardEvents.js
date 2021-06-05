@@ -6,7 +6,7 @@ import { useStoreActions, useStoreState, useZoomPanHelper } from "react-flow-ren
 import { saveToDb } from "../../app-global/db";
 import { setCopiedElements, setRotateAllPath } from "../../store/actions/flowActions";
 import uuid from "react-uuid";
-import { addNewNode, pasteNodes } from "../../store/actions/elementsActions";
+import { pasteNodes } from "../../store/actions/elementsActions";
 export default function KeyboardEvents() {
   const dispatch = useDispatch();
   const elements = useSelector((state) => state.elementReducer).present;

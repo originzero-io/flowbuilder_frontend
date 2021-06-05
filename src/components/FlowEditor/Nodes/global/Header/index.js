@@ -1,16 +1,16 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 import Flag from "./NodeFlag";
 import { Header, Label ,Content,FeatureIconsWrapper } from "../../styles";
 import { useSelector, useDispatch } from "react-redux";
 import GroupMenu from "../../../Menu/GroupMenu";
 import { closeAllNodeGroupMenu } from "../../../../../store/actions/guiActions";
-import { expandNode, setElements } from "../../../../../store/actions/elementsActions";
+import { expandNode } from "../../../../../store/actions/elementsActions";
 import EditNameForm from "./EditNameForm";
-import Switch from "react-switch"
 import FeatureIcons from "./FeatureIcons";
+import PropTypes from "prop-types"
 export default function NodeHeader({ self, selectedElements }) {
   const dispatch = useDispatch();
-  const elements = useSelector((state) => state.elementReducer).present;
+  //const elements = useSelector((state) => state.elementReducer).present;
 
   const [showGroup, setShowGroup] = useState(false);
   const [hover, setHover] = useState(false);
@@ -64,4 +64,8 @@ export default function NodeHeader({ self, selectedElements }) {
       </Header>
     </>
   );
+}
+NodeHeader.propTypes = {
+  self: PropTypes.object.isRequired,
+  selectedElements:PropTypes.array.isRequired
 }

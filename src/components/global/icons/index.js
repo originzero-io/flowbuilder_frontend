@@ -1,4 +1,5 @@
 import * as themeColor from "../../../config/ThemeReference";
+import React from "react-redux"
 export function Logo({ theme }) {
   return (
     <>

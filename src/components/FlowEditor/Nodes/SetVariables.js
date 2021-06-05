@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getOutgoers, useUpdateNodeInternals } from "react-flow-renderer";
+import React, { useEffect, useState } from "react";
+import { getOutgoers } from "react-flow-renderer";
+import { useDispatch, useSelector } from "react-redux";
 import { getNodesAndEdges } from "../../../app-global/helpers/elementController";
 import useDidMountEffect from "../../../hooks/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
-import { Label } from "./styles";
-import { useSelector, useDispatch } from "react-redux";
 import NodeIOmanager from "./global/NodeIOManager";
+import { Label } from "./styles";
 
 const SetVariables = React.memo((self) => {
   const elements = useSelector((state) => state.elementReducer).present;

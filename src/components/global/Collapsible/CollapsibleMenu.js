@@ -1,9 +1,9 @@
 import React from "react";
 import Collapsible from "react-collapsible";
 import { CollapsableItem, TriggerWrapper } from "./style";
-import { SetVariablesIcon } from "../../FlowEditor/Nodes/global/Icons";
+import PropTypes from "prop-types";
 
-export function CollapsibleMenu({ trigger, icon, open, children }) {
+export function CollapsibleMenu({ trigger, open, children }) {
   return (
     <Collapsible
       trigger={trigger}
@@ -15,7 +15,7 @@ export function CollapsibleMenu({ trigger, icon, open, children }) {
     </Collapsible>
   );
 }
-export function CollapsibleMenuItem({ children,onClick}) {
+export function CollapsibleMenuItem({ children, onClick }) {
   return <CollapsableItem onClick={onClick}>{children}</CollapsableItem>;
 }
 export function CollapsibleTrigger({ children, label, icon }) {
@@ -29,3 +29,18 @@ export function CollapsibleTrigger({ children, label, icon }) {
     </TriggerWrapper>
   );
 }
+
+CollapsibleMenu.propTypes = {
+  trigger: PropTypes.oneOf([PropTypes.string, PropTypes.element]).isRequired,
+  open: PropTypes.bool.isRequired,
+  children: PropTypes.element.isRequired
+};
+CollapsibleMenuItem.propTypes = {
+  children: PropTypes.element.isRequired,
+  onClick: PropTypes.func.isRequired
+};
+CollapsibleTrigger.propTypes = {
+  children: PropTypes.element.isRequired,
+  label: PropTypes.string.isRequired,
+  icon: PropTypes.element.isRequired
+};

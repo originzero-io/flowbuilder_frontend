@@ -15,8 +15,6 @@ const App = () => {
         <Route exact path="/" component={HomePage}/>
         <Route exact path="/panel" component={ControlPanel}/>
         <Route exact path="/flow" component={FlowPage}/>
-        {/* <Route path="/flow/:flowId" component={FlowPage}/>
-        <Route path="/dashbord/:dashboardId" component={FlowPage}/> */}
         <Route path="/flow/:flowId" component={FlowPage}/>
         <Route path="/dashbord/:dashboardId" component={FlowPage}/>
       </Switch>

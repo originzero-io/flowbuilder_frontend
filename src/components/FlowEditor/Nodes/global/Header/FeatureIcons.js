@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setNodeEnable, setOutgoersEnable } from "../../../../../store/actions/elementsActions";
 import { getIncomers, getOutgoers } from "react-flow-renderer";
 import { openNotification as notification } from "../../../../../app-global/dom/notification";
-
+import PropTypes from "prop-types"
 export default function FeatureIcons({ self, edit, setEdit }) {
   const dispatch = useDispatch();
   const elements = useSelector((state) => state.elementReducer).present;
@@ -56,4 +56,10 @@ export default function FeatureIcons({ self, edit, setEdit }) {
       <RotateButton self={self} />
     </>
   );
+}
+
+FeatureIcons.propTypes = {
+  self: PropTypes.object.isRequired,
+  edit:PropTypes.bool.isRequired,
+  setEdit:PropTypes.func.isRequired,
 }

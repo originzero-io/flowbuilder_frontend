@@ -6,6 +6,7 @@ import {
     CalculateIcon,
     ExcelReadIcon,
 } from "../../components/FlowEditor/Nodes/global/Icons";
+import React from "react"
 import * as types from "../../components/FlowEditor/Nodes/constant/nodeTypes";
 
 export const loadIconsToNodeList = (type) => {

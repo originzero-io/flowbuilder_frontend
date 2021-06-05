@@ -3,6 +3,7 @@ import { Label } from "../styles";
 import { useSelector, useDispatch } from "react-redux";
 import updateNodeHandles from "../../../../app-global/helpers/updateNodeHandles";
 import { setElements } from "../../../../store/actions/elementsActions";
+import PropTypes from "prop-types"
 export default function NodeIOManager({ self, ioType }) {
   const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
@@ -72,4 +73,9 @@ export default function NodeIOManager({ self, ioType }) {
       )}
     </>
   );
+}
+
+NodeIOManager.propTypes = {
+  self: PropTypes.object.isRequired,
+  ioType:PropTypes.string.isRequired
 }

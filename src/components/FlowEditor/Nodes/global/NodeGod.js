@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { getOutgoers, Handle, useUpdateNodeInternals } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
 import { InfoIcon } from "./Icons";
@@ -13,11 +13,12 @@ import {
 } from "../styles";
 import setIconInstance from "./Icons/iconConstant";
 import { setOutgoersEnable } from "../../../../store/actions/elementsActions";
-const NodeGod = ({ self, ioType, children, collapsable }) => {
+import PropTypes from "prop-types"
+const NodeGod = ({ self, ioType, children, collapsible }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sources = [];
   const targets = [];
-  const { zoom } = useSelector((state) => state.flowConfigReducer);
+  //const { zoom } = useSelector((state) => state.flowConfigReducer);
   const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
   const { selected, align, expand, enable} = self.data;
@@ -65,7 +66,7 @@ const NodeGod = ({ self, ioType, children, collapsable }) => {
       <NodeArea>
         <NodeHeader
           self={self}
-          collapsable={collapsable}
+          collapsible={collapsible}
           selectedElements={selected}
         />
         {expand ? (
@@ -106,3 +107,11 @@ const NodeGod = ({ self, ioType, children, collapsable }) => {
 };
 
 export default NodeGod;
+
+
+NodeGod.propTypes = {
+  self: PropTypes.object.isRequired,
+  ioType: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
+  collapsible: PropTypes.bool.isRequired,
+}

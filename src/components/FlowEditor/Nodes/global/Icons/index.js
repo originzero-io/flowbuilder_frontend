@@ -1,4 +1,5 @@
 import * as themeColor from "../../../../../config/ThemeReference"
+import React from "react";
 export function SetVariablesIcon({ width, height, enable }) {
   return (
     <svg

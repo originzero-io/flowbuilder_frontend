@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { SubmitIcon } from "../../../../global/Icons";
 import { Submit } from "../../../Menu/GroupBar/style";
 import { useSelector, useDispatch } from "react-redux";
-import { isNode } from "react-flow-renderer";
+//import { isNode } from "react-flow-renderer";
 import {
   changeNodeName,
-  setElements,
+  //setElements,
 } from "../../../../../store/actions/elementsActions";
+import PropTypes from "prop-types"
 const Form = styled.form`
   position: relative;
 `;
@@ -23,7 +24,7 @@ const Input = styled.input`
 export default function EditNameForm({ self, setEdit }) {
   const dispatch = useDispatch();
   const [editedName, setEditedName] = useState(self.data.label);
-  const elements = useSelector((state) => state.elementReducer).present;
+  //const elements = useSelector((state) => state.elementReducer).present;
   const nameEditChangeHandle = (e) => {
     setEditedName(e.target.value);
   };
@@ -46,4 +47,9 @@ export default function EditNameForm({ self, setEdit }) {
       </Submit>
     </Form>
   );
+}
+
+EditNameForm.propTypes = {
+  self: PropTypes.object.isRequired,
+  setEdit : PropTypes.func.isRequired
 }

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types"
+
 const Container = styled.div`
   margin: 7px;
   width: 150px;
@@ -70,4 +72,24 @@ export function CardText({ children }) {
 }
 export function CardFooter({ children }) {
   return <FooterContainer>{children}</FooterContainer>;
+}
+
+
+Card.propTypes = {
+  children:PropTypes.element.isRequired
+}
+CardBody.propTypes = {
+  children:PropTypes.element.isRequired
+}
+CardTitle.propTypes = {
+  children:PropTypes.element.isRequired
+}
+CardSubtitle.propTypes = {
+  children:PropTypes.element.isRequired
+}
+CardText.propTypes = {
+  children:PropTypes.element.isRequired
+}
+CardFooter.propTypes = {
+  children:PropTypes.element.isRequired
 }

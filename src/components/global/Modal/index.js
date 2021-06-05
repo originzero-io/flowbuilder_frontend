@@ -1,6 +1,8 @@
 import React from "react";
 import ReactModal from "react-modal";
 import { CancelIcon } from "../Icons";
+import PropTypes from "prop-types"
+
 const customStyles = {
   content: {
     top: "40%",
@@ -49,4 +51,10 @@ export default function Modal({ isOpen, onRequestClose, children }) {
       <div style={childrenStyle}>{children}</div>
     </ReactModal>
   );
+}
+
+Modal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired
 }

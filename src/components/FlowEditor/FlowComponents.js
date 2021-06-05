@@ -1,6 +1,7 @@
 import React from "react";
 import { Background, Controls, MiniMap } from "react-flow-renderer";
 import AppMenu from "./Menu";
+import PropTypes from "prop-types"
 const FlowComponents = ({ theme, miniMapDisplay }) => {
   return (
     <>
@@ -25,3 +26,8 @@ const FlowComponents = ({ theme, miniMapDisplay }) => {
 }
 
 export default React.memo(FlowComponents);
+
+FlowComponents.propTypes = {
+  theme: PropTypes.string.isRequired,
+  miniMapDisplay: PropTypes.string.isRequired,
+}

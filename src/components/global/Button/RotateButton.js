@@ -1,7 +1,8 @@
 import React from "react";
 import {useDispatch} from "react-redux"
 import { rotateNode } from "../../../store/actions/elementsActions";
-import { HorizontalToVerticalIcon,VerticalToHorizontalIcon } from "../../FlowEditor/Nodes/global/Icons";
+import { HorizontalToVerticalIcon, VerticalToHorizontalIcon } from "../../FlowEditor/Nodes/global/Icons";
+import PropTypes from "prop-types"
 export default function RotateButton({ self }) {
   const dispatch = useDispatch();
   const rotateHandle = () => {
@@ -16,4 +17,8 @@ export default function RotateButton({ self }) {
       }
     </div>
   );
+}
+
+RotateButton.propTypes = {
+  self: PropTypes.object.isRequired
 }
