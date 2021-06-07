@@ -9,14 +9,11 @@ import "@fortawesome/fontawesome-free/js/solid"
 import "@fortawesome/fontawesome-free/js/fontawesome"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-tabs/style/react-tabs.css';
+import reportWebVitals from './reportWebVitals';
 
-///REDUX
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import reducers from "./store/reducers/index";
-import { composeWithDevTools } from 'redux-devtools-extension';
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
+import configureStore from "./store/configureStore.js";
+const store = configureStore();
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
@@ -26,3 +23,5 @@ ReactDOM.render(
   </Provider>,
   rootElement
 );
+
+reportWebVitals(console.log);

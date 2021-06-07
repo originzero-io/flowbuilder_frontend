@@ -1,4 +1,4 @@
-import SetVariables from "./SetVariables";
+import SetVariablesNode from "./SetVariables";
 import NotificationNode from "./Notification";
 import CombineNode from "./Combine";
 import SplitNode from "./Split";
@@ -7,7 +7,7 @@ import ExcelReadNode from "./ExcelRead";
 import SerialReadNode from "./SerialRead";
 import * as types from "./constant/nodeTypes"
 const customNodes = {
-  [types.SET_VARIABLES]: SetVariables,
+  [types.SET_VARIABLES]: SetVariablesNode,
   [types.NOTIFICATION]: NotificationNode,
   [types.SPLIT]: SplitNode,
   [types.COMBINE]: CombineNode,

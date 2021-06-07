@@ -320,7 +320,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   // const onMoveHandle = (flowTransform) => {
   //   dispatch(setZoom(flowTransform.zoom))
   // }
-  console.log("wrapperrr:",reactFlowWrapper)
   return (
     <>
       <ReactFlow

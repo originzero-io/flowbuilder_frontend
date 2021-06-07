@@ -45,29 +45,6 @@ export const flowConfigReducer = (state = flowConfig, action) => {
   }
 };
 
-const flow = {
-  config: {
-    id: "1234",
-    name: "flow1",
-    author: "Anaks",
-    createdDate: "05-06-2021 10.15",
-    project: "Project 1",
-  },
-  gui: {
-    reactFlowInstance: null,
-    zoom: 0,
-    rotateAllPath: "horizontal",
-    miniMapDisplay: "visible",
-    groupBarDisplay: "hidden",
-    edgeType: "bezier",
-    clickedElement: {},
-    copiedElements: [],
-    paneClickPosition: { x: 0, y: 0 },
-    theme: "light",
-    nodeGroupMenuDisplay: false,
-  },
-  elements: [],
-};
 const activeFlows = ["1234", "13569"]
 const flows = [
   {
@@ -92,7 +69,7 @@ const flows = [
       nodeGroupMenuDisplay: false,
     },
     elements: [],
-    teams:[]
+    groups:[]
   },
   {
     config: {
@@ -118,3 +95,12 @@ const flows = [
     elements: [],
   },
 ];
+
+export const flowReducer = (state = flows, action) => {
+  switch (action.type) {
+    case "action":
+      return state;
+    default:
+      return state;
+  }
+};

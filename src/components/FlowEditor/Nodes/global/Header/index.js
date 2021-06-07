@@ -12,11 +12,11 @@ export default function NodeHeader({ self, selectedElements }) {
   const dispatch = useDispatch();
   //const elements = useSelector((state) => state.elementReducer).present;
 
-  const [showGroup, setShowGroup] = useState(false);
-  const [hover, setHover] = useState(false);
   const { nodeGroupMenuDisplay } = useSelector(
     (state) => state.guiConfigReducer
   );
+  const [showGroup, setShowGroup] = useState(nodeGroupMenuDisplay);
+  const [hover, setHover] = useState(false);
   const groupHandle = (e) => {
     setShowGroup(!showGroup);
     dispatch(closeAllNodeGroupMenu(false));

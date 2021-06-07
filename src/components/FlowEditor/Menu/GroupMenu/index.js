@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { isNode, useStoreActions, useStoreState } from "react-flow-renderer";
 //import { Container, AddButton,Button,Input,ColorBox,AddGroupWrapper } from "./style";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  addGroup,
-  deleteGroup,
-  addNodeToGroupSingle,
-  addNodeToGroupMultiple,
-  deleteNodeCurrentGroup,
-  deleteNodeCurrentGroupMultiple,
-} from "../../../../store/actions/nodeGroupsActions";
-import { setElements, setGroupMultiple, setGroupSingle } from "../../../../store/actions/elementsActions";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { GroupColor, Label } from "../GroupBar/style";
-import { isEdge, isNode,useStoreActions, useStoreState } from "react-flow-renderer";
 import { setGroupToNodes } from "../../../../app-global/helpers/elementController";
+import { setGroupMultiple, setGroupSingle } from "../../../../store/actions/elementsActions";
+import {
+  addNodeToGroupMultiple, addNodeToGroupSingle,
+
+  deleteNodeCurrentGroup
+} from "../../../../store/actions/nodeGroupsActions";
+import { GroupColor, Label } from "../GroupBar/style";
 const Container = styled.div`
   position: absolute;
   right: -120px;

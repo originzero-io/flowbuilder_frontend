@@ -2,6 +2,7 @@ import * as actionTypes from "../constants/controlPanelContants";
 
 const panelConfig = {
   activePanel: "Teams",
+  activeProject: { id: null, name: null, author: null, flows: [] },
   projects: [
     {
       id: "project0",
@@ -34,7 +35,6 @@ const panelConfig = {
       projectId: "project0",
     },
   ],
-  activeProject: { id: null, name: null, author: null, flows: [] },
 };
 
 const controlPanelReducer = (state = panelConfig, { type, payload }) => {

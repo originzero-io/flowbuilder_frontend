@@ -8,7 +8,7 @@ export default function FlowPage({match}) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
-  console.log("params",match)
+  //console.log("params",match)
   useEffect(() => {
     nodeClass.applyElements(elements, dispatch);
   }, [elements]);
