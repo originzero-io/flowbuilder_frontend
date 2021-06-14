@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Menu, MenuItem } from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { setElementContextMenu } from "../../../../../store/actions/menuActions";
-import { setElements } from "../../../../../store/actions/elementsActions";
+import { rotateNode, setElements } from "../../../../../store/actions/elementsActions";
 import { deleteNodeCurrentGroup } from "../../../../../store/actions/nodeGroupsActions";
 
 export default function ElementMenu() {
-  const elements = useSelector((state) => state.elementReducer).present;
+  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
+  const elements = elementReducer.present;
   const {elementMenu} = useSelector((state) => state.menuConfigReducer);
   const theme = useSelector((state) => state.themeReducer);
   const dispatch = useDispatch();
@@ -26,22 +27,7 @@ export default function ElementMenu() {
       newAlign = "horizontal";
     }
     else newAlign = "vertical"
-
-    const newElements = elements.map(els => {
-      if (els.id === element.id) {
-        return {
-          ...els,
-          data: {
-            ...els.data,
-            align:newAlign
-          }
-        }
-      }
-      else {
-        return els;
-      }
-    })
-    dispatch(setElements(newElements));
+    dispatch(rotateNode(element,newAlign));
     dispatch(setElementContextMenu(false));
   }
   return (

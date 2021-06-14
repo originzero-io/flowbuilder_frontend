@@ -2,43 +2,31 @@ import * as actionTypes from "../constants/nodeGroupsContants";
 const nodeGroups = [
   {
     id: 1,
-    createdFlow:"flow1",
     name: "group_1",
     nodes: [],
     color: "#2ecc71",
   },
   {
     id: 2,
-    createdFlow:"flow1",
     name: "group_2",
     nodes: [],
     color: "#2980b9",
   },
   {
     id: 3,
-    createdFlow:"flow1",
     name: "group_3",
     nodes: [],
     color: "#f39c12",
   },
   {
     id: 4,
-    createdFlow:"flow1",
     name: "group_4",
     nodes: [],
     color: "#6c5ce7",
   },
   {
     id: 5,
-    createdFlow:"flow1",
     name: "group_5",
-    nodes: [],
-    color: "#32cdae",
-  },
-  {
-    id: 6,
-    createdFlow:"flow1",
-    name: "group_6",
     nodes: [],
     color: "tomato",
   },

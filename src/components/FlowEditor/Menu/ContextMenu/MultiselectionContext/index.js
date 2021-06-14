@@ -12,8 +12,9 @@ export default function MultiSelectionContextMenu() {
   const { multiSelectionMenu } = useSelector(
     (state) => state.menuConfigReducer
   );
-  const { theme } = useSelector((state) => state.guiConfigReducer);
-  const elements = useSelector((state) => state.elementReducer).present;
+  const { elementReducer, flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
+  const { theme } = flowWorkSpaceReducer;
+  const elements = elementReducer.present;
   const dispatch = useDispatch();
   const deleteItems = () => {
     if (confirm("Are you sure?")) {

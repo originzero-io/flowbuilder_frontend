@@ -3,8 +3,8 @@ import { GroupFlagIcon } from "../Icons";
 import PropTypes from "prop-types"
 function Flag({ self, onClick }) {
   return (
-    <div onClick={onClick} style={{marginTop: "-4px", marginRight: "-4px" }}>
-      <GroupFlagIcon color={self.data.group.color || "rgb(70,70,70)"} id={self.id}/>
+    <div onClick={onClick} style={{marginTop: "-4px", marginRight: "-3px" }}>
+      <GroupFlagIcon color={self.data.group.color || "rgba(170,170,170,0.7)"} id={self.id}/>
     </div>
   );
 }

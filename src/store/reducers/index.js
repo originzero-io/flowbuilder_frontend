@@ -1,20 +1,17 @@
 import {combineReducers} from "redux";
 import elementReducer from "./elementsReducer"
-import {nodeClassReducer,flowConfigReducer} from "./flowReducers"
+import {nodeClassReducer,flowReducer,flowConfigReducer,flowWorkSpaceReducer} from "./flowReducers"
 import {nodeGroupsReducer} from "./nodeGroupsReducers"
-import {guiConfigReducer} from "./guiReducers"
 import {menuConfigReducer} from "./menuReducers"
 import {nodeListReducer} from "./nodeListReducers"
 import controlPanelReducer from "./controlPanelReducer"
 const reducers = combineReducers({
-  elementReducer,
-  guiConfigReducer,
   menuConfigReducer,
   nodeClassReducer,
   nodeListReducer,
-  flowConfigReducer,
-  nodeGroupsReducer,
-  controlPanelReducer
+  controlPanelReducer,
+  flowReducer,
+  activeFlowReducer:combineReducers({flowConfigReducer,flowWorkSpaceReducer,elementReducer,nodeGroupsReducer})
 });
 
 export default reducers;

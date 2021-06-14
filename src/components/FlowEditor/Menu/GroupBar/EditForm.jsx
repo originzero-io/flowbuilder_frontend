@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setElements } from "../../../../store/actions/elementsActions";
+import { setElements, updateGroupOfElement } from "../../../../store/actions/elementsActions";
 import { updateGroup } from "../../../../store/actions/nodeGroupsActions";
 import { SubmitIcon } from "../../../global/Icons";
 import { ColorFlag, Submit } from "./style";
@@ -26,39 +26,11 @@ const Input = styled.input`
 `;
 
 export default function EditForm({ editableItem, setEditableItem, theme }) {
-  const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
   const onSubmitHandle = (event) => {
     event.preventDefault();
     dispatch(updateGroup(editableItem.group));
-    const newArray = elements.map((els) => {
-      if (isNode(els)) {
-        if (els.data.group.id === editableItem.group.id) {
-          return {
-            ...els,
-            data: {
-              ...els.data,
-              group: { ...els.data.group, name: editableItem.group.name, color: editableItem.group.color },
-            },
-          };
-        }
-        else return els;
-      }
-      else if (isEdge(els)) {
-        if (els.group.id && els.group.id === editableItem.group.id) {
-          return {
-            ...els,
-            group: { ...els.group, name: editableItem.group.name, color: editableItem.group.color },
-            style: {
-              ...els.style,
-              stroke: editableItem.group.color
-            }
-          }
-        }
-        else return els;
-      }
-    });
-    dispatch(setElements(newArray));
+    dispatch(updateGroupOfElement(editableItem.group))
     setEditableItem({state:false,group:{}});
   };
   const updateChangeHandle = (event) => {

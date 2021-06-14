@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { applyMiddleware, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -12,7 +13,7 @@ export default function configureStore(preloadedState) {
 
   const store = createStore(rootReducer, preloadedState, composedEnhancers);
 
-  if (module.hot) {
+  if (process.env.NODE_ENV === "development" && module.hot) {
     module.hot.accept("./reducers", () => store.replaceReducer(rootReducer));
   }
   return store;

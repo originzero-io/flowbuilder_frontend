@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteGroup,
-  loadGroups,
-  updateGroup,
-} from "../../../../store/actions/nodeGroupsActions";
-import { setElements } from "../../../../store/actions/elementsActions";
+import { deleteGroup } from "../../../../store/actions/nodeGroupsActions";
+import { deleteGroupOfElement } from "../../../../store/actions/elementsActions";
 import { GroupItem, GroupColor, Label} from "./style";
-import { isEdge, isNode, useStoreActions } from "react-flow-renderer";
+import { useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";
 import { NameEditIcon } from "../../../global/Icons";
 import useDidMountEffect from "../../../../hooks/useDidMountEffect";
-
+import PropTypes from "prop-types"
 export default function GroupList({ theme }) {
-  const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
-  const elements = useSelector((state) => state.elementReducer).present;
+  const {nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(null);
   const [editableItem, setEditableItem] = useState({ state: false, group: {} });
@@ -26,34 +21,7 @@ export default function GroupList({ theme }) {
   const deleteIconClickHandle = (groupId) => {
     if (confirm("Are you sure?")) {
       dispatch(deleteGroup(groupId));
-      const newArray = elements.map((els) => {
-        if (isNode(els)) {
-          if (els.data.group.id === groupId) {
-            return {
-              ...els,
-              data: {
-                ...els.data,
-                group: {},
-              },
-            };
-          }
-          else return els;
-        }
-        else if (isEdge(els)) {
-          if (els.group.id === groupId) {
-            return {
-              ...els,
-              group:{},
-              style: {
-                ...els.style,
-                stroke: ''
-              }
-            }
-          }
-          else return els;
-        }
-      });
-      dispatch(setElements(newArray));
+      dispatch(deleteGroupOfElement(groupId))
     }
   };
 
@@ -77,18 +45,18 @@ export default function GroupList({ theme }) {
 
   useDidMountEffect(() => {
     //localStorage.setItem("groups", JSON.stringify(nodeGroups));
-  }, [nodeGroups])
+  }, [nodeGroupsReducer])
   
   useEffect(() => {
-    const storedGroups = JSON.parse(localStorage.getItem("groups"));
-    if (storedGroups) {
-      dispatch(loadGroups(storedGroups));
-    }
+    // const storedGroups = JSON.parse(localStorage.getItem("groups"));
+    // if (storedGroups) {
+    //   dispatch(loadGroups(storedGroups));
+    // }
   },[])
 
   return (
     <>
-      {nodeGroups.map((group) => {
+      {nodeGroupsReducer.map((group) => {
         return (
           <GroupItem
             key={group.id}
@@ -129,4 +97,8 @@ export default function GroupList({ theme }) {
       })}
     </>
   );
+}
+
+GroupList.propTypes = {
+  theme: PropTypes.string.isRequired
 }

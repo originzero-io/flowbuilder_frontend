@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { DashboardsContainer, FlowsContainer } from "./style";
 import {
   deleteDashboard,
-  deleteFlow,
 } from "../../../../store/actions/controlPanelActions";
+import {
+  deleteFlow,
+} from "../../../../store/actions/flowActions";
 import { Box } from "../styles";
 import {
   Card,
@@ -22,9 +24,10 @@ import {
 import FormManager from "./forms/FormManager";
 import { Link } from "react-router-dom";
 export default function ProjectsPanel() {
-  const { activeProject, flows, dashboards } = useSelector(
+  const { activeProject, dashboards } = useSelector(
     (state) => state.controlPanelReducer
   );
+  const flows = useSelector((state) => state.flowReducer);
   const [showModal, setShowModal] = useState(false);
   const [projectFlows, setProjectFlows] = useState([]);
   const [projectDashboards, setProjectDashboards] = useState([]);
@@ -47,7 +50,7 @@ export default function ProjectsPanel() {
 
   useEffect(() => {
     const flowData = flows.filter(
-      (flow) => flow.projectId === activeProject.id
+      (flow) => flow.config.projectId === activeProject.id
     );
     const dashboardData = dashboards.filter(
       (dashboard) => dashboard.projectId === activeProject.id
@@ -67,21 +70,21 @@ export default function ProjectsPanel() {
     }
   };
   return (
-    <div>
+    <>
       {/* {activeProject.name} */}
       <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
         <FlowsContainer>
           <Box onClick={() => showModalHandle("flow")}>+</Box>
-          {projectFlows.map((flow) => {
+          {projectFlows.map(({config}) => {
             return (
-              <Link key={flow.id} to={`/flow/${flow.id}`}>
-                <Card key={flow.id}>
+              <Link key={config.id} to={`/flow/${config.id}`}>
+                <Card key={config.id}>
                   <CardBody>
-                    <CardTitle>{flow.name}</CardTitle>
-                    <CardSubtitle>{flow.author}</CardSubtitle>
-                    <CardText>{flow.description}</CardText>
+                    <CardTitle>{config.name}</CardTitle>
+                    <CardSubtitle>{config.author}</CardSubtitle>
+                    <CardText>{config.description}</CardText>
                     <CardFooter>
-                      <div onClick={() => deleteFlowHandler(flow)}>
+                      <div onClick={() => deleteFlowHandler(config)}>
                         <i className="fas fa-trash-alt"></i>
                       </div>
                     </CardFooter>
@@ -119,6 +122,6 @@ export default function ProjectsPanel() {
       <Modal isOpen={showModal} onRequestClose={hideModalHandle}>
         <FormManager closeModal={hideModalHandle} formType={formType} />
       </Modal>
-    </div>
+    </>
   );
 }

@@ -15,14 +15,6 @@ export const deleteProject = (project) => ({
   type: action.DELETE_PROJECT,
   payload: project,
 });
-export const addFlow = (flow) => ({
-  type: action.ADD_FLOW,
-  payload: flow,
-});
-export const deleteFlow = (flow) => ({
-  type: action.DELETE_FLOW,
-  payload: flow,
-});
 export const addDashboard = (dashboard) => ({
   type: action.ADD_DASHBOARD,
   payload: dashboard,

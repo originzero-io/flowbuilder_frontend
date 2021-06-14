@@ -3,18 +3,15 @@ import Flag from "./NodeFlag";
 import { Header, Label ,Content,FeatureIconsWrapper } from "../../styles";
 import { useSelector, useDispatch } from "react-redux";
 import GroupMenu from "../../../Menu/GroupMenu";
-import { closeAllNodeGroupMenu } from "../../../../../store/actions/guiActions";
+import { closeAllNodeGroupMenu } from "../../../../../store/actions/flowActions";
 import { expandNode } from "../../../../../store/actions/elementsActions";
 import EditNameForm from "./EditNameForm";
 import FeatureIcons from "./FeatureIcons";
 import PropTypes from "prop-types"
 export default function NodeHeader({ self, selectedElements }) {
   const dispatch = useDispatch();
-  //const elements = useSelector((state) => state.elementReducer).present;
-
-  const { nodeGroupMenuDisplay } = useSelector(
-    (state) => state.guiConfigReducer
-  );
+  const { flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
+  const { nodeGroupMenuDisplay } = flowWorkSpaceReducer;
   const [showGroup, setShowGroup] = useState(nodeGroupMenuDisplay);
   const [hover, setHover] = useState(false);
   const groupHandle = (e) => {
@@ -67,5 +64,5 @@ export default function NodeHeader({ self, selectedElements }) {
 }
 NodeHeader.propTypes = {
   self: PropTypes.object.isRequired,
-  selectedElements:PropTypes.array.isRequired
+  selectedElements:PropTypes.bool.isRequired
 }

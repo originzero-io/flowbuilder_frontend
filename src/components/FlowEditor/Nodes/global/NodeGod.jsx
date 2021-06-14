@@ -18,10 +18,10 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sources = [];
   const targets = [];
-  //const { zoom } = useSelector((state) => state.flowConfigReducer);
-  const elements = useSelector((state) => state.elementReducer).present;
+  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
+  const elements = elementReducer.present;
   const dispatch = useDispatch();
-  const { selected, align, expand, enable} = self.data;
+  const { selected, align, expand, enable, group } = self.data;
   for (let index = 0; index < self.data.targetCount; index++) {
     targets.push(index);
   }
@@ -37,8 +37,8 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
   useEffect(() => {
     const outgoers = getOutgoers(self, elements);
     const outgoersIds = outgoers.map(o => o.id);
-    dispatch(setOutgoersEnable(outgoersIds,self.data.enable));
-  }, [self.data.enable])
+    dispatch(setOutgoersEnable(outgoersIds,enable));
+  }, [enable])
   return (
     <NodeWrapper align={align} selected={selected} enable={enable}>
       <TargetWrapper align={align}>
@@ -73,7 +73,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
           <NodeContent>{children}</NodeContent>
         ) : (
           <NodeContent type="logo">
-            <NodeIcon width="70px" height="70px" enable={self.data.enable} />
+            <NodeIcon width="70px" height="70px" enable={enable} />
           </NodeContent>
         )}
         <Info>
@@ -95,7 +95,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
                   : "node-handle horizontal"
               }`}
               style={{
-                backgroundColor: self.data.group.color,
+                backgroundColor: group.color,
                 visibility: ioType === "source" || ioType === "both" ? "visible" : "hidden"
               }}
             />
@@ -112,6 +112,6 @@ export default NodeGod;
 NodeGod.propTypes = {
   self: PropTypes.object.isRequired,
   ioType: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element,
   collapsible: PropTypes.bool.isRequired,
 }

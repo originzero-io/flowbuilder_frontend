@@ -9,8 +9,9 @@ import uuid from "react-uuid";
 import { pasteNodes } from "../../store/actions/elementsActions";
 export default function KeyboardEvents() {
   const dispatch = useDispatch();
-  const elements = useSelector((state) => state.elementReducer).present;
-  const { reactFlowInstance, rotateAllPath, copiedElements, paneClickPosition} = useSelector((state) => state.flowConfigReducer);
+  const { flowWorkSpaceReducer,elementReducer } = useSelector((state) => state.activeFlowReducer);
+  const { copiedElements, paneClickPosition,reactFlowInstance,rotateAllPath } = flowWorkSpaceReducer;
+  const elements = elementReducer.present;
   const selectedElements = useStoreState((state) => state.selectedElements);
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements

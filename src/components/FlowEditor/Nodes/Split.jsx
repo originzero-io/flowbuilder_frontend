@@ -5,10 +5,10 @@ import useDidMountEffect from "../../../hooks/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
 // import { Label } from "./styles";
 // import { setElements } from "../../../store/actions/elementsActions";
-// import updateNodeHandles from "../../../app-global/helpers/updateNodeHandles";
 import NodeIOManager from "./global/NodeIOManager";
 const SplitNode = (self) => {
-  const elements = useSelector((state) => state.elementReducer).present;
+  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
+  const elements = elementReducer.present;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const dispatch = useDispatch();
   const [values, setValues] = useState([

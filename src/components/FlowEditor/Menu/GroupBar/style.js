@@ -38,7 +38,7 @@ export const GroupItem = styled.div`
   user-select: none;
   font-size: 12px;
   &:hover {
-    background: rgb(15,175,143);
+    background: ${themeColor.HOVER_COLOR};
   }
 `;
 export const ColorBox = styled.div`

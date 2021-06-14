@@ -1,6 +1,7 @@
 import React from 'react'
 import Switch from "react-switch"
 import PropTypes from "prop-types"
+import * as themeColor from "../../../config/ThemeReference"
 export default function SwitchButton({checked,onChange,width,height}) {
     return (
         <>
@@ -8,7 +9,7 @@ export default function SwitchButton({checked,onChange,width,height}) {
               checked={checked}
               onChange={onChange}
               onColor="#888888"
-              onHandleColor="#1dd1a1"
+              onHandleColor={themeColor.HOVER_COLOR}
               handleDiameter={height}
               uncheckedIcon={false}
               checkedIcon={false}
@@ -24,6 +25,6 @@ export default function SwitchButton({checked,onChange,width,height}) {
 SwitchButton.propTypes = {
     checked: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
-    width: PropTypes.string.isRequired,
-    height: PropTypes.string.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
 }

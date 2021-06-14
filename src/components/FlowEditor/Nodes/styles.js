@@ -7,16 +7,13 @@ export const NodeWrapper = styled.div`
   padding: 2px 2px;
   padding-bottom: 0px; //Added by "My name is Anıl Akseki"
   font-size: 12px;
-  border-radius: 4px;
+  border-radius: 3px;
   text-align: center;
   background-color: #000000;
-  background-image: linear-gradient(
-    355deg,
-    #323232 0%,
-    #505050 80%
-  );
   box-shadow: 0.261px 1.5px 3px 0px rgba(0, 0, 0, 0.996);
   opacity: ${(props) => (props.enable ? "1" : "0.5")};
+  background:${(props) => (props.selected ? "#1DB954" : "#000000")};
+  background-image:${props=>props.selected ? "linear-gradient(355deg,rgb(7,46,21) 0%,rgb(22,139,63) 80%)":"linear-gradient(355deg,#323232 0%,#505050 80%)"};
 `;
 
 export const NodeArea = styled.div`
@@ -31,21 +28,16 @@ export const Header = styled.div`
   text-align: start; //Added by "My name is Anıl Akseki"
   position:relative;
   margin:-2px;
-  border-top-right-radius:3px;
-  border-top-left-radius:3px;
+  border-top-right-radius:4px;
+  border-top-left-radius:4px;
   box-shadow: 0.1px 0.5px 0.6px 0px rgba(0, 0, 0, 0.7);
-  background-image: linear-gradient(
-    270deg,
-    #323232 10%,
-    ${(props) => (props.selected === true ? "#108080" : "#404040")} 80%
-  );
   padding:3px;
 `;
 export const Content = styled.div`
   width:60%;
 `;
 export const Label = styled.div`
-  color: rgb(220, 220, 220);
+  color:white;
   padding-left: 5px;
   font-family: "Prime-Light";
 `;
@@ -76,7 +68,7 @@ export const TargetWrapper = styled.div`
   width: ${(props) => (props.align === "vertical" ? "none" : "0px")};
   height: ${(props) => (props.align === "vertical" ? "0px" : "none")};
   bottom: ${(props) => (props.align === "vertical" ? "13px" : "none")};
-  right: ${(props) => (props.align === "vertical" ? "none" : "13px")};
+  right: ${(props) => (props.align === "vertical" ? "none" : "15px")};
 `;
 export const SourceWrapper = styled.div`
   display: flex;
@@ -85,8 +77,8 @@ export const SourceWrapper = styled.div`
   justify-content: center;
   width: ${(props) => (props.align === "vertical" ? "none" : "0px")};
   height: ${(props) => (props.align === "vertical" ? "0px" : "none")};
-  top: ${(props) => (props.align === "vertical" ? "4px" : "none")};
-  left: ${(props) => (props.align === "vertical" ? "none" : "4px")};
+  top: ${(props) => (props.align === "vertical" ? "5px" : "none")};
+  left: ${(props) => (props.align === "vertical" ? "none" : "7px")};
 `;
 
 export const Divider = styled.div`

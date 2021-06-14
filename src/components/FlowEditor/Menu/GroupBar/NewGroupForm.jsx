@@ -1,33 +1,32 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
+import { isNode, useStoreActions } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
 import * as themeColor from "../../../../config/ThemeReference";
 import { addGroup } from "../../../../store/actions/nodeGroupsActions";
 import {
-  AddGroupWrapper,
-  ColorInput,
-  InputWrapper,
-  Input,
-  Title,
-  IconWrapper,
-  Submit,
-  Divider,
-  Header,
-} from "./style";
-import {
-  SubmitIcon,
   AddIcon,
   CancelIcon,
   NonGroupIcon,
+  SubmitIcon
 } from "../../../global/Icons/index";
-import { useStoreActions, isNode, isEdge } from "react-flow-renderer";
 import { HorizontalDivider } from "../../../style-components/Divider";
-import { setElements } from "../../../../store/actions/elementsActions";
+import {
+  AddGroupWrapper,
+  ColorInput,
+  Header,
+  IconWrapper,
+  Input,
+  InputWrapper,
+  Submit,
+  Title
+} from "./style";
 
 export default function NewGroupForm({ theme }) {
   const [groupInfo, setGroupInfo] = useState({});
   const [formOpen, setFormOpen] = useState(false);
-  const elements = useSelector((state) => state.elementReducer).present;
+  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
+  const elements = elementReducer.present;
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
   );
@@ -56,25 +55,8 @@ export default function NewGroupForm({ theme }) {
     );
     setSelectedElements(nonGroups);
   };
-  const strokeWidthChange = (e) => {
-    const newElements = elements.map(els => {
-      if (isEdge(els)) {
-        return {
-          ...els,
-          style: {
-            ...els.style,
-            strokeWidth:e.target.value
-          }
-        }
-      }
-      return els;
-    })
-    dispatch(setElements(newElements));
-  }
   return (
     <AddGroupWrapper onSubmit={addNewGroup}>
-      {/* <label>Stroke Width:</label>
-      <input type="number" onChange={strokeWidthChange} min={1} step={0.2} defaultValue={1.2} /> */}
       <Header theme={theme}>
         <IconWrapper onClick={() => setFormOpen(!formOpen)}>
           {formOpen === true ? (
@@ -96,7 +78,12 @@ export default function NewGroupForm({ theme }) {
           )}
         </IconWrapper>
         <Title>Groups</Title>
-        <NonGroupIcon width="40px" height="40px" onClick={selectNonGroupsHandle} theme={theme}/>
+        <NonGroupIcon
+          width="40px"
+          height="40px"
+          onClick={selectNonGroupsHandle}
+          theme={theme}
+        />
       </Header>
 
       {formOpen && (
@@ -129,7 +116,7 @@ export default function NewGroupForm({ theme }) {
           </Submit>
         </InputWrapper>
       )}
-      <HorizontalDivider theme={theme}/>
+      <HorizontalDivider theme={theme} />
     </AddGroupWrapper>
   );
 }

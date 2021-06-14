@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { MenuIndex, MenuItem} from "./style";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as themeColor from "../../../../config/ThemeReference"
 import { Logo } from "../../../global/Icons";
 import { Link } from "react-router-dom";
+import { mergeFlow } from "../../../../store/actions/flowActions";
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;
@@ -13,7 +14,7 @@ const Menu = styled(MenuIndex)`
       ? themeColor.DARK_MENU_BACKGROUND
       : themeColor.LIGHT_MENU_BACKGROUND};
   border-radius: 6px;
-  width:70px;
+  min-width:70px;
 `;
 const Circle = styled.div`
   width: 55px;
@@ -37,20 +38,34 @@ const Circle = styled.div`
     transform:scale(1.1);
   }
 `;
-
 const MainMenu = () => {
-  const { theme } = useSelector((state) => state.guiConfigReducer);
+  const { flowWorkSpaceReducer,flowConfigReducer,elementReducer,nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
+  const { theme,reactFlowInstance } = flowWorkSpaceReducer;
+  const dispatch = useDispatch();
+  const homeClickHandle = () => {
+    const { position, zoom } = reactFlowInstance.toObject();
+    const flow = {
+      config: flowConfigReducer,
+      workspace: { ...flowWorkSpaceReducer, position, zoom },
+      elements: elementReducer.present,
+      groups: nodeGroupsReducer
+    };
+    dispatch(mergeFlow(flow));
+  }
   return (
-    <div>
+    <>
       <Menu theme={theme}>
         <Circle theme={theme}>
           <Logo theme={theme}/>
         </Circle>
-        <Link to="/panel">
-          <MenuItem theme={theme}>Home</MenuItem>
-        </Link>
+        <div onClick={homeClickHandle}>
+          <Link to="/">
+            <MenuItem theme={theme}>Home</MenuItem>
+          </Link>
+        </div>
+        <MenuItem theme={theme}>{flowConfigReducer.name}</MenuItem>
       </Menu>
-    </div>
+    </>
   );
 }
 

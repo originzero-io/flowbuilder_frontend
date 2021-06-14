@@ -55,9 +55,6 @@ export const changeEdgeType = (data) => ({
   type: action.CHANGE_EDGE_TYPE,
   payload: data,
 });
-export const setAllNodesDeselect = () => ({
-  type: action.SET_ALL_NODES_DESELECT,
-});
 export const setGroupSingle = (self,group) => ({
   type: action.SET_GROUP_SINGLE,
   payload:{self,group}
@@ -65,4 +62,23 @@ export const setGroupSingle = (self,group) => ({
 export const setGroupMultiple = (selectedIDArray,group) => ({
   type: action.SET_GROUP_MULTIPLE,
   payload:{selectedIDArray,group}
+});
+export const selectNodes = (selectedIDArray) => ({
+  type: action.SELECT_NODES,
+  payload:selectedIDArray
+});
+export const setAllNodesDeselect = () => ({
+  type: action.SET_ALL_NODES_DESELECT
+});
+export const deleteGroupOfElement = (groupId) => ({
+  type: action.DELETE_GROUP_OF_ELEMENT,
+  payload: groupId,
+});
+export const updateGroupOfElement = (editedGroup) => ({
+  type: action.UPDATE_GROUP_OF_ELEMENT,
+  payload: editedGroup,
+});
+export const updateNodeHandles = (name,value,self) => ({
+  type: action.UPDATE_NODE_HANDLES,
+  payload: {name,value,self},
 });

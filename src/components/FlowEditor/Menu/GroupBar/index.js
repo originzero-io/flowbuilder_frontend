@@ -16,8 +16,8 @@ const Wrapper = styled.div`
   right:${({visible})=>visible === "visible" ? "0px" : "-25px"};
 `;
 export default function GroupBar() {
-  const { theme } = useSelector((state) => state.guiConfigReducer);
-  const { groupBarDisplay } = useSelector((state) => state.flowConfigReducer);
+  const { flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
+  const { theme,groupBarDisplay } = flowWorkSpaceReducer;
   return (
     <Wrapper visible={groupBarDisplay}>
       <GroupBarIcon theme={theme} />

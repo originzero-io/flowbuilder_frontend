@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Label } from "../styles";
 import { useSelector, useDispatch } from "react-redux";
-import updateNodeHandles from "../../../../app-global/helpers/updateNodeHandles";
-import { setElements } from "../../../../store/actions/elementsActions";
+import { updateNodeHandles } from "../../../../store/actions/elementsActions";
 import PropTypes from "prop-types"
 export default function NodeIOManager({ self, ioType }) {
-  const elements = useSelector((state) => state.elementReducer).present;
   const dispatch = useDispatch();
   const [handleCount, setHandleCount] = useState({
     targetCount: self.data.targetCount,
@@ -13,13 +11,12 @@ export default function NodeIOManager({ self, ioType }) {
   });
   const handleCountChange = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    const value = Number(e.target.value);
     setHandleCount({
       ...handleCount,
       [name]: value,
     });
-    const updatedElements = updateNodeHandles(name, value, self, elements);
-    dispatch(setElements(updatedElements));
+    dispatch(updateNodeHandles(name, value, self));
   };
   return (
     <>

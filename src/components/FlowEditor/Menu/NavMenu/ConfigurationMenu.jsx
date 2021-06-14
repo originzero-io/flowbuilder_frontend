@@ -1,27 +1,24 @@
-import React, { useCallback, useState, useRef, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useStoreActions } from "react-flow-renderer";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { VerticalDivider } from "../../../style-components/Divider";
-import * as tooltip from "../../../../config/TooltipReference";
-import { MenuIndex, MenuItem } from "./style";
-import { GuideIcon, LockIcon, ProfileIcon, SettingsIcon, ShareIcon, TuneIcon } from "./Icons";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  DropdownWrapper,
-  DropdownList,
-  DropDownItem,
-} from "../../../style-components/DropdownMenu";
-import * as themeColor from "../../../../config/ThemeReference";
-import { setEdgeType, setMiniMapDisplay } from "../../../../store/actions/flowActions";
-import { changeEdgeType, importElements,setElements } from "../../../../store/actions/elementsActions";
 import { openNotification } from "../../../../app-global/dom/notification";
 import { loadFunctionsToNode } from "../../../../app-global/helpers/loadFunctionsToNode";
-import { isEdge, useStoreActions } from "react-flow-renderer";
+import * as themeColor from "../../../../config/ThemeReference";
+import * as tooltip from "../../../../config/TooltipReference";
+import { changeEdgeType, importElements } from "../../../../store/actions/elementsActions";
+import { setMiniMapDisplay, setTheme, setWorkspaceEdgeType } from "../../../../store/actions/flowActions";
+import { LearnIcon } from "../../../ControlPanel/Icons";
+import SwitchButton from "../../../global/Button/SwitchButton";
 import FileInputWrapper from "../../../global/FileInputWrapper";
+import { VerticalDivider } from "../../../style-components/Divider";
+import {
+  DropDownItem, DropdownList, DropdownWrapper
+} from "../../../style-components/DropdownMenu";
 import { FileInput } from "../../../style-components/FileInput";
 import { Circle } from "../../../style-components/Shapes";
-import { setTheme } from "../../../../store/actions/guiActions";
-import SwitchButton from "../../../global/Button/SwitchButton";
-import { LearnIcon } from "../../../ControlPanel/Icons";
+import { ProfileIcon, ShareIcon, TuneIcon } from "./Icons";
+import { MenuIndex, MenuItem } from "./style";
 const Menu = styled(MenuIndex)`
   background: ${(props) =>
     props.theme === "dark"
@@ -34,11 +31,8 @@ const Menu = styled(MenuIndex)`
 `;
 
 export default function ConfigurationMenu() {
-  const { theme } = useSelector((state) => state.guiConfigReducer);
-  const elements = useSelector((state) => state.elementReducer).present;
-  const { reactFlowInstance, miniMapDisplay } = useSelector(
-    (state) => state.flowConfigReducer
-  );
+  const { flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
+  const { reactFlowInstance,miniMapDisplay,theme } = flowWorkSpaceReducer;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
@@ -97,34 +91,34 @@ export default function ConfigurationMenu() {
   const changeTheme = (checked) => {
     if (theme === "dark") {
       dispatch(setTheme("light"));
-      localStorage.setItem("theme", "light");
+      //localStorage.setItem("theme", "light");
     } else {
       dispatch(setTheme("dark"));
-      localStorage.setItem("theme", "dark");
+      //localStorage.setItem("theme", "dark");
     }
     setActive({ ...active, theme: checked });
   };
   const changeMiniMapDisplay = (checked) => {
     if (miniMapDisplay === "visible") {
       dispatch(setMiniMapDisplay("hidden"));
-      localStorage.setItem("mini-map", "hidden");
+      //localStorage.setItem("mini-map", "hidden");
     } else {
       dispatch(setMiniMapDisplay("visible"));
-      localStorage.setItem("mini-map", "visible");
+      //localStorage.setItem("mini-map", "visible");
     }
     setActive({ ...active, miniMap: checked });
   };
   const edgeTypeHandle = (e) => {
+    dispatch(setWorkspaceEdgeType(e.target.value))
     dispatch(changeEdgeType(e.target.value))
-    dispatch(setEdgeType(e.target.value))
   }
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    const storedMinimapDisplay = localStorage.getItem("mini-map");
-    setActive({
-      miniMap: storedMinimapDisplay === "visible" ? true : false,
-      theme: storedTheme === "dark" ? true : false,
-    });
+    // const storedTheme = localStorage.getItem("theme");
+    // const storedMinimapDisplay = localStorage.getItem("mini-map");
+    // setActive({
+    //   miniMap: storedMinimapDisplay === "visible" ? true : false,
+    //   theme: storedTheme === "dark" ? true : false,
+    // });
   }, []);
   return (
     <Menu theme={theme}>

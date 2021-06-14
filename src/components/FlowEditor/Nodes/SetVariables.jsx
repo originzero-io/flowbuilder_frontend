@@ -8,10 +8,9 @@ import NodeIOmanager from "./global/NodeIOManager";
 import { Label } from "./styles";
 
 const SetVariables = React.memo((self) => {
-  const elements = useSelector((state) => state.elementReducer).present;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const nodeGroups = useSelector((state) => state.nodeGroupsReducer);
-  const dispatch = useDispatch();
+  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
+  const elements = elementReducer.present;
   const [values, setValues] = useState([
     {
       source1: "Anaks",

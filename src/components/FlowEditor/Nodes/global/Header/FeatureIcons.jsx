@@ -9,7 +9,8 @@ import { openNotification as notification } from "../../../../../app-global/dom/
 import PropTypes from "prop-types"
 export default function FeatureIcons({ self, edit, setEdit }) {
   const dispatch = useDispatch();
-  const elements = useSelector((state) => state.elementReducer).present;
+  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
+  const elements = elementReducer.present;
   const nameEditHandle = () => {
     setEdit(!edit);
   };

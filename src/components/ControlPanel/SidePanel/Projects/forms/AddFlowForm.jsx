@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addFlow,
-  addNewFlowToProject,
-} from "../../../../../store/actions/controlPanelActions";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { addFlow } from "../../../../../store/actions/flowActions";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import uuid from "react-uuid";
 
-export default function AddFlowForm({ closeModal,formType }) {
-  const { activeProject,flows } = useSelector((state) => state.controlPanelReducer);
+export default function AddFlowForm({ closeModal, formType }) {
+  const { activeProject } = useSelector(
+    (state) => state.controlPanelReducer
+  );
 
   const [flowInfo, setFlowInfo] = useState({
-    id: null,
+    id: uuid(),
     name: null,
     author: null,
     description: null,
-    projectId: null
+    projectId: activeProject.id,
   });
   const dispatch = useDispatch();
   const onChangeHandler = (e) => {
@@ -23,8 +22,7 @@ export default function AddFlowForm({ closeModal,formType }) {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    const flow = {id:uuid(),...flowInfo,projectId:activeProject.id}
-    dispatch(addFlow(flow));
+    dispatch(addFlow(flowInfo));
     closeModal();
   };
 

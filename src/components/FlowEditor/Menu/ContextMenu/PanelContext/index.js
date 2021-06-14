@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import * as themeColor from "../../../../../config/ThemeReference";
 import { Container } from "./style";
 import { useSelector,useDispatch } from "react-redux";
@@ -15,11 +15,10 @@ import {loadIconsToNodeList} from "../../../../../app-global/helpers/loadIconsTo
 
 const PanelContextMenu = () => {
   const { panelMenu } = useSelector((state) => state.menuConfigReducer);
-  const { theme } = useSelector((state) => state.guiConfigReducer);
+  const { flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
+  const { reactFlowInstance,rotateAllPath,theme } = flowWorkSpaceReducer;
   const nodeList = useSelector((state) => state.nodeListReducer);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const { reactFlowInstance,rotateAllPath } = useSelector((state) => state.flowConfigReducer);
-
   const dispatch = useDispatch();
   const onDragStart = (event, nodeType) => {
     event.dataTransfer.setData("application/reactflow", nodeType);
@@ -38,21 +37,21 @@ const PanelContextMenu = () => {
     dispatch(addNewNode(newNode));
   }
   useDidMountEffect(() => {
-    localStorage.setItem("node-list", JSON.stringify(nodeList));
+    //localStorage.setItem("node-list", JSON.stringify(nodeList));
   }, [nodeList])
   useEffect(() => {
-    const storedNodeList = JSON.parse(localStorage.getItem("node-list")) || nodeList;
-    const newList = storedNodeList.map(node => {
-      return {
-        ...node,
-        icon:loadIconsToNodeList(node.type)
-      }
-    })
-    dispatch(setNodeList(newList));
+    // const storedNodeList = JSON.parse(localStorage.getItem("node-list")) || nodeList;
+    // const newList = storedNodeList.map(node => {
+    //   return {
+    //     ...node,
+    //     icon:loadIconsToNodeList(node.type)
+    //   }
+    // })
+    // dispatch(setNodeList(newList));
   },[])
   return (
     <>
-      {panelMenu.state === true && (
+      {panelMenu.state && (
         <Container x={panelMenu.x} y={panelMenu.y} theme={theme}>
           <Tabs
             selectedTabClassName="selected-tab"

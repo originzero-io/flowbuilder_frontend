@@ -1,7 +1,12 @@
 import * as action from "../constants/flowConstants";
-export const setReactFlowInstance = (data) => ({
+
+export const setActiveFlow = (flowId) => ({
+  type: action.SET_ACTIVE_FLOW,
+  payload: flowId
+});
+export const setReactFlowInstance = (reactFlowInstance) => ({
   type: action.SET_REACT_FLOW_INSTANCE,
-  payload: data
+  payload: reactFlowInstance
 });
 export const setClickedElement = (data) => ({
   type: action.SET_CLICKED_ELEMENT,
@@ -23,8 +28,8 @@ export const setRotateAllPath = (data) => ({
   type: action.SET_ROTATE_ALL_PATH,
   payload: data
 });
-export const setEdgeType = (data) => ({
-  type: action.SET_EDGE_TYPE,
+export const setWorkspaceEdgeType = (data) => ({
+  type: action.SET_WORKSPACE_EDGE_TYPE,
   payload: data
 });
 export const setCopiedElements = (nodes) => ({
@@ -35,6 +40,40 @@ export const setPaneClickPosition = (x,y) => ({
   type: action.SET_PANE_CLICK_POSITION,
   payload: {x,y}
 });
+export const setTheme = (data) => ({
+  type: action.SET_THEME,
+  payload: data
+});
+
+export const closeAllNodeGroupMenu = (data) => ({
+  type: action.SET_CLOSE_ALL_GROUPS,
+  payload: data
+});
+
+export const addFlow = (flow) => ({
+  type: action.ADD_FLOW,
+  payload: flow,
+});
+export const deleteFlow = (flow) => ({
+  type: action.DELETE_FLOW,
+  payload: flow,
+});
+export const mergeFlow = (flow) => ({
+  type: action.MERGE_FLOW,
+  payload: flow,
+});
+
+
+
+export const setCurrentFlowConfig = (data) => ({
+  type: action.SET_CURRENT_FLOW_CONFIG,
+  payload: data
+});
+export const setCurrentFlowWorkspace = (data) => ({
+  type: action.SET_CURRENT_FLOW_WORKSPACE,
+  payload: data
+});
+
 
 
 

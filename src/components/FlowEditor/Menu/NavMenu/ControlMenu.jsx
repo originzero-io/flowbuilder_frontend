@@ -8,7 +8,6 @@ import {
   RedoIcon,
   UndoIcon,
   SaveIcon,
-  MapIcon,
   DeleteIcon,
   RotateAllIcon,
   FitViewIcon,
@@ -16,7 +15,6 @@ import {
   ZoomOutIcon,
   LockIcon,
   UnLockIcon,
-  SelectAllIcon,
   ExpandAllIcon,
 } from "./Icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -26,7 +24,6 @@ import {
   setExpandAll,
 } from "../../../../store/actions/elementsActions";
 import {
-  setMiniMapDisplay,
   setRotateAllPath,
 } from "../../../../store/actions/flowActions";
 import * as themeColor from "../../../../config/ThemeReference";
@@ -49,19 +46,14 @@ const Menu = styled.div`
     props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON};
 `;
 export default function ControlMenu() {
-  const { reactFlowInstance } = useSelector((state) => state.flowConfigReducer);
-  const dispatch = useDispatch();
-  const { theme } = useSelector((state) => state.guiConfigReducer);
-  const { rotateAllPath } = useSelector((state) => state.flowConfigReducer);
-  const elements = useSelector((state) => state.elementReducer).present;
-  const canUndo = useSelector((state) => state.elementReducer).past.length > 0;
-  const canRedo = useSelector((state) => state.elementReducer).future.length > 0;
+  const { flowWorkSpaceReducer,elementReducer } = useSelector((state) => state.activeFlowReducer);
+  const { reactFlowInstance,rotateAllPath,theme } = flowWorkSpaceReducer;
+  const elements = elementReducer.present;
+  const canUndo = elementReducer.past.length > 0;
+  const canRedo = elementReducer.future.length > 0;
   const { zoomIn, zoomOut, fitView } = useZoomPanHelper();
   const setInteractive = useStoreActions((actions) => actions.setInteractive);
-  const setSelectedElements = useStoreActions(
-    (actions) => actions.setSelectedElements
-  );
-
+  const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
   const saveFlow = useCallback(() => {
     saveToDb(reactFlowInstance);
@@ -103,9 +95,6 @@ export default function ControlMenu() {
   const lockHandle = () => {
     setLock(!lock);
   };
-  const selectAllNodes = () => {
-    setSelectedElements(elements);
-  };
   const undoHandle = () => {
     dispatch(UndoActionCreators.undo());
   }
@@ -133,14 +122,6 @@ export default function ControlMenu() {
         <RedoIcon theme={theme} disable={!canRedo} />
       </MenuItem>
       <HorizontalDivider theme={theme} />
-      {/* <MenuItem
-        theme={theme}
-        onClick={selectAllNodes}
-        data-tip="Select All Nodes"
-        data-for={tooltip.SELECT_ALL_NODES}
-      >
-        <SelectAllIcon theme={theme} />
-      </MenuItem> */}
       <MenuItem
         theme={theme}
         onClick={closeAllNodes}

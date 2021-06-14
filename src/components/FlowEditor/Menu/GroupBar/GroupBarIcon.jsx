@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setGroupBarDisplay } from "../../../../store/actions/flowActions";
 import { GroupIcon } from "../../../global/Icons";
 export default function GroupBarIcon({theme}) {
-  const { groupBarDisplay } = useSelector((state) => state.flowConfigReducer);
+  const { flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
   const dispatch = useDispatch();
-  
+  const { groupBarDisplay } = flowWorkSpaceReducer;
   const groupBarDisplayHandle = () => {
     if (groupBarDisplay === "visible") {
       dispatch(setGroupBarDisplay("hidden"));

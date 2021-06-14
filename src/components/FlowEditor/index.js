@@ -9,19 +9,18 @@ import ReactFlow, {
 } from "react-flow-renderer";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import nodeTypes from "./Nodes/index";
-import initialElements from "../../config/initial-elements";
 import { getDataFromDb } from "../../app-global/db";
 import adjustScreen from "../../app-global/dom/adjustScreen";
 import { loadFunctionsToNode } from "../../app-global/helpers/loadFunctionsToNode";
 import { openNotification as notification } from "../../app-global/dom/notification";
 import {
-  setClickedElement,
-  setMiniMapDisplay,
-  setPaneClickPosition,
   setReactFlowInstance,
-  //setZoom,
+  setMiniMapDisplay,
+  setClickedElement,
+  setPaneClickPosition,
+  setTheme
 } from "../../store/actions/flowActions";
-import {addNewNode, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/actions/elementsActions"
+import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/actions/elementsActions"
 import {
   setElementContextMenu,
   setGroupMenu,
@@ -30,22 +29,19 @@ import {
 } from "../../store/actions/menuActions";
 import { setNodeList } from "../../store/actions/nodeListActions";
 import * as themeColor from "../../config/ThemeReference";
-import { closeAllNodeGroupMenu,setTheme } from "../../store/actions/guiActions";
+import { closeAllNodeGroupMenu } from "../../store/actions/flowActions";
 import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "../../app-global/helpers/elementController";
 import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
 import { deleteNodeCurrentGroup } from "../../store/actions/nodeGroupsActions";
 import PropTypes from "prop-types"
-
 export default function FlowEditor({ reactFlowWrapper }) {
-  const { theme } = useSelector((state) => state.guiConfigReducer);
-  const { reactFlowInstance, miniMapDisplay,edgeType,rotateAllPath } = useSelector(
-    (state) => state.flowConfigReducer
-  );
-  const elements = useSelector((state) => state.elementReducer).present;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
   const selectedElements = useStoreState((state) => state.selectedElements);
+  const {elementReducer,flowWorkSpaceReducer}= useSelector((state) => state.activeFlowReducer);
+  const elements = elementReducer.present;
+  const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowWorkSpaceReducer;
   const dispatch = useDispatch();
   const store = useStore();
   const onConnectHandle = (params) => {
@@ -70,10 +66,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
 
   const onEdgeUpdateHandle = (oldEdge, newConnection) => {
-    const elementArray = store.getState().elementReducer.present;
-    console.log("store-state-elements:", elementArray)
-    console.log("old-edge", oldEdge);
-    console.log("new connection", newConnection);
+    const elementArray = store.getState().activeFlowReducer.elementReducer.present;
     const edgeExist = isEdgeExist(newConnection,elementArray);
     if (edgeExist) {
       const newElements = removeEdgeFromArray(oldEdge,elementArray);
@@ -90,26 +83,26 @@ export default function FlowEditor({ reactFlowWrapper }) {
     const newElements = removeElements(elementsToRemove, elements);
     dispatch(setElements(newElements));
     const nodesToRemove = elementsToRemove.filter(els => isNode(els));
-    console.log("nodeess", nodesToRemove);
     nodesToRemove.map(els => {
       dispatch(deleteNodeCurrentGroup(els));
     })
   };
   const onLoadHandle = (_reactFlowInstance) => {
-    dispatch(setTheme(localStorage.getItem("theme") || "light"));
-    dispatch(setMiniMapDisplay(localStorage.getItem("mini-map")) || "visible")
+    dispatch(setTheme(theme));
+    dispatch(setMiniMapDisplay(miniMapDisplay));
     dispatch(setReactFlowInstance(_reactFlowInstance));
-    getDataFromDb(nodeClass)
-      .then((flow) => {
-        adjustScreen(flow, _reactFlowInstance);
-        dispatch(setElements(flow.elements));
-      })
-      .catch((err) => {
-        console.log("ERROR ON DB", err);
-        dispatch(setElements(initialElements));
-      });
+    adjustScreen(flowWorkSpaceReducer,_reactFlowInstance);
+    // getDataFromDb(nodeClass)
+    //   .then((flow) => {
+    //     console.log("ohoo:", flow);
+    //     //adjustScreen(flow, _reactFlowInstance);
+    //     //dispatch(setElements(flow.elements));
+    //   })
+    //   .catch((err) => {
+    //     console.log("ERROR ON DB", err);
+    //     dispatch(setElements(initialElements));
+    //   });
   };
-
   const onDragOverHandle = (event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
@@ -160,7 +153,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(closeAllNodeGroupMenu(true));
     dispatch(setAllNodesDeselect());
   };
-
   const onPaneContextHandle = (e) => {
     e.preventDefault();
     const windowWidth = window.innerWidth;
@@ -209,88 +201,23 @@ export default function FlowEditor({ reactFlowWrapper }) {
       );
     }
   };
-
-  const onSelectionContextMenuHandle = (e) => {
-    e.preventDefault();
+  const onSelectionContextMenuHandle = (event, nodes) => {
+    console.log("nodes:", nodes);
+    event.preventDefault();
     dispatch(
       setMultiSelectionContextMenu({
         state: true,
-        x: e.clientX,
-        y: e.clientY,
+        x: event.clientX,
+        y: event.clientY,
       })
     );
   };
-
-  useEffect(() => {
-    let newElements = [];
-    if (selectedElements !== null) {
-      const selectedIDArray = selectedElements.map((s) => s.id);
-      const elementIDArray = elements.map((e) => e.id);
-      const selectedElementsIDArray = elementIDArray.filter((elementId) =>
-        selectedIDArray.includes(elementId)
-      );
-      newElements = elements.map((els) => {
-        if (selectedElementsIDArray.includes(els.id)) {
-          if (isEdge(els)) {
-            return {
-              ...els,
-              animated: true,
-            };
-          } else if(isNode(els)) {
-            return {
-              ...els,
-              data: {
-                ...els.data,
-                selected: true
-              },
-            };
-          }
-        } else {
-          if (isEdge(els)) {
-            if (selectedElementsIDArray.includes(els.source) || selectedElementsIDArray.includes(els.target)) {
-              return {
-                ...els,
-                animated:true
-              }
-            }
-            else {
-              return {
-                ...els,
-                animated: false,
-              };
-            }
-          } else if(isNode(els)) {
-            return {
-              ...els,
-              data: {
-                ...els.data,
-                selected: false,
-              },
-            };
-          }
-        }
-      });
-    } else if(selectedElements === null) {
-      newElements = elements.map((els) => {
-        if (isEdge(els)) {
-          return {
-            ...els,
-            animated: false,
-          };
-        } else {
-          return {
-            ...els,
-            data: {
-              ...els.data,
-              selected: false,
-            },
-          };
-        }
-      });
+  const onSelectionChangeHandle = (selected) => {
+    if (selected !== null) {
+      const selectedIDArray = selected.map(e => e.id);
+      dispatch(selectNodes(selectedIDArray));
     }
-    dispatch(setElements(newElements));
-  }, [selectedElements]);
-
+  }
   const openMultiSelectionContextMenu = (event) => {
     dispatch(
       setMultiSelectionContextMenu({
@@ -316,10 +243,13 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const closeElementContextMenu = () => {
     dispatch(setElementContextMenu(false));
   };
-
-  // const onMoveHandle = (flowTransform) => {
-  //   dispatch(setZoom(flowTransform.zoom))
-  // }
+  
+  useEffect(() => {
+    nodeClass.applyElements(elements, dispatch);
+  }, [elements]);
+  useEffect(() => {
+    console.log("first render");
+  }, [])
   return (
     <>
       <ReactFlow
@@ -359,7 +289,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         //onNodeMouseEnter={(e, node) => console.log(node)} //hover
         //onNodeMouseLeave={(e, node) => console.log(node)} //hover leave
         //onConnectEnd={(e) => console.log(e)}
-        onSelectionChange={(els) => console.log(els)}
+        onSelectionChange={onSelectionChangeHandle}
       >
         <FlowComponents theme={theme} miniMapDisplay={miniMapDisplay}/>
         <KeyboardEvents/>
@@ -369,5 +299,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
 }
 
 FlowEditor.propTypes = {
-  reactFlowWrapper:PropTypes.object
+  reactFlowWrapper: PropTypes.object.isRequired,
+  flowId: PropTypes.string.isRequired
 }

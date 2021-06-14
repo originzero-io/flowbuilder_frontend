@@ -24,7 +24,6 @@ const Input = styled.input`
 export default function EditNameForm({ self, setEdit }) {
   const dispatch = useDispatch();
   const [editedName, setEditedName] = useState(self.data.label);
-  //const elements = useSelector((state) => state.elementReducer).present;
   const nameEditChangeHandle = (e) => {
     setEditedName(e.target.value);
   };

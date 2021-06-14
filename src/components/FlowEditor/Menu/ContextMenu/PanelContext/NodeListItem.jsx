@@ -1,8 +1,8 @@
 import React from "react";
 import { NodeElement,IconWrapper,Label } from "./style";
 import FavIconManager from "./FavIconManager";
-
-export default function NodeListItem({node,onDragStart,addNewNode,favClick}) {
+import PropTypes from "prop-types"
+export default function NodeListItem({ node, onDragStart, addNewNode, favClick }) {
   return (
     <NodeElement
       onDragStart={(event) => onDragStart(event, node.name)}
@@ -21,4 +21,11 @@ export default function NodeListItem({node,onDragStart,addNewNode,favClick}) {
       </IconWrapper>
     </NodeElement>
   );
+}
+
+NodeListItem.propTypes = {
+  node: PropTypes.object.isRequired,
+  onDragStart: PropTypes.func.isRequired,
+  addNewNode: PropTypes.func.isRequired,
+  favClick: PropTypes.func.isRequired
 }

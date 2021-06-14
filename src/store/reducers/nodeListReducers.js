@@ -63,7 +63,7 @@ const panelNodeList = [
     id: 7,
     name: types.SERIAL_READ,
     type: types.SERIAL_READ,
-    icon: <CalculateIcon/>,
+    icon: <SplitIcon/>,
     fav: false,
     createdDate:undefined
   },
