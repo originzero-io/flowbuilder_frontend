@@ -278,7 +278,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         maxZoom={4}
         zoomActivationKeyCode={90}
         zoomOnDoubleClick={false}
-        connectionLineStyle={{ stroke: theme==="dark" ? "#c8d6e5" : "black", strokeWidth: "2px" }}
+        connectionLineStyle={{ stroke: "rgb(22,139,63)", strokeWidth: "2px" }}
         //onMove={onMoveHandle} //return x,y,zoom
         // snapToGrid={true}
         // snapGrid={[60, 60]}

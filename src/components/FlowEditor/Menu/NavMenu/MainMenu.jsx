@@ -39,15 +39,15 @@ const Circle = styled.div`
   }
 `;
 const MainMenu = () => {
-  const { flowWorkSpaceReducer,flowConfigReducer,elementReducer,nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
+  const { flowWorkSpaceReducer,flowConfigReducer,nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
   const { theme,reactFlowInstance } = flowWorkSpaceReducer;
   const dispatch = useDispatch();
   const homeClickHandle = () => {
-    const { position, zoom } = reactFlowInstance.toObject();
+    const { position, zoom, elements } = reactFlowInstance.toObject();
     const flow = {
       config: flowConfigReducer,
       workspace: { ...flowWorkSpaceReducer, position, zoom },
-      elements: elementReducer.present,
+      elements: elements,
       groups: nodeGroupsReducer
     };
     dispatch(mergeFlow(flow));

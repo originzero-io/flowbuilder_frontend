@@ -1,11 +1,11 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
-import logo from "./assets/images/logo.png";
 import {AppWrapper} from "./components/style-components/AppWrapper";
-import Favicon from "react-favicon";
 import FlowPage from "./pages/FlowPage";
 import ControlPanel from "./pages/ControlPanelPage";
+//import logo from "./assets/images/logo.png";
+//import Favicon from "react-favicon";
 const App = () => {
   return (
     <AppWrapper>
