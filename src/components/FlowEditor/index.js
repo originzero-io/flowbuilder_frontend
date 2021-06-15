@@ -18,7 +18,9 @@ import {
   setMiniMapDisplay,
   setClickedElement,
   setPaneClickPosition,
-  setTheme
+  setTheme,
+  setCurrentFlowConfig,
+  setCurrentFlowWorkspace
 } from "../../store/actions/flowActions";
 import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/actions/elementsActions"
 import {
@@ -33,13 +35,13 @@ import { closeAllNodeGroupMenu } from "../../store/actions/flowActions";
 import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "../../app-global/helpers/elementController";
 import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
-import { deleteNodeCurrentGroup } from "../../store/actions/nodeGroupsActions";
+import { loadGroups } from "../../store/actions/nodeGroupsActions";
 import PropTypes from "prop-types"
 export default function FlowEditor({ reactFlowWrapper }) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
   const selectedElements = useStoreState((state) => state.selectedElements);
-  const {elementReducer,flowWorkSpaceReducer}= useSelector((state) => state.activeFlowReducer);
+  const { elementReducer, flowWorkSpaceReducer, flowConfigReducer } = useSelector((state) => state.activeFlowReducer);
   const elements = elementReducer.present;
   const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowWorkSpaceReducer;
   const dispatch = useDispatch();
@@ -82,26 +84,25 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const onElementsRemoveHandle = (elementsToRemove) => {
     const newElements = removeElements(elementsToRemove, elements);
     dispatch(setElements(newElements));
-    const nodesToRemove = elementsToRemove.filter(els => isNode(els));
-    nodesToRemove.map(els => {
-      dispatch(deleteNodeCurrentGroup(els));
-    })
   };
   const onLoadHandle = (_reactFlowInstance) => {
-    dispatch(setTheme(theme));
-    dispatch(setMiniMapDisplay(miniMapDisplay));
     dispatch(setReactFlowInstance(_reactFlowInstance));
     adjustScreen(flowWorkSpaceReducer,_reactFlowInstance);
-    // getDataFromDb(nodeClass)
+    // getDataFromDb(flowConfigReducer,nodeClass)
     //   .then((flow) => {
-    //     console.log("ohoo:", flow);
+    //     console.log("dönen flow:", flow);
     //     //adjustScreen(flow, _reactFlowInstance);
     //     //dispatch(setElements(flow.elements));
+    //     //dispatch(setCurrentFlowConfig(flow.config));
+    //     //dispatch(setCurrentFlowWorkspace(flow.workspace));
+    //     dispatch(setElements(flow.elements));
     //   })
     //   .catch((err) => {
     //     console.log("ERROR ON DB", err);
-    //     dispatch(setElements(initialElements));
+    //     //dispatch(setElements(initialElements));
     //   });
+    // const data = localStorage.getItem(`${flowConfigReducer.id}`);
+    // console.log("dataaaa", data);
   };
   const onDragOverHandle = (event) => {
     event.preventDefault();
@@ -128,10 +129,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
       return node.name === type ? { ...node, createdDate: Date.now() } : node;
     });
     dispatch(setNodeList(newList));
-  };
-  const onElementClickHandle = (event, element) => {
-    event.preventDefault();
-    dispatch(setClickedElement(element));
   };
   const onDoubleClickHandle = (event) => {
     event.preventDefault();
@@ -247,9 +244,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   useEffect(() => {
     nodeClass.applyElements(elements, dispatch);
   }, [elements]);
-  useEffect(() => {
-    console.log("first render");
-  }, [])
   return (
     <>
       <ReactFlow
@@ -263,7 +257,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         elements={elements}
         onConnect={onConnectHandle}
         onElementsRemove={onElementsRemoveHandle}
-        onElementClick={onElementClickHandle}
+        //onElementClick={onElementClickHandle}
         onDoubleClick={onDoubleClickHandle}
         onPaneContextMenu={onPaneContextHandle}
         onPaneClick={onPaneClickHandle}

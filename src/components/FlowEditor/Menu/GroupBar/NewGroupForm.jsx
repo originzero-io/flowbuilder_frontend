@@ -43,7 +43,6 @@ export default function NewGroupForm({ theme }) {
     dispatch(
       addGroup({
         id: uuid(),
-        nodes: [],
         name: groupInfo.name,
         color: groupInfo.color,
       })

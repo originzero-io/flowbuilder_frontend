@@ -100,7 +100,7 @@ export default function ProjectsPanel() {
           <Box onClick={() => showModalHandle("dashboard")}>+</Box>
           {projectDashboards.map((dashboard) => {
             return (
-              <Link key={dashboard.id} to={`/flow/105055`}>
+              <Link key={dashboard.id} to={`/dashboard/1234`}>
                 <Card key={dashboard.id}>
                   <CardBody>
                     <CardTitle>{dashboard.name}</CardTitle>

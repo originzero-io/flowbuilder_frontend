@@ -14,7 +14,7 @@ export const createNode = (type,position,align,func) => {
       align: align,
       expand: false,
       enable: true,
-      group: {id:0,color:undefined,nodes:[]},
+      group: {},
     },
   };
 }

@@ -24,7 +24,7 @@ export default function ControlPanelPage() {
         <TopMenu />
         <Content>
           <NavigationMenu />
-          <PanelManager/>
+          <PanelManager />
         </Content>
       </Wrapper>
     </AppWrapper>

@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { rotateMultiNode, setElements, setMultipleNodeEnable } from "../../../../../store/actions/elementsActions";
 import { setMultiSelectionContextMenu } from "../../../../../store/actions/menuActions";
 import GroupMenu from "../../GroupMenu";
-import { deleteNodeCurrentGroup } from "../../../../../store/actions/nodeGroupsActions";
 
 export default function MultiSelectionContextMenu() {
   const selected = useStoreState((state) => state.selectedElements);
@@ -23,11 +22,6 @@ export default function MultiSelectionContextMenu() {
       );
       dispatch(setElements(newElements));
       dispatch(setMultiSelectionContextMenu(false));
-
-      const nodesToRemove = selected.filter(s => isNode(s));
-      nodesToRemove.map(els => {
-        dispatch(deleteNodeCurrentGroup(els));
-      })
     }
   };
   const [showGroup, setShowGroup] = useState(false);

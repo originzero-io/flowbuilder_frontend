@@ -8,10 +8,6 @@ export const setReactFlowInstance = (reactFlowInstance) => ({
   type: action.SET_REACT_FLOW_INSTANCE,
   payload: reactFlowInstance
 });
-export const setClickedElement = (data) => ({
-  type: action.SET_CLICKED_ELEMENT,
-  payload: data
-});
 export const setMiniMapDisplay = (data) => ({
   type: action.SET_MINIMAP_DISPLAY,
   payload: data
@@ -31,10 +27,6 @@ export const setRotateAllPath = (data) => ({
 export const setWorkspaceEdgeType = (data) => ({
   type: action.SET_WORKSPACE_EDGE_TYPE,
   payload: data
-});
-export const setCopiedElements = (nodes) => ({
-  type: action.SET_COPIED_ELEMENTS,
-  payload: nodes
 });
 export const setPaneClickPosition = (x,y) => ({
   type: action.SET_PANE_CLICK_POSITION,

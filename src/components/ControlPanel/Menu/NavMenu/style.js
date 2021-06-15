@@ -28,9 +28,9 @@ export const NavMenuItemWrapper = styled.button`
   color:white;
   &:hover{
     background-color: rgba(47, 54, 64,0.7);
-    border-right: 3px solid #1890ff;
+    border-right: 3px solid rgb(22,139,63);
   }
   &:focus{
-    background-color: #1890ff;
+    background-color: rgb(22,139,63);
   }
 `

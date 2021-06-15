@@ -28,8 +28,7 @@ import {
 } from "../../../../store/actions/flowActions";
 import * as themeColor from "../../../../config/ThemeReference";
 import { useZoomPanHelper, useStoreActions, isNode } from "react-flow-renderer";
-import { ActionCreators as UndoActionCreators } from 'redux-undo'
-import { deleteNodeCurrentGroup } from "../../../../store/actions/nodeGroupsActions";
+import { ActionCreators as UndoActionCreators } from 'redux-undo';
 const Menu = styled.div`
   position: absolute;
   display: flex;
@@ -46,9 +45,8 @@ const Menu = styled.div`
     props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON};
 `;
 export default function ControlMenu() {
-  const { flowWorkSpaceReducer,elementReducer } = useSelector((state) => state.activeFlowReducer);
+  const { flowWorkSpaceReducer,flowConfigReducer,elementReducer } = useSelector((state) => state.activeFlowReducer);
   const { reactFlowInstance,rotateAllPath,theme } = flowWorkSpaceReducer;
-  const elements = elementReducer.present;
   const canUndo = elementReducer.past.length > 0;
   const canRedo = elementReducer.future.length > 0;
   const { zoomIn, zoomOut, fitView } = useZoomPanHelper();
@@ -56,16 +54,12 @@ export default function ControlMenu() {
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
   const saveFlow = useCallback(() => {
-    saveToDb(reactFlowInstance);
+    saveToDb(flowConfigReducer,flowWorkSpaceReducer);
   }, [reactFlowInstance]);
 
   const deleteAllNodes = () => {
     if (confirm("Are you sure?")) {
       dispatch(setElements([]));
-      const nodesToRemove = elements.filter(els => isNode(els));
-      nodesToRemove.map(els => {
-        dispatch(deleteNodeCurrentGroup(els));
-      })
     }
   };
   const closeAllNodes = () => {

@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { isNode, useStoreActions, useStoreState } from "react-flow-renderer";
-//import { Container, AddButton,Button,Input,ColorBox,AddGroupWrapper } from "./style";
+import { useStoreActions, useStoreState } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { setGroupToNodes } from "../../../../app-global/helpers/elementController";
 import { setGroupMultiple, setGroupSingle } from "../../../../store/actions/elementsActions";
-import {
-  addNodeToGroupMultiple, addNodeToGroupSingle,
-
-  deleteNodeCurrentGroup
-} from "../../../../store/actions/nodeGroupsActions";
 import { GroupColor, Label } from "../GroupBar/style";
 const Container = styled.div`
   position: absolute;
@@ -81,21 +75,12 @@ export default function GroupMenu({ self }) {
   };
 
   const singleSelectionHandle = (group) => {
-    console.log("single",group);
     dispatch(setGroupSingle(self, group));
-    dispatch(deleteNodeCurrentGroup(self));
-    dispatch(addNodeToGroupSingle(self, group));
   };
 
   const multiSelectionHandle = (group) => {
     const selectedElementIds = selectedElements.map(m => m.id)
     dispatch(setGroupMultiple(selectedElementIds, group));
-    const nodesToRemove = selectedElements.filter(els => isNode(els));
-    nodesToRemove.map(els => {
-      dispatch(deleteNodeCurrentGroup(els));
-    })
-    dispatch(addNodeToGroupMultiple(selectedElements, group));
-
     const newElements = setGroupToNodes(selectedElementIds, elements, group);
     const newSelected = newElements.filter(els=>selectedElementIds.includes(els.id))
     setSelectedElements(newSelected);

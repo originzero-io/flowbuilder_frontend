@@ -6,14 +6,23 @@ import { openNotification } from "../../../../app-global/dom/notification";
 import { loadFunctionsToNode } from "../../../../app-global/helpers/loadFunctionsToNode";
 import * as themeColor from "../../../../config/ThemeReference";
 import * as tooltip from "../../../../config/TooltipReference";
-import { changeEdgeType, importElements } from "../../../../store/actions/elementsActions";
-import { setMiniMapDisplay, setTheme, setWorkspaceEdgeType } from "../../../../store/actions/flowActions";
+import {
+  changeEdgeType,
+  importElements,
+} from "../../../../store/actions/elementsActions";
+import {
+  setMiniMapDisplay,
+  setTheme,
+  setWorkspaceEdgeType,
+} from "../../../../store/actions/flowActions";
 import { LearnIcon } from "../../../ControlPanel/Icons";
 import SwitchButton from "../../../global/Button/SwitchButton";
 import FileInputWrapper from "../../../global/FileInputWrapper";
 import { VerticalDivider } from "../../../style-components/Divider";
 import {
-  DropDownItem, DropdownList, DropdownWrapper
+  DropDownItem,
+  DropdownList,
+  DropdownWrapper,
 } from "../../../style-components/DropdownMenu";
 import { FileInput } from "../../../style-components/FileInput";
 import { Circle } from "../../../style-components/Shapes";
@@ -31,8 +40,8 @@ const Menu = styled(MenuIndex)`
 `;
 
 export default function ConfigurationMenu() {
-  const { flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
-  const { reactFlowInstance,miniMapDisplay,theme } = flowWorkSpaceReducer;
+  const { flowWorkSpaceReducer, flowConfigReducer, elementReducer, nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
+  const { reactFlowInstance, miniMapDisplay, theme } = flowWorkSpaceReducer;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
@@ -42,8 +51,13 @@ export default function ConfigurationMenu() {
   const downloadFlowHandle = () => {
     if (confirm("Download?")) {
       if (reactFlowInstance) {
-        console.log("reactflefew", reactFlowInstance);
-        const flow = reactFlowInstance.toObject();
+        const { elements } = reactFlowInstance.toObject();
+        const flow = {
+          config: flowConfigReducer,
+          workspace: flowWorkSpaceReducer,
+          elements: elements,
+          groups: nodeGroupsReducer
+        }
         console.log("flow:", flow);
         let hiddenElement = document.createElement("a");
         hiddenElement.href =
@@ -109,20 +123,12 @@ export default function ConfigurationMenu() {
     setActive({ ...active, miniMap: checked });
   };
   const edgeTypeHandle = (e) => {
-    dispatch(setWorkspaceEdgeType(e.target.value))
-    dispatch(changeEdgeType(e.target.value))
-  }
-  useEffect(() => {
-    // const storedTheme = localStorage.getItem("theme");
-    // const storedMinimapDisplay = localStorage.getItem("mini-map");
-    // setActive({
-    //   miniMap: storedMinimapDisplay === "visible" ? true : false,
-    //   theme: storedTheme === "dark" ? true : false,
-    // });
-  }, []);
+    dispatch(setWorkspaceEdgeType(e.target.value));
+    dispatch(changeEdgeType(e.target.value));
+  };
   return (
     <Menu theme={theme}>
-      <DropdownWrapper tabIndex="1" >
+      <DropdownWrapper tabIndex="1">
         <MenuItem>
           <ShareIcon width="25px" height="25px" theme={theme} />
         </MenuItem>
@@ -137,7 +143,7 @@ export default function ConfigurationMenu() {
         </DropdownList>
       </DropdownWrapper>
       <VerticalDivider theme={theme} />
-    
+
       <MenuItem data-tip="Settings" data-for={tooltip.SETTINGS}>
         <TuneIcon
           color={

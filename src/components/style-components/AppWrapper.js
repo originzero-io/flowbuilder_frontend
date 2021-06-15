@@ -3,7 +3,8 @@ import * as themeColor from "../../config/ThemeReference"
 export const AppWrapper = styled.div`
   width:100%;
   height:100vh;
-  overflow: hidden;
+  position: relative;
+  overflow-x: hidden;
 `;
 export const FlowWrapper = styled.div`
   height:100%;

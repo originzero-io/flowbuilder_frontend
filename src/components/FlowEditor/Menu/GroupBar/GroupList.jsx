@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteGroup } from "../../../../store/actions/nodeGroupsActions";
 import { deleteGroupOfElement } from "../../../../store/actions/elementsActions";
 import { GroupItem, GroupColor, Label} from "./style";
-import { useStoreActions } from "react-flow-renderer";
+import { isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";
 import { NameEditIcon } from "../../../global/Icons";
-import useDidMountEffect from "../../../../hooks/useDidMountEffect";
 import PropTypes from "prop-types"
 export default function GroupList({ theme }) {
-  const {nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
+  const { nodeGroupsReducer, elementReducer } = useSelector((state) => state.activeFlowReducer);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(null);
   const [editableItem, setEditableItem] = useState({ state: false, group: {} });
@@ -24,7 +23,10 @@ export default function GroupList({ theme }) {
       dispatch(deleteGroupOfElement(groupId))
     }
   };
-
+  const groupItemClickHandle = (group) => {
+    const newArr = elementReducer.present.filter(els => isNode(els) && els.data.group.id === group.id);
+    setSelectedElements(newArr);
+  };
   const editIconClickHandle = (group) => {
     if (group.id !== editableItem.group.id) {
       setEditableItem({ state: true, group: { ...group } });
@@ -34,26 +36,9 @@ export default function GroupList({ theme }) {
       } else setEditableItem({ state: true, group: { ...group } });
     }
   };
-
-  const groupItemClickHandle = (nodes) => {
-    setSelectedElements(nodes);
-  };
-
   const labelClickHandle = () => {
     setEditableItem({state:false,group:{}});
   };
-
-  useDidMountEffect(() => {
-    //localStorage.setItem("groups", JSON.stringify(nodeGroups));
-  }, [nodeGroupsReducer])
-  
-  useEffect(() => {
-    // const storedGroups = JSON.parse(localStorage.getItem("groups"));
-    // if (storedGroups) {
-    //   dispatch(loadGroups(storedGroups));
-    // }
-  },[])
-
   return (
     <>
       {nodeGroupsReducer.map((group) => {
@@ -63,7 +48,7 @@ export default function GroupList({ theme }) {
             theme={theme}
             onMouseEnter={() => setHover(group.id)}
             onMouseLeave={() => setHover(null)}
-            onClick={() => groupItemClickHandle(group.nodes)}
+            onClick={()=>groupItemClickHandle(group)}
           >
             {editableItem.state && editableItem.group.id === group.id ? (
               <EditForm

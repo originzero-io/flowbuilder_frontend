@@ -11,7 +11,7 @@ export const Container = styled.div`
   color:whitesmoke;
 `
 export const Box = styled.div`
-  background:#1890ff;
+  background:rgb(22,139,63);
   width:150px;
   height:150px;
   border-radius: 6px;

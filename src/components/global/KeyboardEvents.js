@@ -4,13 +4,16 @@ import { ActionCreators as UndoActionCreators } from 'redux-undo'
 import KeyboardEventHandler from "react-keyboard-event-handler";
 import { useStoreActions, useStoreState, useZoomPanHelper } from "react-flow-renderer";
 import { saveToDb } from "../../app-global/db";
-import { setCopiedElements, setRotateAllPath } from "../../store/actions/flowActions";
+import { setRotateAllPath } from "../../store/actions/flowActions";
+import { setCopiedElements } from "../../store/actions/controlPanelActions";
 import uuid from "react-uuid";
 import { pasteNodes } from "../../store/actions/elementsActions";
+import { openNotification as notification } from "../../app-global/dom/notification";
 export default function KeyboardEvents() {
   const dispatch = useDispatch();
   const { flowWorkSpaceReducer,elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const { copiedElements, paneClickPosition,reactFlowInstance,rotateAllPath } = flowWorkSpaceReducer;
+  const { copiedElements } = useSelector((state) => state.controlPanelReducer);
+  const { paneClickPosition,reactFlowInstance,rotateAllPath } = flowWorkSpaceReducer;
   const elements = elementReducer.present;
   const selectedElements = useStoreState((state) => state.selectedElements);
   const setSelectedElements = useStoreActions(
@@ -46,6 +49,7 @@ export default function KeyboardEvents() {
   const copyNodesEvent = (key, e) => {
     e.preventDefault();
     dispatch(setCopiedElements(selectedElements));
+    notification("", `${selectedElements.length} nodes copied.`, "success");
   }
   const getPosition = (index) => {
     const position = reactFlowInstance.project({

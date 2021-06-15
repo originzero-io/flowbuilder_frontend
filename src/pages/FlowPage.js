@@ -12,16 +12,20 @@ import useComponentWillMount from "../hooks/useComponentWillMount";
 import { setElements } from "../store/actions/elementsActions";
 import { loadGroups } from "../store/actions/nodeGroupsActions";
 import { Redirect } from "react-router";
-export default function FlowPage({ match }) {
+import { useParams } from "react-router-dom";
+export default function FlowPage() {
   const dispatch = useDispatch();
-  const flowId = match.params.flowId;
+  const { flowId } = useParams();
   const flow = useSelector((state) => state.flowReducer).find((flow) => flow.config.id === flowId);
+  const loadFlow = () => {
+    dispatch(setCurrentFlowConfig(flow.config));
+    dispatch(setCurrentFlowWorkspace(flow.workspace));
+    dispatch(setElements(flow.elements));
+    dispatch(loadGroups(flow.groups));
+  }
   useComponentWillMount(() => {
     if (flow) {
-      dispatch(setCurrentFlowConfig(flow.config));
-      dispatch(setCurrentFlowWorkspace(flow.workspace));
-      dispatch(setElements(flow.elements));
-      dispatch(loadGroups(flow.groups));
+      loadFlow();
     }
   }, []);
   const rfWrapper = useRef(null);
@@ -29,7 +33,7 @@ export default function FlowPage({ match }) {
     <ReactFlowProvider>
       {flow !== undefined ? (
         <FlowWrapper ref={rfWrapper}>
-          <FlowEditor reactFlowWrapper={rfWrapper} />
+          <FlowEditor reactFlowWrapper={rfWrapper}/>
         </FlowWrapper>
       ) : (
           <Redirect to="/"/>

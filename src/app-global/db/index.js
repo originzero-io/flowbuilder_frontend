@@ -5,13 +5,13 @@ localforage.config({
   name: "LocalForage DB",
   storeName: "Anaks-Flow",
 });
-export const getDataFromDb = async (nodeClass) => {
+export const getDataFromDb = async (flowConfig,nodeClass) => {
   return await localforage
-    .getItem("flow")
+    .getItem(flowConfig.id)
     .then((storedFlow) => {
       if (storedFlow) {
-        const flow = JSON.parse(storedFlow);
-        const flowElements = flow.elements;
+        const data = JSON.parse(storedFlow);
+        const flowElements = data.flow.elements;
         const elements = flowElements.map((els) => {
           return {
             ...els,
@@ -23,8 +23,8 @@ export const getDataFromDb = async (nodeClass) => {
         });
         return {
           elements,
-          position: flow.position,
-          zoom: flow.zoom
+          position: data.flow.position,
+          zoom: data.flow.zoom
         };
       } else {
         return Promise.reject("No flow");
@@ -34,18 +34,24 @@ export const getDataFromDb = async (nodeClass) => {
       return Promise.reject(err);
     });
 };
-export const saveToDb = async (reactFlowInstance) => {
-  console.log("savetodb:",reactFlowInstance)
-  if (reactFlowInstance) {
-    const flow = reactFlowInstance.toObject();
-    console.log("floww:",flow)
-    return await localforage
-      .setItem("flow", JSON.stringify(flow))
-      .then((res) => {
-        notification("","Save successful","success");
-      })
-      .catch((err) => Promise.reject(err));
-  } else {
-    Promise.reject("No reactflow instance");
+export const saveToDb = async (flowConfig, flowWorkspace) => {
+  const { reactFlowInstance } = flowWorkspace;
+  const flow = reactFlowInstance.toObject();
+  const data = {
+    flowConfig,
+    flowWorkspace,
+    flow
   }
+  console.log("DATA:", data);
+  const name = `${flowConfig.id}`;
+  const value = JSON.stringify(data);
+  console.log("name", name);
+  console.log("value:", value);
+  localStorage.setItem(`${data.flowConfig.id}`,JSON.stringify(data));
+  // return await localforage
+  //   .setItem("sdadas", value)
+  //   .then((res) => {
+  //     notification("","Save successful","success");
+  //   })
+  //   .catch((err) => Promise.reject(err));
 };

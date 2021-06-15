@@ -60,8 +60,8 @@ const NavigationMenu = () => {
           })}
         </CollapsibleMenu>
         <NavMenuItem label="Teams" icon={<LearnIcon width="20px" color="white"/>} onClick={()=>panelActiveHandler("Teams")}></NavMenuItem>
-        <NavMenuItem label="Learn" icon={<LearnIcon width="20px" color="white"/>}  onClick={()=>panelActiveHandler("Learn")}></NavMenuItem>
-        <NavMenuItem label="Notes" icon={<LearnIcon width="20px" color="white"/>}  onClick={()=>panelActiveHandler("Notes")}></NavMenuItem>
+        <NavMenuItem label="Learn" icon={<LearnIcon width="20px" color="white"/>} onClick={()=>panelActiveHandler("Learn")}></NavMenuItem>
+        <NavMenuItem label="Notes" icon={<LearnIcon width="20px" color="white"/>} onClick={()=>panelActiveHandler("Notes")}></NavMenuItem>
         <NavMenuItem label="Devices" icon={<LearnIcon width="20px" color="white"/>} onClick={()=>panelActiveHandler("Devices")}></NavMenuItem>
         <CollapsibleMenu trigger={settingsItem()}>
           <CollapsibleMenuItem onClick={()=>panelActiveHandler("Settings")}>Account settings</CollapsibleMenuItem>
