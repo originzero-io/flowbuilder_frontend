@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { SubmitIcon } from "../../../../global/Icons";
+import { SubmitIcon } from "../../../../global/icons";
 import { Submit } from "../../../Menu/GroupBar/style";
 import { useSelector, useDispatch } from "react-redux";
 //import { isNode } from "react-flow-renderer";

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MenuIndex, MenuItem} from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import * as themeColor from "../../../../config/ThemeReference"
-import { Logo } from "../../../global/Icons";
+import { Logo } from "../../../global/icons";
 import { Link } from "react-router-dom";
 import { mergeFlow } from "../../../../store/actions/flowActions";
 const Menu = styled(MenuIndex)`

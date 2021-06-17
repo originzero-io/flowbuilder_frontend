@@ -6,7 +6,7 @@ import { GroupItem, GroupColor, Label} from "./style";
 import { isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";
-import { NameEditIcon } from "../../../global/Icons";
+import { NameEditIcon } from "../../../global/icons";
 import PropTypes from "prop-types"
 export default function GroupList({ theme }) {
   const { nodeGroupsReducer, elementReducer } = useSelector((state) => state.activeFlowReducer);
