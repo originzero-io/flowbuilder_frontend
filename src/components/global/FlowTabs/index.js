@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { mergeFlow } from "../../../store/actions/flowActions";
 import AddFlowForm from "../../ControlPanel/SidePanel/Projects/forms/AddFlowForm";
 import Modal from "../../global/Modal";
-
+import * as themeColor from "../../../config/ThemeReference"
 const Container = styled.div`
   display: flex;
   position: absolute;
@@ -14,10 +14,10 @@ const Container = styled.div`
   z-index: 5;
   user-select: none;
 `;
-const TabItem = styled.div`
-  background:rgba(189, 195, 199,0.6);
+const TabItem = styled.button`
   border-top-left-radius:4px;
   border-top-right-radius:4px;
+  border:none;
   min-width: 100px;
   cursor: pointer;
   color: black;
@@ -25,9 +25,10 @@ const TabItem = styled.div`
   margin-right: 5px;
   padding: 2px;
   text-align: center;
+  background: ${({selected}) => selected ? themeColor.HOVER_COLOR : "rgba(189, 195, 199,0.6)" };
   &:hover {
     transform: scale(1.1);
-    background: #1DB954;
+    background: ${themeColor.HOVER_COLOR};  
   }
 `;
 const AddButton = styled.div`
@@ -77,8 +78,13 @@ export default function FlowTabs() {
     <Container>
       {flows.map((flow) => {
         return (
-          <div key={flow.config.id} onClick={()=>onClickHandle(flow.config.id)}>
-              <TabItem key={flow.config.id}>{flow.config.name}</TabItem>
+          <div key={flow.config.id} onClick={() => onClickHandle(flow.config.id)}>
+            <TabItem
+              disabled={flowConfigReducer.id === flow.config.id}
+              selected={flowConfigReducer.id === flow.config.id}
+              key={flow.config.id}>
+                {flow.config.name}
+            </TabItem>
           </div>
         );
       })}
