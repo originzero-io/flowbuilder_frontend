@@ -1,0 +1,20 @@
+.node-handle {
+  border: none !important;
+  box-shadow: 0.174px 0.8px 2px 0px rgba(0, 0, 0, 1) !important;
+  width: 10px !important;
+  height: 10px !important;
+  position: static !important;
+}
+.node-handle:hover {
+  width: 11px !important;
+  height: 11px !important;
+}
+
+.vertical {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.horizontal {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

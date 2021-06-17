@@ -1,13 +1,26 @@
 import styled from "styled-components";
-import { readBuilderProgram } from "typescript";
-
-export const Circle = styled.div`
-  width: 20px;
-  height: 15px;
-  background: green;
+import {DropdownList} from "../style-components/DropdownMenu"
+export const Circle = styled.button`
+  width: 55px;
+  height: 55px;
+  background: transparent;
   border-radius: 50%;
-  background-color: #7ee8fa;
-  background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
+  position: absolute;
+  top: -29px;
+  border: 7px solid
+    ${(props) => (props.theme === "dark" ? "#232323" : "#d7d7d7")};
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:focus + ${DropdownList} {
+    visibility: visible;
+    transform: translateY(0px);
+  }
 `;
 export const Triangle = styled.div`
   margin: 0px 0px;

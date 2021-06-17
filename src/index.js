@@ -1,27 +1,26 @@
-import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import "./assets/css/main.css"
+import React from "react"
+import {BrowserRouter} from 'react-router-dom'
+import "./assets/css/index.js"
 import App from "./App";
 import "react-notifications/lib/notifications.css";
 import "@fortawesome/fontawesome-free/js/brands"
 import "@fortawesome/fontawesome-free/js/solid"
 import "@fortawesome/fontawesome-free/js/fontawesome"
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import Popper from 'popper.js';
-//import $ from "jquery"
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'react-tabs/style/react-tabs.css';
-///REDUX
-import { createStore, applyMiddleware, compose } from "redux";
-import thunk from "redux-thunk";
+import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
-import reducers from "./REDUX/reducers/index";
-import { composeWithDevTools } from 'redux-devtools-extension';
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
+import configureStore from "./store/configureStore.js";
+const store = configureStore();
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   rootElement
 );
+
+reportWebVitals(console.log);

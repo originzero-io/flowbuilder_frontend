@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-//Same as componentDidUpdate, but unless is first render 
+import { useEffect, useRef } from "react";
+//Same as componentDidUpdate, but unless is first render
 const useDidMountEffect = (func, deps) => {
   const didMount = useRef(false);
 

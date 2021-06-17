@@ -1,15 +1,15 @@
 import {
   getOutgoers,
-  getIncomers,
-  getConnectedEdges,
+  //getIncomers,
+  //getConnectedEdges,
   isEdge
 } from "react-flow-renderer";
 import {
   getNodesAndEdges,
-  findElementById
+  //findElementById
 } from "../helpers/elementController";
 import { openNotification as notification } from "../dom/notification";
-import {setElements} from "../../REDUX/actions/flowActions"
+import {setElements} from "../../store/actions/elementsActions"
 export default class Node {
   elements = [];
   nodes = [];
@@ -51,7 +51,7 @@ export default class Node {
     //combined = "This is for " + datas[0].payload;
     //console.log("COMBINED:", combined);
     notification("Datas combined", combined, "success");
-    const connected = getConnectedEdges([self], this.edges);
+    //const connected = getConnectedEdges([self], this.edges);
     //BURDA KALINDI
     //console.log("combine connected:", connected);
     this.sendDataToYourOutgoers([{ source1: combined }], self, outgoers);

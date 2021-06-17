@@ -1,0 +1,24 @@
+.selected-tab {
+  background: #1DB954;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  user-select: none;
+}
+.custom-tooltip {
+  padding: 8px !important;
+  font-size: 12px !important;
+}
+
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 400ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.ReactModal__Overlay--after-open{
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+  opacity: 0;
+}
