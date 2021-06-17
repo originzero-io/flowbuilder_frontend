@@ -1,27 +1,5 @@
 import * as actions from "../constants/controlPanelContants";
-
-const panelConfig = {
-  activePanel: "Projects",
-  activeProject: { id: "project0", name: "Project 1", author: "Anaks", flows: [] },
-  copiedElements: [],
-  projects: [
-    {
-      id: "project0",
-      name: "Project 1",
-      author: "Anaks",
-    },
-  ],
-  dashboards: [
-    {
-      id: "dashboard0",
-      name: "dashboard1",
-      author: "Anıl Akseki",
-      description: "anaks ilk flow",
-      projectId: "project0",
-    },
-  ],
-};
-
+import { panelConfig } from "../initialValues";
 const controlPanelReducer = (state = panelConfig, { type, payload }) => {
   switch (type) {
     case actions.SET_ACTIVE_PANEL:

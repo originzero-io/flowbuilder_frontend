@@ -15,7 +15,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={ControlPanel}/>
         <Route exact path="/flow/:flowId" component={FlowPage}/>
-        <Route exact path="/changeTab/:flowId" component={TabChange}/>
+        <Route exact path="/change-tab/:flowId" component={TabChange}/>
         <Route exact path="/dashboard/:dashboardId" component={DashboardPage}/>
         <Route><Redirect to="/"/></Route>  
       </Switch>

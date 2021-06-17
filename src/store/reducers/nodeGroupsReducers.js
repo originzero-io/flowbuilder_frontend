@@ -1,31 +1,6 @@
 import * as actionTypes from "../constants/nodeGroupsContants";
-const nodeGroups = [
-  {
-    id: 1,
-    name: "group_1",
-    color: "#2ecc71",
-  },
-  {
-    id: 2,
-    name: "group_2",
-    color: "#2980b9",
-  },
-  {
-    id: 3,
-    name: "group_3",
-    color: "#f39c12",
-  },
-  {
-    id: 4,
-    name: "group_4",
-    color: "#6c5ce7",
-  },
-  {
-    id: 5,
-    name: "group_5",
-    color: "tomato",
-  },
-];
+import { nodeGroups } from "../initialValues";
+
 export const nodeGroupsReducer = (state = nodeGroups, { type, payload }) => {
   switch (type) {
     case actionTypes.LOAD_GROUPS:

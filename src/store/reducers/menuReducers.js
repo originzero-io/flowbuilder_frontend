@@ -5,7 +5,7 @@ const initialState = {
     x: 0,
     y: 0,
     element:{}
-  }
+}
 const menuConfig = {
   panelMenu: initialState,
   multiSelectionMenu: initialState,

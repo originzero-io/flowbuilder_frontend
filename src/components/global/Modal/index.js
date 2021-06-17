@@ -17,11 +17,11 @@ const customStyles = {
     background: "rgb(245, 246, 250)",
     width: "30%",
     maxHeight: "70%",
-    boxShadow: "0px 3px 18px 9px rgba(0,0,0,0.75)"
-
+    boxShadow: "-1px 1px 16px -9px rgba(0,0,0,0.75)",
   },
   overlay: {
     background: "rgba(53, 59, 72,0.4)",
+    zIndex:'6'
   },
 };
 const closeButtonWrapperStyle = {
