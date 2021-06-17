@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { addFlow } from "../../../../../store/actions/flowActions";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import uuid from "react-uuid";
@@ -17,6 +18,7 @@ export default function AddFlowForm({ closeModal, formType }) {
     projectId: activeProject.id,
   });
   const dispatch = useDispatch();
+  const history = useHistory();
   const onChangeHandler = (e) => {
     setFlowInfo({ ...flowInfo, [e.target.name]: e.target.value });
   };
@@ -24,6 +26,7 @@ export default function AddFlowForm({ closeModal, formType }) {
     e.preventDefault();
     dispatch(addFlow(flowInfo));
     closeModal();
+    history.push(`/change-tab/${flowInfo.id}`)
   };
 
   return (

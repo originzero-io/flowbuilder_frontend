@@ -45,7 +45,7 @@ const AddButton = styled.div`
   text-align: center;
   &:hover {
     transform: scale(1.1);
-    background: #1DB954;
+    background: ${themeColor.HOVER_COLOR};
   }
 `;
 export default function FlowTabs() {
@@ -64,7 +64,6 @@ export default function FlowTabs() {
   };
   const onClickHandle = (id) => {
     const { position, zoom, elements } = reactFlowInstance.toObject();
-    console.log("elements:", elements);
     const flow = {
       config: flowConfigReducer,
       workspace: { ...flowWorkSpaceReducer, position, zoom },
