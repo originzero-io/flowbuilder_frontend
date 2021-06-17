@@ -1,6 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
-import { CancelIcon } from "../Icons";
+import { CancelIcon } from "../icons";
 import PropTypes from "prop-types"
 
 const customStyles = {
