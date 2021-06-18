@@ -11,6 +11,7 @@ const Container = styled.div`
   user-select: none;
   background-color: white;
   cursor: pointer;
+  color:black;
   transition: background-color 0.3s ease-in-out;
   &:hover {
     background-color: rgba(210, 218, 226, 1);
@@ -36,7 +37,7 @@ const SubtitleContainer = styled.div`
   justify-content: center;
 `;
 const TextContainer = styled.div`
-  color: darkgray;
+  color: black;
   font-size: 12px;
 `;
 const FooterContainer = styled.div`

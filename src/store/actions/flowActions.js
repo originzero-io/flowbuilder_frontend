@@ -65,6 +65,14 @@ export const setCurrentFlowWorkspace = (data) => ({
   type: action.SET_CURRENT_FLOW_WORKSPACE,
   payload: data
 });
+export const openFlow = (flow) => ({
+  type: action.OPEN_FLOW,
+  payload: flow
+});
+export const closeFlow = (flow) => ({
+  type: action.CLOSE_FLOW,
+  payload: flow
+});
 
 
 

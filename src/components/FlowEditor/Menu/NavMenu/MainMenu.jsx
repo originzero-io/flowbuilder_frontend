@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as themeColor from "../../../../config/ThemeReference"
 import { Logo } from "../../../global/icons";
 import { Link } from "react-router-dom";
-import { mergeFlow } from "../../../../store/actions/flowActions";
+import { mergeFlow, setActiveFlow, setCurrentFlowConfig } from "../../../../store/actions/flowActions";
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;
@@ -51,6 +51,7 @@ const MainMenu = () => {
       groups: nodeGroupsReducer
     };
     dispatch(mergeFlow(flow));
+    dispatch(setCurrentFlowConfig({}));
   }
   return (
     <>

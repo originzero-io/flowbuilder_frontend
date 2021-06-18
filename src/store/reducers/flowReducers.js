@@ -10,12 +10,33 @@ export const flowReducer = (state = flows, { type, payload }) => {
       return [...state, { config: { ...payload }, ...flowTemplate }];
     case actions.UPDATE_FLOW:
       return state;
+    case actions.OPEN_FLOW:
+      return state.map(state => {
+        if (state.config.id === payload.id) {
+          return {
+            ...state,
+            opened:true
+          }
+        }
+        else return state;
+      });
+    case actions.CLOSE_FLOW:
+      return state.map(state => {
+        if (state.config.id === payload.id) {
+          return {
+            ...state,
+            opened:false
+          }
+        }
+        else return state;
+      });
     case actions.DELETE_FLOW:
       return state.filter(state=>state.config.id !== payload.id)
     case actions.MERGE_FLOW:
       return state.map(state => {
         if (state.config.id === payload.config.id) {
-          return payload
+          console.log(payload);
+          return {...state,...payload}
         }
         else return state;
       });

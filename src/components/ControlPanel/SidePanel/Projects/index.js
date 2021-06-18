@@ -5,7 +5,7 @@ import {
   deleteDashboard,
 } from "../../../../store/actions/controlPanelActions";
 import {
-  deleteFlow,
+  deleteFlow, openFlow,
 } from "../../../../store/actions/flowActions";
 import { Box } from "../styles";
 import {
@@ -22,7 +22,7 @@ import {
   CollapsibleTrigger,
 } from "../../../global/Collapsible/CollapsibleMenu";
 import FormManager from "./forms/FormManager";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 export default function ProjectsPanel() {
   const { activeProject, dashboards } = useSelector(
     (state) => state.controlPanelReducer
@@ -32,6 +32,7 @@ export default function ProjectsPanel() {
   const [projectFlows, setProjectFlows] = useState([]);
   const [projectDashboards, setProjectDashboards] = useState([]);
   const [formType, setFormType] = useState(null);
+  const history = useHistory();
   const dispatch = useDispatch();
   const showModalHandle = (type) => {
     setShowModal(true);
@@ -69,6 +70,11 @@ export default function ProjectsPanel() {
       dispatch(deleteDashboard(dashbord));
     }
   };
+
+  const openPageHandler = (type, data) => {
+    dispatch(openFlow(data));
+    history.push(`/${type}/${data.id}`);
+  }
   return (
     <>
       {/* {activeProject.name} */}
@@ -77,7 +83,7 @@ export default function ProjectsPanel() {
           <Box onClick={() => showModalHandle("flow")}>+</Box>
           {projectFlows.map(({config}) => {
             return (
-              <Link key={config.id} to={`/flow/${config.id}`}>
+              <div key={config.id} onClick={()=>openPageHandler("flow",config)}>
                 <Card key={config.id}>
                   <CardBody>
                     <CardTitle>{config.name}</CardTitle>
@@ -90,7 +96,7 @@ export default function ProjectsPanel() {
                     </CardFooter>
                   </CardBody>
                 </Card>
-              </Link>
+              </div>
             );
           })}
         </FlowsContainer>
@@ -100,7 +106,7 @@ export default function ProjectsPanel() {
           <Box onClick={() => showModalHandle("dashboard")}>+</Box>
           {projectDashboards.map((dashboard) => {
             return (
-              <Link key={dashboard.id} to={`/dashboard/1234`}>
+              <div key={dashboard.id} onClick={()=>openPageHandler("dashboard",dashboard)}>
                 <Card key={dashboard.id}>
                   <CardBody>
                     <CardTitle>{dashboard.name}</CardTitle>
@@ -113,7 +119,7 @@ export default function ProjectsPanel() {
                     </CardFooter>
                   </CardBody>
                 </Card>
-              </Link>
+              </div>
             );
           })}
         </DashboardsContainer>

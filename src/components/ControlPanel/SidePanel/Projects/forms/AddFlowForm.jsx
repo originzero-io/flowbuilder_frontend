@@ -18,7 +18,7 @@ export default function AddFlowForm({ closeModal, formType }) {
     projectId: activeProject.id,
   });
   const dispatch = useDispatch();
-  const history = useHistory();
+  //const history = useHistory();
   const onChangeHandler = (e) => {
     setFlowInfo({ ...flowInfo, [e.target.name]: e.target.value });
   };
@@ -26,7 +26,7 @@ export default function AddFlowForm({ closeModal, formType }) {
     e.preventDefault();
     dispatch(addFlow(flowInfo));
     closeModal();
-    history.push(`/change-tab/${flowInfo.id}`)
+    //history.push(`/change-tab/${flowInfo.id}`)
   };
 
   return (

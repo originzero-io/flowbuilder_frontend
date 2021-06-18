@@ -141,6 +141,7 @@ export const flowTemplate = {
 
 export const flows = [
   {
+    opened:false,
     config: {
       id: "flow0",
       name: "flow1",
