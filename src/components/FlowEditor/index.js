@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import ReactFlow, {
   addEdge,
   isEdge,
@@ -46,6 +46,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowWorkSpaceReducer;
   const dispatch = useDispatch();
   const store = useStore();
+  const [currentZoom, setCurrentZoom] = useState(0);
   const onConnectHandle = (params) => {
     console.log(params);
     if (params.source === params.target) {
@@ -270,6 +271,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         multiSelectionKeyCode={17}
         minZoom={0.3}
         maxZoom={4}
+        onMove={(flowTransform)=>setCurrentZoom(flowTransform.zoom)}
         zoomActivationKeyCode={90}
         zoomOnDoubleClick={false}
         connectionLineStyle={{ stroke: "rgb(22,139,63)", strokeWidth: "2px" }}
@@ -285,7 +287,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         //onConnectEnd={(e) => console.log(e)}
         onSelectionChange={onSelectionChangeHandle}
       >
-        <FlowComponents theme={theme} miniMapDisplay={miniMapDisplay}/>
+        <FlowComponents theme={theme} miniMapDisplay={miniMapDisplay} currentZoom={currentZoom}/>
         <KeyboardEvents/>
       </ReactFlow>
     </>

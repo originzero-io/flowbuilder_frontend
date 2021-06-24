@@ -3,15 +3,15 @@ import { Background, MiniMap } from "react-flow-renderer";
 import AppMenu from "./Menu";
 import PropTypes from "prop-types"
 import AppTooltips from "../global/AppTooltips";
-const FlowComponents = ({ theme, miniMapDisplay }) => {
+const FlowComponents = ({ theme, miniMapDisplay,currentZoom }) => {
   return (
     <>
       <AppMenu/>
       <Background
         variant="lines"
-        gap={80}
+        gap={80/currentZoom}
         color={theme === "light" ? "#7f8c8d" : "rgb(170,170,170)"}
-        size={theme === "light" ? "0.1px" : "0.1px"}
+        size={theme === "light" ? `0.1px` : `0.1px`}
       />
       <MiniMap
         nodeColor="gray"
