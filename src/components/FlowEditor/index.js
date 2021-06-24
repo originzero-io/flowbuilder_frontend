@@ -57,6 +57,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         ...params,
         type:edgeType,
         group: sourceGroup,
+        label:'Label',
         style: { stroke: sourceGroup.color, strokeWidth: "2px" },
         data: { source: "", target: "", payload: "Anaks" },
       };
@@ -241,7 +242,9 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const closeElementContextMenu = () => {
     dispatch(setElementContextMenu(false));
   };
-  
+  const onElementClickHandle = (event,element) => {
+    console.log(element);
+  }
   useEffect(() => {
     nodeClass.applyElements(elements, dispatch);
   }, [elements]);
@@ -258,7 +261,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         elements={elements}
         onConnect={onConnectHandle}
         onElementsRemove={onElementsRemoveHandle}
-        //onElementClick={onElementClickHandle}
+        onElementClick={onElementClickHandle}
         onDoubleClick={onDoubleClickHandle}
         onPaneContextMenu={onPaneContextHandle}
         onPaneClick={onPaneClickHandle}

@@ -17,16 +17,16 @@
     "react-collapsible": "^2.8.3",
     "react-dom": "17.0.1",
     "react-favicon": "0.0.22",
-    "react-flow-renderer": "^9.5.4",
+    "react-flow-renderer": "^9.6.1",
     "react-keyboard-event-handler": "^1.5.4",
-    "react-modal": "^3.13.1",
+    "react-modal": "^3.14.3",
     "react-notifications": "1.7.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "react-switch": "^6.0.0",
     "react-tabs": "^3.2.2",
-    "react-tooltip": "^4.2.19",
+    "react-tooltip": "^4.2.21",
     "react-uuid": "1.0.2",
     "reactstrap": "^8.9.0",
     "redux": "^4.1.0",
@@ -35,19 +35,19 @@
     "redux-undo": "^1.0.1",
     "styled-components": "^5.3.0",
     "use-reducer-thunk": "^1.0.8",
-    "use-undo": "^1.0.3",
+    "use-undo": "^1.0.5",
     "web-vitals": "^2.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.27.0",
+    "eslint": "^7.29.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-only-warn": "^1.0.2",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "typescript": "^4.2.4"
+    "typescript": "^4.3.4"
   },
   "eslintConfig": {
     "extends": [
