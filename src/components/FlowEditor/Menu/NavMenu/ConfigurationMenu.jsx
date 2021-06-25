@@ -6,6 +6,7 @@ import { openNotification } from "../../../../app-global/dom/notification";
 import { loadFunctionsToNode } from "../../../../app-global/helpers/loadFunctionsToNode";
 import * as themeColor from "../../../../config/ThemeReference";
 import * as tooltip from "../../../../config/TooltipReference";
+import { logOut } from "../../../../store/actions/authActions";
 import {
   changeEdgeType,
   importElements,
@@ -126,6 +127,9 @@ export default function ConfigurationMenu() {
     dispatch(setWorkspaceEdgeType(e.target.value));
     dispatch(changeEdgeType(e.target.value));
   };
+  const logOutHandle = () => {
+    dispatch(logOut());
+  };
   return (
     <Menu theme={theme}>
       <DropdownWrapper tabIndex="1">
@@ -192,6 +196,7 @@ export default function ConfigurationMenu() {
             />
           </DropDownItem>
           <DropDownItem>Account Settings</DropDownItem>
+          <DropDownItem onClick={logOutHandle}>Log Out</DropDownItem>
           <DropDownItem>
             <select onChange={edgeTypeHandle} defaultValue="smoothstep">
               <option value="bezier">Bezier</option>

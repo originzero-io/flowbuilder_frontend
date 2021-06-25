@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom";
 import React from "react"
-import {BrowserRouter} from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
+import axios from "axios"
 import "./assets/css/index.js"
 import App from "./App";
 import "react-notifications/lib/notifications.css";
@@ -13,6 +14,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore.js";
 const store = configureStore();
+axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>

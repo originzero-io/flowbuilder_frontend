@@ -5,7 +5,9 @@ import {nodeGroupsReducer} from "./nodeGroupsReducers"
 import {menuConfigReducer} from "./menuReducers"
 import {nodeListReducer} from "./nodeListReducers"
 import controlPanelReducer from "./controlPanelReducer"
+import authReducer from "./authReducer"
 const reducers = combineReducers({
+  authReducer,
   menuConfigReducer,
   nodeClassReducer,
   nodeListReducer,

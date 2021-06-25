@@ -36,7 +36,7 @@ export default function FlowPage() {
           <FlowEditor reactFlowWrapper={rfWrapper}/>
         </FlowWrapper>
       ) : (
-          <Redirect to="/"/>
+          <Redirect to="/panel"/>
       )}
     </ReactFlowProvider>
   );

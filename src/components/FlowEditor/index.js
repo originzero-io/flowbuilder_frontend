@@ -36,6 +36,7 @@ import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } fr
 import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
 import { loadGroups } from "../../store/actions/nodeGroupsActions";
+import CustomEdge from './CustomEdge'
 import PropTypes from "prop-types"
 export default function FlowEditor({ reactFlowWrapper }) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
@@ -57,7 +58,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
         ...params,
         type:edgeType,
         group: sourceGroup,
-        label:'Label',
         style: { stroke: sourceGroup.color, strokeWidth: "2px" },
         data: { source: "", target: "", payload: "Anaks" },
       };
@@ -243,7 +243,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setElementContextMenu(false));
   };
   const onElementClickHandle = (event,element) => {
-    console.log(element);
+    //console.log(element);
   }
   useEffect(() => {
     nodeClass.applyElements(elements, dispatch);
@@ -252,6 +252,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     <>
       <ReactFlow
         nodeTypes={nodeTypes}
+        edgeTypes={{custom:CustomEdge}}
         style={{
           background:
             theme === "light" ? themeColor.LIGHT_PANE : themeColor.DARK_PANE,
