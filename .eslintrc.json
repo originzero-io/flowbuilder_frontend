@@ -19,6 +19,11 @@
         "only-warn"
     ],
     "rules": {
-        "react/display-name":"off"
+        "react/display-name":"off",
+        "class-methods-use-this": "warn",
+        "eqeqeq":"warn",
+        "no-case-declarations":"warn",
+        "no-empty-pattern":"warn",
+        "no-new-wrappers":"warn"
     }
 }

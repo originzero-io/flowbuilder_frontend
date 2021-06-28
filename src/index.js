@@ -14,7 +14,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore.js";
 const store = configureStore();
-axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
+axios.defaults.baseURL = 'https://anaks-flow-server.herokuapp.com/';
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>

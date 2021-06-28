@@ -80,7 +80,7 @@ Card.propTypes = {
   children:PropTypes.element.isRequired
 }
 CardBody.propTypes = {
-  children:PropTypes.element.isRequired
+  children: PropTypes.element.isRequired
 }
 CardTitle.propTypes = {
   children:PropTypes.element.isRequired

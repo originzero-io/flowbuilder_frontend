@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { Redirect } from "react-router-dom";
 import { loginError, loginSuccess } from "../store/actions/authActions";
-import { checkAPI } from "../services/authService";
+import { checkAPI, postAPI } from "../services/authService";
 
 const Container = styled.div`
   display: flex;
@@ -41,6 +41,7 @@ export default function LoginPage() {
       (user) =>
         user.username === data.username && user.password === data.password
     );
+    postAPI(user).then(res => console.log(res.data));
     if (user) {
       dispatch(loginSuccess(user.username));
     } else {
@@ -58,7 +59,8 @@ export default function LoginPage() {
         onSubmit={(e) => e.preventDefault()}
         style={{
           width: "25%",
-          border: "1px solid green",
+          border: "1px dashed green",
+          transform: 'scale(1.1)',
           padding: "25px",
           borderRadius: "4px",
         }}
