@@ -60,14 +60,16 @@ export default function ProjectsPanel() {
     setProjectDashboards(dashboardData);
   }, [flows, dashboards, activeProject]);
 
-  const deleteFlowHandler = (flow) => {
+  const deleteFlowHandler = (e, flow) => {
+    e.stopPropagation();
     if (confirm("Sure?")) {
       dispatch(deleteFlow(flow));
     }
   };
-  const deleteDashbordHandler = (dashbord) => {
+  const deleteDashbordHandler = (e, dashboard) => {
+    e.stopPropagation();
     if (confirm("Sure?")) {
-      dispatch(deleteDashboard(dashbord));
+      dispatch(deleteDashboard(dashboard));
     }
   };
 
@@ -90,7 +92,7 @@ export default function ProjectsPanel() {
                     <CardSubtitle>{config.author}</CardSubtitle>
                     <CardText>{config.description}</CardText>
                     <CardFooter>
-                      <div onClick={() => deleteFlowHandler(config)}>
+                      <div onClick={(e) => deleteFlowHandler(e,config)}>
                         <i className="fas fa-trash-alt"></i>
                       </div>
                     </CardFooter>
@@ -113,7 +115,7 @@ export default function ProjectsPanel() {
                     <CardSubtitle>{dashboard.author}</CardSubtitle>
                     <CardText>{dashboard.description}</CardText>
                     <CardFooter>
-                      <div onClick={() => deleteDashbordHandler(dashboard)}>
+                      <div onClick={(e) => deleteDashbordHandler(e,dashboard)}>
                         <i className="fas fa-trash-alt"></i>
                       </div>
                     </CardFooter>

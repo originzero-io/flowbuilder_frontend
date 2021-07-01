@@ -18,11 +18,10 @@ const App = () => {
         <PrivateRoute exact path="/flow/:flowId" component={FlowPage}/>
         <PrivateRoute exact path="/change-tab/:flowId" component={TabChange}/>
         <PrivateRoute exact path="/dashboard/:dashboardId" component={DashboardPage}/>
-        <Route><Redirect to="/login"/></Route>  
+        <Route path="*"><Redirect to="/login"/></Route>  
       </Switch>
       <FlowTabs/>
       <NotificationContainer />
-      {/* <Favicon url={logo} /> */}
     </AppWrapper>
   );
 };

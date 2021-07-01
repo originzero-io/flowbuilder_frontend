@@ -9,7 +9,7 @@ import { setCopiedElements } from "../../store/actions/controlPanelActions";
 import uuid from "react-uuid";
 import { pasteNodes } from "../../store/actions/elementsActions";
 import { openNotification as notification } from "../../app-global/dom/notification";
-export default function KeyboardEvents() {
+const KeyboardEvents = () => {
   const dispatch = useDispatch();
   const { flowWorkSpaceReducer,elementReducer } = useSelector((state) => state.activeFlowReducer);
   const { copiedElements } = useSelector((state) => state.controlPanelReducer);
@@ -107,3 +107,4 @@ export default function KeyboardEvents() {
     </>
   );
 }
+export default React.memo(KeyboardEvents);

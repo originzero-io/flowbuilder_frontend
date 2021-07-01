@@ -1,28 +1,24 @@
 import * as actions from "../constants/authConstants";
 
 const initialState = {
-  user: "",
+  username: "",
   role: "admin",
   isAuthenticated: false,
   error: false,
   errorMessage: "",
-  apiUser:{}
 };
 
 const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case actions.LOGIN_SUCCESS:
       return {
-        ...state,
-        user: payload,
+        ...payload,
         isAuthenticated: true,
         error: false,
         errorMessage: "",
       };
     case actions.LOGIN_ERROR:
       return {
-        ...state,
-        user: "",
         error: true,
         isAuthenticated: false,
         errorMessage: payload,

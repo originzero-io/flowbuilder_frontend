@@ -8,7 +8,7 @@ import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";
 import { NameEditIcon } from "../../../global/icons";
 import PropTypes from "prop-types"
-export default function GroupList({ theme }) {
+const GroupList = ({ theme }) => {
   const { nodeGroupsReducer, elementReducer } = useSelector((state) => state.activeFlowReducer);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(null);
@@ -84,6 +84,7 @@ export default function GroupList({ theme }) {
   );
 }
 
+export default React.memo(GroupList);
 GroupList.propTypes = {
   theme: PropTypes.string.isRequired
 }

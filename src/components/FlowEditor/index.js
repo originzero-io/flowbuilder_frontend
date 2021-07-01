@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect,useState,useMemo } from "react";
 import ReactFlow, {
   addEdge,
   isEdge,
@@ -90,21 +90,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const onLoadHandle = (_reactFlowInstance) => {
     dispatch(setReactFlowInstance(_reactFlowInstance));
     adjustScreen(flowWorkSpaceReducer,_reactFlowInstance);
-    // getDataFromDb(flowConfigReducer,nodeClass)
-    //   .then((flow) => {
-    //     console.log("dönen flow:", flow);
-    //     //adjustScreen(flow, _reactFlowInstance);
-    //     //dispatch(setElements(flow.elements));
-    //     //dispatch(setCurrentFlowConfig(flow.config));
-    //     //dispatch(setCurrentFlowWorkspace(flow.workspace));
-    //     dispatch(setElements(flow.elements));
-    //   })
-    //   .catch((err) => {
-    //     console.log("ERROR ON DB", err);
-    //     //dispatch(setElements(initialElements));
-    //   });
-    // const data = localStorage.getItem(`${flowConfigReducer.id}`);
-    // console.log("dataaaa", data);
   };
   const onDragOverHandle = (event) => {
     event.preventDefault();
@@ -201,7 +186,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
     }
   };
   const onSelectionContextMenuHandle = (event, nodes) => {
-    console.log("nodes:", nodes);
     event.preventDefault();
     dispatch(
       setMultiSelectionContextMenu({
@@ -248,6 +232,9 @@ export default function FlowEditor({ reactFlowWrapper }) {
   useEffect(() => {
     nodeClass.applyElements(elements, dispatch);
   }, [elements]);
+  // useMemo(() => {
+  //   nodeClass.applyElements(elements, dispatch);
+  // }, [elements]);
   return (
     <>
       <ReactFlow
@@ -275,7 +262,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
         multiSelectionKeyCode={17}
         minZoom={0.3}
         maxZoom={4}
-        onMove={(flowTransform)=>setCurrentZoom(flowTransform.zoom)}
         zoomActivationKeyCode={90}
         zoomOnDoubleClick={false}
         connectionLineStyle={{ stroke: "rgb(22,139,63)", strokeWidth: "2px" }}
@@ -289,9 +275,9 @@ export default function FlowEditor({ reactFlowWrapper }) {
         //onNodeMouseEnter={(e, node) => console.log(node)} //hover
         //onNodeMouseLeave={(e, node) => console.log(node)} //hover leave
         //onConnectEnd={(e) => console.log(e)}
-        onSelectionChange={onSelectionChangeHandle}
+        //onSelectionChange={onSelectionChangeHandle}
       >
-        <FlowComponents theme={theme} miniMapDisplay={miniMapDisplay} currentZoom={currentZoom}/>
+        <FlowComponents theme={theme} miniMapDisplay={miniMapDisplay}/>
         <KeyboardEvents/>
       </ReactFlow>
     </>

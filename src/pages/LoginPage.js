@@ -5,8 +5,10 @@ import styled from "styled-components";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 import { Redirect } from "react-router-dom";
 import { loginError, loginSuccess } from "../store/actions/authActions";
-import { checkAPI, postAPI } from "../services/authService";
-
+import { loginService } from "../services/authService";
+import { init,sendMessage,subscribeChat,disconnect } from '../services/socketApi';
+import macaddress from 'macaddress'
+import address from 'address'
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -54,33 +56,15 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors },
   } = useForm({});
-  const [users, setUsers] = useState([
-    {
-      username: "anilakseki",
-      password: "1234",
-    },
-    {
-      username: "akinsibay",
-      password: "1234",
-    },
-  ]);
-  const onSubmitHandle = (data) => {
-    const user = users.find(
-      (user) =>
-        user.username === data.username && user.password === data.password
-    );
-    postAPI(user).then(res => console.log(res.data));
-    if (user) {
-      dispatch(loginSuccess(user.username));
-    } else {
-      dispatch(loginError("Username or password is not match"));
+  
+  const onSubmitHandle = async (data) => {
+    try {
+      const response = await loginService(data);
+      dispatch(loginSuccess(response.data));
+    } catch ({response}) {
+      dispatch(loginError(response.data.message));
     }
   };
-  useEffect(() => {
-    checkAPI().then((res) => {
-      console.log(res);
-    });
-  }, []);
   return (
     <Container>
       <FormWrapper>

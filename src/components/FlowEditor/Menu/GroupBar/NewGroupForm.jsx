@@ -22,7 +22,7 @@ import {
   Title
 } from "./style";
 
-export default function NewGroupForm({ theme }) {
+const NewGroupForm = ({ theme }) => {
   const [groupInfo, setGroupInfo] = useState({});
   const [formOpen, setFormOpen] = useState(false);
   const { elementReducer } = useSelector((state) => state.activeFlowReducer);
@@ -119,3 +119,4 @@ export default function NewGroupForm({ theme }) {
     </AddGroupWrapper>
   );
 }
+export default React.memo(NewGroupForm);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GroupBarWrapper } from "../../../style-components/AppWrapper";
 import GroupBarIcon from "./GroupBarIcon";
@@ -15,9 +15,9 @@ const Wrapper = styled.div`
   max-height:70vh;
   right:${({visible})=>visible === "visible" ? "0px" : "-25px"};
 `;
-export default function GroupBar() {
+const GroupBar = () => {
   const { flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
-  const { theme,groupBarDisplay } = flowWorkSpaceReducer;
+  const { theme, groupBarDisplay } = flowWorkSpaceReducer;
   return (
     <Wrapper visible={groupBarDisplay}>
       <GroupBarIcon theme={theme} />
@@ -28,3 +28,5 @@ export default function GroupBar() {
     </Wrapper>
   );
 }
+
+export default React.memo(GroupBar);
