@@ -7,8 +7,6 @@ import { Redirect } from "react-router-dom";
 import { loginError, loginSuccess } from "../store/actions/authActions";
 import { loginService } from "../services/authService";
 import { init,sendMessage,subscribeChat,disconnect } from '../services/socketApi';
-import macaddress from 'macaddress'
-import address from 'address'
 const Container = styled.div`
   display: flex;
   justify-content: center;
