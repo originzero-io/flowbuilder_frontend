@@ -239,7 +239,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     <>
       <ReactFlow
         nodeTypes={nodeTypes}
-        edgeTypes={{custom:CustomEdge}}
+        edgeTypes={{ custom: CustomEdge }}
         style={{
           background:
             theme === "light" ? themeColor.LIGHT_PANE : themeColor.DARK_PANE,
@@ -265,6 +265,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         zoomActivationKeyCode={90}
         zoomOnDoubleClick={false}
         connectionLineStyle={{ stroke: "rgb(22,139,63)", strokeWidth: "2px" }}
+        onSelectionChange={onSelectionChangeHandle}
         //onMove={onMoveHandle} //return x,y,zoom
         // snapToGrid={true}
         // snapGrid={[60, 60]}
@@ -275,7 +276,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
         //onNodeMouseEnter={(e, node) => console.log(node)} //hover
         //onNodeMouseLeave={(e, node) => console.log(node)} //hover leave
         //onConnectEnd={(e) => console.log(e)}
-        //onSelectionChange={onSelectionChangeHandle}
       >
         <FlowComponents theme={theme} miniMapDisplay={miniMapDisplay}/>
         <KeyboardEvents/>
