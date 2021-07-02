@@ -1,8 +1,6 @@
-import React, { useEffect,useState,useMemo } from "react";
+import React, { useEffect } from "react";
 import ReactFlow, {
   addEdge,
-  isEdge,
-  isNode,
   removeElements,
   updateEdge,
   useStoreState,
@@ -13,15 +11,7 @@ import { getDataFromDb } from "../../app-global/db";
 import adjustScreen from "../../app-global/dom/adjustScreen";
 import { loadFunctionsToNode } from "../../app-global/helpers/loadFunctionsToNode";
 import { openNotification as notification } from "../../app-global/dom/notification";
-import {
-  setReactFlowInstance,
-  setMiniMapDisplay,
-  setClickedElement,
-  setPaneClickPosition,
-  setTheme,
-  setCurrentFlowConfig,
-  setCurrentFlowWorkspace
-} from "../../store/actions/flowActions";
+import { setReactFlowInstance, setPaneClickPosition } from "../../store/actions/flowActions";
 import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/actions/elementsActions"
 import {
   setElementContextMenu,
@@ -47,7 +37,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowWorkSpaceReducer;
   const dispatch = useDispatch();
   const store = useStore();
-  const [currentZoom, setCurrentZoom] = useState(0);
   const onConnectHandle = (params) => {
     console.log(params);
     if (params.source === params.target) {
@@ -232,9 +221,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   useEffect(() => {
     nodeClass.applyElements(elements, dispatch);
   }, [elements]);
-  // useMemo(() => {
-  //   nodeClass.applyElements(elements, dispatch);
-  // }, [elements]);
   return (
     <>
       <ReactFlow
