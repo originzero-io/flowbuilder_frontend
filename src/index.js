@@ -13,9 +13,14 @@ import 'react-tabs/style/react-tabs.css';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore.js";
+import { setAuthorizationToken } from "./app-global/helpers/httpHelpers.js";
 const store = configureStore();
 axios.defaults.baseURL = 'https://anaks-flow-server.herokuapp.com/';
 //axios.defaults.baseURL = 'http://localhost:5000/';
+const jwtToken = localStorage.getItem("token");
+if (jwtToken) {
+    setAuthorizationToken(jwtToken);
+}
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
@@ -26,4 +31,4 @@ ReactDOM.render(
   rootElement
 );
 
-reportWebVitals(console.log);
+//reportWebVitals(console.log);

@@ -80,16 +80,16 @@ Card.propTypes = {
   children:PropTypes.element.isRequired
 }
 CardBody.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.arrayOf(PropTypes.element)
 }
 CardTitle.propTypes = {
-  children:PropTypes.element.isRequired
+  children:PropTypes.string.isRequired
 }
 CardSubtitle.propTypes = {
-  children:PropTypes.element.isRequired
+  children:PropTypes.string.isRequired
 }
 CardText.propTypes = {
-  children:PropTypes.element.isRequired
+  children:PropTypes.string.isRequired
 }
 CardFooter.propTypes = {
   children:PropTypes.element.isRequired

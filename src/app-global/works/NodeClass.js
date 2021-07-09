@@ -9,7 +9,7 @@ import {
   //findElementById
 } from "../helpers/elementController";
 import { openNotification as notification } from "../dom/notification";
-import {setElements} from "../../store/actions/elementsActions"
+import { setElements } from "../../store/actions/elementsActions";
 export default class Node {
   elements = [];
   nodes = [];

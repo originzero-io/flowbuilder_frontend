@@ -64,5 +64,5 @@ export default function NodeHeader({ self, selectedElements }) {
 }
 NodeHeader.propTypes = {
   self: PropTypes.object.isRequired,
-  selectedElements:PropTypes.bool.isRequired
+  selectedElements: PropTypes.bool
 }

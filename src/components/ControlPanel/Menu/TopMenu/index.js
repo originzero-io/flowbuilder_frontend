@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import fullLogo from "../../../../assets/images/full-logo.png";
+import { checkAPI } from "../../../../services/authService";
 import { ProfileIcon } from "../../../FlowEditor/Menu/NavMenu/Icons";
 import { DropDownItem, DropdownList, DropdownWrapper } from "../../../style-components/DropdownMenu";
 import { Container, SearchBar, ProfileWrapper,LeftSideContainer } from "./style";
@@ -13,6 +14,7 @@ export default function TopMenu() {
         </Link>
         <SearchBar placeholder="Search flows" spellCheck={false} />
       </LeftSideContainer>
+      {/* <button onClick={checkAPI}>Check users</button> */}
       <DropdownWrapper>
         <ProfileWrapper tabIndex="1">
           <ProfileIcon

@@ -2,22 +2,21 @@ import io from 'socket.io-client';
 
 let socket;
 export const init = () => {
-    console.log("Loading...");
-    socket = io("http://localhost:4000", {
-        transports:["websocket"]
+    socket = io.connect("http://localhost:5000/my-namespace", {
+        transports: ["websocket"],
+        reconnectionAttempts:3
     })
     socket.on('connect', () => console.log("Connected!"));
 }
 
 export const sendMessage = (message) => {
     if (socket) {
-        console.log("burdayım")
-        socket.emit("new-message", message);
+        socket.emit("hello", message);
     }
 }
 export const subscribeChat = (cb) => {
     if (!socket) return;
-    socket.on('receive-message', (message) => {
+    socket.on('hello-back', (message) => {
         console.log("Sunucudan mesaj:", message);
         cb(message);
     })

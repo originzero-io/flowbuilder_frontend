@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
 import {AppWrapper} from "./components/style-components/AppWrapper";
@@ -9,7 +9,17 @@ import PrivateRoute from "./components/global/PrivateRoute";
 import TabChange from "./pages/TabChange";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
+import { init,sendMessage,subscribeChat,disconnect } from './services/socketApi';
 const App = () => {
+  useEffect(() => {
+    init();
+    subscribeChat(message => {
+      alert(message.message);
+    });
+    return () => {
+      disconnect();
+    }
+  }, [])
   return (
     <AppWrapper>
       <Switch>

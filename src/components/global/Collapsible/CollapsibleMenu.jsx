@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Collapsible from "react-collapsible";
 import { CollapsableItem, TriggerWrapper } from "./style";
@@ -30,17 +31,17 @@ export function CollapsibleTrigger({ children, label, icon }) {
   );
 }
 
-CollapsibleMenu.propTypes = {
-  trigger: PropTypes.oneOf([PropTypes.string, PropTypes.element]).isRequired,
-  open: PropTypes.bool.isRequired,
-  children: PropTypes.element.isRequired
-};
-CollapsibleMenuItem.propTypes = {
-  children: PropTypes.element.isRequired,
-  onClick: PropTypes.func.isRequired
-};
-CollapsibleTrigger.propTypes = {
-  children: PropTypes.element.isRequired,
-  label: PropTypes.string.isRequired,
-  icon: PropTypes.element.isRequired
-};
+// CollapsibleMenu.propTypes = {
+//   trigger: PropTypes.oneOf([PropTypes.string, PropTypes.element]).isRequired,
+//   open: PropTypes.oneOf([PropTypes.bool,PropTypes.undefined]),
+//   children: PropTypes.arrayOf(PropTypes.element).isRequired
+// };
+// CollapsibleMenuItem.propTypes = {
+//   children: PropTypes.arrayOf(PropTypes.element),
+//   onClick: PropTypes.func.isRequired
+// };
+// CollapsibleTrigger.propTypes = {
+//   children: PropTypes.element,
+//   label: PropTypes.string,
+//   icon: PropTypes.element
+// };

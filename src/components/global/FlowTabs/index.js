@@ -110,7 +110,7 @@ export default function FlowTabs() {
               disabled={flowConfigReducer.id === flow.config.id}
               selected={flowConfigReducer.id === flow.config.id}
               key={flow.config.id}>
-              <div>
+              <div style={{paddingRight:'20px'}}>
                 {flow.config.name}
               </div>
               <CloseButton onClick={(event)=>closeFlowHandle(event,flow)}>
