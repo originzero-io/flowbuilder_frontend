@@ -15,8 +15,8 @@ import { Provider } from "react-redux";
 import configureStore from "./store/configureStore.js";
 import { setAuthorizationToken } from "./app-global/helpers/httpHelpers.js";
 const store = configureStore();
-axios.defaults.baseURL = 'https://anaks-flow-server.herokuapp.com/';
-//axios.defaults.baseURL = 'http://localhost:5000/';
+//axios.defaults.baseURL = 'https://anaks-flow-server.herokuapp.com/';
+axios.defaults.baseURL = 'http://localhost:5000/';
 const jwtToken = localStorage.getItem("token");
 if (jwtToken) {
     setAuthorizationToken(jwtToken);

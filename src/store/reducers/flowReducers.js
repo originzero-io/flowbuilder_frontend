@@ -2,8 +2,6 @@ import * as actions from "../constants/flowConstants";
 import NodeClass from "../../app-global/works/NodeClass";
 const nodeClass = new NodeClass("nodeClass is created by redux store");
 import { flows,flowTemplate } from "../initialValues";
-
-
 export const flowReducer = (state = flows, { type, payload }) => {
   switch (type) {
     case actions.ADD_FLOW:

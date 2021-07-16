@@ -3,7 +3,7 @@ import {DropdownList} from "../style-components/DropdownMenu"
 export const Circle = styled.button`
   width: 55px;
   height: 55px;
-  background: transparent;
+  background: rgba(29, 185, 84,0.5);
   border-radius: 50%;
   position: absolute;
   top: -29px;

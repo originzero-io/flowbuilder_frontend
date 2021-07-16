@@ -9,6 +9,7 @@ import PrivateRoute from "./components/global/PrivateRoute";
 import TabChange from "./pages/TabChange";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
+import LoginPageX from "./pages/LoginPageX";
 import { init,sendMessage,subscribeChat,disconnect } from './services/socketApi';
 const App = () => {
   useEffect(() => {
@@ -30,7 +31,7 @@ const App = () => {
         <PrivateRoute exact path="/dashboard/:dashboardId" component={DashboardPage}/>
         <Route path="*"><Redirect to="/login"/></Route>  
       </Switch>
-      <FlowTabs/>
+      
       <NotificationContainer />
     </AppWrapper>
   );

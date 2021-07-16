@@ -42,6 +42,7 @@ const Menu = styled(MenuIndex)`
 
 export default function ConfigurationMenu() {
   const { flowWorkSpaceReducer, flowConfigReducer, elementReducer, nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
+  const { name } = useSelector((state) => state.authReducer);
   const { reactFlowInstance, miniMapDisplay, theme } = flowWorkSpaceReducer;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const setSelectedElements = useStoreActions(
@@ -168,13 +169,14 @@ export default function ConfigurationMenu() {
       </MenuItem>
       <DropdownWrapper tabIndex="1">
         <Circle theme={theme}>
-          <ProfileIcon
+          {/* <ProfileIcon
             width="50px"
             height="50px"
             color={
               theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
             }
-          />
+          /> */}
+          <div style={{fontSize:'10px'}}>{name.split(" ")[0]}</div>
         </Circle>
         <DropdownList theme={theme} align="right">
           <DropDownItem>

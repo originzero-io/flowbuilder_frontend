@@ -112,6 +112,6 @@ export default NodeGod;
 NodeGod.propTypes = {
   self: PropTypes.object.isRequired,
   ioType: PropTypes.string.isRequired,
-  children: PropTypes.element,
-  collapsible: PropTypes.bool.isRequired,
+  children: PropTypes.array,
+  collapsible: PropTypes.bool,
 }

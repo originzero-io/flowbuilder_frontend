@@ -55,12 +55,11 @@ const CloseButton = styled.div`
   top:0px;
   right:0;
 `;
-export default function FlowTabs() {
+const FlowTabs = () => {
   const flows = useSelector((state) => state.flowReducer);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [openedFlows, setOpenedFlows] = useState([]);
-
   const { flowWorkSpaceReducer, flowConfigReducer, nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
   const { reactFlowInstance } = flowWorkSpaceReducer;
   
@@ -127,3 +126,4 @@ export default function FlowTabs() {
     </Container>
   );
 }
+export default React.memo(FlowTabs);

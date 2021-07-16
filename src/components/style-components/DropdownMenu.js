@@ -6,8 +6,7 @@ export const DropdownWrapper = styled.div`
 `;
 
 export const DropdownList = styled.ul`
-  //margin-top: ${(props) => (props.align === "right" ? "30px" : "17px")};
-  //margin-top: ${(props) => (props.align === "right" ? "30px" : "17px")};
+  margin-top: ${(props) => (props.align === "right" ? "30px" : "8px")};
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -22,7 +21,7 @@ export const DropdownList = styled.ul`
 
   ${DropdownWrapper}:focus-within & {
     visibility:visible;
-    transform: translateY(25px);
+    //transform: translateY(25px);
   }
 `;
 

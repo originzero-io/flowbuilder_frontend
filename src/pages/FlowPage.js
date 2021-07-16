@@ -13,7 +13,8 @@ import { setElements } from "../store/actions/elementsActions";
 import { loadGroups } from "../store/actions/nodeGroupsActions";
 import { Redirect } from "react-router";
 import { useParams } from "react-router-dom";
-export default function FlowPage() {
+import FlowTabs from "../components/global/FlowTabs";
+const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowId } = useParams();
   const flow = useSelector((state) => state.flowReducer).find((flow) => flow.config.id === flowId);
@@ -33,7 +34,8 @@ export default function FlowPage() {
     <ReactFlowProvider>
       {flow !== undefined ? (
         <FlowWrapper ref={rfWrapper}>
-          <FlowEditor reactFlowWrapper={rfWrapper}/>
+          <FlowEditor reactFlowWrapper={rfWrapper} />
+          <FlowTabs/>
         </FlowWrapper>
       ) : (
           <Redirect to="/panel"/>
@@ -44,3 +46,5 @@ export default function FlowPage() {
 FlowPage.propTypes = {
   match: PropTypes.object,
 };
+
+export default React.memo(FlowPage);

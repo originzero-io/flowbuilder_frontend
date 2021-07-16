@@ -4,6 +4,7 @@ import TopMenu from "../components/ControlPanel/Menu/TopMenu";
 import PanelManager from "../components/ControlPanel/SidePanel/PanelManager";
 import { AppWrapper } from "../components/style-components/AppWrapper";
 import styled from "styled-components"
+import FlowTabs from "../components/global/FlowTabs";
 const Wrapper = styled.div`
   display:flex;
   flex-direction: column;
@@ -27,6 +28,7 @@ export default function ControlPanelPage() {
           <PanelManager />
         </Content>
       </Wrapper>
+      <FlowTabs/>
     </AppWrapper>
   );
 }
