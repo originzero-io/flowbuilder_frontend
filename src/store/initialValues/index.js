@@ -97,29 +97,8 @@ export const nodeGroups = [
 
 export const panelConfig = {
   activePanel: "Projects",
-  activeProject: {
-    id: "project0",
-    name: "Project 1",
-    author: "Anaks",
-    flows: [],
-  },
-  copiedElements: [],
-  projects: [
-    {
-      id: "project0",
-      name: "Project 1",
-      author: "Anaks",
-    },
-  ],
-  dashboards: [
-    {
-      id: "dashboard0",
-      name: "dashboard1",
-      author: "Anıl Akseki",
-      description: "Sample dashboard",
-      projectId: "project0",
-    },
-  ],
+  activeProject: {},
+  copiedElements: []
 };
 
 export const flowTemplate = {
@@ -140,17 +119,17 @@ export const flowTemplate = {
 };
 
 export const flows = [
-  {
-    opened:false,
-    config: {
-      id: "flow0",
-      name: "flow1",
-      author: "Anaks",
-      description: "Sample Flow",
-      company: "Star Metal",
-      createdDate: "05-06-2021 10.15",
-      projectId: "project0",
-    },
-    ...flowTemplate,
-  },
+  // {
+  //   opened:false,
+  //   config: {
+  //     id: "flow0",
+  //     name: "Initial flow",
+  //     author: "Anaks",
+  //     description: "Sample Flow",
+  //     company: "Star Metal",
+  //     createdDate: "05-06-2021 10.15",
+  //     projectId: "project0",
+  //   },
+  //   ...flowTemplate,
+  // },
 ];

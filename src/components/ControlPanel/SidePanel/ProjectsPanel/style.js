@@ -1,21 +1,18 @@
 import styled from "styled-components";
-
-export const Container = styled.div`
-  //padding:15px;
-  padding-top:5px;
-  padding-right:15px;
-  padding-bottom:5px;
-  padding-left:15px;
-  background:#1C2022;
-  width: 85%;
-  color:whitesmoke;
+export const ProjectsContainerIndex = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding:5px;
+  color:white;
+  min-height: 200px;
+  //overflow:scroll;
 `
 export const Box = styled.div`
   background:rgb(22,139,63);
   width:150px;
   height:150px;
   border-radius: 6px;
-  font-size:64px;
+  font-size:48px;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -26,5 +23,8 @@ export const Box = styled.div`
       background:rgba(210, 218, 226,1.0);
       transition: background 0.3s ease-in-out;
   }
-
+`
+export const FlowsContainer = styled(ProjectsContainerIndex)`
+`
+export const DashboardsContainer = styled(ProjectsContainerIndex)`
 `

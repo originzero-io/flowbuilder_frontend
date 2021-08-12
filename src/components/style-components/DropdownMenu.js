@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as themeColor from "../../config/ThemeReference"
+import * as themeColor from "../../config/ThemeReference";
 export const DropdownWrapper = styled.div`
   position: relative;
   font-size:14px;
@@ -21,7 +21,6 @@ export const DropdownList = styled.ul`
 
   ${DropdownWrapper}:focus-within & {
     visibility:visible;
-    //transform: translateY(25px);
   }
 `;
 

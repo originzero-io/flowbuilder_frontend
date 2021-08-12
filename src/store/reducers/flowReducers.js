@@ -10,7 +10,7 @@ export const flowReducer = (state = flows, { type, payload }) => {
       return state;
     case actions.OPEN_FLOW:
       return state.map(state => {
-        if (state.config.id === payload.id) {
+        if (state._id === payload._id) {
           return {
             ...state,
             opened:true
@@ -20,7 +20,7 @@ export const flowReducer = (state = flows, { type, payload }) => {
       });
     case actions.CLOSE_FLOW:
       return state.map(state => {
-        if (state.config.id === payload.id) {
+        if (state._id === payload._id) {
           return {
             ...state,
             opened:false
@@ -29,15 +29,17 @@ export const flowReducer = (state = flows, { type, payload }) => {
         else return state;
       });
     case actions.DELETE_FLOW:
-      return state.filter(state=>state.config.id !== payload.id)
+      return state.filter(state=>state._id !== payload._id)
     case actions.MERGE_FLOW:
       return state.map(state => {
-        if (state.config.id === payload.config.id) {
+        if (state._id === payload._id) {
           console.log(payload);
           return {...state,...payload}
         }
         else return state;
       });
+    case actions.LOAD_FLOWS:
+      return payload
     default:
       return state;
   }

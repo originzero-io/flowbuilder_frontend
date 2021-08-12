@@ -28,7 +28,7 @@ const GroupList = ({ theme }) => {
     setSelectedElements(newArr);
   };
   const editIconClickHandle = (group) => {
-    if (group.id !== editableItem.group.id) {
+    if (group._id !== editableItem.group.id) {
       setEditableItem({ state: true, group: { ...group } });
     } else {
       if (editableItem.state === true) {
@@ -46,11 +46,11 @@ const GroupList = ({ theme }) => {
           <GroupItem
             key={group.id}
             theme={theme}
-            onMouseEnter={() => setHover(group.id)}
+            onMouseEnter={() => setHover(group._id)}
             onMouseLeave={() => setHover(null)}
             onClick={()=>groupItemClickHandle(group)}
           >
-            {editableItem.state && editableItem.group.id === group.id ? (
+            {editableItem.state && editableItem.group.id === group._id ? (
               <EditForm
                 editableItem={editableItem}
                 setEditableItem={setEditableItem}
@@ -63,7 +63,7 @@ const GroupList = ({ theme }) => {
               </>
             )}
 
-            {hover === group.id && (
+            {hover === group._id && (
               <>
                 <NameEditIcon
                   width="25px"
@@ -73,7 +73,7 @@ const GroupList = ({ theme }) => {
                 />
                 <DeleteIcon
                   theme={theme}
-                  onClick={() => deleteIconClickHandle(group.id)}
+                  onClick={() => deleteIconClickHandle(group._id)}
                 />
               </>
             )}

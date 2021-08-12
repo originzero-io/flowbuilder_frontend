@@ -43,15 +43,15 @@ const MainMenu = () => {
   const { theme,reactFlowInstance } = flowWorkSpaceReducer;
   const dispatch = useDispatch();
   const homeClickHandle = () => {
-    const { position, zoom, elements } = reactFlowInstance.toObject();
-    const flow = {
-      config: flowConfigReducer,
-      workspace: { ...flowWorkSpaceReducer, position, zoom },
-      elements: elements,
-      groups: nodeGroupsReducer
-    };
-    dispatch(mergeFlow(flow));
-    dispatch(setCurrentFlowConfig({}));
+    // const { position, zoom, elements } = reactFlowInstance.toObject();
+    // const flow = {
+    //   config: flowConfigReducer,
+    //   workspace: { ...flowWorkSpaceReducer, position, zoom },
+    //   elements: elements,
+    //   groups: nodeGroupsReducer
+    // };
+    // dispatch(mergeFlow(flow));
+    // dispatch(setCurrentFlowConfig({}));
   }
   return (
     <>

@@ -6,13 +6,6 @@ const controlPanelReducer = (state = panelConfig, { type, payload }) => {
       return { ...state, activePanel: payload };
     case actions.SET_COPIED_ELEMENTS:
       return {...state, copiedElements: payload };
-    case actions.ADD_PROJECT:
-      return { ...state, projects: [...state.projects, payload] };
-    case actions.DELETE_PROJECT:
-      return {
-        ...state,
-        projects: state.projects.filter((project) => project.id !== payload.id),
-      };
     case actions.SET_ACTIVE_PROJECT:
       return { ...state, activeProject: payload };
     case actions.ADD_DASHBOARD:

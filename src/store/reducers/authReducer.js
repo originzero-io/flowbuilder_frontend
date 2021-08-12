@@ -2,7 +2,7 @@ import * as actions from "../constants/authConstants";
 
 const initialState = {
   username: "",
-  role: "admin",
+  role: "user",
   isAuthenticated: false,
   error: false,
   errorMessage: "",

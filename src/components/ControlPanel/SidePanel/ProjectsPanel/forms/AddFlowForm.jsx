@@ -15,7 +15,7 @@ export default function AddFlowForm({ closeModal, formType }) {
     name: null,
     author: null,
     description: null,
-    projectId: activeProject.id,
+    //projectId: activeProject._id,
   });
   const dispatch = useDispatch();
   //const history = useHistory();

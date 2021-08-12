@@ -32,8 +32,8 @@ export default class Node {
   doInput = async(data, self, outgoers) => {
     //console.log("inject outgoers", outgoers);
     console.log("Input fonksiyonuna gelen data", data);
-    const res = await axios.get('http://localhost:5000/users/getAll');
-    console.log("res:", res);
+    //const res = await axios.get('http://localhost:5000/users/getAll');
+    //console.log("res:", res);
     this.sendDataToYourOutgoers(data, self, outgoers);
   };
   doSplit = (data, self, outgoers) => {

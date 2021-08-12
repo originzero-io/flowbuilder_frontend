@@ -25,3 +25,4 @@ export const UPDATE_FLOW = "UPDATE_FLOW";
 export const DELETE_FLOW = "DELETE_FLOW";
 export const MERGE_FLOW = "MERGE_FLOW";
 
+export const LOAD_FLOWS = "LOAD_FLOWS";

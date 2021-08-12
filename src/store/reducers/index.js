@@ -11,6 +11,9 @@ import { menuConfigReducer } from "./menuReducers";
 import { nodeListReducer } from "./nodeListReducers";
 import controlPanelReducer from "./controlPanelReducer";
 import authReducer from "./authReducer";
+import teamReducer from "./teamReducer";
+import projectReducer from "./projectReducer";
+import errorReducer from "./errorReducer";
 const reducers = combineReducers({
   authReducer,
   menuConfigReducer,
@@ -18,6 +21,9 @@ const reducers = combineReducers({
   nodeListReducer,
   controlPanelReducer,
   flowReducer,
+  teamReducer,
+  projectReducer,
+  errorReducer,
   activeFlowReducer: combineReducers({
     flowConfigReducer,
     flowWorkSpaceReducer,

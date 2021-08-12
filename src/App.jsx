@@ -3,37 +3,27 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
 import {AppWrapper} from "./components/style-components/AppWrapper";
 import FlowPage from "./pages/FlowPage";
-import ControlPanel from "./pages/ControlPanelPage";
-import FlowTabs from "./components/global/FlowTabs";
-import PrivateRoute from "./components/global/PrivateRoute";
-import TabChange from "./pages/TabChange";
+import ControlPanelPage from "./pages/ControlPanelPage";
+import PrivateRoute from "./navigation/PrivateRoute";
+import TabRedirector from './navigation/TabRedirector';
+import NotFound from './navigation/NotFound';
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
-import LoginPageX from "./pages/LoginPageX";
-import { init,sendMessage,subscribeChat,disconnect } from './services/socketApi';
+import * as routes from './navigation/RouterConfig';
 const App = () => {
-  useEffect(() => {
-    init();
-    subscribeChat(message => {
-      alert(message.message);
-    });
-    return () => {
-      disconnect();
-    }
-  }, [])
   return (
-    <AppWrapper>
-      <Switch>
-        <Route exact path="/login" component={LoginPage}/>
-        <PrivateRoute exact path="/panel" component={ControlPanel}/>
-        <PrivateRoute exact path="/flow/:flowId" component={FlowPage}/>
-        <PrivateRoute exact path="/change-tab/:flowId" component={TabChange}/>
-        <PrivateRoute exact path="/dashboard/:dashboardId" component={DashboardPage}/>
-        <Route path="*"><Redirect to="/login"/></Route>  
-      </Switch>
-      
-      <NotificationContainer />
-    </AppWrapper>
+      <AppWrapper>
+        <Switch>
+          <Route exact path={routes.LOGIN} component={LoginPage}/>
+          <PrivateRoute exact path={routes.PANEL} component={ControlPanelPage}/>
+          <PrivateRoute exact path={routes.GOTO_FLOW} component={FlowPage}/>
+          <PrivateRoute exact path={routes.GOTO_DASHBOARD} component={DashboardPage}/>
+          <PrivateRoute exact path={routes.CHANGE_TAB} component={TabRedirector}/>
+          {/* <Route path="*"><Redirect to={routes.LOGIN}/></Route> */}
+          <Route path="*" component={NotFound}/>
+        </Switch> 
+        <NotificationContainer />
+      </AppWrapper>
   );
 };
 export default App;

@@ -74,6 +74,11 @@ export const closeFlow = (flow) => ({
   payload: flow
 });
 
+export const loadFlows = (flows) => ({
+  type: action.LOAD_FLOWS,
+  payload: flows
+});
+
 
 
 

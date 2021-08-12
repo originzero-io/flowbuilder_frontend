@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function TeamsPanel() {
+export default function NotFound() {
     return (
         <div>
-          Teams  
+            Not found
         </div>
     )
 }

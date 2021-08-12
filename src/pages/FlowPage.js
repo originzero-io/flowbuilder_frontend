@@ -17,7 +17,9 @@ import FlowTabs from "../components/global/FlowTabs";
 const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowId } = useParams();
-  const flow = useSelector((state) => state.flowReducer).find((flow) => flow.config.id === flowId);
+  console.log("flowId:", flowId);
+  const flow = useSelector((state) => state.flowReducer).find((flow) => flow._id === flowId);
+  console.log(flow);
   const loadFlow = () => {
     dispatch(setCurrentFlowConfig(flow.config));
     dispatch(setCurrentFlowWorkspace(flow.workspace));
@@ -35,7 +37,7 @@ const FlowPage = () => {
       {flow !== undefined ? (
         <FlowWrapper ref={rfWrapper}>
           <FlowEditor reactFlowWrapper={rfWrapper} />
-          <FlowTabs/>
+          {/* <FlowTabs/> */}
         </FlowWrapper>
       ) : (
           <Redirect to="/panel"/>
