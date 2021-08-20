@@ -10,6 +10,7 @@ import { nodeGroupsReducer } from "./nodeGroupsReducers";
 import { menuConfigReducer } from "./menuReducers";
 import { nodeListReducer } from "./nodeListReducers";
 import controlPanelReducer from "./controlPanelReducer";
+import { modalReducer } from "./componentReducer";
 import authReducer from "./authReducer";
 import teamReducer from "./teamReducer";
 import projectReducer from "./projectReducer";
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   nodeClassReducer,
   nodeListReducer,
   controlPanelReducer,
+  modalReducer,
   flowReducer,
   teamReducer,
   projectReducer,

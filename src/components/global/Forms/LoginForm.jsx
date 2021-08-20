@@ -4,12 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
 import { loginService } from "../../../services/authService";
 import { loginError, loginSuccess } from "../../../store/actions/authActions";
-import {
-  Input,
-  Text,
-  Submit,
-  ErrorMessage,
-} from "./style";
+import { Input, Text, Submit, ErrorMessage } from "./style";
 import { Redirect } from "react-router-dom";
 import { openNotification as notification } from "../../../app-global/dom/notification";
 
@@ -40,6 +35,7 @@ export default function LoginForm() {
         <FormGroup>
           <i className="fas fa-user"></i>
           <Input
+            defaultValue="akinsibay"
             {...register("username", {
               required: "Username must enter the field",
             })}
@@ -52,6 +48,7 @@ export default function LoginForm() {
         <FormGroup>
           <i className="fas fa-key"></i>
           <Input
+            defaultValue="1234"
             type="password"
             {...register("password", {
               required: "Password must enter the field",

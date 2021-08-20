@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export const getProjectsService = async () => {
     const response = await axios.get("/projects/getAll");
     return response.data;

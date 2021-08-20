@@ -5,6 +5,12 @@ export const loadProjects = (params) => {
     payload: params,
   };
 };
+export const setActiveProject = (params) => {
+  return {
+    type: action.SET_ACTIVE_PROJECT,
+    payload: params,
+  };
+};
 export const createProject = (params) => {
   return {
     type: action.CREATE_PROJECT,

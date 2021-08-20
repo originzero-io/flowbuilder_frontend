@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import * as themeColor from "../../../config/ThemeReference";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,6 +28,7 @@ export const NavMenuItemWrapper = styled.button`
   margin-bottom: 7px;
   padding: 7px;
   color: black;
+  width:100%;
   &:hover {
     background-color: #dcdde1;
     border-right: 3px solid rgb(22, 139, 63);
@@ -38,13 +39,16 @@ export const NavMenuItemWrapper = styled.button`
 `;
 
 export const TeamBrand = styled.div`
-  background: rgb(22, 139, 63);
-  padding: 10px;
+  background: #323232;
+  padding: 15px;
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
   align-items: center;
-  letter-spacing: 10px;
+  letter-spacing: 5px;
   cursor: pointer;
-  color:whitesmoke;
+  color: #2ecc71;
   height:5vh;
+  user-select:none;
+  position:relative;
+  font-size:20px;
 `;

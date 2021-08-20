@@ -1,32 +1,36 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { addFlow } from "../../../../../store/actions/flowActions";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import uuid from "react-uuid";
+import { setModal } from "../../../../../store/actions/componentActions";
+import { createFlowService } from "../../../../../services/flowService";
+import { setError } from "../../../../../store/actions/errorActions";
 
-export default function AddFlowForm({ closeModal, formType }) {
-  const { activeProject } = useSelector(
-    (state) => state.controlPanelReducer
-  );
-
+export default function AddFlowForm() {
+  const auth = useSelector(state => state.authReducer);
+  const { activeTeam } = useSelector(state => state.teamReducer);
+  const { activeProject,projects } = useSelector(state => state.projectReducer);
   const [flowInfo, setFlowInfo] = useState({
-    id: uuid(),
-    name: null,
-    author: null,
-    description: null,
-    //projectId: activeProject._id,
-  });
+    name: "Flow 1",
+    author: "Akın Şibay",
+    description: "Created for future",
+    company: "Anaks ARGE Ltd.Şti.",
+    teamId: activeTeam._id,
+    projectId: activeProject?._id || projects[0],
+    createdBy: auth.username
+});
   const dispatch = useDispatch();
-  //const history = useHistory();
   const onChangeHandler = (e) => {
     setFlowInfo({ ...flowInfo, [e.target.name]: e.target.value });
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    dispatch(addFlow(flowInfo));
-    closeModal();
-    //history.push(`/change-tab/${flowInfo.id}`)
+    createFlowService(flowInfo)
+      .then((res) => {
+        dispatch(addFlow(res.flow));
+        dispatch(setModal(false))
+      })
+      .catch(err => dispatch(setError(err)));
   };
 
   return (
@@ -47,6 +51,14 @@ export default function AddFlowForm({ closeModal, formType }) {
             placeholder="author"
             onChange={onChangeHandler}
             required
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>Company</Label>
+          <Input
+            name="company"
+            placeholder="company"
+            onChange={onChangeHandler}
           />
         </FormGroup>
         <FormGroup>

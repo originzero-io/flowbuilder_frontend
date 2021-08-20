@@ -1,13 +1,19 @@
 import * as actions from "../constants/projectContants";
 
-const projectReducer = (state = [], { type, payload }) => {
+const initialState = {
+  activeProject: "",
+  projects:[]
+}
+const projectReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case actions.LOAD_PROJECTS:
-      return [...payload]
+      return { ...state, projects: payload }
     case actions.CREATE_PROJECT:
-      return [...state,payload]
+      return { ...state, projects: [...state.projects, payload] };
+    case actions.SET_ACTIVE_PROJECT:
+      return {...state,activeProject:payload}
     case actions.DELETE_PROJECT:
-      return state.filter(state=>state._id !== payload)
+      return { ...state, projects: state.projects.filter(s => s._id !== payload) }
     default:
       return state;
   }

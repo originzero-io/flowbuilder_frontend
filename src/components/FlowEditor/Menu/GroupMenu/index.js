@@ -95,7 +95,7 @@ export default function GroupMenu({ self }) {
       <Content>
         {searched.map((group) => {
           return (
-            <GroupItem key={group.id} onClick={() => selectGroup(group)}>
+            <GroupItem key={group._id} onClick={() => selectGroup(group)}>
               <Label style={{ fontSize: "12px" }}>{group.name}</Label>
               <GroupColor width="15px" height="15px" value={group.color} />
             </GroupItem>

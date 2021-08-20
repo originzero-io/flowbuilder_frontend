@@ -7,6 +7,7 @@ import { loginError, loginSuccess } from "../../../store/actions/authActions";
 import { Input, Text, Submit, ErrorMessage } from "./style";
 import { Redirect } from "react-router-dom";
 import { openNotification as notification } from "../../../app-global/dom/notification";
+import { setError } from "../../../store/actions/errorActions";
 
 export default function RegisterForm({ setFormType }) {
   const dispatch = useDispatch();
@@ -18,15 +19,14 @@ export default function RegisterForm({ setFormType }) {
     handleSubmit,
     formState: { errors },
   } = useForm({});
-  const onSubmitHandle = async (data) => {
-    try {
-      const response = await registerService(data);
-      notification("", "Register Successfuly", "success");
-      setFormType("login");
-    } catch ({ response }) {
-      console.log("reponse:", response);
-      notification("", response.data.message, "error");
-    }
+  const onSubmitHandle = (data) => {
+
+    registerService(data)
+      .then(() => {
+        notification("", "Register Successfuly", "success");
+        setFormType("login");
+      })
+      .catch((error) => dispatch(setError(error)));
   };
   return (
     <>

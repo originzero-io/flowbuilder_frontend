@@ -1,7 +1,7 @@
 import styled from "styled-components";
 export const TeamsContainer = styled.div`
   background: #050038;
-  background: #323232;
+  //background: #323232;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

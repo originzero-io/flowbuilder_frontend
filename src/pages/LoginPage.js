@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import LoginForm from "../components/global/Forms/LoginForm";
+import LoginForm from "../components/Global/Forms/LoginForm";
 import styled from "styled-components";
 import {
   Container,
@@ -12,8 +12,9 @@ import {
   Text,
   LoginButton,
   ErrorMessage,
-} from "../components/global/Forms/style";
-import RegisterForm from "../components/global/Forms/RegisterForm";
+} from "../components/Global/Forms/style";
+import RegisterForm from "../components/Global/Forms/RegisterForm";
+import axios from "axios";
 const Button = styled.button`
   border: none;
   border-radius: 8px;
@@ -35,6 +36,7 @@ export default function LoginPage() {
     }
     else setFormType("login")
   }
+
   return (
     <Container>
       <Button onClick={switchForm}>{formType === "login" ? "Sign Up" : "Log In"}</Button>

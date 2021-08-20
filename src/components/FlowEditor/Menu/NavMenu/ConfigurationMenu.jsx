@@ -7,6 +7,7 @@ import { loadFunctionsToNode } from "../../../../app-global/helpers/loadFunction
 import * as themeColor from "../../../../config/ThemeReference";
 import * as tooltip from "../../../../config/TooltipReference";
 import { logOut } from "../../../../store/actions/authActions";
+import { setModal } from "../../../../store/actions/componentActions";
 import {
   changeEdgeType,
   importElements,
@@ -16,9 +17,9 @@ import {
   setTheme,
   setWorkspaceEdgeType,
 } from "../../../../store/actions/flowActions";
-import { LearnIcon } from "../../../ControlPanel/Icons";
-import SwitchButton from "../../../global/Button/SwitchButton";
-import FileInputWrapper from "../../../global/FileInputWrapper";
+import { BiBrain } from "react-icons/bi";
+import SwitchButton from "../../../Global/Button/SwitchButton";
+import FileInputWrapper from "../../../Global/FileInputWrapper";
 import { VerticalDivider } from "../../../style-components/Divider";
 import {
   DropDownItem,
@@ -54,20 +55,21 @@ export default function ConfigurationMenu() {
     if (confirm("Download?")) {
       if (reactFlowInstance) {
         const { elements } = reactFlowInstance.toObject();
-        const flow = {
-          config: flowConfigReducer,
-          workspace: flowWorkSpaceReducer,
-          elements: elements,
-          groups: nodeGroupsReducer
-        }
-        console.log("flow:", flow);
-        let hiddenElement = document.createElement("a");
-        hiddenElement.href =
-          "data:application/octet-stream;base64," + btoa(JSON.stringify(flow));
-        hiddenElement.target = "_blank";
-        hiddenElement.download = "Flow.json";
-        hiddenElement.click();
-        hiddenElement.remove();
+        console.log(elements);
+        // const flow = {
+        //   config: flowConfigReducer,
+        //   workspace: flowWorkSpaceReducer,
+        //   elements: elements,
+        //   groups: nodeGroupsReducer
+        // }
+        // console.log("flow:", flow);
+        // let hiddenElement = document.createElement("a");
+        // hiddenElement.href =
+        //   "data:application/octet-stream;base64," + btoa(JSON.stringify(flow));
+        // hiddenElement.target = "_blank";
+        // hiddenElement.download = "Flow.json";
+        // hiddenElement.click();
+        // hiddenElement.remove();
       }
     }
   };
@@ -159,13 +161,7 @@ export default function ConfigurationMenu() {
       <VerticalDivider theme={theme} />
 
       <MenuItem data-tip="Learn" data-for={tooltip.LEARN}>
-        <LearnIcon
-          width="25px"
-          height="25px"
-          color={
-            theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-          }
-        />
+        <BiBrain style={{fontSize:'25px',color:theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}}/>
       </MenuItem>
       <DropdownWrapper tabIndex="1">
         <Circle theme={theme}>

@@ -7,8 +7,9 @@ import {
 } from "../../../../../store/actions/controlPanelActions";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import uuid from "react-uuid";
+import { setModal } from "../../../../../store/actions/componentActions";
 
-export default function AddDashboardForm({ closeModal }) {
+export default function AddDashboardForm() {
   const { activeProject,flows } = useSelector((state) => state.controlPanelReducer);
 
   const [dashboardInfo, setDashboardInfo] = useState({
@@ -26,7 +27,7 @@ export default function AddDashboardForm({ closeModal }) {
     e.preventDefault();
     const dashboard = {id:uuid(),...dashboardInfo,projectId:activeProject.id}
     dispatch(addDashboard(dashboard));
-    closeModal();
+    dispatch(setModal(false));
   };
 
   return (

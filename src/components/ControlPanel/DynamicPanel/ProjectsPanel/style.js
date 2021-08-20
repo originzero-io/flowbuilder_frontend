@@ -8,8 +8,8 @@ export const ProjectsContainerIndex = styled.div`
   //overflow:scroll;
 `
 export const Box = styled.div`
-  background:rgb(22,139,63);
-  width:150px;
+  background:rgb(22,137,63);
+  width:160px;
   height:150px;
   border-radius: 6px;
   font-size:48px;

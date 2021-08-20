@@ -36,19 +36,6 @@ const PanelContextMenu = () => {
     const newNode = createNode(node.type, position, rotateAllPath, nodeFunction);
     dispatch(addNewNode(newNode));
   }
-  useDidMountEffect(() => {
-    //localStorage.setItem("node-list", JSON.stringify(nodeList));
-  }, [nodeList])
-  useEffect(() => {
-    // const storedNodeList = JSON.parse(localStorage.getItem("node-list")) || nodeList;
-    // const newList = storedNodeList.map(node => {
-    //   return {
-    //     ...node,
-    //     icon:loadIconsToNodeList(node.type)
-    //   }
-    // })
-    // dispatch(setNodeList(newList));
-  },[])
   return (
     <>
       {panelMenu.state && (

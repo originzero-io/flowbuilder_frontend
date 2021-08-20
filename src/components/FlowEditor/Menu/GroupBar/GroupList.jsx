@@ -6,7 +6,7 @@ import { GroupItem, GroupColor, Label} from "./style";
 import { isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";
-import { NameEditIcon } from "../../../global/icons";
+import { NameEditIcon } from "../../../Global/icons";
 import PropTypes from "prop-types"
 const GroupList = ({ theme }) => {
   const { nodeGroupsReducer, elementReducer } = useSelector((state) => state.activeFlowReducer);
@@ -24,11 +24,11 @@ const GroupList = ({ theme }) => {
     }
   };
   const groupItemClickHandle = (group) => {
-    const newArr = elementReducer.present.filter(els => isNode(els) && els.data.group.id === group.id);
+    const newArr = elementReducer.present.filter(els => isNode(els) && els.data.group._id === group._id);
     setSelectedElements(newArr);
   };
   const editIconClickHandle = (group) => {
-    if (group._id !== editableItem.group.id) {
+    if (group._id !== editableItem.group._id) {
       setEditableItem({ state: true, group: { ...group } });
     } else {
       if (editableItem.state === true) {
@@ -44,13 +44,13 @@ const GroupList = ({ theme }) => {
       {nodeGroupsReducer.map((group) => {
         return (
           <GroupItem
-            key={group.id}
+            key={group._id}
             theme={theme}
             onMouseEnter={() => setHover(group._id)}
             onMouseLeave={() => setHover(null)}
             onClick={()=>groupItemClickHandle(group)}
           >
-            {editableItem.state && editableItem.group.id === group._id ? (
+            {editableItem.state && editableItem.group._id === group._id ? (
               <EditForm
                 editableItem={editableItem}
                 setEditableItem={setEditableItem}

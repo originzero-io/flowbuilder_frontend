@@ -4,28 +4,29 @@ import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { createProjectService } from "../../../../../services/projectService";
 import { createProject } from "../../../../../store/actions/projectActions";
 import { setError } from "../../../../../store/actions/errorActions";
-import errorWrapper from "../../../../../app-global/errorWrapper";
-const AddProjectForm = ({ closeModal }) => {
+import { setModal } from "../../../../../store/actions/componentActions";
+const AddProjectForm = () => {
   const { activeTeam } = useSelector((state) => state.teamReducer);
+  const auth = useSelector((state) => state.authReducer);
   const [projectInfo, setProjectInfo] = useState({
     name: null,
     author: null,
     description: '',
+    createdBy: auth.username,
     teamId: activeTeam._id
   });
   const dispatch = useDispatch();
   const onChangeHandler = (e) => {
     setProjectInfo({ ...projectInfo, [e.target.name]: e.target.value });
   };
-  const onSubmitHandle = async (e) => {
+  const onSubmitHandle = (e) => {
     e.preventDefault();
-    try {
-      const data = await createProjectService(projectInfo);
-      dispatch(createProject(data.project));
-      closeModal();
-    } catch (error) {
-      dispatch(setError(error));
-    }
+    createProjectService(projectInfo)
+      .then(res => {
+        dispatch(createProject(res.project));
+        dispatch(setModal(false));
+    })
+      .catch(err => dispatch(setError(err)));
   };
   return (
       <Form onSubmit={onSubmitHandle}>

@@ -3,6 +3,7 @@ import * as themeColor from "../../config/ThemeReference";
 export const DropdownWrapper = styled.div`
   position: relative;
   font-size:14px;
+  z-index:6;
 `;
 
 export const DropdownList = styled.ul`
@@ -18,7 +19,6 @@ export const DropdownList = styled.ul`
   list-style: none;
   border-radius: 4px;
   visibility:hidden;
-
   ${DropdownWrapper}:focus-within & {
     visibility:visible;
   }

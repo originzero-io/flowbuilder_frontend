@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import ControlPanelMenu from "../components/ControlPanel/Menu/PanelMenu";
-import ControlPanelManager from "../components/ControlPanel/SidePanel/ControlPanelManager";
+import React from "react";
+import NavigationPanel from "../components/ControlPanel/NavigationPanel";
+import PanelRouter from "../components/ControlPanel/DynamicPanel/PanelRouter";
 import styled from "styled-components";
-import FlowTabs from "../components/global/FlowTabs";
-import TeamList from "../components/ControlPanel/TeamPanel/TeamList";
+import FlowTabs from "../components/Global/FlowTabs";
+import TeamList from "../components/ControlPanel/TeamPanel/TeamList.jsx";
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
@@ -13,8 +13,8 @@ export default function ControlPanelPage() {
   return (
     <Wrapper>
       <TeamList />
-      <ControlPanelMenu />
-      <ControlPanelManager />
+      <NavigationPanel />
+      <PanelRouter />
       {/* <FlowTabs /> */}
     </Wrapper>
   );

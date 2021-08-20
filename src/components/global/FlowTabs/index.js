@@ -2,25 +2,15 @@ import React,{ useState,useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { closeFlow, mergeFlow } from "../../../store/actions/flowActions";
-import AddFlowForm from "../../ControlPanel/SidePanel/ProjectsPanel/forms/AddFlowForm";
-import Modal from "../../global/Modal";
-import { CancelIcon } from "../../global/icons";
 import { Container, TabItem, AddButton,CloseButton } from "./style";
 const FlowTabs = () => {
   const flows = useSelector((state) => state.flowReducer);
   const dispatch = useDispatch();
-  const [showModal, setShowModal] = useState(false);
   const [openedFlows, setOpenedFlows] = useState([]);
   const { flowWorkSpaceReducer, flowConfigReducer, nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
   const { reactFlowInstance } = flowWorkSpaceReducer;
   
   const history = useHistory();
-  const showModalHandle = () => {
-    setShowModal(true);
-  };
-  const hideModalHandle = () => {
-    setShowModal(false);
-  };
   const onClickHandle = (id) => {
     const { position, zoom, elements } = reactFlowInstance.toObject();
     const flow = {
@@ -63,17 +53,10 @@ const FlowTabs = () => {
               <div style={{paddingRight:'20px'}}>
                 {flow.config.name}
               </div>
-              <CloseButton onClick={(event)=>closeFlowHandle(event,flow)}>
-                <CancelIcon width="20px" height="20px"/>
-              </CloseButton>
             </TabItem>
           </div>
         );
       })}
-      <AddButton onClick={showModalHandle}>+</AddButton>
-      <Modal isOpen={showModal} onRequestClose={hideModalHandle}>
-        <AddFlowForm closeModal={hideModalHandle}/>
-      </Modal>
     </Container>
   );
 }

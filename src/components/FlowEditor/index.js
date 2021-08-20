@@ -22,7 +22,7 @@ import { setNodeList } from "../../store/actions/nodeListActions";
 import * as themeColor from "../../config/ThemeReference";
 import { closeAllNodeGroupMenu } from "../../store/actions/flowActions";
 import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "../../app-global/helpers/elementController";
-import KeyboardEvents from "../global/KeyboardEvents";
+import KeyboardEvents from "../Global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
 import CustomEdge from './Edges/CustomEdge'
 import PropTypes from "prop-types"

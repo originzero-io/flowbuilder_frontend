@@ -14,7 +14,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore.js";
 import { setAuthorizationToken } from "./app-global/helpers/httpHelpers.js";
-import ErrorBoundary from "./components/global/ErrorBoundary.js";
+import ErrorBoundary from "./components/Global/ErrorBoundary.js";
 const store = configureStore();
 //axios.defaults.baseURL = 'https://anaks-flow-server.herokuapp.com/';
 axios.defaults.baseURL = "http://localhost:5000/";

@@ -7,20 +7,30 @@ import {
 } from "./style";
 import { FiMoreVertical } from "react-icons/fi";
 import PropTypes from "prop-types";
-
-export default function DetailMenu({deleteEvent}) {
+import { useDispatch } from "react-redux";
+import { setModal } from "../../../store/actions/componentActions";
+import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsPanel/components/MoveFlow";
+import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsPanel/components/EditFlow";
+export default function DetailMenu({deleteEvent,data}) {
+  const dispatch = useDispatch();
+  const moveHandler = () => {
+    dispatch(setModal(true, <MoveFlow flow={data}/>));
+  }
+  const editHandler = () => {
+    dispatch(setModal(true, <EditFlow flow={data}/>));
+  }
   return (
-    <DetailMenuWrapper tabIndex="1">
-      <CardMoreButton onClick={(e) => e.stopPropagation()}>
-        <FiMoreVertical />
-      </CardMoreButton>
-      <DetailMenuList>
-        <MenuItem>Move</MenuItem>
-        <MenuItem>Edit</MenuItem>
-        <MenuItem>Share</MenuItem>
-        <MenuItem onClick={deleteEvent}>Delete</MenuItem>
-      </DetailMenuList>
-    </DetailMenuWrapper>
+      <DetailMenuWrapper tabIndex="1">
+        <CardMoreButton onClick={(e) => e.stopPropagation()}>
+          <FiMoreVertical />
+        </CardMoreButton>
+        <DetailMenuList>
+          <MenuItem onClick={moveHandler}>Move</MenuItem>
+          <MenuItem onClick={editHandler}>Edit</MenuItem>
+          <MenuItem>Share</MenuItem>
+          <MenuItem onClick={(e)=>deleteEvent(e,data)}>Delete</MenuItem>
+        </DetailMenuList>
+      </DetailMenuWrapper>
   );
 }
 
@@ -30,15 +40,18 @@ const MenuItem = ({ children, onClick }) => {
         if (onClick) onClick(e);
     }
   return (
-    <DetailMenuItem onClick={onClickHandler}>
-      {children}
-    </DetailMenuItem>
+    <>
+      <DetailMenuItem onClick={onClickHandler}>
+        {children}
+      </DetailMenuItem>
+    </>
   );
 };
+
 DetailMenu.propTypes = {
     deleteEvent: PropTypes.func,
 };
 MenuItem.propTypes = {
-    children: PropTypes.oneOfType[PropTypes.element,PropTypes.string],
+    children: PropTypes.string,
     onClick: PropTypes.func,
 };

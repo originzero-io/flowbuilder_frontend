@@ -1,45 +1,46 @@
 import * as actions from "../constants/flowConstants";
 import NodeClass from "../../app-global/works/NodeClass";
 const nodeClass = new NodeClass("nodeClass is created by redux store");
-import { flows,flowTemplate } from "../initialValues";
+import { flows, flowTemplate } from "../initialValues";
 export const flowReducer = (state = flows, { type, payload }) => {
   switch (type) {
     case actions.ADD_FLOW:
-      return [...state, { config: { ...payload }, ...flowTemplate }];
-    case actions.UPDATE_FLOW:
-      return state;
+      return [...state, payload];
     case actions.OPEN_FLOW:
-      return state.map(state => {
+      return state.map((state) => {
         if (state._id === payload._id) {
           return {
             ...state,
-            opened:true
-          }
-        }
-        else return state;
+            opened: true,
+          };
+        } else return state;
       });
     case actions.CLOSE_FLOW:
-      return state.map(state => {
+      return state.map((state) => {
         if (state._id === payload._id) {
           return {
             ...state,
-            opened:false
-          }
-        }
-        else return state;
+            opened: false,
+          };
+        } else return state;
       });
     case actions.DELETE_FLOW:
-      return state.filter(state=>state._id !== payload._id)
+      return state.filter((state) => state._id !== payload._id);
     case actions.MERGE_FLOW:
-      return state.map(state => {
+      return state.map((state) => {
         if (state._id === payload._id) {
           console.log(payload);
-          return {...state,...payload}
-        }
-        else return state;
+          return { ...state, ...payload };
+        } else return state;
       });
     case actions.LOAD_FLOWS:
-      return payload
+      return payload;
+    case actions.UPDATE_FLOW:
+      return state.map((state) => {
+        if (state._id === payload._id) {
+          return payload;
+        } else return state;
+      });
     default:
       return state;
   }
@@ -66,21 +67,21 @@ export const flowWorkSpaceReducer = (state = {}, { type, payload }) => {
     case actions.SET_CURRENT_FLOW_WORKSPACE:
       return payload;
     case actions.SET_PANE_CLICK_POSITION:
-      return {...state, paneClickPosition: payload };
+      return { ...state, paneClickPosition: payload };
     case actions.SET_REACT_FLOW_INSTANCE:
-      return {...state, reactFlowInstance: payload };
+      return { ...state, reactFlowInstance: payload };
     case actions.SET_THEME:
-      return {...state, theme: payload };
+      return { ...state, theme: payload };
     case actions.SET_MINIMAP_DISPLAY:
-      return {...state, miniMapDisplay: payload };
+      return { ...state, miniMapDisplay: payload };
     case actions.SET_ROTATE_ALL_PATH:
-      return {...state, rotateAllPath: payload };
+      return { ...state, rotateAllPath: payload };
     case actions.SET_WORKSPACE_EDGE_TYPE:
-      return {...state, edgeType: payload };
+      return { ...state, edgeType: payload };
     case actions.SET_GROUPBAR_DISPLAY:
       return { ...state, groupBarDisplay: payload };
-      case actions.SET_CLOSE_ALL_GROUPS:
-        return {...state,nodeGroupMenuDisplay:payload}
+    case actions.SET_CLOSE_ALL_GROUPS:
+      return { ...state, nodeGroupMenuDisplay: payload };
     default:
       return state;
   }
@@ -94,5 +95,3 @@ export const activeFlowReducer = (state = {}, { type, payload }) => {
       return state;
   }
 };
-
-

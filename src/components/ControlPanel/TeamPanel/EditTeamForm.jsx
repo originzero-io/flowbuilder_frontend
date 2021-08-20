@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
-import { createTeam } from "../../../store/actions/teamActions";
-import { createTeamService } from "../../../services/teamService";
+import { editTeam } from "../../../store/actions/teamActions";
+import { editTeamService } from "../../../services/teamService";
 import { setError } from "../../../store/actions/errorActions";
 import { setModal } from "../../../store/actions/componentActions";
-export default function AddTeamForm() {
-  const auth = useSelector((state) => state.authReducer);
+export default function EditTeamForm() {
+  const { activeTeam } = useSelector((state) => state.teamReducer);
   const [teamInfo, setteamInfo] = useState({
     name: null,
-    createdBy: auth.username,
   });
   const dispatch = useDispatch();
   const onChangeHandler = (e) => {
@@ -17,9 +16,9 @@ export default function AddTeamForm() {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    createTeamService(teamInfo)
+    editTeamService(activeTeam._id, teamInfo)
       .then((res) => {
-        dispatch(createTeam(res.team));
+        dispatch(editTeam(res.team));
         dispatch(setModal(false));
       })
       .catch((err) => dispatch(setError(err)));

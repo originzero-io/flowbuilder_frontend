@@ -1,7 +1,8 @@
 export const setError = (error) => {
-    console.log("ERRORRR:", error.response);
+    console.log("ERROR:", error.response);
+    const { response } = error;
     return {
         type: "SET_ERROR",
-        payload: { message: error.response.data.message, status: error.response.status },
+        payload: { message: response.data?.message || response.statusText, status: response.status },
     };
 }

@@ -1,7 +1,8 @@
 import React from "react";
 import ReactModal from "react-modal";
 import { CancelIcon } from "../icons";
-import PropTypes from "prop-types"
+import { useDispatch, useSelector } from "react-redux";
+import { setModal } from "../../../store/actions/componentActions";
 
 const customStyles = {
   content: {
@@ -12,7 +13,8 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     borderRadius: "14px",
-    overflow: "visible",
+    overflowY: "auto",
+    overflowX:"hidden",
     padding: "35px",
     background: "rgb(245, 246, 250)",
     width: "30%",
@@ -26,8 +28,8 @@ const customStyles = {
 };
 const closeButtonWrapperStyle = {
   position: "absolute",
-  top: "-8px",
-  right: "-6px",
+  top: "0px",
+  right: "1px",
   cursor: "pointer",
 };
 const childrenStyle = {
@@ -35,26 +37,25 @@ const childrenStyle = {
 };
 ReactModal.setAppElement("#root");
 
-export default function Modal({ isOpen, onRequestClose, children }) {
+export default function Modal() {
+  const modalReducer  = useSelector(state => state.modalReducer);
+  const dispatch = useDispatch();
+  
+  const closeModal = () => {
+    dispatch(setModal(false))
+  }
   return (
     <ReactModal
-      isOpen={isOpen}
-      //onAfterOpen={afterOpenModal}
-      onRequestClose={onRequestClose}
+      isOpen={modalReducer.active}
+      onRequestClose={closeModal}
       style={customStyles}
       shouldCloseOnEsc={true}
       shouldCloseOnOverlayClick={true}
     >
-      <div style={closeButtonWrapperStyle} onClick={onRequestClose}>
+      <div style={closeButtonWrapperStyle} onClick={closeModal}>
         <CancelIcon width="30px" height="30px" />
       </div>
-      <div style={childrenStyle}>{children}</div>
+      <div style={childrenStyle}>{modalReducer.component}</div>
     </ReactModal>
   );
-}
-
-Modal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired
 }

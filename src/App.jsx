@@ -10,19 +10,21 @@ import NotFound from './navigation/NotFound';
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import * as routes from './navigation/RouterConfig';
+import Modal from "./components/Global/Modal";
 const App = () => {
   return (
       <AppWrapper>
         <Switch>
           <Route exact path={routes.LOGIN} component={LoginPage}/>
-          <PrivateRoute exact path={routes.PANEL} component={ControlPanelPage}/>
+          <PrivateRoute path="/panel" component={ControlPanelPage}/>
           <PrivateRoute exact path={routes.GOTO_FLOW} component={FlowPage}/>
           <PrivateRoute exact path={routes.GOTO_DASHBOARD} component={DashboardPage}/>
           <PrivateRoute exact path={routes.CHANGE_TAB} component={TabRedirector}/>
           {/* <Route path="*"><Redirect to={routes.LOGIN}/></Route> */}
           <Route path="*" component={NotFound}/>
         </Switch> 
-        <NotificationContainer />
+      <NotificationContainer /> 
+      <Modal/>
       </AppWrapper>
   );
 };

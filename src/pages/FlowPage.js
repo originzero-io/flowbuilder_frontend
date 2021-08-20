@@ -13,7 +13,7 @@ import { setElements } from "../store/actions/elementsActions";
 import { loadGroups } from "../store/actions/nodeGroupsActions";
 import { Redirect } from "react-router";
 import { useParams } from "react-router-dom";
-import FlowTabs from "../components/global/FlowTabs";
+import FlowTabs from "../components/Global/FlowTabs";
 const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowId } = useParams();

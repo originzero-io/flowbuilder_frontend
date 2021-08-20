@@ -74,9 +74,15 @@ export const closeFlow = (flow) => ({
   payload: flow
 });
 
+
+
 export const loadFlows = (flows) => ({
   type: action.LOAD_FLOWS,
   payload: flows
+});
+export const updateFlow = (flow) => ({
+  type: action.UPDATE_FLOW,
+  payload: flow
 });
 
 

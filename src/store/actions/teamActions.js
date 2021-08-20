@@ -17,6 +17,13 @@ export const createTeam = (params) => {
     payload: params,
   };
 };
+export const editTeam = (params) => {
+  console.log("edit-team:", params);
+  return {
+    type: action.EDIT_TEAM,
+    payload: params,
+  };
+};
 export const deleteTeam = (id) => {
   return {
     type: action.DELETE_TEAM,

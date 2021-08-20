@@ -3,20 +3,21 @@ export const Container = styled.div`
   margin: 7px;
   width: 160px;
   height: 150px;
-  border-radius: 8px;
+  border-radius: 4px;
   user-select: none;
   background-color: white;
   cursor: pointer;
   color: black;
   transition: background-color 0.3s ease-in-out;
-  box-shadow: 1px 1px 26px -20px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
   &:hover {
-    background-color: #ecf0f1;
-    transition: background-color 0.3s ease-in-out;
+    background-color: rgba(46, 204, 113,0.2);
+    transition: background-color 0.2s ease-in-out;
   }
   display: flex;
   flex-direction: column;
   position: relative;
+  border:1px solid rgb(22, 139, 63);
 `;
 export const CardBody = styled.div`
   position: relative;
@@ -32,8 +33,7 @@ export const CardTitle = styled.div`
   padding: 5px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  background: rgb(22, 139, 63);
-  color: white;
+  color: black;
 `;
 export const CardAuthor = styled.div`
   display: flex;
@@ -54,12 +54,12 @@ export const CardFooter = styled.div`
 `;
 export const CardMoreButton = styled.div`
   font-size: 20px;
-  color: whitesmoke;
+  color: rgb(22, 139, 63);
   position: absolute;
   right: 2px;
   top: 1px;
   &:hover {
-    color: red;
+    color: #2ecc71;
   }
 `;
 export const DetailMenuWrapper = styled.div`
@@ -67,7 +67,6 @@ export const DetailMenuWrapper = styled.div`
   position: absolute;
   right: 12px;
   top: 3px;
-  background:Red;
   z-index: 1;
 `;
 export const DetailMenuList = styled.ul`

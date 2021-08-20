@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   Container,
@@ -13,27 +13,33 @@ import { VscTrash } from "react-icons/vsc";
 import DetailMenu from "./DetailMenu";
 import { deleteFlowService } from "../../../services/flowService";
 import { deleteFlow } from "../../../store/actions/flowActions";
+import { setError } from "../../../store/actions/errorActions";
+import { Badge } from "reactstrap";
 
 const Card = ({ data }) => {
   const dispatch = useDispatch();
-  const deleteCardHandler = async (e, flow) => {
+  const { projects } = useSelector(state => state.projectReducer);
+  const currentProject = projects.filter(project => project._id === data.config.projectId)[0];
+  const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
-      await deleteFlowService(flow._id);
-      dispatch(deleteFlow(flow));
+      deleteFlowService(flow._id)
+        .then(() => dispatch(deleteFlow(flow)))
+        .catch((err) => dispatch(setError(err)));
     }
   };
   return (
     <Container>
       <CardTitle>{data.config.name || ""}</CardTitle>
-      <DetailMenu deleteEvent={deleteCardHandler} />
+      <DetailMenu deleteEvent={deleteCardHandler} data={data} />
       <CardBody>
         <CardAuthor>{data.config.author || ""}</CardAuthor>
         <CardDescription>{data.config.description || ""}</CardDescription>
         <CardFooter>
-          <div onClick={(e) => deleteCardHandler(e, data)}>
+          <Badge color="success">{currentProject?.name}</Badge>
+          <span onClick={(e) => deleteCardHandler(e, data)}>
             <VscTrash style={{ fontSize: "22px" }} />
-          </div>
+          </span>
         </CardFooter>
       </CardBody>
     </Container>

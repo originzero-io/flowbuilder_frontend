@@ -2,9 +2,11 @@ import React, { useEffect,useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProjectsByTeamService } from "../../../services/projectService";
 import { getTeamsService } from "../../../services/teamService";
+import { setModal } from "../../../store/actions/componentActions";
+import { setActiveProject } from "../../../store/actions/controlPanelActions";
+import { setError } from "../../../store/actions/errorActions";
 import { loadProjects } from "../../../store/actions/projectActions";
 import { loadTeams,setActiveTeam } from "../../../store/actions/teamActions";
-import Modal from "../../global/Modal";
 import AddTeamForm from "./AddTeamForm";
 import { AddTeamButton, TeamItem, TeamsContainer } from "./style";
 
@@ -14,24 +16,24 @@ const TeamList = () => {
   console.log("team list rendered");
   useEffect(() => {
     getTeamsService()
-      .then((res) => {
-        console.log("res:", res);
-        dispatch(loadTeams(res.teams));
-        dispatch(setActiveTeam(res.teams[0]));
+      .then((teams) => {
+        dispatch(loadTeams(teams));
+        dispatch(setActiveTeam(teams[0]));
+        return getProjectsByTeamService(teams[0]._id);
       })
-      .catch((err) => console.log("team error:", err));
+      .then((projects) => {
+        dispatch(loadProjects(projects));
+      })
+      .catch((err) => dispatch(setError(err)));
   }, []);
-  const clickTeamHandle = async (team) => {
-    const projects = await getProjectsByTeamService(team._id);
-    dispatch(setActiveTeam(team))
-    dispatch(loadProjects(projects));
-  };
-  const [showModal, setShowModal] = useState(false);
-  const showModalHandle = (type) => {
-    setShowModal(true);
-  };
-  const hideModalHandle = () => {
-    setShowModal(false);
+
+  const clickTeamHandle = (team) => {
+    getProjectsByTeamService(team._id)
+      .then((projects) => {
+        dispatch(setActiveTeam(team))
+        dispatch(loadProjects(projects));
+      })
+      .catch((err) => dispatch(setError(err)));
   };
   return (
     <TeamsContainer>
@@ -45,10 +47,7 @@ const TeamList = () => {
           </TeamItem>
         );
       })}
-      <AddTeamButton onClick={showModalHandle}><i className="fas fa-plus"></i></AddTeamButton>
-      <Modal isOpen={showModal} onRequestClose={hideModalHandle}>
-        <AddTeamForm closeModal={hideModalHandle} />
-      </Modal>
+      <AddTeamButton onClick={()=>dispatch(setModal(true,<AddTeamForm/>))}><i className="fas fa-plus"></i></AddTeamButton>
     </TeamsContainer>
   );
 };

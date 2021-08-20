@@ -9,7 +9,7 @@ import {
   CancelIcon,
   NonGroupIcon,
   SubmitIcon
-} from "../../../global/icons";
+} from "../../../Global/icons";
 import { HorizontalDivider } from "../../../style-components/Divider";
 import {
   AddGroupWrapper,
