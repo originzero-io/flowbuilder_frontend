@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getFlowByProjectService } from "../../../services/flowService";
+import { getFlowsByProjectService } from "../../../services/flowService";
 import { deleteProjectService } from "../../../services/projectService";
 import { loadFlows } from "../../../store/actions/flowActions";
 import { deleteProject, setActiveProject, } from "../../../store/actions/projectActions";
@@ -11,11 +11,10 @@ import { setError } from "../../../store/actions/errorActions";
 import { Badge } from "reactstrap";
 export default function ProjectList() {
   const dispatch = useDispatch();
-  const { projects } = useSelector((state) => state.projectReducer);
+  const { projects,activeProject } = useSelector((state) => state.projectReducer);
   const clickProjectHandle = (project) => {    
-    getFlowByProjectService(project._id)
+    getFlowsByProjectService(project)
       .then((res) => {
-        console.log("flows:", res);
         dispatch(loadFlows(res.flows));
         dispatch(setActivePanel("Projects"));
         dispatch(setActiveProject(project));
@@ -38,10 +37,11 @@ export default function ProjectList() {
           <CollapsibleMenuItem
             key={project._id}
             onClick={() => clickProjectHandle(project)}
+            active={project._id === activeProject._id}
           >
-            <Badge style={{marginLeft:'-15px'}} color="success">{project.createdBy}</Badge>
+            <Badge style={{marginLeft:'-15px',background:'rgb(22, 139, 63)'}}>{project.createdBy}</Badge>
             <div>{project.name}</div>
-            <div onClick={(e) => deleteProjectHandle(e,project)}>
+            <div onClick={() => deleteProjectHandle(project)}>
               <VscTrash style={{ fontSize: '20px' }}/>
             </div>
           </CollapsibleMenuItem>

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
 import {AppWrapper} from "./components/style-components/AppWrapper";
 import FlowPage from "./pages/FlowPage";
@@ -8,14 +8,14 @@ import PrivateRoute from "./navigation/PrivateRoute";
 import TabRedirector from './navigation/TabRedirector';
 import NotFound from './navigation/NotFound';
 import DashboardPage from "./pages/DashboardPage";
-import LoginPage from "./pages/LoginPage";
+import AuthPage from "./pages/AuthPage";
 import * as routes from './navigation/RouterConfig';
 import Modal from "./components/Global/Modal";
 const App = () => {
   return (
       <AppWrapper>
         <Switch>
-          <Route exact path={routes.LOGIN} component={LoginPage}/>
+          <Route exact path={routes.AUTH} component={AuthPage}/>
           <PrivateRoute path="/panel" component={ControlPanelPage}/>
           <PrivateRoute exact path={routes.GOTO_FLOW} component={FlowPage}/>
           <PrivateRoute exact path={routes.GOTO_DASHBOARD} component={DashboardPage}/>
@@ -23,8 +23,8 @@ const App = () => {
           {/* <Route path="*"><Redirect to={routes.LOGIN}/></Route> */}
           <Route path="*" component={NotFound}/>
         </Switch> 
-      <NotificationContainer /> 
-      <Modal/>
+        <NotificationContainer /> 
+        <Modal/>
       </AppWrapper>
   );
 };

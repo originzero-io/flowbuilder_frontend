@@ -7,13 +7,13 @@ import { setError } from "../../../store/actions/errorActions";
 import { setModal } from "../../../store/actions/componentActions";
 export default function AddTeamForm() {
   const auth = useSelector((state) => state.authReducer);
-  const [teamInfo, setteamInfo] = useState({
+  const [teamInfo, setTeamInfo] = useState({
     name: null,
     createdBy: auth.username,
   });
   const dispatch = useDispatch();
   const onChangeHandler = (e) => {
-    setteamInfo({ ...teamInfo, [e.target.name]: e.target.value });
+    setTeamInfo({ ...teamInfo, [e.target.name]: e.target.value });
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();

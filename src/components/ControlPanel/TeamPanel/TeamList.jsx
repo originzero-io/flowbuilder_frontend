@@ -1,39 +1,48 @@
 import React, { useEffect,useState } from "react";
+import { VscAdd } from "react-icons/vsc";
 import { useSelector, useDispatch } from "react-redux";
+import { getFlowByProjectService, getFlowsByTeamService } from "../../../services/flowService";
 import { getProjectsByTeamService } from "../../../services/projectService";
 import { getTeamsService } from "../../../services/teamService";
 import { setModal } from "../../../store/actions/componentActions";
-import { setActiveProject } from "../../../store/actions/controlPanelActions";
 import { setError } from "../../../store/actions/errorActions";
+import { loadFlows } from "../../../store/actions/flowActions";
 import { loadProjects } from "../../../store/actions/projectActions";
 import { loadTeams,setActiveTeam } from "../../../store/actions/teamActions";
 import AddTeamForm from "./AddTeamForm";
 import { AddTeamButton, TeamItem, TeamsContainer } from "./style";
 
 const TeamList = () => {
-  const { teams } = useSelector((state) => state.teamReducer);
+  const { teams,activeTeam } = useSelector((state) => state.teamReducer);
   const dispatch = useDispatch();
   console.log("team list rendered");
-  useEffect(() => {
-    getTeamsService()
-      .then((teams) => {
-        dispatch(loadTeams(teams));
+  useEffect(async () => {
+    try {
+      const teams = await getTeamsService();
+      dispatch(loadTeams(teams));
+      if (teams.length > 0) {
         dispatch(setActiveTeam(teams[0]));
-        return getProjectsByTeamService(teams[0]._id);
-      })
-      .then((projects) => {
+        const projects = await getProjectsByTeamService(teams[0]);
         dispatch(loadProjects(projects));
-      })
-      .catch((err) => dispatch(setError(err)));
+      }
+      else {
+        dispatch(setActiveTeam(""));
+        dispatch(loadProjects([]));
+        dispatch(loadFlows([]));
+      }
+    }
+    catch (error) {
+      dispatch(setError(error))
+    }
   }, []);
 
-  const clickTeamHandle = (team) => {
-    getProjectsByTeamService(team._id)
-      .then((projects) => {
-        dispatch(setActiveTeam(team))
-        dispatch(loadProjects(projects));
-      })
-      .catch((err) => dispatch(setError(err)));
+  const clickTeamHandle = async(team) => {
+    const projects = await getProjectsByTeamService(team);
+    dispatch(setActiveTeam(team))
+    dispatch(loadProjects(projects));
+
+    const flows = await getFlowsByTeamService(team);
+    dispatch(loadFlows(flows.flows));
   };
   return (
     <TeamsContainer>
@@ -41,15 +50,20 @@ const TeamList = () => {
         return (
           <TeamItem
             key={team._id}
+            active={team._id === activeTeam._id}
             onClick={()=>clickTeamHandle(team)}
           >
-            {team.name.split("")[0].toUpperCase()}
+            <div style={{color:'white',paddingLeft:'8px',paddingRight:'8px',borderRadius:'4px'}}>
+              {team.name.split("")[0].toUpperCase()}
+            </div>
           </TeamItem>
         );
       })}
-      <AddTeamButton onClick={()=>dispatch(setModal(true,<AddTeamForm/>))}><i className="fas fa-plus"></i></AddTeamButton>
+      <AddTeamButton onClick={()=>dispatch(setModal(true,<AddTeamForm/>))}>
+        <VscAdd style={{ color:"white" }}/>
+      </AddTeamButton>
     </TeamsContainer>
   );
 };
 
-export default TeamList;
+export default React.memo(TeamList);

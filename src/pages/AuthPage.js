@@ -1,20 +1,13 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "../components/Global/Forms/LoginForm";
 import styled from "styled-components";
 import {
   Container,
   Content,
   Image,
-  FormWrapper,
-  Input,
-  Text,
-  LoginButton,
-  ErrorMessage,
+  FormWrapper
 } from "../components/Global/Forms/style";
 import RegisterForm from "../components/Global/Forms/RegisterForm";
-import axios from "axios";
 const Button = styled.button`
   border: none;
   border-radius: 8px;

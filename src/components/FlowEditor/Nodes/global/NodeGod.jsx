@@ -106,7 +106,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
   );
 };
 
-export default NodeGod;
+export default React.memo(NodeGod);
 
 
 NodeGod.propTypes = {

@@ -9,7 +9,7 @@ import { updateFlow } from "../../../../../store/actions/flowActions";
 export default function MoveFlow({ flow }) {
   const dispatch = useDispatch();
   const { projects } = useSelector((state) => state.projectReducer);
-  const [selection, setSelection] = useState(flow.config.projectId);
+  const [selection, setSelection] = useState(flow.project);
   const changeHandle = (e) => {
     setSelection(e.target.value);
   };

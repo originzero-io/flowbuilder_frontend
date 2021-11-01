@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { createProjectService } from "../../../../../services/projectService";
-import { createProject } from "../../../../../store/actions/projectActions";
-import { setError } from "../../../../../store/actions/errorActions";
-import { setModal } from "../../../../../store/actions/componentActions";
+import { createProjectService } from "../../../services/projectService";
+import { createProject } from "../../../store/actions/projectActions";
+import { setError } from "../../../store/actions/errorActions";
+import { setModal } from "../../../store/actions/componentActions";
 const AddProjectForm = () => {
   const { activeTeam } = useSelector((state) => state.teamReducer);
   const auth = useSelector((state) => state.authReducer);
@@ -13,7 +13,7 @@ const AddProjectForm = () => {
     author: null,
     description: '',
     createdBy: auth.username,
-    teamId: activeTeam._id
+    team: activeTeam._id
   });
   const dispatch = useDispatch();
   const onChangeHandler = (e) => {

@@ -60,7 +60,7 @@ const MainMenu = () => {
           <Logo theme={theme}/>
         </Circle>
         <div onClick={homeClickHandle}>
-          <Link to="/panel">
+          <Link to="/panel/all">
             <MenuItem theme={theme}>Home</MenuItem>
           </Link>
         </div>

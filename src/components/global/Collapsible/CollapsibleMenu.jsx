@@ -16,12 +16,12 @@ export function CollapsibleMenu({ trigger, open, children }) {
     </Collapsible>
   );
 }
-export function CollapsibleMenuItem({ children, onClick }) {
-  return <CollapsableItem onClick={onClick}>{children}</CollapsableItem>;
+export function CollapsibleMenuItem({ children, onClick,active }) {
+  return <CollapsableItem active={active} onClick={onClick}>{children}</CollapsableItem>;
 }
-export function CollapsibleTrigger({ children, label, icon,onClick }) {
+export function CollapsibleTrigger({ children, label, icon,onClick,style }) {
   return (
-    <TriggerWrapper onClick={onClick}>
+    <TriggerWrapper onClick={onClick} style={style}>
       <div style={{ display: "flex", alignItems: "center" }}>
         {icon}
         <div style={{ paddingLeft: "5px"}}>{label}</div>

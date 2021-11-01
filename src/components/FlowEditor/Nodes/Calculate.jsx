@@ -5,6 +5,7 @@ import NodeIOManager from "./global/NodeIOManager";
 
 const CalculateNode = (self) => {
   const [align, setAlign] = useState("vertical");
+  console.log("calculate rendered");
   return (
     <>
       <NodeGod
@@ -20,4 +21,4 @@ const CalculateNode = (self) => {
   );
 };
 
-export default CalculateNode;
+export default React.memo(CalculateNode);

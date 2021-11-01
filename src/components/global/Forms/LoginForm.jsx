@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
@@ -7,6 +7,7 @@ import { loginError, loginSuccess } from "../../../store/actions/authActions";
 import { Input, Text, Submit, ErrorMessage } from "./style";
 import { Redirect } from "react-router-dom";
 import { openNotification as notification } from "../../../app-global/dom/notification";
+import { setError } from "../../../store/actions/errorActions";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -19,13 +20,14 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm({});
   const onSubmitHandle = async (data) => {
-    //const response = await loginService(data);
     try {
       const response = await loginService(data);
+      console.log(response.data);
       dispatch(loginSuccess(response.data));
-    } catch ({ response }) {
+      localStorage.setItem("user", JSON.stringify(response.data));
+    } catch (error) {
       notification("", "The server is not active", "error");
-      dispatch(loginError(response?.data.message));
+      dispatch(loginError(error.response?.data.message));
     }
   };
   return (

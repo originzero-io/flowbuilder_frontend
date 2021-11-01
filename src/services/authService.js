@@ -4,6 +4,7 @@ export const loginService = async (user) => {
     const response = await axios.post("/auth/login", user);
     const token = response.data.access_token;
     localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(response.data));
     setAuthorizationToken(token);
     return response.data;
 }

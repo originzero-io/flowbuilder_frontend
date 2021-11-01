@@ -1,6 +1,6 @@
 import axios from 'axios';
 export const getTeamsService = async () => {
-    const response = await axios.get("/teams/getAll");
+    const response = await axios.get("/teams/all");
     return response.data;
 }
 export const createTeamService = async (params) => {

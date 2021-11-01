@@ -1,4 +1,4 @@
-export const LOGIN = "/";
+export const AUTH = "/";
 export const PANEL = "/panel";
 
 export const GOTO_FLOW = "/flow/:flowId";

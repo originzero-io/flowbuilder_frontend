@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 export const getProjectsService = async () => {
-    const response = await axios.get("/projects/getAll");
+    const response = await axios.get("/projects/all");
     return response.data;
 }
-export const getProjectsByTeamService = async (teamId) => {
-    const response = await axios.get(`/projects/byTeam/${teamId}`);
+export const getProjectsByTeamService = async (team) => {
+    const response = await axios.get(`/projects/byTeam/${team._id}`);
     return response.data;
 }
 export const createProjectService = async (params) => {

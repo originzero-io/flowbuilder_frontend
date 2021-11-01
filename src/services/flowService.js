@@ -1,10 +1,14 @@
 import axios from 'axios';
 export const getFlowsService = async () => {
-    const response = await axios.get("/flows/getAll");
+    const response = await axios.get("/flows/all");
     return response.data;
 }
-export const getFlowByProjectService = async (projectId) => {
-    const response = await axios.get(`/flows/byProject/${projectId}`);
+export const getFlowsByProjectService = async (project) => {
+    const response = await axios.get(`/flows/byProject/${project._id}`);
+    return response.data;
+}
+export const getFlowsByTeamService = async (team) => {
+    const response = await axios.get(`/flows/byTeam/${team._id}`);
     return response.data;
 }
 export const createFlowService = async (params) => {
@@ -15,8 +19,8 @@ export const deleteFlowService = async (id) => {
     const response = await axios.delete(`/flows/${id}`);
     return response.data;
 }
-export const moveFlowService = async (flowId, projectId) => {
-    const response = await axios.put(`/flows/move/${flowId}`, { projectId });
+export const moveFlowService = async (flowId, project) => {
+    const response = await axios.put(`/flows/move/${flowId}`, { project });
     return response.data;
 }
 export const editFlowConfigService = async (flowId,flowConfig) => {

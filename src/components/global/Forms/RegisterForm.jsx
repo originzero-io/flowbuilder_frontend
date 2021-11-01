@@ -1,26 +1,21 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
-import { loginService, registerService } from "../../../services/authService";
-import { loginError, loginSuccess } from "../../../store/actions/authActions";
+import { registerService } from "../../../services/authService";
 import { Input, Text, Submit, ErrorMessage } from "./style";
-import { Redirect } from "react-router-dom";
 import { openNotification as notification } from "../../../app-global/dom/notification";
 import { setError } from "../../../store/actions/errorActions";
+import PropTypes from "prop-types";
 
 export default function RegisterForm({ setFormType }) {
   const dispatch = useDispatch();
-  const { isAuthenticated, errorMessage } = useSelector(
-    (state) => state.authReducer
-  );
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({});
   const onSubmitHandle = (data) => {
-
     registerService(data)
       .then(() => {
         notification("", "Register Successfuly", "success");
@@ -39,9 +34,7 @@ export default function RegisterForm({ setFormType }) {
             })}
             placeholder="Full Name"
           />
-          {errors.username && (
-            <ErrorMessage>{errors.username.message}</ErrorMessage>
-          )}
+          {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
           <Input
             {...register("username", {
               required: "Username must enter the field",
@@ -57,8 +50,8 @@ export default function RegisterForm({ setFormType }) {
             })}
             placeholder="E-mail"
           />
-          {errors.username && (
-            <ErrorMessage>{errors.username.message}</ErrorMessage>
+          {errors.email && (
+            <ErrorMessage>{errors.email.message}</ErrorMessage>
           )}
           <Input
             type="password"
@@ -82,3 +75,7 @@ export default function RegisterForm({ setFormType }) {
     </>
   );
 }
+
+RegisterForm.propTypes = {
+  setFormType: PropTypes.func,
+};

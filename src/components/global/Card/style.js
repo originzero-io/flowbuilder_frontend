@@ -9,7 +9,7 @@ export const Container = styled.div`
   cursor: pointer;
   color: black;
   transition: background-color 0.3s ease-in-out;
-  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
   &:hover {
     background-color: rgba(46, 204, 113,0.2);
     transition: background-color 0.2s ease-in-out;
@@ -17,7 +17,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  border:1px solid rgb(22, 139, 63);
+  //border:1px solid rgb(22, 139, 63);
 `;
 export const CardBody = styled.div`
   position: relative;

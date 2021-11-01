@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setActivePanel,
-  setActiveProject,
-} from "../../../store/actions/controlPanelActions";
-import { Container, NavMenu, TeamBrand } from "./style";
-import AddProjectForm from "../DynamicPanel/ProjectsPanel/forms/AddProjectForm";
+import { Container, NavMenu } from "./style";
+import AddProjectForm from "./AddProjectForm";
 import {
   CollapsibleMenu,
   CollapsibleMenuItem,
@@ -19,24 +15,24 @@ import { MdDevicesOther } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
 import { BiBrain } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
-import { getFlowsService } from "../../../services/flowService";
+import { getFlowsByTeamService, getFlowsService } from "../../../services/flowService";
 import { loadFlows } from "../../../store/actions/flowActions";
 import { setError } from "../../../store/actions/errorActions";
 import { setModal } from "../../../store/actions/componentActions";
-import { VscTrash } from "react-icons/vsc";
-import { BiEdit } from "react-icons/bi";
-import { deleteTeamService } from "../../../services/teamService";
-import { deleteTeam, setActiveTeam } from "../../../store/actions/teamActions";
 import { Link,useRouteMatch } from "react-router-dom";
-import EditTeamForm from "../TeamPanel/EditTeamForm";
+import TeamBrand from "./TeamBrand";
 
 const ControlPanelMenu = () => {
   const dispatch = useDispatch();
   const { url } = useRouteMatch();
-  const { activeTeam } = useSelector((state) => state.teamReducer);
-  const { projects } = useSelector((state) => state.projectReducer);
-  const showModalHandle = () => {
-    dispatch(setModal(true, <AddProjectForm />));
+  const { activeTeam, teams } = useSelector((state) => state.teamReducer);
+  const showModalHandle = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (activeTeam) {
+      dispatch(setModal(true, <AddProjectForm />));
+    }
+    else alert("Firstly, create a team.");
   };
 
   const projectItem = () => {
@@ -45,7 +41,7 @@ const ControlPanelMenu = () => {
         label="Projects"
         icon={<AiOutlineProject />}
       >
-        <div onClick={showModalHandle}>
+        <div onClick={(e)=>showModalHandle(e)}>
           <BsPlusCircle />
         </div>
       </CollapsibleTrigger>
@@ -61,38 +57,19 @@ const ControlPanelMenu = () => {
   };
 
   const allFlowsHandle = () => {
-    getFlowsService()
+    getFlowsByTeamService(activeTeam)
       .then((res) => {
-        dispatch(loadFlows(res.flows));
+        if (teams.length > 0) {
+          dispatch(loadFlows(res.flows));
+        }
+        else dispatch(loadFlows([]));
       })
       .catch((err) => dispatch(setError(err)));
   };
 
-  const deleteTeamHandler = () => {
-    if (confirm(`${activeTeam.name} takımını silmek istiyor musunuz?`)) {
-      deleteTeamService(activeTeam._id)
-        .then(res => {
-          dispatch(deleteTeam(res.team._id));
-        })
-        .catch(err => dispatch(setError(err)));
-    }
-  };
-  const editTeamHandler = () => {
-    dispatch(setModal(true,<EditTeamForm/>))
-  };
   return (
     <Container>
-      <TeamBrand>
-        <span>{activeTeam.name}</span>
-        <div>
-          <span onClick={editTeamHandler} style={{marginRight:'5px'}}>
-            <BiEdit style={{ fontSize: '20px' }} />
-          </span> 
-          <span onClick={deleteTeamHandler}>
-            <VscTrash style={{ fontSize: '20px' }} />
-          </span> 
-        </div>
-      </TeamBrand>
+      <TeamBrand team={activeTeam}/>
       <NavMenu>
         <Link to={`${url}/all`}>
           <NavMenuItem
