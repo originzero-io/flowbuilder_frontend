@@ -9,10 +9,12 @@ import { updateFlow } from "../../../../../store/actions/flowActions";
 export default function EditFlow({ flow }) {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.projectReducer);
+  const auth = useSelector((state) => state.authReducer);
   const [flowConfig, setFlowConfig] = useState({
     name: flow.config.name,
     author: flow.config.author,
     description: flow.config.description,
+    createdBy:auth.username
   });
 
   const onChangeHandler = (e) => {

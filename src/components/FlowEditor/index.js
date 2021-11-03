@@ -26,6 +26,7 @@ import KeyboardEvents from "../Global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
 import CustomEdge from './Edges/CustomEdge'
 import PropTypes from "prop-types"
+import { loadGroups } from "../../store/actions/nodeGroupsActions";
 export default function FlowEditor({ reactFlowWrapper }) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeListReducer);
@@ -254,5 +255,4 @@ export default function FlowEditor({ reactFlowWrapper }) {
 
 FlowEditor.propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
-  flowId: PropTypes.string.isRequired
 }

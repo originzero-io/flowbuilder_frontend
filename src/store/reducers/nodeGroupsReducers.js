@@ -8,9 +8,9 @@ export const nodeGroupsReducer = (state = nodeGroups, { type, payload }) => {
     case actionTypes.ADD_GROUP:
       return [...state, payload];
     case actionTypes.UPDATE_GROUP:
-      return state.map(state=>state.id === payload.id ? payload : state);
+      return state.map(state=>state._id === payload._id ? payload : state);
     case actionTypes.DELETE_GROUP:
-      return state.filter(state=>state.id !== payload);
+      return state.filter(state=>state._id !== payload._id);
     default:
       return state;
   }

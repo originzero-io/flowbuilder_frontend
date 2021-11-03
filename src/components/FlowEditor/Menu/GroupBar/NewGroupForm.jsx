@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { isNode, useStoreActions } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useParams } from "react-router";
 import uuid from "react-uuid";
 import * as themeColor from "../../../../config/ThemeReference";
+import { createGroupService } from "../../../../services/groupService";
 import { addGroup } from "../../../../store/actions/nodeGroupsActions";
 import {
   AddIcon,
@@ -23,14 +25,21 @@ import {
 } from "./style";
 
 const NewGroupForm = ({ theme }) => {
-  const [groupInfo, setGroupInfo] = useState({});
   const [formOpen, setFormOpen] = useState(false);
   const { elementReducer } = useSelector((state) => state.activeFlowReducer);
+  const auth = useSelector((state) => state.authReducer);
   const elements = elementReducer.present;
+  const { flowId } = useParams();
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
-  );
+    );
   const dispatch = useDispatch();
+  const [groupInfo, setGroupInfo] = useState({
+    name: "",
+    color: "",
+    createdBy: auth.username,
+    flow:flowId
+  });
   const groupHandle = (event) => {
     const { name, value } = event.target;
     setGroupInfo({
@@ -38,15 +47,10 @@ const NewGroupForm = ({ theme }) => {
       [name]: value,
     });
   };
-  const addNewGroup = (event) => {
+  const addNewGroup = async (event) => {
     event.preventDefault();
-    dispatch(
-      addGroup({
-        id: uuid(),
-        name: groupInfo.name,
-        color: groupInfo.color,
-      })
-    );
+    const response = await createGroupService(flowId, groupInfo);
+    dispatch(addGroup(response.group))
   };
   const selectNonGroupsHandle = () => {
     const nonGroups = elements.filter(

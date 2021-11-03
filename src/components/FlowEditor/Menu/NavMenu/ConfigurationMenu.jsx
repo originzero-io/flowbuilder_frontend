@@ -50,7 +50,7 @@ export default function ConfigurationMenu() {
     (actions) => actions.setSelectedElements
   );
   const dispatch = useDispatch();
-
+  
   const downloadFlowHandle = () => {
     if (confirm("Download?")) {
       if (reactFlowInstance) {

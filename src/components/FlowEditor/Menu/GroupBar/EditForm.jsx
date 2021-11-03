@@ -8,6 +8,7 @@ import { ColorFlag, Submit } from "./style";
 import * as themeColor from "../../../../config/ThemeReference";
 import { isEdge, isNode } from "react-flow-renderer";
 import PropTypes from "prop-types"
+import { updateGroupService } from "../../../../services/groupService";
 const Form = styled.form`
   position: relative;
   width: 78%;
@@ -27,10 +28,12 @@ const Input = styled.input`
 
 export default function EditForm({ editableItem, setEditableItem, theme }) {
   const dispatch = useDispatch();
-  const onSubmitHandle = (event) => {
+  const onSubmitHandle = async (event) => {
+    console.log("editable:", editableItem);
     event.preventDefault();
-    dispatch(updateGroup(editableItem.group));
-    dispatch(updateGroupOfElement(editableItem.group))
+    const response = await updateGroupService(editableItem.group);
+    dispatch(updateGroup(response.group));
+    dispatch(updateGroupOfElement(response.group))
     setEditableItem({state:false,group:{}});
   };
   const updateChangeHandle = (event) => {

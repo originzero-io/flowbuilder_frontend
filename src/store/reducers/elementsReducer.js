@@ -258,7 +258,7 @@ const elementReducer = (state = [], { type, payload }) => {
     case actions.DELETE_GROUP_OF_ELEMENT:
       return state.map((els) => {
         if (isNode(els)) {
-          if (els.data.group.id === payload) {
+          if (els.data.group._id === payload) {
             return {
               ...els,
               data: {
@@ -270,7 +270,7 @@ const elementReducer = (state = [], { type, payload }) => {
           else return els;
         }
         else if (isEdge(els)) {
-          if (els.group.id === payload) {
+          if (els.group._id === payload) {
             return {
               ...els,
               group:{},
@@ -286,7 +286,7 @@ const elementReducer = (state = [], { type, payload }) => {
     case actions.UPDATE_GROUP_OF_ELEMENT:
       return state.map((els) => {
         if (isNode(els)) {
-          if (els.data.group.id === payload.id) {
+          if (els.data.group._id === payload._id) {
             return {
               ...els,
               data: {
@@ -298,7 +298,7 @@ const elementReducer = (state = [], { type, payload }) => {
           else return els;
         }
         else if (isEdge(els)) {
-          if (els.group.id && els.group.id === payload.id) {
+          if (els.group._id && els.group._id === payload._id) {
             return {
               ...els,
               group: { ...els.group, name: payload.name, color: payload.color },

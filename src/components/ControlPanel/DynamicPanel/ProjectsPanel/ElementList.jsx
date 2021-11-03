@@ -4,23 +4,29 @@ import { Link, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import Card from "../../../Global/Card/Card";
+import { getFlowService } from "../../../../services/flowService";
+import { setCurrentFlowConfig, setCurrentFlowWorkspace } from "../../../../store/actions/flowActions";
+import { setElements } from "../../../../store/actions/elementsActions";
+import { loadGroups } from "../../../../store/actions/nodeGroupsActions";
 
 const ElementList = ({ elements }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const openPageHandler = (element) => {
+  const openPageHandler = async(element) => {
+    const { flow } = await getFlowService(element._id);
+    dispatch(setCurrentFlowConfig(flow.config));
+    dispatch(setCurrentFlowWorkspace(flow.workspace));
+    // dispatch(setElements([]));
+    // dispatch(loadGroups([]));
     history.push(`/flow/${element._id}`);
   };
   return (
     <>
       {elements && elements.map((element) => {
         return (
-          <Link key={element._id} to={`/flow/${element._id}`} onClick={(e)=>e.stopPropagation()}>
+          <div key={element._id} onClick={() => openPageHandler(element)}>
             <Card key={element._id} data={element} />
-          </Link>
-          // <div key={element._id} onClick={() => openPageHandler(element)}>
-          //   <Card key={element._id} data={element} />
-          // </div>
+          </div>
         );
       })}
     </>

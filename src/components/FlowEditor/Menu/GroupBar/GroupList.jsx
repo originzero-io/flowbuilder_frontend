@@ -1,30 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteGroup } from "../../../../store/actions/nodeGroupsActions";
+import {
+  deleteGroup,
+  loadGroups,
+} from "../../../../store/actions/nodeGroupsActions";
 import { deleteGroupOfElement } from "../../../../store/actions/elementsActions";
-import { GroupItem, GroupColor, Label} from "./style";
+import { GroupItem, GroupColor, Label } from "./style";
 import { isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";
 import { NameEditIcon } from "../../../Global/icons";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
+import {
+  deleteGroupService,
+  getGroupsService,
+} from "../../../../services/groupService";
+import { useParams } from "react-router";
 const GroupList = ({ theme }) => {
-  const { nodeGroupsReducer, elementReducer } = useSelector((state) => state.activeFlowReducer);
+  const { nodeGroupsReducer, elementReducer, flowWorkSpaceReducer } =
+    useSelector((state) => state.activeFlowReducer);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(null);
   const [editableItem, setEditableItem] = useState({ state: false, group: {} });
-
+  const { flowId } = useParams();
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
   );
-  const deleteIconClickHandle = (groupId) => {
+  const deleteIconClickHandle = async (group) => {
     if (confirm("Are you sure?")) {
-      dispatch(deleteGroup(groupId));
-      dispatch(deleteGroupOfElement(groupId))
+      dispatch(deleteGroupOfElement(group));
+      const data = await deleteGroupService(group);
+      dispatch(deleteGroup(data.group));
     }
   };
   const groupItemClickHandle = (group) => {
-    const newArr = elementReducer.present.filter(els => isNode(els) && els.data.group._id === group._id);
+    const newArr = elementReducer.present.filter(
+      (els) => isNode(els) && els.data.group._id === group._id
+    );
     setSelectedElements(newArr);
   };
   const editIconClickHandle = (group) => {
@@ -37,54 +49,61 @@ const GroupList = ({ theme }) => {
     }
   };
   const labelClickHandle = () => {
-    setEditableItem({state:false,group:{}});
+    setEditableItem({ state: false, group: {} });
   };
   return (
     <>
-      {nodeGroupsReducer.map((group) => {
-        return (
-          <GroupItem
-            key={group._id}
-            theme={theme}
-            onMouseEnter={() => setHover(group._id)}
-            onMouseLeave={() => setHover(null)}
-            onClick={()=>groupItemClickHandle(group)}
-          >
-            {editableItem.state && editableItem.group._id === group._id ? (
-              <EditForm
-                editableItem={editableItem}
-                setEditableItem={setEditableItem}
-                theme={theme}
-              />
-            ) : (
-              <>
-                <GroupColor width="22px" height="22px" value={group.color} />
-                <Label onClick={labelClickHandle}>{group.name}</Label>
-              </>
-            )}
+      {nodeGroupsReducer.length > 0
+        ? nodeGroupsReducer.map((group) => {
+          return (
+            <GroupItem
+              key={group._id}
+              theme={theme}
+              onMouseEnter={() => setHover(group._id)}
+              onMouseLeave={() => setHover(null)}
+              onClick={() => groupItemClickHandle(group)}
+            >
+              {editableItem.state && editableItem.group._id === group._id ? (
+                <EditForm
+                  editableItem={editableItem}
+                  setEditableItem={setEditableItem}
+                  theme={theme}
+                />
+              ) : (
+                <>
+                  <GroupColor
+                    width="22px"
+                    height="22px"
+                    value={group.color}
+                  />
+                  <Label onClick={labelClickHandle}>{group.name}</Label>
+                </>
+              )}
 
-            {hover === group._id && (
-              <>
-                <NameEditIcon
-                  width="25px"
-                  height="25px"
-                  onClick={() => editIconClickHandle(group)}
-                  theme={theme}
-                />
-                <DeleteIcon
-                  theme={theme}
-                  onClick={() => deleteIconClickHandle(group._id)}
-                />
-              </>
-            )}
-          </GroupItem>
-        );
-      })}
+              {hover === group._id && (
+                <>
+                  <NameEditIcon
+                    width="25px"
+                    height="25px"
+                    onClick={() => editIconClickHandle(group)}
+                    theme={theme}
+                  />
+                  <DeleteIcon
+                    theme={theme}
+                    onClick={() => deleteIconClickHandle(group)}
+                  />
+                </>
+              )}
+            </GroupItem>
+          );
+        })
+        : "There is no group"
+      }
     </>
   );
-}
+};
 
 export default React.memo(GroupList);
 GroupList.propTypes = {
-  theme: PropTypes.string.isRequired
-}
+  theme: PropTypes.string.isRequired,
+};

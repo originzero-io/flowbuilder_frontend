@@ -4,8 +4,9 @@ import { MenuIndex, MenuItem} from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import * as themeColor from "../../../../config/ThemeReference"
 import { Logo } from "../../../Global/icons";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import { mergeFlow, setActiveFlow, setCurrentFlowConfig } from "../../../../store/actions/flowActions";
+import { saveFlowService } from "../../../../services/flowService";
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;
@@ -40,16 +41,17 @@ const Circle = styled.div`
 `;
 const MainMenu = () => {
   const { flowWorkSpaceReducer,flowConfigReducer,nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
-  const { theme,reactFlowInstance } = flowWorkSpaceReducer;
+  const { theme, reactFlowInstance } = flowWorkSpaceReducer;
+  const { flowId } = useParams();
   const dispatch = useDispatch();
-  const homeClickHandle = () => {
-    // const { position, zoom, elements } = reactFlowInstance.toObject();
-    // const flow = {
-    //   config: flowConfigReducer,
-    //   workspace: { ...flowWorkSpaceReducer, position, zoom },
-    //   elements: elements,
-    //   groups: nodeGroupsReducer
-    // };
+  const homeClickHandle = async () => {
+    const { position, zoom, elements } = reactFlowInstance.toObject();
+    const flow = {
+      config: flowConfigReducer,
+      workspace: { ...flowWorkSpaceReducer, position, zoom },
+    };
+    console.log("elements:", elements);
+    await saveFlowService(flowId, flow);
     // dispatch(mergeFlow(flow));
     // dispatch(setCurrentFlowConfig({}));
   }

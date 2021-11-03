@@ -70,15 +70,15 @@ export const selectNodes = (selectedIDArray) => ({
 export const setAllNodesDeselect = () => ({
   type: action.SET_ALL_NODES_DESELECT
 });
-export const deleteGroupOfElement = (groupId) => ({
+export const deleteGroupOfElement = (group) => ({
   type: action.DELETE_GROUP_OF_ELEMENT,
-  payload: groupId,
+  payload: group._id,
 });
 export const updateGroupOfElement = (editedGroup) => ({
   type: action.UPDATE_GROUP_OF_ELEMENT,
   payload: editedGroup,
 });
-export const updateNodeHandles = (name,value,self) => ({
+export const updateNodeHandles = (name, value, self) => ({
   type: action.UPDATE_NODE_HANDLES,
-  payload: {name,value,self},
+  payload: { name, value, self },
 });

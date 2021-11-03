@@ -1,47 +1,27 @@
-import React, { useRef } from "react";
+import React, { useRef,useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ReactFlowProvider } from "react-flow-renderer";
 import FlowEditor from "../components/FlowEditor";
 import { FlowWrapper } from "../components/style-components/AppWrapper";
 import PropTypes from "prop-types";
-import {
-  setCurrentFlowConfig,
-  setCurrentFlowWorkspace,
-} from "../store/actions/flowActions";
-import useComponentWillMount from "../hooks/useComponentWillMount";
-import { setElements } from "../store/actions/elementsActions";
 import { loadGroups } from "../store/actions/nodeGroupsActions";
-import { Redirect } from "react-router";
 import { useParams } from "react-router-dom";
 import FlowTabs from "../components/Global/FlowTabs";
+import { getGroupsService } from "../services/groupService";
 const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowId } = useParams();
-  console.log("flowId:", flowId);
-  const flow = useSelector((state) => state.flowReducer).find((flow) => flow._id === flowId);
-  console.log(flow);
-  const loadFlow = () => {
-    dispatch(setCurrentFlowConfig(flow.config));
-    dispatch(setCurrentFlowWorkspace(flow.workspace));
-    dispatch(setElements(flow.elements));
-    dispatch(loadGroups(flow.groups));
-  }
-  useComponentWillMount(() => {
-    if (flow) {
-      loadFlow();
-    }
-  }, []);
+  useEffect(async () => {
+    const data = await getGroupsService(flowId);
+    dispatch(loadGroups(data.groups));
+  }, [])
   const rfWrapper = useRef(null);
   return (
     <ReactFlowProvider>
-      {flow !== undefined ? (
         <FlowWrapper ref={rfWrapper}>
           <FlowEditor reactFlowWrapper={rfWrapper} />
           {/* <FlowTabs/> */}
         </FlowWrapper>
-      ) : (
-          <Redirect to="/panel"/>
-      )}
     </ReactFlowProvider>
   );
 }
