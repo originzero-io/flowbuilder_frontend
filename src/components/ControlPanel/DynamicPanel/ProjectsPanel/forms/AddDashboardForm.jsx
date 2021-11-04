@@ -15,7 +15,6 @@ export default function AddDashboardForm() {
   const [dashboardInfo, setDashboardInfo] = useState({
     id: null,
     name: null,
-    author: null,
     description: null,
     projectId: null
   });
@@ -37,15 +36,6 @@ export default function AddDashboardForm() {
         <Input
           name="name"
           placeholder="dashboard name"
-          onChange={onChangeHandler}
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label>Author</Label>
-        <Input
-          name="author"
-          placeholder="author"
           onChange={onChangeHandler}
           required
         />

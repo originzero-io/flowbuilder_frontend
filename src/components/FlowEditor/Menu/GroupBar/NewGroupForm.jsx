@@ -37,7 +37,7 @@ const NewGroupForm = ({ theme }) => {
   const [groupInfo, setGroupInfo] = useState({
     name: "",
     color: "",
-    createdBy: auth.username,
+    createdBy: auth._id,
     flow:flowId
   });
   const groupHandle = (event) => {

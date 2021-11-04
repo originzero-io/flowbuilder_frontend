@@ -7,6 +7,7 @@ import { Logo } from "../../../Global/icons";
 import { Link,useParams } from "react-router-dom";
 import { mergeFlow, setActiveFlow, setCurrentFlowConfig } from "../../../../store/actions/flowActions";
 import { saveFlowService } from "../../../../services/flowService";
+import { saveElementsService } from "../../../../services/elementService";
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;
@@ -52,6 +53,9 @@ const MainMenu = () => {
     };
     console.log("elements:", elements);
     await saveFlowService(flowId, flow);
+
+    const data = await saveElementsService(flowId, elements);
+    console.log("SAVE DATA:", data);
     // dispatch(mergeFlow(flow));
     // dispatch(setCurrentFlowConfig({}));
   }

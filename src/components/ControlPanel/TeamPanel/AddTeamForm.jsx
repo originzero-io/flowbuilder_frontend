@@ -9,7 +9,7 @@ export default function AddTeamForm() {
   const auth = useSelector((state) => state.authReducer);
   const [teamInfo, setTeamInfo] = useState({
     name: null,
-    createdBy: auth.username,
+    createdBy: auth._id,
   });
   const dispatch = useDispatch();
   const onChangeHandler = (e) => {

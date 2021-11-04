@@ -8,13 +8,11 @@ import { updateFlow } from "../../../../../store/actions/flowActions";
 
 export default function EditFlow({ flow }) {
   const dispatch = useDispatch();
-  const projects = useSelector((state) => state.projectReducer);
   const auth = useSelector((state) => state.authReducer);
   const [flowConfig, setFlowConfig] = useState({
     name: flow.config.name,
-    author: flow.config.author,
     description: flow.config.description,
-    createdBy:auth.username
+    createdBy:auth._id
   });
 
   const onChangeHandler = (e) => {
@@ -42,16 +40,6 @@ export default function EditFlow({ flow }) {
           placeholder="flow name"
           onChange={onChangeHandler}
           value={flowConfig.name}
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label>Author</Label>
-        <Input
-          name="author"
-          placeholder="author"
-          onChange={onChangeHandler}
-          value={flowConfig.author}
           required
         />
       </FormGroup>

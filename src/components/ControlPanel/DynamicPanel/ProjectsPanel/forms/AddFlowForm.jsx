@@ -17,10 +17,9 @@ export default function AddFlowForm() {
 
   const [flowInfo, setFlowInfo] = useState({
     name: "Flow 1",
-    author: "Akın Şibay",
     description: "Created for future",
     company: "Anaks ARGE Ltd.Şti.",
-    createdBy: auth.username,
+    createdBy: auth._id,
   });
   const dispatch = useDispatch();
   const onChangeHandler = (e) => {
@@ -46,17 +45,6 @@ export default function AddFlowForm() {
           style={{ color: "green" }}
           name="name"
           placeholder="flow name"
-          onChange={onChangeHandler}
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label>Author</Label>
-        <Input
-          style={{ color: "green" }}
-          defaultValue={flowInfo.author}
-          name="author"
-          placeholder="author"
           onChange={onChangeHandler}
           required
         />

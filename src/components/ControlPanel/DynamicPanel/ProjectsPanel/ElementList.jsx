@@ -8,6 +8,7 @@ import { getFlowService } from "../../../../services/flowService";
 import { setCurrentFlowConfig, setCurrentFlowWorkspace } from "../../../../store/actions/flowActions";
 import { setElements } from "../../../../store/actions/elementsActions";
 import { loadGroups } from "../../../../store/actions/nodeGroupsActions";
+import { getElementsService } from "../../../../services/elementService";
 
 const ElementList = ({ elements }) => {
   const dispatch = useDispatch();
@@ -16,8 +17,8 @@ const ElementList = ({ elements }) => {
     const { flow } = await getFlowService(element._id);
     dispatch(setCurrentFlowConfig(flow.config));
     dispatch(setCurrentFlowWorkspace(flow.workspace));
-    // dispatch(setElements([]));
-    // dispatch(loadGroups([]));
+    const { data } = await getElementsService(element._id);
+    dispatch(setElements(data));
     history.push(`/flow/${element._id}`);
   };
   return (

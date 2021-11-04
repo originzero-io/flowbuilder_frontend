@@ -39,7 +39,7 @@ export default function ProjectList() {
             onClick={() => clickProjectHandle(project)}
             active={project._id === activeProject._id}
           >
-            <Badge style={{marginLeft:'-15px',background:'rgb(22, 139, 63)'}}>{project.createdBy}</Badge>
+            <Badge style={{marginLeft:'-15px',background:'rgb(22, 139, 63)'}}>{project.createdBy.username}</Badge>
             <div>{project.name}</div>
             <div onClick={() => deleteProjectHandle(project)}>
               <VscTrash style={{ fontSize: '20px' }}/>

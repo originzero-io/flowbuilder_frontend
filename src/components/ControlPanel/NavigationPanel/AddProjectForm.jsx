@@ -10,9 +10,8 @@ const AddProjectForm = () => {
   const auth = useSelector((state) => state.authReducer);
   const [projectInfo, setProjectInfo] = useState({
     name: null,
-    author: null,
     description: '',
-    createdBy: auth.username,
+    createdBy: auth._id,
     team: activeTeam._id
   });
   const dispatch = useDispatch();
@@ -33,10 +32,6 @@ const AddProjectForm = () => {
         <FormGroup>
           <Label>Project Name</Label>
           <Input name="name" placeholder="project name" onChange={onChangeHandler} required/>
-        </FormGroup>
-        <FormGroup>
-          <Label>Author</Label>
-          <Input name="author" placeholder="author" onChange={onChangeHandler} required/>
         </FormGroup>
         <FormGroup>
           <Label>Description</Label>

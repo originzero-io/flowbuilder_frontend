@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   Container,
@@ -18,6 +18,7 @@ import { Badge } from "reactstrap";
 
 const Card = ({ data }) => {
   const dispatch = useDispatch();
+  const auth = useSelector(state => state.authReducer);
   const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
@@ -28,10 +29,10 @@ const Card = ({ data }) => {
   };
   return (
     <Container>
-      <CardTitle onClick={(e)=>e.stopPropagation()}>{data.config.name || ""}</CardTitle>
+      <CardTitle>{data.config.name || ""}</CardTitle>
       <DetailMenu deleteEvent={deleteCardHandler} data={data} />
       <CardBody>
-        <CardAuthor>{data.config.author || ""}</CardAuthor>
+        <Badge color="success">{auth.username || ""}</Badge>
         <CardDescription>{data.config.description || ""}</CardDescription>
         <CardFooter>
           <Badge color="success">{data.project.name}</Badge>
