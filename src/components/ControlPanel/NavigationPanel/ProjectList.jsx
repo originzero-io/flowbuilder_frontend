@@ -6,17 +6,15 @@ import { loadFlows } from "../../../store/actions/flowActions";
 import { deleteProject, setActiveProject, } from "../../../store/actions/projectActions";
 import { CollapsibleMenuItem } from "../../Global/Collapsible/CollapsibleMenu";
 import { VscTrash } from "react-icons/vsc";
-import { setActivePanel } from "../../../store/actions/controlPanelActions";
 import { setError } from "../../../store/actions/errorActions";
 import { Badge } from "reactstrap";
 export default function ProjectList() {
   const dispatch = useDispatch();
-  const { projects,activeProject } = useSelector((state) => state.projectReducer);
+  const { projects,activeProject } = useSelector((state) => state.projects);
   const clickProjectHandle = (project) => {    
     getFlowsByProjectService(project)
       .then((res) => {
         dispatch(loadFlows(res.flows));
-        dispatch(setActivePanel("Projects"));
         dispatch(setActiveProject(project));
       })
       .catch((error) => dispatch(setError(error)));

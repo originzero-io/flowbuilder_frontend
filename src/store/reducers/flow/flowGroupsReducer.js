@@ -1,7 +1,6 @@
-import * as actionTypes from "../constants/nodeGroupsContants";
-import { nodeGroups } from "../initialValues";
+import * as actionTypes from "../../constants/nodeGroupsContants";
 
-export const nodeGroupsReducer = (state = nodeGroups, { type, payload }) => {
+const flowGroupsReducer = (state = [], { type, payload }) => {
   switch (type) {
     case actionTypes.LOAD_GROUPS:
       return payload;
@@ -15,3 +14,4 @@ export const nodeGroupsReducer = (state = nodeGroups, { type, payload }) => {
       return state;
   }
 };
+export default flowGroupsReducer;

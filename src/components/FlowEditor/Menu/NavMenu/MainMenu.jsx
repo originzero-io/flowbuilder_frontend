@@ -41,15 +41,15 @@ const Circle = styled.div`
   }
 `;
 const MainMenu = () => {
-  const { flowWorkSpaceReducer,flowConfigReducer,nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
-  const { theme, reactFlowInstance } = flowWorkSpaceReducer;
+  const { flowWorkspace,flowConfig,flowGroups } = useSelector((state) => state.activeFlow);
+  const { theme, reactFlowInstance } = flowWorkspace;
   const { flowId } = useParams();
   const dispatch = useDispatch();
   const homeClickHandle = async () => {
     const { position, zoom, elements } = reactFlowInstance.toObject();
     const flow = {
-      config: flowConfigReducer,
-      workspace: { ...flowWorkSpaceReducer, position, zoom },
+      config: flowConfig,
+      workspace: { ...flowWorkspace, position, zoom },
     };
     console.log("elements:", elements);
     await saveFlowService(flowId, flow);
@@ -70,7 +70,7 @@ const MainMenu = () => {
             <MenuItem theme={theme}>Home</MenuItem>
           </Link>
         </div>
-        <MenuItem theme={theme}>{flowConfigReducer.name}</MenuItem>
+        <MenuItem theme={theme}>{flowConfig.name}</MenuItem>
       </Menu>
     </>
   );

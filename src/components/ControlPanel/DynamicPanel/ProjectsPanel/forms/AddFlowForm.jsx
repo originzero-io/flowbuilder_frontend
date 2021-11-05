@@ -7,10 +7,10 @@ import { createFlowService } from "../../../../../services/flowService";
 import { setError } from "../../../../../store/actions/errorActions";
 
 export default function AddFlowForm() {
-  const auth = useSelector((state) => state.authReducer);
-  const { activeTeam } = useSelector((state) => state.teamReducer);
+  const auth = useSelector((state) => state.auth);
+  const { activeTeam } = useSelector((state) => state.teams);
   const { activeProject, projects } = useSelector(
-    (state) => state.projectReducer
+    (state) => state.projects
   );
   const team = activeTeam._id;
   const project = activeProject?._id || projects[0];

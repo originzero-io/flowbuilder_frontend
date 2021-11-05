@@ -4,13 +4,13 @@ import { useSelector } from "react-redux"
 import PropTypes from "prop-types"
 
 export default function Tooltip({ id, place, others }) {
-  const { flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer)
+  const { flowWorkspace } = useSelector((state) => state.activeFlow)
   return (
     <>
       <ReactTooltip
         id={id}
         place={place}
-        type={flowWorkSpaceReducer.theme==="dark" ? "light" : "dark"}
+        type={flowWorkspace.theme==="dark" ? "light" : "dark"}
         effect="solid"
         delayHide={120}
         delayShow={50}

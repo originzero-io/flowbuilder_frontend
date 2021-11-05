@@ -1,5 +1,4 @@
 export const setError = (error) => {
-    console.log("ERROR:", error.response);
     const { response } = error;
     return {
         type: "SET_ERROR",

@@ -29,11 +29,11 @@ import PropTypes from "prop-types"
 import { loadGroups } from "../../store/actions/nodeGroupsActions";
 export default function FlowEditor({ reactFlowWrapper }) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const nodeList = useSelector((state) => state.nodeListReducer);
+  const nodeList = useSelector((state) => state.nodeList);
   const selectedElements = useStoreState((state) => state.selectedElements);
-  const { elementReducer, flowWorkSpaceReducer, flowConfigReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
-  const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowWorkSpaceReducer;
+  const { flowElements, flowWorkspace, flowConfig } = useSelector((state) => state.activeFlow);
+  const elements = flowElements.present;
+  const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowWorkspace;
   const dispatch = useDispatch();
   const store = useStore();
   const onConnectHandle = (params) => {
@@ -57,7 +57,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
 
   const onEdgeUpdateHandle = (oldEdge, newConnection) => {
-    const elementArray = store.getState().activeFlowReducer.elementReducer.present;
+    const elementArray = store.getState().activeFlow.flowElements.present;
     const edgeExist = isEdgeExist(newConnection,elementArray);
     if (edgeExist) {
       const newElements = removeEdgeFromArray(oldEdge,elementArray);
@@ -76,7 +76,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
   const onLoadHandle = (_reactFlowInstance) => {
     dispatch(setReactFlowInstance(_reactFlowInstance));
-    adjustScreen(flowWorkSpaceReducer,_reactFlowInstance);
+    adjustScreen(flowWorkspace,_reactFlowInstance);
   };
   const onDragOverHandle = (event) => {
     event.preventDefault();

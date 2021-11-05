@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
-import { loginService } from "../../../services/authService";
-import { loginError, loginSuccess } from "../../../store/actions/authActions";
+import { loginService } from "../../services/authService";
+import { loginError, loginSuccess } from "../../store/actions/authActions";
 import { Input, Text, Submit, ErrorMessage } from "./style";
 import { Redirect } from "react-router-dom";
-import { openNotification as notification } from "../../../app-global/dom/notification";
-import { setError } from "../../../store/actions/errorActions";
+import { openNotification as notification } from "../../app-global/dom/notification";
+import { setError } from "../../store/actions/errorActions";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
   const { isAuthenticated, errorMessage } = useSelector(
-    (state) => state.authReducer
+    (state) => state.auth
   );
   const {
     register,

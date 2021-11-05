@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 const TeamBrand = ({ team }) => {
   console.log("TEAM BRAND RENDERED");
   const dispatch = useDispatch();
-  const { activeTeam } = useSelector((state) => state.teamReducer);
+  const { activeTeam } = useSelector((state) => state.teams);
   const deleteTeamHandler = () => {
     if (confirm(`${team.name} takımını silmek istiyor musunuz?`)) {
       deleteTeamService(team._id)

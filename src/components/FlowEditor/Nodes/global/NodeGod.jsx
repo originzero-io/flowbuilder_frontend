@@ -18,8 +18,8 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sources = [];
   const targets = [];
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
+  const { flowElements } = useSelector((state) => state.activeFlow);
+  const elements = flowElements.present;
   const dispatch = useDispatch();
   const { selected, align, expand, enable, group } = self.data;
   for (let index = 0; index < self.data.targetCount; index++) {

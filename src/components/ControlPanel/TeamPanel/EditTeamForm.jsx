@@ -6,7 +6,7 @@ import { editTeamService } from "../../../services/teamService";
 import { setError } from "../../../store/actions/errorActions";
 import { setModal } from "../../../store/actions/componentActions";
 export default function EditTeamForm() {
-  const { activeTeam } = useSelector((state) => state.teamReducer);
+  const { activeTeam } = useSelector((state) => state.teams);
   const [teamInfo, setteamInfo] = useState({
     name: null,
   });

@@ -6,7 +6,7 @@ import { createTeamService } from "../../../services/teamService";
 import { setError } from "../../../store/actions/errorActions";
 import { setModal } from "../../../store/actions/componentActions";
 export default function AddTeamForm() {
-  const auth = useSelector((state) => state.authReducer);
+  const auth = useSelector((state) => state.auth);
   const [teamInfo, setTeamInfo] = useState({
     name: null,
     createdBy: auth._id,

@@ -25,7 +25,7 @@ import TeamBrand from "./TeamBrand";
 const ControlPanelMenu = () => {
   const dispatch = useDispatch();
   const { url } = useRouteMatch();
-  const { activeTeam, teams } = useSelector((state) => state.teamReducer);
+  const { activeTeam, teams } = useSelector((state) => state.teams);
   const showModalHandle = (e) => {
     e.preventDefault();
     e.stopPropagation();

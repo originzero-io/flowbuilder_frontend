@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import LoginForm from "../components/Global/Forms/LoginForm";
 import styled from "styled-components";
 import {
   Container,
   Content,
   Image,
   FormWrapper
-} from "../components/Global/Forms/style";
-import RegisterForm from "../components/Global/Forms/RegisterForm";
+} from "../components/Auth/style";
+import LoginForm from "../components/Auth/LoginForm";
+import RegisterForm from "../components/Auth/RegisterForm";
 const Button = styled.button`
   border: none;
   border-radius: 8px;

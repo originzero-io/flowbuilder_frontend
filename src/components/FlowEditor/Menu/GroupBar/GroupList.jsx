@@ -17,8 +17,8 @@ import {
 } from "../../../../services/groupService";
 import { useParams } from "react-router";
 const GroupList = ({ theme }) => {
-  const { nodeGroupsReducer, elementReducer, flowWorkSpaceReducer } =
-    useSelector((state) => state.activeFlowReducer);
+  const { flowGroups, flowElements, flowWorkspace } =
+    useSelector((state) => state.activeFlow);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(null);
   const [editableItem, setEditableItem] = useState({ state: false, group: {} });
@@ -34,7 +34,7 @@ const GroupList = ({ theme }) => {
     }
   };
   const groupItemClickHandle = (group) => {
-    const newArr = elementReducer.present.filter(
+    const newArr = flowElements.present.filter(
       (els) => isNode(els) && els.data.group._id === group._id
     );
     setSelectedElements(newArr);
@@ -53,8 +53,8 @@ const GroupList = ({ theme }) => {
   };
   return (
     <>
-      {nodeGroupsReducer.length > 0
-        ? nodeGroupsReducer.map((group) => {
+      {flowGroups.length > 0
+        ? flowGroups.map((group) => {
           return (
             <GroupItem
               key={group._id}

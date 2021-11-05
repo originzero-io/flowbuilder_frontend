@@ -2,10 +2,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
-import { registerService } from "../../../services/authService";
+import { registerService } from "../../services/authService";
 import { Input, Text, Submit, ErrorMessage } from "./style";
-import { openNotification as notification } from "../../../app-global/dom/notification";
-import { setError } from "../../../store/actions/errorActions";
+import { openNotification as notification } from "../../app-global/dom/notification";
+import { setError } from "../../store/actions/errorActions";
 import PropTypes from "prop-types";
 
 export default function RegisterForm({ setFormType }) {

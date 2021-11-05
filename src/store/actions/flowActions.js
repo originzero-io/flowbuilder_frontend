@@ -1,9 +1,5 @@
 import * as action from "../constants/flowConstants";
 
-export const setActiveFlow = (flowId) => ({
-  type: action.SET_ACTIVE_FLOW,
-  payload: flowId
-});
 export const setReactFlowInstance = (reactFlowInstance) => ({
   type: action.SET_REACT_FLOW_INSTANCE,
   payload: reactFlowInstance

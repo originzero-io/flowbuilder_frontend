@@ -13,7 +13,7 @@ import AddTeamForm from "./AddTeamForm";
 import { AddTeamButton, TeamItem, TeamsContainer } from "./style";
 
 const TeamList = () => {
-  const { teams,activeTeam } = useSelector((state) => state.teamReducer);
+  const { teams,activeTeam } = useSelector((state) => state.teams);
   const dispatch = useDispatch();
   console.log("team list rendered");
   useEffect(async () => {

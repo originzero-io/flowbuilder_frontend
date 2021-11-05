@@ -4,7 +4,7 @@ import { openNotification } from '../../app-global/dom/notification';
 import useDidMountEffect from '../../hooks/useDidMountEffect';
 import PropTypes from "prop-types";
 export default function ErrorBoundary({children}) {
-    const error = useSelector(state => state.errorReducer);
+    const error = useSelector(state => state.error);
     useDidMountEffect(() => {
         openNotification("", error.message, "error");
     }, [error])

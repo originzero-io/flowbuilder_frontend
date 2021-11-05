@@ -42,9 +42,9 @@ const Menu = styled(MenuIndex)`
 `;
 
 export default function ConfigurationMenu() {
-  const { flowWorkSpaceReducer, flowConfigReducer, elementReducer, nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
-  const { name } = useSelector((state) => state.authReducer);
-  const { reactFlowInstance, miniMapDisplay, theme } = flowWorkSpaceReducer;
+  const { flowWorkspace, flowConfig, flowElements, flowGroups } = useSelector((state) => state.activeFlow);
+  const { name } = useSelector((state) => state.auth);
+  const { reactFlowInstance, miniMapDisplay, theme } = flowWorkspace;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
@@ -57,10 +57,10 @@ export default function ConfigurationMenu() {
         const { elements } = reactFlowInstance.toObject();
         console.log(elements);
         // const flow = {
-        //   config: flowConfigReducer,
-        //   workspace: flowWorkSpaceReducer,
+        //   config: flowConfig,
+        //   workspace: flowWorkspace,
         //   elements: elements,
-        //   groups: nodeGroupsReducer
+        //   groups: flowGroups
         // }
         // console.log("flow:", flow);
         // let hiddenElement = document.createElement("a");

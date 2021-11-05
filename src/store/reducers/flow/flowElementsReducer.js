@@ -1,4 +1,4 @@
-import * as actions from "../constants/elementsContants";
+import * as actions from "../../constants/elementsContants";
 import undoable,{excludeAction,includeAction} from "redux-undo"
 import { isEdge, isNode } from "react-flow-renderer";
 const elementReducer = (state = [], { type, payload }) => {

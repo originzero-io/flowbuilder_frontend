@@ -10,8 +10,8 @@ import FeatureIcons from "./FeatureIcons";
 import PropTypes from "prop-types"
 export default function NodeHeader({ self, selectedElements }) {
   const dispatch = useDispatch();
-  const { flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
-  const { nodeGroupMenuDisplay } = flowWorkSpaceReducer;
+  const { flowWorkspace } = useSelector((state) => state.activeFlow);
+  const { nodeGroupMenuDisplay } = flowWorkspace;
   const [showGroup, setShowGroup] = useState(nodeGroupMenuDisplay);
   const [hover, setHover] = useState(false);
   const groupHandle = (e) => {

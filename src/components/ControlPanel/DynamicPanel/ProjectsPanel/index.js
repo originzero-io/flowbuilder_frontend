@@ -14,7 +14,7 @@ import { VscAdd } from "react-icons/vsc";
 import { GrAdd } from "react-icons/gr";
 export default function ProjectsPanel() {
   const dispatch = useDispatch();
-  const flows = useSelector(state => state.flowReducer);
+  const flows = useSelector(state => state.flows);
   const flowsCollapseTrigger = () => {
     return <CollapsibleTrigger label={`Flows (${flows.length})`} style={{ color: 'black' }}/>;
   };

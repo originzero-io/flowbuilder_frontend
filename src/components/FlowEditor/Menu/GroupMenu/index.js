@@ -41,8 +41,8 @@ const Content = styled.div`
   margin-top: 2px;
 `;
 export default function GroupMenu({ self }) {
-  const { elementReducer,nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
+  const { flowElements,flowGroups } = useSelector((state) => state.activeFlow);
+  const elements = flowElements.present;
   const dispatch = useDispatch();
   const selectedElements = useStoreState((state) => state.selectedElements);
   const setSelectedElements = useStoreActions(
@@ -50,14 +50,14 @@ export default function GroupMenu({ self }) {
   );
   const [searched, setSearched] = useState([]);
   useEffect(() => {
-    setSearched(nodeGroupsReducer);
-  }, [nodeGroupsReducer]);
+    setSearched(flowGroups);
+  }, [flowGroups]);
   useEffect(() => {
-    setSearched(nodeGroupsReducer);
+    setSearched(flowGroups);
   }, []);
   const searchHandle = (e) => {
     const value = e.target.value;
-    const filtered = nodeGroupsReducer.filter((group) =>
+    const filtered = flowGroups.filter((group) =>
       group.name.toLowerCase().includes(value.toLowerCase())
     );
     if (value === "") {

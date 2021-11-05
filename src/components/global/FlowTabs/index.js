@@ -4,20 +4,20 @@ import { useHistory } from "react-router-dom";
 import { closeFlow, mergeFlow } from "../../../store/actions/flowActions";
 import { Container, TabItem, AddButton,CloseButton } from "./style";
 const FlowTabs = () => {
-  const flows = useSelector((state) => state.flowReducer);
+  const flows = useSelector((state) => state.flows);
   const dispatch = useDispatch();
   const [openedFlows, setOpenedFlows] = useState([]);
-  const { flowWorkSpaceReducer, flowConfigReducer, nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
-  const { reactFlowInstance } = flowWorkSpaceReducer;
+  const { flowWorkspace, flowConfig, flowGroups } = useSelector((state) => state.activeFlow);
+  const { reactFlowInstance } = flowWorkspace;
   
   const history = useHistory();
   const onClickHandle = (id) => {
     const { position, zoom, elements } = reactFlowInstance.toObject();
     const flow = {
-      config: flowConfigReducer,
-      workspace: { ...flowWorkSpaceReducer, position, zoom },
+      config: flowConfig,
+      workspace: { ...flowWorkspace, position, zoom },
       elements: elements,
-      groups: nodeGroupsReducer,
+      groups: flowGroups,
     };
     dispatch(mergeFlow(flow));
     history.push(`/change-tab/${id}`);
@@ -29,13 +29,13 @@ const FlowTabs = () => {
   const closeFlowHandle = (event, flow) => {
     event.stopPropagation();
     dispatch(closeFlow(flow.config));
-    if (flowConfigReducer.id === flow.config.id) {
+    if (flowConfig.id === flow.config.id) {
       const { position, zoom, elements } = reactFlowInstance.toObject();
       const flowx = {
-        config: flowConfigReducer,
-        workspace: { ...flowWorkSpaceReducer, position, zoom },
+        config: flowConfig,
+        workspace: { ...flowWorkspace, position, zoom },
         elements: elements,
-        groups: nodeGroupsReducer,
+        groups: flowGroups,
       };
       dispatch(mergeFlow(flowx));
       history.push("/");
@@ -47,8 +47,8 @@ const FlowTabs = () => {
         return (
           <div key={flow.config.id} onClick={() => onClickHandle(flow.config.id)}>
             <TabItem
-              disabled={flowConfigReducer.id === flow.config.id}
-              selected={flowConfigReducer.id === flow.config.id}
+              disabled={flowConfig.id === flow.config.id}
+              selected={flowConfig.id === flow.config.id}
               key={flow.config.id}>
               <div style={{paddingRight:'20px'}}>
                 {flow.config.name}

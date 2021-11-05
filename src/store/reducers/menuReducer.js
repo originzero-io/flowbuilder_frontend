@@ -13,7 +13,7 @@ const menuConfig = {
   groupMenu: initialState,
 }
 
-export const menuConfigReducer = (state=menuConfig, action) => {
+const menuReducer = (state=menuConfig, action) => {
   switch (action.type) {
     case actionTypes.SET_PANEL_CONTEXT:
       return {...state,panelMenu:action.payload}
@@ -28,3 +28,4 @@ export const menuConfigReducer = (state=menuConfig, action) => {
   }
 }
 
+export default menuReducer;

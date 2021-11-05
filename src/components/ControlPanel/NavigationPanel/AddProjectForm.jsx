@@ -6,8 +6,8 @@ import { createProject } from "../../../store/actions/projectActions";
 import { setError } from "../../../store/actions/errorActions";
 import { setModal } from "../../../store/actions/componentActions";
 const AddProjectForm = () => {
-  const { activeTeam } = useSelector((state) => state.teamReducer);
-  const auth = useSelector((state) => state.authReducer);
+  const { activeTeam } = useSelector((state) => state.teams);
+  const auth = useSelector((state) => state.auth);
   const [projectInfo, setProjectInfo] = useState({
     name: null,
     description: '',

@@ -26,9 +26,9 @@ import {
 
 const NewGroupForm = ({ theme }) => {
   const [formOpen, setFormOpen] = useState(false);
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const auth = useSelector((state) => state.authReducer);
-  const elements = elementReducer.present;
+  const { flowElements } = useSelector((state) => state.activeFlow);
+  const auth = useSelector((state) => state.auth);
+  const elements = flowElements.present;
   const { flowId } = useParams();
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements

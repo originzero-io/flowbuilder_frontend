@@ -45,16 +45,16 @@ const Menu = styled.div`
     props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON};
 `;
 export default function ControlMenu() {
-  const { flowWorkSpaceReducer,flowConfigReducer,elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const { reactFlowInstance,rotateAllPath,theme } = flowWorkSpaceReducer;
-  const canUndo = elementReducer.past.length > 0;
-  const canRedo = elementReducer.future.length > 0;
+  const { flowWorkspace,flowConfig,flowElements } = useSelector((state) => state.activeFlow);
+  const { reactFlowInstance,rotateAllPath,theme } = flowWorkspace;
+  const canUndo = flowElements.past.length > 0;
+  const canRedo = flowElements.future.length > 0;
   const { zoomIn, zoomOut, fitView } = useZoomPanHelper();
   const setInteractive = useStoreActions((actions) => actions.setInteractive);
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
   const saveFlow = useCallback(() => {
-    saveToDb(flowConfigReducer,flowWorkSpaceReducer);
+    saveToDb(flowConfig,flowWorkspace);
   }, [reactFlowInstance]);
 
   const deleteAllNodes = () => {

@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addDashboard,
-  addFlow,
-  addNewFlowToProject,
-} from "../../../../../store/actions/controlPanelActions";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, } from "reactstrap";
 import uuid from "react-uuid";
 import { setModal } from "../../../../../store/actions/componentActions";
 
 export default function AddDashboardForm() {
-  const { activeProject,flows } = useSelector((state) => state.controlPanelReducer);
+  const { activeProject } = useSelector((state) => state.controlPanel);
 
   const [dashboardInfo, setDashboardInfo] = useState({
     id: null,
@@ -24,8 +19,6 @@ export default function AddDashboardForm() {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    const dashboard = {id:uuid(),...dashboardInfo,projectId:activeProject.id}
-    dispatch(addDashboard(dashboard));
     dispatch(setModal(false));
   };
 

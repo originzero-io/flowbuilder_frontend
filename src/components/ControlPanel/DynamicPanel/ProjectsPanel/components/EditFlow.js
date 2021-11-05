@@ -8,7 +8,7 @@ import { updateFlow } from "../../../../../store/actions/flowActions";
 
 export default function EditFlow({ flow }) {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.authReducer);
+  const auth = useSelector((state) => state.auth);
   const [flowConfig, setFlowConfig] = useState({
     name: flow.config.name,
     description: flow.config.description,

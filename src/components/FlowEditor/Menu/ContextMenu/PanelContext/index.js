@@ -14,10 +14,10 @@ import useDidMountEffect  from "../../../../../hooks/useDidMountEffect";
 import {loadIconsToNodeList} from "../../../../../app-global/helpers/loadIconsToNodeList";
 
 const PanelContextMenu = () => {
-  const { panelMenu } = useSelector((state) => state.menuConfigReducer);
-  const { flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
-  const { reactFlowInstance,rotateAllPath,theme } = flowWorkSpaceReducer;
-  const nodeList = useSelector((state) => state.nodeListReducer);
+  const { panelMenu } = useSelector((state) => state.menus);
+  const { flowWorkspace } = useSelector((state) => state.activeFlow);
+  const { reactFlowInstance,rotateAllPath,theme } = flowWorkspace;
+  const nodeList = useSelector((state) => state.nodeList);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const dispatch = useDispatch();
   const onDragStart = (event, nodeType) => {

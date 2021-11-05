@@ -5,9 +5,9 @@ import { setElementContextMenu } from "../../../../../store/actions/menuActions"
 import { rotateNode, setElements } from "../../../../../store/actions/elementsActions";
 
 export default function ElementMenu() {
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
-  const {elementMenu} = useSelector((state) => state.menuConfigReducer);
+  const { flowElements } = useSelector((state) => state.activeFlow);
+  const elements = flowElements.present;
+  const {elementMenu} = useSelector((state) => state.menus);
   const theme = useSelector((state) => state.themeReducer);
   const dispatch = useDispatch();
 

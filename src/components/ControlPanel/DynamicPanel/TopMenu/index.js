@@ -8,7 +8,7 @@ import {
 import { Container, SearchBar, ProfileWrapper, ProfileList } from "./style";
 export default function TopMenu() {
   const dispatch = useDispatch();
-  const { username } = useSelector((state) => state.authReducer);  
+  const { username } = useSelector((state) => state.auth);
   const logOutHandle = () => {
     if (confirm("Sure?")) {
       dispatch(logOut());

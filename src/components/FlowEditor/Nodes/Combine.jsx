@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setElements } from "../../../store/actions/elementsActions";
 import NodeIOManager from "./global/NodeIOManager";
 const CombineNode = (self) => {
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
+  const { flowElements } = useSelector((state) => state.activeFlow);
+  const elements = flowElements.present;
   const dispatch = useDispatch();
   const [align, setAlign] = useState("vertical");
   return (

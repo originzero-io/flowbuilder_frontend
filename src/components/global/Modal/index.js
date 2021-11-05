@@ -38,7 +38,7 @@ const childrenStyle = {
 ReactModal.setAppElement("#root");
 
 export default function Modal() {
-  const modalReducer  = useSelector(state => state.modalReducer);
+  const modal  = useSelector(state => state.modal);
   const dispatch = useDispatch();
   
   const closeModal = () => {
@@ -46,7 +46,7 @@ export default function Modal() {
   }
   return (
     <ReactModal
-      isOpen={modalReducer.active}
+      isOpen={modal.active}
       onRequestClose={closeModal}
       style={customStyles}
       shouldCloseOnEsc={true}
@@ -55,7 +55,7 @@ export default function Modal() {
       <div style={closeButtonWrapperStyle} onClick={closeModal}>
         <CancelIcon width="30px" height="30px" />
       </div>
-      <div style={childrenStyle}>{modalReducer.component}</div>
+      <div style={childrenStyle}>{modal.component}</div>
     </ReactModal>
   );
 }

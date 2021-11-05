@@ -18,7 +18,7 @@ import { Badge } from "reactstrap";
 
 const Card = ({ data }) => {
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.authReducer);
+  const auth = useSelector(state => state.auth);
   const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
@@ -32,7 +32,7 @@ const Card = ({ data }) => {
       <CardTitle>{data.config.name || ""}</CardTitle>
       <DetailMenu deleteEvent={deleteCardHandler} data={data} />
       <CardBody>
-        <Badge color="success">{auth.username || ""}</Badge>
+        <CardAuthor>{auth.username || ""}</CardAuthor>
         <CardDescription>{data.config.description || ""}</CardDescription>
         <CardFooter>
           <Badge color="success">{data.project.name}</Badge>

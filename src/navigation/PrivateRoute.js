@@ -6,7 +6,7 @@ import { setAuthorizationToken } from "../app-global/helpers/httpHelpers";
 import { loginSuccess } from "../store/actions/authActions";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuthenticated } = useSelector((state) => state.authReducer);
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     const jwtToken = localStorage.getItem("token");

@@ -9,8 +9,8 @@ import { Label } from "./styles";
 
 const SetVariables = React.memo((self) => {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
+  const { flowElements } = useSelector((state) => state.activeFlow);
+  const elements = flowElements.present;
   const [values, setValues] = useState([
     {
       source1: "Anaks",

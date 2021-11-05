@@ -9,11 +9,11 @@ import GroupMenu from "../../GroupMenu";
 export default function MultiSelectionContextMenu() {
   const selected = useStoreState((state) => state.selectedElements);
   const { multiSelectionMenu } = useSelector(
-    (state) => state.menuConfigReducer
+    (state) => state.menus
   );
-  const { elementReducer, flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
-  const { theme } = flowWorkSpaceReducer;
-  const elements = elementReducer.present;
+  const { flowElements, flowWorkspace } = useSelector((state) => state.activeFlow);
+  const { theme } = flowWorkspace;
+  const elements = flowElements.present;
   const dispatch = useDispatch();
   const deleteItems = () => {
     if (confirm("Are you sure?")) {

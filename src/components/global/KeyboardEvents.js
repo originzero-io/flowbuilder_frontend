@@ -11,10 +11,10 @@ import { pasteNodes } from "../../store/actions/elementsActions";
 import { openNotification as notification } from "../../app-global/dom/notification";
 const KeyboardEvents = () => {
   const dispatch = useDispatch();
-  const { flowWorkSpaceReducer,elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const { copiedElements } = useSelector((state) => state.controlPanelReducer);
-  const { paneClickPosition,reactFlowInstance,rotateAllPath } = flowWorkSpaceReducer;
-  const elements = elementReducer.present;
+  const { flowWorkspace,flowElements } = useSelector((state) => state.activeFlow);
+  const { copiedElements } = useSelector((state) => state.controlPanel);
+  const { paneClickPosition,reactFlowInstance,rotateAllPath } = flowWorkspace;
+  const elements = flowElements.present;
   const selectedElements = useStoreState((state) => state.selectedElements);
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements

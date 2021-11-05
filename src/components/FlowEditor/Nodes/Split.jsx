@@ -7,8 +7,8 @@ import NodeGod from "./global/NodeGod";
 // import { setElements } from "../../../store/actions/elementsActions";
 import NodeIOManager from "./global/NodeIOManager";
 const SplitNode = (self) => {
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
+  const { flowElements } = useSelector((state) => state.activeFlow);
+  const elements = flowElements.present;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const dispatch = useDispatch();
   const [values, setValues] = useState([
