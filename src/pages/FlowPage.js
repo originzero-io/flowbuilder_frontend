@@ -4,16 +4,14 @@ import { ReactFlowProvider } from "react-flow-renderer";
 import FlowEditor from "../components/FlowEditor";
 import { FlowWrapper } from "../components/style-components/AppWrapper";
 import PropTypes from "prop-types";
-import { loadGroups } from "../store/actions/nodeGroupsActions";
+import { getGroups } from "../store/actions/groupActions";
 import { useParams } from "react-router-dom";
 import FlowTabs from "../components/Global/FlowTabs";
-import { getGroupsService } from "../services/groupService";
 const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowId } = useParams();
   useEffect(async () => {
-    const data = await getGroupsService(flowId);
-    dispatch(loadGroups(data.groups));
+    dispatch(getGroups(flowId));
   }, [])
   const rfWrapper = useRef(null);
   return (

@@ -1,8 +1,8 @@
-import * as actionTypes from "../../constants/nodeGroupsContants";
+import * as actionTypes from "../../constants/groupContants";
 
 const flowGroupsReducer = (state = [], { type, payload }) => {
   switch (type) {
-    case actionTypes.LOAD_GROUPS:
+    case actionTypes.GET_GROUPS:
       return payload;
     case actionTypes.ADD_GROUP:
       return [...state, payload];

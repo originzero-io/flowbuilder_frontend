@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { isNode, useStoreActions } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router";
-import uuid from "react-uuid";
+import {  useParams } from "react-router";
 import * as themeColor from "../../../../config/ThemeReference";
-import { createGroupService } from "../../../../services/groupService";
-import { addGroup } from "../../../../store/actions/nodeGroupsActions";
+import { createGroup } from "../../../../store/actions/groupActions";
 import {
   AddIcon,
   CancelIcon,
@@ -49,8 +47,7 @@ const NewGroupForm = ({ theme }) => {
   };
   const addNewGroup = async (event) => {
     event.preventDefault();
-    const response = await createGroupService(flowId, groupInfo);
-    dispatch(addGroup(response.group))
+    dispatch(createGroup(flowId, groupInfo));
   };
   const selectNonGroupsHandle = () => {
     const nonGroups = elements.filter(

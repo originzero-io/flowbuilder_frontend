@@ -15,24 +15,22 @@ import { MdDevicesOther } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
 import { BiBrain } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
-import { getFlowsByTeamService, getFlowsService } from "../../../services/flowService";
-import { loadFlows } from "../../../store/actions/flowActions";
-import { setError } from "../../../store/actions/errorActions";
+import { getFlowsByWorkspace } from "../../../store/actions/flowActions";
 import { setModal } from "../../../store/actions/componentActions";
 import { Link,useRouteMatch } from "react-router-dom";
-import TeamBrand from "./TeamBrand";
+import WorkspaceBrand from "./WorkspaceBrand";
 
 const ControlPanelMenu = () => {
   const dispatch = useDispatch();
   const { url } = useRouteMatch();
-  const { activeTeam, teams } = useSelector((state) => state.teams);
+  const { activeWorkspace } = useSelector((state) => state.workspaces);
   const showModalHandle = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (activeTeam) {
+    if (activeWorkspace) {
       dispatch(setModal(true, <AddProjectForm />));
     }
-    else alert("Firstly, create a team.");
+    else alert("Firstly, create a workspace.");
   };
 
   const projectItem = () => {
@@ -57,19 +55,12 @@ const ControlPanelMenu = () => {
   };
 
   const allFlowsHandle = () => {
-    getFlowsByTeamService(activeTeam)
-      .then((res) => {
-        if (teams.length > 0) {
-          dispatch(loadFlows(res.flows));
-        }
-        else dispatch(loadFlows([]));
-      })
-      .catch((err) => dispatch(setError(err)));
+    dispatch(getFlowsByWorkspace(activeWorkspace));
   };
 
   return (
     <Container>
-      <TeamBrand team={activeTeam}/>
+      <WorkspaceBrand workspace={activeWorkspace}/>
       <NavMenu>
         <Link to={`${url}/all`}>
           <NavMenuItem

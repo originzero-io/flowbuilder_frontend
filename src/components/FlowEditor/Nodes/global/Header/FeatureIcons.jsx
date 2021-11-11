@@ -3,7 +3,7 @@ import RotateButton from "../../../../Global/Button/RotateButton";
 import SwitchButton from "../../../../Global/Button/SwitchButton";
 import { NameEditIcon } from "../../../../Global/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { setNodeEnable, setOutgoersEnable } from "../../../../../store/actions/elementsActions";
+import { setNodeEnable, setOutgoersEnable } from "../../../../../store/actions/elementActions";
 import { getIncomers, getOutgoers } from "react-flow-renderer";
 import { openNotification as notification } from "../../../../../app-global/dom/notification";
 import PropTypes from "prop-types"

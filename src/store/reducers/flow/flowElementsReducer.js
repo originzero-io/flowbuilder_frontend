@@ -1,5 +1,5 @@
 import * as actions from "../../constants/elementsContants";
-import undoable,{excludeAction,includeAction} from "redux-undo"
+import undoable,{includeAction} from "redux-undo"
 import { isEdge, isNode } from "react-flow-renderer";
 const elementReducer = (state = [], { type, payload }) => {
   switch (type) {

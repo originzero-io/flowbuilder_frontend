@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setElements, updateGroupOfElement } from "../../../../store/actions/elementsActions";
-import { updateGroup } from "../../../../store/actions/nodeGroupsActions";
+import { setElements, updateGroupOfElement } from "../../../../store/actions/elementActions";
+import { updateGroup } from "../../../../store/actions/groupActions";
 import { SubmitIcon } from "../../../Global/icons";
 import { ColorFlag, Submit } from "./style";
 import * as themeColor from "../../../../config/ThemeReference";
@@ -29,11 +29,9 @@ const Input = styled.input`
 export default function EditForm({ editableItem, setEditableItem, theme }) {
   const dispatch = useDispatch();
   const onSubmitHandle = async (event) => {
-    console.log("editable:", editableItem);
     event.preventDefault();
-    const response = await updateGroupService(editableItem.group);
-    dispatch(updateGroup(response.group));
-    dispatch(updateGroupOfElement(response.group))
+    dispatch(updateGroup(editableItem.group));
+    dispatch(updateGroupOfElement(editableItem))
     setEditableItem({state:false,group:{}});
   };
   const updateChangeHandle = (event) => {

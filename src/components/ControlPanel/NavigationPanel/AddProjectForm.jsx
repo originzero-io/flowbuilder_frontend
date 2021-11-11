@@ -6,13 +6,13 @@ import { createProject } from "../../../store/actions/projectActions";
 import { setError } from "../../../store/actions/errorActions";
 import { setModal } from "../../../store/actions/componentActions";
 const AddProjectForm = () => {
-  const { activeTeam } = useSelector((state) => state.teams);
+  const { activeWorkspace } = useSelector((state) => state.workspaces);
   const auth = useSelector((state) => state.auth);
   const [projectInfo, setProjectInfo] = useState({
     name: null,
     description: '',
     createdBy: auth._id,
-    team: activeTeam._id
+    workspace: activeWorkspace._id
   });
   const dispatch = useDispatch();
   const onChangeHandler = (e) => {
@@ -20,12 +20,8 @@ const AddProjectForm = () => {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    createProjectService(projectInfo)
-      .then(res => {
-        dispatch(createProject(res.project));
-        dispatch(setModal(false));
-    })
-      .catch(err => dispatch(setError(err)));
+    dispatch(createProject(projectInfo));
+    dispatch(setModal(false));
   };
   return (
       <Form onSubmit={onSubmitHandle}>

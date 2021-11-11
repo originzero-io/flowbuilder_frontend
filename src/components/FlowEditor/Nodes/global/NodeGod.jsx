@@ -12,7 +12,7 @@ import {
   Info,
 } from "../styles";
 import setIconInstance from "./Icons/iconConstant";
-import { setOutgoersEnable } from "../../../../store/actions/elementsActions";
+import { setOutgoersEnable } from "../../../../store/actions/elementActions";
 import PropTypes from "prop-types"
 const NodeGod = ({ self, ioType, children, collapsible }) => {
   const updateNodeInternals = useUpdateNodeInternals();

@@ -4,8 +4,12 @@ export const getProjectsService = async () => {
     const response = await axios.get("/projects/all");
     return response.data;
 }
-export const getProjectsByTeamService = async (team) => {
-    const response = await axios.get(`/projects/byTeam/${team._id}`);
+export const getProjectsByWorkspaceService = async (workspace) => {
+    const response = await axios.get(`/projects/byWorkspace/${workspace._id}`);
+    return response.data;
+}
+export const updateProjectService = async (project,params) => {
+    const response = await axios.put(`/projects/${project._id}`,params);
     return response.data;
 }
 export const createProjectService = async (params) => {

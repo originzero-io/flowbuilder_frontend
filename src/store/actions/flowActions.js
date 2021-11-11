@@ -1,3 +1,4 @@
+import { createFlowService, deleteFlowService, editFlowConfigService, getFlowsByProjectService, getFlowsByWorkspaceService , moveFlowService } from "../../services/flowService";
 import * as action from "../constants/flowConstants";
 
 export const setReactFlowInstance = (reactFlowInstance) => ({
@@ -38,27 +39,12 @@ export const closeAllNodeGroupMenu = (data) => ({
   payload: data
 });
 
-export const addFlow = (flow) => ({
-  type: action.ADD_FLOW,
-  payload: flow,
-});
-export const deleteFlow = (flow) => ({
-  type: action.DELETE_FLOW,
-  payload: flow,
-});
-export const mergeFlow = (flow) => ({
-  type: action.MERGE_FLOW,
-  payload: flow,
-});
-
-
-
 export const setCurrentFlowConfig = (data) => ({
   type: action.SET_CURRENT_FLOW_CONFIG,
   payload: data
 });
-export const setCurrentFlowWorkspace = (data) => ({
-  type: action.SET_CURRENT_FLOW_WORKSPACE,
+export const setCurrentFlowGui = (data) => ({
+  type: action.SET_CURRENT_FLOW_GUI,
   payload: data
 });
 export const openFlow = (flow) => ({
@@ -72,14 +58,59 @@ export const closeFlow = (flow) => ({
 
 
 
-export const loadFlows = (flows) => ({
-  type: action.LOAD_FLOWS,
-  payload: flows
-});
-export const updateFlow = (flow) => ({
-  type: action.UPDATE_FLOW,
-  payload: flow
-});
+export const getFlowsByWorkspace = (workspace) => async dispatch => {
+  const { flows } = await getFlowsByWorkspaceService(workspace);
+  console.log("flows:", flows);
+  if (workspace) {
+    dispatch( {
+      type: action.LOAD_FLOWS,
+      payload: flows,
+    });
+  }
+  else {
+    dispatch( {
+      type: action.LOAD_FLOWS,
+      payload: [],
+    });
+  }
+}
+export const getFlowsByProject = (project) => async dispatch => {
+  const { flows } = await getFlowsByProjectService(project);
+  console.log("FLOWS:", flows);
+  dispatch( {
+    type: action.LOAD_FLOWS,
+    payload: flows,
+  });
+}
+export const createFlow = (params) => async dispatch => {
+  const { flow } = await createFlowService(params);
+  dispatch({
+    type: action.CREATE_FLOW,
+    payload: flow,
+  })
+};
+export const editFlow = (currentConfig,newConfig) => async dispatch => {
+  const { flow } = await editFlowConfigService(currentConfig._id, newConfig);
+  dispatch({
+    type: action.UPDATE_FLOW,
+    payload: flow,
+  })
+};
+export const moveFlow = (currentConfig,newConfig) => async dispatch => {
+  const { flow } = await moveFlowService(currentConfig._id, newConfig);
+  dispatch({
+    type: action.UPDATE_FLOW,
+    payload: flow,
+  })
+};
+export const deleteFlow = (flow) => async dispatch => {
+  await deleteFlowService(flow._id);
+  dispatch({
+    type: action.DELETE_FLOW,
+    payload: flow,
+  })
+};
+
 
 
 

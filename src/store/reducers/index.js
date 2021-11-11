@@ -3,7 +3,7 @@ import {
   nodeClassReducer,
   flowReducer,
   flowConfigReducer,
-  flowWorkSpaceReducer,
+  flowGuiReducer,
 } from "./flow/flowReducers";
 import flowElementsReducer from "./flow/flowElementsReducer";
 import flowGroupsReducer from "./flow/flowGroupsReducer";
@@ -12,18 +12,18 @@ import nodeListReducer from "./nodeListReducers";
 import controlPanelReducer from "./controlPanelReducer";
 import { modalReducer } from "./componentReducer";
 import authReducer from "./authReducer";
-import teamReducer from "./teamReducer";
+import workspaceReducer from "./workspaceReducer";
 import projectReducer from "./projectReducer";
 import errorReducer from "./errorReducer";
 const reducers = combineReducers({
   auth:authReducer,
   activeFlow: combineReducers({
     flowConfig: flowConfigReducer,
-    flowWorkspace: flowWorkSpaceReducer,
+    flowGui: flowGuiReducer,
     flowElements: flowElementsReducer,
     flowGroups: flowGroupsReducer,
   }),
-  teams: teamReducer,
+  workspaces: workspaceReducer,
   projects: projectReducer,
   flows: flowReducer,
   menus: menuReducer,

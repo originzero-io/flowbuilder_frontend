@@ -11,9 +11,7 @@ import {
 } from "./style";
 import { VscTrash } from "react-icons/vsc";
 import DetailMenu from "./DetailMenu";
-import { deleteFlowService } from "../../../services/flowService";
 import { deleteFlow } from "../../../store/actions/flowActions";
-import { setError } from "../../../store/actions/errorActions";
 import { Badge } from "reactstrap";
 
 const Card = ({ data }) => {
@@ -22,9 +20,7 @@ const Card = ({ data }) => {
   const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
-      deleteFlowService(flow._id)
-        .then(() => dispatch(deleteFlow(flow)))
-        .catch((err) => dispatch(setError(err)));
+      dispatch(deleteFlow(flow))
     }
   };
   return (
@@ -35,7 +31,7 @@ const Card = ({ data }) => {
         <CardAuthor>{auth.username || ""}</CardAuthor>
         <CardDescription>{data.config.description || ""}</CardDescription>
         <CardFooter>
-          <Badge color="success">{data.project.name}</Badge>
+          <Badge color="success">{data.project.name || ""}</Badge>
           <span onClick={(e) => deleteCardHandler(e, data)}>
             <VscTrash style={{ fontSize: "22px" }} />
           </span>

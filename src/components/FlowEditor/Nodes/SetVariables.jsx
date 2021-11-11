@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getOutgoers } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import { getNodesAndEdges } from "../../../app-global/helpers/elementController";
-import useDidMountEffect from "../../../hooks/useDidMountEffect";
+import useDidMountEffect from "../../../utils/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
 import NodeIOmanager from "./global/NodeIOManager";
 import { Label } from "./styles";

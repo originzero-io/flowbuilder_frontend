@@ -4,14 +4,14 @@ import { Header, Label ,Content,FeatureIconsWrapper } from "../../styles";
 import { useSelector, useDispatch } from "react-redux";
 import GroupMenu from "../../../Menu/GroupMenu";
 import { closeAllNodeGroupMenu } from "../../../../../store/actions/flowActions";
-import { expandNode } from "../../../../../store/actions/elementsActions";
+import { expandNode } from "../../../../../store/actions/elementActions";
 import EditNameForm from "./EditNameForm";
 import FeatureIcons from "./FeatureIcons";
 import PropTypes from "prop-types"
 export default function NodeHeader({ self, selectedElements }) {
   const dispatch = useDispatch();
-  const { flowWorkspace } = useSelector((state) => state.activeFlow);
-  const { nodeGroupMenuDisplay } = flowWorkspace;
+  const { flowGui } = useSelector((state) => state.activeFlow);
+  const { nodeGroupMenuDisplay } = flowGui;
   const [showGroup, setShowGroup] = useState(nodeGroupMenuDisplay);
   const [hover, setHover] = useState(false);
   const groupHandle = (e) => {

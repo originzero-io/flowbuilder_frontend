@@ -22,7 +22,7 @@ import {
   setElements,
   setRotateAll,
   setExpandAll,
-} from "../../../../store/actions/elementsActions";
+} from "../../../../store/actions/elementActions";
 import {
   setRotateAllPath,
 } from "../../../../store/actions/flowActions";
@@ -45,8 +45,8 @@ const Menu = styled.div`
     props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON};
 `;
 export default function ControlMenu() {
-  const { flowWorkspace,flowConfig,flowElements } = useSelector((state) => state.activeFlow);
-  const { reactFlowInstance,rotateAllPath,theme } = flowWorkspace;
+  const { flowGui,flowConfig,flowElements } = useSelector((state) => state.activeFlow);
+  const { reactFlowInstance,rotateAllPath,theme } = flowGui;
   const canUndo = flowElements.past.length > 0;
   const canRedo = flowElements.future.length > 0;
   const { zoomIn, zoomOut, fitView } = useZoomPanHelper();
@@ -54,7 +54,7 @@ export default function ControlMenu() {
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
   const saveFlow = useCallback(() => {
-    saveToDb(flowConfig,flowWorkspace);
+    saveToDb(flowConfig,flowGui);
   }, [reactFlowInstance]);
 
   const deleteAllNodes = () => {

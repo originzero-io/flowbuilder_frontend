@@ -1,8 +1,23 @@
+import { getElementsService,saveElementsService } from "../../services/elementService";
 import * as action from "../constants/elementsContants";
 export const setElements = (data) => ({
   type: action.SET_ELEMENTS,
   payload: data,
 });
+export const saveElements = (flow_id,elements)=> async dispatch => {
+  const { element } = await saveElementsService(flow_id, elements);
+  dispatch({
+    type: action.SET_ELEMENTS,
+    payload: element
+  })
+};
+export const getElementsByFlow = (flow)=> async dispatch => {
+  const { elements } = await getElementsService(flow._id);
+  dispatch({
+    type: action.SET_ELEMENTS,
+    payload: elements
+  })
+};
 export const addNewNode = (node) => ({
   type: action.ADD_NEW_NODE,
   payload: node,

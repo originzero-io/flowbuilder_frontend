@@ -34,12 +34,12 @@ export const getDataFromDb = async (flowConfig,nodeClass) => {
       return Promise.reject(err);
     });
 };
-export const saveToDb = async (flowConfig, flowWorkspace) => {
-  const { reactFlowInstance } = flowWorkspace;
+export const saveToDb = async (flowConfig, flowGui) => {
+  const { reactFlowInstance } = flowGui;
   const flow = reactFlowInstance.toObject();
   const data = {
     flowConfig,
-    flowWorkspace,
+    flowGui,
     flow
   }
   console.log("DATA:", data);

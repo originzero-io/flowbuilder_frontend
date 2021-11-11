@@ -1,4 +1,4 @@
-export const LOAD_GROUPS = "LOAD_GROUPS";
+export const GET_GROUPS = "GET_GROUPS";
 export const ADD_GROUP = "ADD_GROUP";
 export const UPDATE_GROUP = "UPDATE_GROUP";
 export const DELETE_GROUP = "DELETE_GROUP";

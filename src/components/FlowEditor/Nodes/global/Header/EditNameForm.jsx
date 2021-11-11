@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   changeNodeName,
   //setElements,
-} from "../../../../../store/actions/elementsActions";
+} from "../../../../../store/actions/elementActions";
 import PropTypes from "prop-types"
 const Form = styled.form`
   position: relative;

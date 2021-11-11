@@ -40,7 +40,7 @@ export const NavMenuItemWrapper = styled.button`
   }
 `;
 
-export const TeamBrandWrapper = styled.div`
+export const WorkspaceBrandWrapper = styled.div`
   background: #323232;
   padding: 15px;
   display: flex;

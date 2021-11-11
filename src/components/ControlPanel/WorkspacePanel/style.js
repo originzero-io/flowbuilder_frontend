@@ -9,7 +9,7 @@ export const Item = styled.div`
   justify-content: flex-start;
   //margin-left: 20px;
 `;
-export const TeamsContainer = styled.div`
+export const WorkspaceContainer = styled.div`
   background: #050038;
   background: #1C232B;
   display: flex;
@@ -19,11 +19,11 @@ export const TeamsContainer = styled.div`
   flex-basis: 4%;
   padding-top: 42px;
 `;
-export const TeamItem = styled(Item)`
+export const WorkspaceItem = styled(Item)`
   background:${props => props.active ? "rgba(46, 213, 115,0.2)" : "none"};
   border-right:${props => props.active ? "4px solid #2ecc71" : "none"};
 `;
-export const AddTeamButton = styled(Item)`
+export const AddWorkSpaceButton = styled(Item)`
   background:gray;
   padding-left: 12px;
   &:hover{

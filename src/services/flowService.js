@@ -11,8 +11,8 @@ export const getFlowsByProjectService = async (project) => {
     const response = await axios.get(`/flows/byProject/${project._id}`);
     return response.data;
 }
-export const getFlowsByTeamService = async (team) => {
-    const response = await axios.get(`/flows/byTeam/${team._id}`);
+export const getFlowsByWorkspaceService = async (workspace) => {
+    const response = await axios.get(`/flows/byWorkspace/${workspace._id}`);
     return response.data;
 }
 export const createFlowService = async (params) => {

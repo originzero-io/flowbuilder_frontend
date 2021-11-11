@@ -1,4 +1,4 @@
-import React, { useState, useEffect,memo } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DashboardsContainer, FlowsContainer } from "./style";
 import { Box } from "./style";
@@ -6,7 +6,7 @@ import {
   CollapsibleMenu,
   CollapsibleTrigger,
 } from "../../../Global/Collapsible/CollapsibleMenu";
-import ElementList from "./ElementList.jsx";
+import FlowList from "./FlowList.jsx";
 import { setModal } from "../../../../store/actions/componentActions";
 import AddFlowForm from "./forms/AddFlowForm";
 import AddDashboardForm from "./forms/AddDashboardForm";
@@ -26,13 +26,13 @@ export default function ProjectsPanel() {
     <>
       <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
         <FlowsContainer>
-          <ElementList elements={flows}/>
+          <FlowList flows={flows}/>
           <Box onClick={() => dispatch(setModal(true, <AddFlowForm />))}><VscAdd/></Box>
         </FlowsContainer>
       </CollapsibleMenu>
       <CollapsibleMenu trigger={dashboardCollapseTrigger()} open={true}>
         <DashboardsContainer>
-          <ElementList/>
+          {/* <ElementList/> */}
           <Box onClick={() => dispatch(setModal(true, <AddDashboardForm />))}><VscAdd/></Box>
         </DashboardsContainer>
       </CollapsibleMenu>

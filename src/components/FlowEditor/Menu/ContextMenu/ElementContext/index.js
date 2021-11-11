@@ -2,7 +2,7 @@ import React from "react";
 import { Menu, MenuItem } from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { setElementContextMenu } from "../../../../../store/actions/menuActions";
-import { rotateNode, setElements } from "../../../../../store/actions/elementsActions";
+import { rotateNode, setElements } from "../../../../../store/actions/elementActions";
 
 export default function ElementMenu() {
   const { flowElements } = useSelector((state) => state.activeFlow);

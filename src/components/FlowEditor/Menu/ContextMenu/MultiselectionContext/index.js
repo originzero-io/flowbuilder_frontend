@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Menu, MenuItem } from "../ElementContext/style";
 import { isNode, useStoreState } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
-import { rotateMultiNode, setElements, setMultipleNodeEnable } from "../../../../../store/actions/elementsActions";
+import { rotateMultiNode, setElements, setMultipleNodeEnable } from "../../../../../store/actions/elementActions";
 import { setMultiSelectionContextMenu } from "../../../../../store/actions/menuActions";
 import GroupMenu from "../../GroupMenu";
 
@@ -11,8 +11,8 @@ export default function MultiSelectionContextMenu() {
   const { multiSelectionMenu } = useSelector(
     (state) => state.menus
   );
-  const { flowElements, flowWorkspace } = useSelector((state) => state.activeFlow);
-  const { theme } = flowWorkspace;
+  const { flowElements, flowGui } = useSelector((state) => state.activeFlow);
+  const { theme } = flowGui;
   const elements = flowElements.present;
   const dispatch = useDispatch();
   const deleteItems = () => {

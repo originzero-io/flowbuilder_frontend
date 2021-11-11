@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NodeGod from "./global/NodeGod";
 import { useSelector, useDispatch } from "react-redux";
-import { setElements } from "../../../store/actions/elementsActions";
+import { setElements } from "../../../store/actions/elementActions";
 import NodeIOManager from "./global/NodeIOManager";
 const CombineNode = (self) => {
   const { flowElements } = useSelector((state) => state.activeFlow);

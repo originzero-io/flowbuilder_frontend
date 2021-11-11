@@ -11,7 +11,7 @@ import { setModal } from "../../../../store/actions/componentActions";
 import {
   changeEdgeType,
   importElements,
-} from "../../../../store/actions/elementsActions";
+} from "../../../../store/actions/elementActions";
 import {
   setMiniMapDisplay,
   setTheme,
@@ -42,9 +42,9 @@ const Menu = styled(MenuIndex)`
 `;
 
 export default function ConfigurationMenu() {
-  const { flowWorkspace, flowConfig, flowElements, flowGroups } = useSelector((state) => state.activeFlow);
+  const { flowGui, flowConfig, flowElements, flowGroups } = useSelector((state) => state.activeFlow);
   const { name } = useSelector((state) => state.auth);
-  const { reactFlowInstance, miniMapDisplay, theme } = flowWorkspace;
+  const { reactFlowInstance, miniMapDisplay, theme } = flowGui;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
@@ -58,7 +58,7 @@ export default function ConfigurationMenu() {
         console.log(elements);
         // const flow = {
         //   config: flowConfig,
-        //   workspace: flowWorkspace,
+        //   workspace: flowGui,
         //   elements: elements,
         //   groups: flowGroups
         // }

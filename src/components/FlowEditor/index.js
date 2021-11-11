@@ -11,7 +11,7 @@ import adjustScreen from "../../app-global/dom/adjustScreen";
 import { loadFunctionsToNode } from "../../app-global/helpers/loadFunctionsToNode";
 import { openNotification as notification } from "../../app-global/dom/notification";
 import { setReactFlowInstance, setPaneClickPosition } from "../../store/actions/flowActions";
-import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/actions/elementsActions"
+import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/actions/elementActions"
 import {
   setElementContextMenu,
   setGroupMenu,
@@ -26,14 +26,14 @@ import KeyboardEvents from "../Global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
 import CustomEdge from './Edges/CustomEdge'
 import PropTypes from "prop-types"
-import { loadGroups } from "../../store/actions/nodeGroupsActions";
+import { loadGroups } from "../../store/actions/groupActions";
 export default function FlowEditor({ reactFlowWrapper }) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeList);
   const selectedElements = useStoreState((state) => state.selectedElements);
-  const { flowElements, flowWorkspace, flowConfig } = useSelector((state) => state.activeFlow);
+  const { flowElements, flowGui, flowConfig } = useSelector((state) => state.activeFlow);
   const elements = flowElements.present;
-  const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowWorkspace;
+  const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowGui;
   const dispatch = useDispatch();
   const store = useStore();
   const onConnectHandle = (params) => {
@@ -76,7 +76,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
   const onLoadHandle = (_reactFlowInstance) => {
     dispatch(setReactFlowInstance(_reactFlowInstance));
-    adjustScreen(flowWorkspace,_reactFlowInstance);
+    adjustScreen(flowGui,_reactFlowInstance);
   };
   const onDragOverHandle = (event) => {
     event.preventDefault();

@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteGroup,
-  loadGroups,
-} from "../../../../store/actions/nodeGroupsActions";
-import { deleteGroupOfElement } from "../../../../store/actions/elementsActions";
+  deleteGroup
+} from "../../../../store/actions/groupActions";
+import { deleteGroupOfElement } from "../../../../store/actions/elementActions";
 import { GroupItem, GroupColor, Label } from "./style";
 import { isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";
 import { NameEditIcon } from "../../../Global/icons";
 import PropTypes from "prop-types";
-import {
-  deleteGroupService,
-  getGroupsService,
-} from "../../../../services/groupService";
 import { useParams } from "react-router";
 const GroupList = ({ theme }) => {
-  const { flowGroups, flowElements, flowWorkspace } =
+  const { flowGroups, flowElements, flowGui } =
     useSelector((state) => state.activeFlow);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(null);
@@ -26,11 +21,11 @@ const GroupList = ({ theme }) => {
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
   );
-  const deleteIconClickHandle = async (group) => {
+  const deleteIconClickHandle = (group) => {
     if (confirm("Are you sure?")) {
+      console.log("group:", group);
+      dispatch(deleteGroup(group));
       dispatch(deleteGroupOfElement(group));
-      const data = await deleteGroupService(group);
-      dispatch(deleteGroup(data.group));
     }
   };
   const groupItemClickHandle = (group) => {

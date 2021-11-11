@@ -7,13 +7,13 @@ import { saveToDb } from "../../app-global/db";
 import { setRotateAllPath } from "../../store/actions/flowActions";
 import { setCopiedElements } from "../../store/actions/controlPanelActions";
 import uuid from "react-uuid";
-import { pasteNodes } from "../../store/actions/elementsActions";
+import { pasteNodes } from "../../store/actions/elementActions";
 import { openNotification as notification } from "../../app-global/dom/notification";
 const KeyboardEvents = () => {
   const dispatch = useDispatch();
-  const { flowWorkspace,flowElements } = useSelector((state) => state.activeFlow);
+  const { flowGui,flowElements } = useSelector((state) => state.activeFlow);
   const { copiedElements } = useSelector((state) => state.controlPanel);
-  const { paneClickPosition,reactFlowInstance,rotateAllPath } = flowWorkspace;
+  const { paneClickPosition,reactFlowInstance,rotateAllPath } = flowGui;
   const elements = flowElements.present;
   const selectedElements = useStoreState((state) => state.selectedElements);
   const setSelectedElements = useStoreActions(

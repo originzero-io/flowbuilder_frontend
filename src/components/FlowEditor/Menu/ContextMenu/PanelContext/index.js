@@ -8,15 +8,15 @@ import FavoriteNodes from "./FavoriteNodes";
 import {addNodeToFavorites, setNodeList} from "../../../../../store/actions/nodeListActions"
 import RecentNodes from "./RecentNodes";
 import { loadFunctionsToNode } from "../../../../../app-global/helpers/loadFunctionsToNode";
-import { addNewNode } from "../../../../../store/actions/elementsActions";
+import { addNewNode } from "../../../../../store/actions/elementActions";
 import { createNode } from "../../../../../app-global/helpers/elementController";
-import useDidMountEffect  from "../../../../../hooks/useDidMountEffect";
+import useDidMountEffect  from "../../../../../utils/useDidMountEffect";
 import {loadIconsToNodeList} from "../../../../../app-global/helpers/loadIconsToNodeList";
 
 const PanelContextMenu = () => {
   const { panelMenu } = useSelector((state) => state.menus);
-  const { flowWorkspace } = useSelector((state) => state.activeFlow);
-  const { reactFlowInstance,rotateAllPath,theme } = flowWorkspace;
+  const { flowGui } = useSelector((state) => state.activeFlow);
+  const { reactFlowInstance,rotateAllPath,theme } = flowGui;
   const nodeList = useSelector((state) => state.nodeList);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const dispatch = useDispatch();

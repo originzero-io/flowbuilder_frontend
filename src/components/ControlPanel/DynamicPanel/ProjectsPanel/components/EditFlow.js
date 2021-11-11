@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form, Label, FormGroup } from "reactstrap";
-import { editFlowConfigService } from "../../../../../services/flowService";
 import { setModal } from "../../../../../store/actions/componentActions";
-import { setError } from "../../../../../store/actions/errorActions";
-import { updateFlow } from "../../../../../store/actions/flowActions";
+import { editFlow } from "../../../../../store/actions/flowActions";
 
 export default function EditFlow({ flow }) {
   const dispatch = useDispatch();
@@ -23,13 +21,8 @@ export default function EditFlow({ flow }) {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    editFlowConfigService(flow._id, flowConfig)
-      .then(res => {
-        console.log("RES:", res);
-        dispatch(updateFlow(res.flow));
-        dispatch(setModal(false));
-      })
-      .catch((err)=>dispatch(setError(err)));
+    dispatch(editFlow(flow,flowConfig));
+    dispatch(setModal(false));
   };
   return (
     <Form onSubmit={onSubmitHandle}>

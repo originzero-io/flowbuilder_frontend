@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form } from "reactstrap";
-import { moveFlowService } from "../../../../../services/flowService";
 import { setModal } from "../../../../../store/actions/componentActions";
-import { setError } from "../../../../../store/actions/errorActions";
-import { updateFlow } from "../../../../../store/actions/flowActions";
+import { moveFlow } from "../../../../../store/actions/flowActions";
 
 export default function MoveFlow({ flow }) {
   const dispatch = useDispatch();
@@ -16,14 +14,8 @@ export default function MoveFlow({ flow }) {
 
   const submitHandle = (e) => {
     e.preventDefault();
-    console.log(selection);
-    console.log(flow);
-    moveFlowService(flow._id, selection)
-      .then((res) => {
-        dispatch(updateFlow(res.flow));
-        dispatch(setModal(false));
-      })
-      .catch((err) => dispatch(setError(err)));
+    dispatch(moveFlow(flow,selection));
+    dispatch(setModal(false));
   };
   return (
     <Form onSubmit={submitHandle}>

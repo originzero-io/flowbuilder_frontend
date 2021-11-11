@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addFlow } from "../../../../../store/actions/flowActions";
+import { createFlow } from "../../../../../store/actions/flowActions";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { setModal } from "../../../../../store/actions/componentActions";
 import { createFlowService } from "../../../../../services/flowService";
@@ -8,11 +8,11 @@ import { setError } from "../../../../../store/actions/errorActions";
 
 export default function AddFlowForm() {
   const auth = useSelector((state) => state.auth);
-  const { activeTeam } = useSelector((state) => state.teams);
+  const { activeWorkspace } = useSelector((state) => state.workspaces);
   const { activeProject, projects } = useSelector(
     (state) => state.projects
   );
-  const team = activeTeam._id;
+  const workspace = activeWorkspace._id;
   const project = activeProject?._id || projects[0];
 
   const [flowInfo, setFlowInfo] = useState({
@@ -28,13 +28,9 @@ export default function AddFlowForm() {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    const flow = { config: flowInfo, team, project };
-    createFlowService(flow)
-      .then((res) => {
-        dispatch(addFlow(res.flow));
-        dispatch(setModal(false));
-      })
-      .catch((err) => dispatch(setError(err)));
+    const flow = { config: flowInfo, workspace, project };
+    dispatch(createFlow(flow));
+    dispatch(setModal(false));
   };
 
   return (

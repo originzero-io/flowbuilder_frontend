@@ -7,6 +7,7 @@ import { Logo } from "../../../Global/icons";
 import { Link,useParams } from "react-router-dom";
 import { mergeFlow, setActiveFlow, setCurrentFlowConfig } from "../../../../store/actions/flowActions";
 import { saveFlowService } from "../../../../services/flowService";
+import { saveElements, setElements } from "../../../../store/actions/elementActions";
 import { saveElementsService } from "../../../../services/elementService";
 const Menu = styled(MenuIndex)`
   top: 10px;
@@ -41,23 +42,19 @@ const Circle = styled.div`
   }
 `;
 const MainMenu = () => {
-  const { flowWorkspace,flowConfig,flowGroups } = useSelector((state) => state.activeFlow);
-  const { theme, reactFlowInstance } = flowWorkspace;
+  const { flowGui,flowConfig } = useSelector((state) => state.activeFlow);
+  const { theme, reactFlowInstance } = flowGui;
   const { flowId } = useParams();
   const dispatch = useDispatch();
   const homeClickHandle = async () => {
     const { position, zoom, elements } = reactFlowInstance.toObject();
     const flow = {
       config: flowConfig,
-      workspace: { ...flowWorkspace, position, zoom },
+      gui: { ...flowGui, position, zoom },
     };
-    console.log("elements:", elements);
     await saveFlowService(flowId, flow);
-
-    const data = await saveElementsService(flowId, elements);
-    console.log("SAVE DATA:", data);
-    // dispatch(mergeFlow(flow));
-    // dispatch(setCurrentFlowConfig({}));
+    await saveElementsService(flowId, elements);
+    dispatch(setElements([]));
   }
   return (
     <>

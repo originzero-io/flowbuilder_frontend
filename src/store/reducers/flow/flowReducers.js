@@ -3,7 +3,7 @@ import NodeClass from "../../../app-global/works/NodeClass";
 const nodeClass = new NodeClass("nodeClass is created by redux store");
 export const flowReducer = (state = [], { type, payload }) => {
   switch (type) {
-    case actions.ADD_FLOW:
+    case actions.CREATE_FLOW:
       return [...state, payload];
     case actions.OPEN_FLOW:
       return state.map((state) => {
@@ -61,9 +61,9 @@ export const flowConfigReducer = (state = {}, { type, payload }) => {
       return state;
   }
 };
-export const flowWorkSpaceReducer = (state = {}, { type, payload }) => {
+export const flowGuiReducer = (state = {}, { type, payload }) => {
   switch (type) {
-    case actions.SET_CURRENT_FLOW_WORKSPACE:
+    case actions.SET_CURRENT_FLOW_GUI:
       return payload;
     case actions.SET_PANE_CLICK_POSITION:
       return { ...state, paneClickPosition: payload };
