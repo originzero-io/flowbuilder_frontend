@@ -6,17 +6,17 @@ import { openNotification } from "../../../../app-global/dom/notification";
 import { loadFunctionsToNode } from "../../../../app-global/helpers/loadFunctionsToNode";
 import * as themeColor from "../../../../config/ThemeReference";
 import * as tooltip from "../../../../config/TooltipReference";
-import { logOut } from "../../../../store/actions/authActions";
-import { setModal } from "../../../../store/actions/componentActions";
+import { logOut } from "../../../../store/reducers/authReducer";
+import { setModal } from "../../../../store/reducers/componentReducer";
 import {
   changeEdgeType,
   importElements,
-} from "../../../../store/actions/elementActions";
+} from "../../../../store/reducers/flow/flowElementsReducer";
 import {
   setMiniMapDisplay,
   setTheme,
-  setWorkspaceEdgeType,
-} from "../../../../store/actions/flowActions";
+  setFlowEdgeType,
+} from "../../../../store/reducers/flow/flowGuiReducer";
 import { BiBrain } from "react-icons/bi";
 import SwitchButton from "../../../global/Button/SwitchButton";
 import FileInputWrapper from "../../../global/FileInputWrapper";
@@ -42,7 +42,7 @@ const Menu = styled(MenuIndex)`
 `;
 
 export default function ConfigurationMenu() {
-  const { flowGui, flowConfig, flowElements, flowGroups } = useSelector((state) => state.activeFlow);
+  const { flowGui } = useSelector((state) => state.activeFlow);
   const { name } = useSelector((state) => state.auth);
   const { reactFlowInstance, miniMapDisplay, theme } = flowGui;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
@@ -127,7 +127,7 @@ export default function ConfigurationMenu() {
     setActive({ ...active, miniMap: checked });
   };
   const edgeTypeHandle = (e) => {
-    dispatch(setWorkspaceEdgeType(e.target.value));
+    dispatch(setFlowEdgeType(e.target.value));
     dispatch(changeEdgeType(e.target.value));
   };
   const logOutHandle = () => {

@@ -7,11 +7,10 @@ import {
   CollapsibleTrigger,
 } from "../../../global/Collapsible/CollapsibleMenu";
 import FlowList from "./FlowList.jsx";
-import { setModal } from "../../../../store/actions/componentActions";
+import { setModal } from "../../../../store/reducers/componentReducer";
 import AddFlowForm from "./forms/AddFlowForm";
 import AddDashboardForm from "./forms/AddDashboardForm";
 import { VscAdd } from "react-icons/vsc";
-import { GrAdd } from "react-icons/gr";
 export default function ProjectsPanel() {
   const dispatch = useDispatch();
   const flows = useSelector(state => state.flows);
@@ -27,13 +26,13 @@ export default function ProjectsPanel() {
       <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
         <FlowsContainer>
           <FlowList flows={flows}/>
-          <Box onClick={() => dispatch(setModal(true, <AddFlowForm />))}><VscAdd/></Box>
+          <Box onClick={() => dispatch(setModal( <AddFlowForm />))}><VscAdd/></Box>
         </FlowsContainer>
       </CollapsibleMenu>
       <CollapsibleMenu trigger={dashboardCollapseTrigger()} open={true}>
         <DashboardsContainer>
           {/* <ElementList/> */}
-          <Box onClick={() => dispatch(setModal(true, <AddDashboardForm />))}><VscAdd/></Box>
+          <Box onClick={() => dispatch(setModal( <AddDashboardForm />))}><VscAdd/></Box>
         </DashboardsContainer>
       </CollapsibleMenu>
     </>

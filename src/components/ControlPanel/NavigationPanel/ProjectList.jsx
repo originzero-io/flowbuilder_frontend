@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getFlowsByProject } from "../../../store/actions/flowActions";
-import { deleteProject, setActiveProject, } from "../../../store/actions/projectActions";
+import { getFlowsByProject } from "../../../store/reducers/flow/flowReducer";
+import { deleteProject, setActiveProject, } from "../../../store/reducers/projectReducer";
 import { CollapsibleMenuItem } from "../../global/Collapsible/CollapsibleMenu";
 import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
 
 import { Badge } from "reactstrap";
-import { setModal } from "../../../store/actions/componentActions";
+import { setModal } from "../../../store/reducers/componentReducer";
 import EditProjectForm from "./EditProjectForm";
 export default function ProjectList() {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function ProjectList() {
     }
   };
   const editProjectHandle = (project) => {
-    dispatch(setModal(true, <EditProjectForm />));
+    dispatch(setModal( <EditProjectForm />));
   };
   return (
     <>

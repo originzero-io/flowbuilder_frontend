@@ -8,16 +8,16 @@ import {
 import { FiMoreVertical } from "react-icons/fi";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { setModal } from "../../../store/actions/componentActions";
+import { setModal } from "../../../store/reducers/componentReducer";
 import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsPanel/components/MoveFlow";
 import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsPanel/components/EditFlow";
 export default function DetailMenu({deleteEvent,data}) {
   const dispatch = useDispatch();
   const moveHandler = () => {
-    dispatch(setModal(true, <MoveFlow flow={data}/>));
+    dispatch(setModal( <MoveFlow flow={data}/>));
   }
   const editHandler = () => {
-    dispatch(setModal(true, <EditFlow flow={data}/>));
+    dispatch(setModal( <EditFlow flow={data}/>));
   }
   return (
       <DetailMenuWrapper tabIndex="1">

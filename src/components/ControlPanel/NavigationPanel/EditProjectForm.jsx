@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { updateProject } from "../../../store/actions/projectActions";
-import { setModal } from "../../../store/actions/componentActions";
+import { updateProject } from "../../../store/reducers/projectReducer";
+import { setModal } from "../../../store/reducers/componentReducer";
 const EditProjectForm = () => {
   const { activeProject } = useSelector((state) => state.projects);
   const [projectInfo, setprojectInfo] = useState({

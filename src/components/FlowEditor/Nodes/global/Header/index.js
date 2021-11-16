@@ -3,8 +3,8 @@ import Flag from "./NodeFlag";
 import { Header, Label ,Content,FeatureIconsWrapper } from "../../styles";
 import { useSelector, useDispatch } from "react-redux";
 import GroupMenu from "../../../Menu/GroupMenu";
-import { closeAllNodeGroupMenu } from "../../../../../store/actions/flowActions";
-import { expandNode } from "../../../../../store/actions/elementActions";
+import { closeAllNodeGroupMenu } from "../../../../../store/reducers/flow/flowGuiReducer";
+import { expandNode } from "../../../../../store/reducers/flow/flowElementsReducer";
 import EditNameForm from "./EditNameForm";
 import FeatureIcons from "./FeatureIcons";
 import PropTypes from "prop-types"

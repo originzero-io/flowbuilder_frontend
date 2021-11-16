@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form } from "reactstrap";
-import { setModal } from "../../../../../store/actions/componentActions";
-import { moveFlow } from "../../../../../store/actions/flowActions";
+import { setModal } from "../../../../../store/reducers/componentReducer";
+import { moveFlow } from "../../../../../store/reducers/flow/flowReducer";
 
 export default function MoveFlow({ flow }) {
   const dispatch = useDispatch();

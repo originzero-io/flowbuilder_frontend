@@ -3,7 +3,7 @@ import { useStoreActions, useStoreState } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { setGroupToNodes } from "../../../../app-global/helpers/elementController";
-import { setGroupMultiple, setGroupSingle } from "../../../../store/actions/elementActions";
+import { setGroupMultiple, setGroupSingle } from "../../../../store/reducers/flow/flowElementsReducer";
 import { GroupColor, Label } from "../GroupBar/style";
 const Container = styled.div`
   position: absolute;

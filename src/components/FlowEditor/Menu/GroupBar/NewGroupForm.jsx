@@ -3,7 +3,7 @@ import { isNode, useStoreActions } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import {  useParams } from "react-router";
 import * as themeColor from "../../../../config/ThemeReference";
-import { createGroup } from "../../../../store/actions/groupActions";
+import { createGroup } from "../../../../store/reducers/flow/flowGroupsReducer";
 import {
   AddIcon,
   CancelIcon,

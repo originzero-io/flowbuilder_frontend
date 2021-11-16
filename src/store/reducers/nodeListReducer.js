@@ -78,3 +78,13 @@ const nodeListReducer = (state = panelNodeList, {type,payload}) => {
   }
 };
 export default nodeListReducer;
+
+
+export const setNodeList = (data) => ({
+  type: actionTypes.SET_NODE_LIST,
+  payload: data
+});
+export const addNodeToFavorites = (node) => ({
+  type: actionTypes.ADD_NODE_TO_FAVORITES,
+  payload: node
+});

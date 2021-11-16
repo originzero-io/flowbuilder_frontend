@@ -9,7 +9,7 @@ import {
   //findElementById
 } from "../helpers/elementController";
 import { openNotification as notification } from "../dom/notification";
-import { setElements } from "../../store/actions/elementActions";
+import { setElements } from "../../store/reducers/flow/flowElementsReducer";
 import axios from "axios"
 export default class Node {
   elements = [];

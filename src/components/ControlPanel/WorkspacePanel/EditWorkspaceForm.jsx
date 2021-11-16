@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
-import { editWorkspace } from "../../../store/actions/workspaceActions";
-import { setModal } from "../../../store/actions/componentActions";
+import { editWorkspace } from "../../../store/reducers/workspaceReducer";
+import { setModal } from "../../../store/reducers/componentReducer";
 export default function EditTeamForm() {
   const { activeWorkspace } = useSelector((state) => state.workspaces);
   const [workspaceInfo, setworkspaceInfo] = useState({

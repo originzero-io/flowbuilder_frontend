@@ -15,8 +15,8 @@ import { MdDevicesOther } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
 import { BiBrain } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
-import { getFlowsByWorkspace } from "../../../store/actions/flowActions";
-import { setModal } from "../../../store/actions/componentActions";
+import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
+import { setModal } from "../../../store/reducers/componentReducer";
 import { Link,useRouteMatch } from "react-router-dom";
 import WorkspaceBrand from "./WorkspaceBrand";
 
@@ -28,7 +28,7 @@ const ControlPanelMenu = () => {
     e.preventDefault();
     e.stopPropagation();
     if (activeWorkspace) {
-      dispatch(setModal(true, <AddProjectForm />));
+      dispatch(setModal( <AddProjectForm />));
     }
     else alert("Firstly, create a workspace.");
   };

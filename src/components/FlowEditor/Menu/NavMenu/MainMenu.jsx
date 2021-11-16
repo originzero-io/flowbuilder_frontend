@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import * as themeColor from "../../../../config/ThemeReference"
 import { Logo } from "../../../global/icons";
 import { Link,useParams } from "react-router-dom";
-import { getFlowsByWorkspace, mergeFlow, setActiveFlow, setCurrentFlowConfig } from "../../../../store/actions/flowActions";
+import { getFlowsByWorkspace, mergeFlow, setActiveFlow, setCurrentFlowConfig } from "../../../../store/reducers/flow/flowReducer";
 import { saveFlowService } from "../../../../services/flowService";
-import { saveElements, setElements } from "../../../../store/actions/elementActions";
+import { saveElements, setElements } from "../../../../store/reducers/flow/flowElementsReducer";
 import { saveElementsService } from "../../../../services/elementService";
 const Menu = styled(MenuIndex)`
   top: 10px;

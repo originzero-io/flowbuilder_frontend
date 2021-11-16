@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
-import { createWorkspace } from "../../../store/actions/workspaceActions";
-import { setModal } from "../../../store/actions/componentActions";
+import { createWorkspace } from "../../../store/reducers/workspaceReducer";
+import { setModal } from "../../../store/reducers/componentReducer";
 export default function AddWorkspaceForm() {
   const auth = useSelector((state) => state.auth);
   const [workspaceInfo, setWorkspaceInfo] = useState({

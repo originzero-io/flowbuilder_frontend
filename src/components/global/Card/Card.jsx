@@ -11,7 +11,7 @@ import {
 } from "./style";
 import { VscTrash } from "react-icons/vsc";
 import DetailMenu from "./DetailMenu";
-import { deleteFlow } from "../../../store/actions/flowActions";
+import { deleteFlow } from "../../../store/reducers/flow/flowReducer";
 import { Badge } from "reactstrap";
 
 const Card = ({ data }) => {

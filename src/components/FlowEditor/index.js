@@ -10,23 +10,22 @@ import nodeTypes from "./Nodes";
 import adjustScreen from "../../app-global/dom/adjustScreen";
 import { loadFunctionsToNode } from "../../app-global/helpers/loadFunctionsToNode";
 import { openNotification as notification } from "../../app-global/dom/notification";
-import { setReactFlowInstance, setPaneClickPosition } from "../../store/actions/flowActions";
-import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/actions/elementActions"
+import { setReactFlowInstance, setPaneClickPosition } from "../../store/reducers/flow/flowGuiReducer";
+import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/reducers/flow/flowElementsReducer"
 import {
   setElementContextMenu,
   setGroupMenu,
   setMultiSelectionContextMenu,
   setPanelContextMenu,
-} from "../../store/actions/menuActions";
-import { setNodeList } from "../../store/actions/nodeListActions";
+} from "../../store/reducers/menuReducer";
+import { setNodeList } from "../../store/reducers/nodeListReducer";
 import * as themeColor from "../../config/ThemeReference";
-import { closeAllNodeGroupMenu } from "../../store/actions/flowActions";
+import { closeAllNodeGroupMenu } from "../../store/reducers/flow/flowGuiReducer";
 import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "../../app-global/helpers/elementController";
 import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
 import CustomEdge from './Edges/CustomEdge'
 import PropTypes from "prop-types"
-import { loadGroups } from "../../store/actions/groupActions";
 export default function FlowEditor({ reactFlowWrapper }) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeList);
@@ -74,10 +73,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
     const newElements = removeElements(elementsToRemove, elements);
     dispatch(setElements(newElements));
   };
-  // const onLoadHandle = useCallback((_reactFlowInstance) => {
-  //   dispatch(setReactFlowInstance(_reactFlowInstance));
-  //   adjustScreen(flowGui,_reactFlowInstance);
-  // },[reactFlowInstance]);
   const onLoadHandle = (_reactFlowInstance) => {
     dispatch(setReactFlowInstance(_reactFlowInstance));
     adjustScreen(flowGui,_reactFlowInstance);

@@ -1,3 +1,4 @@
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_ERROR = "LOGIN_ERROR";
-export const LOG_OUT = "LOG_OUT";
+const name = "auth";
+export const LOGIN_SUCCESS = `${name}/loginSuccess`;
+export const LOGIN_ERROR = `${name}/loginError`;
+export const LOG_OUT = `${name}/logOut`;

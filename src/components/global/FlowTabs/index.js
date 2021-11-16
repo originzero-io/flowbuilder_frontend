@@ -1,7 +1,7 @@
 import React,{ useState,useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { closeFlow } from "../../../store/actions/flowActions";
+import { closeFlow } from "../../../store/reducers/flow/flowReducer";
 import { Container, TabItem, AddButton,CloseButton } from "./style";
 const FlowTabs = () => {
   const flows = useSelector((state) => state.flows);

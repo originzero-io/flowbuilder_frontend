@@ -4,10 +4,10 @@ import { ActionCreators as UndoActionCreators } from 'redux-undo'
 import KeyboardEventHandler from "react-keyboard-event-handler";
 import { useStoreActions, useStoreState, useZoomPanHelper } from "react-flow-renderer";
 import { saveToDb } from "../../app-global/db";
-import { setRotateAllPath } from "../../store/actions/flowActions";
-import { setCopiedElements } from "../../store/actions/controlPanelActions";
+import { setRotateAllPath } from "../../store/reducers/flow/flowGuiReducer";
+import { setCopiedElements } from "../../store/reducers/controlPanelReducer";
 import uuid from "react-uuid";
-import { pasteNodes } from "../../store/actions/elementActions";
+import { pasteNodes } from "../../store/reducers/flow/flowElementsReducer";
 import { openNotification as notification } from "../../app-global/dom/notification";
 const KeyboardEvents = () => {
   const dispatch = useDispatch();

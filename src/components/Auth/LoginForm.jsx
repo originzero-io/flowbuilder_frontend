@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
 import { loginService } from "../../services/authService";
-import { loginError, loginSuccess } from "../../store/actions/authActions";
+import { loginError, loginSuccess } from "../../store/reducers/authReducer";
 import { Input, Text, Submit, ErrorMessage } from "./style";
 import { Redirect } from "react-router-dom";
 import { openNotification as notification } from "../../app-global/dom/notification";
-import { setError } from "../../store/actions/errorActions";
+import { setError } from "../../store/reducers/errorReducer";
 
 export default function LoginForm() {
   const dispatch = useDispatch();

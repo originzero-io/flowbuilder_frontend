@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "../../../store/actions/componentActions";
-import { deleteWorkspace, setActiveWorkspace } from "../../../store/actions/workspaceActions";
+import { setModal } from "../../../store/reducers/componentReducer";
+import { deleteWorkspace, setActiveWorkspace } from "../../../store/reducers/workspaceReducer";
 import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
@@ -18,7 +18,7 @@ const WorkspaceBrand = ({ workspace }) => {
     }
   };
   const editWorkspaceHandler = () => {
-    dispatch(setModal(true, <EditWorkspaceForm />));
+    dispatch(setModal( <EditWorkspaceForm />));
   };
   return (
     <WorkspaceBrandWrapper>

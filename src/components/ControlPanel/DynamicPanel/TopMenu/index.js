@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../../../../store/actions/authActions";
+import { logOut } from "../../../../store/reducers/authReducer";
 import {
   DropDownItem,
   DropdownWrapper,

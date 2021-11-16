@@ -1,1 +1,2 @@
-export const SET_MODAL = "SET_MODAL"
+const name = "component";
+export const SET_MODAL = `${name}/modal`;

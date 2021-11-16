@@ -15,3 +15,12 @@ const controlPanelReducer = (state = panelConfig, { type, payload }) => {
   }
 };
 export default controlPanelReducer;
+
+export const setCopiedElements = (nodes) => ({
+  type: actions.SET_COPIED_ELEMENTS,
+  payload: nodes
+});
+export const setActiveProject = (project) => ({
+  type: actions.SET_ACTIVE_PROJECT,
+  payload: project,
+});

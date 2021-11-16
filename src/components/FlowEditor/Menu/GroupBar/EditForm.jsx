@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setElements, updateGroupOfElement } from "../../../../store/actions/elementActions";
-import { updateGroup } from "../../../../store/actions/groupActions";
+import { setElements, updateGroupOfElement } from "../../../../store/reducers/flow/flowElementsReducer";
+import { updateGroup } from "../../../../store/reducers/flow/flowGroupsReducer";
 import { SubmitIcon } from "../../../global/icons";
 import { ColorFlag, Submit } from "./style";
 import * as themeColor from "../../../../config/ThemeReference";

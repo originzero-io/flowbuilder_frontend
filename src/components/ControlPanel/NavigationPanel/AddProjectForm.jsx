@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { createProjectService } from "../../../services/projectService";
-import { createProject } from "../../../store/actions/projectActions";
-import { setError } from "../../../store/actions/errorActions";
-import { setModal } from "../../../store/actions/componentActions";
+import { createProject } from "../../../store/reducers/projectReducer";
+import { setError } from "../../../store/reducers/errorReducer";
+import { setModal } from "../../../store/reducers/componentReducer";
 const AddProjectForm = () => {
   const { activeWorkspace } = useSelector((state) => state.workspaces);
   const auth = useSelector((state) => state.auth);

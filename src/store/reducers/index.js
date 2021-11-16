@@ -1,14 +1,12 @@
 import { combineReducers } from "redux";
-import {
-  nodeClassReducer,
-  flowReducer,
-  flowConfigReducer,
-  flowGuiReducer,
-} from "./flow/flowReducers";
 import flowElementsReducer from "./flow/flowElementsReducer";
+import nodeClassReducer from "./flow/nodeClassReducer";
 import flowGroupsReducer from "./flow/flowGroupsReducer";
+import flowConfigReducer from "./flow/flowConfigReducer";
+import flowGuiReducer from "./flow/flowGuiReducer";
+import flowReducer from "./flow/flowReducer";
 import menuReducer from "./menuReducer";
-import nodeListReducer from "./nodeListReducers";
+import nodeListReducer from "./nodeListReducer";
 import controlPanelReducer from "./controlPanelReducer";
 import { modalReducer } from "./componentReducer";
 import authReducer from "./authReducer";

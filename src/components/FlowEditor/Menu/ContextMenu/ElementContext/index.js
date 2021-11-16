@@ -1,8 +1,8 @@
 import React from "react";
 import { Menu, MenuItem } from "./style";
 import { useSelector, useDispatch } from "react-redux";
-import { setElementContextMenu } from "../../../../../store/actions/menuActions";
-import { rotateNode, setElements } from "../../../../../store/actions/elementActions";
+import { setElementContextMenu } from "../../../../../store/reducers/menuReducer";
+import { rotateNode, setElements } from "../../../../../store/reducers/flow/flowElementsReducer";
 
 export default function ElementMenu() {
   const { flowElements } = useSelector((state) => state.activeFlow);

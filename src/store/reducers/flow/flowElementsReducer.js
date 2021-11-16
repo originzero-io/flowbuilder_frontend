@@ -1,6 +1,8 @@
 import * as actions from "../../constants/elementsContants";
 import undoable,{includeAction} from "redux-undo"
 import { isEdge, isNode } from "react-flow-renderer";
+import { getElementsService,saveElementsService } from "../../../services/elementService";
+
 const elementReducer = (state = [], { type, payload }) => {
   switch (type) {
     case actions.SET_ELEMENTS:
@@ -360,3 +362,102 @@ const undoableElements = undoable(elementReducer, {
 });
 
 export default undoableElements;
+
+
+export const setElements = (data) => ({
+  type: actions.SET_ELEMENTS,
+  payload: data,
+});
+export const saveElements = (flow_id,elements)=> async dispatch => {
+  const { element } = await saveElementsService(flow_id, elements);
+  dispatch({
+    type: actions.SET_ELEMENTS,
+    payload: element
+  })
+};
+export const getElementsByFlow = (flow)=> async dispatch => {
+  const { elements } = await getElementsService(flow._id);
+  dispatch({
+    type: actions.SET_ELEMENTS,
+    payload: elements
+  })
+};
+export const addNewNode = (node) => ({
+  type: actions.ADD_NEW_NODE,
+  payload: node,
+});
+export const pasteNodes = (nodes) => ({
+  type: actions.PASTE_NODES,
+  payload: nodes,
+});
+export const setRotateAll = (data) => ({
+  type: actions.SET_ROTATE_ALL,
+  payload: data,
+});
+export const setExpandAll = (data) => ({
+  type: actions.SET_EXPAND_ALL,
+  payload: data,
+});
+export const rotateNode = (self, path) => ({
+  type: actions.ROTATE_NODE,
+  payload: { self, path },
+});
+export const rotateMultiNode = (selectedIDArray, path) => ({
+  type: actions.ROTATE_MULTI_NODE,
+  payload: { selectedIDArray, path },
+});
+export const expandNode = (self) => ({
+  type: actions.EXPAND_NODE,
+  payload: { self },
+});
+export const changeNodeName = (self, editedName) => ({
+  type: actions.CHANGE_NODE_NAME,
+  payload: { self, editedName },
+});
+export const setNodeEnable = (self, checked) => ({
+  type: actions.SET_NODE_ENABLE,
+  payload: { self, checked },
+});
+export const setMultipleNodeEnable = (selectedIDArray) => ({
+  type: actions.SET_NODE_ENABLE_MULTIPLE,
+  payload: { selectedIDArray },
+});
+export const setOutgoersEnable = (outgouersIdArray, enable) => ({
+  type: actions.SET_OUTGOERS_ENABLE,
+  payload: { outgouersIdArray, enable },
+});
+export const importElements = (data) => ({
+  type: actions.IMPORT_ELEMENTS,
+  payload: data,
+});
+export const changeEdgeType = (data) => ({
+  type: actions.CHANGE_EDGE_TYPE,
+  payload: data,
+});
+export const setGroupSingle = (self,group) => ({
+  type: actions.SET_GROUP_SINGLE,
+  payload:{self,group}
+});
+export const setGroupMultiple = (selectedIDArray,group) => ({
+  type: actions.SET_GROUP_MULTIPLE,
+  payload:{selectedIDArray,group}
+});
+export const selectNodes = (selectedIDArray) => ({
+  type: actions.SELECT_NODES,
+  payload:selectedIDArray
+});
+export const setAllNodesDeselect = () => ({
+  type: actions.SET_ALL_NODES_DESELECT
+});
+export const deleteGroupOfElement = (group) => ({
+  type: actions.DELETE_GROUP_OF_ELEMENT,
+  payload: group._id,
+});
+export const updateGroupOfElement = (editedGroup) => ({
+  type: actions.UPDATE_GROUP_OF_ELEMENT,
+  payload: editedGroup,
+});
+export const updateNodeHandles = (name, value, self) => ({
+  type: actions.UPDATE_NODE_HANDLES,
+  payload: { name, value, self },
+});

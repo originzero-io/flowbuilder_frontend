@@ -1,4 +1,5 @@
 import * as actions from "../constants/projectContants";
+import { createProjectService, deleteProjectService, getProjectsByWorkspaceService, updateProjectService } from "../../services/projectService";
 
 const initialState = {
   activeProject: "",
@@ -6,7 +7,7 @@ const initialState = {
 }
 const projectReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case actions.LOAD_PROJECTS:
+    case actions.GET_PROJECTS:
       return { ...state, projects: payload }
     case actions.CREATE_PROJECT:
       return { ...state, projects: [...state.projects, payload] };
@@ -28,3 +29,39 @@ const projectReducer = (state = initialState, { type, payload }) => {
   }
 };
 export default projectReducer;
+
+export const setActiveProject = (params) => {
+  return {
+    type: actions.SET_ACTIVE_PROJECT,
+    payload: params,
+  };
+};
+export const loadProjects = (teams) => async dispatch => {
+  const projects = await getProjectsByWorkspaceService(teams);
+  dispatch( {
+    type: actions.GET_PROJECTS,
+    payload: projects,
+  });
+};
+export const createProject = (projectInfo) => async dispatch => {
+  const { project } = await createProjectService(projectInfo);
+  dispatch({
+    type: actions.CREATE_PROJECT,
+    payload: project,
+  });
+};
+export const updateProject = (currentProject,projectInfo) => async dispatch => {
+  const { project } = await updateProjectService(currentProject, projectInfo);
+  console.log("UPDATE-DATA", project);
+  dispatch({
+    type: actions.UPDATE_PROJECT,
+    payload: project,
+  });
+};
+export const deleteProject = (project) => async dispatch => {
+  await deleteProjectService(project._id);
+  dispatch({
+    type: actions.DELETE_PROJECT,
+    payload: project._id,
+  })
+};

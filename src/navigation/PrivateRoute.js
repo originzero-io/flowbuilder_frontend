@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setAuthorizationToken } from "../app-global/helpers/httpHelpers";
-import { loginSuccess } from "../store/actions/authActions";
+import { loginSuccess } from "../store/reducers/authReducer";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isAuthenticated } = useSelector((state) => state.auth);

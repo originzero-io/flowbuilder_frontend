@@ -4,7 +4,7 @@ import { ReactFlowProvider } from "react-flow-renderer";
 import FlowEditor from "../components/FlowEditor";
 import { FlowWrapper } from "../components/style-components/AppWrapper";
 import PropTypes from "prop-types";
-import { getGroups } from "../store/actions/groupActions";
+import { getGroups } from "../store/reducers/flow/flowGroupsReducer";
 import { useParams } from "react-router-dom";
 import FlowTabs from "../components/global/FlowTabs";
 const FlowPage = () => {

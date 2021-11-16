@@ -3,11 +3,9 @@ import styled from "styled-components";
 import { SubmitIcon } from "../../../../global/icons";
 import { Submit } from "../../../Menu/GroupBar/style";
 import { useSelector, useDispatch } from "react-redux";
-//import { isNode } from "react-flow-renderer";
 import {
   changeNodeName,
-  //setElements,
-} from "../../../../../store/actions/elementActions";
+} from "../../../../../store/reducers/flow/flowElementsReducer";
 import PropTypes from "prop-types"
 const Form = styled.form`
   position: relative;

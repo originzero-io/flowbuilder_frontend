@@ -1,7 +1,5 @@
-export const GET_GROUPS = "GET_GROUPS";
-export const ADD_GROUP = "ADD_GROUP";
-export const UPDATE_GROUP = "UPDATE_GROUP";
-export const DELETE_GROUP = "DELETE_GROUP";
-export const ADD_NODE_TO_GROUP_SINGLE = "ADD_NODE_TO_SINGLE";
-export const ADD_NODE_TO_GROUP_MULTIPLE = "ADD_NODE_TO_GROUP_MULTIPLE";
-export const DELETE_NODE_CURRENT_GROUP = "DELETE_NODE_CURRENT_GROUP";
+const name="groups"
+export const GET_GROUPS = `${name}/getGroups`;
+export const CREATE_GROUP = `${name}/createGroup`;
+export const UPDATE_GROUP = `${name}/updateGroup`;
+export const DELETE_GROUP = `${name}/deleteGroup`;

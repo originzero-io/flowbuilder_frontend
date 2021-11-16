@@ -1,5 +1,7 @@
-export const GET_WORKSPACES = "GET_WORKSPACES";
-export const CREATE_WORKSPACE = "CREATE_WORKSPACE";
-export const EDIT_WORKSPACE = "EDIT_WORKSPACE";
-export const DELETE_WORKSPACE = "DELETE_WORKSPACE";
-export const SET_ACTIVE_WORKSPACE = "SET_ACTIVE_WORKSPACE";
+const name = "workspaces";
+
+export const GET_WORKSPACES = `${name}/getWorkspaces`;
+export const CREATE_WORKSPACE = `${name}/createWorkspace`;
+export const EDIT_WORKSPACE = `${name}/editWorkspace`;
+export const DELETE_WORKSPACE = `${name}/deleteWorkspace`;
+export const SET_ACTIVE_WORKSPACE = `${name}/setActiveWorkspace`;

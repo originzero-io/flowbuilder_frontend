@@ -1,10 +1,10 @@
 import React, { useEffect,useState } from "react";
 import { VscAdd } from "react-icons/vsc";
 import { useSelector, useDispatch } from "react-redux";
-import { setModal } from "../../../store/actions/componentActions";
-import { getFlowsByWorkspace } from "../../../store/actions/flowActions";
-import { loadProjects } from "../../../store/actions/projectActions";
-import { getWorkspaces,setActiveWorkspace } from "../../../store/actions/workspaceActions";
+import { setModal } from "../../../store/reducers/componentReducer";
+import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
+import { loadProjects } from "../../../store/reducers/projectReducer";
+import { getWorkspaces,setActiveWorkspace } from "../../../store/reducers/workspaceReducer";
 import useDidMountEffect from "../../../utils/useDidMountEffect";
 import AddWorkspaceForm from "./AddWorkspaceForm";
 import { AddWorkSpaceButton, WorkspaceItem, WorkspaceContainer } from "./style";
@@ -40,7 +40,7 @@ const WorkspaceList = () => {
           </WorkspaceItem>
         );
       })}
-      <AddWorkSpaceButton onClick={()=>dispatch(setModal(true,<AddWorkspaceForm/>))}>
+      <AddWorkSpaceButton onClick={()=>dispatch(setModal(<AddWorkspaceForm/>))}>
         <VscAdd style={{ color:"white" }}/>
       </AddWorkSpaceButton>
     </WorkspaceContainer>

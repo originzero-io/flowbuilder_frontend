@@ -1,4 +1,6 @@
 import * as actions from "../constants/workspaceConstants";
+import { createWorkspaceService, deleteWorkspaceService, editWorkspaceService, getWorkspacesService } from "../../services/workspaceService";
+import { setError } from "./errorReducer";
 
 const initialState = {
   activeWorkspace: "",
@@ -28,3 +30,55 @@ const workspaceReducer = (state = initialState, { type, payload }) => {
   }
 };
 export default workspaceReducer;
+
+export const setActiveWorkspace = (params) =>  {
+  return {
+    type: actions.SET_ACTIVE_WORKSPACE,
+    payload: params,
+  };
+};
+export const getWorkspaces = () => async dispatch => {
+  try {
+    const workspaces = await getWorkspacesService();
+    dispatch( {
+      type: actions.GET_WORKSPACES,
+      payload: workspaces,
+    });
+  }
+  catch (error) {
+    dispatch(setError(error));
+  }
+};
+export const createWorkspace = (params) => async dispatch => {
+  try {
+    const { workspace } = await createWorkspaceService(params);
+    dispatch({
+      type: actions.CREATE_WORKSPACE,
+      payload: workspace,
+    });
+  } catch (error) {
+    dispatch(setError(error));
+  }
+};
+export const editWorkspace = (activeWorkspace, newWorkspace) => async dispatch => {
+  try {
+    const { workspace } = await editWorkspaceService(activeWorkspace._id, newWorkspace);
+    dispatch({
+      type: actions.EDIT_WORKSPACE,
+      payload: workspace,
+    });
+  } catch (error) {
+    dispatch(setError(error));
+  }
+};
+export const deleteWorkspace = (workspace) => async dispatch => {
+  try {
+    await deleteWorkspaceService(workspace);
+    dispatch({
+      type: actions.DELETE_WORKSPACE,
+      payload: workspace._id,
+    });
+  } catch (error) {
+    dispatch(setError(error));
+  }
+};

@@ -1,8 +1,8 @@
 import React from "react";
 import ReactModal from "react-modal";
-import { CancelIcon } from "../icons";
+import { CancelIcon } from "./icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "../../../store/actions/componentActions";
+import { setModal } from "../../store/reducers/componentReducer";
 
 const customStyles = {
   content: {
@@ -46,7 +46,7 @@ export default function Modal() {
   }
   return (
     <ReactModal
-      isOpen={modal.active}
+      isOpen={modal ? true : false}
       onRequestClose={closeModal}
       style={customStyles}
       shouldCloseOnEsc={true}
@@ -55,7 +55,7 @@ export default function Modal() {
       <div style={closeButtonWrapperStyle} onClick={closeModal}>
         <CancelIcon width="30px" height="30px" />
       </div>
-      <div style={childrenStyle}>{modal.component}</div>
+      <div style={childrenStyle}>{modal}</div>
     </ReactModal>
   );
 }

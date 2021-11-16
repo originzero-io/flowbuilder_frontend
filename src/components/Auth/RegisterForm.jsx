@@ -5,7 +5,7 @@ import { Form, FormGroup } from "reactstrap";
 import { registerService } from "../../services/authService";
 import { Input, Text, Submit, ErrorMessage } from "./style";
 import { openNotification as notification } from "../../app-global/dom/notification";
-import { setError } from "../../store/actions/errorActions";
+import { setError } from "../../store/reducers/errorReducer";
 import PropTypes from "prop-types";
 
 export default function RegisterForm({ setFormType }) {

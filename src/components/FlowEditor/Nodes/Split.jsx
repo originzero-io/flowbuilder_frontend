@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import useDidMountEffect from "../../../utils/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
 // import { Label } from "./styles";
-// import { setElements } from "../../../store/actions/elementActions";
+// import { setElements } from "../../../store/reducers/flow/flowElementsReducer";
 import NodeIOManager from "./global/NodeIOManager";
 const SplitNode = (self) => {
   const { flowElements } = useSelector((state) => state.activeFlow);
