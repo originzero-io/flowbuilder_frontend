@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { MenuIndex, MenuItem} from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import * as themeColor from "../../../../config/ThemeReference"
-import { Logo } from "../../../Global/icons";
+import { Logo } from "../../../global/icons";
 import { Link,useParams } from "react-router-dom";
-import { mergeFlow, setActiveFlow, setCurrentFlowConfig } from "../../../../store/actions/flowActions";
+import { getFlowsByWorkspace, mergeFlow, setActiveFlow, setCurrentFlowConfig } from "../../../../store/actions/flowActions";
 import { saveFlowService } from "../../../../services/flowService";
 import { saveElements, setElements } from "../../../../store/actions/elementActions";
 import { saveElementsService } from "../../../../services/elementService";
@@ -43,6 +43,7 @@ const Circle = styled.div`
 `;
 const MainMenu = () => {
   const { flowGui,flowConfig } = useSelector((state) => state.activeFlow);
+  const { activeWorkspace } = useSelector((state) => state.workspaces);
   const { theme, reactFlowInstance } = flowGui;
   const { flowId } = useParams();
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ const MainMenu = () => {
     await saveFlowService(flowId, flow);
     await saveElementsService(flowId, elements);
     dispatch(setElements([]));
+    dispatch(getFlowsByWorkspace(activeWorkspace));
   }
   return (
     <>

@@ -5,7 +5,7 @@ import { Box } from "./style";
 import {
   CollapsibleMenu,
   CollapsibleTrigger,
-} from "../../../Global/Collapsible/CollapsibleMenu";
+} from "../../../global/Collapsible/CollapsibleMenu";
 import FlowList from "./FlowList.jsx";
 import { setModal } from "../../../../store/actions/componentActions";
 import AddFlowForm from "./forms/AddFlowForm";

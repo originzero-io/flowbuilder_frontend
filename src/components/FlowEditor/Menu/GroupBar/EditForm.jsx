@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setElements, updateGroupOfElement } from "../../../../store/actions/elementActions";
 import { updateGroup } from "../../../../store/actions/groupActions";
-import { SubmitIcon } from "../../../Global/icons";
+import { SubmitIcon } from "../../../global/icons";
 import { ColorFlag, Submit } from "./style";
 import * as themeColor from "../../../../config/ThemeReference";
 import { isEdge, isNode } from "react-flow-renderer";

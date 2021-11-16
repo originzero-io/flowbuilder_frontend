@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getFlowsByProject } from "../../../store/actions/flowActions";
 import { deleteProject, setActiveProject, } from "../../../store/actions/projectActions";
-import { CollapsibleMenuItem } from "../../Global/Collapsible/CollapsibleMenu";
+import { CollapsibleMenuItem } from "../../global/Collapsible/CollapsibleMenu";
 import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import ReactFlow, {
   addEdge,
   removeElements,
@@ -22,7 +22,7 @@ import { setNodeList } from "../../store/actions/nodeListActions";
 import * as themeColor from "../../config/ThemeReference";
 import { closeAllNodeGroupMenu } from "../../store/actions/flowActions";
 import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "../../app-global/helpers/elementController";
-import KeyboardEvents from "../Global/KeyboardEvents";
+import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
 import CustomEdge from './Edges/CustomEdge'
 import PropTypes from "prop-types"
@@ -74,6 +74,10 @@ export default function FlowEditor({ reactFlowWrapper }) {
     const newElements = removeElements(elementsToRemove, elements);
     dispatch(setElements(newElements));
   };
+  // const onLoadHandle = useCallback((_reactFlowInstance) => {
+  //   dispatch(setReactFlowInstance(_reactFlowInstance));
+  //   adjustScreen(flowGui,_reactFlowInstance);
+  // },[reactFlowInstance]);
   const onLoadHandle = (_reactFlowInstance) => {
     dispatch(setReactFlowInstance(_reactFlowInstance));
     adjustScreen(flowGui,_reactFlowInstance);

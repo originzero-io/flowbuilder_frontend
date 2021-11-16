@@ -8,7 +8,7 @@ import { GroupItem, GroupColor, Label } from "./style";
 import { isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";
-import { NameEditIcon } from "../../../Global/icons";
+import { NameEditIcon } from "../../../global/icons";
 import PropTypes from "prop-types";
 import { useParams } from "react-router";
 const GroupList = ({ theme }) => {

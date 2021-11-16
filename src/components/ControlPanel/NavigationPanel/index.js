@@ -6,7 +6,7 @@ import {
   CollapsibleMenu,
   CollapsibleMenuItem,
   CollapsibleTrigger,
-} from "../../Global/Collapsible/CollapsibleMenu";
+} from "../../global/Collapsible/CollapsibleMenu";
 import NavMenuItem from "./NavMenuItem";
 import ProjectList from "./ProjectList.jsx";
 import { AiOutlineProject } from "react-icons/ai";

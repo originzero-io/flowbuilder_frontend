@@ -18,8 +18,8 @@ import {
   setWorkspaceEdgeType,
 } from "../../../../store/actions/flowActions";
 import { BiBrain } from "react-icons/bi";
-import SwitchButton from "../../../Global/Button/SwitchButton";
-import FileInputWrapper from "../../../Global/FileInputWrapper";
+import SwitchButton from "../../../global/Button/SwitchButton";
+import FileInputWrapper from "../../../global/FileInputWrapper";
 import { VerticalDivider } from "../../../style-components/Divider";
 import {
   DropDownItem,

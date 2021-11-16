@@ -6,7 +6,7 @@ import { FlowWrapper } from "../components/style-components/AppWrapper";
 import PropTypes from "prop-types";
 import { getGroups } from "../store/actions/groupActions";
 import { useParams } from "react-router-dom";
-import FlowTabs from "../components/Global/FlowTabs";
+import FlowTabs from "../components/global/FlowTabs";
 const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowId } = useParams();

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import Card from "../../../Global/Card/Card";
+import Card from "../../../global/Card/Card";
 import { setCurrentFlowConfig, setCurrentFlowGui } from "../../../../store/actions/flowActions";
 import { getElementsByFlow } from "../../../../store/actions/elementActions";
 
@@ -13,6 +13,7 @@ const FlowList = ({ flows }) => {
   const openPageHandler = async(flow) => {
     dispatch(getElementsByFlow(flow));
     dispatch(setCurrentFlowConfig(flow.config));
+    console.log("FLOW.GUI",flow.gui)
     dispatch(setCurrentFlowGui(flow.gui));
     history.push(`/flow/${flow._id}`);
   };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import RotateButton from "../../../../Global/Button/RotateButton";
-import SwitchButton from "../../../../Global/Button/SwitchButton";
-import { NameEditIcon } from "../../../../Global/icons";
+import RotateButton from "../../../../global/Button/RotateButton";
+import SwitchButton from "../../../../global/Button/SwitchButton";
+import { NameEditIcon } from "../../../../global/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { setNodeEnable, setOutgoersEnable } from "../../../../../store/actions/elementActions";
 import { getIncomers, getOutgoers } from "react-flow-renderer";

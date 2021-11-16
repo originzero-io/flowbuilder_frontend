@@ -10,7 +10,7 @@ import NotFound from './navigation/NotFound';
 import DashboardPage from "./pages/DashboardPage";
 import AuthPage from "./pages/AuthPage";
 import * as routes from './navigation/RouterConfig';
-import Modal from "./components/Global/Modal";
+import Modal from "./components/global/Modal";
 const App = () => {
   return (
       <AppWrapper>

@@ -2,7 +2,7 @@ import React from "react";
 import { Background, MiniMap } from "react-flow-renderer";
 import AppMenu from "./Menu";
 import PropTypes from "prop-types"
-import AppTooltips from "../Global/AppTooltips";
+import AppTooltips from "../global/AppTooltips";
 const FlowComponents = ({ theme, miniMapDisplay }) => {
   return (
     <>

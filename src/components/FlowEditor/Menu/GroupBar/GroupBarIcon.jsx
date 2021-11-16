@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import { Container } from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { setGroupBarDisplay } from "../../../../store/actions/flowActions";
-import { GroupIcon } from "../../../Global/icons";
+import { GroupIcon } from "../../../global/icons";
 import { getGroupsService } from "../../../../services/groupService";
 import { getGroups } from "../../../../store/actions/groupActions";
 import { useParams } from "react-router";
