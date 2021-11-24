@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import { saveToDb } from "../../../../app-global/db";
 import { HorizontalDivider } from "../../../style-components/Divider";
 import { MenuItem } from "./style";
 import * as tooltip from "../../../../config/TooltipReference";
@@ -27,8 +26,10 @@ import {
   setRotateAllPath,
 } from "../../../../store/reducers/flow/flowGuiReducer";
 import * as themeColor from "../../../../config/ThemeReference";
-import { useZoomPanHelper, useStoreActions, isNode } from "react-flow-renderer";
+import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
+import { useParams } from "react-router";
+import { elementNamespace } from "../../../../App";
 const Menu = styled.div`
   position: absolute;
   display: flex;
@@ -53,8 +54,11 @@ export default function ControlMenu() {
   const setInteractive = useStoreActions((actions) => actions.setInteractive);
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
+  const { flowId } = useParams();
   const saveFlow = useCallback(() => {
-    saveToDb(flowConfig,flowGui);
+    //saveToDb(flowConfig,flowGui);
+    const { position, zoom, elements } = reactFlowInstance.toObject();
+    elementNamespace.emit('elements:save', { flow_id: flowId, elements })
   }, [reactFlowInstance]);
 
   const deleteAllNodes = () => {

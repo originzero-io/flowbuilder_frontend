@@ -368,11 +368,12 @@ export const setElements = (data) => ({
   type: actions.SET_ELEMENTS,
   payload: data,
 });
-export const saveElements = (flow_id,elements)=> async dispatch => {
-  const { element } = await saveElementsService(flow_id, elements);
+export const saveElements = (elements,elementsx)=> async dispatch => {
+  //const { element } = await saveElementsService(flow_id, elements);
+  console.log('elements:', elements);
   dispatch({
     type: actions.SET_ELEMENTS,
-    payload: element
+    payload: elements.data
   })
 };
 export const getElementsByFlow = (flow)=> async dispatch => {

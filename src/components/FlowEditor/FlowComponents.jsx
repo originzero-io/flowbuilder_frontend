@@ -3,6 +3,7 @@ import { Background, MiniMap } from "react-flow-renderer";
 import AppMenu from "./Menu";
 import PropTypes from "prop-types"
 import AppTooltips from "../global/AppTooltips";
+import KeyboardEvents from "../global/KeyboardEvents";
 const FlowComponents = ({ theme, miniMapDisplay }) => {
   return (
     <>
@@ -22,6 +23,7 @@ const FlowComponents = ({ theme, miniMapDisplay }) => {
           borderRadius: "4px",
         }}
       />
+      <KeyboardEvents/>
       <AppTooltips/>
     </>
   );

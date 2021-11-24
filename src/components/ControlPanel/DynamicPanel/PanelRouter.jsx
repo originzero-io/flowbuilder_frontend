@@ -11,8 +11,7 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background: #f5f5f6;
-  color: black;
+  background: #0E1217;
   overflow-y: auto;
   overflow-x: hidden;
 `;

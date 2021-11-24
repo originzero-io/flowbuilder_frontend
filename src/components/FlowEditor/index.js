@@ -22,7 +22,6 @@ import { setNodeList } from "../../store/reducers/nodeListReducer";
 import * as themeColor from "../../config/ThemeReference";
 import { closeAllNodeGroupMenu } from "../../store/reducers/flow/flowGuiReducer";
 import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "../../app-global/helpers/elementController";
-import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
 import CustomEdge from './Edges/CustomEdge'
 import PropTypes from "prop-types"
@@ -36,6 +35,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const dispatch = useDispatch();
   const store = useStore();
   const onConnectHandle = (params) => {
+    console.log("params:", params);
     if (params.source === params.target) {
       notification("ERROR!", "Nodes cannot connect itself.", "error");
     } else {
@@ -246,7 +246,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
         onSelectionChange={onSelectionChangeHandle}
       >
         <FlowComponents theme={theme} miniMapDisplay={miniMapDisplay}/>
-        <KeyboardEvents/>
       </ReactFlow>
     </>
   );

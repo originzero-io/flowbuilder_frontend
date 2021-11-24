@@ -7,14 +7,16 @@ import Card from "../../../global/Card/Card";
 import { setCurrentFlowGui } from "../../../../store/reducers/flow/flowGuiReducer";
 import { setCurrentFlowConfig } from "../../../../store/reducers/flow/flowConfigReducer";
 import { getElementsByFlow } from "../../../../store/reducers/flow/flowElementsReducer";
+import { elementNamespace,mainNamespace } from "../../../../App";
 
 const FlowList = ({ flows }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const openPageHandler = async(flow) => {
-    dispatch(getElementsByFlow(flow));
+    //dispatch(getElementsByFlow(flow));
+    elementNamespace.emit('elements:getElements',{flow_id:flow._id});
+    mainNamespace.emit('main:messageFromClient',"Hello main. I am FlowList component");
     dispatch(setCurrentFlowConfig(flow.config));
-    console.log("FLOW.GUI",flow.gui)
     dispatch(setCurrentFlowGui(flow.gui));
     history.push(`/flow/${flow._id}`);
   };

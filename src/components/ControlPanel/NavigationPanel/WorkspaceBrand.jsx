@@ -8,7 +8,7 @@ import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
 import { WorkspaceBrandWrapper } from "./style";
 import PropTypes from "prop-types";
 const WorkspaceBrand = ({ workspace }) => {
-  console.log("TEAM BRAND RENDERED");
+  //console.log("TEAM BRAND RENDERED");
   const dispatch = useDispatch();
   const { activeWorkspace } = useSelector((state) => state.workspaces);
   const deleteWorkspaceHandler = () => {

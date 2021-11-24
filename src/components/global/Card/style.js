@@ -3,15 +3,16 @@ export const Container = styled.div`
   margin: 7px;
   width: 160px;
   height: 150px;
-  border-radius: 4px;
+  border-radius: 6px;
   user-select: none;
-  background-color: white;
+  background-color: #1C1F26;
+  border:1px solid rgba(255,255,255,0.3);
   cursor: pointer;
-  color: black;
+  color: white;
   transition: background-color 0.3s ease-in-out;
   box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
   &:hover {
-    background-color: rgba(46, 204, 113,0.2);
+    background-color: rgba(46, 204, 113,0.4);
     transition: background-color 0.2s ease-in-out;
   }
   display: flex;
@@ -33,7 +34,7 @@ export const CardTitle = styled.div`
   padding: 5px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  color: black;
+  color: white;
 `;
 export const CardAuthor = styled.div`
   display: flex;
@@ -54,7 +55,7 @@ export const CardFooter = styled.div`
 `;
 export const CardMoreButton = styled.div`
   font-size: 20px;
-  color: rgb(22, 139, 63);
+  color: rgb(46, 204, 113);
   position: absolute;
   right: 2px;
   top: 1px;

@@ -55,7 +55,7 @@ const ControlPanelMenu = () => {
   };
 
   const allFlowsHandle = () => {
-    dispatch(getFlowsByWorkspace(activeWorkspace));
+    activeWorkspace && dispatch(getFlowsByWorkspace(activeWorkspace));
   };
 
   return (

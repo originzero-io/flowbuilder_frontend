@@ -12,7 +12,7 @@ import { AddWorkSpaceButton, WorkspaceItem, WorkspaceContainer } from "./style";
 const WorkspaceList = () => {
   const { workspaces,activeWorkspace } = useSelector((state) => state.workspaces);
   const dispatch = useDispatch();
-  console.log("workspace list rendered");
+  //console.log("workspace list rendered");
   useEffect(() => {
     dispatch(getWorkspaces());
   }, []);

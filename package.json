@@ -12,6 +12,7 @@
     "axios": "^0.21.4",
     "bootstrap": "^4.6.1",
     "cogo-toast": "4.2.3",
+    "colors": "^1.4.0",
     "localforage": "1.9.0",
     "lodash": "^4.17.21",
     "react": "17.0.1",

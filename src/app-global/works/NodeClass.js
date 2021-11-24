@@ -15,9 +15,9 @@ export default class Node {
   elements = [];
   nodes = [];
   edges = [];
-  constructor(data) {
+  constructor(message) {
     console.log(
-      `%c ${data}`,
+      `%c ${message}`,
       "background: green; color: white; display: block;"
     );
   }

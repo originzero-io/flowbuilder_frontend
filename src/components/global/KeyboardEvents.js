@@ -36,7 +36,7 @@ const KeyboardEvents = () => {
   }
   const saveFlowEvent = (key, e) => {
     e.preventDefault();
-    saveToDb(reactFlowInstance);
+    //saveToDb(reactFlowInstance);
   }
   const rotateAllNodesEvent = (key, e) => {
     e.preventDefault();
