@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { updateProject } from "../../../store/reducers/projectReducer";
 import { setModal } from "../../../store/reducers/componentReducer";
-const EditProjectForm = () => {
+import { projectNamespace } from "../../../App";
+const EditProjectForm = ({project}) => {
   const { activeProject } = useSelector((state) => state.projects);
   const [projectInfo, setprojectInfo] = useState({
     name: null,
@@ -14,7 +15,7 @@ const EditProjectForm = () => {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    dispatch(updateProject(activeProject,projectInfo));
+    projectNamespace.emit("projects:update", { project, projectInfo });
     dispatch(setModal(false));
   };
   return (

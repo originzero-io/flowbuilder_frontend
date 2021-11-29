@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import { editWorkspace } from "../../../store/reducers/workspaceReducer";
 import { setModal } from "../../../store/reducers/componentReducer";
-export default function EditTeamForm() {
+import { workspaceNamespace } from "../../../App";
+export default function EditWorkspaceForm({ workspace }) {
   const { activeWorkspace } = useSelector((state) => state.workspaces);
   const [workspaceInfo, setworkspaceInfo] = useState({
     name: null,
@@ -14,7 +15,7 @@ export default function EditTeamForm() {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    dispatch(editWorkspace(activeWorkspace,workspaceInfo));
+    workspaceNamespace.emit("workspaces:update", { workspace, workspaceInfo });
     dispatch(setModal(false));
   };
   return (

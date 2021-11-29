@@ -5,6 +5,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { setModal } from "../../../../../store/reducers/componentReducer";
 import { createFlowService } from "../../../../../services/flowService";
 import { setError } from "../../../../../store/reducers/errorReducer";
+import { flowNamespace } from "../../../../../App";
 
 export default function AddFlowForm() {
   const auth = useSelector((state) => state.auth);
@@ -29,7 +30,7 @@ export default function AddFlowForm() {
   const onSubmitHandle = (e) => {
     e.preventDefault();
     const flow = { config: flowInfo, workspace, project };
-    dispatch(createFlow(flow));
+    flowNamespace.emit("flows:create", { flow });
     dispatch(setModal(false));
   };
 

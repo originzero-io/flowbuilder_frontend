@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form } from "reactstrap";
+import { flowNamespace } from "../../../../../App";
 import { setModal } from "../../../../../store/reducers/componentReducer";
-import { moveFlow } from "../../../../../store/reducers/flow/flowReducer";
 
 export default function MoveFlow({ flow }) {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function MoveFlow({ flow }) {
 
   const submitHandle = (e) => {
     e.preventDefault();
-    dispatch(moveFlow(flow,selection));
+    flowNamespace.emit("flows:move", { flow, newProject: selection });
     dispatch(setModal(false));
   };
   return (

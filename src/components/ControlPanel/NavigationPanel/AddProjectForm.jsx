@@ -5,6 +5,7 @@ import { createProjectService } from "../../../services/projectService";
 import { createProject } from "../../../store/reducers/projectReducer";
 import { setError } from "../../../store/reducers/errorReducer";
 import { setModal } from "../../../store/reducers/componentReducer";
+import { projectNamespace } from "../../../App";
 const AddProjectForm = () => {
   const { activeWorkspace } = useSelector((state) => state.workspaces);
   const auth = useSelector((state) => state.auth);
@@ -20,7 +21,7 @@ const AddProjectForm = () => {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    dispatch(createProject(projectInfo));
+    projectNamespace.emit('projects:create', { project: projectInfo });
     dispatch(setModal(false));
   };
   return (

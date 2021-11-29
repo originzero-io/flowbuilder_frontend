@@ -7,22 +7,22 @@ import { BiEdit } from "react-icons/bi";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
 import { WorkspaceBrandWrapper } from "./style";
 import PropTypes from "prop-types";
+import { workspaceNamespace } from "../../../App";
 const WorkspaceBrand = ({ workspace }) => {
   //console.log("TEAM BRAND RENDERED");
   const dispatch = useDispatch();
-  const { activeWorkspace } = useSelector((state) => state.workspaces);
   const deleteWorkspaceHandler = () => {
     if (confirm(`${workspace.name} takımını silmek istiyor musunuz?`)) {
-      dispatch(deleteWorkspace(workspace));
+      workspaceNamespace.emit("workspaces:remove", { workspace });
       dispatch(setActiveWorkspace(""));
     }
   };
   const editWorkspaceHandler = () => {
-    dispatch(setModal( <EditWorkspaceForm />));
+    dispatch(setModal(<EditWorkspaceForm workspace={workspace} />));
   };
   return (
     <WorkspaceBrandWrapper>
-      {activeWorkspace && (
+      {workspace && (
         <>
           <span>{workspace.name}</span>
           <div>

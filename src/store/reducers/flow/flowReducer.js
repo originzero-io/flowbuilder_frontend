@@ -1,5 +1,12 @@
 import * as actions from "../../constants/flowConstants";
-import { createFlowService, deleteFlowService, editFlowConfigService, getFlowsByProjectService, getFlowsByWorkspaceService , moveFlowService } from "../../../services/flowService";
+import {
+  createFlowService,
+  deleteFlowService,
+  editFlowConfigService,
+  getFlowsByProjectService,
+  getFlowsByWorkspaceService,
+  moveFlowService,
+} from "../../../services/flowService";
 
 export const flowReducer = (state = [], { type, payload }) => {
   switch (type) {
@@ -22,53 +29,40 @@ export const flowReducer = (state = [], { type, payload }) => {
 
 export default flowReducer;
 
-export const getFlowsByWorkspace = (workspace) => async dispatch => {
+export const getFlowsByWorkspace = (workspace) => async (dispatch) => {
   const { flows } = await getFlowsByWorkspaceService(workspace);
   if (workspace) {
-    dispatch( {
+    dispatch({
       type: actions.GET_FLOWS,
       payload: flows,
     });
-  }
-  else {
-    dispatch( {
+  } else {
+    dispatch({
       type: actions.GET_FLOWS,
       payload: [],
     });
   }
-}
-export const getFlowsByProject = (project) => async dispatch => {
+};
+export const getFlowsByProject = (project) => async (dispatch) => {
   const { flows } = await getFlowsByProjectService(project);
-  dispatch( {
+  dispatch({
     type: actions.GET_FLOWS,
     payload: flows,
   });
-}
-export const createFlow = (params) => async dispatch => {
-  const { flow } = await createFlowService(params);
-  dispatch({
-    type: actions.CREATE_FLOW,
-    payload: flow,
-  })
 };
-export const editFlow = (currentConfig,newConfig) => async dispatch => {
-  const { flow } = await editFlowConfigService(currentConfig._id, newConfig);
-  dispatch({
-    type: actions.UPDATE_FLOW,
-    payload: flow,
-  })
-};
-export const moveFlow = (currentConfig,newConfig) => async dispatch => {
-  const { flow } = await moveFlowService(currentConfig._id, newConfig);
-  dispatch({
-    type: actions.UPDATE_FLOW,
-    payload: flow,
-  })
-};
-export const deleteFlow = (flow) => async dispatch => {
-  await deleteFlowService(flow._id);
-  dispatch({
-    type: actions.DELETE_FLOW,
-    payload: flow,
-  })
-};
+export const createFlow = (flow) => ({
+  type: actions.CREATE_FLOW,
+  payload: flow,
+});
+export const editFlow = (newFlow) => ({
+  type: actions.UPDATE_FLOW,
+  payload: newFlow,
+});
+export const moveFlow = (flow) => ({
+  type: actions.UPDATE_FLOW,
+  payload: flow,
+});
+export const deleteFlow = (flow) => ({
+  type: actions.DELETE_FLOW,
+  payload: flow,
+});

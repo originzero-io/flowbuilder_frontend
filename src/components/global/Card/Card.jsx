@@ -13,14 +13,15 @@ import { VscTrash } from "react-icons/vsc";
 import DetailMenu from "./DetailMenu";
 import { deleteFlow } from "../../../store/reducers/flow/flowReducer";
 import { Badge } from "reactstrap";
-
+import { flowNamespace } from "../../../App";
 const Card = ({ data }) => {
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
   const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
-      dispatch(deleteFlow(flow))
+      flowNamespace.emit('flows:remove',{flow})
+      //dispatch(deleteFlow(flow))
     }
   };
   return (

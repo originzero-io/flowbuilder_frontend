@@ -25,6 +25,7 @@ const FlowPage = () => {
       window.removeEventListener("beforeunload", onUnload);
     }
   }, []);
+
   const rfWrapper = useRef(null);
   return (
     <ReactFlowProvider>

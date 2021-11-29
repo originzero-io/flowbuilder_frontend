@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form, Label, FormGroup } from "reactstrap";
+import { flowNamespace } from "../../../../../App";
 import { setModal } from "../../../../../store/reducers/componentReducer";
-import { editFlow } from "../../../../../store/reducers/flow/flowReducer";
 
 export default function EditFlow({ flow }) {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ export default function EditFlow({ flow }) {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    dispatch(editFlow(flow,flowConfig));
+    flowNamespace.emit('flows:update',{flow,flowConfig})
     dispatch(setModal(false));
   };
   return (

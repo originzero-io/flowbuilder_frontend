@@ -11,45 +11,81 @@ import DashboardPage from "./pages/DashboardPage";
 import AuthPage from "./pages/AuthPage";
 import * as routes from "./navigation/RouterConfig";
 import Modal from "./components/global/Modal.jsx";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   saveElements,
   setElements,
 } from "./store/reducers/flow/flowElementsReducer";
 import createSocket from "./services/socketApi";
+import {
+  createFlow,
+  deleteFlow,
+  editFlow,
+  moveFlow,
+} from "./store/reducers/flow/flowReducer";
+import { createProject, deleteProject, updateProject } from "./store/reducers/projectReducer";
+import { createWorkspace, deleteWorkspace, editWorkspace } from "./store/reducers/workspaceReducer";
 export const mainNamespace = createSocket("main");
-export const elementNamespace = createSocket("elements", {
-  query: { data: 'This is for soap' },
-  auth: { token: 123 }
+export const elementNamespace = createSocket("elements");
+export const flowNamespace = createSocket("flows", {
+  auth: { token: 123 },
 });
-// const socketTest = io.connect('https://anaks-ws-server.herokuapp.com',{
-//   transports: ["websocket"],
-//   //reconnectionAttempts: 3,
-// });
+export const projectNamespace = createSocket("projects");
+export const workspaceNamespace = createSocket("workspaces");
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     console.log("Main", mainNamespace);
     console.log("Element", elementNamespace);
+    console.log("Flow", flowNamespace);
+    console.log("Project", projectNamespace);
+    console.log("Workspace", workspaceNamespace);
+
+    mainNamespace.emit("main:messageFromClient", "Hi there!!!", (data) => {
+      console.log("mainnamespaceten gelen:", data);
+    });
     elementNamespace.on("elements:save", (data) => {
-      console.log("SAVE-data:", data);
       dispatch(saveElements(data));
     });
     elementNamespace.on("elements:getElements", (data) => {
-      console.log("GET-ELEMENTS-data:", data.data);
       dispatch(setElements(data.data));
     });
     elementNamespace.emit("elements:test", "message", (data) => {
       console.log("testten gelen:", data);
     });
-    mainNamespace.emit("main:messageFromClient", "Hi there!!!", (data) => {
-      console.log("mainnamespaceten gelen:", data);
+
+    flowNamespace.on("flows:remove", (data) => {
+      dispatch(deleteFlow(data.flow));
+    });
+    flowNamespace.on("flows:update", (data) => {
+      dispatch(editFlow(data.flow));
+    });
+    flowNamespace.on("flows:move", (data) => {
+      dispatch(moveFlow(data.flow));
+    });
+    flowNamespace.on("flows:create", (data) => {
+      dispatch(createFlow(data.flow));
     });
 
-    
-    // socketTest.on('helloMessage', console.log);
-    // socketTest.emit('device_request', { data: 'Hello Fatih!' });
-    // socketTest.on('server_respond', console.log);
+    projectNamespace.on("projects:create", (data) => {
+      dispatch(createProject(data.project));
+    });
+    projectNamespace.on("projects:update", (data) => {
+      dispatch(updateProject(data.project));
+    });
+    projectNamespace.on("projects:remove", (data) => {
+      dispatch(deleteProject(data.project));
+    });
+
+    workspaceNamespace.on("workspaces:create", (data) => {
+      dispatch(createWorkspace(data.workspace));
+    });
+    workspaceNamespace.on("workspaces:update", (data) => {
+      dispatch(editWorkspace(data.workspace));
+    });
+    workspaceNamespace.on("workspaces:remove", (data) => {
+      dispatch(deleteWorkspace(data.workspace));
+    });
   }, []);
   return (
     <AppWrapper>
