@@ -9,6 +9,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "antd": "^4.17.2",
     "axios": "^0.21.4",
     "bootstrap": "^4.6.1",
     "cogo-toast": "4.2.3",

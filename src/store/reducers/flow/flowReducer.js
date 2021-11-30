@@ -1,12 +1,8 @@
-import * as actions from "../../constants/flowConstants";
 import {
-  createFlowService,
-  deleteFlowService,
-  editFlowConfigService,
   getFlowsByProjectService,
-  getFlowsByWorkspaceService,
-  moveFlowService,
+  getFlowsByWorkspaceService
 } from "../../../services/flowService";
+import * as actions from "../../constants/flowConstants";
 
 export const flowReducer = (state = [], { type, payload }) => {
   switch (type) {

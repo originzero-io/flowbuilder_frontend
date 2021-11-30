@@ -40,6 +40,6 @@ const WorkspaceBrand = ({ workspace }) => {
 };
 
 WorkspaceBrand.propTypes = {
-  team: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  workspace: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 };
 export default React.memo(WorkspaceBrand);

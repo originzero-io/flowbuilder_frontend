@@ -11,6 +11,7 @@ import { setModal } from "../../../../store/reducers/componentReducer";
 import AddFlowForm from "./forms/AddFlowForm";
 import AddDashboardForm from "./forms/AddDashboardForm";
 import { VscAdd } from "react-icons/vsc";
+import { DynamicPanelContainer } from "../style";
 export default function ProjectsPanel() {
   const dispatch = useDispatch();
   const flows = useSelector((state) => state.flows);
@@ -27,7 +28,7 @@ export default function ProjectsPanel() {
   };
   //console.log("PROJECT-FLOW PANEL RENDERED");
   return (
-    <>
+    <DynamicPanelContainer>
       <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
         <FlowsContainer>
           <FlowList flows={flows} />
@@ -44,6 +45,6 @@ export default function ProjectsPanel() {
           </Box>
         </DashboardsContainer>
       </CollapsibleMenu>
-    </>
+    </DynamicPanelContainer>
   );
 }

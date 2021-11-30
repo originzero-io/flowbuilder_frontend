@@ -1,8 +1,9 @@
 import React from 'react'
+import { DynamicPanelContainer } from '../style'
 export default function LearnPanel() {
     return (
-        <div>
+        <DynamicPanelContainer>
            Learn 
-        </div>
+        </DynamicPanelContainer>
     )
 }

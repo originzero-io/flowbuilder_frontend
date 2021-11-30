@@ -2,10 +2,9 @@ import styled from "styled-components";
 import * as themeColor from "../../config/ThemeReference";
 export const DropdownWrapper = styled.div`
   position: relative;
-  font-size:14px;
+  font-size:16px;
   z-index:6;
 `;
-
 export const DropdownList = styled.ul`
   margin-top: ${(props) => (props.align === "right" ? "30px" : "8px")};
   position: absolute;

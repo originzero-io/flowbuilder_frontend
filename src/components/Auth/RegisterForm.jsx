@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
-import { registerService } from "../../services/authService";
+import { registerService } from "../../services/userService";
 import { Input, Text, Submit, ErrorMessage } from "./style";
 import { openNotification as notification } from "../../app-global/dom/notification";
 import { setError } from "../../store/reducers/errorReducer";

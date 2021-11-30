@@ -19,7 +19,7 @@ class Socket {
       console.log(`${namespace} namespaceine bağlandı.`)
     );
     this.socket.on(`${namespace}:welcome`, (data) => {
-      openNotification("", data.message, "success");
+      //openNotification("", data.message, "success");
     });
     this.socket.on('connect_error', (err) => {
       openNotification("", err.message, "error")

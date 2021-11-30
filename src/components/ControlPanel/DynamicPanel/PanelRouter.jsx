@@ -7,6 +7,7 @@ import DevicesPanel from "./DevicesPanel";
 import TopMenu from "./TopMenu";
 import styled from "styled-components";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
+import UserPanel from "./UserPanel";
 
 const Container = styled.div`
   width: 100%;
@@ -24,7 +25,6 @@ export default function PanelRouter() {
   const { url } = useRouteMatch();
   return (
     <Container>
-      <TopMenu />
       <PanelComponentWrapper>
         <Switch>
           <Route exact path={`${url}/all`} component={ProjectsPanel}/>
@@ -33,6 +33,7 @@ export default function PanelRouter() {
           <Route exact path={`${url}/notes`} component={NotesPanel}/>
           <Route exact path={`${url}/devices`} component={DevicesPanel}/>
           <Route exact path={`${url}/settings`} component={SettingsPanel}/>
+          <Route exact path={`${url}/users`} component={UserPanel}/>
         </Switch>
       </PanelComponentWrapper>
     </Container>

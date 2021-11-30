@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Container, NavMenu } from "./style";
+import { Container, Footer, NavMenu } from "./style";
 import AddProjectForm from "./AddProjectForm";
 import {
   CollapsibleMenu,
@@ -15,43 +15,37 @@ import { MdDevicesOther } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
 import { BiBrain } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
+import { RiTeamLine } from "react-icons/ri";
 import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
 import { setModal } from "../../../store/reducers/componentReducer";
-import { Link,useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import WorkspaceBrand from "./WorkspaceBrand";
+import { Badge } from "reactstrap";
 
 const ControlPanelMenu = () => {
   const dispatch = useDispatch();
   const { url } = useRouteMatch();
   const { activeWorkspace } = useSelector((state) => state.workspaces);
+  const { username } = useSelector((state) => state.auth);
   const showModalHandle = (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (activeWorkspace) {
-      dispatch(setModal( <AddProjectForm />));
-    }
-    else alert("Firstly, create a workspace.");
+      dispatch(setModal(<AddProjectForm />));
+    } else alert("Firstly, create a workspace.");
   };
 
   const projectItem = () => {
     return (
-      <CollapsibleTrigger
-        label="Projects"
-        icon={<AiOutlineProject />}
-      >
-        <div onClick={(e)=>showModalHandle(e)}>
+      <CollapsibleTrigger label="Projects" icon={<AiOutlineProject />}>
+        <div onClick={(e) => showModalHandle(e)}>
           <BsPlusCircle />
         </div>
       </CollapsibleTrigger>
     );
   };
   const settingsItem = () => {
-    return (
-      <CollapsibleTrigger
-        label="Settings"
-        icon={<FiSettings />}
-      />
-    );
+    return <CollapsibleTrigger label="Settings" icon={<FiSettings />} />;
   };
 
   const allFlowsHandle = () => {
@@ -60,8 +54,8 @@ const ControlPanelMenu = () => {
 
   return (
     <Container>
-      <WorkspaceBrand workspace={activeWorkspace}/>
       <NavMenu>
+        <WorkspaceBrand workspace={activeWorkspace} />
         <Link to={`${url}/all`}>
           <NavMenuItem
             label="All Flows"
@@ -74,35 +68,37 @@ const ControlPanelMenu = () => {
             <ProjectList />
           </CollapsibleMenu>
         </Link>
+        <Link to={`${url}/team`}>
+          <NavMenuItem label="Team" icon={<RiTeamLine />} />
+        </Link>
         <Link to={`${url}/learn`}>
-          <NavMenuItem
-            label="Learn"
-            icon={<BiBrain />}
-          />
+          <NavMenuItem label="Learn" icon={<BiBrain />} />
         </Link>
         <Link to={`${url}/notes`}>
-          <NavMenuItem
-            label="Notes"
-            icon={<CgNotes />}
-          />
+          <NavMenuItem label="Notes" icon={<CgNotes />} />
         </Link>
         <Link to={`${url}/devices`}>
-          <NavMenuItem
-            label="Devices"
-            icon={<MdDevicesOther />}
-          />
+          <NavMenuItem label="Devices" icon={<MdDevicesOther />} />
         </Link>
         <Link to={`${url}/settings`}>
           <CollapsibleMenu trigger={settingsItem()}>
-            <CollapsibleMenuItem>
-              Account settings
-            </CollapsibleMenuItem>
-            <CollapsibleMenuItem>
-              Preferences
-            </CollapsibleMenuItem>
+            <CollapsibleMenuItem>Account settings</CollapsibleMenuItem>
+            <CollapsibleMenuItem>Preferences</CollapsibleMenuItem>
           </CollapsibleMenu>
         </Link>
       </NavMenu>
+      <Footer>
+        Logged in as:{" "}
+        <Badge
+          color="success"
+          style={{
+            fontSize: "14px",
+            color: "black",
+          }}
+        >
+          {username}
+        </Badge>
+      </Footer>
     </Container>
   );
 };

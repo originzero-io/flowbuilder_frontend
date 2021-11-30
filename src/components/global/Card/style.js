@@ -5,8 +5,8 @@ export const Container = styled.div`
   height: 150px;
   border-radius: 6px;
   user-select: none;
-  background-color: #1C1F26;
-  border:1px solid rgba(255,255,255,0.3);
+  background-color: #212529;
+  border:1px solid rgba(75,75,75,0.4);
   cursor: pointer;
   color: white;
   transition: background-color 0.3s ease-in-out;

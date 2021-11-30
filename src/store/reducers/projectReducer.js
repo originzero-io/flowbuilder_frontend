@@ -1,10 +1,7 @@
-import * as actions from "../constants/projectContants";
 import {
-  createProjectService,
-  deleteProjectService,
-  getProjectsByWorkspaceService,
-  updateProjectService,
+  getProjectsByWorkspaceService
 } from "../../services/projectService";
+import * as actions from "../constants/projectContants";
 
 const initialState = {
   activeProject: "",

@@ -8,10 +8,6 @@ export const loginService = async (user) => {
     setAuthorizationToken(token);
     return response.data;
 }
-export const registerService = async (user) => {
-    const response = await axios.post("/auth/register", user);
-    return response.data;
-}
 
 export const logoutService = () => {
     localStorage.removeItem("token");

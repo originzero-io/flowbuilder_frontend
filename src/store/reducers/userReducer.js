@@ -1,0 +1,56 @@
+import {
+  deleteUserService,
+  editUserService,
+  getAllUsersService,
+  registerService,
+} from "../../services/userService";
+import * as actions from "../constants/userContants";
+
+const userReducer = (state = [], { type, payload }) => {
+  switch (type) {
+    case actions.GET_ALL_USERS:
+      return payload;
+    case actions.CREATE_USER:
+      return [...state, payload];
+    case actions.EDIT_USER:
+      return state.map((state) => {
+        if (state._id === payload._id) {
+          return payload;
+        } else return state;
+      });
+    case actions.DELETE_USER:
+      return state.filter((state) => state._id !== payload._id);
+    default:
+      return state;
+  }
+};
+export default userReducer;
+
+export const getAllUsers = () => async (dispatch) => {
+  const { users } = await getAllUsersService();
+  dispatch({
+    type: actions.GET_ALL_USERS,
+    payload: users,
+  });
+};
+export const registerUser = (userInfo) => async (dispatch) => {
+  const { user } = await registerService(userInfo);
+  dispatch({
+    type: actions.CREATE_USER,
+    payload: user,
+  });
+};
+export const editUser = (userInfo) => async (dispatch) => {
+  const { user } = await editUserService(userInfo);
+  dispatch({
+    type: actions.EDIT_USER,
+    payload: user,
+  });
+};
+export const deleteUser = (user) => async (dispatch) => {
+  await deleteUserService(user);
+  dispatch({
+    type: actions.DELETE_USER,
+    payload: user,
+  });
+};

@@ -1,10 +1,11 @@
 import React from 'react'
+import { DynamicPanelContainer } from '../style'
 
 export default function DevicesPanel() {
     return (
-        <div>
+        <DynamicPanelContainer>
            Devices 
-        </div>
+        </DynamicPanelContainer>
     )
 }
 

@@ -10,11 +10,13 @@ import nodeListReducer from "./nodeListReducer";
 import controlPanelReducer from "./controlPanelReducer";
 import { modalReducer } from "./componentReducer";
 import authReducer from "./authReducer";
+import userReducer from "./userReducer";
 import workspaceReducer from "./workspaceReducer";
 import projectReducer from "./projectReducer";
 import errorReducer from "./errorReducer";
 const reducers = combineReducers({
   auth:authReducer,
+  users:userReducer,
   activeFlow: combineReducers({
     flowConfig: flowConfigReducer,
     flowGui: flowGuiReducer,
