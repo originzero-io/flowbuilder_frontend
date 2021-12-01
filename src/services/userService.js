@@ -8,7 +8,7 @@ export const getMeService = async () => {
   return response.data;
 };
 export const registerService = async (user) => {
-    const response = await axios.post("/users/register", user);
+    const response = await axios.post("/auth/register", user);
     return response.data;
 }
 export const editUserService = async (user) => {

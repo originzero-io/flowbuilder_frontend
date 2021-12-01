@@ -13,21 +13,39 @@ export default function AddUserForm() {
     password: "",
     email: "",
     role: "user",
+    avatar: "",
   });
 
   const onChangeHandler = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
   const onSubmitHandle = (e) => {
+    
+    var formData = new FormData();
+    formData.append("name", userInfo.name);
+    formData.append("username", userInfo.username);
+    formData.append("password", userInfo.password);
+    formData.append("email", userInfo.email);
+    formData.append("role", userInfo.role);
+    formData.append("avatar", userInfo.avatar);
+    dispatch(registerUser(formData));
     e.preventDefault();
-    dispatch(registerUser(userInfo));
-    dispatch(setModal(false));
-    openNotification("","Register successful!", "success");
+    //dispatch(setModal(false));
+    //openNotification("", "Register successful!", "success");
+  };
+  const profilePictureHandle = (e) => {
+    setUserInfo({ ...userInfo, avatar: e.target.files[0] });
   };
   return (
-    <Form onSubmit={onSubmitHandle}>
+    <form onSubmit={onSubmitHandle} encType="multipart/form-data">
       <FormGroup>
         <Label>Name</Label>
+        <Input
+          type="file"
+          accept=".png, .jpg, .jpeg"
+          name="avatar"
+          onChange={profilePictureHandle}
+        />
         <Input
           name="name"
           placeholder="Full Name"
@@ -84,6 +102,6 @@ export default function AddUserForm() {
       <Button color="success" type="submit">
         Submit
       </Button>
-    </Form>
+    </form>
   );
 }

@@ -11,7 +11,9 @@ import {
 } from "../../../../store/reducers/userReducer";
 import { BiEdit } from "react-icons/bi";
 import { VscTrash } from "react-icons/vsc";
+import { FaUserCircle } from "react-icons/fa";
 import EditUserForm from "./EditUserForm";
+import { Avatar } from "antd";
 const UserListContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,6 +55,7 @@ export default function UserList() {
           <thead>
             <tr>
               <th>#</th>
+              <th>Avatar</th>
               <th>Full Name</th>
               <th>Username</th>
               <th>E-Mail</th>
@@ -64,6 +67,10 @@ export default function UserList() {
             return (
               <TBody key={user._id} style={{cursor:"pointer"}}>
                 <th>{index + 1}</th>
+                <th>
+                  {/* <img src={`http://localhost:5000/uploads/${user.avatar}`} alt="" width="30px" height="30px" /> */}
+                  <Avatar size={48} src={`http://localhost:5000/uploads/${user.avatar}`} icon={<FaUserCircle style={{fontSize:'48px'}}/>}/>
+                </th>
                 <td>{user.name}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
