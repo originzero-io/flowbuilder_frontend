@@ -12,6 +12,7 @@ import AddFlowForm from "./forms/AddFlowForm";
 import AddDashboardForm from "./forms/AddDashboardForm";
 import { VscAdd } from "react-icons/vsc";
 import { DynamicPanelContainer } from "../style";
+import { SearchBar } from "./style";
 export default function ProjectsPanel() {
   const dispatch = useDispatch();
   const flows = useSelector((state) => state.flows);
@@ -30,6 +31,7 @@ export default function ProjectsPanel() {
   return (
     <DynamicPanelContainer>
       <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
+        <SearchBar placeholder="Search flows" spellCheck={false}/>
         <FlowsContainer>
           <FlowList flows={flows} />
           <Box onClick={() => dispatch(setModal(<AddFlowForm />))}>

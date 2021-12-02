@@ -4,6 +4,8 @@ import { Input, Button, Form, Label, FormGroup } from "reactstrap";
 import { setModal } from "../../../../store/reducers/componentReducer";
 import { editUser } from "../../../../store/reducers/userReducer";
 import { openNotification } from "../../../../app-global/dom/notification";
+import { Avatar } from "antd";
+import { FaUserCheck } from "react-icons/fa";
 
 export default function EditUserForm({ user }) {
   const dispatch = useDispatch();
@@ -21,8 +23,21 @@ export default function EditUserForm({ user }) {
     dispatch(setModal(false));
     openNotification("", "User updated", "success");
   };
+  const profilePictureHandle = (e) => {
+    setUserInfo({ ...userInfo, avatar: e.target.files[0] });
+  };
   return (
     <Form onSubmit={onSubmitHandle}>
+      <div style={{marginLeft:'35%'}}>
+        <Avatar size={108} src={`http://localhost:5000/uploads/${user.avatar}`} icon={<FaUserCheck style={{fontSize:'48px'}}/>}/>
+      </div>
+      {/* <Input
+        type="file"
+        accept=".png, .jpg, .jpeg"
+        name="avatar"
+        onChange={profilePictureHandle}
+      /> */}
+
       <FormGroup>
         <Label>Name</Label>
         <Input
@@ -51,6 +66,18 @@ export default function EditUserForm({ user }) {
           onChange={onChangeHandler}
           required
           defaultValue={user.email}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label>Phone</Label>
+        <Input
+          name="phone"
+          placeholder="Phone number"
+          onChange={onChangeHandler}
+          minLength={11}
+          maxLength={11}
+          required
+          defaultValue={user.phone}
         />
       </FormGroup>
       <FormGroup>

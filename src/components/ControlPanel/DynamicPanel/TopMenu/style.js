@@ -10,18 +10,6 @@ export const Container = styled.div`
   background-color: #323232;
   background-color: #343A40;
 `;
-export const SearchBar = styled.input`
-  border-radius: 4px;
-  padding-left: 10px;
-  margin-right: 5px;
-  margin-left: 5px;
-  background-color: #1e1e1e;
-  border: none;
-  color: whitesmoke;
-  width: 250px;
-  height:80%;
-  user-select: none;
-`;
 export const ProfileWrapper = styled.div`
   cursor: pointer;
   background: rgba(29, 185, 84, 0.7);

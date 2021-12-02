@@ -5,7 +5,7 @@ import {
   registerService,
 } from "../../services/userService";
 import * as actions from "../constants/userContants";
-
+import {setError} from "../../store/reducers/errorReducer"
 const userReducer = (state = [], { type, payload }) => {
   switch (type) {
     case actions.GET_ALL_USERS:
@@ -48,9 +48,14 @@ export const editUser = (userInfo) => async (dispatch) => {
   });
 };
 export const deleteUser = (user) => async (dispatch) => {
-  await deleteUserService(user);
-  dispatch({
-    type: actions.DELETE_USER,
-    payload: user,
-  });
+  try {
+    await deleteUserService(user);
+    dispatch({
+      type: actions.DELETE_USER,
+      payload: user,
+    });
+    
+  } catch (error) {
+    dispatch(setError(error));
+  }
 };

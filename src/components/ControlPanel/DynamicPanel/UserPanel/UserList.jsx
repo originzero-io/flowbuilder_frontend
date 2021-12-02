@@ -50,8 +50,7 @@ export default function UserList() {
   };
   return (
     <UserListContainer>
-      <>
-        <Table style={{ color: "white", background: "#1C1F26" }}>
+        <Table style={{ color: "white", background: "#1C1F26"}}>
           <thead>
             <tr>
               <th>#</th>
@@ -59,6 +58,7 @@ export default function UserList() {
               <th>Full Name</th>
               <th>Username</th>
               <th>E-Mail</th>
+              <th>Phone</th>
               <th>Role</th>
               <th></th>
             </tr>
@@ -68,12 +68,12 @@ export default function UserList() {
               <TBody key={user._id} style={{cursor:"pointer"}}>
                 <th>{index + 1}</th>
                 <th>
-                  {/* <img src={`http://localhost:5000/uploads/${user.avatar}`} alt="" width="30px" height="30px" /> */}
                   <Avatar size={48} src={`http://localhost:5000/uploads/${user.avatar}`} icon={<FaUserCircle style={{fontSize:'48px'}}/>}/>
                 </th>
                 <td>{user.name}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
+                <td>{user.phone}</td>
                 <td>
                   <Badge color={user.role === "admin" ? "primary" : "warning"}>
                     {user.role}
@@ -97,7 +97,6 @@ export default function UserList() {
         <Button color="primary" onClick={addUserHandle} style={{ width: "5%" }}>
           <AiOutlineUserAdd style={{ fontSize: "4vh" }} />
         </Button>
-      </>
     </UserListContainer>
   );
 }

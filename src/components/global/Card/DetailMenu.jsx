@@ -9,8 +9,8 @@ import { FiMoreVertical } from "react-icons/fi";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { setModal } from "../../../store/reducers/componentReducer";
-import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsPanel/components/MoveFlowForm";
-import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsPanel/components/EditFlowForm";
+import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsPanel/forms/MoveFlowForm";
+import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsPanel/forms/EditFlowForm";
 export default function DetailMenu({deleteEvent,data}) {
   const dispatch = useDispatch();
   const moveHandler = () => {

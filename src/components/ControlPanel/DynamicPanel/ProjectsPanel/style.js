@@ -27,6 +27,20 @@ export const Box = styled.div`
   }
   color: white;
 `;
+
+export const SearchBar = styled.input`
+  border-radius: 4px;
+  padding-left: 10px;
+  margin-right: 5px;
+  margin-left:1%;
+  margin-top: 5px;
+  background-color: #212529;
+  border:2px solid rgba(75,75,75,0.4);;
+  color: whitesmoke;
+  width: 250px;
+  height:3vh;
+  user-select: none;
+`;
 export const FlowsContainer = styled(ProjectsContainerIndex)`
 `;
 export const DashboardsContainer = styled(ProjectsContainerIndex)``;

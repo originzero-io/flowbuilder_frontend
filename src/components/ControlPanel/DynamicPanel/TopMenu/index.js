@@ -11,7 +11,6 @@ import {
 } from "../../../style-components/DropdownMenu";
 import {
   Container,
-  SearchBar,
   ProfileWrapper,
   ProfileList,
   MenuItem
@@ -28,7 +27,6 @@ export default function TopMenu() {
   };
   return (
     <Container>
-      <SearchBar placeholder="Search flows" spellCheck={false} />
         {
           role === "admin" && (
             <Link to={`${url}/users`}>

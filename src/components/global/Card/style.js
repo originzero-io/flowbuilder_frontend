@@ -6,7 +6,7 @@ export const Container = styled.div`
   border-radius: 6px;
   user-select: none;
   background-color: #212529;
-  border:1px solid rgba(75,75,75,0.4);
+  border:2px solid rgba(75,75,75,0.4);
   cursor: pointer;
   color: white;
   transition: background-color 0.3s ease-in-out;

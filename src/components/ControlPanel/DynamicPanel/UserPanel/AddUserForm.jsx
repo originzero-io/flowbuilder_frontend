@@ -14,6 +14,7 @@ export default function AddUserForm() {
     email: "",
     role: "user",
     avatar: "",
+    phone: "",
   });
 
   const onChangeHandler = (e) => {
@@ -28,6 +29,7 @@ export default function AddUserForm() {
     formData.append("email", userInfo.email);
     formData.append("role", userInfo.role);
     formData.append("avatar", userInfo.avatar);
+    formData.append("phone", userInfo.phone);
     dispatch(registerUser(formData));
     e.preventDefault();
     //dispatch(setModal(false));
@@ -77,6 +79,16 @@ export default function AddUserForm() {
           name="password"
           type="password"
           placeholder="Password"
+          required
+          onChange={onChangeHandler}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label>Phone</Label>
+        <Input
+          name="phone"
+          type="number"
+          placeholder="Phone Number"
           required
           onChange={onChangeHandler}
         />
