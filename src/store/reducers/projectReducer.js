@@ -41,8 +41,8 @@ export const setActiveProject = (params) => {
     payload: params,
   };
 };
-export const loadProjects = (teams) => async (dispatch) => {
-  const projects = await getProjectsByWorkspaceService(teams);
+export const loadProjects = (workspace) => async (dispatch) => {
+  const projects = await getProjectsByWorkspaceService(workspace);
   dispatch({
     type: actions.GET_PROJECTS,
     payload: projects,

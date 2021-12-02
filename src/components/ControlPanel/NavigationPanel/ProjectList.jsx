@@ -5,8 +5,6 @@ import { setActiveProject } from "../../../store/reducers/projectReducer";
 import { CollapsibleMenuItem } from "../../global/Collapsible/CollapsibleMenu";
 import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
-
-import { Badge } from "reactstrap";
 import { setModal } from "../../../store/reducers/componentReducer";
 import EditProjectForm from "./EditProjectForm";
 import { projectNamespace } from "../../../App";
