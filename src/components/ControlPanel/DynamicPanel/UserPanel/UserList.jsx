@@ -30,6 +30,14 @@ const TdItem = styled.span`
   margin-right: 5px;
   cursor: pointer;
 `;
+const Box = styled.div`
+  margin-top: 3px;
+  cursor: pointer;
+  width:25px;
+  height:25px;
+  background: ${props=>props.online ? "#4cd137" : "#c0392b"};
+  border-radius: 50%;
+`;
 
 export default function UserList() {
   const dispatch = useDispatch();
@@ -55,6 +63,7 @@ export default function UserList() {
             <tr>
               <th>#</th>
               <th>Avatar</th>
+              <th>Online</th>
               <th>Full Name</th>
               <th>Username</th>
               <th>E-Mail</th>
@@ -68,8 +77,9 @@ export default function UserList() {
               <TBody key={user._id} style={{cursor:"pointer"}}>
                 <th>{index + 1}</th>
                 <th>
-                  <Avatar size={48} src={`http://localhost:5000/uploads/${user.avatar}`} icon={<FaUserCircle style={{fontSize:'48px'}}/>}/>
+                  <Avatar size={48} src={`${process.env.REACT_APP_BASE_URL}/uploads/${user.avatar}`} icon={<FaUserCircle style={{fontSize:'48px'}}/>}/>
                 </th>
+                <td><Box online={user.online}/></td>
                 <td>{user.name}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>

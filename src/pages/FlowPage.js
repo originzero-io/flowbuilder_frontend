@@ -1,14 +1,11 @@
-import React, { useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import React, { useEffect, useRef } from "react";
 import { ReactFlowProvider } from "react-flow-renderer";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import FlowEditor from "../components/FlowEditor";
 import { FlowWrapper } from "../components/style-components/AppWrapper";
-import PropTypes from "prop-types";
 import { getGroups } from "../store/reducers/flow/flowGroupsReducer";
-import { useParams } from "react-router-dom";
-import FlowTabs from "../components/global/FlowTabs";
-import { saveElements, setElements } from "../store/reducers/flow/flowElementsReducer";
-import createSocket from "../services/socketApi";
 const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowId } = useParams();

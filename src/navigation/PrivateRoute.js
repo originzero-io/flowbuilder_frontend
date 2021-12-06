@@ -1,19 +1,15 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { setAuthorizationToken } from "../app-global/helpers/httpHelpers";
-import { loginSuccess } from "../store/reducers/authReducer";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isAuthenticated } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
   useEffect(() => {
     const jwtToken = localStorage.getItem("token");
-    const userData = JSON.parse(localStorage.getItem("user"));
     if (jwtToken) {
       setAuthorizationToken(jwtToken);
-      dispatch(loginSuccess(userData));
     }
   }, []);
   return (

@@ -25,7 +25,7 @@ import {
 } from "./store/reducers/flow/flowReducer";
 import { createProject, deleteProject, updateProject } from "./store/reducers/projectReducer";
 import { createWorkspace, deleteWorkspace, editWorkspace } from "./store/reducers/workspaceReducer";
-export const mainNamespace = createSocket("main");
+//export const mainNamespace = createSocket("main");
 export const elementNamespace = createSocket("elements");
 export const flowNamespace = createSocket("flows", {
   auth: { token: 123 },
@@ -35,15 +35,10 @@ export const workspaceNamespace = createSocket("workspaces");
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("Main", mainNamespace);
     console.log("Element", elementNamespace);
     console.log("Flow", flowNamespace);
     console.log("Project", projectNamespace);
     console.log("Workspace", workspaceNamespace);
-
-    mainNamespace.emit("main:messageFromClient", "Hi there!!!", (data) => {
-      console.log("mainnamespaceten gelen:", data);
-    });
     elementNamespace.on("elements:save", (data) => {
       dispatch(saveElements(data));
     });

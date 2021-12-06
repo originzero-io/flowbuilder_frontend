@@ -27,8 +27,10 @@ const WorkspaceList = () => {
     dispatch(getWorkspaces());
   }, []);
   useDidMountEffect(() => {
-    dispatch(setActiveWorkspace(workspaces[0]));
-    dispatch(loadProjects(workspaces[0]))
+    if (workspaces.length > 0) {
+      dispatch(setActiveWorkspace(workspaces[0]));
+      dispatch(loadProjects(workspaces[0]))
+    }
   }, [workspaces]);
 
   const clickWorkspaceHandler = (workspace) => {

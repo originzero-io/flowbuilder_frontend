@@ -15,14 +15,14 @@ class Socket {
       reconnectionAttempts: 3,
       ...extraOptions,
     });
-    this.socket.on("connect", () =>
-      console.log(`${namespace} namespaceine bağlandı.`)
-    );
+    this.socket.on("connect", () => {
+      console.log(`${namespace} namespaceine bağlandı.`);
+    });
     this.socket.on(`${namespace}:welcome`, (data) => {
       //openNotification("", data.message, "success");
     });
-    this.socket.on('connect_error', (err) => {
-      openNotification("", err.message, "error")
+    this.socket.on("connect_error", (err) => {
+      openNotification("", err.message, "error");
     });
   }
 }

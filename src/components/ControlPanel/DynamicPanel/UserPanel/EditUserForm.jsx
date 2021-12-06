@@ -29,7 +29,7 @@ export default function EditUserForm({ user }) {
   return (
     <Form onSubmit={onSubmitHandle}>
       <div style={{marginLeft:'35%'}}>
-        <Avatar size={108} src={`http://localhost:5000/uploads/${user.avatar}`} icon={<FaUserCheck style={{fontSize:'48px'}}/>}/>
+        <Avatar size={108} src={`${process.env.REACT_APP_BASE_URL}/uploads/${user.avatar}`} icon={<FaUserCheck style={{fontSize:'48px'}}/>}/>
       </div>
       {/* <Input
         type="file"

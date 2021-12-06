@@ -12,7 +12,9 @@ export default function configureStore(preloadedState) {
   const composedEnhancers = composeWithDevTools(...enhancers);
 
   const store = createStore(rootReducer, preloadedState, composedEnhancers);
-
+  console.log("NODE_ENV:", process.env.NODE_ENV);
+  console.log("PUBLIC_URL:", process.env.PUBLIC_URL);
+  console.log("BASE_URL:", process.env.REACT_APP_BASE_URL);
   //Hot Reloading
   if (process.env.NODE_ENV === "development" && module.hot) {
     module.hot.accept("./reducers", () => store.replaceReducer(rootReducer));

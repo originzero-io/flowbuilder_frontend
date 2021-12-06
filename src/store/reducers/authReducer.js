@@ -17,6 +17,13 @@ const authReducer = (state = initialState, { type, payload }) => {
         error: false,
         errorMessage: "",
       };
+    case actions.MAKE_ME_ONLINE:
+      return {
+        ...payload,
+        isAuthenticated: true,
+        error: false,
+        errorMessage: "",
+      };
     case actions.LOGIN_ERROR:
       return {
         error: true,
@@ -34,12 +41,18 @@ const authReducer = (state = initialState, { type, payload }) => {
 };
 export default authReducer;
 
-import { logoutService } from '../../services/authService';
-export const loginSuccess = (user) => {
-  return {
-    type: actions.LOGIN_SUCCESS,
-    payload: user,
-  };
+import { loginService, logoutService } from '../../services/authService';
+
+export const loginSuccess = (user) => async dispatch => {
+  try {
+    const { data } = await loginService(user);
+    dispatch({
+      type: actions.LOGIN_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch(loginError(error.response?.data.message));
+  }
 };
 export const loginError = (error) => {
   return {
@@ -51,5 +64,11 @@ export const logOut = () => {
   logoutService();
   return {
     type: actions.LOG_OUT,
+  };
+};
+export const makeMeOnline = (data) => {
+  return {
+    type: actions.MAKE_ME_ONLINE,
+    payload: data
   };
 };

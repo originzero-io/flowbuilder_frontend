@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import {  mainNamespace,elementNamespace } from "../../../../App";
+import { elementNamespace } from "../../../../App";
 import * as themeColor from "../../../../config/ThemeReference";
 import { saveFlowService } from "../../../../services/flowService";
 import { saveElements, setElements } from "../../../../store/reducers/flow/flowElementsReducer";
@@ -62,9 +62,7 @@ const MainMenu = () => {
   };
   const nameClick = () => {
     console.log("tıkladım");
-    console.log("Main:", mainNamespace);
     console.log("eLEMENT:", elementNamespace);
-    mainNamespace.emit("main:messageFromClient", { message: 'Naber main?' });
     elementNamespace.emit("elements:messageFromClient", { message: 'Naber elements?' });
   }
   return (

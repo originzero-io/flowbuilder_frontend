@@ -11,9 +11,7 @@ import { setError } from "../../store/reducers/errorReducer";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
-  const { isAuthenticated, errorMessage } = useSelector(
-    (state) => state.auth
-  );
+  const { isAuthenticated, errorMessage } = useSelector((state) => state.auth);
   const {
     register,
     handleSubmit,
@@ -21,10 +19,7 @@ export default function LoginForm() {
   } = useForm({});
   const onSubmitHandle = async (data) => {
     try {
-      const response = await loginService(data);
-      console.log(response.data);
-      dispatch(loginSuccess(response.data));
-      localStorage.setItem("user", JSON.stringify(response.data));
+      dispatch(loginSuccess(data));
     } catch (error) {
       notification("", "The server is not active", "error");
       dispatch(loginError(error.response?.data.message));

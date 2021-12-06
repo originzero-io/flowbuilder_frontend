@@ -18,7 +18,7 @@ import { setAuthorizationToken } from "./app-global/helpers/httpHelpers.js";
 import ErrorBoundary from "./components/global/ErrorBoundary.js";
 const store = configureStore();
 //axios.defaults.baseURL = 'https://anaks-flow-server.herokuapp.com/';
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 const jwtToken = localStorage.getItem("token");
 if (jwtToken) {
   setAuthorizationToken(jwtToken);

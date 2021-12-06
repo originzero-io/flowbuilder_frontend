@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavigationPanel from "../components/ControlPanel/NavigationPanel";
 import PanelRouter from "../components/ControlPanel/DynamicPanel/PanelRouter";
 import styled from "styled-components";
 import WorkspaceList from "../components/ControlPanel/WorkspacePanel/WorkspaceList.jsx";
 import TopMenu from "../components/ControlPanel/DynamicPanel/TopMenu";
+import createSocket from "../services/socketApi";
+import { useDispatch, useSelector } from "react-redux";
+import { makeMeOnline } from "../store/reducers/authReducer";
+import { editUser } from "../store/reducers/userReducer";
+import { openNotification } from "../app-global/dom/notification";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,7 +19,32 @@ const Content = styled.div`
   display: flex;
   height: 100vh;
 `;
+
+export let mainNamespace;
 export default function ControlPanelPage() {
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth)
+  useEffect(() => {
+    mainNamespace = createSocket("main", {
+      auth: { token: localStorage.getItem("token") }
+    });
+    console.log("Main", mainNamespace);
+    mainNamespace.emit("main:onlineUser", "MAKE_ME_ONLINE");
+    mainNamespace.on("main:onlineUser", (data) => {
+      if (auth._id !== data._id) {
+        dispatch(editUser(data));
+        openNotification("", `${data.username} oturum açtı`,"success");
+      }
+      else dispatch(makeMeOnline(data));
+    })
+    mainNamespace.on("main:offlineUser", (data) => {
+      if (auth._id !== data._id) {
+        dispatch(editUser(data));
+        openNotification("", `${data.username} oturumu kapadı`,"warning");
+      }
+      else alert('Oturum başka bir tabde açık')
+    })
+  }, [])
   return (
     <Wrapper>
       <TopMenu />

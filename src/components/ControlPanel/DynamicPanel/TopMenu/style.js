@@ -5,24 +5,10 @@ export const Container = styled.div`
   display: flex;
   width: 100%;
   height: 5vh;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   background-color: #323232;
   background-color: #343A40;
-`;
-export const ProfileWrapper = styled.div`
-  cursor: pointer;
-  background: rgba(29, 185, 84, 0.7);
-  color: whitesmoke;
-  border-radius: 50%;
-  width: 45px;
-  height: 100%;
-  text-align: center;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
 `;
 export const MenuItem = styled.div`
   color:white;
@@ -31,6 +17,10 @@ export const MenuItem = styled.div`
   font-size:1.5vmin;
 `;
 export const LeftSideContainer = styled.div`
+  margin-left:15px;
+  cursor:pointer;
+`;
+export const RightSideContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: stretch;

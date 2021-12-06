@@ -1,10 +1,7 @@
-import * as actions from "../constants/workspaceConstants";
 import {
-  createWorkspaceService,
-  deleteWorkspaceService,
-  editWorkspaceService,
-  getWorkspacesService,
+  getWorkspacesService
 } from "../../services/workspaceService";
+import * as actions from "../constants/workspaceConstants";
 import { setError } from "./errorReducer";
 
 const initialState = {
