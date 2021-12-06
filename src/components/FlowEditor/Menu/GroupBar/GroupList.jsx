@@ -11,9 +11,10 @@ import EditForm from "./EditForm";
 import { NameEditIcon } from "../../../global/icons";
 import PropTypes from "prop-types";
 import { useParams } from "react-router";
+import useActiveFlow from "../../../../utils/useActiveFlow";
 const GroupList = ({ theme }) => {
   const { flowGroups, flowElements, flowGui } =
-    useSelector((state) => state.activeFlow);
+    useActiveFlow();
   const dispatch = useDispatch();
   const [hover, setHover] = useState(null);
   const [editableItem, setEditableItem] = useState({ state: false, group: {} });

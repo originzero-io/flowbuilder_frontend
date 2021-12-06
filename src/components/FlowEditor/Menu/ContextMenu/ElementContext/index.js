@@ -3,9 +3,10 @@ import { Menu, MenuItem } from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { setElementContextMenu } from "../../../../../store/reducers/menuReducer";
 import { rotateNode, setElements } from "../../../../../store/reducers/flow/flowElementsReducer";
+import useActiveFlow from "../../../../../utils/useActiveFlow";
 
 export default function ElementMenu() {
-  const { flowElements } = useSelector((state) => state.activeFlow);
+  const { flowElements } = useActiveFlow();
   const elements = flowElements.present;
   const {elementMenu} = useSelector((state) => state.menus);
   const theme = useSelector((state) => state.themeReducer);

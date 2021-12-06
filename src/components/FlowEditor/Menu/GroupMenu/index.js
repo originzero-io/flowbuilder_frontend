@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { setGroupToNodes } from "../../../../app-global/helpers/elementController";
 import { setGroupMultiple, setGroupSingle } from "../../../../store/reducers/flow/flowElementsReducer";
+import useActiveFlow from "../../../../utils/useActiveFlow";
 import { GroupColor, Label } from "../GroupBar/style";
 const Container = styled.div`
   position: absolute;
@@ -41,7 +42,7 @@ const Content = styled.div`
   margin-top: 2px;
 `;
 export default function GroupMenu({ self }) {
-  const { flowElements,flowGroups } = useSelector((state) => state.activeFlow);
+  const { flowElements,flowGroups } = useActiveFlow();
   const elements = flowElements.present;
   const dispatch = useDispatch();
   const selectedElements = useStoreState((state) => state.selectedElements);

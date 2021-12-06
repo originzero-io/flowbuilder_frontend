@@ -1,10 +1,10 @@
+import PropTypes from "prop-types";
 import React from "react";
 import ReactTooltip from "react-tooltip";
-import { useSelector } from "react-redux"
-import PropTypes from "prop-types"
+import useActiveFlow from "../../utils/useActiveFlow";
 
 export default function Tooltip({ id, place, others }) {
-  const { flowGui } = useSelector((state) => state.activeFlow)
+  const { flowGui } = useActiveFlow()
   return (
     <>
       <ReactTooltip

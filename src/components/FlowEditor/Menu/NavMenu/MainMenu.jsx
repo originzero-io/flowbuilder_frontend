@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { elementNamespace } from "../../../../App";
 import * as themeColor from "../../../../config/ThemeReference";
 import { saveFlowService } from "../../../../services/flowService";
-import { saveElements, setElements } from "../../../../store/reducers/flow/flowElementsReducer";
+import { setElements } from "../../../../store/reducers/flow/flowElementsReducer";
 import { getFlowsByWorkspace } from "../../../../store/reducers/flow/flowReducer";
+import useWorkspace from "../../../../utils/useWorkspace";
+import useActiveFlow from "../../../../utils/useActiveFlow";
 import { Logo } from "../../../global/icons";
 import { MenuIndex, MenuItem } from "./style";
 const Menu = styled(MenuIndex)`
@@ -42,8 +44,8 @@ const Circle = styled.div`
   }
 `;
 const MainMenu = () => {
-  const { flowGui, flowConfig } = useSelector((state) => state.activeFlow);
-  const { activeWorkspace } = useSelector((state) => state.workspaces);
+  const { flowGui, flowConfig } = useActiveFlow();
+  const { activeWorkspace } = useWorkspace();
   const { theme, reactFlowInstance } = flowGui;
   const { flowId } = useParams();
   const dispatch = useDispatch();

@@ -30,6 +30,8 @@ import { FileInput } from "../../../style-components/FileInput";
 import { Circle } from "../../../style-components/Shapes";
 import { ProfileIcon, ShareIcon, TuneIcon } from "./Icons";
 import { MenuIndex, MenuItem } from "./style";
+import useAuth from "../../../../utils/useAuth";
+import useActiveFlow from "../../../../utils/useActiveFlow";
 const Menu = styled(MenuIndex)`
   background: ${(props) =>
     props.theme === "dark"
@@ -42,8 +44,8 @@ const Menu = styled(MenuIndex)`
 `;
 
 export default function ConfigurationMenu() {
-  const { flowGui } = useSelector((state) => state.activeFlow);
-  const { name } = useSelector((state) => state.auth);
+  const { flowGui } = useActiveFlow();
+  const { name } = useAuth();
   const { reactFlowInstance, miniMapDisplay, theme } = flowGui;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const setSelectedElements = useStoreActions(
@@ -131,7 +133,9 @@ export default function ConfigurationMenu() {
     dispatch(changeEdgeType(e.target.value));
   };
   const logOutHandle = () => {
-    dispatch(logOut());
+    if (confirm("Are you sure?")) {
+      dispatch(logOut());
+    }
   };
   return (
     <Menu theme={theme}>

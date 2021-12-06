@@ -8,10 +8,11 @@ import { Input, Text, Submit, ErrorMessage } from "./style";
 import { Redirect } from "react-router-dom";
 import { openNotification as notification } from "../../app-global/dom/notification";
 import { setError } from "../../store/reducers/errorReducer";
+import useAuth from "../../utils/useAuth";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
-  const { isAuthenticated, errorMessage } = useSelector((state) => state.auth);
+  const { isAuthenticated, errorMessage } = useAuth();
   const {
     register,
     handleSubmit,

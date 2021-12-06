@@ -14,11 +14,12 @@ import {
 import setIconInstance from "./Icons/iconConstant";
 import { setOutgoersEnable } from "../../../../store/reducers/flow/flowElementsReducer";
 import PropTypes from "prop-types"
+import useActiveFlow from "../../../../utils/useActiveFlow";
 const NodeGod = ({ self, ioType, children, collapsible }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sources = Array.from(Array(self.data.sourceCount).keys());
   const targets = Array.from(Array(self.data.targetCount).keys());
-  const { flowElements } = useSelector((state) => state.activeFlow);
+  const { flowElements } = useActiveFlow();
   const elements = flowElements.present;
   const dispatch = useDispatch();
   const { selected, align, expand, enable, group } = self.data;

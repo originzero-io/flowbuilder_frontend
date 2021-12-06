@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form } from "reactstrap";
 import { flowNamespace } from "../../../../../App";
 import { setModal } from "../../../../../store/reducers/componentReducer";
+import useProject from "../../../../../utils/useProject";
 
 export default function MoveFlow({ flow }) {
   const dispatch = useDispatch();
-  const { projects } = useSelector((state) => state.projects);
+  const { projects } = useProject();
   const [selection, setSelection] = useState(flow.project);
   const changeHandle = (e) => {
     setSelection(e.target.value);

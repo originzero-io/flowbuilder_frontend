@@ -5,6 +5,7 @@ import GroupBarIcon from "./GroupBarIcon";
 import GroupList from "./GroupList";
 import NewGroupForm from "./NewGroupForm";
 import styled from "styled-components";
+import useActiveFlow from "../../../../utils/useActiveFlow";
 const Wrapper = styled.div`
   position: absolute;
   display: flex;
@@ -16,7 +17,7 @@ const Wrapper = styled.div`
   right:${({visible})=>visible === "visible" ? "0px" : "-25px"};
 `;
 const GroupBar = () => {
-  const { flowGui } = useSelector((state) => state.activeFlow);
+  const { flowGui } = useActiveFlow();
   const { theme, groupBarDisplay } = flowGui;
   return (
     <Wrapper visible={groupBarDisplay}>

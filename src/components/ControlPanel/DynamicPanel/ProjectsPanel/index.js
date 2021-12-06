@@ -13,9 +13,10 @@ import AddDashboardForm from "./forms/AddDashboardForm";
 import { VscAdd } from "react-icons/vsc";
 import { DynamicPanelContainer } from "../style";
 import { SearchBar } from "./style";
+import useFlow from "../../../../utils/useFlow";
 export default function ProjectsPanel() {
   const dispatch = useDispatch();
-  const flows = useSelector((state) => state.flows);
+  const flows = useFlow();
   const flowsCollapseTrigger = () => {
     return (
       <CollapsibleTrigger

@@ -1,17 +1,17 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { ActionCreators as UndoActionCreators } from 'redux-undo'
-import KeyboardEventHandler from "react-keyboard-event-handler";
 import { useStoreActions, useStoreState, useZoomPanHelper } from "react-flow-renderer";
-import { saveToDb } from "../../app-global/db";
-import { setRotateAllPath } from "../../store/reducers/flow/flowGuiReducer";
-import { setCopiedElements } from "../../store/reducers/controlPanelReducer";
+import KeyboardEventHandler from "react-keyboard-event-handler";
+import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
-import { pasteNodes } from "../../store/reducers/flow/flowElementsReducer";
+import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { openNotification as notification } from "../../app-global/dom/notification";
+import { setCopiedElements } from "../../store/reducers/controlPanelReducer";
+import { pasteNodes } from "../../store/reducers/flow/flowElementsReducer";
+import { setRotateAllPath } from "../../store/reducers/flow/flowGuiReducer";
+import useActiveFlow from "../../utils/useActiveFlow";
 const KeyboardEvents = () => {
   const dispatch = useDispatch();
-  const { flowGui,flowElements } = useSelector((state) => state.activeFlow);
+  const { flowGui,flowElements } = useActiveFlow();
   const { copiedElements } = useSelector((state) => state.controlPanel);
   const { paneClickPosition,reactFlowInstance,rotateAllPath } = flowGui;
   const elements = flowElements.present;

@@ -8,9 +8,10 @@ import { BiEdit } from "react-icons/bi";
 import { setModal } from "../../../store/reducers/componentReducer";
 import EditProjectForm from "./EditProjectForm";
 import { projectNamespace } from "../../../App";
+import useProject from "../../../utils/useProject";
 export default function ProjectList() {
   const dispatch = useDispatch();
-  const { projects, activeProject } = useSelector((state) => state.projects);
+  const { projects, activeProject } = useProject();
   const clickProjectHandle = (project) => {
     dispatch(setActiveProject(project));
     dispatch(getFlowsByProject(project));

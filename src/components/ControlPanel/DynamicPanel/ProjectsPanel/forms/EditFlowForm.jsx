@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form, Label, FormGroup } from "reactstrap";
 import { flowNamespace } from "../../../../../App";
 import { setModal } from "../../../../../store/reducers/componentReducer";
+import useAuth from "../../../../../utils/useAuth";
 
 export default function EditFlow({ flow }) {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+  const auth = useAuth();
   const [flowConfig, setFlowConfig] = useState({
     name: flow.config.name,
     description: flow.config.description,

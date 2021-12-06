@@ -4,8 +4,9 @@ import { Button, Form, FormGroup, Input } from "reactstrap";
 import { editWorkspace } from "../../../store/reducers/workspaceReducer";
 import { setModal } from "../../../store/reducers/componentReducer";
 import { workspaceNamespace } from "../../../App";
+import useWorkspace from "../../../utils/useWorkspace";
 export default function EditWorkspaceForm({ workspace }) {
-  const { activeWorkspace } = useSelector((state) => state.workspaces);
+  const { activeWorkspace } = useWorkspace();
   const [workspaceInfo, setworkspaceInfo] = useState({
     name: null,
   });

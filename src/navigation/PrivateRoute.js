@@ -3,9 +3,10 @@ import React, { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { setAuthorizationToken } from "../app-global/helpers/httpHelpers";
+import useAuth from "../utils/useAuth";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useAuth();
   useEffect(() => {
     const jwtToken = localStorage.getItem("token");
     if (jwtToken) {

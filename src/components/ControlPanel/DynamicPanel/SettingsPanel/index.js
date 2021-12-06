@@ -1,8 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import useAuth from "../../../../utils/useAuth";
 import { DynamicPanelContainer } from "../style";
 export default function SettingsPanel() {
-  const auth = useSelector((state) => state.auth);
+  const auth = useAuth();
   return (
     <DynamicPanelContainer>
       <div>{auth.username}</div>

@@ -4,6 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import { logOut } from "../../../../store/reducers/authReducer";
+import useAuth from "../../../../utils/useAuth";
 import { Logo } from "../../../global/icons";
 import {
   DropDownItem,
@@ -19,8 +20,7 @@ import {
 export default function TopMenu() {
   const dispatch = useDispatch();
   const { url } = useRouteMatch();
-
-  const { role, avatar } = useSelector((state) => state.auth);
+  const { role, avatar } = useAuth();
   const logOutHandle = () => {
     if (confirm("Sure?")) {
       dispatch(logOut());

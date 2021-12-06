@@ -25,11 +25,12 @@ import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } fr
 import FlowComponents from "./FlowComponents";
 import CustomEdge from './Edges/CustomEdge'
 import PropTypes from "prop-types"
+import useActiveFlow from "../../utils/useActiveFlow";
 export default function FlowEditor({ reactFlowWrapper }) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeList);
   const selectedElements = useStoreState((state) => state.selectedElements);
-  const { flowElements, flowGui, flowConfig } = useSelector((state) => state.activeFlow);
+  const { flowElements, flowGui } = useActiveFlow();
   const elements = flowElements.present;
   const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowGui;
   const dispatch = useDispatch();

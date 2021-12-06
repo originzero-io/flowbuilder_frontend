@@ -12,10 +12,11 @@ import { addNewNode } from "../../../../../store/reducers/flow/flowElementsReduc
 import { createNode } from "../../../../../app-global/helpers/elementController";
 import useDidMountEffect  from "../../../../../utils/useDidMountEffect";
 import {loadIconsToNodeList} from "../../../../../app-global/helpers/loadIconsToNodeList";
+import useActiveFlow from "../../../../../utils/useActiveFlow";
 
 const PanelContextMenu = () => {
   const { panelMenu } = useSelector((state) => state.menus);
-  const { flowGui } = useSelector((state) => state.activeFlow);
+  const { flowGui } = useActiveFlow();
   const { reactFlowInstance,rotateAllPath,theme } = flowGui;
   const nodeList = useSelector((state) => state.nodeList);
   const nodeClass = useSelector((state) => state.nodeClassReducer);

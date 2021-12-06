@@ -5,8 +5,9 @@ import { setGroupBarDisplay } from "../../../../store/reducers/flow/flowGuiReduc
 import { GroupIcon } from "../../../global/icons";
 import { getGroups } from "../../../../store/reducers/flow/flowGroupsReducer";
 import { useParams } from "react-router";
+import useActiveFlow from "../../../../utils/useActiveFlow";
 export default function GroupBarIcon({theme}) {
-  const { flowGui } = useSelector((state) => state.activeFlow);
+  const { flowGui } = useActiveFlow();
   const { flowId } = useParams();
   const dispatch = useDispatch();
   const { groupBarDisplay } = flowGui;

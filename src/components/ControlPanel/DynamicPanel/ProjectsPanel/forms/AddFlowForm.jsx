@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { flowNamespace } from "../../../../../App";
 import { setModal } from "../../../../../store/reducers/componentReducer";
+import useAuth from "../../../../../utils/useAuth";
+import useProject from "../../../../../utils/useProject";
+import useWorkspace from "../../../../../utils/useWorkspace";
 
 export default function AddFlowForm() {
-  const auth = useSelector((state) => state.auth);
-  const { activeWorkspace } = useSelector((state) => state.workspaces);
-  const { activeProject, projects } = useSelector(
-    (state) => state.projects
-  );
+  const auth = useAuth();
+  const { activeWorkspace } = useWorkspace();
+  const { activeProject, projects } = useProject();
   const workspace = activeWorkspace._id;
   const project = activeProject?._id || projects[0];
 

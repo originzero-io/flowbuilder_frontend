@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getOutgoers } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import { getNodesAndEdges } from "../../../app-global/helpers/elementController";
+import useActiveFlow from "../../../utils/useActiveFlow";
 import useDidMountEffect from "../../../utils/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
 import NodeIOmanager from "./global/NodeIOManager";
@@ -9,7 +10,7 @@ import { Label } from "./styles";
 
 const SetVariables = React.memo((self) => {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const { flowElements } = useSelector((state) => state.activeFlow);
+  const { flowElements } = useActiveFlow();
   const elements = flowElements.present;
   const [values, setValues] = useState([
     {

@@ -5,13 +5,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { rotateMultiNode, setElements, setMultipleNodeEnable } from "../../../../../store/reducers/flow/flowElementsReducer";
 import { setMultiSelectionContextMenu } from "../../../../../store/reducers/menuReducer";
 import GroupMenu from "../../GroupMenu";
+import useActiveFlow from "../../../../../utils/useActiveFlow";
 
 export default function MultiSelectionContextMenu() {
   const selected = useStoreState((state) => state.selectedElements);
   const { multiSelectionMenu } = useSelector(
     (state) => state.menus
   );
-  const { flowElements, flowGui } = useSelector((state) => state.activeFlow);
+  const { flowElements, flowGui } = useActiveFlow();
   const { theme } = flowGui;
   const elements = flowElements.present;
   const dispatch = useDispatch();

@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
-import Flag from "./NodeFlag";
-import { Header, Label ,Content,FeatureIconsWrapper } from "../../styles";
-import { useSelector, useDispatch } from "react-redux";
-import GroupMenu from "../../../Menu/GroupMenu";
-import { closeAllNodeGroupMenu } from "../../../../../store/reducers/flow/flowGuiReducer";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { expandNode } from "../../../../../store/reducers/flow/flowElementsReducer";
+import { closeAllNodeGroupMenu } from "../../../../../store/reducers/flow/flowGuiReducer";
+import useActiveFlow from "../../../../../utils/useActiveFlow";
+import GroupMenu from "../../../Menu/GroupMenu";
+import { Content, FeatureIconsWrapper, Header, Label } from "../../styles";
 import EditNameForm from "./EditNameForm";
 import FeatureIcons from "./FeatureIcons";
-import PropTypes from "prop-types"
+import Flag from "./NodeFlag";
 export default function NodeHeader({ self, selectedElements }) {
   const dispatch = useDispatch();
-  const { flowGui } = useSelector((state) => state.activeFlow);
+  const { flowGui } = useActiveFlow();
   const { nodeGroupMenuDisplay } = flowGui;
   const [showGroup, setShowGroup] = useState(nodeGroupMenuDisplay);
   const [hover, setHover] = useState(false);

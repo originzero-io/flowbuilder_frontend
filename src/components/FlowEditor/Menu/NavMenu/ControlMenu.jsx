@@ -30,6 +30,7 @@ import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { useParams } from "react-router";
 import { elementNamespace } from "../../../../App";
+import useActiveFlow from "../../../../utils/useActiveFlow";
 const Menu = styled.div`
   position: absolute;
   display: flex;
@@ -46,7 +47,7 @@ const Menu = styled.div`
     props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON};
 `;
 export default function ControlMenu() {
-  const { flowGui,flowConfig,flowElements } = useSelector((state) => state.activeFlow);
+  const { flowGui,flowConfig,flowElements } = useActiveFlow();
   const { reactFlowInstance,rotateAllPath,theme } = flowGui;
   const canUndo = flowElements.past.length > 0;
   const canRedo = flowElements.future.length > 0;

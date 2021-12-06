@@ -1,13 +1,14 @@
-import React,{ useState,useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { closeFlow } from "../../../store/reducers/flow/flowReducer";
-import { Container, TabItem, AddButton,CloseButton } from "./style";
+import useActiveFlow from "../../../utils/useActiveFlow";
+import useFlow from "../../../utils/useFlow";
+import { Container, TabItem } from "./style";
 const FlowTabs = () => {
-  const flows = useSelector((state) => state.flows);
+  const flows = useFlow();
   const dispatch = useDispatch();
   const [openedFlows, setOpenedFlows] = useState([]);
-  const { flowGui, flowConfig, flowGroups } = useSelector((state) => state.activeFlow);
+  const { flowGui, flowConfig, flowGroups } = useActiveFlow();
   const { reactFlowInstance } = flowGui;
   
   const history = useHistory();

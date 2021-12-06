@@ -21,12 +21,14 @@ import { setModal } from "../../../store/reducers/componentReducer";
 import { Link, useRouteMatch } from "react-router-dom";
 import WorkspaceBrand from "./WorkspaceBrand";
 import { Badge } from "reactstrap";
+import useAuth from "../../../utils/useAuth";
+import useWorkspace from "../../../utils/useWorkspace";
 
 const ControlPanelMenu = () => {
   const dispatch = useDispatch();
   const { url } = useRouteMatch();
-  const { activeWorkspace } = useSelector((state) => state.workspaces);
-  const { username } = useSelector((state) => state.auth);
+  const { activeWorkspace } = useWorkspace();
+  const { username } = useAuth();
   const showModalHandle = (e) => {
     e.preventDefault();
     e.stopPropagation();

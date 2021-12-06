@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { createProjectService } from "../../../services/projectService";
-import { createProject } from "../../../store/reducers/projectReducer";
-import { setError } from "../../../store/reducers/errorReducer";
-import { setModal } from "../../../store/reducers/componentReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import { projectNamespace } from "../../../App";
+import { setModal } from "../../../store/reducers/componentReducer";
+import useAuth from "../../../utils/useAuth";
+import useWorkspace from "../../../utils/useWorkspace";
 const AddProjectForm = () => {
-  const { activeWorkspace } = useSelector((state) => state.workspaces);
-  const auth = useSelector((state) => state.auth);
+  const { activeWorkspace } = useWorkspace();
+  const auth = useAuth();
   const [projectInfo, setProjectInfo] = useState({
     name: null,
     description: '',

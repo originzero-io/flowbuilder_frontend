@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {  useParams } from "react-router";
 import * as themeColor from "../../../../config/ThemeReference";
 import { createGroup } from "../../../../store/reducers/flow/flowGroupsReducer";
+import useActiveFlow from "../../../../utils/useActiveFlow";
+import useAuth from "../../../../utils/useAuth";
 import {
   AddIcon,
   CancelIcon,
@@ -24,8 +26,8 @@ import {
 
 const NewGroupForm = ({ theme }) => {
   const [formOpen, setFormOpen] = useState(false);
-  const { flowElements } = useSelector((state) => state.activeFlow);
-  const auth = useSelector((state) => state.auth);
+  const { flowElements } = useActiveFlow();
+  const auth = useAuth();
   const elements = flowElements.present;
   const { flowId } = useParams();
   const setSelectedElements = useStoreActions(
