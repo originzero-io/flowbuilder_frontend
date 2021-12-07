@@ -4,10 +4,10 @@ import NotesPanel from "./NotesPanel";
 import ProjectsPanel from "./ProjectsPanel";
 import SettingsPanel from "./SettingsPanel";
 import DevicesPanel from "./DevicesPanel";
-import TopMenu from "./TopMenu";
 import styled from "styled-components";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import UserPanel from "./UserPanel";
+import TeamPanel from "./TeamPanel";
 
 const Container = styled.div`
   width: 100%;
@@ -29,6 +29,7 @@ export default function PanelRouter() {
         <Switch>
           <Route exact path={`${url}/all`} component={ProjectsPanel}/>
           <Route exact path={`${url}/projects`} component={ProjectsPanel}/>
+          <Route exact path={`${url}/team`} component={TeamPanel}/>
           <Route exact path={`${url}/learn`} component={LearnPanel}/>
           <Route exact path={`${url}/notes`} component={NotesPanel}/>
           <Route exact path={`${url}/devices`} component={DevicesPanel}/>

@@ -1,8 +1,10 @@
 import {
+  addUserToWorkspaceService,
   deleteUserService,
   editUserService,
   getAllUsersService,
   registerService,
+  removeUserToWorkspaceService,
 } from "../../services/userService";
 import * as actions from "../constants/userContants";
 import {setError} from "../../store/reducers/errorReducer"
@@ -42,6 +44,20 @@ export const registerUser = (userInfo) => async (dispatch) => {
 };
 export const editUser = (userInfo) => async (dispatch) => {
   const { user } = await editUserService(userInfo);
+  dispatch({
+    type: actions.EDIT_USER,
+    payload: user,
+  });
+};
+export const addUserToWorkspace = (userInfo,workspace) => async (dispatch) => {
+  const { user } = await addUserToWorkspaceService(userInfo, workspace);
+  dispatch({
+    type: actions.EDIT_USER,
+    payload: user,
+  });
+};
+export const removeUserToWorkspace = (userInfo, workspace) => async (dispatch) => {
+  const { user } = await removeUserToWorkspaceService(userInfo, workspace);
   dispatch({
     type: actions.EDIT_USER,
     payload: user,

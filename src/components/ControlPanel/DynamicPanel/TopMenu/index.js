@@ -1,10 +1,10 @@
-import { Avatar } from "antd";
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import { logOut } from "../../../../store/reducers/authReducer";
 import useAuth from "../../../../utils/useAuth";
+import Avatar from "../../../global/Avatar";
 import { Logo } from "../../../global/icons";
 import {
   DropDownItem,
@@ -39,11 +39,7 @@ export default function TopMenu() {
         )}
         <DropdownWrapper tabIndex="1">
           <div style={{ cursor: "pointer" }}>
-            <Avatar
-              size={40}
-              src={`${process.env.REACT_APP_BASE_URL}/uploads/${avatar}`}
-              icon={<FaUserCircle style={{ fontSize: "48px" }} />}
-            />
+            <Avatar avatar={avatar}/>
           </div>
           <ProfileList>
             <DropDownItem>User settings</DropDownItem>

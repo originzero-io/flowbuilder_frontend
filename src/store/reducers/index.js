@@ -33,5 +33,11 @@ const reducers = combineReducers({
   nodeList: nodeListReducer,
   nodeClassReducer,
 });
-
-export default reducers;
+//resetting reducers when user log out
+const rootReducer = (state, action) => {
+  if (action.type === 'LOG_OUT') {
+    state = undefined;
+  }
+  return reducers(state, action);
+}
+export default rootReducer;

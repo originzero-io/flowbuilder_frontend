@@ -1,5 +1,5 @@
 import {
-  getWorkspacesService
+  getMyWorkspacesService
 } from "../../services/workspaceService";
 import * as actions from "../constants/workspaceConstants";
 import { setError } from "./errorReducer";
@@ -42,9 +42,9 @@ export const setActiveWorkspace = (params) => {
     payload: params,
   };
 };
-export const getWorkspaces = () => async (dispatch) => {
+export const getMyWorkspaces = () => async (dispatch) => {
   try {
-    const workspaces = await getWorkspacesService();
+    const workspaces = await getMyWorkspacesService();
     dispatch({
       type: actions.GET_WORKSPACES,
       payload: workspaces,

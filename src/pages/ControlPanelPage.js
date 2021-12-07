@@ -7,7 +7,7 @@ import TopMenu from "../components/ControlPanel/DynamicPanel/TopMenu";
 import createSocket from "../services/socketApi";
 import { useDispatch, useSelector } from "react-redux";
 import { makeMeOnline } from "../store/reducers/authReducer";
-import { editUser } from "../store/reducers/userReducer";
+import { editUser, getAllUsers } from "../store/reducers/userReducer";
 import { openNotification } from "../app-global/dom/notification";
 const Wrapper = styled.div`
   display: flex;
@@ -44,6 +44,8 @@ export default function ControlPanelPage() {
       }
       else alert('Oturum başka bir tabde açık')
     })
+
+    dispatch(getAllUsers());
   }, [])
   return (
     <Wrapper>

@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { VscAdd } from "react-icons/vsc";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "../../../store/reducers/componentReducer";
 import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
 import { loadProjects } from "../../../store/reducers/projectReducer";
 import {
-  getWorkspaces,
-  setActiveWorkspace,
+  getMyWorkspaces,
+  setActiveWorkspace
 } from "../../../store/reducers/workspaceReducer";
 import useDidMountEffect from "../../../utils/useDidMountEffect";
 import AddWorkspaceForm from "./AddWorkspaceForm";
 import {
-  AddWorkSpaceButton,
-  WorkspaceItemWrapper,
-  WorkspaceItem,
-  WorkspaceContainer,
+  WorkspaceContainer, WorkspaceItem, WorkspaceItemWrapper
 } from "./style";
 
 const WorkspaceList = () => {
@@ -24,7 +21,7 @@ const WorkspaceList = () => {
   const dispatch = useDispatch();
   //console.log("workspace list rendered");
   useEffect(() => {
-    dispatch(getWorkspaces());
+    dispatch(getMyWorkspaces());
   }, []);
   useDidMountEffect(() => {
     if (workspaces.length > 0) {
