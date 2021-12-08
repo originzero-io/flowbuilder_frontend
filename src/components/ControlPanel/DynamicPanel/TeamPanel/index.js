@@ -4,8 +4,8 @@ import { Button } from "reactstrap";
 import { setModal } from "../../../../store/reducers/componentReducer";
 import { getAllUsers } from "../../../../store/reducers/userReducer";
 import { DynamicPanelContainer } from "../style";
-import AddMemberForm from "./AddMemberForm";
-import MemberList from "./MemberList";
+import AddMemberForm from "./AddMemberForm.jsx";
+import MemberList from "./MemberList.jsx";
 
 export default function TeamPanel() {
     const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { VscAdd } from "react-icons/vsc";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setModal } from "../../../store/reducers/componentReducer";
 import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
 import { loadProjects } from "../../../store/reducers/projectReducer";
@@ -9,15 +9,14 @@ import {
   setActiveWorkspace
 } from "../../../store/reducers/workspaceReducer";
 import useDidMountEffect from "../../../utils/useDidMountEffect";
+import useWorkspace from "../../../utils/useWorkspace";
 import AddWorkspaceForm from "./AddWorkspaceForm";
 import {
   WorkspaceContainer, WorkspaceItem, WorkspaceItemWrapper
 } from "./style";
 
 const WorkspaceList = () => {
-  const { workspaces, activeWorkspace } = useSelector(
-    (state) => state.workspaces
-  );
+  const { workspaces, activeWorkspace } = useWorkspace();
   const dispatch = useDispatch();
   //console.log("workspace list rendered");
   useEffect(() => {

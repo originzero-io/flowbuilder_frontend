@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState,useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { DashboardsContainer, FlowsContainer } from "./style";
 import { Box } from "./style";
 import {
@@ -28,13 +28,23 @@ export default function ProjectsPanel() {
   const dashboardCollapseTrigger = () => {
     return <CollapsibleTrigger label="Dashboards" style={{ color: "white" }} />;
   };
-  //console.log("PROJECT-FLOW PANEL RENDERED");
+  const [searched, setSearched] = useState(flows);
+  const searchHandle = (e) => {
+    const value = e.target.value;
+    const filtered = flows.filter((flow) =>
+      flow.config.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setSearched(filtered);
+  };
+  useEffect(() => {
+    setSearched(flows);
+  }, [flows]);  
   return (
     <DynamicPanelContainer>
       <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
-        <SearchBar placeholder="Search flows" spellCheck={false}/>
+        <SearchBar placeholder="Search flows" spellCheck={false} onChange={searchHandle}/>
         <FlowsContainer>
-          <FlowList flows={flows} />
+          <FlowList flows={searched} />
           <Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
             <VscAdd />
           </Box>
@@ -42,7 +52,6 @@ export default function ProjectsPanel() {
       </CollapsibleMenu>
       <CollapsibleMenu trigger={dashboardCollapseTrigger()} open={true}>
         <DashboardsContainer>
-          {/* <ElementList/> */}
           <Box onClick={() => dispatch(setModal(<AddDashboardForm />))}>
             <VscAdd />
           </Box>

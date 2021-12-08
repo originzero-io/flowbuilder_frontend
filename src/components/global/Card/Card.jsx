@@ -29,7 +29,7 @@ const Card = ({ data }) => {
       <CardTitle>{data.config.name || ""}</CardTitle>
       <DetailMenu deleteEvent={deleteCardHandler} data={data} />
       <CardBody>
-        <CardAuthor>{auth.username || ""}</CardAuthor>
+        <CardAuthor>{data.config.createdBy.username || ""}</CardAuthor>
         <CardDescription>{data.config.description || ""}</CardDescription>
         <CardFooter>
           <Badge color="success">{data.project.name || ""}</Badge>

@@ -14,6 +14,7 @@ import userReducer from "./userReducer";
 import workspaceReducer from "./workspaceReducer";
 import projectReducer from "./projectReducer";
 import errorReducer from "./errorReducer";
+import * as actions from "../constants/authConstants";
 const reducers = combineReducers({
   auth:authReducer,
   users:userReducer,
@@ -33,9 +34,9 @@ const reducers = combineReducers({
   nodeList: nodeListReducer,
   nodeClassReducer,
 });
-//resetting reducers when user log out
+//resetting reducers after user log out
 const rootReducer = (state, action) => {
-  if (action.type === 'LOG_OUT') {
+  if (action.type === actions.LOG_OUT) {
     state = undefined;
   }
   return reducers(state, action);

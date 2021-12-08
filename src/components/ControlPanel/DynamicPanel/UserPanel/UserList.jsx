@@ -33,7 +33,7 @@ const Box = styled.div`
   cursor: pointer;
   width: 25px;
   height: 25px;
-  background: ${(props) => (props.online ? "#4cd137" : "#c0392b")};
+  background: ${(props) => (props.online ? "#4cd137" : "#95a5a6")};
   border-radius: 50%;
 `;
 
