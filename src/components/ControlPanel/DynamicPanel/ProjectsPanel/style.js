@@ -40,6 +40,7 @@ export const SearchBar = styled.input`
   width: 250px;
   height:3vh;
   user-select: none;
+  outline-color:green;
 `;
 export const FlowsContainer = styled(ProjectsContainerIndex)`
 `;

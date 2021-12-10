@@ -24,6 +24,12 @@ export const removeUserToWorkspaceService = async (user, workspace) => {
   });
   return response.data;
 };
+export const assignPermissionToMemberService = async (user,workspace,permissions) => {
+  const response = await axios.post(`/users/${user._id}/workspace/${workspace._id}/permissions`, {
+    permissions
+  });
+  return response.data;
+};
 export const editUserService = async (user) => {
   const response = await axios.put(`/users/${user._id}`, user);
   return response.data;

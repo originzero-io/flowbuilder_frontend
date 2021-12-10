@@ -17,8 +17,8 @@ export default function TeamPanel() {
   };
   return (
     <DynamicPanelContainer>
-      <Button color="primary" onClick={addMemberToTeamHandle}>Add Member to Team</Button>
-      <Button color="warning" onClick={refreshHandle}>Refresh</Button>
+      <Button color="primary" onClick={addMemberToTeamHandle} style={{marginBottom:'5px'}}>Manage Members</Button>
+      <Button color="warning" onClick={refreshHandle} style={{marginLeft:'10px',marginBottom:'5px'}}>Refresh</Button>
       <MemberList />
     </DynamicPanelContainer>
   );

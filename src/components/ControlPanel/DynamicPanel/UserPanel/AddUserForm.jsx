@@ -13,7 +13,7 @@ export default function AddUserForm() {
     password: "",
     email: "",
     role: "user",
-    avatar: "",
+    avatar: null,
     phone: "",
   });
 

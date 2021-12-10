@@ -32,6 +32,7 @@ import { ProfileIcon, ShareIcon, TuneIcon } from "./Icons";
 import { MenuIndex, MenuItem } from "./style";
 import useAuth from "../../../../utils/useAuth";
 import useActiveFlow from "../../../../utils/useActiveFlow";
+import Avatar from "../../../global/Avatar";
 const Menu = styled(MenuIndex)`
   background: ${(props) =>
     props.theme === "dark"
@@ -45,7 +46,7 @@ const Menu = styled(MenuIndex)`
 
 export default function ConfigurationMenu() {
   const { flowGui } = useActiveFlow();
-  const { name } = useAuth();
+  const auth = useAuth();
   const { reactFlowInstance, miniMapDisplay, theme } = flowGui;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const setSelectedElements = useStoreActions(
@@ -111,20 +112,16 @@ export default function ConfigurationMenu() {
   const changeTheme = (checked) => {
     if (theme === "dark") {
       dispatch(setTheme("light"));
-      //localStorage.setItem("theme", "light");
     } else {
       dispatch(setTheme("dark"));
-      //localStorage.setItem("theme", "dark");
     }
     setActive({ ...active, theme: checked });
   };
   const changeMiniMapDisplay = (checked) => {
     if (miniMapDisplay === "visible") {
       dispatch(setMiniMapDisplay("hidden"));
-      //localStorage.setItem("mini-map", "hidden");
     } else {
       dispatch(setMiniMapDisplay("visible"));
-      //localStorage.setItem("mini-map", "visible");
     }
     setActive({ ...active, miniMap: checked });
   };
@@ -169,14 +166,7 @@ export default function ConfigurationMenu() {
       </MenuItem>
       <DropdownWrapper tabIndex="1">
         <Circle theme={theme}>
-          {/* <ProfileIcon
-            width="50px"
-            height="50px"
-            color={
-              theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-            }
-          /> */}
-          <div style={{fontSize:'10px'}}>{name.split(" ")[0]}</div>
+          <Avatar avatar={auth.avatar}/>
         </Circle>
         <DropdownList theme={theme} align="right">
           <DropDownItem>

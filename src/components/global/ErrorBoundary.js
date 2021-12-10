@@ -13,7 +13,7 @@ export default function ErrorBoundary({children}) {
           {children}  
         </>
     )
-};
+}
 
 ErrorBoundary.propTypes = {
     children: PropTypes.element

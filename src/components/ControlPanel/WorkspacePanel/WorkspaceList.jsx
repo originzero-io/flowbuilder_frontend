@@ -3,7 +3,7 @@ import { VscAdd } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { setModal } from "../../../store/reducers/componentReducer";
 import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
-import { loadProjects } from "../../../store/reducers/projectReducer";
+import { getProjects } from "../../../store/reducers/projectReducer";
 import {
   getMyWorkspaces,
   setActiveWorkspace
@@ -25,13 +25,13 @@ const WorkspaceList = () => {
   useDidMountEffect(() => {
     if (workspaces.length > 0) {
       dispatch(setActiveWorkspace(workspaces[0]));
-      dispatch(loadProjects(workspaces[0]))
+      dispatch(getProjects(workspaces[0]))
     }
   }, [workspaces]);
 
   const clickWorkspaceHandler = (workspace) => {
     dispatch(setActiveWorkspace(workspace));
-    dispatch(loadProjects(workspace));
+    dispatch(getProjects(workspace));
     dispatch(getFlowsByWorkspace(workspace));
   };
   return (

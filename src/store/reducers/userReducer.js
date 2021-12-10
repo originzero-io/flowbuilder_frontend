@@ -1,5 +1,6 @@
 import {
   addUserToWorkspaceService,
+  assignPermissionToMemberService,
   deleteUserService,
   editUserService,
   getAllUsersService,
@@ -58,6 +59,14 @@ export const addUserToWorkspace = (userInfo,workspace) => async (dispatch) => {
 };
 export const removeUserToWorkspace = (userInfo, workspace) => async (dispatch) => {
   const { user } = await removeUserToWorkspaceService(userInfo, workspace);
+  dispatch({
+    type: actions.EDIT_USER,
+    payload: user,
+  });
+};
+export const assignPermissionToMember = (member,workspace,permissions) => async (dispatch) => {
+  const {user} = await assignPermissionToMemberService(member, workspace, permissions);
+  console.log(user);
   dispatch({
     type: actions.EDIT_USER,
     payload: user,

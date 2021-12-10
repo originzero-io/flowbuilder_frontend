@@ -39,7 +39,7 @@ export default function AddMemberForm() {
           <Container key={user._id}>
             <Avatar avatar={user.avatar} />
             <UserItem>{user.username}</UserItem>
-            {user.workspaces.includes(activeWorkspace._id) ? (
+            {user.workspaces.some(workspace=>workspace._id === activeWorkspace._id) ? (
               <TiTickOutline
                 style={{ fontSize: "30px" }}
                 onClick={() => removeMemberHandle(user)}
