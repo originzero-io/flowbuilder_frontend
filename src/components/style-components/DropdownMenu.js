@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import * as themeColor from "../../config/ThemeReference"
+import * as themeColor from "../../config/ThemeReference";
 export const DropdownWrapper = styled.div`
   position: relative;
-  font-size:14px;
+  font-size:16px;
+  z-index:6;
 `;
-
 export const DropdownList = styled.ul`
-  //margin-top: ${(props) => (props.align === "right" ? "30px" : "17px")};
-  //margin-top: ${(props) => (props.align === "right" ? "30px" : "17px")};
+  margin-top: ${(props) => (props.align === "right" ? "30px" : "8px")};
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -19,10 +18,8 @@ export const DropdownList = styled.ul`
   list-style: none;
   border-radius: 4px;
   visibility:hidden;
-
   ${DropdownWrapper}:focus-within & {
     visibility:visible;
-    transform: translateY(25px);
   }
 `;
 

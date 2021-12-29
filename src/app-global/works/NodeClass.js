@@ -9,14 +9,15 @@ import {
   //findElementById
 } from "../helpers/elementController";
 import { openNotification as notification } from "../dom/notification";
-import {setElements} from "../../store/actions/elementsActions"
+import { setElements } from "../../store/reducers/flow/flowElementsReducer";
+import axios from "axios"
 export default class Node {
   elements = [];
   nodes = [];
   edges = [];
-  constructor(data) {
+  constructor(message) {
     console.log(
-      `%c ${data}`,
+      `%c ${message}`,
       "background: green; color: white; display: block;"
     );
   }
@@ -28,9 +29,11 @@ export default class Node {
     this.dispatch = dispatch;
   };
 
-  doInput = (data, self, outgoers) => {
+  doInput = async(data, self, outgoers) => {
     //console.log("inject outgoers", outgoers);
     console.log("Input fonksiyonuna gelen data", data);
+    //const res = await axios.get('http://localhost:5000/users/getAll');
+    //console.log("res:", res);
     this.sendDataToYourOutgoers(data, self, outgoers);
   };
   doSplit = (data, self, outgoers) => {
@@ -93,6 +96,7 @@ export default class Node {
     let indis = 0;
     const newElements = this.elements.map((element, index) => {
       if (isEdge(element)) {
+        //benden çıkan edge
         if (element.source === self.id) {
           console.log("BİRLEŞTİRİLMİŞ DATA:", element);
           return {

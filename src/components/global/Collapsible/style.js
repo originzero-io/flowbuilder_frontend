@@ -3,31 +3,26 @@ export const CollapseIndex = styled.button`
   background:none;
   border:none;
   width:100%;
-  color:whitesmoke;
+  color:white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px;
   cursor: pointer;
   &:hover {
-    background-color: rgba(47, 54, 64,0.7);
-    border-right: 3px solid rgb(22,139,63);
-  }
-  &:focus {
-    background: rgb(22,139,63);
+    background-color: rgb(60, 60, 60);
   }
 `;
 export const CollapsableItem = styled(CollapseIndex)`
-  //margin-left: 25px;
-  margin-top:2px;
+  margin-top:1px;
   margin-right:3px;
-  padding-left: 25px;
-  background: rgba(189, 195, 199, 0.2);
-  border-radius:7px;
+  padding-left: 13%;
+  border-radius:3px;
+  background:${props => props.active ? "rgba(46, 213, 115,0.2)" : "none"};
+  border-bottom:1px solid rgb(60, 60, 60);
 `;
 export const TriggerWrapper = styled(CollapseIndex)`
-  padding: 5px;
-  margin:3px;
+  padding: 7px;
   cursor: pointer;
   user-select:none;
 `;

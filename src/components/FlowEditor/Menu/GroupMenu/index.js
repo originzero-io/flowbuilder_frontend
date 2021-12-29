@@ -3,7 +3,8 @@ import { useStoreActions, useStoreState } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { setGroupToNodes } from "../../../../app-global/helpers/elementController";
-import { setGroupMultiple, setGroupSingle } from "../../../../store/actions/elementsActions";
+import { setGroupMultiple, setGroupSingle } from "../../../../store/reducers/flow/flowElementsReducer";
+import useActiveFlow from "../../../../utils/useActiveFlow";
 import { GroupColor, Label } from "../GroupBar/style";
 const Container = styled.div`
   position: absolute;
@@ -41,8 +42,8 @@ const Content = styled.div`
   margin-top: 2px;
 `;
 export default function GroupMenu({ self }) {
-  const { elementReducer,nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
+  const { flowElements,flowGroups } = useActiveFlow();
+  const elements = flowElements.present;
   const dispatch = useDispatch();
   const selectedElements = useStoreState((state) => state.selectedElements);
   const setSelectedElements = useStoreActions(
@@ -50,14 +51,14 @@ export default function GroupMenu({ self }) {
   );
   const [searched, setSearched] = useState([]);
   useEffect(() => {
-    setSearched(nodeGroupsReducer);
-  }, [nodeGroupsReducer]);
+    setSearched(flowGroups);
+  }, [flowGroups]);
   useEffect(() => {
-    setSearched(nodeGroupsReducer);
+    setSearched(flowGroups);
   }, []);
   const searchHandle = (e) => {
     const value = e.target.value;
-    const filtered = nodeGroupsReducer.filter((group) =>
+    const filtered = flowGroups.filter((group) =>
       group.name.toLowerCase().includes(value.toLowerCase())
     );
     if (value === "") {
@@ -95,7 +96,7 @@ export default function GroupMenu({ self }) {
       <Content>
         {searched.map((group) => {
           return (
-            <GroupItem key={group.id} onClick={() => selectGroup(group)}>
+            <GroupItem key={group._id} onClick={() => selectGroup(group)}>
               <Label style={{ fontSize: "12px" }}>{group.name}</Label>
               <GroupColor width="15px" height="15px" value={group.color} />
             </GroupItem>

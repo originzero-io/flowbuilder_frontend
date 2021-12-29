@@ -1,11 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { MenuIndex, MenuItem} from "./style";
-import { useDispatch, useSelector } from "react-redux";
-import * as themeColor from "../../../../config/ThemeReference"
-import { Logo } from "../../../global/Icons";
-import { Link } from "react-router-dom";
-import { mergeFlow } from "../../../../store/actions/flowActions";
+import { elementNamespace } from "../../../../App";
+import * as themeColor from "../../../../config/ThemeReference";
+import { saveFlowService } from "../../../../services/flowService";
+import { setElements } from "../../../../store/reducers/flow/flowElementsReducer";
+import { getFlowsByWorkspace } from "../../../../store/reducers/flow/flowReducer";
+import useWorkspace from "../../../../utils/useWorkspace";
+import useActiveFlow from "../../../../utils/useActiveFlow";
+import { Logo } from "../../../global/icons";
+import { MenuIndex, MenuItem } from "./style";
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;
@@ -14,7 +19,7 @@ const Menu = styled(MenuIndex)`
       ? themeColor.DARK_MENU_BACKGROUND
       : themeColor.LIGHT_MENU_BACKGROUND};
   border-radius: 6px;
-  min-width:70px;
+  min-width: 70px;
 `;
 const Circle = styled.div`
   width: 55px;
@@ -34,39 +39,49 @@ const Circle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  &:hover{
-    transform:scale(1.1);
+  &:hover {
+    transform: scale(1.1);
   }
 `;
 const MainMenu = () => {
-  const { flowWorkSpaceReducer,flowConfigReducer,nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
-  const { theme,reactFlowInstance } = flowWorkSpaceReducer;
+  const { flowGui, flowConfig } = useActiveFlow();
+  const { activeWorkspace } = useWorkspace();
+  const { theme, reactFlowInstance } = flowGui;
+  const { flowId } = useParams();
   const dispatch = useDispatch();
-  const homeClickHandle = () => {
+  const homeClickHandle = async () => {
     const { position, zoom, elements } = reactFlowInstance.toObject();
     const flow = {
-      config: flowConfigReducer,
-      workspace: { ...flowWorkSpaceReducer, position, zoom },
-      elements: elements,
-      groups: nodeGroupsReducer
+      config: flowConfig,
+      gui: { ...flowGui, position, zoom },
     };
-    dispatch(mergeFlow(flow));
+    await saveFlowService(flowId, flow);
+    //await saveElementsService(flowId, elements);
+
+    elementNamespace.emit("elements:save", { flow_id: flowId, elements });
+    dispatch(setElements([]));
+    dispatch(getFlowsByWorkspace(activeWorkspace));
+  };
+  const nameClick = () => {
+    console.log("tıkladım");
+    console.log("eLEMENT:", elementNamespace);
+    elementNamespace.emit("elements:messageFromClient", { message: 'Naber elements?' });
   }
   return (
     <>
       <Menu theme={theme}>
         <Circle theme={theme}>
-          <Logo theme={theme}/>
+          <Logo theme={theme} />
         </Circle>
         <div onClick={homeClickHandle}>
-          <Link to="/">
+          <Link to="/panel/all">
             <MenuItem theme={theme}>Home</MenuItem>
           </Link>
         </div>
-        <MenuItem theme={theme}>{flowConfigReducer.name}</MenuItem>
+        <MenuItem theme={theme} onClick={nameClick}>{flowConfig.name}</MenuItem>
       </Menu>
     </>
   );
-}
+};
 
 export default React.memo(MainMenu);

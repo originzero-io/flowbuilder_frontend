@@ -1,11 +1,11 @@
 import styled from "styled-components";
-export const Container = styled.div`
-  background-image: radial-gradient(ellipse at 50% 45%, #2e2f36, #1b1d21 50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
+// export const Container = styled.div`
+//   background-image: radial-gradient(ellipse at 50% 45%, #2e2f36, #1b1d21 50%);
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 100%;
+// `;
 export const Box = styled.div`
   display: flex;
   flex-direction: column;

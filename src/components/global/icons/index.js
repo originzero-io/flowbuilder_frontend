@@ -1,15 +1,16 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+//test
 import * as themeColor from "../../../config/ThemeReference";
 import React from "react-redux"
-export function Logo({ theme }) {
+export function Logo({ theme,width="26px",height="30px" }) {
   return (
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 156.74 220.09"
-        width="26px"
-        height="30px"
+        width={width}
+        height={height}
         fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
       >
         <polygon

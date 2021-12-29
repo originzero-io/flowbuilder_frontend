@@ -1,20 +1,20 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { ActionCreators as UndoActionCreators } from 'redux-undo'
-import KeyboardEventHandler from "react-keyboard-event-handler";
 import { useStoreActions, useStoreState, useZoomPanHelper } from "react-flow-renderer";
-import { saveToDb } from "../../app-global/db";
-import { setRotateAllPath } from "../../store/actions/flowActions";
-import { setCopiedElements } from "../../store/actions/controlPanelActions";
+import KeyboardEventHandler from "react-keyboard-event-handler";
+import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
-import { pasteNodes } from "../../store/actions/elementsActions";
+import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { openNotification as notification } from "../../app-global/dom/notification";
-export default function KeyboardEvents() {
+import { setCopiedElements } from "../../store/reducers/controlPanelReducer";
+import { pasteNodes } from "../../store/reducers/flow/flowElementsReducer";
+import { setRotateAllPath } from "../../store/reducers/flow/flowGuiReducer";
+import useActiveFlow from "../../utils/useActiveFlow";
+const KeyboardEvents = () => {
   const dispatch = useDispatch();
-  const { flowWorkSpaceReducer,elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const { copiedElements } = useSelector((state) => state.controlPanelReducer);
-  const { paneClickPosition,reactFlowInstance,rotateAllPath } = flowWorkSpaceReducer;
-  const elements = elementReducer.present;
+  const { flowGui,flowElements } = useActiveFlow();
+  const { copiedElements } = useSelector((state) => state.controlPanel);
+  const { paneClickPosition,reactFlowInstance,rotateAllPath } = flowGui;
+  const elements = flowElements.present;
   const selectedElements = useStoreState((state) => state.selectedElements);
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
@@ -36,7 +36,7 @@ export default function KeyboardEvents() {
   }
   const saveFlowEvent = (key, e) => {
     e.preventDefault();
-    saveToDb(reactFlowInstance);
+    //saveToDb(reactFlowInstance);
   }
   const rotateAllNodesEvent = (key, e) => {
     e.preventDefault();
@@ -107,3 +107,4 @@ export default function KeyboardEvents() {
     </>
   );
 }
+export default React.memo(KeyboardEvents);

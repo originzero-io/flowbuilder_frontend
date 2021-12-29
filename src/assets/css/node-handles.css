@@ -4,6 +4,7 @@
   width: 10px !important;
   height: 10px !important;
   position: static !important;
+  border-radius: 2px !important;
 }
 .node-handle:hover {
   width: 11px !important;

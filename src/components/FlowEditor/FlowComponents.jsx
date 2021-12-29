@@ -3,6 +3,7 @@ import { Background, MiniMap } from "react-flow-renderer";
 import AppMenu from "./Menu";
 import PropTypes from "prop-types"
 import AppTooltips from "../global/AppTooltips";
+import KeyboardEvents from "../global/KeyboardEvents";
 const FlowComponents = ({ theme, miniMapDisplay }) => {
   return (
     <>
@@ -11,7 +12,7 @@ const FlowComponents = ({ theme, miniMapDisplay }) => {
         variant="lines"
         gap={80}
         color={theme === "light" ? "#7f8c8d" : "rgb(170,170,170)"}
-        size={theme === "light" ? "0.1px" : "0.1px"}
+        size={theme === "light" ? `0.1px` : `0.1px`}
       />
       <MiniMap
         nodeColor="gray"
@@ -22,6 +23,7 @@ const FlowComponents = ({ theme, miniMapDisplay }) => {
           borderRadius: "4px",
         }}
       />
+      <KeyboardEvents/>
       <AppTooltips/>
     </>
   );
@@ -32,4 +34,5 @@ export default React.memo(FlowComponents);
 FlowComponents.propTypes = {
   theme: PropTypes.string.isRequired,
   miniMapDisplay: PropTypes.string.isRequired,
+  currentZoom: PropTypes.number
 }

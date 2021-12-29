@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import { saveToDb } from "../../../../app-global/db";
 import { HorizontalDivider } from "../../../style-components/Divider";
 import { MenuItem } from "./style";
 import * as tooltip from "../../../../config/TooltipReference";
@@ -22,13 +21,16 @@ import {
   setElements,
   setRotateAll,
   setExpandAll,
-} from "../../../../store/actions/elementsActions";
+} from "../../../../store/reducers/flow/flowElementsReducer";
 import {
   setRotateAllPath,
-} from "../../../../store/actions/flowActions";
+} from "../../../../store/reducers/flow/flowGuiReducer";
 import * as themeColor from "../../../../config/ThemeReference";
-import { useZoomPanHelper, useStoreActions, isNode } from "react-flow-renderer";
+import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
+import { useParams } from "react-router";
+import { elementNamespace } from "../../../../App";
+import useActiveFlow from "../../../../utils/useActiveFlow";
 const Menu = styled.div`
   position: absolute;
   display: flex;
@@ -45,16 +47,19 @@ const Menu = styled.div`
     props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON};
 `;
 export default function ControlMenu() {
-  const { flowWorkSpaceReducer,flowConfigReducer,elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const { reactFlowInstance,rotateAllPath,theme } = flowWorkSpaceReducer;
-  const canUndo = elementReducer.past.length > 0;
-  const canRedo = elementReducer.future.length > 0;
+  const { flowGui,flowConfig,flowElements } = useActiveFlow();
+  const { reactFlowInstance,rotateAllPath,theme } = flowGui;
+  const canUndo = flowElements.past.length > 0;
+  const canRedo = flowElements.future.length > 0;
   const { zoomIn, zoomOut, fitView } = useZoomPanHelper();
   const setInteractive = useStoreActions((actions) => actions.setInteractive);
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
+  const { flowId } = useParams();
   const saveFlow = useCallback(() => {
-    saveToDb(flowConfigReducer,flowWorkSpaceReducer);
+    //saveToDb(flowConfig,flowGui);
+    const { position, zoom, elements } = reactFlowInstance.toObject();
+    elementNamespace.emit('elements:save', { flow_id: flowId, elements })
   }, [reactFlowInstance]);
 
   const deleteAllNodes = () => {

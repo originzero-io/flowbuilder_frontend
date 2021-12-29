@@ -1,16 +1,17 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { getIncomers, getOutgoers } from "react-flow-renderer";
+import { useDispatch } from "react-redux";
+import { openNotification as notification } from "../../../../../app-global/dom/notification";
+import { setNodeEnable, setOutgoersEnable } from "../../../../../store/reducers/flow/flowElementsReducer";
+import useActiveFlow from "../../../../../utils/useActiveFlow";
 import RotateButton from "../../../../global/Button/RotateButton";
 import SwitchButton from "../../../../global/Button/SwitchButton";
-import { NameEditIcon } from "../../../../global/Icons";
-import { useSelector, useDispatch } from "react-redux";
-import { setNodeEnable, setOutgoersEnable } from "../../../../../store/actions/elementsActions";
-import { getIncomers, getOutgoers } from "react-flow-renderer";
-import { openNotification as notification } from "../../../../../app-global/dom/notification";
-import PropTypes from "prop-types"
+import { NameEditIcon } from "../../../../global/icons";
 export default function FeatureIcons({ self, edit, setEdit }) {
   const dispatch = useDispatch();
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
+  const { flowElements } = useActiveFlow();
+  const elements = flowElements.present;
   const nameEditHandle = () => {
     setEdit(!edit);
   };

@@ -1,53 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import ReactFlow, {
   addEdge,
-  isEdge,
-  isNode,
   removeElements,
   updateEdge,
   useStoreState,
 } from "react-flow-renderer";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import nodeTypes from "./Nodes/index";
-import { getDataFromDb } from "../../app-global/db";
+import nodeTypes from "./Nodes";
 import adjustScreen from "../../app-global/dom/adjustScreen";
 import { loadFunctionsToNode } from "../../app-global/helpers/loadFunctionsToNode";
 import { openNotification as notification } from "../../app-global/dom/notification";
-import {
-  setReactFlowInstance,
-  setMiniMapDisplay,
-  setClickedElement,
-  setPaneClickPosition,
-  setTheme,
-  setCurrentFlowConfig,
-  setCurrentFlowWorkspace
-} from "../../store/actions/flowActions";
-import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/actions/elementsActions"
+import { setReactFlowInstance, setPaneClickPosition } from "../../store/reducers/flow/flowGuiReducer";
+import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/reducers/flow/flowElementsReducer"
 import {
   setElementContextMenu,
   setGroupMenu,
   setMultiSelectionContextMenu,
   setPanelContextMenu,
-} from "../../store/actions/menuActions";
-import { setNodeList } from "../../store/actions/nodeListActions";
+} from "../../store/reducers/menuReducer";
+import { setNodeList } from "../../store/reducers/nodeListReducer";
 import * as themeColor from "../../config/ThemeReference";
-import { closeAllNodeGroupMenu } from "../../store/actions/flowActions";
+import { closeAllNodeGroupMenu } from "../../store/reducers/flow/flowGuiReducer";
 import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "../../app-global/helpers/elementController";
-import KeyboardEvents from "../global/KeyboardEvents";
 import FlowComponents from "./FlowComponents";
-import { loadGroups } from "../../store/actions/nodeGroupsActions";
+import CustomEdge from './Edges/CustomEdge'
 import PropTypes from "prop-types"
+import useActiveFlow from "../../utils/useActiveFlow";
 export default function FlowEditor({ reactFlowWrapper }) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const nodeList = useSelector((state) => state.nodeListReducer);
+  const nodeList = useSelector((state) => state.nodeList);
   const selectedElements = useStoreState((state) => state.selectedElements);
-  const { elementReducer, flowWorkSpaceReducer, flowConfigReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
-  const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowWorkSpaceReducer;
+  const { flowElements, flowGui } = useActiveFlow();
+  const elements = flowElements.present;
+  const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowGui;
   const dispatch = useDispatch();
   const store = useStore();
   const onConnectHandle = (params) => {
-    console.log(params);
+    console.log("params:", params);
     if (params.source === params.target) {
       notification("ERROR!", "Nodes cannot connect itself.", "error");
     } else {
@@ -68,7 +57,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
 
   const onEdgeUpdateHandle = (oldEdge, newConnection) => {
-    const elementArray = store.getState().activeFlowReducer.elementReducer.present;
+    const elementArray = store.getState().activeFlow.flowElements.present;
     const edgeExist = isEdgeExist(newConnection,elementArray);
     if (edgeExist) {
       const newElements = removeEdgeFromArray(oldEdge,elementArray);
@@ -87,22 +76,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
   const onLoadHandle = (_reactFlowInstance) => {
     dispatch(setReactFlowInstance(_reactFlowInstance));
-    adjustScreen(flowWorkSpaceReducer,_reactFlowInstance);
-    // getDataFromDb(flowConfigReducer,nodeClass)
-    //   .then((flow) => {
-    //     console.log("dönen flow:", flow);
-    //     //adjustScreen(flow, _reactFlowInstance);
-    //     //dispatch(setElements(flow.elements));
-    //     //dispatch(setCurrentFlowConfig(flow.config));
-    //     //dispatch(setCurrentFlowWorkspace(flow.workspace));
-    //     dispatch(setElements(flow.elements));
-    //   })
-    //   .catch((err) => {
-    //     console.log("ERROR ON DB", err);
-    //     //dispatch(setElements(initialElements));
-    //   });
-    // const data = localStorage.getItem(`${flowConfigReducer.id}`);
-    // console.log("dataaaa", data);
+    adjustScreen(flowGui,_reactFlowInstance);
   };
   const onDragOverHandle = (event) => {
     event.preventDefault();
@@ -198,8 +172,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
       );
     }
   };
-  const onSelectionContextMenuHandle = (event, nodes) => {
-    console.log("nodes:", nodes);
+  const onSelectionContextMenuHandle = (event) => {
     event.preventDefault();
     dispatch(
       setMultiSelectionContextMenu({
@@ -240,7 +213,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const closeElementContextMenu = () => {
     dispatch(setElementContextMenu(false));
   };
-  
   useEffect(() => {
     nodeClass.applyElements(elements, dispatch);
   }, [elements]);
@@ -248,6 +220,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     <>
       <ReactFlow
         nodeTypes={nodeTypes}
+        edgeTypes={{ custom: CustomEdge }}
         style={{
           background:
             theme === "light" ? themeColor.LIGHT_PANE : themeColor.DARK_PANE,
@@ -257,7 +230,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
         elements={elements}
         onConnect={onConnectHandle}
         onElementsRemove={onElementsRemoveHandle}
-        //onElementClick={onElementClickHandle}
         onDoubleClick={onDoubleClickHandle}
         onPaneContextMenu={onPaneContextHandle}
         onPaneClick={onPaneClickHandle}
@@ -270,23 +242,11 @@ export default function FlowEditor({ reactFlowWrapper }) {
         multiSelectionKeyCode={17}
         minZoom={0.3}
         maxZoom={4}
-        zoomActivationKeyCode={90}
         zoomOnDoubleClick={false}
         connectionLineStyle={{ stroke: "rgb(22,139,63)", strokeWidth: "2px" }}
-        //onMove={onMoveHandle} //return x,y,zoom
-        // snapToGrid={true}
-        // snapGrid={[60, 60]}
-        //onNodeDoubleClick={onNodeDoubleClick}
-        //onNodeDragStart={(e, node) => console.log(node)}
-        //onNodeDrag={(e, node) => console.log(node)}
-        //onNodeDragStop={(e, node) => console.log(node)}
-        //onNodeMouseEnter={(e, node) => console.log(node)} //hover
-        //onNodeMouseLeave={(e, node) => console.log(node)} //hover leave
-        //onConnectEnd={(e) => console.log(e)}
         onSelectionChange={onSelectionChangeHandle}
       >
         <FlowComponents theme={theme} miniMapDisplay={miniMapDisplay}/>
-        <KeyboardEvents/>
       </ReactFlow>
     </>
   );
@@ -294,5 +254,4 @@ export default function FlowEditor({ reactFlowWrapper }) {
 
 FlowEditor.propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
-  flowId: PropTypes.string.isRequired
 }

@@ -6,16 +6,18 @@ import { openNotification } from "../../../../app-global/dom/notification";
 import { loadFunctionsToNode } from "../../../../app-global/helpers/loadFunctionsToNode";
 import * as themeColor from "../../../../config/ThemeReference";
 import * as tooltip from "../../../../config/TooltipReference";
+import { logOut } from "../../../../store/reducers/authReducer";
+import { setModal } from "../../../../store/reducers/componentReducer";
 import {
   changeEdgeType,
   importElements,
-} from "../../../../store/actions/elementsActions";
+} from "../../../../store/reducers/flow/flowElementsReducer";
 import {
   setMiniMapDisplay,
   setTheme,
-  setWorkspaceEdgeType,
-} from "../../../../store/actions/flowActions";
-import { LearnIcon } from "../../../ControlPanel/Icons";
+  setFlowEdgeType,
+} from "../../../../store/reducers/flow/flowGuiReducer";
+import { BiBrain } from "react-icons/bi";
 import SwitchButton from "../../../global/Button/SwitchButton";
 import FileInputWrapper from "../../../global/FileInputWrapper";
 import { VerticalDivider } from "../../../style-components/Divider";
@@ -28,6 +30,9 @@ import { FileInput } from "../../../style-components/FileInput";
 import { Circle } from "../../../style-components/Shapes";
 import { ProfileIcon, ShareIcon, TuneIcon } from "./Icons";
 import { MenuIndex, MenuItem } from "./style";
+import useAuth from "../../../../utils/useAuth";
+import useActiveFlow from "../../../../utils/useActiveFlow";
+import Avatar from "../../../global/Avatar";
 const Menu = styled(MenuIndex)`
   background: ${(props) =>
     props.theme === "dark"
@@ -40,32 +45,34 @@ const Menu = styled(MenuIndex)`
 `;
 
 export default function ConfigurationMenu() {
-  const { flowWorkSpaceReducer, flowConfigReducer, elementReducer, nodeGroupsReducer } = useSelector((state) => state.activeFlowReducer);
-  const { reactFlowInstance, miniMapDisplay, theme } = flowWorkSpaceReducer;
+  const { flowGui } = useActiveFlow();
+  const auth = useAuth();
+  const { reactFlowInstance, miniMapDisplay, theme } = flowGui;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
   );
   const dispatch = useDispatch();
-
+  
   const downloadFlowHandle = () => {
     if (confirm("Download?")) {
       if (reactFlowInstance) {
         const { elements } = reactFlowInstance.toObject();
-        const flow = {
-          config: flowConfigReducer,
-          workspace: flowWorkSpaceReducer,
-          elements: elements,
-          groups: nodeGroupsReducer
-        }
-        console.log("flow:", flow);
-        let hiddenElement = document.createElement("a");
-        hiddenElement.href =
-          "data:application/octet-stream;base64," + btoa(JSON.stringify(flow));
-        hiddenElement.target = "_blank";
-        hiddenElement.download = "Flow.json";
-        hiddenElement.click();
-        hiddenElement.remove();
+        console.log(elements);
+        // const flow = {
+        //   config: flowConfig,
+        //   workspace: flowGui,
+        //   elements: elements,
+        //   groups: flowGroups
+        // }
+        // console.log("flow:", flow);
+        // let hiddenElement = document.createElement("a");
+        // hiddenElement.href =
+        //   "data:application/octet-stream;base64," + btoa(JSON.stringify(flow));
+        // hiddenElement.target = "_blank";
+        // hiddenElement.download = "Flow.json";
+        // hiddenElement.click();
+        // hiddenElement.remove();
       }
     }
   };
@@ -105,26 +112,27 @@ export default function ConfigurationMenu() {
   const changeTheme = (checked) => {
     if (theme === "dark") {
       dispatch(setTheme("light"));
-      //localStorage.setItem("theme", "light");
     } else {
       dispatch(setTheme("dark"));
-      //localStorage.setItem("theme", "dark");
     }
     setActive({ ...active, theme: checked });
   };
   const changeMiniMapDisplay = (checked) => {
     if (miniMapDisplay === "visible") {
       dispatch(setMiniMapDisplay("hidden"));
-      //localStorage.setItem("mini-map", "hidden");
     } else {
       dispatch(setMiniMapDisplay("visible"));
-      //localStorage.setItem("mini-map", "visible");
     }
     setActive({ ...active, miniMap: checked });
   };
   const edgeTypeHandle = (e) => {
-    dispatch(setWorkspaceEdgeType(e.target.value));
+    dispatch(setFlowEdgeType(e.target.value));
     dispatch(changeEdgeType(e.target.value));
+  };
+  const logOutHandle = () => {
+    if (confirm("Are you sure?")) {
+      dispatch(logOut());
+    }
   };
   return (
     <Menu theme={theme}>
@@ -154,23 +162,11 @@ export default function ConfigurationMenu() {
       <VerticalDivider theme={theme} />
 
       <MenuItem data-tip="Learn" data-for={tooltip.LEARN}>
-        <LearnIcon
-          width="25px"
-          height="25px"
-          color={
-            theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-          }
-        />
+        <BiBrain style={{fontSize:'25px',color:theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}}/>
       </MenuItem>
       <DropdownWrapper tabIndex="1">
         <Circle theme={theme}>
-          <ProfileIcon
-            width="50px"
-            height="50px"
-            color={
-              theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-            }
-          />
+          <Avatar avatar={auth.avatar}/>
         </Circle>
         <DropdownList theme={theme} align="right">
           <DropDownItem>
@@ -178,8 +174,6 @@ export default function ConfigurationMenu() {
             <SwitchButton
               checked={active.theme}
               onChange={changeTheme}
-              width={30}
-              height={15}
             />
           </DropDownItem>
           <DropDownItem>
@@ -187,11 +181,10 @@ export default function ConfigurationMenu() {
             <SwitchButton
               checked={active.miniMap}
               onChange={changeMiniMapDisplay}
-              width={30}
-              height={15}
             />
           </DropDownItem>
           <DropDownItem>Account Settings</DropDownItem>
+          <DropDownItem onClick={logOutHandle}>Log Out</DropDownItem>
           <DropDownItem>
             <select onChange={edgeTypeHandle} defaultValue="smoothstep">
               <option value="bezier">Bezier</option>

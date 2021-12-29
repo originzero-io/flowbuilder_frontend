@@ -1,46 +1,40 @@
-import React, { useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import React, { useEffect, useRef } from "react";
 import { ReactFlowProvider } from "react-flow-renderer";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import FlowEditor from "../components/FlowEditor";
 import { FlowWrapper } from "../components/style-components/AppWrapper";
-import PropTypes from "prop-types";
-import {
-  setCurrentFlowConfig,
-  setCurrentFlowWorkspace,
-} from "../store/actions/flowActions";
-import useComponentWillMount from "../hooks/useComponentWillMount";
-import { setElements } from "../store/actions/elementsActions";
-import { loadGroups } from "../store/actions/nodeGroupsActions";
-import { Redirect } from "react-router";
-import { useParams } from "react-router-dom";
-export default function FlowPage() {
+import { getGroups } from "../store/reducers/flow/flowGroupsReducer";
+const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowId } = useParams();
-  const flow = useSelector((state) => state.flowReducer).find((flow) => flow.config.id === flowId);
-  const loadFlow = () => {
-    dispatch(setCurrentFlowConfig(flow.config));
-    dispatch(setCurrentFlowWorkspace(flow.workspace));
-    dispatch(setElements(flow.elements));
-    dispatch(loadGroups(flow.groups));
+  const onUnload = e => {
+    e.preventDefault();
+    e.returnValue = 'Some message';
   }
-  useComponentWillMount(() => {
-    if (flow) {
-      loadFlow();
+  useEffect(async () => {
+    dispatch(getGroups(flowId));
+
+    window.addEventListener("beforeunload", onUnload);
+    return () => {
+      console.log("FlowPage Unmounting...");
+      window.removeEventListener("beforeunload", onUnload);
     }
   }, []);
+
   const rfWrapper = useRef(null);
   return (
     <ReactFlowProvider>
-      {flow !== undefined ? (
-        <FlowWrapper ref={rfWrapper}>
-          <FlowEditor reactFlowWrapper={rfWrapper}/>
-        </FlowWrapper>
-      ) : (
-          <Redirect to="/"/>
-      )}
+      <FlowWrapper ref={rfWrapper}>
+        <FlowEditor reactFlowWrapper={rfWrapper} />
+        {/* <FlowTabs/> */}
+      </FlowWrapper>
     </ReactFlowProvider>
   );
-}
+};
 FlowPage.propTypes = {
   match: PropTypes.object,
 };
+
+export default React.memo(FlowPage);

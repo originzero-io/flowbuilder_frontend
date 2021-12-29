@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { isNode, useStoreActions } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
-import uuid from "react-uuid";
+import {  useParams } from "react-router";
 import * as themeColor from "../../../../config/ThemeReference";
-import { addGroup } from "../../../../store/actions/nodeGroupsActions";
+import { createGroup } from "../../../../store/reducers/flow/flowGroupsReducer";
+import useActiveFlow from "../../../../utils/useActiveFlow";
+import useAuth from "../../../../utils/useAuth";
 import {
   AddIcon,
   CancelIcon,
   NonGroupIcon,
   SubmitIcon
-} from "../../../global/Icons/index";
+} from "../../../global/icons";
 import { HorizontalDivider } from "../../../style-components/Divider";
 import {
   AddGroupWrapper,
@@ -22,15 +24,22 @@ import {
   Title
 } from "./style";
 
-export default function NewGroupForm({ theme }) {
-  const [groupInfo, setGroupInfo] = useState({});
+const NewGroupForm = ({ theme }) => {
   const [formOpen, setFormOpen] = useState(false);
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
+  const { flowElements } = useActiveFlow();
+  const auth = useAuth();
+  const elements = flowElements.present;
+  const { flowId } = useParams();
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
-  );
+    );
   const dispatch = useDispatch();
+  const [groupInfo, setGroupInfo] = useState({
+    name: "",
+    color: "",
+    createdBy: auth._id,
+    flow:flowId
+  });
   const groupHandle = (event) => {
     const { name, value } = event.target;
     setGroupInfo({
@@ -38,15 +47,9 @@ export default function NewGroupForm({ theme }) {
       [name]: value,
     });
   };
-  const addNewGroup = (event) => {
+  const addNewGroup = async (event) => {
     event.preventDefault();
-    dispatch(
-      addGroup({
-        id: uuid(),
-        name: groupInfo.name,
-        color: groupInfo.color,
-      })
-    );
+    dispatch(createGroup(flowId, groupInfo));
   };
   const selectNonGroupsHandle = () => {
     const nonGroups = elements.filter(
@@ -119,3 +122,4 @@ export default function NewGroupForm({ theme }) {
     </AddGroupWrapper>
   );
 }
+export default React.memo(NewGroupForm);

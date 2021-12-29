@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Label } from "../styles";
 import { useSelector, useDispatch } from "react-redux";
-import { updateNodeHandles } from "../../../../store/actions/elementsActions";
+import { updateNodeHandles } from "../../../../store/reducers/flow/flowElementsReducer";
 import PropTypes from "prop-types"
 export default function NodeIOManager({ self, ioType }) {
   const dispatch = useDispatch();

@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { getOutgoers } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import { getNodesAndEdges } from "../../../app-global/helpers/elementController";
-import useDidMountEffect from "../../../hooks/useDidMountEffect";
+import useActiveFlow from "../../../utils/useActiveFlow";
+import useDidMountEffect from "../../../utils/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
 import NodeIOmanager from "./global/NodeIOManager";
 import { Label } from "./styles";
 
 const SetVariables = React.memo((self) => {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
+  const { flowElements } = useActiveFlow();
+  const elements = flowElements.present;
   const [values, setValues] = useState([
     {
       source1: "Anaks",

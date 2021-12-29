@@ -19,5 +19,5 @@ export default function FileInputWrapper({ children }) {
 }
 
 FileInputWrapper.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.element])
 }

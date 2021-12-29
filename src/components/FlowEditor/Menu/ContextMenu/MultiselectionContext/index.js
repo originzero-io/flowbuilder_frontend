@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Menu, MenuItem } from "../ElementContext/style";
 import { isNode, useStoreState } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
-import { rotateMultiNode, setElements, setMultipleNodeEnable } from "../../../../../store/actions/elementsActions";
-import { setMultiSelectionContextMenu } from "../../../../../store/actions/menuActions";
+import { rotateMultiNode, setElements, setMultipleNodeEnable } from "../../../../../store/reducers/flow/flowElementsReducer";
+import { setMultiSelectionContextMenu } from "../../../../../store/reducers/menuReducer";
 import GroupMenu from "../../GroupMenu";
+import useActiveFlow from "../../../../../utils/useActiveFlow";
 
 export default function MultiSelectionContextMenu() {
   const selected = useStoreState((state) => state.selectedElements);
   const { multiSelectionMenu } = useSelector(
-    (state) => state.menuConfigReducer
+    (state) => state.menus
   );
-  const { elementReducer, flowWorkSpaceReducer } = useSelector((state) => state.activeFlowReducer);
-  const { theme } = flowWorkSpaceReducer;
-  const elements = elementReducer.present;
+  const { flowElements, flowGui } = useActiveFlow();
+  const { theme } = flowGui;
+  const elements = flowElements.present;
   const dispatch = useDispatch();
   const deleteItems = () => {
     if (confirm("Are you sure?")) {

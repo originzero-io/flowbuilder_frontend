@@ -1,13 +1,14 @@
 import React from "react";
 import { Menu, MenuItem } from "./style";
 import { useSelector, useDispatch } from "react-redux";
-import { setElementContextMenu } from "../../../../../store/actions/menuActions";
-import { rotateNode, setElements } from "../../../../../store/actions/elementsActions";
+import { setElementContextMenu } from "../../../../../store/reducers/menuReducer";
+import { rotateNode, setElements } from "../../../../../store/reducers/flow/flowElementsReducer";
+import useActiveFlow from "../../../../../utils/useActiveFlow";
 
 export default function ElementMenu() {
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
-  const {elementMenu} = useSelector((state) => state.menuConfigReducer);
+  const { flowElements } = useActiveFlow();
+  const elements = flowElements.present;
+  const {elementMenu} = useSelector((state) => state.menus);
   const theme = useSelector((state) => state.themeReducer);
   const dispatch = useDispatch();
 

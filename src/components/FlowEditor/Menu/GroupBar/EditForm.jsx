@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setElements, updateGroupOfElement } from "../../../../store/actions/elementsActions";
-import { updateGroup } from "../../../../store/actions/nodeGroupsActions";
-import { SubmitIcon } from "../../../global/Icons";
+import { setElements, updateGroupOfElement } from "../../../../store/reducers/flow/flowElementsReducer";
+import { updateGroup } from "../../../../store/reducers/flow/flowGroupsReducer";
+import { SubmitIcon } from "../../../global/icons";
 import { ColorFlag, Submit } from "./style";
 import * as themeColor from "../../../../config/ThemeReference";
 import { isEdge, isNode } from "react-flow-renderer";
 import PropTypes from "prop-types"
+import { updateGroupService } from "../../../../services/groupService";
 const Form = styled.form`
   position: relative;
   width: 78%;
@@ -27,10 +28,10 @@ const Input = styled.input`
 
 export default function EditForm({ editableItem, setEditableItem, theme }) {
   const dispatch = useDispatch();
-  const onSubmitHandle = (event) => {
+  const onSubmitHandle = async (event) => {
     event.preventDefault();
     dispatch(updateGroup(editableItem.group));
-    dispatch(updateGroupOfElement(editableItem.group))
+    dispatch(updateGroupOfElement(editableItem))
     setEditableItem({state:false,group:{}});
   };
   const updateChangeHandle = (event) => {

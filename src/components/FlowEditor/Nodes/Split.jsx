@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { getOutgoers } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
-import useDidMountEffect from "../../../hooks/useDidMountEffect";
+import useActiveFlow from "../../../utils/useActiveFlow";
+import useDidMountEffect from "../../../utils/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
 // import { Label } from "./styles";
-// import { setElements } from "../../../store/actions/elementsActions";
+// import { setElements } from "../../../store/reducers/flow/flowElementsReducer";
 import NodeIOManager from "./global/NodeIOManager";
 const SplitNode = (self) => {
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
+  const { flowElements } = useActiveFlow();
+  const elements = flowElements.present;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const dispatch = useDispatch();
   const [values, setValues] = useState([

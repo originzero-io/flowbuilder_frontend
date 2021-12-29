@@ -1,32 +1,62 @@
-import React from "react";
-import NavigationMenu from "../components/ControlPanel/Menu/NavMenu";
-import TopMenu from "../components/ControlPanel/Menu/TopMenu";
-import PanelManager from "../components/ControlPanel/SidePanel/PanelManager";
-import { AppWrapper } from "../components/style-components/AppWrapper";
-import styled from "styled-components"
+import React, { useEffect } from "react";
+import NavigationPanel from "../components/ControlPanel/NavigationPanel";
+import PanelRouter from "../components/ControlPanel/DynamicPanel/PanelRouter";
+import styled from "styled-components";
+import WorkspaceList from "../components/ControlPanel/WorkspacePanel/WorkspaceList.jsx";
+import TopMenu from "../components/ControlPanel/DynamicPanel/TopMenu";
+import createSocket from "../services/socketApi";
+import { useDispatch, useSelector } from "react-redux";
+import { makeMeOnline } from "../store/reducers/authReducer";
+import { editUser, getAllUsers } from "../store/reducers/userReducer";
+import { openNotification } from "../app-global/dom/notification";
+import useAuth from "../utils/useAuth";
 const Wrapper = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
-  width:100%;
-  height:100vh;
-`
+  width: 100%;
+  height: 100vh;
+`;
 const Content = styled.div`
   display: flex;
-  width:100%;
-  align-items: stretch;
-  justify-content: center;
-  height:97vh;
-`
+  height: 100vh;
+`;
+
+export let mainNamespace;
 export default function ControlPanelPage() {
+  const dispatch = useDispatch();
+  const auth = useAuth();
+  useEffect(() => {
+    mainNamespace = createSocket("main", {
+      auth: { token: localStorage.getItem("token") }
+    });
+    console.log("testtttttdfdsftttsss")
+    //console.log("Main", mainNamespace);
+    mainNamespace.emit("main:onlineUser", "MAKE_ME_ONLINE");
+    mainNamespace.on("main:onlineUser", (data) => {
+      if (auth._id !== data._id) {
+        dispatch(editUser(data));
+        openNotification("", `${data.username} oturum açtı`,"success");
+      }
+      else dispatch(makeMeOnline(data));
+    })
+    mainNamespace.on("main:offlineUser", (data) => {
+      if (auth._id !== data._id) {
+        dispatch(editUser(data));
+        openNotification("", `${data.username} oturumu kapadı`,"warning");
+      }
+      else alert('Oturum başka bir tabde açık')
+    })
+
+    dispatch(getAllUsers());
+  }, [])
   return (
-    <AppWrapper>
-      <Wrapper>
-        <TopMenu />
-        <Content>
-          <NavigationMenu />
-          <PanelManager />
-        </Content>
-      </Wrapper>
-    </AppWrapper>
+    <Wrapper>
+      <TopMenu />
+      <Content>
+        <WorkspaceList />
+        <NavigationPanel />
+        <PanelRouter />
+      </Content>
+    </Wrapper>
   );
 }

@@ -12,28 +12,22 @@ import {
   Info,
 } from "../styles";
 import setIconInstance from "./Icons/iconConstant";
-import { setOutgoersEnable } from "../../../../store/actions/elementsActions";
+import { setOutgoersEnable } from "../../../../store/reducers/flow/flowElementsReducer";
 import PropTypes from "prop-types"
+import useActiveFlow from "../../../../utils/useActiveFlow";
 const NodeGod = ({ self, ioType, children, collapsible }) => {
   const updateNodeInternals = useUpdateNodeInternals();
-  const sources = [];
-  const targets = [];
-  const { elementReducer } = useSelector((state) => state.activeFlowReducer);
-  const elements = elementReducer.present;
+  const sources = Array.from(Array(self.data.sourceCount).keys());
+  const targets = Array.from(Array(self.data.targetCount).keys());
+  const { flowElements } = useActiveFlow();
+  const elements = flowElements.present;
   const dispatch = useDispatch();
   const { selected, align, expand, enable, group } = self.data;
-  for (let index = 0; index < self.data.targetCount; index++) {
-    targets.push(index);
-  }
-  for (let index = 0; index < self.data.sourceCount; index++) {
-    sources.push(index);
-  }
   useEffect(() => {
     updateNodeInternals(self.id);
   }, [self.data.targetCount, self.data.sourceCount, align]);
 
   const NodeIcon = setIconInstance(self.type);
-
   useEffect(() => {
     const outgoers = getOutgoers(self, elements);
     const outgoersIds = outgoers.map(o => o.id);
@@ -106,12 +100,12 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
   );
 };
 
-export default NodeGod;
+export default React.memo(NodeGod);
 
 
 NodeGod.propTypes = {
   self: PropTypes.object.isRequired,
   ioType: PropTypes.string.isRequired,
-  children: PropTypes.element,
-  collapsible: PropTypes.bool.isRequired,
+  children: PropTypes.oneOfType([PropTypes.array,PropTypes.object]),
+  collapsible: PropTypes.bool,
 }
