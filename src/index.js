@@ -9,8 +9,8 @@ import "@fortawesome/fontawesome-free/js/brands";
 import "@fortawesome/fontawesome-free/js/solid";
 import "@fortawesome/fontawesome-free/js/fontawesome";
 import "bootstrap/dist/css/bootstrap.min.css";
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-
+//import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import 'antd/dist/antd.min.css'
 import "react-tabs/style/react-tabs.css";
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore.js";

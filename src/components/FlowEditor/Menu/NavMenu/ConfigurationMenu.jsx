@@ -174,8 +174,6 @@ export default function ConfigurationMenu() {
             <SwitchButton
               checked={active.theme}
               onChange={changeTheme}
-              width={30}
-              height={15}
             />
           </DropDownItem>
           <DropDownItem>
@@ -183,8 +181,6 @@ export default function ConfigurationMenu() {
             <SwitchButton
               checked={active.miniMap}
               onChange={changeMiniMapDisplay}
-              width={30}
-              height={15}
             />
           </DropDownItem>
           <DropDownItem>Account Settings</DropDownItem>

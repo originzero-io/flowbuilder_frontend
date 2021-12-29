@@ -1,6 +1,5 @@
 import React from "react";
 import ReactModal from "react-modal";
-import { CancelIcon } from "./icons";
 import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "../../store/reducers/componentReducer";
 import {AiFillCloseCircle} from "react-icons/ai"
@@ -15,9 +14,9 @@ const customStyles = {
     borderRadius: "14px",
     overflowY: "auto",
     overflowX:"hidden",
-    padding: "35px",
+    padding: "25px",
     background: "#1C1F26",
-    width: "30%",
+    minWidth: "30%",
     maxHeight: "70%",
     boxShadow: "-1px 1px 16px -9px rgba(0,0,0,0.75)",
     color: "white",
@@ -56,7 +55,6 @@ export default function Modal() {
       shouldCloseOnOverlayClick={true}
     >
       <div style={closeButtonWrapperStyle} onClick={closeModal}>
-        {/* <CancelIcon width="30px" height="30px" /> */}
         <AiFillCloseCircle style={{fontSize:'3vh'}}/>
       </div>
       <div style={childrenStyle}>{modal}</div>

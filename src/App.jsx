@@ -35,10 +35,10 @@ export const workspaceNamespace = createSocket("workspaces");
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("Element", elementNamespace);
-    console.log("Flow", flowNamespace);
-    console.log("Project", projectNamespace);
-    console.log("Workspace", workspaceNamespace);
+    // console.log("Element", elementNamespace);
+    // console.log("Flow", flowNamespace);
+    // console.log("Project", projectNamespace);
+    // console.log("Workspace", workspaceNamespace);
     elementNamespace.on("elements:save", (data) => {
       dispatch(saveElements(data));
     });
@@ -98,7 +98,6 @@ const App = () => {
           path={routes.CHANGE_TAB}
           component={TabRedirector}
         />
-        {/* <Route path="*"><Redirect to={routes.LOGIN}/></Route> */}
         <Route path="*" component={NotFound} />
       </Switch>
       <NotificationContainer />

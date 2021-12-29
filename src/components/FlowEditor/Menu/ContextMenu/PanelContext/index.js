@@ -46,9 +46,9 @@ const PanelContextMenu = () => {
             style={{color:theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}}
           >
             <TabList>
-              <Tab style={{userSelect:"none"}}>All</Tab>
-              <Tab style={{userSelect:"none"}}>Favorites</Tab>
-              <Tab style={{userSelect:"none"}}>Recent</Tab>
+              <Tab>All</Tab>
+              <Tab>Favorites</Tab>
+              <Tab>Recent</Tab>
             </TabList>
             <TabPanel>
               <AllNodes nodeList={nodeList} favClick={favClick} onDragStart={onDragStart} addNewNode={addNewNodeHandle}/>

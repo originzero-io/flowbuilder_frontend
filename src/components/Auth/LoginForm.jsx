@@ -9,6 +9,8 @@ import { Redirect } from "react-router-dom";
 import { openNotification as notification } from "../../app-global/dom/notification";
 import { setError } from "../../store/reducers/errorReducer";
 import useAuth from "../../utils/useAuth";
+import { FaUser } from "react-icons/fa";
+import { RiLockPasswordFill } from "react-icons/ri";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -28,10 +30,10 @@ export default function LoginForm() {
   };
   return (
     <>
-      <Text>Welcome to flow builder</Text>
-      <Form onSubmit={(e) => e.preventDefault()} style={{ marginTop: "50%" }}>
+      <Text>Welcome to flow builder.📗 Please login</Text>
+      <Form onSubmit={(e) => e.preventDefault()}>
         <FormGroup>
-          <i className="fas fa-user"></i>
+          <FaUser style={{fontSize:'20px',color:'whitesmoke',marginRight:'8px'}}/>
           <Input
             defaultValue="akinsibay"
             {...register("username", {
@@ -44,7 +46,7 @@ export default function LoginForm() {
           )}
         </FormGroup>
         <FormGroup>
-          <i className="fas fa-key"></i>
+          <RiLockPasswordFill style={{fontSize:'20px',color:'whitesmoke',marginRight:'8px'}}/>
           <Input
             defaultValue="1234"
             type="password"

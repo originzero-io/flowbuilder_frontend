@@ -8,7 +8,6 @@ export default createSocket;
 
 class Socket {
   constructor(namespace = "", extraOptions) {
-    console.log("extraOptions:", extraOptions);
     const URL = HOST + namespace;
     this.socket = io.connect(URL, {
       transports: ["websocket"],
@@ -16,7 +15,7 @@ class Socket {
       ...extraOptions,
     });
     this.socket.on("connect", () => {
-      console.log(`${namespace} namespaceine bağlandı.`);
+      //console.log(`${namespace} namespaceine bağlandı.`);
     });
     this.socket.on(`${namespace}:welcome`, (data) => {
       //openNotification("", data.message, "success");

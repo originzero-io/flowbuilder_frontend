@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeMeOnline } from "../store/reducers/authReducer";
 import { editUser, getAllUsers } from "../store/reducers/userReducer";
 import { openNotification } from "../app-global/dom/notification";
+import useAuth from "../utils/useAuth";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,12 +24,13 @@ const Content = styled.div`
 export let mainNamespace;
 export default function ControlPanelPage() {
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth)
+  const auth = useAuth();
   useEffect(() => {
     mainNamespace = createSocket("main", {
       auth: { token: localStorage.getItem("token") }
     });
-    console.log("Main", mainNamespace);
+    console.log("testtttttdfdsftttsss")
+    //console.log("Main", mainNamespace);
     mainNamespace.emit("main:onlineUser", "MAKE_ME_ONLINE");
     mainNamespace.on("main:onlineUser", (data) => {
       if (auth._id !== data._id) {

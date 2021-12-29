@@ -3,7 +3,7 @@ import { VscAdd } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { setModal } from "../../../store/reducers/componentReducer";
 import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
-import { getProjects } from "../../../store/reducers/projectReducer";
+import { getProjectsByWorkspace } from "../../../store/reducers/projectReducer";
 import {
   getMyWorkspaces,
   setActiveWorkspace
@@ -14,7 +14,6 @@ import AddWorkspaceForm from "./AddWorkspaceForm";
 import {
   WorkspaceContainer, WorkspaceItem, WorkspaceItemWrapper
 } from "./style";
-
 const WorkspaceList = () => {
   const { workspaces, activeWorkspace } = useWorkspace();
   const dispatch = useDispatch();
@@ -25,14 +24,17 @@ const WorkspaceList = () => {
   useDidMountEffect(() => {
     if (workspaces.length > 0) {
       dispatch(setActiveWorkspace(workspaces[0]));
-      dispatch(getProjects(workspaces[0]))
+      dispatch(getProjectsByWorkspace(workspaces[0]))
     }
   }, [workspaces]);
 
   const clickWorkspaceHandler = (workspace) => {
     dispatch(setActiveWorkspace(workspace));
-    dispatch(getProjects(workspace));
+    dispatch(getProjectsByWorkspace(workspace));
     dispatch(getFlowsByWorkspace(workspace));
+  };
+  const addWorkspaceHandler = () => {
+    dispatch(setModal(<AddWorkspaceForm />))
   };
   return (
     <WorkspaceContainer>
@@ -49,11 +51,12 @@ const WorkspaceList = () => {
           </WorkspaceItemWrapper>
         );
       })}
+      
       <WorkspaceItemWrapper>
-        <WorkspaceItem onClick={() => dispatch(setModal(<AddWorkspaceForm />))}>
+        <WorkspaceItem onClick={addWorkspaceHandler}>
           <VscAdd style={{ color: "white"}} />
         </WorkspaceItem>
-        </WorkspaceItemWrapper>
+      </WorkspaceItemWrapper>
     </WorkspaceContainer>
   );
 };

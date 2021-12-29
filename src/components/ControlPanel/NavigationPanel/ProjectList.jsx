@@ -9,8 +9,10 @@ import { setModal } from "../../../store/reducers/componentReducer";
 import EditProjectForm from "./EditProjectForm";
 import { projectNamespace } from "../../../App";
 import useProject from "../../../utils/useProject";
+import usePermission from "../../../utils/usePermission";
 export default function ProjectList() {
   const dispatch = useDispatch();
+  const permission = usePermission();
   const { projects, activeProject } = useProject();
   const clickProjectHandle = (project) => {
     dispatch(setActiveProject(project));
@@ -36,18 +38,26 @@ export default function ProjectList() {
             >
               <div>{project.name}</div>
               <div>
-                <span onClick={() => editProjectHandle(project)}>
-                  <BiEdit style={{ fontSize: "20px" }} />
-                </span>
-                <span onClick={() => deleteProjectHandle(project)}>
-                  <VscTrash style={{ fontSize: "20px" }} />
-                </span>
+                {permission?.CAN_EDIT_PROJECT && (
+                  <span onClick={() => editProjectHandle(project)}>
+                    <BiEdit style={{ fontSize: "20px" }} />
+                  </span>
+                )}
+                {permission?.CAN_DELETE_PROJECT && (
+                  <span onClick={() => deleteProjectHandle(project)}>
+                    <VscTrash style={{ fontSize: "20px" }} />
+                  </span>
+                )}
               </div>
             </CollapsibleMenuItem>
           );
         })
       ) : (
-        <span style={{color:"white",fontSize:'1.5vmin',paddingLeft:'10%'}}>No projects found</span>
+        <span
+          style={{ color: "white", fontSize: "1.5vmin", paddingLeft: "10%" }}
+        >
+          No projects found
+        </span>
       )}
     </>
   );

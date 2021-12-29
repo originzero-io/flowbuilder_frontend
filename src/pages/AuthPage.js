@@ -1,42 +1,22 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
 import {
   Container,
   Content,
-  Image,
-  FormWrapper
+  FormWrapper,
+  LogoWrapper
 } from "../components/Auth/style";
 import LoginForm from "../components/Auth/LoginForm";
-import RegisterForm from "../components/Auth/RegisterForm";
-const Button = styled.button`
-  border: none;
-  border-radius: 8px;
-  padding: 6px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 2vh;
-  width: 120px;
-  background-color:rgb(182,157,230);
-  color:whitesmoke;
-`;
+import { Logo } from "../components/global/icons";
 
 export default function LoginPage() {
-  const [formType, setFormType] = useState("login");
-  const switchForm = () => {
-    if (formType === "login") {
-      setFormType("signup")
-    }
-    else setFormType("login")
-  }
-
   return (
     <Container>
-      <Button onClick={switchForm}>{formType === "login" ? "Sign Up" : "Log In"}</Button>
       <Content>
-        <Image />
+        <LogoWrapper>
+          <Logo theme="dark" width="100px" height="100px" />
+        </LogoWrapper>
         <FormWrapper>
-          {formType === "login" ? <LoginForm setFormType={setFormType} /> : <RegisterForm setFormType={setFormType}/>}
+          <LoginForm />
         </FormWrapper>
       </Content>
     </Container>

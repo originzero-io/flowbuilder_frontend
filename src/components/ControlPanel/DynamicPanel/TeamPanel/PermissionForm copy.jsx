@@ -1,20 +1,16 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import {
-  Form,
-  Input,
-  FormGroup,
-  Label,
-  Button,
-} from "reactstrap";
+import { Form, Input, FormGroup, Label, Button } from "reactstrap";
+import { Collapse } from "antd";
 import styled from "styled-components";
-import SwitchButton from "../../../global/Button/SwitchButton";
 import { assignPermissionToMember } from "../../../../store/reducers/userReducer";
 import { useDispatch } from "react-redux";
-import useWorkspace from "../../../../utils/useWorkspace"
+import useWorkspace from "../../../../utils/useWorkspace";
 import Avatar from "../../../global/Avatar";
 import { setModal } from "../../../../store/reducers/componentReducer";
 import { openNotification } from "../../../../app-global/dom/notification";
+import useFlow from "../../../../utils/useFlow";
+const { Panel } = Collapse;
 const Header = styled.div`
   margin-bottom: 5px;
   font-size: 2vmin;
@@ -28,11 +24,11 @@ const Title = styled.div`
 export default function PermissionForm({ member }) {
   const dispatch = useDispatch();
   const { activeWorkspace } = useWorkspace();
-  const memberPermissionsThisWorkspace = member.workspaces.find(workspace => workspace._id === activeWorkspace._id)?.permissions;
+  const flows = useFlow();
+  const memberPermissionsThisWorkspace = member.workspaces.find(
+    (workspace) => workspace._id === activeWorkspace._id
+  )?.permissions;
   const [permissions, setPermissions] = useState({
-    CAN_CREATE_WORKSPACE: false,
-    CAN_EDIT_WORKSPACE: false,
-    CAN_DELETE_WORKSPACE: false,
     CAN_CREATE_PROJECT: false,
     CAN_EDIT_PROJECT: false,
     CAN_DELETE_PROJECT: false,
@@ -47,9 +43,8 @@ export default function PermissionForm({ member }) {
     CAN_DELETE_USER: false,
   });
   useEffect(() => {
-    console.log("rendered");
-    setPermissions({...permissions,...memberPermissionsThisWorkspace})
-  }, [])
+    setPermissions({ ...permissions, ...memberPermissionsThisWorkspace });
+  }, []);
   const onChangeHandle = (e) => {
     setPermissions({ ...permissions, [e.target.name]: e.target.checked });
   };
@@ -58,51 +53,24 @@ export default function PermissionForm({ member }) {
     try {
       dispatch(assignPermissionToMember(member, activeWorkspace, permissions));
       dispatch(setModal(false));
-      openNotification("", "Permissions assigned to user for this workspace", "success");
+      openNotification(
+        "",
+        "Permissions assigned to user for this workspace",
+        "success"
+      );
     } catch (error) {
       openNotification("", error.message, "error");
     }
   };
-  
+
   return (
-    <div>
-      <Header><Avatar avatar={member.avatar}/></Header>
+    <div style={{width:'80vw'}}>
+      <Header>
+        <Avatar avatar={member.avatar} />
+      </Header>
       <Header>{member.username}</Header>
-      
+
       <Form onSubmit={onSubmitHandle}>
-        <div>
-          <Title>Workspace</Title>
-          <FormGroup check inline>
-            <Input
-              name="CAN_CREATE_WORKSPACE"
-              type="checkbox"
-              onChange={onChangeHandle}
-              style={{ width: "20px", height: "20px" }}
-              defaultChecked={memberPermissionsThisWorkspace?.CAN_CREATE_WORKSPACE}
-            />
-            <Label check>Can create</Label>
-          </FormGroup>
-          <FormGroup check inline>
-            <Input
-              name="CAN_EDIT_WORKSPACE"
-              type="checkbox"
-              onChange={onChangeHandle}
-              style={{ width: "20px", height: "20px" }}
-              defaultChecked={memberPermissionsThisWorkspace?.CAN_EDIT_WORKSPACE}
-            />
-            <Label check>Can edit</Label>
-          </FormGroup>
-          <FormGroup check inline>
-            <Input
-              name="CAN_DELETE_WORKSPACE"
-              type="checkbox"
-              onChange={onChangeHandle}
-              style={{ width: "20px", height: "20px" }}
-              defaultChecked={memberPermissionsThisWorkspace?.CAN_DELETE_WORKSPACE}
-            />
-            <Label check>Can delete</Label>
-          </FormGroup>
-        </div>
         <div>
           <Title>Project</Title>
           <FormGroup check inline>
@@ -111,7 +79,9 @@ export default function PermissionForm({ member }) {
               type="checkbox"
               onChange={onChangeHandle}
               style={{ width: "20px", height: "20px" }}
-              defaultChecked={memberPermissionsThisWorkspace?.CAN_CREATE_PROJECT}
+              defaultChecked={
+                memberPermissionsThisWorkspace?.CAN_CREATE_PROJECT
+              }
             />
             <Label check>Can create</Label>
           </FormGroup>
@@ -131,43 +101,61 @@ export default function PermissionForm({ member }) {
               type="checkbox"
               onChange={onChangeHandle}
               style={{ width: "20px", height: "20px" }}
-              defaultChecked={memberPermissionsThisWorkspace?.CAN_DELETE_PROJECT}
+              defaultChecked={
+                memberPermissionsThisWorkspace?.CAN_DELETE_PROJECT
+              }
             />
             <Label check>Can delete</Label>
           </FormGroup>
         </div>
         <div>
           <Title>Flow</Title>
-          <FormGroup check inline>
-            <Input
-              name="CAN_CREATE_FLOW"
-              type="checkbox"
-              onChange={onChangeHandle}
-              style={{ width: "20px", height: "20px" }}
-              defaultChecked={memberPermissionsThisWorkspace?.CAN_CREATE_FLOW}
-            />
-            <Label check>Can create</Label>
-          </FormGroup>
-          <FormGroup check inline>
-            <Input
-              name="CAN_EDIT_FLOW"
-              type="checkbox"
-              onChange={onChangeHandle}
-              style={{ width: "20px", height: "20px" }}
-              defaultChecked={memberPermissionsThisWorkspace?.CAN_EDIT_FLOW}
-            />
-            <Label check>Can edit</Label>
-          </FormGroup>
-          <FormGroup check inline>
-            <Input
-              name="CAN_DELETE_FLOW"
-              type="checkbox"
-              onChange={onChangeHandle}
-              style={{ width: "20px", height: "20px" }}
-              defaultChecked={memberPermissionsThisWorkspace?.CAN_DELETE_FLOW}
-            />
-            <Label check>Can delete</Label>
-          </FormGroup>
+          {flows.map((flow) => {
+            return (
+              <div key={flow._id}>
+                <Collapse>
+                  <Panel header={flow.config.name} key={flow._id}>
+                    <FormGroup check inline>
+                      <Input
+                        name="CAN_CREATE_FLOW"
+                        type="checkbox"
+                        onChange={onChangeHandle}
+                        style={{ width: "20px", height: "20px" }}
+                        defaultChecked={
+                          memberPermissionsThisWorkspace?.CAN_CREATE_FLOW
+                        }
+                      />
+                      <Label check>Can create</Label>
+                    </FormGroup>
+                    <FormGroup check inline>
+                      <Input
+                        name="CAN_EDIT_FLOW"
+                        type="checkbox"
+                        onChange={onChangeHandle}
+                        style={{ width: "20px", height: "20px" }}
+                        defaultChecked={
+                          memberPermissionsThisWorkspace?.CAN_EDIT_FLOW
+                        }
+                      />
+                      <Label check>Can edit</Label>
+                    </FormGroup>
+                    <FormGroup check inline>
+                      <Input
+                        name="CAN_DELETE_FLOW"
+                        type="checkbox"
+                        onChange={onChangeHandle}
+                        style={{ width: "20px", height: "20px" }}
+                        defaultChecked={
+                          memberPermissionsThisWorkspace?.CAN_DELETE_FLOW
+                        }
+                      />
+                      <Label check>Can delete</Label>
+                    </FormGroup>
+                  </Panel>
+                </Collapse>
+              </div>
+            );
+          })}
         </div>
         <div>
           <Title>Device</Title>

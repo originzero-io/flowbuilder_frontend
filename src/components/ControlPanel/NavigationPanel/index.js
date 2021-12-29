@@ -23,9 +23,11 @@ import WorkspaceBrand from "./WorkspaceBrand";
 import { Badge } from "reactstrap";
 import useAuth from "../../../utils/useAuth";
 import useWorkspace from "../../../utils/useWorkspace";
+import usePermission from "../../../utils/usePermission";
 
 const ControlPanelMenu = () => {
   const dispatch = useDispatch();
+  const permissions = usePermission("CAN_CREATE_PROJECT");
   const { url } = useRouteMatch();
   const { activeWorkspace } = useWorkspace();
   const { username } = useAuth();
@@ -41,7 +43,7 @@ const ControlPanelMenu = () => {
     return (
       <CollapsibleTrigger label="Projects" icon={<AiOutlineProject />}>
         <div onClick={(e) => showModalHandle(e)}>
-          <BsPlusCircle />
+          {permissions?.CAN_CREATE_PROJECT && <BsPlusCircle />}
         </div>
       </CollapsibleTrigger>
     );

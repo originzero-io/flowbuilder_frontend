@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { DashboardsContainer, FlowsContainer } from "./style";
 import { Box } from "./style";
@@ -14,8 +14,12 @@ import { VscAdd } from "react-icons/vsc";
 import { DynamicPanelContainer } from "../style";
 import { SearchBar } from "./style";
 import useFlow from "../../../../utils/useFlow";
+import usePermission from "../../../../utils/usePermission";
 export default function ProjectsPanel() {
   const dispatch = useDispatch();
+  const permission = usePermission();
+  //console.log("PERMISSION:", permission);
+  //console.log("PROJECT PANEL RENDERED");
   const flows = useFlow();
   const flowsCollapseTrigger = () => {
     return (
@@ -38,16 +42,22 @@ export default function ProjectsPanel() {
   };
   useEffect(() => {
     setSearched(flows);
-  }, [flows]);  
+  }, [flows]);
   return (
     <DynamicPanelContainer>
       <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
-        <SearchBar placeholder="Search flows" spellCheck={false} onChange={searchHandle}/>
+        <SearchBar
+          placeholder="Search flows"
+          spellCheck={false}
+          onChange={searchHandle}
+        />
         <FlowsContainer>
           <FlowList flows={searched} />
-          <Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
-            <VscAdd />
-          </Box>
+          {permission?.CAN_CREATE_FLOW && (
+            <Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
+              <VscAdd />
+            </Box>
+          )}
         </FlowsContainer>
       </CollapsibleMenu>
       <CollapsibleMenu trigger={dashboardCollapseTrigger()} open={true}>

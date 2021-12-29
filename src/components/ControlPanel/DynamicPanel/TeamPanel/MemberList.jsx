@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Badge, Table } from "reactstrap";
+import { Badge, Button, Table } from "reactstrap";
 import styled from "styled-components";
 import { setModal } from "../../../../store/reducers/componentReducer";
 import useUser from "../../../../utils/useUser";
 import useWorkspace from "../../../../utils/useWorkspace";
 import Avatar from "../../../global/Avatar";
-import PermissionForm from "./PermissionForm";
+import PermissionPage from "./PermissionPage";
+import { Button as AntdButton } from "antd";
 const TBody = styled.tbody`
   &:hover {
     background-color: rgba(46, 213, 115, 0.2);
@@ -27,10 +28,13 @@ export default function MemberList() {
   const { activeWorkspace } = useWorkspace();
   const members = users.filter(({workspaces}) => workspaces.some((workspace) => workspace._id === activeWorkspace._id));
   const permissionHandle = (member) => {
-    dispatch(setModal(<PermissionForm member={member}/>));
+    dispatch(setModal(<PermissionPage member={member}/>));
   }
   return (
     <div>
+      <Button color="success">Denedim olmadı</Button>
+      <AntdButton type="primary">Denedim olmadı</AntdButton>
+      <Badge color="warning">dasda</Badge>
       <Table style={{ color: "white", background: "#1C1F26" }}>
         <thead>
           <tr>
@@ -62,7 +66,7 @@ export default function MemberList() {
                   <Badge color="warning" style={{fontSize:'1.3vmin'}} onClick={()=>permissionHandle(member)}>
                     Manage Permissions
                   </Badge>
-                </td>
+              </td>
               </TBody>
           );
         })}
