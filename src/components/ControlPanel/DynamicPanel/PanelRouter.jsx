@@ -1,13 +1,13 @@
 import React from "react";
-import LearnPanel from "./LearnPanel";
-import NotesPanel from "./NotesPanel";
-import ProjectsPanel from "./ProjectsPanel";
-import SettingsPanel from "./SettingsPanel";
-import DevicesPanel from "./DevicesPanel";
-import styled from "styled-components";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
-import UserPanel from "./UserPanel";
-import TeamPanel from "./TeamPanel";
+import styled from "styled-components";
+import LearnPanel from "./LearnPanel/LearnPanel";
+import NotesPanel from "./NotesPanel/NotesPanel";
+import ProjectsPanel from "./ProjectsPanel/ProjectsPanel";
+import SettingsPanel from "./SettingsPanel/SettingsPanel";
+import DevicesPanel from "./DevicesPanel/DevicesPanel";
+import UserPanel from "./UserPanel/UserPanel";
+import TeamPanel from "./TeamPanel/TeamPanel";
 
 const Container = styled.div`
   width: 100%;

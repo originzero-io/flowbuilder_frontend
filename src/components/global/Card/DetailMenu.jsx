@@ -11,47 +11,33 @@ import { useDispatch } from "react-redux";
 import { setModal } from "../../../store/reducers/componentReducer";
 import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsPanel/forms/MoveFlowForm";
 import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsPanel/forms/EditFlowForm";
+import { DropdownWrapper, DropdownItem } from "../../style-components/DropdownMenu";
 export default function DetailMenu({deleteEvent,data}) {
   const dispatch = useDispatch();
-  const moveHandler = () => {
+  const moveHandler = (e) => {
+    e.stopPropagation();
     dispatch(setModal( <MoveFlow flow={data}/>));
   }
-  const editHandler = () => {
+  const editHandler = (e) => {
+    e.stopPropagation();
     dispatch(setModal( <EditFlow flow={data}/>));
   }
   return (
-      <DetailMenuWrapper tabIndex="1">
+      <DropdownWrapper tabIndex="1" style={{position:'absolute',right:'12px',top:'3px'}}>
         <CardMoreButton onClick={(e) => e.stopPropagation()}>
           <FiMoreVertical />
         </CardMoreButton>
         <DetailMenuList>
-          <MenuItem onClick={moveHandler}>Move</MenuItem>
-          <MenuItem onClick={editHandler}>Edit</MenuItem>
-          <MenuItem>Share</MenuItem>
-          <MenuItem onClick={(e)=>deleteEvent(e,data)}>Delete</MenuItem>
+          <DropdownItem onClick={moveHandler}>Move</DropdownItem>
+          <DropdownItem onClick={editHandler}>Edit</DropdownItem>
+          <DropdownItem>Share</DropdownItem>
+          <DropdownItem onClick={(e)=>deleteEvent(e,data)}>Delete</DropdownItem>
         </DetailMenuList>
-      </DetailMenuWrapper>
+      </DropdownWrapper>
   );
 }
 
-const MenuItem = ({ children, onClick }) => {
-    const onClickHandler = (e) => {
-        e.stopPropagation();
-        if (onClick) onClick(e);
-    }
-  return (
-    <>
-      <DetailMenuItem onClick={onClickHandler}>
-        {children}
-      </DetailMenuItem>
-    </>
-  );
-};
 
 DetailMenu.propTypes = {
     deleteEvent: PropTypes.func,
-};
-MenuItem.propTypes = {
-    children: PropTypes.string,
-    onClick: PropTypes.func,
 };

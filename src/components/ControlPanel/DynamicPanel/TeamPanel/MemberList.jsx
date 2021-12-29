@@ -26,10 +26,12 @@ export default function MemberList() {
   const dispatch = useDispatch();
   const users = useUser();
   const { activeWorkspace } = useWorkspace();
-  const members = users.filter(({workspaces}) => workspaces.some((workspace) => workspace._id === activeWorkspace._id));
+  const members = users.filter(({ workspaces }) =>
+    workspaces.some((workspace) => workspace._id === activeWorkspace._id)
+  );
   const permissionHandle = (member) => {
-    dispatch(setModal(<PermissionPage member={member}/>));
-  }
+    dispatch(setModal(<PermissionPage member={member} />));
+  };
   return (
     <div>
       <Button color="success">Denedim olmadı</Button>
@@ -51,26 +53,31 @@ export default function MemberList() {
         {members.map((member, index) => {
           return (
             <TBody key={member._id} style={{ cursor: "pointer" }}>
-                <th>{index + 1}</th>
-                <th>
-                  <Avatar avatar={member.avatar}/>
-                </th>
-                <td>
-                  <Box online={member.online} />
-                </td>
-                <td>{member.name}</td>
-                <td>{member.username}</td>
-                <td>{member.email}</td>
-                <td>{member.phone}</td>
-                <td>
-                  <Badge color="warning" style={{fontSize:'1.3vmin'}} onClick={()=>permissionHandle(member)}>
-                    Manage Permissions
-                  </Badge>
+              <th>{index + 1}</th>
+              <th>
+                <Avatar avatar={member.avatar} />
+              </th>
+              <td>
+                <Box online={member.online} />
               </td>
-              </TBody>
+              <td>{member.name}</td>
+              <td>{member.username}</td>
+              <td>{member.email}</td>
+              <td>{member.phone}</td>
+              <td>
+                <Button
+                  color="warning"
+                  style={{ fontSize: "1.6vmin" }}
+                  onClick={() => permissionHandle(member)}
+                >
+                  Manage Permissions
+                </Button>
+              </td>
+            </TBody>
           );
         })}
       </Table>
+      <Button color="warning">Bombalar</Button>
     </div>
   );
 }

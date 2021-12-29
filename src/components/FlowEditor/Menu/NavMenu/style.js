@@ -12,6 +12,16 @@ export const MenuIndex = styled.div`
   font-size: 15px;
   padding: 4px;
 `;
+export const Menu = styled(MenuIndex)`
+  background: ${(props) =>
+    props.theme === "dark"
+      ? themeColor.DARK_MENU_BACKGROUND
+      : themeColor.LIGHT_MENU_BACKGROUND};
+  border-radius: 6px;
+  top: 10px;
+  right: 45px;
+  width: 160px;
+`;
 export const MenuItem = styled.button`
   background: none;
   border: none;

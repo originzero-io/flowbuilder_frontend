@@ -4,7 +4,7 @@ import { isNode, useStoreState } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
 import { rotateMultiNode, setElements, setMultipleNodeEnable } from "../../../../../store/reducers/flow/flowElementsReducer";
 import { setMultiSelectionContextMenu } from "../../../../../store/reducers/menuReducer";
-import GroupMenu from "../../GroupMenu";
+import NodeGroupMenu from "../../NodeGroupMenu/NodeGroupMenu";
 import useActiveFlow from "../../../../../utils/useActiveFlow";
 
 export default function MultiSelectionContextMenu() {
@@ -60,7 +60,7 @@ export default function MultiSelectionContextMenu() {
           <MenuItem onClick={disableHandle}>Disable</MenuItem>
           <MenuItem onClick={groupHandle}>{open ? "Group <" : "Group >"}</MenuItem>
           <MenuItem onClick={deleteItems}>Delete</MenuItem>
-          {showGroup && <GroupMenu self={self} />}
+          {showGroup && <NodeGroupMenu self={self} />}
         </Menu>
       )}
     </div>

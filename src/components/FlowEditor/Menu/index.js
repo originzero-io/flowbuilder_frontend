@@ -1,9 +1,9 @@
 import React from "react";
 import NavMenus from "./NavMenu"
-import PanelContextMenu from "./ContextMenu/PanelContext";
-import MultiSelectionContextMenu from "./ContextMenu/MultiselectionContext";
-import ElementContextMenu from "./ContextMenu/ElementContext";
-import GroupBar from "./GroupBar";
+import PanelContextMenu from "./ContextMenu/PanelContext/PanelContextMenu";
+import MultiSelectionContextMenu from "./ContextMenu/MultiselectionContext/MultiSelectionContextMenu";
+import ElementContextMenu from "./ContextMenu/ElementContext/ElementContextMenu";
+import GroupBar from "./GroupBar/GroupBar";
 const AppMenu = () => {
   return (
     <>

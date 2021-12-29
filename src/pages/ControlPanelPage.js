@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import NavigationPanel from "../components/ControlPanel/NavigationPanel";
+import NavigationPanel from "../components/ControlPanel/NavigationPanel/NavigationPanel";
 import PanelRouter from "../components/ControlPanel/DynamicPanel/PanelRouter";
 import styled from "styled-components";
 import WorkspaceList from "../components/ControlPanel/WorkspacePanel/WorkspaceList.jsx";
-import TopMenu from "../components/ControlPanel/DynamicPanel/TopMenu";
+import TopMenu from "../components/ControlPanel/DynamicPanel/TopMenu/TopMenu";
 import createSocket from "../services/socketApi";
 import { useDispatch, useSelector } from "react-redux";
 import { makeMeOnline } from "../store/reducers/authReducer";

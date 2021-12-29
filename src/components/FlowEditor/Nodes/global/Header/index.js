@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { expandNode } from "../../../../../store/reducers/flow/flowElementsReducer";
 import { closeAllNodeGroupMenu } from "../../../../../store/reducers/flow/flowGuiReducer";
 import useActiveFlow from "../../../../../utils/useActiveFlow";
-import GroupMenu from "../../../Menu/GroupMenu";
+import GroupMenu from "../../../Menu/NodeGroupMenu/NodeGroupMenu";
 import { Content, FeatureIconsWrapper, Header, Label } from "../../styles";
 import EditNameForm from "./EditNameForm";
 import FeatureIcons from "./FeatureIcons";

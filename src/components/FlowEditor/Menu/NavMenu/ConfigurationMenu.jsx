@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useStoreActions } from "react-flow-renderer";
+import { BiBrain } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { openNotification } from "../../../../app-global/dom/notification";
@@ -7,42 +8,28 @@ import { loadFunctionsToNode } from "../../../../app-global/helpers/loadFunction
 import * as themeColor from "../../../../config/ThemeReference";
 import * as tooltip from "../../../../config/TooltipReference";
 import { logOut } from "../../../../store/reducers/authReducer";
-import { setModal } from "../../../../store/reducers/componentReducer";
 import {
   changeEdgeType,
-  importElements,
+  importElements
 } from "../../../../store/reducers/flow/flowElementsReducer";
 import {
-  setMiniMapDisplay,
-  setTheme,
-  setFlowEdgeType,
+  setFlowEdgeType, setMiniMapDisplay,
+  setTheme
 } from "../../../../store/reducers/flow/flowGuiReducer";
-import { BiBrain } from "react-icons/bi";
+import useActiveFlow from "../../../../utils/useActiveFlow";
+import useAuth from "../../../../utils/useAuth";
+import Avatar from "../../../global/Avatar";
 import SwitchButton from "../../../global/Button/SwitchButton";
-import FileInputWrapper from "../../../global/FileInputWrapper";
+import { FileInput } from "../../../global/FileInput/FileInput";
 import { VerticalDivider } from "../../../style-components/Divider";
 import {
-  DropDownItem,
+  DropdownItem,
   DropdownList,
-  DropdownWrapper,
+  DropdownWrapper
 } from "../../../style-components/DropdownMenu";
-import { FileInput } from "../../../style-components/FileInput";
 import { Circle } from "../../../style-components/Shapes";
-import { ProfileIcon, ShareIcon, TuneIcon } from "./Icons";
-import { MenuIndex, MenuItem } from "./style";
-import useAuth from "../../../../utils/useAuth";
-import useActiveFlow from "../../../../utils/useActiveFlow";
-import Avatar from "../../../global/Avatar";
-const Menu = styled(MenuIndex)`
-  background: ${(props) =>
-    props.theme === "dark"
-      ? themeColor.DARK_MENU_BACKGROUND
-      : themeColor.LIGHT_MENU_BACKGROUND};
-  border-radius: 6px;
-  top: 10px;
-  right: 45px;
-  width: 160px;
-`;
+import { ShareIcon, TuneIcon } from "./Icons";
+import { Menu, MenuItem } from "./style";
 
 export default function ConfigurationMenu() {
   const { flowGui } = useActiveFlow();
@@ -141,13 +128,10 @@ export default function ConfigurationMenu() {
           <ShareIcon width="25px" height="25px" theme={theme} />
         </MenuItem>
         <DropdownList theme={theme}>
-          <DropDownItem>
-            <FileInputWrapper>
-              <FileInput type="file" onChange={fileUploadHandle} />
-              Import Flow
-            </FileInputWrapper>
-          </DropDownItem>
-          <DropDownItem onClick={downloadFlowHandle}>Export Flow</DropDownItem>
+          <DropdownItem>
+            <FileInput onChange={fileUploadHandle} label="Import Flow"/>
+          </DropdownItem>
+          <DropdownItem onClick={downloadFlowHandle}>Export Flow</DropdownItem>
         </DropdownList>
       </DropdownWrapper>
       <VerticalDivider theme={theme} />
@@ -169,30 +153,30 @@ export default function ConfigurationMenu() {
           <Avatar avatar={auth.avatar}/>
         </Circle>
         <DropdownList theme={theme} align="right">
-          <DropDownItem>
+          <DropdownItem>
             Dark Theme
             <SwitchButton
               checked={active.theme}
               onChange={changeTheme}
             />
-          </DropDownItem>
-          <DropDownItem>
+          </DropdownItem>
+          <DropdownItem>
             Mini-map
             <SwitchButton
               checked={active.miniMap}
               onChange={changeMiniMapDisplay}
             />
-          </DropDownItem>
-          <DropDownItem>Account Settings</DropDownItem>
-          <DropDownItem onClick={logOutHandle}>Log Out</DropDownItem>
-          <DropDownItem>
+          </DropdownItem>
+          <DropdownItem>Account Settings</DropdownItem>
+          <DropdownItem onClick={logOutHandle}>Log Out</DropdownItem>
+          <DropdownItem>
             <select onChange={edgeTypeHandle} defaultValue="smoothstep">
               <option value="bezier">Bezier</option>
               <option value="step">Step</option>
               <option value="smoothstep">Smooth Step</option>
               <option value="straight">Straight</option>
             </select>
-          </DropDownItem>
+          </DropdownItem>
         </DropdownList>
       </DropdownWrapper>
     </Menu>
