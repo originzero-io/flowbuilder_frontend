@@ -4,8 +4,7 @@ export const ProjectsContainerIndex = styled.div`
   flex-wrap: wrap;
   padding: 5px;
   color: white;
-  min-height: 200px;
-  //overflow:scroll;
+  //min-height: 200px;
 `;
 export const Box = styled.div`
   background: rgb(22, 137, 63);

@@ -52,6 +52,7 @@ export const WorkspaceBrandWrapper = styled.div`
 `;
 export const Footer = styled.div`
   position:absolute;
-  bottom:5%;
-  color:whitesmoke;
+  width:100%;
+  bottom:0;
+  cursor:pointer;
 `;

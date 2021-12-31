@@ -7,13 +7,6 @@ import useUser from "../../../../utils/useUser";
 import useWorkspace from "../../../../utils/useWorkspace";
 import Avatar from "../../../global/Avatar";
 import PermissionPage from "./PermissionPage";
-import { Button as AntdButton } from "antd";
-const TBody = styled.tbody`
-  &:hover {
-    background-color: rgba(46, 213, 115, 0.2);
-    transition: background-color 0.2s ease-in-out;
-  }
-`;
 const Box = styled.div`
   margin-top: 3px;
   cursor: pointer;
@@ -33,11 +26,8 @@ export default function MemberList() {
     dispatch(setModal(<PermissionPage member={member} />));
   };
   return (
-    <div>
-      <Button color="success">Denedim olmadı</Button>
-      <AntdButton type="primary">Denedim olmadı</AntdButton>
-      <Badge color="warning">dasda</Badge>
-      <Table style={{ color: "white", background: "#1C1F26" }}>
+    <>
+      <Table dark hover>
         <thead>
           <tr>
             <th>#</th>
@@ -50,34 +40,35 @@ export default function MemberList() {
             <th>Permissions</th>
           </tr>
         </thead>
-        {members.map((member, index) => {
-          return (
-            <TBody key={member._id} style={{ cursor: "pointer" }}>
-              <th>{index + 1}</th>
-              <th>
-                <Avatar avatar={member.avatar} />
-              </th>
-              <td>
-                <Box online={member.online} />
-              </td>
-              <td>{member.name}</td>
-              <td>{member.username}</td>
-              <td>{member.email}</td>
-              <td>{member.phone}</td>
-              <td>
-                <Button
-                  color="warning"
-                  style={{ fontSize: "1.6vmin" }}
-                  onClick={() => permissionHandle(member)}
-                >
-                  Manage Permissions
-                </Button>
-              </td>
-            </TBody>
-          );
-        })}
+        <tbody>
+          {members.map((member, index) => {
+            return (
+              <tr key={member._id}>
+                <th scope="row">{index + 1}</th>
+                <td>
+                  <Avatar avatar={member.avatar} />
+                </td>
+                <td>
+                  <Box online={member.online} />
+                </td>
+                <td>{member.name}</td>
+                <td>{member.username}</td>
+                <td>{member.email}</td>
+                <td>{member.phone}</td>
+                <td>
+                  <Button
+                    color="warning"
+                    style={{ fontSize: "1.2vmin" }}
+                    onClick={() => permissionHandle(member)}
+                  >
+                    Manage Permissions
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
       </Table>
-      <Button color="warning">Bombalar</Button>
-    </div>
+    </>
   );
 }

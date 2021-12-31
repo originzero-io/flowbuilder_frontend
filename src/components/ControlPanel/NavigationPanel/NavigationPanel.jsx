@@ -92,12 +92,12 @@ const ControlPanelMenu = () => {
         </Link>
       </NavMenu>
       <Footer>
-        Logged in as:{" "}
         <Badge
           color="success"
           style={{
-            fontSize: "14px",
+            fontSize: "16px",
             color: "black",
+            width:'100%'
           }}
         >
           {username}

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import WorkspaceList from "../components/ControlPanel/WorkspacePanel/WorkspaceList.jsx";
 import TopMenu from "../components/ControlPanel/DynamicPanel/TopMenu/TopMenu";
 import createSocket from "../services/socketApi";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { makeMeOnline } from "../store/reducers/authReducer";
 import { editUser, getAllUsers } from "../store/reducers/userReducer";
 import { openNotification } from "../app-global/dom/notification";

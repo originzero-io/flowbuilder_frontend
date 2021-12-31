@@ -20,6 +20,7 @@ const PanelComponentWrapper = styled.div`
   padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
+  color:white;
 `;
 export default function PanelRouter() {
   const { url } = useRouteMatch();

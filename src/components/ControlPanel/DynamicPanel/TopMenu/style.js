@@ -35,4 +35,7 @@ export const ProfileList = styled(DropdownList)`
   ${DropdownWrapper}:focus-within & {
     visibility: visible;
   }
+  background:#212529;
+  border:1px solid rgba(75, 75, 75, 0.4);
+  color:whitesmoke;
 `;

@@ -11,7 +11,6 @@ import { setModal } from "../../../../store/reducers/componentReducer";
 import AddFlowForm from "./forms/AddFlowForm";
 import AddDashboardForm from "./forms/AddDashboardForm";
 import { VscAdd } from "react-icons/vsc";
-import { DynamicPanelContainer } from "../style";
 import { SearchBar } from "./style";
 import useFlow from "../../../../utils/useFlow";
 import usePermission from "../../../../utils/usePermission";
@@ -44,7 +43,7 @@ export default function ProjectsPanel() {
     setSearched(flows);
   }, [flows]);
   return (
-    <DynamicPanelContainer>
+    <>
       <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
         <SearchBar
           placeholder="Search flows"
@@ -67,6 +66,6 @@ export default function ProjectsPanel() {
           </Box>
         </DashboardsContainer>
       </CollapsibleMenu>
-    </DynamicPanelContainer>
+    </>
   );
 }

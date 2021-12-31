@@ -1,13 +1,10 @@
 import styled from "styled-components";
 export const Item = styled.div`
   padding:7px 7px 7px 2px;
-  //border-radius:3px;
-  //margin-top:4px;
   width:100%;
   cursor:pointer;
   display:flex;
   justify-content: flex-start;
-  //margin-left: 20px;
 `;
 export const WorkspaceContainer = styled.div`
   background: #212529;

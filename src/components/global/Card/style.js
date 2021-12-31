@@ -76,6 +76,10 @@ export const DetailMenuList = styled(DropdownList)`
   }
   padding-top: 5px;
   padding-bottom: 5px;
+  background:#212529;
+  border:1px solid rgba(75, 75, 75, 0.4);
+  color:whitesmoke;
+  z-index:999999;
 `;
 export const DetailMenuItem = styled.li`
   padding: 8px;

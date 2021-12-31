@@ -9,7 +9,6 @@ import TabRedirector from "./navigation/TabRedirector";
 import NotFound from "./navigation/NotFound";
 import DashboardPage from "./pages/DashboardPage";
 import AuthPage from "./pages/AuthPage";
-import * as routes from "./navigation/RouterConfig";
 import Modal from "./components/global/Modal.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -35,10 +34,6 @@ export const workspaceNamespace = createSocket("workspaces");
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    // console.log("Element", elementNamespace);
-    // console.log("Flow", flowNamespace);
-    // console.log("Project", projectNamespace);
-    // console.log("Workspace", workspaceNamespace);
     elementNamespace.on("elements:save", (data) => {
       dispatch(saveElements(data));
     });
@@ -85,17 +80,17 @@ const App = () => {
   return (
     <AppWrapper>
       <Switch>
-        <Route exact path={routes.AUTH} component={AuthPage} />
+        <Route exact path="/" component={AuthPage} />
         <PrivateRoute path="/panel" component={ControlPanelPage} />
-        <PrivateRoute exact path={routes.GOTO_FLOW} component={FlowPage} />
+        <PrivateRoute exact path="/flow/:flowId" component={FlowPage} />
         <PrivateRoute
           exact
-          path={routes.GOTO_DASHBOARD}
+          path="/dashboard/:dashboardId"
           component={DashboardPage}
         />
         <PrivateRoute
           exact
-          path={routes.CHANGE_TAB}
+          path="/change-tab/:flowId"
           component={TabRedirector}
         />
         <Route path="*" component={NotFound} />
