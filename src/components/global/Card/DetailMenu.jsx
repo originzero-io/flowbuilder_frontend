@@ -16,7 +16,9 @@ export default function DetailMenu({deleteEvent,data}) {
   const dispatch = useDispatch();
   const moveHandler = (e) => {
     e.stopPropagation();
-    dispatch(setModal( <MoveFlow flow={data}/>));
+    dispatch(setModal(<MoveFlow flow={data} />));
+    console.log("thats ok if even i lose");
+    console.log("thats ok if even i lose2");
   }
   const editHandler = (e) => {
     e.stopPropagation();
