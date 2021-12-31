@@ -18,6 +18,7 @@ export default function DetailMenu({deleteEvent,data}) {
     e.stopPropagation();
     dispatch(setModal(<MoveFlow flow={data} />));
     console.log("thats ok if even i lose");
+    console.log("thats ok if even i lose2");
   }
   const editHandler = (e) => {
     e.stopPropagation();
