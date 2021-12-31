@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DropdownWrapper } from "../../../style-components/DropdownMenu";
+import { DropdownWrapper,DropdownList } from "../../../style-components/DropdownMenu";
 export const Container = styled.div`
   padding: 2px;
   display: flex;
@@ -8,40 +8,34 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #323232;
-  background-color: #343A40;
+  background-color: #343a40;
 `;
 export const MenuItem = styled.div`
-  color:white;
-  cursor:pointer;
+  color: white;
+  cursor: pointer;
   padding: 8px;
-  font-size:1.5vmin;
+  font-size: 1.5vmin;
 `;
 export const LeftSideContainer = styled.div`
-  margin-left:15px;
-  cursor:pointer;
+  margin-left: 15px;
+  cursor: pointer;
 `;
 export const RightSideContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: stretch;
 `;
-export const ProfileList = styled.ul`
-  position: absolute;
-  display: flex;
+export const ProfileList = styled(DropdownList)`
   padding-top: 3px;
   padding-bottom: 3px;
-  flex-direction: column;
-  min-width: 120px;
   background: white;
-  list-style: none;
-  right: 0px;
+  left:-70px;
   margin-top: 3px;
-  border-radius: 4px;
-  visibility: hidden;
   font-size: 12px;
-  box-shadow: 1px 1px 33px -11px rgba(0, 0, 0, 0.75);
-
   ${DropdownWrapper}:focus-within & {
     visibility: visible;
   }
+  background:#212529;
+  border:1px solid rgba(75, 75, 75, 0.4);
+  color:whitesmoke;
 `;

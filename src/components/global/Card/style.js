@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DropdownList,DropdownWrapper } from "../../style-components/DropdownMenu";
 export const Container = styled.div`
   margin: 7px;
   width: 160px;
@@ -6,13 +7,13 @@ export const Container = styled.div`
   border-radius: 6px;
   user-select: none;
   background-color: #212529;
-  border:2px solid rgba(75,75,75,0.4);
+  border: 2px solid rgba(75, 75, 75, 0.4);
   cursor: pointer;
   color: white;
   transition: background-color 0.3s ease-in-out;
-  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
   &:hover {
-    background-color: rgba(46, 204, 113,0.4);
+    background-color: rgba(46, 204, 113, 0.4);
     transition: background-color 0.2s ease-in-out;
   }
   display: flex;
@@ -63,35 +64,22 @@ export const CardMoreButton = styled.div`
     color: #2ecc71;
   }
 `;
-export const DetailMenuWrapper = styled.div`
-  color: whitesmoke;
-  position: absolute;
-  right: 12px;
-  top: 3px;
-  z-index: 1;
-`;
-export const DetailMenuList = styled.ul`
-  margin-top: 5px;
+export const DetailMenuList = styled(DropdownList)`
   font-size: 12px;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
   min-width: 80px;
-  background: white;
   color: black;
+  background:whitesmoke;
   top: 30px;
   left: -10px;
-  list-style: none;
-  border-radius: 4px;
-  box-shadow: 1px 1px 26px -20px rgba(0, 0, 0, 0.75);
-
-  visibility: hidden;
-
-  ${DetailMenuWrapper}:focus-within & {
+  ${DropdownWrapper}:focus-within & {
     visibility: visible;
   }
   padding-top: 5px;
   padding-bottom: 5px;
+  background:#212529;
+  border:1px solid rgba(75, 75, 75, 0.4);
+  color:whitesmoke;
+  z-index:999999;
 `;
 export const DetailMenuItem = styled.li`
   padding: 8px;

@@ -1,37 +1,4 @@
 import styled from "styled-components";
-export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background: #0e1217;
-`;
-export const Content = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  height: 40%;
-  border-radius: 4px;
-  box-shadow: 3px 3px 83px 2px rgba(29, 185, 84, 1);
-  //overflow-y:auto;
-`;
-export const FormWrapper = styled.div`
-  width: 300px;
-  padding: 40px 30px;
-  background: #212529;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-`;
-export const LogoWrapper = styled.div`
-  padding: 40px;
-  transition: all 0.3s ease;
-  &:hover {
-    transform: translateY(5px);
-    box-shadow: 0 2px 6px -1px rgba($primary, 0.65);
-  }
-`;
 export const Text = styled.div`
   letter-spacing: 2px;
   color: whitesmoke;

@@ -53,7 +53,7 @@ export default function UserList() {
   };
   return (
     <UserListContainer>
-      <Table style={{ color: "white", background: "#1C1F26" }}>
+      <Table dark hover>
         <thead>
           <tr>
             <th>#</th>
@@ -63,30 +63,31 @@ export default function UserList() {
             <th>Username</th>
             <th>E-Mail</th>
             <th>Phone</th>
-            <th>Role</th>
+            <th>Permissions</th>
             <th></th>
           </tr>
         </thead>
-        {users.map((user, index) => {
-          return (
-            <TBody key={user._id} style={{ cursor: "pointer" }}>
-              <th>{index + 1}</th>
-              <th>
-                <Avatar avatar={user.avatar}/>
-              </th>
-              <td>
-                <Box online={user.online} />
-              </td>
-              <td>{user.name}</td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>{user.phone}</td>
-              <td>
+        <tbody>
+          {users.map((user, index) => {
+            return (
+              <tr key={user._id}>
+                <th scope="row">{index + 1}</th>
+                <td>
+                  <Avatar avatar={user.avatar} />
+                </td>
+                <td>
+                  <Box online={user.online} />
+                </td>
+                <td>{user.name}</td>
+                <td>{user.username}</td>
+                <td>{user.email}</td>
+                <td>{user.phone}</td>
+                <td>
                 <Badge color={user.role === "admin" ? "primary" : "warning"}>
                   {user.role}
                 </Badge>
-              </td>
-              <Td>
+                </td>
+                <Td>
                 <TdItem>
                   <BiEdit
                     onClick={() => editUserHandle(user)}
@@ -97,9 +98,10 @@ export default function UserList() {
                   <VscTrash style={{ fontSize: "20px" }} />
                 </TdItem>
               </Td>
-            </TBody>
-          );
-        })}
+              </tr>
+            );
+          })}
+        </tbody>
       </Table>
       <Button color="primary" onClick={addUserHandle} style={{ width: "5%" }}>
         <AiOutlineUserAdd style={{ fontSize: "4vh" }} />

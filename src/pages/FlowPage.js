@@ -4,8 +4,12 @@ import { ReactFlowProvider } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import FlowEditor from "../components/FlowEditor";
-import { FlowWrapper } from "../components/style-components/AppWrapper";
 import { getGroups } from "../store/reducers/flow/flowGroupsReducer";
+import styled from "styled-components";
+const FlowWrapper = styled.div`
+  height:100%;
+  width:100%;
+`;
 const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowId } = useParams();
@@ -28,7 +32,6 @@ const FlowPage = () => {
     <ReactFlowProvider>
       <FlowWrapper ref={rfWrapper}>
         <FlowEditor reactFlowWrapper={rfWrapper} />
-        {/* <FlowTabs/> */}
       </FlowWrapper>
     </ReactFlowProvider>
   );

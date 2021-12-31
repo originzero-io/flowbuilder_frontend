@@ -7,7 +7,7 @@ import useAuth from "../../../../utils/useAuth";
 import Avatar from "../../../global/Avatar";
 import { Logo } from "../../../global/icons";
 import {
-  DropDownItem,
+  DropdownItem,
   DropdownWrapper,
 } from "../../../style-components/DropdownMenu";
 import {
@@ -42,8 +42,8 @@ export default function TopMenu() {
             <Avatar avatar={avatar}/>
           </div>
           <ProfileList>
-            <DropDownItem>User settings</DropDownItem>
-            <DropDownItem onClick={logOutHandle}>Log out</DropDownItem>
+            <DropdownItem>User settings</DropdownItem>
+            <DropdownItem onClick={logOutHandle}>Log out</DropdownItem>
           </ProfileList>
         </DropdownWrapper>
       </RightSideContainer>
