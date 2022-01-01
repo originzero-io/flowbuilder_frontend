@@ -26,7 +26,6 @@ export default function LoginForm() {
     } catch (error) {
       notification("", "The server is not active", "error");
       dispatch(loginError(error.response?.data.message));
-      console.log("thats not important")
     }
   };
   return (
