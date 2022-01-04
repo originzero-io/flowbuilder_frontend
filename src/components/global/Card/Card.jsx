@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import {
   Container,
@@ -16,7 +16,6 @@ import { Badge } from "reactstrap";
 import { flowNamespace } from "../../../App";
 const Card = ({ data }) => {
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth);
   const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
