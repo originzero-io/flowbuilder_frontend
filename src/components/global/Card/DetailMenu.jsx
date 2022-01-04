@@ -36,9 +36,6 @@ export default function DetailMenu({deleteEvent,data}) {
           <DropdownItem>Share</DropdownItem>
           <DropdownItem>Duplicate</DropdownItem>
           <DropdownItem>Change</DropdownItem>
-          <DropdownItem>Duplicate</DropdownItem>
-          <DropdownItem>Duplicate</DropdownItem>
-          <DropdownItem>Duplicate</DropdownItem>
           <DropdownItem>Share</DropdownItem>
           <DropdownItem onClick={(e)=>deleteEvent(e,data)}>Delete</DropdownItem>
         </DetailMenuList>

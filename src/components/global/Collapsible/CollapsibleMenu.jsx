@@ -12,6 +12,7 @@ export function CollapsibleMenu({ trigger, open, children, style, ...props }) {
       transitionTime={150}
       transitionCloseTime={150}
       style={style}
+    overflowWhenOpen="visible"
       {...props}
     >
       <div>{children}</div>
