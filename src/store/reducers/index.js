@@ -13,6 +13,7 @@ import authReducer from "./authReducer";
 import userReducer from "./userReducer";
 import workspaceReducer from "./workspaceReducer";
 import projectReducer from "./projectReducer";
+import notesReducer from "./notesReducer";
 import errorReducer from "./errorReducer";
 import * as actions from "../constants/authConstants";
 const reducers = combineReducers({
@@ -27,6 +28,7 @@ const reducers = combineReducers({
   workspaces: workspaceReducer,
   projects: projectReducer,
   flows: flowReducer,
+  notes: notesReducer,
   menus: menuReducer,
   controlPanel: controlPanelReducer,
   modal: modalReducer,
