@@ -3,6 +3,7 @@ const HOST = "http://localhost:5001/";
 import { openNotification } from "../app-global/dom/notification";
 import { saveElements, setElements } from "../store/reducers/flow/flowElementsReducer";
 import { createFlow, deleteFlow, editFlow, moveFlow } from "../store/reducers/flow/flowReducer";
+import { createNote, deleteNote, updateNote } from "../store/reducers/notesReducer";
 import { createProject, deleteProject, updateProject } from "../store/reducers/projectReducer";
 import { createWorkspace, deleteWorkspace, editWorkspace } from "../store/reducers/workspaceReducer";
 const createSocket = (namespace, extraOptions) => {
@@ -68,7 +69,6 @@ export const flowSubscribe = (socket,dispatch) => {
     dispatch(moveFlow(data.flow));
   });
   socket.on("flows:create", (data) => {
-    console.log("data:", data);
     dispatch(createFlow(data.flow));
   });
 }
@@ -78,6 +78,17 @@ export const elementSubscribe = (socket,dispatch) => {
   });
   socket.on("elements:getElements", (data) => {
     dispatch(setElements(data.data));
+  });
+}
+export const noteSubscribe = (socket,dispatch) => {
+  socket.on("notes:create", (data) => {
+    dispatch(createNote(data.note));
+  });
+  socket.on("notes:update", (data) => {
+    dispatch(updateNote(data.note));
+  });
+  socket.on("notes:remove", (data) => {
+    dispatch(deleteNote(data.note));
   });
 }
 

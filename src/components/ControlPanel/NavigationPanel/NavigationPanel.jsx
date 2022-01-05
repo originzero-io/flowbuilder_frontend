@@ -55,7 +55,6 @@ const ControlPanelMenu = () => {
   const allFlowsHandle = () => {
     activeWorkspace && dispatch(getFlowsByWorkspace(activeWorkspace));
   };
-
   return (
     <Container>
       <NavMenu>
@@ -75,8 +74,8 @@ const ControlPanelMenu = () => {
         <Link to={`${url}/team`}>
           <NavMenuItem label="Team" icon={<RiTeamLine />} />
         </Link>
-        <Link to={`${url}/learn`}>
-          <NavMenuItem label="Learn" icon={<BiBrain />} />
+        <Link to={`${url}/learn`} style={{position:'absolute',bottom:'30px',width:'100%'}}>
+          <NavMenuItem label="Learn" icon={<BiBrain />}/>
         </Link>
         <Link to={`${url}/notes`}>
           <NavMenuItem label="Notes" icon={<CgNotes />} />

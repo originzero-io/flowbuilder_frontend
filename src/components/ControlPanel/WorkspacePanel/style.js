@@ -13,7 +13,6 @@ export const WorkspaceContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-basis: 4%;
-  border-right:1px solid rgb(60, 60, 60);
 `;
 export const WorkspaceItemWrapper = styled(Item)`
   background:${props => props.active ? "rgb(70, 70, 70)" : "none"};

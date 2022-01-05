@@ -1,33 +1,22 @@
 import React, { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
+import { useDispatch } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import Modal from "./components/global/Modal.jsx";
 import { AppWrapper } from "./components/style-components/AppWrapper";
-import FlowPage from "./pages/FlowPage";
-import ControlPanelPage from "./pages/ControlPanelPage";
+import NotFound from "./navigation/NotFound";
 import PrivateRoute from "./navigation/PrivateRoute";
 import TabRedirector from "./navigation/TabRedirector";
-import NotFound from "./navigation/NotFound";
-import DashboardPage from "./pages/DashboardPage";
 import AuthPage from "./pages/AuthPage";
-import Modal from "./components/global/Modal.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  saveElements,
-  setElements,
-} from "./store/reducers/flow/flowElementsReducer";
-import createSocket, { elementSubscribe, flowSubscribe, projectSubscribe, workspaceSubscribe } from "./services/socketApi";
-import {
-  createFlow,
-  deleteFlow,
-  editFlow,
-  moveFlow,
-} from "./store/reducers/flow/flowReducer";
-import { createProject, deleteProject, updateProject } from "./store/reducers/projectReducer";
-import { createWorkspace, deleteWorkspace, editWorkspace } from "./store/reducers/workspaceReducer";
+import ControlPanelPage from "./pages/ControlPanelPage";
+import DashboardPage from "./pages/DashboardPage";
+import FlowPage from "./pages/FlowPage";
+import createSocket, { elementSubscribe, flowSubscribe, projectSubscribe, workspaceSubscribe,noteSubscribe } from "./services/socketApi";
 export const elementNamespace = createSocket("elements");
 export const flowNamespace = createSocket("flows");
 export const projectNamespace = createSocket("projects");
 export const workspaceNamespace = createSocket("workspaces");
+export const noteNamespace = createSocket("notes");
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -35,6 +24,7 @@ const App = () => {
     flowSubscribe(flowNamespace, dispatch);
     projectSubscribe(projectNamespace,dispatch);
     workspaceSubscribe(workspaceNamespace, dispatch);
+    noteSubscribe(noteNamespace, dispatch);
   }, []);
   return (
     <AppWrapper>

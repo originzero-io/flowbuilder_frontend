@@ -20,7 +20,7 @@ export const CollapsableItem = styled(CollapseIndex)`
   padding-left: 13%;
   border-radius:3px;
   background:${props => props.active ? "rgba(46, 213, 115,0.2)" : "none"};
-  border-bottom:1px solid rgb(60, 60, 60);
+  border-bottom:1px solid rgb(50, 50, 50);
 `;
 export const TriggerWrapper = styled(CollapseIndex)`
   padding: 7px;
