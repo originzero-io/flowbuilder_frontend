@@ -41,9 +41,9 @@ const ControlPanelMenu = () => {
 
   const projectItem = () => {
     return (
-      <CollapsibleTrigger label="Projects" icon={<AiOutlineProject />}>
+      <CollapsibleTrigger label="Projects" icon={<AiOutlineProject/>}>
         <div onClick={(e) => showModalHandle(e)}>
-          {permissions?.CAN_CREATE_PROJECT && <BsPlusCircle />}
+          {permissions?.CAN_CREATE_PROJECT && <BsPlusCircle style={{fontSize:'2vmin'}} />}
         </div>
       </CollapsibleTrigger>
     );
@@ -95,7 +95,7 @@ const ControlPanelMenu = () => {
         <Badge
           color="success"
           style={{
-            fontSize: "16px",
+            fontSize: "2vmin",
             color: "black",
             width:'100%'
           }}

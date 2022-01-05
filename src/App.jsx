@@ -15,7 +15,7 @@ import {
   saveElements,
   setElements,
 } from "./store/reducers/flow/flowElementsReducer";
-import createSocket from "./services/socketApi";
+import createSocket, { elementSubscribe, flowSubscribe, projectSubscribe, workspaceSubscribe } from "./services/socketApi";
 import {
   createFlow,
   deleteFlow,
@@ -24,58 +24,17 @@ import {
 } from "./store/reducers/flow/flowReducer";
 import { createProject, deleteProject, updateProject } from "./store/reducers/projectReducer";
 import { createWorkspace, deleteWorkspace, editWorkspace } from "./store/reducers/workspaceReducer";
-//export const mainNamespace = createSocket("main");
 export const elementNamespace = createSocket("elements");
-export const flowNamespace = createSocket("flows", {
-  auth: { token: 123 },
-});
+export const flowNamespace = createSocket("flows");
 export const projectNamespace = createSocket("projects");
 export const workspaceNamespace = createSocket("workspaces");
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    elementNamespace.on("elements:save", (data) => {
-      dispatch(saveElements(data));
-    });
-    elementNamespace.on("elements:getElements", (data) => {
-      dispatch(setElements(data.data));
-    });
-    elementNamespace.emit("elements:test", "message", (data) => {
-      console.log("testten gelen:", data);
-    });
-
-    flowNamespace.on("flows:remove", (data) => {
-      dispatch(deleteFlow(data.flow));
-    });
-    flowNamespace.on("flows:update", (data) => {
-      dispatch(editFlow(data.flow));
-    });
-    flowNamespace.on("flows:move", (data) => {
-      dispatch(moveFlow(data.flow));
-    });
-    flowNamespace.on("flows:create", (data) => {
-      dispatch(createFlow(data.flow));
-    });
-
-    projectNamespace.on("projects:create", (data) => {
-      dispatch(createProject(data.project));
-    });
-    projectNamespace.on("projects:update", (data) => {
-      dispatch(updateProject(data.project));
-    });
-    projectNamespace.on("projects:remove", (data) => {
-      dispatch(deleteProject(data.project));
-    });
-
-    workspaceNamespace.on("workspaces:create", (data) => {
-      dispatch(createWorkspace(data.workspace));
-    });
-    workspaceNamespace.on("workspaces:update", (data) => {
-      dispatch(editWorkspace(data.workspace));
-    });
-    workspaceNamespace.on("workspaces:remove", (data) => {
-      dispatch(deleteWorkspace(data.workspace));
-    });
+    elementSubscribe(elementNamespace, dispatch);
+    flowSubscribe(flowNamespace, dispatch);
+    projectSubscribe(projectNamespace,dispatch);
+    workspaceSubscribe(workspaceNamespace, dispatch);
   }, []);
   return (
     <AppWrapper>

@@ -22,6 +22,7 @@ export const WorkspaceItemWrapper = styled(Item)`
 `;
 export const WorkspaceItem = styled.div`
   color:white;
+  font-size:1.5vmin;
   border-radius:50%;
   background:${props => props.active ? "rgb(22, 139, 63)" : "#343A40"};
   width:50%;
