@@ -45,11 +45,13 @@ export default function ProjectsPanel() {
   return (
     <>
       <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
-        <SearchBar
-          placeholder="Search flows"
-          spellCheck={false}
-          onChange={searchHandle}
-        />
+        {flows.length > 0 && (
+          <SearchBar
+            placeholder="Search flows"
+            spellCheck={false}
+            onChange={searchHandle}
+          />
+        )}
         <FlowsContainer>
           <FlowList flows={searched} />
           {permission?.CAN_CREATE_FLOW && (

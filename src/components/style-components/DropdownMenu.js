@@ -9,7 +9,7 @@ export const DropdownList = styled.ul`
   padding: 0px;
   margin-top: ${(props) => (props.align === "right" ? "30px" : "8px")};
   position: absolute;
-  display: flex;
+  display: none;
   flex-direction: column;
   min-width: 120px;
   background: ${(props) =>
@@ -19,9 +19,8 @@ export const DropdownList = styled.ul`
   left: ${(props) => (props.align === "right" ? "none" : "0px")};
   list-style: none;
   border-radius: 4px;
-  visibility: hidden;
   ${DropdownWrapper}:focus-within & {
-    visibility: visible;
+    display: flex;
   }
 `;
 

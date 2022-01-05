@@ -14,6 +14,7 @@ export const CollapseIndex = styled.button`
   }
 `;
 export const CollapsableItem = styled(CollapseIndex)`
+  font-size:1.5vmin;
   margin-top:1px;
   margin-right:3px;
   padding-left: 13%;

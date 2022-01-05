@@ -4,6 +4,8 @@ export const Container = styled.div`
   margin: 7px;
   width: 160px;
   height: 150px;
+  //width:15vw;
+  //height:25vh;
   border-radius: 6px;
   user-select: none;
   background-color: #212529;
@@ -79,7 +81,6 @@ export const DetailMenuList = styled(DropdownList)`
   background:#212529;
   border:1px solid rgba(75, 75, 75, 0.4);
   color:whitesmoke;
-  z-index:999999;
 `;
 export const DetailMenuItem = styled.li`
   padding: 8px;

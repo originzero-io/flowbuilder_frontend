@@ -24,13 +24,13 @@ const WorkspaceBrand = ({ workspace }) => {
     <WorkspaceBrandWrapper>
       {workspace && (
         <>
-          <span>{workspace.name}</span>
+          <span style={{fontSize:'2vmin'}}>{workspace.name}</span>
           <div>
             <span onClick={editWorkspaceHandler} style={{ marginRight: "5px" }}>
-              <BiEdit style={{ fontSize: "20px" }} />
+              <BiEdit style={{ fontSize: "2.5vmin" }} />
             </span>
             <span onClick={deleteWorkspaceHandler}>
-              <VscTrash style={{ fontSize: "20px" }} />
+              <VscTrash style={{ fontSize: "2.5vmin" }} />
             </span>
           </div>
         </>

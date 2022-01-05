@@ -26,11 +26,8 @@ export default function ControlPanelPage() {
   const dispatch = useDispatch();
   const auth = useAuth();
   useEffect(() => {
-    mainNamespace = createSocket("main", {
-      auth: { token: localStorage.getItem("token") }
-    });
-    console.log("testtttttdfdsftttsss")
-    //console.log("Main", mainNamespace);
+    mainNamespace = createSocket("main");
+    console.log("Main", mainNamespace);
     mainNamespace.emit("main:onlineUser", "MAKE_ME_ONLINE");
     mainNamespace.on("main:onlineUser", (data) => {
       if (auth._id !== data._id) {

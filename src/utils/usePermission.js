@@ -1,7 +1,7 @@
 import { useState, useEffect,useMemo } from 'react'
 import useAuth from "./useAuth"
 import useWorkspace from './useWorkspace';
-export default function useAuthorization(permission) {
+export default function usePermission(permission) {
     const auth = useAuth();
     const { activeWorkspace } = useWorkspace();
     // const permissionsInThisWorkspace = useMemo(() => {

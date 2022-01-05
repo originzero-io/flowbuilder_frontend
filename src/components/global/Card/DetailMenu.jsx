@@ -17,9 +17,6 @@ export default function DetailMenu({deleteEvent,data}) {
   const moveHandler = (e) => {
     e.stopPropagation();
     dispatch(setModal(<MoveFlow flow={data} />));
-    console.log("thats ok if even i lose");
-    console.log("thats ok if even i lose2");
-    console.log("thats ok if even i lose3");
   }
   const editHandler = (e) => {
     e.stopPropagation();
@@ -33,10 +30,10 @@ export default function DetailMenu({deleteEvent,data}) {
         <DetailMenuList>
           <DropdownItem onClick={moveHandler}>Move</DropdownItem>
           <DropdownItem onClick={editHandler}>Edit</DropdownItem>
-          <DropdownItem>Share</DropdownItem>
-          <DropdownItem>Duplicate</DropdownItem>
-          <DropdownItem>Change</DropdownItem>
-          <DropdownItem>Share</DropdownItem>
+          <DropdownItem onClick={(e) => e.stopPropagation()}>Share</DropdownItem>
+          <DropdownItem onClick={(e) => e.stopPropagation()}>Duplicate</DropdownItem>
+          <DropdownItem onClick={(e) => e.stopPropagation()}>Change</DropdownItem>
+          <DropdownItem onClick={(e) => e.stopPropagation()}>Share</DropdownItem>
           <DropdownItem onClick={(e)=>deleteEvent(e,data)}>Delete</DropdownItem>
         </DetailMenuList>
       </DropdownWrapper>

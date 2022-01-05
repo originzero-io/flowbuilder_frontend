@@ -40,12 +40,12 @@ export default function ProjectList() {
               <div>
                 {permission?.CAN_EDIT_PROJECT && (
                   <span onClick={() => editProjectHandle(project)}>
-                    <BiEdit style={{ fontSize: "20px" }} />
+                    <BiEdit style={{ fontSize: "2vmin" }} />
                   </span>
                 )}
                 {permission?.CAN_DELETE_PROJECT && (
                   <span onClick={() => deleteProjectHandle(project)}>
-                    <VscTrash style={{ fontSize: "20px" }} />
+                    <VscTrash style={{ fontSize: "2vmin" }} />
                   </span>
                 )}
               </div>

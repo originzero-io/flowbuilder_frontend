@@ -32,8 +32,9 @@ export const ProfileList = styled(DropdownList)`
   left:-70px;
   margin-top: 3px;
   font-size: 12px;
+  display:none;
   ${DropdownWrapper}:focus-within & {
-    visibility: visible;
+    display:flex;
   }
   background:#212529;
   border:1px solid rgba(75, 75, 75, 0.4);
