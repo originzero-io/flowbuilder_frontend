@@ -7,7 +7,7 @@ import { BiEdit } from "react-icons/bi";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
 import { WorkspaceBrandWrapper } from "./style";
 import PropTypes from "prop-types";
-import { workspaceNamespace } from "../../../App";
+import { workspaceNamespace } from "../../global/SocketConnections";
 const WorkspaceBrand = ({ workspace }) => {
   //console.log("TEAM BRAND RENDERED");
   const dispatch = useDispatch();

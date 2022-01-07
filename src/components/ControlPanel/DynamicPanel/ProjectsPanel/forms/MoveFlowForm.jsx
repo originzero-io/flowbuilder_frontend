@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form } from "reactstrap";
-import { flowNamespace } from "../../../../../App";
+import { flowNamespace } from "../../../../global/SocketConnections";
 import { setModal } from "../../../../../store/reducers/componentReducer";
 import useProject from "../../../../../utils/useProject";
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { noteNamespace } from "../../../../App";
+import { noteNamespace } from "../../../global/SocketConnections";
 import { setModal } from "../../../../store/reducers/componentReducer";
 import useAuth from "../../../../utils/useAuth";
 import useWorkspace from "../../../../utils/useWorkspace";

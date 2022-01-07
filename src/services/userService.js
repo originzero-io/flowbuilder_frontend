@@ -3,10 +3,6 @@ export const getAllUsersService = async () => {
   const response = await axios.get("/users/getAll");
   return response.data;
 };
-export const getMeService = async () => {
-  const response = await axios.get("/users/me");
-  return response.data;
-};
 export const registerService = async (user) => {
   const response = await axios.post("/auth/register", user);
   return response.data;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from 'reactstrap';
-import { projectNamespace } from "../../../App";
+import { projectNamespace } from "../../global/SocketConnections";
 import { setModal } from "../../../store/reducers/componentReducer";
 import useProject from "../../../utils/useProject";
 const EditProjectForm = ({project}) => {

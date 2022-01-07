@@ -7,7 +7,7 @@ import Card from "../../../global/Card/Card";
 import { setCurrentFlowGui } from "../../../../store/reducers/flow/flowGuiReducer";
 import { setCurrentFlowConfig } from "../../../../store/reducers/flow/flowConfigReducer";
 import { getElementsByFlow } from "../../../../store/reducers/flow/flowElementsReducer";
-import { elementNamespace } from "../../../../App";
+import { elementNamespace } from "../../../global/SocketConnections";
 
 const FlowList = ({ flows }) => {
   const dispatch = useDispatch();

@@ -6,6 +6,7 @@ import { logOut } from "../../../../store/reducers/authReducer";
 import useAuth from "../../../../utils/useAuth";
 import Avatar from "../../../global/Avatar";
 import { Logo } from "../../../global/icons";
+import { VerticalDivider } from "../../../style-components/Divider";
 import {
   DropdownItem,
   DropdownWrapper,
@@ -16,11 +17,13 @@ import {
   MenuItem,
   LeftSideContainer,
   RightSideContainer,
+  UserInformation,
+  Profile,
 } from "./style";
 export default function TopMenu() {
   const dispatch = useDispatch();
   const { url } = useRouteMatch();
-  const { role, avatar } = useAuth();
+  const { role, avatar,name } = useAuth();
   const logOutHandle = () => {
     if (confirm("Sure?")) {
       dispatch(logOut());
@@ -38,9 +41,13 @@ export default function TopMenu() {
           </Link>
         )}
         <DropdownWrapper tabIndex="1">
-          <div style={{ cursor: "pointer" }}>
-            <Avatar avatar={avatar}/>
-          </div>
+          <Profile>
+            <Avatar avatar={avatar} size={36}/>
+            <UserInformation>
+              <div>{name}</div>
+              <div style={{textAlign:'center',opacity:'0.6'}}>{role}</div>
+            </UserInformation>
+          </Profile>
           <ProfileList>
             <DropdownItem>User settings</DropdownItem>
             <DropdownItem onClick={logOutHandle}>Log out</DropdownItem>

@@ -54,7 +54,11 @@ export const CardDescription = styled.div`
 export const CardFooter = styled.div`
   position: absolute;
   bottom: 5px;
-  right: 8px;
+  left: 2px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width: 100%;
 `;
 export const CardMoreButton = styled.div`
   font-size: 20px;
@@ -76,8 +80,6 @@ export const DetailMenuList = styled(DropdownList)`
   ${DropdownWrapper}:focus-within & {
     visibility: visible;
   }
-  padding-top: 5px;
-  padding-bottom: 5px;
   background:#212529;
   border:1px solid rgba(75, 75, 75, 0.4);
   color:whitesmoke;

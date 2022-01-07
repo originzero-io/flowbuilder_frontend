@@ -7,7 +7,7 @@ import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
 import { setModal } from "../../../store/reducers/componentReducer";
 import EditProjectForm from "./EditProjectForm";
-import { projectNamespace } from "../../../App";
+import { projectNamespace } from "../../global/SocketConnections";
 import useProject from "../../../utils/useProject";
 import usePermission from "../../../utils/usePermission";
 export default function ProjectList() {

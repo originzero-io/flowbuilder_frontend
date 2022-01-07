@@ -8,6 +8,7 @@ import SettingsPanel from "./SettingsPanel/SettingsPanel";
 import DevicesPanel from "./DevicesPanel/DevicesPanel";
 import UserPanel from "./UserPanel/UserPanel";
 import TeamPanel from "./TeamPanel/TeamPanel";
+import NotFound from "./NotFound";
 
 const Container = styled.div`
   width: 100%;
@@ -36,6 +37,7 @@ export default function PanelRouter() {
           <Route exact path={`${url}/devices`} component={DevicesPanel}/>
           <Route exact path={`${url}/settings`} component={SettingsPanel}/>
           <Route exact path={`${url}/users`} component={UserPanel}/>
+          <Route path="*" component={NotFound}/>
         </Switch>
       </PanelComponentWrapper>
     </Container>

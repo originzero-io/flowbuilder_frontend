@@ -29,7 +29,7 @@ import * as themeColor from "../../../../config/ThemeReference";
 import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { useParams } from "react-router";
-import { elementNamespace } from "../../../../App";
+import { elementNamespace } from "../../../global/SocketConnections";
 import useActiveFlow from "../../../../utils/useActiveFlow";
 const Menu = styled.div`
   position: absolute;

@@ -42,6 +42,7 @@ const authReducer = (state = initialState, { type, payload }) => {
 export default authReducer;
 
 import { loginService, logoutService } from '../../services/authService';
+import { getMeService } from "../../services/authService";
 
 export const loginSuccess = (user) => async dispatch => {
   try {
@@ -49,6 +50,17 @@ export const loginSuccess = (user) => async dispatch => {
     dispatch({
       type: actions.LOGIN_SUCCESS,
       payload: data,
+    });
+  } catch (error) {
+    dispatch(loginError(error.response?.data.message));
+  }
+};
+export const getMe = (token) => async dispatch => {
+  try {
+    const { user } = await getMeService(token);
+    dispatch({
+      type: actions.LOGIN_SUCCESS,
+      payload: user,
     });
   } catch (error) {
     dispatch(loginError(error.response?.data.message));
