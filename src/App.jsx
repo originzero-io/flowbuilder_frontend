@@ -3,6 +3,7 @@ import { NotificationContainer } from "react-notifications";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Modal from "./components/global/Modal.jsx";
+import SocketConnections from "./components/global/SocketConnections.jsx";
 import { AppWrapper } from "./components/style-components/AppWrapper";
 import NotFound from "./navigation/NotFound";
 import PrivateRoute from "./navigation/PrivateRoute";
@@ -11,20 +12,15 @@ import AuthPage from "./pages/AuthPage";
 import ControlPanelPage from "./pages/ControlPanelPage";
 import DashboardPage from "./pages/DashboardPage";
 import FlowPage from "./pages/FlowPage";
-import createSocket, { elementSubscribe, flowSubscribe, projectSubscribe, workspaceSubscribe,noteSubscribe } from "./services/socketApi";
-export const elementNamespace = createSocket("elements");
-export const flowNamespace = createSocket("flows");
-export const projectNamespace = createSocket("projects");
-export const workspaceNamespace = createSocket("workspaces");
-export const noteNamespace = createSocket("notes");
+import { getMe } from "./store/reducers/authReducer.js";
 const App = () => {
   const dispatch = useDispatch();
+  console.log("App rendered!!");
   useEffect(() => {
-    elementSubscribe(elementNamespace, dispatch);
-    flowSubscribe(flowNamespace, dispatch);
-    projectSubscribe(projectNamespace,dispatch);
-    workspaceSubscribe(workspaceNamespace, dispatch);
-    noteSubscribe(noteNamespace, dispatch);
+    const jwtToken = localStorage.getItem("token");
+    if (jwtToken) {
+      dispatch(getMe(jwtToken));
+    }
   }, []);
   return (
     <AppWrapper>
@@ -46,6 +42,7 @@ const App = () => {
       </Switch>
       <NotificationContainer />
       <Modal />
+      <SocketConnections/>
     </AppWrapper>
   );
 };

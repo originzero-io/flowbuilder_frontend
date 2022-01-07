@@ -53,4 +53,8 @@ export const Footer = styled.div`
   width:100%;
   bottom:0;
   cursor:pointer;
+  padding: 5px 0px 5px 2px;
+  display:flex;
+  align-items:center;
+  user-select:none;
 `;

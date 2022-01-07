@@ -13,13 +13,14 @@ import { VscTrash } from "react-icons/vsc";
 import DetailMenu from "./DetailMenu";
 import { deleteFlow } from "../../../store/reducers/flow/flowReducer";
 import { Badge } from "reactstrap";
-import { flowNamespace } from "../../../App";
+import { flowNamespace } from "../../../components/global/SocketConnections";
+import Avatar from "../Avatar";
 const Card = ({ data }) => {
   const dispatch = useDispatch();
   const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
-      flowNamespace.emit('flows:remove',{flow})
+      flowNamespace.emit("flows:remove", { flow });
       //dispatch(deleteFlow(flow))
     }
   };
@@ -31,10 +32,13 @@ const Card = ({ data }) => {
         <CardAuthor>{data.config.createdBy.username || ""}</CardAuthor>
         <CardDescription>{data.config.description || ""}</CardDescription>
         <CardFooter>
-          <Badge color="success">{data.project.name || ""}</Badge>
-          <span onClick={(e) => deleteCardHandler(e, data)}>
-            <VscTrash style={{ fontSize: "22px" }} />
-          </span>
+          <Avatar avatar={data.config.createdBy.avatar} size={24} style={{marginLeft:'3px'}} />
+          <div>
+            <Badge color="success">{data.project.name || ""}</Badge>
+            <span onClick={(e) => deleteCardHandler(e, data)}>
+              <VscTrash style={{ fontSize: "22px" }} />
+            </span>
+          </div>
         </CardFooter>
       </CardBody>
     </Container>

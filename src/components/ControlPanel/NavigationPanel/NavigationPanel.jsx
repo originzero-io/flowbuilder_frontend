@@ -24,13 +24,14 @@ import { Badge } from "reactstrap";
 import useAuth from "../../../utils/useAuth";
 import useWorkspace from "../../../utils/useWorkspace";
 import usePermission from "../../../utils/usePermission";
+import Avatar from "../../global/Avatar";
 
 const ControlPanelMenu = () => {
   const dispatch = useDispatch();
   const permissions = usePermission("CAN_CREATE_PROJECT");
   const { url } = useRouteMatch();
   const { activeWorkspace } = useWorkspace();
-  const { username } = useAuth();
+  const { name, avatar } = useAuth();
   const showModalHandle = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -74,7 +75,7 @@ const ControlPanelMenu = () => {
         <Link to={`${url}/team`}>
           <NavMenuItem label="Team" icon={<RiTeamLine />} />
         </Link>
-        <Link to={`${url}/learn`} style={{position:'absolute',bottom:'30px',width:'100%'}}>
+        <Link to={`${url}/learn`}>
           <NavMenuItem label="Learn" icon={<BiBrain />}/>
         </Link>
         <Link to={`${url}/notes`}>
@@ -91,16 +92,8 @@ const ControlPanelMenu = () => {
         </Link>
       </NavMenu>
       <Footer>
-        <Badge
-          color="success"
-          style={{
-            fontSize: "2vmin",
-            color: "black",
-            width:'100%'
-          }}
-        >
-          {username}
-        </Badge>
+        <Avatar avatar={avatar} size={24}/>
+        <div style={{color:'whitesmoke',letterSpacing:'2px',paddingLeft:'10px'}}>{name}</div>
       </Footer>
     </Container>
   );

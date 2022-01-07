@@ -1,7 +1,7 @@
 import styled from "styled-components";
 export const NoteContainer = styled.div`
-  margin-top: 3px;
-  margin-bottom: 3px;
+  margin-top: 8px;
+  margin-bottom: 8px;
   padding: 5px;
   display: flex;
   flex-direction:column;

@@ -3,7 +3,7 @@ import { BsPlusCircle } from "react-icons/bs";
 import { VscTrash } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { Button } from "reactstrap";
-import { noteNamespace } from "../../../../App";
+import { noteNamespace } from "../../../global/SocketConnections";
 import { setModal } from "../../../../store/reducers/componentReducer";
 import { getNotes } from "../../../../store/reducers/notesReducer";
 import useAuth from "../../../../utils/useAuth";
@@ -60,7 +60,7 @@ export default function NotesPanel() {
                   }}
                 >
                   <VscTrash
-                    style={{ fontSize: "3vmin" }}
+                    style={{ fontSize: "3vmin",color:"tomato" }}
                     onClick={() => deleteNoteHandle(note)}
                   />
                 </div>

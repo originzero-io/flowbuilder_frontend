@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { elementNamespace } from "../../../../App";
+import { elementNamespace } from "../../../global/SocketConnections";
 import * as themeColor from "../../../../config/ThemeReference";
 import { saveFlowService } from "../../../../services/flowService";
 import { setElements } from "../../../../store/reducers/flow/flowElementsReducer";
