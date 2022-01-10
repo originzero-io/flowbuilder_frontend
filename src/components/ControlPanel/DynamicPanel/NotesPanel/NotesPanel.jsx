@@ -12,7 +12,6 @@ import Avatar from "../../../global/Avatar";
 import AddNoteForm from "./AddNoteForm";
 import EditNoteForm from "./EditNoteForm";
 import { NoteContainer, NoteContent, NoteTitle } from "./style";
-
 export default function NotesPanel() {
   const notes = useNotes();
   const auth = useAuth();

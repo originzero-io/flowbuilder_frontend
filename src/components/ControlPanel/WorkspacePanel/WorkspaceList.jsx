@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
+import ReactTooltip from "react-tooltip";
 import { setModal } from "../../../store/reducers/componentReducer";
 import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
 import { getProjectsByWorkspace } from "../../../store/reducers/projectReducer";
@@ -45,9 +46,10 @@ const WorkspaceList = () => {
             active={workspace._id === activeWorkspace._id}
             onClick={() => clickWorkspaceHandler(workspace)}
           >
-            <WorkspaceItem active={workspace._id === activeWorkspace._id}>
+            <WorkspaceItem active={workspace._id === activeWorkspace._id} data-tip={workspace.name} data-for={workspace._id}>
               {workspace.name.split("")[0].toUpperCase()}
             </WorkspaceItem>
+            <ReactTooltip id={workspace._id} place="right" type="light" effect="solid"/>
           </WorkspaceItemWrapper>
         );
       })}
