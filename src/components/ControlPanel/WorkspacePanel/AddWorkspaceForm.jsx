@@ -16,26 +16,10 @@ export default function AddWorkspaceForm() {
   const onChangeHandler = (e) => {
     setWorkspaceInfo({ ...workspaceInfo, [e.target.name]: e.target.value });
   };
-  // const permissions = {
-  //   CAN_CREATE_PROJECT: true,
-  //   CAN_EDIT_PROJECT: true,
-  //   CAN_DELETE_PROJECT: true,
-  //   CAN_CREATE_FLOW: true,
-  //   CAN_EDIT_FLOW: true,
-  //   CAN_DELETE_FLOW: true,
-  //   CAN_CREATE_DEVICE: true,
-  //   CAN_EDIT_DEVICE: true,
-  //   CAN_DELETE_DEVICE: true,
-  //   CAN_CREATE_USER: true,
-  //   CAN_EDIT_USER: true,
-  //   CAN_DELETE_USER: true,
-  // }
   const onSubmitHandle = (e) => {
     e.preventDefault();
     workspaceNamespace.emit("workspaces:create", { workspace: workspaceInfo });
     //dispatch(addUserToWorkspace(auth, workspaceInfo));
-    //workspaceInfonun _id si yok!! 
-    //dispatch(assignPermissionToMember(auth, workspaceInfo, permissions));
     dispatch(setModal(false));
   };
   return (

@@ -29,8 +29,8 @@ const noteReducer = (state = [], { type, payload }) => {
 };
 export default noteReducer;
 
-export const getNotes = () => async (dispatch) => {
-  const { notes } = await getNotesService();
+export const getNotes = (workspace) => async (dispatch) => {
+  const { notes } = await getNotesService(workspace);
   dispatch({
     type: actions.GET_NOTES,
     payload: notes,
