@@ -20,7 +20,7 @@ export default function MemberList() {
   const users = useUser();
   const { activeWorkspace } = useWorkspace();
   const members = users.filter(({ workspaces }) =>
-    workspaces.some((workspace) => workspace._id === activeWorkspace._id)
+    workspaces.some((workspace) => workspace?._id === activeWorkspace._id)
   );
   const permissionHandle = (member) => {
     dispatch(setModal(<PermissionPage member={member} />));

@@ -33,7 +33,7 @@ export default function AddWorkspaceForm() {
   const onSubmitHandle = (e) => {
     e.preventDefault();
     workspaceNamespace.emit("workspaces:create", { workspace: workspaceInfo });
-    dispatch(addUserToWorkspace(auth, workspaceInfo));
+    //dispatch(addUserToWorkspace(auth, workspaceInfo));
     //workspaceInfonun _id si yok!! 
     //dispatch(assignPermissionToMember(auth, workspaceInfo, permissions));
     dispatch(setModal(false));

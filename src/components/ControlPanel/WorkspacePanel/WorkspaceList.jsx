@@ -7,16 +7,20 @@ import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
 import { getProjectsByWorkspace } from "../../../store/reducers/projectReducer";
 import {
   getMyWorkspaces,
-  setActiveWorkspace
+  setActiveWorkspace,
 } from "../../../store/reducers/workspaceReducer";
+import useAuth from "../../../utils/useAuth";
 import useDidMountEffect from "../../../utils/useDidMountEffect";
 import useWorkspace from "../../../utils/useWorkspace";
 import AddWorkspaceForm from "./AddWorkspaceForm";
 import {
-  WorkspaceContainer, WorkspaceItem, WorkspaceItemWrapper
+  WorkspaceContainer,
+  WorkspaceItem,
+  WorkspaceItemWrapper,
 } from "./style";
 const WorkspaceList = () => {
   const { workspaces, activeWorkspace } = useWorkspace();
+  const { role } = useAuth();
   const dispatch = useDispatch();
   //console.log("workspace list rendered");
   useEffect(() => {
@@ -25,7 +29,7 @@ const WorkspaceList = () => {
   useDidMountEffect(() => {
     if (workspaces.length > 0) {
       dispatch(setActiveWorkspace(workspaces[0]));
-      dispatch(getProjectsByWorkspace(workspaces[0]))
+      dispatch(getProjectsByWorkspace(workspaces[0]));
     }
   }, [workspaces]);
 
@@ -33,9 +37,10 @@ const WorkspaceList = () => {
     dispatch(setActiveWorkspace(workspace));
     dispatch(getProjectsByWorkspace(workspace));
     dispatch(getFlowsByWorkspace(workspace));
+    //getNotesByWorkspace
   };
   const addWorkspaceHandler = () => {
-    dispatch(setModal(<AddWorkspaceForm />))
+    dispatch(setModal(<AddWorkspaceForm />));
   };
   return (
     <WorkspaceContainer>
@@ -46,19 +51,30 @@ const WorkspaceList = () => {
             active={workspace._id === activeWorkspace._id}
             onClick={() => clickWorkspaceHandler(workspace)}
           >
-            <WorkspaceItem active={workspace._id === activeWorkspace._id} data-tip={workspace.name} data-for={workspace._id}>
+            <WorkspaceItem
+              active={workspace._id === activeWorkspace._id}
+              data-tip={workspace.name}
+              data-for={workspace._id}
+            >
               {workspace.name.split("")[0].toUpperCase()}
             </WorkspaceItem>
-            <ReactTooltip id={workspace._id} place="right" type="light" effect="solid"/>
+            <ReactTooltip
+              id={workspace._id}
+              place="right"
+              type="light"
+              effect="solid"
+            />
           </WorkspaceItemWrapper>
         );
       })}
-      
-      <WorkspaceItemWrapper>
-        <WorkspaceItem onClick={addWorkspaceHandler}>
-          <VscAdd style={{ color: "white"}} />
-        </WorkspaceItem>
-      </WorkspaceItemWrapper>
+
+      {role === "admin" && (
+        <WorkspaceItemWrapper>
+          <WorkspaceItem onClick={addWorkspaceHandler}>
+            <VscAdd style={{ color: "white" }} />
+          </WorkspaceItem>
+        </WorkspaceItemWrapper>
+      )}
     </WorkspaceContainer>
   );
 };

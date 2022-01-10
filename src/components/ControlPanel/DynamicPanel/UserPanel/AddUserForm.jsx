@@ -12,7 +12,6 @@ export default function AddUserForm() {
     username: "",
     password: "",
     email: "",
-    role: "user",
     avatar: null,
     phone: "",
   });
@@ -27,7 +26,6 @@ export default function AddUserForm() {
     formData.append("username", userInfo.username);
     formData.append("password", userInfo.password);
     formData.append("email", userInfo.email);
-    formData.append("role", userInfo.role);
     formData.append("avatar", userInfo.avatar);
     formData.append("phone", userInfo.phone);
     dispatch(registerUser(formData));
@@ -92,24 +90,6 @@ export default function AddUserForm() {
           required
           onChange={onChangeHandler}
         />
-      </FormGroup>
-      <FormGroup>
-        <Label>Role</Label>
-        <Input
-          type="select"
-          onChange={onChangeHandler}
-          name="role"
-          value={userInfo.role}
-          defaultValue="user"
-          required
-        >
-          <option style={{ color: "black" }} value="admin">
-            admin
-          </option>
-          <option style={{ color: "black" }} value="user">
-            user
-          </option>
-        </Input>
       </FormGroup>
       <Button color="success" type="submit">
         Submit

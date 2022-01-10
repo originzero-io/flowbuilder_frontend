@@ -37,7 +37,6 @@ export default function EditUserForm({ user }) {
         name="avatar"
         onChange={profilePictureHandle}
       /> */}
-
       <FormGroup>
         <Label>Name</Label>
         <Input
@@ -79,24 +78,6 @@ export default function EditUserForm({ user }) {
           required
           defaultValue={user.phone}
         />
-      </FormGroup>
-      <FormGroup>
-        <Label>Role</Label>
-        <Input
-          type="select"
-          onChange={onChangeHandler}
-          name="role"
-          value={userInfo.role}
-          defaultValue={user.role}
-          required
-        >
-          <option style={{ color: "black" }} value="admin">
-            admin
-          </option>
-          <option style={{ color: "black" }} value="user">
-            user
-          </option>
-        </Input>
       </FormGroup>
       <Button color="success" type="submit">
         Submit
