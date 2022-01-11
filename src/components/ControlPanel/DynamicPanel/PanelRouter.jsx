@@ -1,5 +1,5 @@
-import React from "react";
-import { Switch, Route, useRouteMatch } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import LearnPanel from "./LearnPanel/LearnPanel";
 import NotesPanel from "./NotesPanel/NotesPanel";
@@ -9,6 +9,9 @@ import DevicesPanel from "./DevicesPanel/DevicesPanel";
 import UserPanel from "./UserPanel/UserPanel";
 import TeamPanel from "./TeamPanel/TeamPanel";
 import NotFound from "./NotFound";
+import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
+import useWorkspace from "../../../utils/useWorkspace";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   width: 100%;
@@ -25,6 +28,13 @@ const PanelComponentWrapper = styled.div`
 `;
 export default function PanelRouter() {
   const { url } = useRouteMatch();
+  const dispatch = useDispatch();
+  const { activeWorkspace } = useWorkspace();
+  const history = useHistory()
+  useEffect(() => {
+    history.push(`${url}/all`);
+    dispatch(getFlowsByWorkspace(activeWorkspace))
+  }, [activeWorkspace])
   return (
     <Container>
       <PanelComponentWrapper>

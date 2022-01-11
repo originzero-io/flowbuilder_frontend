@@ -26,7 +26,11 @@ export default function SocketConnections() {
       projectNamespace = createSocket("projects");
       workspaceNamespace = createSocket("workspaces");
       noteNamespace = createSocket("notes");
-
+      //const test = createSocket('namespace1');
+      // const test2 = createSocket('namespace2');
+      // //test.emit('hello',{message:'Hey!'})
+      // test2.emit('bye',{message:'Byee!'})
+      // test2.emit('hello',{message:'Hello :)'})
       mainSubscribe(mainNamespace, dispatch, auth);
       elementSubscribe(elementNamespace, dispatch);
       flowSubscribe(flowNamespace, dispatch);
