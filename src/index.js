@@ -16,7 +16,7 @@ import { Provider } from "react-redux";
 import configureStore from "./store/configureStore.js";
 import { setAuthorizationToken } from "./app-global/helpers/httpHelpers.js";
 import ErrorBoundary from "./components/global/ErrorBoundary.js";
-const store = configureStore();
+export const store = configureStore();
 //axios.defaults.baseURL = 'https://anaks-flow-server.herokuapp.com/';
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 const jwtToken = localStorage.getItem("token");

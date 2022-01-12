@@ -20,10 +20,10 @@ import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
 import { setModal } from "../../../store/reducers/componentReducer";
 import { Link, useRouteMatch } from "react-router-dom";
 import WorkspaceBrand from "./WorkspaceBrand";
-import { Badge } from "reactstrap";
 import useAuth from "../../../utils/useAuth";
 import useWorkspace from "../../../utils/useWorkspace";
 import usePermission from "../../../utils/usePermission";
+import useProject from "../../../utils/useProject";
 import Avatar from "../../global/Avatar";
 
 const ControlPanelMenu = () => {
@@ -31,6 +31,7 @@ const ControlPanelMenu = () => {
   const permissions = usePermission("CAN_CREATE_PROJECT");
   const { url } = useRouteMatch();
   const { activeWorkspace } = useWorkspace();
+  const { projects, activeProject } = useProject();
   const { name, avatar } = useAuth();
   const showModalHandle = (e) => {
     e.preventDefault();
@@ -42,7 +43,7 @@ const ControlPanelMenu = () => {
 
   const projectItem = () => {
     return (
-      <CollapsibleTrigger label="Projects" icon={<AiOutlineProject/>}>
+      <CollapsibleTrigger label={`Projects (${projects.length})`} icon={<AiOutlineProject/>}>
         <div onClick={(e) => showModalHandle(e)}>
           {permissions?.CAN_CREATE_PROJECT && <BsPlusCircle style={{fontSize:'2vmin'}} />}
         </div>
@@ -69,7 +70,7 @@ const ControlPanelMenu = () => {
         </Link>
         <Link to={`${url}/projects`}>
           <CollapsibleMenu trigger={projectItem()}>
-            <ProjectList />
+            <ProjectList projects={projects} activeProject={activeProject} />
           </CollapsibleMenu>
         </Link>
         <Link to={`${url}/team`}>

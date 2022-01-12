@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import ReactTooltip from "react-tooltip";
 import { setModal } from "../../../store/reducers/componentReducer";
 import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
+import { getNotesByWorkspace } from "../../../store/reducers/notesReducer";
 import { getProjectsByWorkspace } from "../../../store/reducers/projectReducer";
 import {
   getMyWorkspaces,
@@ -37,7 +38,7 @@ const WorkspaceList = () => {
     dispatch(setActiveWorkspace(workspace));
     dispatch(getProjectsByWorkspace(workspace));
     dispatch(getFlowsByWorkspace(workspace));
-    //getNotesByWorkspace
+    dispatch(getNotesByWorkspace(workspace));
   };
   const addWorkspaceHandler = () => {
     dispatch(setModal(<AddWorkspaceForm />));

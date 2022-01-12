@@ -8,14 +8,6 @@ const noteReducer = (state = [], { type, payload }) => {
     case actions.CREATE_NOTE:
       return [...state, payload];
     case actions.UPDATE_NOTE:
-      // return {
-      //   activenote: payload,
-      //   notes: state.notes.map((state) => {
-      //     if (state._id === payload._id) {
-      //       return payload;
-      //     } else return state;
-      //   }),
-      // };
       return state.map((s) => {
         if (s._id === payload._id) {
           return payload;
@@ -29,7 +21,7 @@ const noteReducer = (state = [], { type, payload }) => {
 };
 export default noteReducer;
 
-export const getNotes = (workspace) => async (dispatch) => {
+export const getNotesByWorkspace = (workspace) => async (dispatch) => {
   const { notes } = await getNotesService(workspace);
   dispatch({
     type: actions.GET_NOTES,

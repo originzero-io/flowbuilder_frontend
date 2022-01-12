@@ -8,7 +8,7 @@ import flowReducer from "./flow/flowReducer";
 import menuReducer from "./menuReducer";
 import nodeListReducer from "./nodeListReducer";
 import controlPanelReducer from "./controlPanelReducer";
-import { modalReducer } from "./componentReducer";
+import { modalReducer,loadingBarReducer } from "./componentReducer";
 import authReducer from "./authReducer";
 import userReducer from "./userReducer";
 import workspaceReducer from "./workspaceReducer";
@@ -32,6 +32,7 @@ const reducers = combineReducers({
   menus: menuReducer,
   controlPanel: controlPanelReducer,
   modal: modalReducer,
+  loadingBar: loadingBarReducer,
   error: errorReducer,
   nodeList: nodeListReducer,
   nodeClassReducer,

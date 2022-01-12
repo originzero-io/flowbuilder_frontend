@@ -32,8 +32,8 @@ export default function PanelRouter() {
   const { activeWorkspace } = useWorkspace();
   const history = useHistory()
   useEffect(() => {
-    history.push(`${url}/all`);
     dispatch(getFlowsByWorkspace(activeWorkspace))
+    history.push(`${url}/all`);
   }, [activeWorkspace])
   return (
     <Container>

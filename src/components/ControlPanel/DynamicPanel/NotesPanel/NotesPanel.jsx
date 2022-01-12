@@ -1,28 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BsPlusCircle } from "react-icons/bs";
 import { VscTrash } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { Button } from "reactstrap";
 import { noteNamespace } from "../../../global/SocketConnections";
 import { setModal } from "../../../../store/reducers/componentReducer";
-import { getNotes } from "../../../../store/reducers/notesReducer";
 import useAuth from "../../../../utils/useAuth";
 import useNotes from "../../../../utils/useNotes";
 import Avatar from "../../../global/Avatar";
 import AddNoteForm from "./AddNoteForm";
 import EditNoteForm from "./EditNoteForm";
 import { NoteContainer, NoteContent, NoteTitle } from "./style";
-import useWorkspace from "../../../../utils/useWorkspace";
 export default function NotesPanel() {
   const notes = useNotes();
   const auth = useAuth();
-  const { activeWorkspace } = useWorkspace();
   const dispatch = useDispatch();
   const [hoveredNote, setHoveredNote] = useState("");
   const addNoteHandle = () => {
     dispatch(setModal(<AddNoteForm />));
   };
-  const deleteNoteHandle = (note) => {
+  const deleteNoteHandle = (event, note) => {
+    event.stopPropagation();
     if (confirm("Sure?")) {
       noteNamespace.emit("notes:remove", { note });
     }
@@ -30,9 +28,6 @@ export default function NotesPanel() {
   const viewNoteHandle = (note) => {
     dispatch(setModal(<EditNoteForm note={note} />));
   };
-  useEffect(() => {
-    dispatch(getNotes(activeWorkspace));
-  }, [activeWorkspace]);
   return (
     <>
       <Button color="success" onClick={addNoteHandle}>
@@ -62,7 +57,7 @@ export default function NotesPanel() {
                 >
                   <VscTrash
                     style={{ fontSize: "3vmin",color:"tomato" }}
-                    onClick={() => deleteNoteHandle(note)}
+                    onClick={(event) => deleteNoteHandle(event,note)}
                   />
                 </div>
               )}
