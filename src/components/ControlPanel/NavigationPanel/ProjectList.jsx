@@ -15,7 +15,7 @@ export default function ProjectList({projects,activeProject}) {
   const permission = usePermission();
   const clickProjectHandle = (project) => {
     dispatch(setActiveProject(project));
-    dispatch(getFlowsByProject(project));
+    //dispatch(getFlowsByProject(project));
   };
   const deleteProjectHandle = (project) => {
     if (confirm("Sure?")) {

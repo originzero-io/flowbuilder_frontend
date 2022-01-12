@@ -1,25 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { DashboardsContainer, FlowsContainer } from "./style";
-import { Box } from "./style";
+import React, { useEffect, useState } from "react";
 import {
   CollapsibleMenu,
   CollapsibleTrigger,
 } from "../../../global/Collapsible/CollapsibleMenu";
-import FlowList from "./FlowList.jsx";
+import FlowList from "./components/FlowList.jsx";
 import { setModal } from "../../../../store/reducers/componentReducer";
 import AddFlowForm from "./forms/AddFlowForm";
 import AddDashboardForm from "./forms/AddDashboardForm";
 import { VscAdd } from "react-icons/vsc";
-import { SearchBar } from "./style";
-import useFlow from "../../../../utils/useFlow";
+import { SearchBar, DashboardsContainer, FlowsContainer, Box } from "./style";
+import { useDispatch } from "react-redux";
 import usePermission from "../../../../utils/usePermission";
-export default function ProjectsPanel() {
+import PropTypes from "prop-types"
+export default function Panel({ flows }) {
   const dispatch = useDispatch();
   const permission = usePermission();
-  //console.log("PERMISSION:", permission);
-  //console.log("PROJECT PANEL RENDERED");
-  const flows = useFlow();
   const flowsCollapseTrigger = () => {
     return (
       <CollapsibleTrigger
@@ -70,4 +65,8 @@ export default function ProjectsPanel() {
       </CollapsibleMenu>
     </>
   );
+}
+
+Panel.propTypes = {
+    flows: PropTypes.array.isRequired
 }

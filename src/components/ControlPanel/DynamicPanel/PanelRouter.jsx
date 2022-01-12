@@ -3,7 +3,7 @@ import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import LearnPanel from "./LearnPanel/LearnPanel";
 import NotesPanel from "./NotesPanel/NotesPanel";
-import ProjectsPanel from "./ProjectsPanel/ProjectsPanel";
+import FlowsByProjectPanel from "./ProjectsPanel/FlowsByProjectPanel";
 import SettingsPanel from "./SettingsPanel/SettingsPanel";
 import DevicesPanel from "./DevicesPanel/DevicesPanel";
 import UserPanel from "./UserPanel/UserPanel";
@@ -12,6 +12,7 @@ import NotFound from "./NotFound";
 import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
 import useWorkspace from "../../../utils/useWorkspace";
 import { useDispatch } from "react-redux";
+import AllFlowsPanel from "./ProjectsPanel/AllFlowsPanel";
 
 const Container = styled.div`
   width: 100%;
@@ -31,6 +32,7 @@ export default function PanelRouter() {
   const dispatch = useDispatch();
   const { activeWorkspace } = useWorkspace();
   const history = useHistory()
+  //page redirects to /panel/all automatically when activeWorkspace changed
   useEffect(() => {
     dispatch(getFlowsByWorkspace(activeWorkspace))
     history.push(`${url}/all`);
@@ -39,8 +41,8 @@ export default function PanelRouter() {
     <Container>
       <PanelComponentWrapper>
         <Switch>
-          <Route exact path={`${url}/all`} component={ProjectsPanel}/>
-          <Route exact path={`${url}/projects`} component={ProjectsPanel}/>
+          <Route exact path={`${url}/all`} component={AllFlowsPanel}/>
+          <Route exact path={`${url}/projects`} component={FlowsByProjectPanel}/>
           <Route exact path={`${url}/team`} component={TeamPanel}/>
           <Route exact path={`${url}/learn`} component={LearnPanel}/>
           <Route exact path={`${url}/notes`} component={NotesPanel}/>

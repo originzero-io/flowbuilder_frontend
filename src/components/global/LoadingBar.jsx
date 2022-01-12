@@ -10,6 +10,7 @@ function LoadingBar() {
     <ReactTopLoadingBar
       color="#28b485"
       progress={loadingBar.progress}
+      loaderSpeed={300}
       waitingTime={400}
       height={3}
       onLoaderFinished={() => dispatch(setLoadingBarProgress(0))}

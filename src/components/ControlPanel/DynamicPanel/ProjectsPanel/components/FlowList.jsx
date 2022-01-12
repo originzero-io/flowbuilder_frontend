@@ -3,12 +3,12 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import Card from "../../../global/Card/Card";
-import { setCurrentFlowGui } from "../../../../store/reducers/flow/flowGuiReducer";
-import { setCurrentFlowConfig } from "../../../../store/reducers/flow/flowConfigReducer";
-import { getElementsByFlow } from "../../../../store/reducers/flow/flowElementsReducer";
-import { elementNamespace } from "../../../global/SocketConnections";
-import { beginTheBar } from "../../../../store/reducers/componentReducer";
+import Card from "../../../../global/Card/Card";
+import { setCurrentFlowGui } from "../../../../../store/reducers/flow/flowGuiReducer";
+import { setCurrentFlowConfig } from "../../../../../store/reducers/flow/flowConfigReducer";
+import { getElementsByFlow } from "../../../../../store/reducers/flow/flowElementsReducer";
+import { elementNamespace } from "../../../../global/SocketConnections";
+import { beginTheBar } from "../../../../../store/reducers/componentReducer";
 
 const FlowList = ({ flows }) => {
   const dispatch = useDispatch();
