@@ -8,12 +8,11 @@ import { BiEdit } from "react-icons/bi";
 import { setModal } from "../../../store/reducers/componentReducer";
 import EditProjectForm from "./EditProjectForm";
 import { projectNamespace } from "../../global/SocketConnections";
-import useProject from "../../../utils/useProject";
 import usePermission from "../../../utils/usePermission";
-export default function ProjectList() {
+import PropTypes from "prop-types"
+export default function ProjectList({projects,activeProject}) {
   const dispatch = useDispatch();
   const permission = usePermission();
-  const { projects, activeProject } = useProject();
   const clickProjectHandle = (project) => {
     dispatch(setActiveProject(project));
     dispatch(getFlowsByProject(project));
@@ -62,3 +61,9 @@ export default function ProjectList() {
     </>
   );
 }
+
+ProjectList.propTypes = {
+  projects: PropTypes.array.isRequired,
+  activeProject: PropTypes.object.isRequired
+}
+

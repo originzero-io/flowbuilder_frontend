@@ -9,6 +9,7 @@ import Avatar from "../../../global/Avatar";
 import { useDispatch } from "react-redux";
 import {
   addUserToWorkspace,
+  assignPermissionToMember,
   removeUserToWorkspace,
 } from "../../../../store/reducers/userReducer";
 
@@ -24,10 +25,26 @@ const Container = styled.div`
 `;
 export default function AddMemberForm() {
   const dispatch = useDispatch();
+  const permissions = {
+    CAN_CREATE_PROJECT: true,
+    CAN_EDIT_PROJECT: true,
+    CAN_DELETE_PROJECT: true,
+    CAN_CREATE_FLOW: true,
+    CAN_EDIT_FLOW: true,
+    CAN_DELETE_FLOW: true,
+    CAN_CREATE_DEVICE: true,
+    CAN_EDIT_DEVICE: true,
+    CAN_DELETE_DEVICE: true,
+    CAN_CREATE_USER: true,
+    CAN_EDIT_USER: true,
+    CAN_DELETE_USER: true,
+  }
   const users = useUser();
   const { activeWorkspace } = useWorkspace();
   const addMemberHandle = (user) => {
     dispatch(addUserToWorkspace(user, activeWorkspace));
+    dispatch(assignPermissionToMember(user, activeWorkspace, permissions));
+
   };
   const removeMemberHandle = (user) => {
     dispatch(removeUserToWorkspace(user, activeWorkspace));

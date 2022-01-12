@@ -7,7 +7,6 @@ import createSocket, {
   noteSubscribe,
   mainSubscribe,
 } from "../../services/socketApi";
-import { useDispatch } from "react-redux";
 import useAuth from "../../utils/useAuth";
 export let elementNamespace;
 export let flowNamespace;
@@ -17,7 +16,6 @@ export let noteNamespace;
 export let mainNamespace;
 export default function SocketConnections() {
   const auth = useAuth();
-  const dispatch = useDispatch();
   useEffect(() => {
     if (auth.isAuthenticated) {
       mainNamespace = createSocket("main");
@@ -26,13 +24,12 @@ export default function SocketConnections() {
       projectNamespace = createSocket("projects");
       workspaceNamespace = createSocket("workspaces");
       noteNamespace = createSocket("notes");
-
-      mainSubscribe(mainNamespace, dispatch, auth);
-      elementSubscribe(elementNamespace, dispatch);
-      flowSubscribe(flowNamespace, dispatch);
-      projectSubscribe(projectNamespace, dispatch);
-      workspaceSubscribe(workspaceNamespace, dispatch);
-      noteSubscribe(noteNamespace, dispatch);
+      mainSubscribe(mainNamespace);
+      elementSubscribe(elementNamespace);
+      flowSubscribe(flowNamespace);
+      projectSubscribe(projectNamespace);
+      workspaceSubscribe(workspaceNamespace);
+      noteSubscribe(noteNamespace);
     }
   }, [auth.isAuthenticated]);
   return <></>;

@@ -12,11 +12,9 @@ export const Container = styled.div`
   border: 2px solid rgba(75, 75, 75, 0.4);
   cursor: pointer;
   color: white;
-  transition: background-color 0.3s ease-in-out;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
   &:hover {
     background-color: rgba(46, 204, 113, 0.4);
-    transition: background-color 0.2s ease-in-out;
   }
   display: flex;
   flex-direction: column;

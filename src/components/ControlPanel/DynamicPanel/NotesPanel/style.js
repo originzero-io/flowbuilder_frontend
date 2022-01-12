@@ -21,6 +21,3 @@ export const NoteContent = styled.div`
   font-size: 1.5vmin;
   padding-left:20px;
 `;
-
-
-

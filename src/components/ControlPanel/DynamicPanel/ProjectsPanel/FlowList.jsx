@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -8,14 +8,15 @@ import { setCurrentFlowGui } from "../../../../store/reducers/flow/flowGuiReduce
 import { setCurrentFlowConfig } from "../../../../store/reducers/flow/flowConfigReducer";
 import { getElementsByFlow } from "../../../../store/reducers/flow/flowElementsReducer";
 import { elementNamespace } from "../../../global/SocketConnections";
+import { beginTheBar } from "../../../../store/reducers/componentReducer";
 
 const FlowList = ({ flows }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const openPageHandler = async(flow) => {
     //dispatch(getElementsByFlow(flow));
+    dispatch(beginTheBar());
     elementNamespace.emit('elements:getElements',{flow_id:flow._id});
-    //mainNamespace.emit('main:messageFromClient',"Hello main. I am FlowList component");
     dispatch(setCurrentFlowConfig(flow.config));
     dispatch(setCurrentFlowGui(flow.gui));
     history.push(`/flow/${flow._id}`);

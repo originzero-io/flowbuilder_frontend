@@ -1,4 +1,5 @@
 import io from "socket.io-client";
+import { store } from "../index";
 const HOST = "http://localhost:5001/";
 import { openNotification } from "../app-global/dom/notification";
 import { makeMeOnline } from "../store/reducers/authReducer";
@@ -28,6 +29,7 @@ import {
   deleteWorkspace,
   editWorkspace,
 } from "../store/reducers/workspaceReducer";
+import { endTheBar } from "../store/reducers/componentReducer";
 const createSocket = (namespace, extraOptions) => {
   console.log("çalıştı->", namespace);
   return new Socket(namespace, extraOptions).socket;
@@ -57,76 +59,78 @@ class Socket {
   }
 }
 
-export const projectSubscribe = (socket, dispatch) => {
+export const projectSubscribe = (socket) => {
   socket.on("projects:create", (data) => {
-    dispatch(createProject(data.project));
+    store.dispatch(createProject(data.project));
   });
   socket.on("projects:update", (data) => {
-    dispatch(updateProject(data.project));
+    store.dispatch(updateProject(data.project));
   });
   socket.on("projects:remove", (data) => {
-    dispatch(deleteProject(data.project));
+    store.dispatch(deleteProject(data.project));
   });
 };
-export const workspaceSubscribe = (socket, dispatch) => {
+export const workspaceSubscribe = (socket) => {
   socket.on("workspaces:create", (data) => {
-    dispatch(createWorkspace(data.workspace));
+    store.dispatch(createWorkspace(data.workspace));
   });
   socket.on("workspaces:update", (data) => {
-    dispatch(editWorkspace(data.workspace));
+    store.dispatch(editWorkspace(data.workspace));
   });
   socket.on("workspaces:remove", (data) => {
-    dispatch(deleteWorkspace(data.workspace));
+    store.dispatch(deleteWorkspace(data.workspace));
   });
 };
-export const flowSubscribe = (socket, dispatch) => {
+export const flowSubscribe = (socket) => {
   socket.on("flows:remove", (data) => {
-    dispatch(deleteFlow(data.flow));
+    store.dispatch(deleteFlow(data.flow));
   });
   socket.on("flows:update", (data) => {
-    dispatch(editFlow(data.flow));
+    store.dispatch(editFlow(data.flow));
   });
   socket.on("flows:move", (data) => {
-    dispatch(moveFlow(data.flow));
+    store.dispatch(moveFlow(data.flow));
   });
   socket.on("flows:create", (data) => {
-    dispatch(createFlow(data.flow));
+    store.dispatch(createFlow(data.flow));
   });
 };
-export const elementSubscribe = (socket, dispatch) => {
+export const elementSubscribe = (socket) => {
   socket.on("elements:save", (data) => {
-    dispatch(saveElements(data));
+    store.dispatch(saveElements(data));
   });
   socket.on("elements:getElements", (data) => {
-    dispatch(setElements(data.data));
+    store.dispatch(setElements(data.data));
+    store.dispatch(endTheBar());
   });
 };
-export const noteSubscribe = (socket, dispatch) => {
+export const noteSubscribe = (socket) => {
   socket.on("notes:create", (data) => {
-    dispatch(createNote(data.note));
+    store.dispatch(createNote(data.note));
   });
   socket.on("notes:update", (data) => {
-    dispatch(updateNote(data.note));
+    store.dispatch(updateNote(data.note));
   });
   socket.on("notes:remove", (data) => {
-    dispatch(deleteNote(data.note));
+    store.dispatch(deleteNote(data.note));
   });
 };
 
-export const mainSubscribe = (socket, dispatch,auth) => {
+export const mainSubscribe = (socket) => {
+  const { auth } = store.getState();
   socket.emit("main:onlineUser", "MAKE_ME_ONLINE");
   socket.on("main:onlineUser", (data) => {
     if (auth._id !== data._id) {
-      dispatch(editUser(data));
+      store.dispatch(editUser(data));
       openNotification("", `${data.username} oturum açtı`, "success");
     } else {
-      dispatch(editUser(data));
-      dispatch(makeMeOnline(data));
+      store.dispatch(editUser(data));
+      store.dispatch(makeMeOnline(data));
     }
   });
   socket.on("main:offlineUser", (data) => {
     if (auth._id !== data._id) {
-      dispatch(editUser(data));
+      store.dispatch(editUser(data));
       openNotification("", `${data.username} oturumu kapadı`, "warning");
     } else alert("Oturum başka bir tabde açık");
   });

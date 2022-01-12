@@ -63,7 +63,7 @@ export default function UserList() {
             <th>Username</th>
             <th>E-Mail</th>
             <th>Phone</th>
-            <th>Permissions</th>
+            <th>Role</th>
             <th></th>
           </tr>
         </thead>

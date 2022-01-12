@@ -33,6 +33,6 @@ SwitchButton.propTypes = {
   checked: PropTypes.bool.isRequired,
   defaultChecked: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
