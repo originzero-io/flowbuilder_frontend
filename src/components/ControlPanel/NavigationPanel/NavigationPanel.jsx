@@ -25,6 +25,7 @@ import useWorkspace from "../../../utils/useWorkspace";
 import usePermission from "../../../utils/usePermission";
 import useProject from "../../../utils/useProject";
 import Avatar from "../../global/Avatar";
+import useFlow from "../../../utils/useFlow";
 
 const ControlPanelMenu = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const ControlPanelMenu = () => {
   const { url } = useRouteMatch();
   const { activeWorkspace } = useWorkspace();
   const { projects, activeProject } = useProject();
+  const flows = useFlow();
   const { name, avatar } = useAuth();
   const showModalHandle = (e) => {
     e.preventDefault();
@@ -63,7 +65,7 @@ const ControlPanelMenu = () => {
         <WorkspaceBrand workspace={activeWorkspace} />
         <Link to={`${url}/all`}>
           <NavMenuItem
-            label="All Flows"
+            label={`All Flows (${flows.length})`}
             icon={<BiBrain />}
             onClick={allFlowsHandle}
           />
@@ -88,6 +90,7 @@ const ControlPanelMenu = () => {
         <Link to={`${url}/settings`}>
           <CollapsibleMenu trigger={settingsItem()}>
             <CollapsibleMenuItem>Account settings</CollapsibleMenuItem>
+            <CollapsibleMenuItem>Permission settings</CollapsibleMenuItem>
             <CollapsibleMenuItem>Preferences</CollapsibleMenuItem>
           </CollapsibleMenu>
         </Link>
