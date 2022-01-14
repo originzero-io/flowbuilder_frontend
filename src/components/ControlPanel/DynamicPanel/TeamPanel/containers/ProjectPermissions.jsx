@@ -26,7 +26,7 @@ export default function ProjectPermissions() {
       <PermissionContainer>
         <PermissionHeader>Dashboard Create</PermissionHeader>
         <PermissionContent>
-          <CollapsibleMenu trigger="Projects >">
+          <CollapsibleMenu trigger="Projects">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox name="processorCreate" />
@@ -47,7 +47,7 @@ export default function ProjectPermissions() {
       <PermissionContainer>
         <PermissionHeader>Flow Create</PermissionHeader>
         <PermissionContent>
-          <CollapsibleMenu trigger="Projects >">
+          <CollapsibleMenu trigger="Projects">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox name="processorCreate"/>
@@ -69,7 +69,7 @@ export default function ProjectPermissions() {
       <PermissionContainer>
         <PermissionHeader>Usage</PermissionHeader>
         <PermissionContent>
-          <CollapsibleMenu trigger="Projects >">
+          <CollapsibleMenu trigger="Projects">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox name="processorCreate" />
@@ -79,14 +79,14 @@ export default function ProjectPermissions() {
               return (
                 <CollapsibleSubMenu
                   key={project._id}
-                  trigger={`${project.name} >`}
-                >
+                  trigger={`${project.name}`}
+               >
                   <CollapsibleMenuItem>
                     <CheckboxGroup label="All">
                       <Checkbox name="processorCreate" />
                     </CheckboxGroup>
                   </CollapsibleMenuItem>
-                  <CollapsibleSubMenu trigger="Flows >">
+                  <CollapsibleSubMenu trigger="Flows">
                     <CollapsibleMenuItem>
                       <CheckboxGroup label="All">
                         <Checkbox name="processorCreate" />
@@ -103,7 +103,7 @@ export default function ProjectPermissions() {
       <PermissionContainer>
         <PermissionHeader>Edit</PermissionHeader>
         <PermissionContent>
-          <CollapsibleMenu trigger="Projects >">
+          <CollapsibleMenu trigger="Projects">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox name="processorCreate" />
@@ -113,14 +113,14 @@ export default function ProjectPermissions() {
               return (
                 <CollapsibleSubMenu
                   key={project._id}
-                  trigger={`${project.name} >`}
-                >
+                  trigger={`${project.name}`}
+               >
                   <CollapsibleMenuItem>
                     <CheckboxGroup label="All">
                       <Checkbox name="processorCreate" />
                     </CheckboxGroup>
                   </CollapsibleMenuItem>
-                  <CollapsibleSubMenu trigger="Flows >">
+                  <CollapsibleSubMenu trigger="Flows">
                     <CollapsibleMenuItem>
                       <CheckboxGroup label="All">
                         <Checkbox name="processorCreate" />
@@ -137,7 +137,7 @@ export default function ProjectPermissions() {
       <PermissionContainer>
         <PermissionHeader>Delete</PermissionHeader>
         <PermissionContent>
-          <CollapsibleMenu trigger="Projects >">
+          <CollapsibleMenu trigger="Projects">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox name="processorCreate" />
@@ -147,14 +147,14 @@ export default function ProjectPermissions() {
               return (
                 <CollapsibleSubMenu
                   key={project._id}
-                  trigger={`${project.name} >`}
-                >
+                  trigger={`${project.name}`}
+               >
                   <CollapsibleMenuItem>
                     <CheckboxGroup label="All">
                       <Checkbox name="processorCreate" />
                     </CheckboxGroup>
                   </CollapsibleMenuItem>
-                  <CollapsibleSubMenu trigger="Flows >">
+                  <CollapsibleSubMenu trigger="Flows">
                     <CollapsibleMenuItem>
                       <CheckboxGroup label="All">
                         <Checkbox name="processorCreate" />
@@ -171,7 +171,7 @@ export default function ProjectPermissions() {
       <PermissionContainer>
         <PermissionHeader>View</PermissionHeader>
         <PermissionContent>
-          <CollapsibleMenu trigger="Projects >">
+          <CollapsibleMenu trigger="Projects">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox name="processorCreate" />
@@ -181,14 +181,14 @@ export default function ProjectPermissions() {
               return (
                 <CollapsibleSubMenu
                   key={project._id}
-                  trigger={`${project.name} >`}
-                >
+                  trigger={`${project.name}`}
+               >
                   <CollapsibleMenuItem>
                     <CheckboxGroup label="All">
                       <Checkbox name="processorCreate" />
                     </CheckboxGroup>
                   </CollapsibleMenuItem>
-                  <CollapsibleSubMenu trigger="Flows >">
+                  <CollapsibleSubMenu trigger="Flows">
                     <FlowList project={project} as={CollapsibleMenuItem} />
                   </CollapsibleSubMenu>
                 </CollapsibleSubMenu>
