@@ -94,7 +94,7 @@ export default function DevicePermissions() {
       <PermissionContainer>
         <PermissionHeader>Usage</PermissionHeader>
         <PermissionContent>
-          <CollapsibleMenu trigger="Controllers >">
+          <CollapsibleMenu trigger="Controllers">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox
@@ -121,7 +121,7 @@ export default function DevicePermissions() {
               );
             })}
           </CollapsibleMenu>
-          <CollapsibleMenu trigger="Processors >">
+          <CollapsibleMenu trigger="Processors">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox
@@ -154,7 +154,7 @@ export default function DevicePermissions() {
       <PermissionContainer>
         <PermissionHeader>Edit</PermissionHeader>
         <PermissionContent>
-          <CollapsibleMenu trigger="Controllers >">
+          <CollapsibleMenu trigger="Controllers">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox
@@ -181,7 +181,7 @@ export default function DevicePermissions() {
               );
             })}
           </CollapsibleMenu>
-          <CollapsibleMenu trigger="Processors >">
+          <CollapsibleMenu trigger="Processors">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox
