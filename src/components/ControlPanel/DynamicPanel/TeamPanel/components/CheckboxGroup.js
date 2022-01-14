@@ -4,7 +4,6 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const Container = styled.div`
-  padding: 2px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,7 +11,7 @@ const Container = styled.div`
 export default function CheckboxGroup({ label,labelSize, children }) {
   return (
     <Container>
-      <Label style={{ userSelect: 'none', fontSize: labelSize }} check>{label}</Label>
+      <Label style={{ userSelect: 'none', fontSize: labelSize,margin:'2px' }} check>{label}</Label>
       {children}
     </Container>
   );

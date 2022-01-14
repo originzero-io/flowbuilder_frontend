@@ -26,6 +26,7 @@ import usePermission from "../../../utils/usePermission";
 import useProject from "../../../utils/useProject";
 import Avatar from "../../global/Avatar";
 import useFlow from "../../../utils/useFlow";
+import { Badge } from "reactstrap";
 
 const ControlPanelMenu = () => {
   const dispatch = useDispatch();
@@ -77,9 +78,6 @@ const ControlPanelMenu = () => {
         </Link>
         <Link to={`${url}/team`}>
           <NavMenuItem label="Team" icon={<RiTeamLine />} />
-        </Link>
-        <Link to={`${url}/learn`}>
-          <NavMenuItem label="Learn" icon={<BiBrain />}/>
         </Link>
         <Link to={`${url}/notes`}>
           <NavMenuItem label="Notes" icon={<CgNotes />} />

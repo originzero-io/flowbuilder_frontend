@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link, useRouteMatch } from "react-router-dom";
 import { Badge, Button, Table } from "reactstrap";
 import styled from "styled-components";
 import { setModal } from "../../../../store/reducers/componentReducer";
@@ -19,12 +20,10 @@ export default function MemberList() {
   const dispatch = useDispatch();
   const users = useUser();
   const { activeWorkspace } = useWorkspace();
+  const { url } = useRouteMatch();
   const members = users.filter(({ workspaces }) =>
     workspaces.some((workspace) => workspace?._id === activeWorkspace._id)
   );
-  const permissionHandle = (member) => {
-    dispatch(setModal(<PermissionPage member={member} />));
-  };
   return (
     <>
       <Table dark hover>
@@ -56,13 +55,14 @@ export default function MemberList() {
                 <td>{member.email}</td>
                 <td>{member.phone}</td>
                 <td>
-                  <Button
-                    color="warning"
-                    style={{ fontSize: "1.2vmin" }}
-                    onClick={() => permissionHandle(member)}
-                  >
-                    Manage Permissions
-                  </Button>
+                  <Link to={`${url}/${member._id}/permissions`}>
+                    <Button
+                      color="warning"
+                      style={{ fontSize: "1.2vmin" }}
+                    >
+                      Manage Permissions
+                    </Button>
+                  </Link>
                 </td>
               </tr>
             );

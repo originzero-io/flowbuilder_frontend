@@ -4,9 +4,10 @@ export default function Checkbox({
   name,
   onChange,
   onClick,
-  size="15px",
+  size="17px",
   type,
   checked,
+  defaultChecked,
   center = false,
   ...rest
 }) {
@@ -25,8 +26,9 @@ export default function Checkbox({
         type="checkbox"
         onChange={onChange}
         onClick={onClick}
-        style={{ width: checkbox_size, height: checkbox_size }}
+        style={{ width: checkbox_size, height: checkbox_size,cursor:"pointer" }}
         checked={checked}
+        defaultChecked={defaultChecked}
         {...rest}
       />
     );

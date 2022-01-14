@@ -6,17 +6,17 @@ import {
   TabContainer,
   PermissionHeader,
 } from "../components/style";
-export default function MemberPermissions() {
+export default function TeamPermissions() {
   return (
     <TabContainer>
         <PermissionContainer>
-          <PermissionHeader>Invite</PermissionHeader>
+          <PermissionHeader>Invite Member</PermissionHeader>
           <PermissionContent>
               <Checkbox name="all" size="30px" defaultChecked={false} center={true} />
           </PermissionContent>
         </PermissionContainer>
         <PermissionContainer>
-          <PermissionHeader>Remove</PermissionHeader>
+          <PermissionHeader>Remove Member</PermissionHeader>
           <PermissionContent>
               <Checkbox name="all" size="30px" defaultChecked={false} center={true} />
           </PermissionContent>

@@ -13,11 +13,11 @@ import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
 import useWorkspace from "../../../utils/useWorkspace";
 import { useDispatch } from "react-redux";
 import AllFlowsPanel from "./ProjectsPanel/AllFlowsPanel";
-
+import PermissionPage from "./TeamPanel/PermissionPage"
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background: #0E1217;
+  background: #1a1d21;
   overflow-y: auto;
   overflow-x: hidden;
 `;
@@ -34,6 +34,7 @@ export default function PanelRouter() {
   const history = useHistory()
   //page redirects to /panel/all automatically when activeWorkspace changed
   useEffect(() => {
+    console.log("burdayım")
     dispatch(getFlowsByWorkspace(activeWorkspace))
     history.push(`${url}/all`);
   }, [activeWorkspace])
@@ -44,6 +45,7 @@ export default function PanelRouter() {
           <Route exact path={`${url}/all`} component={AllFlowsPanel}/>
           <Route exact path={`${url}/projects`} component={FlowsByProjectPanel}/>
           <Route exact path={`${url}/team`} component={TeamPanel}/>
+          <Route exact path={`${url}/team/:member_id/permissions`} component={PermissionPage}/>
           <Route exact path={`${url}/learn`} component={LearnPanel}/>
           <Route exact path={`${url}/notes`} component={NotesPanel}/>
           <Route exact path={`${url}/devices`} component={DevicesPanel}/>
