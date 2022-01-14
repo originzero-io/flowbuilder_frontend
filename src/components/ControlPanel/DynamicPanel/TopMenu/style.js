@@ -14,6 +14,12 @@ export const MenuItem = styled.div`
   cursor: pointer;
   padding: 8px;
   font-size: 1.5vmin;
+  display:flex;
+  align-items:center;
+  opacity:0.8;
+  &:hover{
+    opacity:1;
+  }
 `;
 export const LeftSideContainer = styled.div`
   margin-left: 15px;
@@ -29,15 +35,16 @@ export const UserInformation = styled.div`
   color:whitesmoke;
   padding:4px;
   font-size:1.2vmin;
+  opacity:0.8;
+  &:hover {
+    opacity:1;
+  }
 `;
 export const Profile = styled.div`
   cursor:pointer;
   margin-right:2px;
   display:flex;
   align-items:center;
-  &:hover {
-    background-color: rgb(60, 60, 60);
-  }
 `;
 export const ProfileList = styled(DropdownList)`
   margin-top: 3px;

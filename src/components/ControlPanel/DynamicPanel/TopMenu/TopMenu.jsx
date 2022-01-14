@@ -1,5 +1,7 @@
 import React from "react";
+import { BiBrain } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
+import { FiUsers } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import { logOut } from "../../../../store/reducers/authReducer";
@@ -35,9 +37,12 @@ export default function TopMenu() {
         <Logo theme="dark" />
       </LeftSideContainer>
       <RightSideContainer>
+        <Link to={`${url}/learn`}>
+          <MenuItem><BiBrain /><span style={{marginLeft:'5px'}}>Learn</span></MenuItem>
+        </Link>
         {role === "admin" && (
           <Link to={`${url}/users`}>
-            <MenuItem>Users</MenuItem>
+              <MenuItem><FiUsers/><span style={{marginLeft:'5px'}}>Users</span></MenuItem>
           </Link>
         )}
         <DropdownWrapper tabIndex="1">

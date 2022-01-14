@@ -17,26 +17,26 @@ export default function ProjectPermissions() {
   const { projects } = useProject();
   return (
     <TabContainer>
-      <PermissionContainer size="5%">
+      <PermissionContainer>
         <PermissionHeader>Project Create</PermissionHeader>
         <PermissionContent>
           <Checkbox name="all" size="30px" center={true} />
         </PermissionContent>
       </PermissionContainer>
-      <PermissionContainer size="10%">
+      <PermissionContainer>
         <PermissionHeader>Dashboard Create</PermissionHeader>
         <PermissionContent>
           <CollapsibleMenu trigger="Projects >">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
-                <Checkbox name="processorCreate" size="15px" />
+                <Checkbox name="processorCreate" />
               </CheckboxGroup>
             </CollapsibleMenuItem>
             {projects.map((project) => {
               return (
                 <CollapsibleMenuItem key={project._id}>
                   <CheckboxGroup label={project.name}>
-                    <Checkbox name="processorCreate" size="15px" />
+                    <Checkbox name="processorCreate" />
                   </CheckboxGroup>
                 </CollapsibleMenuItem>
               );
@@ -44,20 +44,20 @@ export default function ProjectPermissions() {
           </CollapsibleMenu>
         </PermissionContent>
       </PermissionContainer>
-      <PermissionContainer size="10%">
+      <PermissionContainer>
         <PermissionHeader>Flow Create</PermissionHeader>
         <PermissionContent>
           <CollapsibleMenu trigger="Projects >">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
-                <Checkbox name="processorCreate" size="15px" />
+                <Checkbox name="processorCreate"/>
               </CheckboxGroup>
             </CollapsibleMenuItem>
             {projects.map((project) => {
               return (
                 <CollapsibleMenuItem key={project._id}>
                   <CheckboxGroup label={project.name}>
-                    <Checkbox name="processorCreate" size="15px" />
+                    <Checkbox name="processorCreate" />
                   </CheckboxGroup>
                 </CollapsibleMenuItem>
               );
@@ -66,13 +66,13 @@ export default function ProjectPermissions() {
         </PermissionContent>
       </PermissionContainer>
 
-      <PermissionContainer size="17.5%">
+      <PermissionContainer>
         <PermissionHeader>Usage</PermissionHeader>
         <PermissionContent>
           <CollapsibleMenu trigger="Projects >">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
-                <Checkbox name="processorCreate" size="15px" />
+                <Checkbox name="processorCreate" />
               </CheckboxGroup>
             </CollapsibleMenuItem>
             {projects.map((project) => {
@@ -83,13 +83,13 @@ export default function ProjectPermissions() {
                 >
                   <CollapsibleMenuItem>
                     <CheckboxGroup label="All">
-                      <Checkbox name="processorCreate" size="15px" />
+                      <Checkbox name="processorCreate" />
                     </CheckboxGroup>
                   </CollapsibleMenuItem>
                   <CollapsibleSubMenu trigger="Flows >">
                     <CollapsibleMenuItem>
                       <CheckboxGroup label="All">
-                        <Checkbox name="processorCreate" size="15px" />
+                        <Checkbox name="processorCreate" />
                       </CheckboxGroup>
                     </CollapsibleMenuItem>
                     <FlowList project={project} as={CollapsibleMenuItem} />
@@ -100,13 +100,13 @@ export default function ProjectPermissions() {
           </CollapsibleMenu>
         </PermissionContent>
       </PermissionContainer>
-      <PermissionContainer size="17.5%">
+      <PermissionContainer>
         <PermissionHeader>Edit</PermissionHeader>
         <PermissionContent>
           <CollapsibleMenu trigger="Projects >">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
-                <Checkbox name="processorCreate" size="15px" />
+                <Checkbox name="processorCreate" />
               </CheckboxGroup>
             </CollapsibleMenuItem>
             {projects.map((project) => {
@@ -117,13 +117,13 @@ export default function ProjectPermissions() {
                 >
                   <CollapsibleMenuItem>
                     <CheckboxGroup label="All">
-                      <Checkbox name="processorCreate" size="15px" />
+                      <Checkbox name="processorCreate" />
                     </CheckboxGroup>
                   </CollapsibleMenuItem>
                   <CollapsibleSubMenu trigger="Flows >">
                     <CollapsibleMenuItem>
                       <CheckboxGroup label="All">
-                        <Checkbox name="processorCreate" size="15px" />
+                        <Checkbox name="processorCreate" />
                       </CheckboxGroup>
                     </CollapsibleMenuItem>
                     <FlowList project={project} as={CollapsibleMenuItem} />
@@ -134,13 +134,13 @@ export default function ProjectPermissions() {
           </CollapsibleMenu>
         </PermissionContent>
       </PermissionContainer>
-      <PermissionContainer size="17.5%">
+      <PermissionContainer>
         <PermissionHeader>Delete</PermissionHeader>
         <PermissionContent>
           <CollapsibleMenu trigger="Projects >">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
-                <Checkbox name="processorCreate" size="15px" />
+                <Checkbox name="processorCreate" />
               </CheckboxGroup>
             </CollapsibleMenuItem>
             {projects.map((project) => {
@@ -151,13 +151,13 @@ export default function ProjectPermissions() {
                 >
                   <CollapsibleMenuItem>
                     <CheckboxGroup label="All">
-                      <Checkbox name="processorCreate" size="15px" />
+                      <Checkbox name="processorCreate" />
                     </CheckboxGroup>
                   </CollapsibleMenuItem>
                   <CollapsibleSubMenu trigger="Flows >">
                     <CollapsibleMenuItem>
                       <CheckboxGroup label="All">
-                        <Checkbox name="processorCreate" size="15px" />
+                        <Checkbox name="processorCreate" />
                       </CheckboxGroup>
                     </CollapsibleMenuItem>
                     <FlowList project={project} as={CollapsibleMenuItem} />
@@ -168,13 +168,13 @@ export default function ProjectPermissions() {
           </CollapsibleMenu>
         </PermissionContent>
       </PermissionContainer>
-      <PermissionContainer size="17.5%">
+      <PermissionContainer>
         <PermissionHeader>View</PermissionHeader>
         <PermissionContent>
           <CollapsibleMenu trigger="Projects >">
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
-                <Checkbox name="processorCreate" size="15px" />
+                <Checkbox name="processorCreate" />
               </CheckboxGroup>
             </CollapsibleMenuItem>
             {projects.map((project) => {
@@ -185,7 +185,7 @@ export default function ProjectPermissions() {
                 >
                   <CollapsibleMenuItem>
                     <CheckboxGroup label="All">
-                      <Checkbox name="processorCreate" size="15px" />
+                      <Checkbox name="processorCreate" />
                     </CheckboxGroup>
                   </CollapsibleMenuItem>
                   <CollapsibleSubMenu trigger="Flows >">

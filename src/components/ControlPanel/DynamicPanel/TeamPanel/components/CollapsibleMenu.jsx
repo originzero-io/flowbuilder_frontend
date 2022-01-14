@@ -4,13 +4,16 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 const MenuItem = styled.div`
   margin-left:10px;
+  padding:2px;
+  border-bottom:1px solid rgba(60, 60, 60,0.6);
   &:hover {
-    background: #576574;
+    background: rgb(60, 60, 60);
     border-radius: 4px;
   }
 `;
 const SubMenu = styled.div`
   margin-left:10px;
+  background:#292d31;
 `;
 export default function CollapsibleMenu({ children, ...rest }) {
   const [open, setOpen] = useState(rest.open || false);
@@ -34,6 +37,7 @@ export default function CollapsibleMenu({ children, ...rest }) {
 export function CollapsibleSubMenu({ children, ...rest }) {
   const triggerStyle = {
     marginLeft: "10px",
+    padding:"3px"
   };
   return (
       <Collapsible

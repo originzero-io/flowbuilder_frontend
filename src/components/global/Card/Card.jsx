@@ -29,7 +29,7 @@ const Card = ({ data }) => {
       <CardTitle>{data.config.name || ""}</CardTitle>
       <DetailMenu deleteEvent={deleteCardHandler} data={data} />
       <CardBody>
-        <CardAuthor>{data.config.createdBy.username || ""}</CardAuthor>
+        {/* <CardAuthor>{data.config.createdBy.username || ""}</CardAuthor> */}
         <CardDescription>{data.config.description || ""}</CardDescription>
         <CardFooter>
           <Avatar avatar={data.config.createdBy.avatar} size={24} style={{marginLeft:'3px'}} />

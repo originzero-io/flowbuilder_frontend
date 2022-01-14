@@ -20,6 +20,8 @@ export const Container = styled.div`
   flex-direction: column;
   position: relative;
   //border:1px solid rgb(22, 139, 63);
+
+  text-overflow: ellipsis;
 `;
 export const CardBody = styled.div`
   position: relative;
@@ -29,25 +31,30 @@ export const CardBody = styled.div`
   flex-basis: 90%;
 `;
 export const CardTitle = styled.div`
-  display: flex;
-  justify-content: center;
+  //display: flex;
+  //justify-content: center;
+  text-align: center;
   font-size: 20px;
-  padding: 5px;
+  padding: 8px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   color: white;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
 `;
 export const CardAuthor = styled.div`
   display: flex;
   justify-content: center;
 `;
 export const CardDescription = styled.div`
-  //color: black;
   font-size: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-bottom: 20px;
+  padding-right:5px;
+  padding-left:5px;
+  text-align:center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top:-40px;
 `;
 export const CardFooter = styled.div`
   position: absolute;

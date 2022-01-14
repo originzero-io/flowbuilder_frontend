@@ -79,7 +79,7 @@ export default function DevicePermissions() {
   };
   return (
     <TabContainer>
-      <PermissionContainer size="10%">
+      <PermissionContainer>
         <PermissionHeader>Create</PermissionHeader>
         <PermissionContent>
           <CheckboxGroup label="Controller">
@@ -91,7 +91,7 @@ export default function DevicePermissions() {
         </PermissionContent>
       </PermissionContainer>
 
-      <PermissionContainer size="40%">
+      <PermissionContainer>
         <PermissionHeader>Usage</PermissionHeader>
         <PermissionContent>
           <CollapsibleMenu trigger="Controllers >">
@@ -151,7 +151,7 @@ export default function DevicePermissions() {
         </PermissionContent>
       </PermissionContainer>
 
-      <PermissionContainer size="40%">
+      <PermissionContainer>
         <PermissionHeader>Edit</PermissionHeader>
         <PermissionContent>
           <CollapsibleMenu trigger="Controllers >">
@@ -210,7 +210,7 @@ export default function DevicePermissions() {
           </CollapsibleMenu>
         </PermissionContent>
       </PermissionContainer>
-      <PermissionContainer size="10%">
+      <PermissionContainer>
         <PermissionHeader>Delete</PermissionHeader>
         <PermissionContent>
           <CheckboxGroup label="Controller">

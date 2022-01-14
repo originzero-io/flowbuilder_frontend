@@ -7,6 +7,7 @@ import Checkbox from "./Checkbox";
 
 function FlowList({ project,as:Component }) {
   const [flows, setFlows] = useState([]);
+  console.log("FlowList")
   useEffect(async () => {
     const data = await getFlowsByProjectService(project);
     //console.log("data:", data.flows);
@@ -18,7 +19,7 @@ function FlowList({ project,as:Component }) {
         return (
           <Component key={flow._id}>
             <CheckboxGroup label={flow.config.name}>
-              <Checkbox name="processorCreate" size="15px" />
+              <Checkbox name="processorCreate" />
             </CheckboxGroup>
           </Component>
         );
