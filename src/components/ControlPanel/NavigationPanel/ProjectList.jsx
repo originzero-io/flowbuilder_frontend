@@ -1,18 +1,19 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getFlowsByProject } from "../../../store/reducers/flow/flowReducer";
-import { setActiveProject } from "../../../store/reducers/projectReducer";
-import { CollapsibleMenuItem } from "../../global/Collapsible/CollapsibleMenu";
-import { VscTrash } from "react-icons/vsc";
+import PropTypes from "prop-types";
+import React from "react";
 import { BiEdit } from "react-icons/bi";
+import { VscTrash } from "react-icons/vsc";
+import { useDispatch } from "react-redux";
 import { setModal } from "../../../store/reducers/componentReducer";
-import EditProjectForm from "./EditProjectForm";
-import { projectNamespace } from "../../global/SocketConnections";
+import { setActiveProject } from "../../../store/reducers/projectReducer";
 import usePermission from "../../../utils/usePermission";
-import PropTypes from "prop-types"
-export default function ProjectList({projects,activeProject}) {
+import useProject from "../../../utils/useProject";
+import { CollapsibleMenuItem } from "../../global/Collapsible/CollapsibleMenu";
+import { projectNamespace } from "../../global/SocketConnections";
+import EditProjectForm from "./EditProjectForm";
+export default function ProjectList({projects}) {
   const dispatch = useDispatch();
   const permission = usePermission();
+  const { activeProject } = useProject();
   const clickProjectHandle = (project) => {
     dispatch(setActiveProject(project));
     //dispatch(getFlowsByProject(project));
@@ -63,7 +64,6 @@ export default function ProjectList({projects,activeProject}) {
 }
 
 ProjectList.propTypes = {
-  projects: PropTypes.array.isRequired,
-  activeProject: PropTypes.object.isRequired
+  projects: PropTypes.array.isRequired
 }
 

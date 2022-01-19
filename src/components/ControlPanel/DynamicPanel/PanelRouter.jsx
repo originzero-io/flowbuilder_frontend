@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
+import { Switch, Route, useRouteMatch, useHistory, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import LearnPanel from "./LearnPanel/LearnPanel";
 import NotesPanel from "./NotesPanel/NotesPanel";
@@ -28,29 +28,31 @@ const PanelComponentWrapper = styled.div`
   color:white;
 `;
 export default function PanelRouter() {
-  const { url } = useRouteMatch();
-  const dispatch = useDispatch();
+  const route = useRouteMatch();
+  const location = useLocation();
+  const params = useParams();
   const { activeWorkspace } = useWorkspace();
   const history = useHistory()
   //page redirects to /panel/all automatically when activeWorkspace changed
   useEffect(() => {
-    console.log("burdayım")
-    dispatch(getFlowsByWorkspace(activeWorkspace))
-    history.push(`${url}/all`);
+    console.log("Route: ",route);
+    console.log("Location: ",location);
+    console.log("Params: ",params);
+    history.push(`${route.url}/all`);
   }, [activeWorkspace])
   return (
     <Container>
       <PanelComponentWrapper>
         <Switch>
-          <Route exact path={`${url}/all`} component={AllFlowsPanel}/>
-          <Route exact path={`${url}/projects`} component={FlowsByProjectPanel}/>
-          <Route exact path={`${url}/team`} component={TeamPanel}/>
-          <Route exact path={`${url}/team/:member_id/permissions`} component={PermissionPage}/>
-          <Route exact path={`${url}/learn`} component={LearnPanel}/>
-          <Route exact path={`${url}/notes`} component={NotesPanel}/>
-          <Route exact path={`${url}/devices`} component={DevicesPanel}/>
-          <Route exact path={`${url}/settings`} component={SettingsPanel}/>
-          <Route exact path={`${url}/users`} component={UserPanel}/>
+          <Route exact path={`${route.url}/all`} component={AllFlowsPanel}/>
+          <Route exact path={`${route.url}/projects`} component={FlowsByProjectPanel}/>
+          <Route exact path={`${route.url}/team`} component={TeamPanel}/>
+          <Route exact path={`${route.url}/team/:member_id/permissions`} component={PermissionPage}/>
+          <Route exact path={`${route.url}/learn`} component={LearnPanel}/>
+          <Route exact path={`${route.url}/notes`} component={NotesPanel}/>
+          <Route exact path={`${route.url}/devices`} component={DevicesPanel}/>
+          <Route exact path={`${route.url}/settings`} component={SettingsPanel}/>
+          <Route exact path={`${route.url}/users`} component={UserPanel}/>
           <Route path="*" component={NotFound}/>
         </Switch>
       </PanelComponentWrapper>

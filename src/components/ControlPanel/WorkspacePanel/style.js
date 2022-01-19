@@ -15,7 +15,7 @@ export const WorkspaceContainer = styled.div`
   flex-basis: 4%;
 `;
 export const WorkspaceItemWrapper = styled(Item)`
-  background:${props => props.active ? "rgb(70, 70, 70)" : "none"};
+  background:${props => props.active ? "#343a40" : "none"};
   display:flex;
   justify-content:center;
 `;

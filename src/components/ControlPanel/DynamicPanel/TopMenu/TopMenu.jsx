@@ -54,7 +54,9 @@ export default function TopMenu() {
             </UserInformation>
           </Profile>
           <ProfileList>
-            <DropdownItem>User settings</DropdownItem>
+            <Link to={`${url}/settings`}>
+              <DropdownItem>User settings</DropdownItem>
+            </Link>
             <DropdownItem onClick={logOutHandle}>Log out</DropdownItem>
           </ProfileList>
         </DropdownWrapper>

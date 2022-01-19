@@ -1,15 +1,20 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "../../../store/reducers/componentReducer";
-import { deleteWorkspace, setActiveWorkspace } from "../../../store/reducers/workspaceReducer";
+import {
+  deleteWorkspace,
+  setActiveWorkspace,
+} from "../../../store/reducers/workspaceReducer";
 import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
 import { WorkspaceBrandWrapper } from "./style";
 import PropTypes from "prop-types";
 import { workspaceNamespace } from "../../global/SocketConnections";
+import useAuth from "../../../utils/useAuth";
 const WorkspaceBrand = ({ workspace }) => {
   //console.log("TEAM BRAND RENDERED");
+  const { role } = useAuth();
   const dispatch = useDispatch();
   const deleteWorkspaceHandler = () => {
     if (confirm(`${workspace.name} takımını silmek istiyor musunuz?`)) {
@@ -24,15 +29,20 @@ const WorkspaceBrand = ({ workspace }) => {
     <WorkspaceBrandWrapper>
       {workspace && (
         <>
-          <span style={{fontSize:'2vmin'}}>{workspace.name}</span>
-          <div>
-            <span onClick={editWorkspaceHandler} style={{ marginRight: "5px" }}>
-              <BiEdit style={{ fontSize: "2.5vmin" }} />
-            </span>
-            <span onClick={deleteWorkspaceHandler}>
-              <VscTrash style={{ fontSize: "2.5vmin" }} />
-            </span>
-          </div>
+          <span style={{ fontSize: "2vmin" }}>{workspace.name}</span>
+          {role === "admin" && (
+            <div>
+              <span
+                onClick={editWorkspaceHandler}
+                style={{ marginRight: "5px" }}
+              >
+                <BiEdit style={{ fontSize: "2.5vmin" }} />
+              </span>
+              <span onClick={deleteWorkspaceHandler}>
+                <VscTrash style={{ fontSize: "2.5vmin" }} />
+              </span>
+            </div>
+          )}
         </>
       )}
     </WorkspaceBrandWrapper>
