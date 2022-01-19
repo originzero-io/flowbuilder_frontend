@@ -21,6 +21,11 @@ import { useParams } from "react-router-dom";
 import useUser from "../../../../utils/useUser";
 import { MdDevicesOther } from "react-icons/md";
 import { AiOutlineFundProjectionScreen, AiOutlineTeam } from "react-icons/ai";
+import {
+  setCanDoEverytingPermission,
+  setMultiplePermission,
+  setSinglePermission,
+} from "../../../../store/reducers/userPermissionReducer";
 export default function PermissionPage() {
   const dispatch = useDispatch();
   const { activeWorkspace } = useWorkspace();
@@ -52,13 +57,16 @@ export default function PermissionPage() {
   const onChangeHandle = (e) => {
     setPermissions({ ...permissions, [e.target.name]: e.target.checked });
   };
+  const handleEverythingPermission = (e) => {
+    dispatch(setCanDoEverytingPermission(e.target.checked));
+  }
   return (
     <PermissionProvider>
       <div style={{ height: "90vh" }}>
         <UserHeader member={member} />
         <AllPermissionsContainer>
           <CheckboxGroup label="This user can do everything" labelSize="15px">
-            <Checkbox name="processorCreate" size="20px" />
+            <Checkbox name="CAN_DO_EVERYTHING" onChange={(e)=>handleEverythingPermission(e)} size="20px" />
           </CheckboxGroup>
         </AllPermissionsContainer>
         <Tabs
@@ -66,7 +74,13 @@ export default function PermissionPage() {
           style={{ height: "80%" }}
           forceRenderTabPanel={true}
         >
-          <TabList style={{ marginBottom: "0px", borderBottom: "none" }}>
+          <TabList
+            style={{
+              marginBottom: "0px",
+              borderBottom: "none",
+              marginLeft: "6px",
+            }}
+          >
             <Tab>
               <MdDevicesOther style={{ fontSize: "2vmin" }} />
               <span style={{ marginLeft: "5px" }}>Device</span>

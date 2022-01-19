@@ -10,7 +10,7 @@ export const CollapseIndex = styled.button`
   padding: 5px;
   cursor: pointer;
   &:hover {
-    background-color: rgb(60, 60, 60);
+    background-color: #343a40;
   }
 `;
 export const CollapsableItem = styled(CollapseIndex)`

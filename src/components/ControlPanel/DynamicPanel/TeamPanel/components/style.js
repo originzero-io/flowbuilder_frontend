@@ -28,6 +28,8 @@ export const PermissionContainer = styled(Index)`
     background: #212529;
     border: 1px dotted rgba(113, 128, 147, 0.8);
   }
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
 `;
 export const PermissionHeader = styled(Index)`
   position: sticky;
@@ -44,6 +46,6 @@ export const PermissionHeader = styled(Index)`
 `;
 export const PermissionContent = styled(Index)`
   flex: 80%;
-  padding: 4px;
+  padding: 2px;
   //background:gray;
 `;

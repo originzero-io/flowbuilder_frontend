@@ -30,15 +30,17 @@ const WorkspaceList = () => {
   useDidMountEffect(() => {
     if (workspaces.length > 0) {
       dispatch(setActiveWorkspace(workspaces[0]));
-      dispatch(getProjectsByWorkspace(workspaces[0]));
-    }//
+    }
   }, [workspaces]);
+  useDidMountEffect(() => {
+    dispatch(getFlowsByWorkspace(activeWorkspace));
+    dispatch(getProjectsByWorkspace(activeWorkspace));
+    dispatch(getFlowsByWorkspace(activeWorkspace));
+    dispatch(getNotesByWorkspace(activeWorkspace));
+  }, [activeWorkspace])
 
   const clickWorkspaceHandler = (workspace) => {
     dispatch(setActiveWorkspace(workspace));
-    dispatch(getProjectsByWorkspace(workspace));
-    dispatch(getFlowsByWorkspace(workspace));
-    dispatch(getNotesByWorkspace(workspace));
   };
   const addWorkspaceHandler = () => {
     dispatch(setModal(<AddWorkspaceForm />));

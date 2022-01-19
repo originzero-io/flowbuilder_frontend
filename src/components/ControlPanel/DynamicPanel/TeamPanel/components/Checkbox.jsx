@@ -4,11 +4,12 @@ export default function Checkbox({
   name,
   onChange,
   onClick,
-  size="17px",
+  size = "17px",
   type,
   checked,
   defaultChecked,
   center = false,
+  disabled,
   ...rest
 }) {
   const checkbox_size = type === "main" ? "30px" : size;
@@ -21,16 +22,34 @@ export default function Checkbox({
   };
   const checkbox = () => {
     return (
-      <input
-        name={name}
-        type="checkbox"
-        onChange={onChange}
-        onClick={onClick}
-        style={{ width: checkbox_size, height: checkbox_size,cursor:"pointer" }}
-        checked={checked}
-        defaultChecked={defaultChecked}
-        {...rest}
-      />
+      // <input
+      //   name={name}
+      //   type="checkbox"
+      //   onChange={onChange}
+      //   onClick={onClick}
+      //   style={{ width: checkbox_size, height: checkbox_size,cursor:"pointer" }}
+      //   checked={checked}
+      //   defaultChecked={defaultChecked}
+      //   {...rest}
+      // />
+      <div className="form-check form-switch">
+        <input
+          className="form-check-input"
+          type="checkbox"
+          name={name}
+          onChange={onChange}
+          onClick={onClick}
+          style={{
+            width: "40px",
+            height: "20px",
+            cursor: "pointer",
+          }}
+          checked={checked}
+          defaultChecked={defaultChecked}
+          disabled={disabled}
+          {...rest}
+        />
+      </div>
     );
   };
   return (
@@ -46,4 +65,5 @@ Checkbox.propTypes = {
   checked: PropTypes.bool,
   defaultChecked: PropTypes.bool,
   center: PropTypes.bool,
+  disabled:PropTypes.bool
 };

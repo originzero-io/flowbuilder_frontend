@@ -45,3 +45,9 @@ a{
   text-decoration: none !important;
   color: black !important;
 }
+
+/* permission page switch color */
+.form-check-input:checked{
+  background-color: #1DB954 !important;
+  border-color: #1DB954 !important;
+}

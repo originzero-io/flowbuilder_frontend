@@ -24,6 +24,10 @@ export const MenuItem = styled.div`
 export const LeftSideContainer = styled.div`
   margin-left: 15px;
   cursor: pointer;
+  transition:all .2s ease;
+  &:hover{
+    transform:scale(1.2);
+  }
 `;
 export const RightSideContainer = styled.div`
   min-width:10%;

@@ -27,6 +27,7 @@ export const DropdownList = styled.ul`
 export const DropdownItem = styled.li`
   padding: 8px;
   user-select: none;
+  color:whitesmoke;
   cursor: pointer;
   display: flex;
   justify-content: space-between;

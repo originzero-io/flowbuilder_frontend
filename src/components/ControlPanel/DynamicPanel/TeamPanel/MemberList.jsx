@@ -29,8 +29,8 @@ export default function MemberList() {
       <Table dark hover>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Avatar</th>
+            <th></th>
+            <th></th>
             <th>Online</th>
             <th>Full Name</th>
             <th>Username</th>

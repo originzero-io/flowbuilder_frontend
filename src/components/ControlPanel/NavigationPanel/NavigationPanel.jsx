@@ -33,7 +33,7 @@ const ControlPanelMenu = () => {
   const permissions = usePermission("CAN_CREATE_PROJECT");
   const { url } = useRouteMatch();
   const { activeWorkspace } = useWorkspace();
-  const { projects, activeProject } = useProject();
+  const { projects } = useProject();
   const flows = useFlow();
   const { name, avatar } = useAuth();
   const showModalHandle = (e) => {
@@ -56,10 +56,6 @@ const ControlPanelMenu = () => {
   const settingsItem = () => {
     return <CollapsibleTrigger label="Settings" icon={<FiSettings />} />;
   };
-
-  const allFlowsHandle = () => {
-    activeWorkspace && dispatch(getFlowsByWorkspace(activeWorkspace));
-  };
   return (
     <Container>
       <NavMenu>
@@ -68,14 +64,13 @@ const ControlPanelMenu = () => {
           <NavMenuItem
             label={`All Flows (${flows.length})`}
             icon={<BiBrain />}
-            onClick={allFlowsHandle}
           />
         </Link>
-        <Link to={`${url}/projects`}>
-          <CollapsibleMenu trigger={projectItem()}>
-            <ProjectList projects={projects} activeProject={activeProject} />
-          </CollapsibleMenu>
-        </Link>
+        <CollapsibleMenu trigger={projectItem()}>
+          <Link to={`${url}/projects`}>
+              <ProjectList projects={projects} />
+          </Link>
+        </CollapsibleMenu>
         <Link to={`${url}/team`}>
           <NavMenuItem label="Team" icon={<RiTeamLine />} />
         </Link>
