@@ -10,7 +10,7 @@ function FlowList({ project, handleMultiChange, permissionName }) {
   const [flows, setFlows] = useState([]);
   const permissions = useUserPermission("project");
   //console.log(`CAN_${permissionName}_FLOW`)
-  const name = `CAN_${permissionName.toUpperCase()}_FLOW`
+  const name = `CAN_${permissionName.toUpperCase()}_FLOW`;
   //console.log("NAME:",permissionName)
   useEffect(async () => {
     const data = await getFlowsByProjectService(project);
@@ -23,7 +23,11 @@ function FlowList({ project, handleMultiChange, permissionName }) {
         <>
           <CollapsibleMenuItem>
             <CheckboxGroup label="All">
-              <Checkbox name="processorCreate" />
+              <Checkbox
+                name="processorCreate"
+                disabled={permissions.EVERYTHING}
+                checked={permissions.EVERYTHING}
+              />
             </CheckboxGroup>
           </CollapsibleMenuItem>
           {flows.map((flow) => {
@@ -35,9 +39,18 @@ function FlowList({ project, handleMultiChange, permissionName }) {
                     id={flow._id}
                     onChange={(e) => handleMultiChange(e)}
                     defaultChecked={permissions[name].includes(flow._id)}
-                    disabled={permissionName === "VIEW" && permissions.CAN_EDIT_FLOW.includes(flow._id)}
+                    disabled={
+                      permissions.EVERYTHING ||
+                      (permissionName === "VIEW" &&
+                        permissions.CAN_EDIT_FLOW.includes(flow._id))
+                    }
                     //checked={permissions.CAN_EDIT_FLOW.includes(flow._id)}
-                    checked={permissionName === "VIEW" ? permissions.CAN_VIEW_FLOW.includes(flow._id) : permissions[name].includes(flow._id)}
+                    checked={
+                      permissions.EVERYTHING ||
+                      (permissionName === "VIEW"
+                        ? permissions.CAN_VIEW_FLOW.includes(flow._id)
+                        : permissions[name].includes(flow._id))
+                    }
                   />
                 </CheckboxGroup>
               </CollapsibleMenuItem>

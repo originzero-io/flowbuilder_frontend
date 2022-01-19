@@ -26,6 +26,7 @@ import {
   setMultiplePermission,
   setSinglePermission,
 } from "../../../../store/reducers/userPermissionReducer";
+import useUserPermission from "../../../../utils/useUserPermission";
 export default function PermissionPage() {
   const dispatch = useDispatch();
   const { activeWorkspace } = useWorkspace();
@@ -34,39 +35,24 @@ export default function PermissionPage() {
   const member = users.find((user) => user._id === params.member_id);
   console.log("params:", params);
   console.log("member:", member);
-  const memberPermissionsThisWorkspace = member.workspaces.find(
-    (workspace) => workspace._id === activeWorkspace._id
-  )?.permissions;
-  const [permissions, setPermissions] = useState({
-    CAN_CREATE_PROJECT: false,
-    CAN_EDIT_PROJECT: false,
-    CAN_DELETE_PROJECT: false,
-    CAN_CREATE_FLOW: false,
-    CAN_EDIT_FLOW: false,
-    CAN_DELETE_FLOW: false,
-    CAN_CREATE_DEVICE: false,
-    CAN_EDIT_DEVICE: false,
-    CAN_DELETE_DEVICE: false,
-    CAN_CREATE_USER: false,
-    CAN_EDIT_USER: false,
-    CAN_DELETE_USER: false,
-  });
-  useEffect(() => {
-    setPermissions({ ...permissions, ...memberPermissionsThisWorkspace });
-  }, []);
-  const onChangeHandle = (e) => {
-    setPermissions({ ...permissions, [e.target.name]: e.target.checked });
-  };
   const handleEverythingPermission = (e) => {
     dispatch(setCanDoEverytingPermission(e.target.checked));
   }
+  const permissions = useUserPermission();
+  console.log("pagedeyim:", permissions);
   return (
     <PermissionProvider>
       <div style={{ height: "90vh" }}>
         <UserHeader member={member} />
         <AllPermissionsContainer>
-          <CheckboxGroup label="This user can do everything" labelSize="15px">
-            <Checkbox name="CAN_DO_EVERYTHING" onChange={(e)=>handleEverythingPermission(e)} size="20px" />
+          <CheckboxGroup label="This user can do everything" labelSize="1.6vmin">
+            <Checkbox
+              name="CAN_DO_EVERYTHING"
+              onChange={(e) => handleEverythingPermission(e)}
+              defaultChecked={permissions.CAN_DO_EVERYTHING}
+              //disabled={permissions.EVERYTHING}
+              checked={permissions.CAN_DO_EVERYTHING}
+            />
           </CheckboxGroup>
         </AllPermissionsContainer>
         <Tabs

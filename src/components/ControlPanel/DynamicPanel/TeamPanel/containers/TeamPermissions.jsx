@@ -29,6 +29,10 @@ export default function TeamPermissions() {
             defaultChecked={permissions.CAN_INVITE_MEMBER}
             center={true}
             onChange={(e) => handleChange(e)}
+            disabled={permissions.EVERYTHING}
+            checked={
+              permissions.EVERYTHING || permissions.CAN_INVITE_MEMBER
+            }
           />
         </PermissionContent>
       </PermissionContainer>
@@ -41,6 +45,10 @@ export default function TeamPermissions() {
             defaultChecked={permissions.CAN_REMOVE_MEMBER}
             center={true}
             onChange={(e) => handleChange(e)}
+            disabled={permissions.EVERYTHING}
+            checked={
+              permissions.EVERYTHING || permissions.CAN_REMOVE_MEMBER
+            }
           />
         </PermissionContent>
       </PermissionContainer>
@@ -53,6 +61,10 @@ export default function TeamPermissions() {
             defaultChecked={permissions.CAN_ASSIGN_PERMISSION}
             center={true}
             onChange={(e) => handleChange(e)}
+            disabled={permissions.EVERYTHING}
+            checked={
+              permissions.EVERYTHING || permissions.CAN_ASSIGN_PERMISSION
+            }
           />
         </PermissionContent>
       </PermissionContainer>

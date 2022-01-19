@@ -13,7 +13,7 @@ const MenuItem = styled.div`
   }
 `;
 const TriggerLabel = styled.span`
-  padding-left:3px;
+  padding-left:7px;
 `;
 const SubMenu = styled.div`
   margin-left: 7px;
@@ -66,7 +66,7 @@ export function CollapsibleSubMenu({ children, trigger, ...rest }) {
     padding: "3px",
     display: 'flex',
     alignItems: 'center',
-    paddingLeft:'4px'
+    paddingLeft: '4px'
   };
   const openTriggerStyle = {
     ...triggerStyle,

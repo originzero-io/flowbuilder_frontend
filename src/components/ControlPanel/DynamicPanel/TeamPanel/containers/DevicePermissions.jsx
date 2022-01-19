@@ -13,7 +13,11 @@ import CollapsibleMenu, {
 import PermissionContext from "../context/PermissionContext";
 import useUserPermission from "../../../../../utils/useUserPermission";
 import { useDispatch } from "react-redux";
-import { setAllPermission, setMultiplePermission, setSinglePermission } from "../../../../../store/reducers/userPermissionReducer";
+import {
+  setAllPermission,
+  setMultiplePermission,
+  setSinglePermission,
+} from "../../../../../store/reducers/userPermissionReducer";
 export default function DevicePermissions() {
   const {
     controllers,
@@ -86,14 +90,14 @@ export default function DevicePermissions() {
 
   ////?
   const handleChange = (e) => {
-    dispatch(setSinglePermission(e,"device"));
+    dispatch(setSinglePermission(e, "device"));
   };
   const handleMultiChange = (e) => {
-    dispatch(setMultiplePermission(e,"device"));
+    dispatch(setMultiplePermission(e, "device"));
   };
-  const handleAllChange = (e,data) => {
-    dispatch(setAllPermission(e,data));
-  }
+  const handleAllChange = (e, data) => {
+    dispatch(setAllPermission(e, data));
+  };
   return (
     <TabContainer>
       <PermissionContainer>
@@ -103,7 +107,10 @@ export default function DevicePermissions() {
             <Checkbox
               name="CAN_CREATE_CONTROLLER"
               defaultChecked={permissions.CAN_CREATE_CONTROLLER}
-              checked={permissions.CAN_CREATE_CONTROLLER}
+              disabled={permissions.EVERYTHING}
+              checked={
+                permissions.EVERYTHING || permissions.CAN_CREATE_CONTROLLER
+              }
               onChange={(e) => handleChange(e)}
             />
           </CheckboxGroup>
@@ -112,11 +119,15 @@ export default function DevicePermissions() {
               name="CAN_CREATE_PROCESSOR"
               defaultChecked={permissions.CAN_CREATE_PROCESSOR}
               onChange={(e) => handleChange(e)}
+              disabled={permissions.EVERYTHING}
+              checked={
+                permissions.EVERYTHING || permissions.CAN_CREATE_PROCESSOR
+              }
             />
           </CheckboxGroup>
         </PermissionContent>
       </PermissionContainer>
-
+      {/* ////! */}
       <PermissionContainer>
         <PermissionHeader>Usage</PermissionHeader>
         <PermissionContent>
@@ -127,7 +138,9 @@ export default function DevicePermissions() {
                   name="CAN_USAGE_ALL_CONTROLLER"
                   //onChange={() => handleControllerSelectAll("canUse")}
                   //checked={selectAllControllers.canUse}
-                  onChange={(e)=>handleChange(e)}
+                  onChange={(e) => handleChange(e)}
+                  disabled={permissions.EVERYTHING}
+                  checked={permissions.EVERYTHING}
                 />
               </CheckboxGroup>
             </CollapsibleMenuItem>
@@ -142,7 +155,13 @@ export default function DevicePermissions() {
                       defaultChecked={permissions.CAN_USAGE_CONTROLLER.includes(
                         controller._id
                       )}
-                      checked={permissions.CAN_USAGE_ALL_CONTROLLER}
+                      disabled={permissions.EVERYTHING}
+                      checked={
+                        permissions.EVERYTHING ||
+                        permissions.CAN_USAGE_CONTROLLER.includes(
+                          controller._id
+                        )
+                      }
                     />
                   </CheckboxGroup>
                 </CollapsibleMenuItem>
@@ -155,7 +174,8 @@ export default function DevicePermissions() {
                 <Checkbox
                   name="ALL_PROCESSOR"
                   onChange={() => handleProcessorSelectAll("canUse")}
-                  checked={selectAllProcessors.canUse}
+                  disabled={permissions.EVERYTHING}
+                  checked={permissions.EVERYTHING}
                 />
               </CheckboxGroup>
             </CollapsibleMenuItem>
@@ -166,11 +186,16 @@ export default function DevicePermissions() {
                     <Checkbox
                       name="CAN_USAGE_PROCESSOR"
                       id={processor._id}
-                      onChange={(e) =>handleMultiChange(e)}
+                      onChange={(e) => handleMultiChange(e)}
                       //checked={processor.canUse}
                       defaultChecked={permissions.CAN_USAGE_PROCESSOR.includes(
                         processor._id
                       )}
+                      disabled={permissions.EVERYTHING}
+                      checked={
+                        permissions.EVERYTHING ||
+                        permissions.CAN_USAGE_PROCESSOR.includes(processor._id)
+                      }
                     />
                   </CheckboxGroup>
                 </CollapsibleMenuItem>
@@ -189,7 +214,8 @@ export default function DevicePermissions() {
                 <Checkbox
                   name="ALL_CONTROLLER_2"
                   onChange={() => handleControllerSelectAll("canEdit")}
-                  checked={selectAllControllers.canEdit}
+                  disabled={permissions.EVERYTHING}
+                  checked={permissions.EVERYTHING}
                 />
               </CheckboxGroup>
             </CollapsibleMenuItem>
@@ -200,11 +226,16 @@ export default function DevicePermissions() {
                     <Checkbox
                       name="CAN_EDIT_CONTROLLER"
                       id={controller._id}
-                      onChange={(e) =>handleMultiChange(e)}
+                      onChange={(e) => handleMultiChange(e)}
                       //checked={controller.canEdit}
                       defaultChecked={permissions.CAN_EDIT_CONTROLLER.includes(
                         controller._id
                       )}
+                      disabled={permissions.EVERYTHING}
+                      checked={
+                        permissions.EVERYTHING ||
+                        permissions.CAN_EDIT_CONTROLLER.includes(controller._id)
+                      }
                     />
                   </CheckboxGroup>
                 </CollapsibleMenuItem>
@@ -217,7 +248,8 @@ export default function DevicePermissions() {
                 <Checkbox
                   name="ALL_PROCESSOR"
                   onChange={() => handleProcessorSelectAll("canEdit")}
-                  checked={selectAllProcessors.canEdit}
+                  disabled={permissions.EVERYTHING}
+                  checked={permissions.EVERYTHING}
                 />
               </CheckboxGroup>
             </CollapsibleMenuItem>
@@ -228,11 +260,16 @@ export default function DevicePermissions() {
                     <Checkbox
                       name="CAN_EDIT_PROCESSOR"
                       id={processor._id}
-                      onChange={(e) =>handleMultiChange(e)}
+                      onChange={(e) => handleMultiChange(e)}
                       //checked={processor.canEdit}
                       defaultChecked={permissions.CAN_EDIT_PROCESSOR.includes(
                         processor._id
                       )}
+                      disabled={permissions.EVERYTHING}
+                      checked={
+                        permissions.EVERYTHING ||
+                        permissions.CAN_EDIT_PROCESSOR.includes(processor._id)
+                      }
                     />
                   </CheckboxGroup>
                 </CollapsibleMenuItem>
@@ -249,6 +286,10 @@ export default function DevicePermissions() {
               name="CAN_DELETE_CONTROLLER"
               defaultChecked={permissions.CAN_DELETE_CONTROLLER}
               onChange={(e) => handleChange(e)}
+              disabled={permissions.EVERYTHING}
+              checked={
+                permissions.EVERYTHING || permissions.CAN_DELETE_CONTROLLER
+              }
             />
           </CheckboxGroup>
           <CheckboxGroup label="Processor">
@@ -256,6 +297,10 @@ export default function DevicePermissions() {
               name="CAN_DELETE_PROCESSOR"
               defaultChecked={permissions.CAN_DELETE_PROCESSOR}
               onChange={(e) => handleChange(e)}
+              disabled={permissions.EVERYTHING}
+              checked={
+                permissions.EVERYTHING || permissions.CAN_DELETE_PROCESSOR
+              }
             />
           </CheckboxGroup>
         </PermissionContent>

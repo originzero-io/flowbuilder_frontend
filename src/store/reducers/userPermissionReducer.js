@@ -88,7 +88,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
       };
     case "SET_MULTIPLE_PERMISSION":
       if (payload.checked) {
-        if (payload.name === "CAN_EDIT_PROJECT") {
+        if (payload.name === "CAN_EDIT_PROJECT" && !state.project.CAN_VIEW_PROJECT.includes(payload.id)) {
           return {
             ...state,
             [payload.permissionType]: {
@@ -98,7 +98,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
             },
           };
         }
-        else if (payload.name === "CAN_EDIT_FLOW") {
+        else if (payload.name === "CAN_EDIT_FLOW" && !state.project.CAN_VIEW_FLOW.includes(payload.id)) {
           return {
             ...state,
             [payload.permissionType]: {
