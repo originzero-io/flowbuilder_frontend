@@ -63,8 +63,7 @@ export default function PermissionPage() {
           <TabList
             style={{
               marginBottom: "0px",
-              borderBottom: "none",
-              marginLeft: "6px",
+              borderBottom: "none"
             }}
           >
             <Tab>

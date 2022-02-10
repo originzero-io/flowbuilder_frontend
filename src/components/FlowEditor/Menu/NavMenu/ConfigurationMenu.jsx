@@ -32,7 +32,7 @@ import { ShareIcon, TuneIcon } from "./Icons";
 import { Menu, MenuItem } from "./style";
 
 export default function ConfigurationMenu() {
-  const { flowGui } = useActiveFlow();
+  const { flowGui,flowConfig } = useActiveFlow();
   const auth = useAuth();
   const { reactFlowInstance, miniMapDisplay, theme } = flowGui;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
@@ -45,21 +45,13 @@ export default function ConfigurationMenu() {
     if (confirm("Download?")) {
       if (reactFlowInstance) {
         const { elements } = reactFlowInstance.toObject();
-        console.log(elements);
-        // const flow = {
-        //   config: flowConfig,
-        //   workspace: flowGui,
-        //   elements: elements,
-        //   groups: flowGroups
-        // }
-        // console.log("flow:", flow);
-        // let hiddenElement = document.createElement("a");
-        // hiddenElement.href =
-        //   "data:application/octet-stream;base64," + btoa(JSON.stringify(flow));
-        // hiddenElement.target = "_blank";
-        // hiddenElement.download = "Flow.json";
-        // hiddenElement.click();
-        // hiddenElement.remove();
+        let hiddenElement = document.createElement("a");
+        hiddenElement.href =
+          "data:application/octet-stream;base64," + window.btoa(JSON.stringify(elements));
+        hiddenElement.target = "_blank";
+        hiddenElement.download = `${flowConfig.name}.json`;
+        hiddenElement.click();
+        hiddenElement.remove();
       }
     }
   };

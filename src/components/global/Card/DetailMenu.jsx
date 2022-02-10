@@ -27,13 +27,10 @@ export default function DetailMenu({deleteEvent,data}) {
         <CardMoreButton onClick={(e) => e.stopPropagation()}>
           <FiMoreVertical />
         </CardMoreButton>
-        <DetailMenuList>
+        <DetailMenuList style={{border:'1px solid #495057'}}>
           <DropdownItem onClick={moveHandler}>Move</DropdownItem>
           <DropdownItem onClick={editHandler}>Edit</DropdownItem>
-          <DropdownItem onClick={(e) => e.stopPropagation()}>Share</DropdownItem>
           <DropdownItem onClick={(e) => e.stopPropagation()}>Duplicate</DropdownItem>
-          <DropdownItem onClick={(e) => e.stopPropagation()}>Change</DropdownItem>
-          <DropdownItem onClick={(e) => e.stopPropagation()}>Share</DropdownItem>
           <DropdownItem onClick={(e)=>deleteEvent(e,data)}>Delete</DropdownItem>
         </DetailMenuList>
       </DropdownWrapper>

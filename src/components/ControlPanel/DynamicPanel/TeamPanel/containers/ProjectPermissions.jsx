@@ -17,6 +17,7 @@ import DashboardList from "../components/DashboardList";
 import useUserPermission from "../../../../../utils/useUserPermission";
 import { useDispatch } from "react-redux";
 import {
+  setAllPermission,
   setMultiplePermission,
   setSinglePermission,
 } from "../../../../../store/reducers/userPermissionReducer";
@@ -31,6 +32,12 @@ export default function ProjectPermissions() {
   const handleMultiChange = (e) => {
     console.log("handleMultiChange:", e);
     dispatch(setMultiplePermission(e, "project"));
+  };
+  const handleAllChange = (e, data) => {
+    console.log("data:", data);
+    console.log("e:", e.target);
+    const ids = data.map(d => d._id);
+    dispatch(setAllPermission(e, ids,"project"));
   };
   return (
     <TabContainer>
@@ -55,9 +62,11 @@ export default function ProjectPermissions() {
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox
-                  name="processorCreate"
+                  name="CAN_CREATE_DASHBOARD"
+                  onChange={(e) => handleAllChange(e,projects)}
+                  defaultChecked={permissions.CAN_CREATE_DASHBOARD_ALL}
                   disabled={permissions.EVERYTHING}
-                  checked={permissions.EVERYTHING}
+                  checked={permissions.EVERYTHING || permissions.CAN_CREATE_DASHBOARD_ALL}
                 />
               </CheckboxGroup>
             </CollapsibleMenuItem>
@@ -92,9 +101,11 @@ export default function ProjectPermissions() {
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox
-                  name="processorCreate"
+                  name="CAN_CREATE_FLOW"
+                  onChange={(e) => handleAllChange(e,projects)}
+                  defaultChecked={permissions.CAN_CREATE_FLOW_ALL}
                   disabled={permissions.EVERYTHING}
-                  checked={permissions.EVERYTHING}
+                  checked={permissions.EVERYTHING || permissions.CAN_CREATE_FLOW_ALL}
                 />
               </CheckboxGroup>
             </CollapsibleMenuItem>
@@ -130,9 +141,11 @@ export default function ProjectPermissions() {
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox
-                  name="processorCreate"
+                  name="CAN_USAGE_PROJECT"
+                  onChange={(e) => handleAllChange(e,projects)}
+                  defaultChecked={permissions.CAN_USAGE_PROJECT_ALL}
                   disabled={permissions.EVERYTHING}
-                  checked={permissions.EVERYTHING}
+                  checked={permissions.EVERYTHING || permissions.CAN_USAGE_PROJECT_ALL}
                 />
               </CheckboxGroup>
             </CollapsibleMenuItem>
@@ -163,6 +176,7 @@ export default function ProjectPermissions() {
                     <FlowList
                       project={project}
                       handleMultiChange={handleMultiChange}
+                      handleAllChange={handleAllChange}
                       permissionName="USAGE"
                     />
                   </CollapsibleSubMenu>
@@ -182,9 +196,11 @@ export default function ProjectPermissions() {
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox
-                  name="processorCreate"
+                  name="CAN_EDIT_PROJECT"
+                  onChange={(e) => handleAllChange(e,projects)}
+                  defaultChecked={permissions.CAN_EDIT_PROJECT_ALL}
                   disabled={permissions.EVERYTHING}
-                  checked={permissions.EVERYTHING}
+                  checked={permissions.EVERYTHING || permissions.CAN_EDIT_PROJECT_ALL}
                 />
               </CheckboxGroup>
             </CollapsibleMenuItem>
@@ -215,6 +231,7 @@ export default function ProjectPermissions() {
                     <FlowList
                       project={project}
                       handleMultiChange={handleMultiChange}
+                      handleAllChange={handleAllChange}
                       permissionName="EDIT"
                     />
                   </CollapsibleSubMenu>
@@ -234,9 +251,11 @@ export default function ProjectPermissions() {
             <CollapsibleMenuItem>
               <CheckboxGroup label="All">
                 <Checkbox
-                  name="processorCreate"
+                  name="CAN_DELETE_PROJECT"
+                  onChange={(e) => handleAllChange(e,projects)}
+                  defaultChecked={permissions.CAN_DELETE_PROJECT_ALL}
                   disabled={permissions.EVERYTHING}
-                  checked={permissions.EVERYTHING}
+                  checked={permissions.EVERYTHING || permissions.CAN_DELETE_PROJECT_ALL}
                 />
               </CheckboxGroup>
             </CollapsibleMenuItem>
@@ -267,6 +286,7 @@ export default function ProjectPermissions() {
                     <FlowList
                       project={project}
                       handleMultiChange={handleMultiChange}
+                      handleAllChange={handleAllChange}
                       permissionName="DELETE"
                     />
                   </CollapsibleSubMenu>
@@ -320,6 +340,7 @@ export default function ProjectPermissions() {
                     <FlowList
                       project={project}
                       handleMultiChange={handleMultiChange}
+                      handleAllChange={handleAllChange}
                       permissionName="VIEW"
                     />
                   </CollapsibleSubMenu>

@@ -6,17 +6,28 @@ import Checkbox from "./Checkbox";
 import { CollapsibleMenuItem } from "./CollapsibleMenu";
 import useUserPermission from "../../../../../utils/useUserPermission";
 
-function FlowList({ project, handleMultiChange, permissionName }) {
+function FlowList({ project, handleMultiChange,handleAllChange, permissionName }) {
   const [flows, setFlows] = useState([]);
   const permissions = useUserPermission("project");
   //console.log(`CAN_${permissionName}_FLOW`)
   const name = `CAN_${permissionName.toUpperCase()}_FLOW`;
-  //console.log("NAME:",permissionName)
+  console.log("NAME:",name)
   useEffect(async () => {
     const data = await getFlowsByProjectService(project);
     setFlows(data.flows);
   }, []);
-  //const is
+  const defaultChecked = () => {
+    console.log("burdayım")
+    if(permissionName==="USAGE" || permissionName==="EDIT" || permissionName==="DELETE" || permissionName==="VIEW"){
+      console.log("evet")
+      return permissions[`${name}_ALL`].includes(project._id)
+    }
+    else {
+      console.log("hayır")
+
+      return permissions[`${name}_ALL`]
+    }
+  }
   return (
     <>
       {flows.length > 0 ? (
@@ -24,9 +35,12 @@ function FlowList({ project, handleMultiChange, permissionName }) {
           <CollapsibleMenuItem>
             <CheckboxGroup label="All">
               <Checkbox
-                name="processorCreate"
+                name={name}
+                id={project._id}
+                onChange={(e) => handleAllChange(e,flows)}
+                defaultChecked={defaultChecked()}
                 disabled={permissions.EVERYTHING}
-                checked={permissions.EVERYTHING}
+                checked={permissions.EVERYTHING || defaultChecked()}
               />
             </CheckboxGroup>
           </CollapsibleMenuItem>
@@ -69,6 +83,7 @@ function FlowList({ project, handleMultiChange, permissionName }) {
 FlowList.propTypes = {
   project: PropTypes.object.required,
   handleMultiChange: PropTypes.func,
+  handleAllChange: PropTypes.func,
   permissionName: PropTypes.string,
 };
 

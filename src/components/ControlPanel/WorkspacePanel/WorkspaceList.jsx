@@ -37,6 +37,7 @@ const WorkspaceList = () => {
     dispatch(getProjectsByWorkspace(activeWorkspace));
     dispatch(getFlowsByWorkspace(activeWorkspace));
     dispatch(getNotesByWorkspace(activeWorkspace));
+    console.log("burdayım");
   }, [activeWorkspace])
 
   const clickWorkspaceHandler = (workspace) => {

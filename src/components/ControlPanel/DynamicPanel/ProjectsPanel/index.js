@@ -49,11 +49,9 @@ export default function Panel({ flows }) {
         )}
         <FlowsContainer>
           <FlowList flows={searched} />
-          {permission?.CAN_CREATE_FLOW && (
             <Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
               <VscAdd />
             </Box>
-          )}
         </FlowsContainer>
       </CollapsibleMenu>
       <CollapsibleMenu trigger={dashboardCollapseTrigger()} open={true}>

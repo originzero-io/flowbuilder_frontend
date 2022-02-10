@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import { BiEdit } from "react-icons/bi";
 import { VscTrash } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
@@ -7,13 +7,15 @@ import { setModal } from "../../../store/reducers/componentReducer";
 import { setActiveProject } from "../../../store/reducers/projectReducer";
 import usePermission from "../../../utils/usePermission";
 import useProject from "../../../utils/useProject";
+import useWorkspace from "../../../utils/useWorkspace";
 import { CollapsibleMenuItem } from "../../global/Collapsible/CollapsibleMenu";
 import { projectNamespace } from "../../global/SocketConnections";
 import EditProjectForm from "./EditProjectForm";
-export default function ProjectList({projects}) {
+export default function ProjectList({ projects }) {
   const dispatch = useDispatch();
   const permission = usePermission();
   const { activeProject } = useProject();
+  const { activeWorkspace } = useWorkspace();
   const clickProjectHandle = (project) => {
     dispatch(setActiveProject(project));
     //dispatch(getFlowsByProject(project));
@@ -26,6 +28,12 @@ export default function ProjectList({projects}) {
   const editProjectHandle = (project) => {
     dispatch(setModal(<EditProjectForm project={project} />));
   };
+  useEffect(() => {
+    if (projects.length > 0 && activeProject === "") {
+      dispatch(setActiveProject(projects[0]));
+    }
+  }, [activeWorkspace, projects]);
+
   return (
     <>
       {projects.length > 0 ? (
@@ -38,16 +46,12 @@ export default function ProjectList({projects}) {
             >
               <div>{project.name}</div>
               <div>
-                {permission?.CAN_EDIT_PROJECT && (
-                  <span onClick={() => editProjectHandle(project)}>
-                    <BiEdit style={{ fontSize: "2vmin" }} />
-                  </span>
-                )}
-                {permission?.CAN_DELETE_PROJECT && (
-                  <span onClick={() => deleteProjectHandle(project)}>
-                    <VscTrash style={{ fontSize: "2vmin" }} />
-                  </span>
-                )}
+                <span onClick={() => editProjectHandle(project)}>
+                  <BiEdit style={{ fontSize: "2vmin" }} />
+                </span>
+                <span onClick={() => deleteProjectHandle(project)}>
+                  <VscTrash style={{ fontSize: "2vmin" }} />
+                </span>
               </div>
             </CollapsibleMenuItem>
           );
@@ -64,6 +68,5 @@ export default function ProjectList({projects}) {
 }
 
 ProjectList.propTypes = {
-  projects: PropTypes.array.isRequired
-}
-
+  projects: PropTypes.array.isRequired,
+};

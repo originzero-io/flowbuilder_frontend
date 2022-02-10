@@ -42,7 +42,7 @@ export default function NotesPanel() {
             onClick={() => viewNoteHandle(note)}
           >
             <div style={{ display: "flex", alignItems: "center" }}>
-              <div style={{ width: "95%", cursor: "pointer" }}>
+              <div style={{ width: "95%"}}>
                 <NoteTitle>{note.title}</NoteTitle>
                 <NoteContent>{note.content}</NoteContent>
               </div>

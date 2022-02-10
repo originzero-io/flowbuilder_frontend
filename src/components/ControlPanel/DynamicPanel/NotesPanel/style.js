@@ -9,6 +9,7 @@ export const NoteContainer = styled.div`
   border: 2px solid rgba(75, 75, 75, 0.3);
   border-radius:6px;
   color: whitesmoke;
+  cursor:pointer;
   &:hover {
     background-color: rgba(46, 204, 113, 0.4);
   }

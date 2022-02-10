@@ -1,26 +1,25 @@
 import styled from "styled-components";
 import { DropdownList,DropdownWrapper } from "../../style-components/DropdownMenu";
-export const Container = styled.div`
+export const CardContainer = styled.div`
   margin: 7px;
   width: 160px;
   height: 150px;
   //width:15vw;
   //height:25vh;
-  border-radius: 6px;
+  border-radius: 3px;
   user-select: none;
   background-color: #212529;
-  border: 2px solid rgba(75, 75, 75, 0.4);
+  border: 2px solid rgba(75, 75, 75, 0.7);
   cursor: pointer;
   color: white;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
   &:hover {
-    background-color: rgba(46, 204, 113, 0.4);
+    background-color: rgba(22, 139, 63,0.8);
   }
   display: flex;
   flex-direction: column;
   position: relative;
   //border:1px solid rgb(22, 139, 63);
-
   text-overflow: ellipsis;
 `;
 export const CardBody = styled.div`

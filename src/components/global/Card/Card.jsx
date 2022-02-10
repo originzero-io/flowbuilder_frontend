@@ -1,8 +1,7 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import {
-  Container,
+  CardContainer,
   CardBody,
   CardTitle,
   CardAuthor,
@@ -16,16 +15,14 @@ import { Badge } from "reactstrap";
 import { flowNamespace } from "../../../components/global/SocketConnections";
 import Avatar from "../Avatar";
 const Card = ({ data }) => {
-  const dispatch = useDispatch();
   const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
       flowNamespace.emit("flows:remove", { flow });
-      //dispatch(deleteFlow(flow))
     }
   };
   return (
-    <Container>
+    <CardContainer>
       <CardTitle>{data.config.name || ""}</CardTitle>
       <DetailMenu deleteEvent={deleteCardHandler} data={data} />
       <CardBody>
@@ -41,7 +38,7 @@ const Card = ({ data }) => {
           </div>
         </CardFooter>
       </CardBody>
-    </Container>
+    </CardContainer>
   );
 };
 export default Card;

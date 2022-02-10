@@ -16,7 +16,6 @@ import { FiSettings } from "react-icons/fi";
 import { BiBrain } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
 import { RiTeamLine } from "react-icons/ri";
-import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
 import { setModal } from "../../../store/reducers/componentReducer";
 import { Link, useRouteMatch } from "react-router-dom";
 import WorkspaceBrand from "./WorkspaceBrand";
@@ -26,7 +25,6 @@ import usePermission from "../../../utils/usePermission";
 import useProject from "../../../utils/useProject";
 import Avatar from "../../global/Avatar";
 import useFlow from "../../../utils/useFlow";
-import { Badge } from "reactstrap";
 
 const ControlPanelMenu = () => {
   const dispatch = useDispatch();
@@ -48,7 +46,7 @@ const ControlPanelMenu = () => {
     return (
       <CollapsibleTrigger label={`Projects (${projects.length})`} icon={<AiOutlineProject/>}>
         <div onClick={(e) => showModalHandle(e)}>
-          {permissions?.CAN_CREATE_PROJECT && <BsPlusCircle style={{fontSize:'2vmin'}} />}
+          <BsPlusCircle style={{fontSize:'2vmin'}} />
         </div>
       </CollapsibleTrigger>
     );

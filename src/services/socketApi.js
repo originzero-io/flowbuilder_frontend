@@ -11,6 +11,7 @@ import {
   createFlow,
   deleteFlow,
   editFlow,
+  getFlowsByWorkspace,
   moveFlow,
 } from "../store/reducers/flow/flowReducer";
 import {
@@ -21,6 +22,7 @@ import {
 import {
   createProject,
   deleteProject,
+  setActiveProject,
   updateProject,
 } from "../store/reducers/projectReducer";
 import { editUser } from "../store/reducers/userReducer";
@@ -65,9 +67,15 @@ export const projectSubscribe = (socket) => {
   });
   socket.on("projects:update", (data) => {
     store.dispatch(updateProject(data.project));
+    const activeWorkspace = store.getState().workspaces.activeWorkspace;
+    store.dispatch(getFlowsByWorkspace(activeWorkspace));
   });
   socket.on("projects:remove", (data) => {
     store.dispatch(deleteProject(data.project));
+    const activeWorkspace = store.getState().workspaces.activeWorkspace;
+    const projects = store.getState().projects.projects;
+    store.dispatch(getFlowsByWorkspace(activeWorkspace));
+    store.dispatch(setActiveProject(projects[0]));
   });
 };
 export const workspaceSubscribe = (socket) => {

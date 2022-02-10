@@ -7,6 +7,7 @@ export const Container = styled.div`
   z-index: 1;
   flex-basis: 13%;
   position:relative;
+  resize: both;
   //border:1px solid rgb(40, 40, 40);
 `;
 export const NavMenu = styled.div`
@@ -32,7 +33,7 @@ export const NavMenuItemWrapper = styled.button`
     background-color: #343a40;
   }
   &:focus {
-    background-color: rgba(46, 213, 115, 0.2);
+    background-color: rgba(22, 139, 63,0.6);
   }
 `;
 

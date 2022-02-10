@@ -8,7 +8,7 @@ export function CollapsibleMenu({ trigger, open, children, style, ...props }) {
   return (
     <Collapsible
       trigger={trigger}
-      open={open || false}
+      open={open || true}
       transitionTime={150}
       transitionCloseTime={150}
       style={style}

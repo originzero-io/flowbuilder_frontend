@@ -9,7 +9,6 @@ import DevicesPanel from "./DevicesPanel/DevicesPanel";
 import UserPanel from "./UserPanel/UserPanel";
 import TeamPanel from "./TeamPanel/TeamPanel";
 import NotFound from "./NotFound";
-import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
 import useWorkspace from "../../../utils/useWorkspace";
 import { useDispatch } from "react-redux";
 import AllFlowsPanel from "./ProjectsPanel/AllFlowsPanel";
