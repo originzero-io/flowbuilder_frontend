@@ -45,7 +45,7 @@ const PanelContextMenu = () => {
             selectedTabClassName="selected-tab"
             style={{color:theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}}
           >
-            <TabList>
+            <TabList style={{position:'sticky',top:'0',zIndex:'6'}}>
               <Tab>All</Tab>
               <Tab>Favorites</Tab>
               <Tab>Recent</Tab>

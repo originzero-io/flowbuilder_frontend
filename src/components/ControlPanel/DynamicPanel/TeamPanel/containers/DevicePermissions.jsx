@@ -21,72 +21,12 @@ import {
 export default function DevicePermissions() {
   const {
     controllers,
-    setControllers,
     processors,
-    setProcessors,
-    selectAllControllers,
-    setSelectAllControllers,
-    selectAllProcessors,
-    setSelectAllProcessors,
   } = useContext(PermissionContext);
 
   const permissions = useUserPermission("device");
   console.log("device-permissions:", permissions);
   const dispatch = useDispatch();
-  const handleControllerChange = (event, permission) => {
-    const newControllers = [...controllers];
-    const controllerToUpdate = newControllers.find(
-      (controller) => controller._id === event.target.id
-    );
-    controllerToUpdate[permission] = !controllerToUpdate[permission];
-    if (!controllerToUpdate[permission] && selectAllControllers[permission]) {
-      handleControllerSelectAll(permission);
-    }
-    setControllers(newControllers);
-    const checkedAll = allInputsChecked(newControllers, permission);
-    if (checkedAll && !selectAllControllers[permission]) {
-      handleControllerSelectAll(permission);
-    }
-  };
-  const handleProcessorChange = (event, permission) => {
-    const newProcessors = [...processors];
-    const processorToUpdate = newProcessors.find(
-      (processor) => processor._id === event.target.id
-    );
-    processorToUpdate[permission] = !processorToUpdate[permission];
-    if (!processorToUpdate[permission] && selectAllProcessors[permission]) {
-      handleProcessorSelectAll(permission);
-    }
-    setProcessors(newProcessors);
-    const checkedAll = allInputsChecked(newProcessors, permission);
-    if (checkedAll && !selectAllProcessors[permission]) {
-      handleProcessorSelectAll(permission);
-    }
-  };
-  const handleControllerSelectAll = (permission) => {
-    setSelectAllControllers({
-      ...selectAllControllers,
-      [permission]: !selectAllControllers[permission],
-    });
-    const newControllers = controllers.map((controller) => {
-      return { ...controller, [permission]: !selectAllControllers[permission] };
-    });
-    setControllers(newControllers);
-  };
-  const handleProcessorSelectAll = (permission) => {
-    setSelectAllProcessors({
-      ...selectAllProcessors,
-      [permission]: !selectAllProcessors[permission],
-    });
-    const newProcessors = processors.map((processor) => {
-      return { ...processor, [permission]: !selectAllProcessors[permission] };
-    });
-    setProcessors(newProcessors);
-  };
-  const allInputsChecked = (array, permission) => {
-    const allIsChecked = array.every((element) => element[permission] === true);
-    return allIsChecked;
-  };
 
   ////?
   const handleChange = (e) => {
@@ -97,6 +37,7 @@ export default function DevicePermissions() {
   };
   const handleAllChange = (e, data) => {
     const ids = data.map(d => d._id);
+    console.log("ids:", ids);
     dispatch(setAllPermission(e, ids,"device"));
   };
   return (

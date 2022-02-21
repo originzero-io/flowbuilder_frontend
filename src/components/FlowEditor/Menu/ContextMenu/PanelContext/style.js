@@ -10,6 +10,8 @@ export const Container = styled.div`
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  max-height:50vh;
+  overflow-y:auto;
 `;
 export const NodeWrapper = styled.div`
   border-radius: 2px;

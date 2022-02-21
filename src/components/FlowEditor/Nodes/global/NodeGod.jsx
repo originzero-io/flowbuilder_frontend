@@ -11,7 +11,7 @@ import {
   TargetWrapper,
   Info,
 } from "../styles";
-import setIconInstance from "./Icons/iconConstant";
+import getIconInstance from "./Icons/iconConstant";
 import { setOutgoersEnable } from "../../../../store/reducers/flow/flowElementsReducer";
 import PropTypes from "prop-types"
 import useActiveFlow from "../../../../utils/useActiveFlow";
@@ -27,7 +27,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
     updateNodeInternals(self.id);
   }, [self.data.targetCount, self.data.sourceCount, align]);
 
-  const NodeIcon = setIconInstance(self.type);
+  const NodeIcon = getIconInstance(self.type);
   useEffect(() => {
     const outgoers = getOutgoers(self, elements);
     const outgoersIds = outgoers.map(o => o.id);

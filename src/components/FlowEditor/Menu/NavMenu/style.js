@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as themeColor from "../../../../config/ThemeReference"
 export const MenuIndex = styled.div`
   position: absolute;
-  width: 250px;
+  min-width: 250px;
   z-index: 6;
   display: flex;
   flex-direction: row;

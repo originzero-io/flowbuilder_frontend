@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import NodeGod from "./global/NodeGod";
 import NodeIOManager from "./global/NodeIOManager";
-const CombineNode = (self) => {
+const JsonParseNode = (self) => {
   const [align, setAlign] = useState("vertical");
-  console.log("combine-rendered");
+  console.log("json-parse-rendered");
   return (
     <>
       <NodeGod
@@ -13,10 +13,10 @@ const CombineNode = (self) => {
         ioType="both"
         collapsable={true}
       >
-        <NodeIOManager self={self} ioType="both" />
+        {/* <NodeIOManager self={self} ioType="both" /> */}
       </NodeGod>
     </>
   );
 };
 
-export default CombineNode;
+export default JsonParseNode;

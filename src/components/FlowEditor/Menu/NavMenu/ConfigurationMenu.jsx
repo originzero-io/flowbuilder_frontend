@@ -2,6 +2,12 @@ import React, { useCallback, useState } from "react";
 import { useStoreActions } from "react-flow-renderer";
 import { BiBrain } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  Button,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+} from "reactstrap";
 import styled from "styled-components";
 import { openNotification } from "../../../../app-global/dom/notification";
 import { loadFunctionsToNode } from "../../../../app-global/helpers/loadFunctionsToNode";
@@ -10,11 +16,12 @@ import * as tooltip from "../../../../config/TooltipReference";
 import { logOut } from "../../../../store/reducers/authReducer";
 import {
   changeEdgeType,
-  importElements
+  importElements,
 } from "../../../../store/reducers/flow/flowElementsReducer";
 import {
-  setFlowEdgeType, setMiniMapDisplay,
-  setTheme
+  setFlowEdgeType,
+  setMiniMapDisplay,
+  setTheme,
 } from "../../../../store/reducers/flow/flowGuiReducer";
 import useActiveFlow from "../../../../utils/useActiveFlow";
 import useAuth from "../../../../utils/useAuth";
@@ -25,14 +32,29 @@ import { VerticalDivider } from "../../../style-components/Divider";
 import {
   DropdownItem,
   DropdownList,
-  DropdownWrapper
+  DropdownWrapper,
 } from "../../../style-components/DropdownMenu";
 import { Circle } from "../../../style-components/Shapes";
 import { ShareIcon, TuneIcon } from "./Icons";
 import { Menu, MenuItem } from "./style";
+import { GoDeviceDesktop } from "react-icons/go";
+import { VscRunAll } from "react-icons/vsc";
+
+const dummyDevices = [
+  {
+    id: "1",
+    name: "Akin-PC",
+    ip: "192.168.1.101",
+  },
+  {
+    id: "2",
+    name: "Anil-PC",
+    ip: "192.168.1.102",
+  },
+];
 
 export default function ConfigurationMenu() {
-  const { flowGui,flowConfig } = useActiveFlow();
+  const { flowGui, flowConfig } = useActiveFlow();
   const auth = useAuth();
   const { reactFlowInstance, miniMapDisplay, theme } = flowGui;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
@@ -40,14 +62,15 @@ export default function ConfigurationMenu() {
     (actions) => actions.setSelectedElements
   );
   const dispatch = useDispatch();
-  
+
   const downloadFlowHandle = () => {
     if (confirm("Download?")) {
       if (reactFlowInstance) {
         const { elements } = reactFlowInstance.toObject();
         let hiddenElement = document.createElement("a");
         hiddenElement.href =
-          "data:application/octet-stream;base64," + window.btoa(JSON.stringify(elements));
+          "data:application/octet-stream;base64," +
+          window.btoa(JSON.stringify(elements));
         hiddenElement.target = "_blank";
         hiddenElement.download = `${flowConfig.name}.json`;
         hiddenElement.click();
@@ -113,15 +136,39 @@ export default function ConfigurationMenu() {
       dispatch(logOut());
     }
   };
+
   return (
     <Menu theme={theme}>
+      {/* <MenuItem>
+        <Button color="success">Execute</Button>
+      </MenuItem> */}
+
+      <DropdownWrapper tabIndex="1">
+        <MenuItem>
+          <Button style={{width:'100px',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'5px'}} color="success"><VscRunAll></VscRunAll><div>Execute</div></Button>
+        </MenuItem>
+        <DropdownList theme={theme}>
+          <DropdownItem>
+            <div>This PC</div>
+          </DropdownItem>
+          {dummyDevices.map((device) => {
+            return (
+              <DropdownItem style={{ fontSize: "1.5vmin" }} key={device.id}>
+                <GoDeviceDesktop style={{fontSize:'36px',marginRight:'5px'}}/>
+                <div>{device.name} <span style={{color:'gray',fontSize:'1.2vmin'}}>{device.ip}</span></div>
+              </DropdownItem>
+            );
+          })}
+        </DropdownList>
+      </DropdownWrapper>
+
       <DropdownWrapper tabIndex="1">
         <MenuItem>
           <ShareIcon width="25px" height="25px" theme={theme} />
         </MenuItem>
         <DropdownList theme={theme}>
           <DropdownItem>
-            <FileInput onChange={fileUploadHandle} label="Import Flow"/>
+            <FileInput onChange={fileUploadHandle} label="Import Flow" />
           </DropdownItem>
           <DropdownItem onClick={downloadFlowHandle}>Export Flow</DropdownItem>
         </DropdownList>
@@ -138,19 +185,22 @@ export default function ConfigurationMenu() {
       <VerticalDivider theme={theme} />
 
       <MenuItem data-tip="Learn" data-for={tooltip.LEARN}>
-        <BiBrain style={{fontSize:'25px',color:theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}}/>
+        <BiBrain
+          style={{
+            fontSize: "25px",
+            color:
+              theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON,
+          }}
+        />
       </MenuItem>
       <DropdownWrapper tabIndex="1">
         <Circle theme={theme}>
-          <Avatar avatar={auth.avatar}/>
+          <Avatar avatar={auth.avatar} />
         </Circle>
         <DropdownList theme={theme} align="right">
           <DropdownItem>
             Dark Theme
-            <SwitchButton
-              checked={active.theme}
-              onChange={changeTheme}
-            />
+            <SwitchButton checked={active.theme} onChange={changeTheme} />
           </DropdownItem>
           <DropdownItem>
             Mini-map

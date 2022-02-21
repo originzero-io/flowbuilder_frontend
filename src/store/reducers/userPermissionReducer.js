@@ -102,7 +102,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
           [payload.permissionType]: {
             ...state[payload.permissionType],
             [payload.name]: [...state[payload.permissionType][payload.name], ...payload.data],
-            [`${payload.name}_ALL`] : [...state[payload.permissionType][`${payload.name}_ALL`],payload.id]
+            [`${payload.name}_ALL`] :true
           },
         };
       }
@@ -112,7 +112,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
           [payload.permissionType]: {
             ...state[payload.permissionType],
             [payload.name]: state[payload.permissionType][payload.name].filter(s=>payload.data.includes(s._id)),
-            [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id)
+            [`${payload.name}_ALL`]: false
           },
         }
       }
@@ -220,8 +220,8 @@ export const setAllPermission = (event,data,permissionType) => ({
   payload: {
     name: event.target.name,
     checked: event.target.checked,
-    permissionType: permissionType,
+    id:event.target.id,
     data: data,
-    id:event.target.id
+    permissionType: permissionType
   }
 });
