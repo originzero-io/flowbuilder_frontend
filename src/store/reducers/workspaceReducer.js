@@ -1,8 +1,8 @@
+import toast from "react-hot-toast";
 import {
   getMyWorkspacesService
 } from "../../services/workspaceService";
 import * as actions from "../constants/workspaceConstants";
-import { setError } from "./errorReducer";
 
 const initialState = {
   activeWorkspace: "",
@@ -50,7 +50,7 @@ export const getMyWorkspaces = () => async (dispatch) => {
       payload: workspaces,
     });
   } catch (error) {
-    dispatch(setError(error));
+    toast.error(error.message);
   }
 };
 export const createWorkspace = (workspace) => ({

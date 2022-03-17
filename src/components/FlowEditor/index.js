@@ -9,7 +9,6 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 import nodeTypes from "./Nodes";
 import adjustScreen from "../../app-global/dom/adjustScreen";
 import { loadFunctionsToNode } from "../../app-global/helpers/loadFunctionsToNode";
-import { openNotification as notification } from "../../app-global/dom/notification";
 import { setReactFlowInstance, setPaneClickPosition } from "../../store/reducers/flow/flowGuiReducer";
 import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/reducers/flow/flowElementsReducer"
 import {
@@ -26,6 +25,8 @@ import FlowComponents from "./FlowComponents";
 import CustomEdge from './Edges/CustomEdge'
 import PropTypes from "prop-types"
 import useActiveFlow from "../../utils/useActiveFlow";
+import toast from "react-hot-toast"
+
 export default function FlowEditor({ reactFlowWrapper }) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeList);
@@ -38,7 +39,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const onConnectHandle = (params) => {
     console.log("params:", params);
     if (params.source === params.target) {
-      notification("ERROR!", "Nodes cannot connect itself.", "error");
+      toast.error("Nodes cannot connect itself");
+      
     } else {
       const sourceGroup = elements.find((els) => els.id === params.source).data.group;
       const edge = {

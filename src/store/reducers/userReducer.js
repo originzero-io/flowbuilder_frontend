@@ -8,7 +8,7 @@ import {
   removeUserToWorkspaceService,
 } from "../../services/userService";
 import * as actions from "../constants/userContants";
-import {setError} from "../../store/reducers/errorReducer"
+import toast from "react-hot-toast";
 const userReducer = (state = [], { type, payload }) => {
   switch (type) {
     case actions.GET_ALL_USERS:
@@ -81,6 +81,6 @@ export const deleteUser = (user) => async (dispatch) => {
     });
     
   } catch (error) {
-    dispatch(setError(error));
+    toast.error(error.message);
   }
 };

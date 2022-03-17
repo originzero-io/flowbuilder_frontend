@@ -5,7 +5,6 @@ import { assignPermissionToMember } from "../../../../store/reducers/userReducer
 import { useDispatch } from "react-redux";
 import useWorkspace from "../../../../utils/useWorkspace";
 import { setModal } from "../../../../store/reducers/componentReducer";
-import { openNotification } from "../../../../app-global/dom/notification";
 import useFlow from "../../../../utils/useFlow";
 import DevicePermissions from "./containers/DevicePermissions";
 import ProjectPermissions from "./containers/ProjectPermissions";

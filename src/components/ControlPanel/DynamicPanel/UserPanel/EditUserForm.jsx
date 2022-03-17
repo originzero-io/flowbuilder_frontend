@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form, Label, FormGroup } from "reactstrap";
 import { setModal } from "../../../../store/reducers/componentReducer";
 import { editUser } from "../../../../store/reducers/userReducer";
-import { openNotification } from "../../../../app-global/dom/notification";
 import { Avatar } from "antd";
 import { FaUserCheck } from "react-icons/fa";
-
+import toast from "react-hot-toast"
 export default function EditUserForm({ user }) {
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState(user);
@@ -21,7 +20,7 @@ export default function EditUserForm({ user }) {
     e.preventDefault();
     dispatch(editUser(userInfo));
     dispatch(setModal(false));
-    openNotification("", "User updated", "success");
+    toast.success("User updated");
   };
   const profilePictureHandle = (e) => {
     setUserInfo({ ...userInfo, avatar: e.target.files[0] });

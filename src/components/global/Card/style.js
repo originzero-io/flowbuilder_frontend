@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { DropdownList,DropdownWrapper } from "../../style-components/DropdownMenu";
 export const CardContainer = styled.div`
-  margin: 7px;
+  margin: 4px;
   width: 160px;
   height: 150px;
   //width:15vw;

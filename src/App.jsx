@@ -13,6 +13,7 @@ import DashboardPage from "./pages/DashboardPage";
 import FlowPage from "./pages/FlowPage";
 import { getMe } from "./store/reducers/authReducer.js";
 import LoadingBar from "./components/global/LoadingBar.jsx";
+import ToastNotification from "./components/global/ToastNotification.jsx";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -35,7 +36,8 @@ const App = () => {
         />
         <Route path="*" component={NotFound} />
       </Switch>
-      <NotificationContainer />
+      {/* <NotificationContainer /> */}
+      <ToastNotification/>
       <Modal />
       <SocketConnections/>
     </AppWrapper>

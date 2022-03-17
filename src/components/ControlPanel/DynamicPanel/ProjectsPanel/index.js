@@ -11,7 +11,7 @@ import { VscAdd } from "react-icons/vsc";
 import { SearchBar, DashboardsContainer, FlowsContainer, Box } from "./style";
 import { useDispatch } from "react-redux";
 import usePermission from "../../../../utils/usePermission";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 export default function Panel({ flows }) {
   const dispatch = useDispatch();
   const permission = usePermission();
@@ -49,9 +49,9 @@ export default function Panel({ flows }) {
         )}
         <FlowsContainer>
           <FlowList flows={searched} />
-            <Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
-              <VscAdd />
-            </Box>
+          <Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
+            <VscAdd />
+          </Box>
         </FlowsContainer>
       </CollapsibleMenu>
       <CollapsibleMenu trigger={dashboardCollapseTrigger()} open={true}>
@@ -66,5 +66,5 @@ export default function Panel({ flows }) {
 }
 
 Panel.propTypes = {
-    flows: PropTypes.array.isRequired
-}
+  flows: PropTypes.array.isRequired,
+};

@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import {
   setAllPermission,
   setMultiplePermission,
+  setNestedAllPermission,
   setSinglePermission,
 } from "../../../../../store/reducers/userPermissionReducer";
 export default function ProjectPermissions() {
@@ -30,7 +31,7 @@ export default function ProjectPermissions() {
     dispatch(setSinglePermission(e, "project"));
   };
   const handleMultiChange = (e) => {
-    console.log("handleMultiChange:", e);
+    console.log("handleMultiChange:", e.target);
     dispatch(setMultiplePermission(e, "project"));
   };
   const handleAllChange = (e, data) => {
@@ -38,6 +39,12 @@ export default function ProjectPermissions() {
     console.log("e:", e.target);
     const ids = data.map(d => d._id);
     dispatch(setAllPermission(e, ids,"project"));
+  };
+  const handleNestedAllChange = (e, data) => {
+    console.log("data:", data);
+    console.log("e:", e.target);
+    const ids = data.map(d => d._id);
+    dispatch(setNestedAllPermission(e, ids,"project"));
   };
   return (
     <TabContainer>
@@ -133,7 +140,7 @@ export default function ProjectPermissions() {
           </CollapsibleMenu>
         </PermissionContent>
       </PermissionContainer>
-
+      {/* ///??????????????BURADA???????????????????? */}
       <PermissionContainer>
         <PermissionHeader>Usage</PermissionHeader>
         <PermissionContent>
@@ -176,7 +183,7 @@ export default function ProjectPermissions() {
                     <FlowList
                       project={project}
                       handleMultiChange={handleMultiChange}
-                      handleAllChange={handleAllChange}
+                      handleAllChange={handleNestedAllChange}
                       permissionName="USAGE"
                     />
                   </CollapsibleSubMenu>
@@ -231,7 +238,7 @@ export default function ProjectPermissions() {
                     <FlowList
                       project={project}
                       handleMultiChange={handleMultiChange}
-                      handleAllChange={handleAllChange}
+                      handleAllChange={handleNestedAllChange}
                       permissionName="EDIT"
                     />
                   </CollapsibleSubMenu>
@@ -286,7 +293,7 @@ export default function ProjectPermissions() {
                     <FlowList
                       project={project}
                       handleMultiChange={handleMultiChange}
-                      handleAllChange={handleAllChange}
+                      handleAllChange={handleNestedAllChange}
                       permissionName="DELETE"
                     />
                   </CollapsibleSubMenu>
@@ -340,7 +347,7 @@ export default function ProjectPermissions() {
                     <FlowList
                       project={project}
                       handleMultiChange={handleMultiChange}
-                      handleAllChange={handleAllChange}
+                      handleAllChange={handleNestedAllChange}
                       permissionName="VIEW"
                     />
                   </CollapsibleSubMenu>

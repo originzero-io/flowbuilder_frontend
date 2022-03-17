@@ -15,7 +15,7 @@ export default function AddFlowForm() {
   const project = activeProject?._id || projects[0];
 
   const [flowInfo, setFlowInfo] = useState({
-    name: "Flow 1",
+    name: "Untitled",
     description: "Created for future",
     company: "Anaks ARGE Ltd.Şti.",
     createdBy: auth._id,

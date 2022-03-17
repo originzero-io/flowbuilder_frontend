@@ -103,7 +103,7 @@ export default function DevicePermissions() {
                         permissions.EVERYTHING ||
                         permissions.CAN_USAGE_CONTROLLER.includes(
                           controller._id
-                        )
+                        ) 
                       }
                     />
                   </CheckboxGroup>

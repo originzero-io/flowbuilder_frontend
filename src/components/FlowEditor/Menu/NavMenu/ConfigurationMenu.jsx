@@ -9,7 +9,6 @@ import {
   DropdownMenu,
 } from "reactstrap";
 import styled from "styled-components";
-import { openNotification } from "../../../../app-global/dom/notification";
 import { loadFunctionsToNode } from "../../../../app-global/helpers/loadFunctionsToNode";
 import * as themeColor from "../../../../config/ThemeReference";
 import * as tooltip from "../../../../config/TooltipReference";
@@ -39,6 +38,7 @@ import { ShareIcon, TuneIcon } from "./Icons";
 import { Menu, MenuItem } from "./style";
 import { GoDeviceDesktop } from "react-icons/go";
 import { VscRunAll } from "react-icons/vsc";
+import toast from "react-hot-toast"
 
 const dummyDevices = [
   {
@@ -99,11 +99,8 @@ export default function ConfigurationMenu() {
           setSelectedElements(newArray);
         };
       } else
-        openNotification(
-          "Import Error",
-          "This file cannot be imported. Please provide JSON file.",
-          "error"
-        );
+        
+      toast.error("This file cannot be imported. Please provide JSON file");
     },
     [reactFlowInstance]
   );

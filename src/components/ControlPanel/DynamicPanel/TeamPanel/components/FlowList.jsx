@@ -6,28 +6,37 @@ import Checkbox from "./Checkbox";
 import { CollapsibleMenuItem } from "./CollapsibleMenu";
 import useUserPermission from "../../../../../utils/useUserPermission";
 
-function FlowList({ project, handleMultiChange,handleAllChange, permissionName }) {
+function FlowList({
+  project,
+  handleMultiChange,
+  handleAllChange,
+  permissionName,
+}) {
   const [flows, setFlows] = useState([]);
   const permissions = useUserPermission("project");
   //console.log(`CAN_${permissionName}_FLOW`)
   const name = `CAN_${permissionName.toUpperCase()}_FLOW`;
-  console.log("NAME:",name)
+  console.log("NAME:", name);
   useEffect(async () => {
     const data = await getFlowsByProjectService(project);
     setFlows(data.flows);
   }, []);
   const defaultChecked = () => {
-    console.log("burdayım")
-    if(permissionName==="USAGE" || permissionName==="EDIT" || permissionName==="DELETE" || permissionName==="VIEW"){
-      console.log("evet")
-      return permissions[`${name}_ALL`].includes(project._id)
-    }
-    else {
-      console.log("hayır")
+    console.log("burdayım");
+    if (
+      permissionName === "USAGE" ||
+      permissionName === "EDIT" ||
+      permissionName === "DELETE" ||
+      permissionName === "VIEW"
+    ) {
+      console.log("evet");
+      return permissions[`${name}_ALL`].includes(project._id);
+    } else {
+      console.log("hayır");
 
-      return permissions[`${name}_ALL`]
+      return permissions[`${name}_ALL`];
     }
-  }
+  };
   return (
     <>
       {flows.length > 0 ? (
@@ -37,10 +46,16 @@ function FlowList({ project, handleMultiChange,handleAllChange, permissionName }
               <Checkbox
                 name={name}
                 id={project._id}
-                onChange={(e) => handleAllChange(e,flows)}
-                defaultChecked={defaultChecked()}
+                onChange={(e) => handleAllChange(e, flows)}
+                //defaultChecked={defaultChecked()}
+                defaultChecked={permissions[`${name}_ALL`]}
                 disabled={permissions.EVERYTHING}
-                checked={permissions.EVERYTHING || defaultChecked()}
+                //checked={permissions.EVERYTHING || defaultChecked()}
+                //checked={permissions.EVERYTHING || permissions[`${name}_ALL`]}
+                checked={
+                  permissions.EVERYTHING ||
+                  permissions[`${name}_ALL`].includes(project._id)
+                }
               />
             </CheckboxGroup>
           </CollapsibleMenuItem>
@@ -56,7 +71,9 @@ function FlowList({ project, handleMultiChange,handleAllChange, permissionName }
                     disabled={
                       permissions.EVERYTHING ||
                       (permissionName === "VIEW" &&
-                        permissions.CAN_EDIT_FLOW.includes(flow._id))
+                        (permissions.CAN_EDIT_FLOW.includes(flow._id) ||
+                          permissions.CAN_USAGE_FLOW.includes(flow._id) ||
+                          permissions.CAN_DELETE_FLOW.includes(flow._id)))
                     }
                     //checked={permissions.CAN_EDIT_FLOW.includes(flow._id)}
                     checked={

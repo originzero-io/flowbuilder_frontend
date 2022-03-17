@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 import { store } from "../index";
-const HOST = "http://localhost:5001/";
-import { openNotification } from "../app-global/dom/notification";
+const HOST = process.env.REACT_APP_SOCKET_URL;
+import toast from "react-hot-toast";
 import { makeMeOnline } from "../store/reducers/authReducer";
 import {
   saveElements,
@@ -53,74 +53,134 @@ class Socket {
       console.log(`${namespace} namespaceine bağlandı.`);
     });
     this.socket.on(`${this.namespace}:welcome`, (data) => {
-      //openNotification("", data.message, "success");
+      //anything
     });
     this.socket.on("connect_error", (err) => {
-      openNotification("", err.message, "error");
+      toast.error(err.message);
     });
   }
 }
 
 export const projectSubscribe = (socket) => {
   socket.on("projects:create", (data) => {
-    store.dispatch(createProject(data.project));
+    if (!data.isError) {
+      store.dispatch(createProject(data.project));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
   socket.on("projects:update", (data) => {
-    store.dispatch(updateProject(data.project));
-    const activeWorkspace = store.getState().workspaces.activeWorkspace;
-    store.dispatch(getFlowsByWorkspace(activeWorkspace));
+    if (!data.isError) {
+      store.dispatch(updateProject(data.project));
+      const activeWorkspace = store.getState().workspaces.activeWorkspace;
+      store.dispatch(getFlowsByWorkspace(activeWorkspace));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
   socket.on("projects:remove", (data) => {
-    store.dispatch(deleteProject(data.project));
-    const activeWorkspace = store.getState().workspaces.activeWorkspace;
-    const projects = store.getState().projects.projects;
-    store.dispatch(getFlowsByWorkspace(activeWorkspace));
-    store.dispatch(setActiveProject(projects[0]));
+    if (!data.isError) {
+      store.dispatch(deleteProject(data.project));
+      const activeWorkspace = store.getState().workspaces.activeWorkspace;
+      const projects = store.getState().projects.projects;
+      store.dispatch(getFlowsByWorkspace(activeWorkspace));
+      store.dispatch(setActiveProject(projects[0]));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
 };
 export const workspaceSubscribe = (socket) => {
   socket.on("workspaces:create", (data) => {
-    store.dispatch(createWorkspace(data.workspace));
+    if (!data.isError) {
+      store.dispatch(createWorkspace(data.workspace));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
   socket.on("workspaces:update", (data) => {
-    store.dispatch(editWorkspace(data.workspace));
+    if (!data.isError) {
+      store.dispatch(editWorkspace(data.workspace));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
   socket.on("workspaces:remove", (data) => {
-    store.dispatch(deleteWorkspace(data.workspace));
+    if (!data.isError) {
+      store.dispatch(deleteWorkspace(data.workspace));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
 };
 export const flowSubscribe = (socket) => {
   socket.on("flows:remove", (data) => {
-    store.dispatch(deleteFlow(data.flow));
+    if (!data.isError) {
+      store.dispatch(deleteFlow(data.flow));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
   socket.on("flows:update", (data) => {
-    store.dispatch(editFlow(data.flow));
+    if (!data.isError) {
+      store.dispatch(editFlow(data.flow));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
   socket.on("flows:move", (data) => {
-    store.dispatch(moveFlow(data.flow));
+    if (!data.isError) {
+      store.dispatch(moveFlow(data.flow));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
   socket.on("flows:create", (data) => {
-    store.dispatch(createFlow(data.flow));
+    if (!data.isError) {
+      store.dispatch(createFlow(data.flow));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
 };
 export const elementSubscribe = (socket) => {
   socket.on("elements:save", (data) => {
-    store.dispatch(saveElements(data));
+    if (!data.isError) {
+      store.dispatch(saveElements(data));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
   socket.on("elements:getElements", (data) => {
-    store.dispatch(setElements(data.data));
-    store.dispatch(endTheBar());
+    if (!data.isError) {
+      store.dispatch(setElements(data.data));
+      store.dispatch(endTheBar());
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
 };
 export const noteSubscribe = (socket) => {
   socket.on("notes:create", (data) => {
-    store.dispatch(createNote(data.note));
+    if (!data.isError) {
+      store.dispatch(createNote(data.note));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
   socket.on("notes:update", (data) => {
-    store.dispatch(updateNote(data.note));
+    if (!data.isError) {
+      store.dispatch(updateNote(data.note));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
   socket.on("notes:remove", (data) => {
-    store.dispatch(deleteNote(data.note));
+    if (!data.isError) {
+      store.dispatch(deleteNote(data.note));
+    } else {
+      toast.error(data.errorMessage);
+    }
   });
 };
 
@@ -130,7 +190,7 @@ export const mainSubscribe = (socket) => {
   socket.on("main:onlineUser", (data) => {
     if (auth._id !== data._id) {
       store.dispatch(editUser(data));
-      openNotification("", `${data.username} oturum açtı`, "success");
+      toast.success(`${data.username} oturum açtı`,{style:{background:'#40916c'}});
     } else {
       store.dispatch(editUser(data));
       store.dispatch(makeMeOnline(data));
@@ -139,7 +199,9 @@ export const mainSubscribe = (socket) => {
   socket.on("main:offlineUser", (data) => {
     if (auth._id !== data._id) {
       store.dispatch(editUser(data));
-      openNotification("", `${data.username} oturumu kapadı`, "warning");
+      toast(`${data.username} oturumu kapadı`, {
+        style: { background: "orange", color: "whitesmoke" },
+      });
     } else alert("Oturum başka bir tabde açık");
   });
 };

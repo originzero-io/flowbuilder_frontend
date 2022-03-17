@@ -12,6 +12,8 @@ import { FaUserCircle } from "react-icons/fa";
 import EditUserForm from "./EditUserForm";
 import Avatar from "../../../global/Avatar"
 import useUser from "../../../../utils/useUser";
+import toast from "react-hot-toast"
+
 const UserListContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -51,8 +53,16 @@ export default function UserList() {
   const editUserHandle = (user) => {
     dispatch(setModal(<EditUserForm user={user} />));
   };
+  const toastTestSuccess = () => {
+    toast.success('Test successful');
+  }
+  const toastTestError = () => {
+    toast.error('Test error');
+  }
   return (
     <UserListContainer>
+      <Button onClick={toastTestSuccess}>Toast successful</Button>
+      <Button onClick={toastTestError}>Toast error</Button>
       <Table dark hover>
         <thead>
           <tr>

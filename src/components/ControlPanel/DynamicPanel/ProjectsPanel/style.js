@@ -24,7 +24,7 @@ export const SearchBar = styled.input`
   border-radius: 4px;
   padding-left: 10px;
   margin-right: 5px;
-  margin-left:1%;
+  margin-left:9px;
   margin-top: 5px;
   background-color: #212529;
   border:2px solid rgba(75,75,75,0.4);;
