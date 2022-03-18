@@ -17,6 +17,7 @@ function FlowList({
   //console.log(`CAN_${permissionName}_FLOW`)
   const name = `CAN_${permissionName.toUpperCase()}_FLOW`;
   const PROJECT_NAME = `CAN_${permissionName.toUpperCase()}_PROJECT`;
+  const PROJECT_ALL = `CAN_${permissionName.toUpperCase()}_PROJECT_ALL`;
   const ALL_NAME = `CAN_${permissionName.toUpperCase()}_FLOW_ALL`;
   console.log("NAME:", name);
   useEffect(async () => {
@@ -56,6 +57,7 @@ function FlowList({
                 //checked={permissions.EVERYTHING || permissions[`${name}_ALL`]}
                 checked={
                   permissions.EVERYTHING ||
+                  permissions[PROJECT_ALL] ||
                   permissions[`${name}_ALL`].includes(project._id)
                 }
               />
@@ -80,6 +82,7 @@ function FlowList({
                     //checked={permissions.CAN_EDIT_FLOW.includes(flow._id)}
                     checked={
                       permissions.EVERYTHING ||
+                      permissions[PROJECT_ALL] ||
                       permissions[PROJECT_NAME].includes(project._id) ||
                       permissions[ALL_NAME].includes(project._id) ||
                       (permissionName === "VIEW"

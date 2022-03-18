@@ -49,6 +49,7 @@ function UsageProjectPermission({
                       disabled={permissions.EVERYTHING}
                       checked={
                         permissions.EVERYTHING ||
+                        permissions.CAN_USAGE_PROJECT_ALL ||
                         permissions.CAN_USAGE_PROJECT.includes(project._id)
                       }
                     />

@@ -52,6 +52,7 @@ function ViewProjectPermission({
                       }
                       checked={
                         permissions.EVERYTHING ||
+                        permissions.CAN_VIEW_PROJECT_ALL ||
                         permissions.CAN_VIEW_PROJECT.includes(project._id)
                       }
                     />

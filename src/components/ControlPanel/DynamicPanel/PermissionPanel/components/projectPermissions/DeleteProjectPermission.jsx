@@ -49,6 +49,7 @@ function DeleteProjectPermission({
                       disabled={permissions.EVERYTHING}
                       checked={
                         permissions.EVERYTHING ||
+                        permissions.CAN_DELETE_PROJECT_ALL ||
                         permissions.CAN_DELETE_PROJECT.includes(project._id)
                       }
                     />

@@ -183,7 +183,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
             ...state,
             [payload.permissionType]: {
               ...state[payload.permissionType],
-              [payload.name]: state[payload.permissionType][payload.name].filter(s=>payload.data.includes(s._id)),
+              //[payload.name]: state[payload.permissionType][payload.name].filter(s=>payload.data.includes(s._id)),
               [`${payload.name}_ALL`]: false
             },
           }
