@@ -21,7 +21,7 @@ import {
 export default function ProjectPermissions() {
   const dispatch = useDispatch();
   const { projects } = useProject();
-  const permissions = useUserPermission("project");
+  const projectPermissions = useUserPermission("project");
   const handleSingleProjectChange = (e) => {
     console.log("handleChange:", e);
     dispatch(setSinglePermission(e, "project"));
@@ -46,14 +46,14 @@ export default function ProjectPermissions() {
     <TabContainer>
       <PermissionContainer size="50%">
         <CreateProjectPermission
-          permissions={permissions}
+          permissions={projectPermissions}
           handleChange={handleSingleProjectChange}
         />
       </PermissionContainer>
       <PermissionContainer>
         <CreateDashboardPermission
           projects={projects}
-          permissions={permissions}
+          permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleAllChange={handleAllChange}
         />
@@ -61,7 +61,7 @@ export default function ProjectPermissions() {
       <PermissionContainer>
         <CreateFlowPermission
           projects={projects}
-          permissions={permissions}
+          permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleAllChange={handleAllChange}
         />
@@ -69,7 +69,7 @@ export default function ProjectPermissions() {
       <PermissionContainer>
         <UsageProjectPermission
           projects={projects}
-          permissions={permissions}
+          permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleAllChange={handleAllChange}
           handleNestedAllChange={handleNestedAllChange}
@@ -78,7 +78,7 @@ export default function ProjectPermissions() {
       <PermissionContainer>
         <EditProjectPermission
           projects={projects}
-          permissions={permissions}
+          permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleAllChange={handleAllChange}
           handleNestedAllChange={handleNestedAllChange}
@@ -87,7 +87,7 @@ export default function ProjectPermissions() {
       <PermissionContainer>
         <DeleteProjectPermission
           projects={projects}
-          permissions={permissions}
+          permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleAllChange={handleAllChange}
           handleNestedAllChange={handleNestedAllChange}
@@ -96,7 +96,7 @@ export default function ProjectPermissions() {
       <PermissionContainer>
         <ViewProjectPermission
           projects={projects}
-          permissions={permissions}
+          permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleAllChange={handleAllChange}
           handleNestedAllChange={handleNestedAllChange}

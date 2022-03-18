@@ -34,9 +34,6 @@ export default function PanelRouter() {
   const history = useHistory()
   //page redirects to /panel/all automatically when activeWorkspace changed
   useEffect(() => {
-    console.log("Route: ",route);
-    console.log("Location: ",location);
-    console.log("Params: ",params);
     history.push(`${route.url}/all`);
   }, [activeWorkspace])
   return (
@@ -46,7 +43,7 @@ export default function PanelRouter() {
           <Route exact path={`${route.url}/all`} component={AllFlowsPanel}/>
           <Route exact path={`${route.url}/projects`} component={FlowsByProjectPanel}/>
           <Route exact path={`${route.url}/team`} component={TeamPanel}/>
-          <Route exact path={`${route.url}/team/:member_id/permissions`} component={PermissionPanel}/>
+          <Route exact path={`${route.url}/permissions/:member_id`} component={PermissionPanel}/>
           <Route exact path={`${route.url}/learn`} component={LearnPanel}/>
           <Route exact path={`${route.url}/notes`} component={NotesPanel}/>
           <Route exact path={`${route.url}/devices`} component={DevicesPanel}/>

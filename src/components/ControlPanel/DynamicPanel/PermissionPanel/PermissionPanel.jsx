@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { assignPermissionToMember } from "../../../../store/reducers/userReducer";
+import React from "react";
+import { AiOutlineFundProjectionScreen, AiOutlineTeam } from "react-icons/ai";
+import { MdDevicesOther } from "react-icons/md";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import {
+  setCanDoEverytingPermission
+} from "../../../../store/reducers/userPermissionReducer";
+import useUser from "../../../../utils/useUser";
+import useUserPermission from "../../../../utils/useUserPermission";
 import useWorkspace from "../../../../utils/useWorkspace";
-import { setModal } from "../../../../store/reducers/componentReducer";
-import useFlow from "../../../../utils/useFlow";
+import Checkbox from "./components/shared/Checkbox";
+import CheckboxGroup from "./components/shared/CheckboxGroup";
+import { AllPermissionsContainer } from "./components/style";
+import UserHeader from "./components/UserHeader";
 import DevicePermissions from "./containers/DevicePermissions";
 import ProjectPermissions from "./containers/ProjectPermissions";
 import TeamPermissions from "./containers/TeamPermissions";
-import { Button } from "reactstrap";
-import { TabList, Tabs, Tab, TabPanel } from "react-tabs";
-import CheckboxGroup from "./components/shared/CheckboxGroup";
-import Checkbox from "./components/shared/Checkbox";
-import UserHeader from "./components/UserHeader";
-import { AllPermissionsContainer } from "./components/style";
 import { PermissionProvider } from "./context/PermissionContext";
-import { useParams } from "react-router-dom";
-import useUser from "../../../../utils/useUser";
-import { MdDevicesOther } from "react-icons/md";
-import { AiOutlineFundProjectionScreen, AiOutlineTeam } from "react-icons/ai";
-import {
-  setCanDoEverytingPermission,
-  setMultiplePermission,
-  setSinglePermission,
-} from "../../../../store/reducers/userPermissionReducer";
-import useUserPermission from "../../../../utils/useUserPermission";
 export default function PermissionPage() {
   const dispatch = useDispatch();
   const { activeWorkspace } = useWorkspace();

@@ -20,6 +20,7 @@ export default function MemberList() {
   const users = useUser();
   const { activeWorkspace } = useWorkspace();
   const { url } = useRouteMatch();
+  console.log("url:", url);
   const members = users.filter(({ workspaces }) =>
     workspaces.some((workspace) => workspace?._id === activeWorkspace._id)
   );
@@ -54,7 +55,7 @@ export default function MemberList() {
                 <td>{member.email}</td>
                 <td>{member.phone}</td>
                 <td>
-                  <Link to={`${url}/${member._id}/permissions`}>
+                  <Link to={`/panel/permissions/${member._id}`}>
                     <Button
                       color="warning"
                       style={{ fontSize: "1.2vmin" }}

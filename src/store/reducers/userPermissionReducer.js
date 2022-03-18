@@ -3,16 +3,19 @@ const initialState = {
   device: {
     CAN_CREATE_CONTROLLER: true,
     CAN_CREATE_PROCESSOR: false,
+
     CAN_USAGE_CONTROLLER_ALL:false,
     CAN_USAGE_CONTROLLER: [],
+
     CAN_USAGE_PROCESSOR_ALL:false,
-    CAN_USAGE_PROCESSOR: [
-      /*processor_id*/
-    ],
+    CAN_USAGE_PROCESSOR: [],
+
     CAN_EDIT_CONTROLLER_ALL:false,
     CAN_EDIT_CONTROLLER: [],
+
     CAN_EDIT_PROCESSOR_ALL:false,
     CAN_EDIT_PROCESSOR: [],
+
     CAN_DELETE_CONTROLLER: false,
     CAN_DELETE_PROCESSOR: false,
   },
@@ -171,7 +174,6 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
             ...state,
             [payload.permissionType]: {
               ...state[payload.permissionType],
-              //[payload.name]: [...state[payload.permissionType][payload.name], ...payload.data],
               [`${payload.name}_ALL`] :true
             },
           };
@@ -193,7 +195,6 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
             ...state,
             [payload.permissionType]: {
               ...state[payload.permissionType],
-              //[payload.name]: [...state[payload.permissionType][payload.name], ...payload.data],
               [`${payload.name}_ALL`] :[...state[payload.permissionType][`${payload.name}_ALL`],payload.id]
             },
           };
