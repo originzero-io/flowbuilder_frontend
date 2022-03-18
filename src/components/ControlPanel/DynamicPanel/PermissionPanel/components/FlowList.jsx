@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { getFlowsByProjectService } from "../../../../../services/flowService";
-import CheckboxGroup from "./CheckboxGroup";
-import Checkbox from "./Checkbox";
-import { CollapsibleMenuItem } from "./CollapsibleMenu";
+import CheckboxGroup from "./shared/CheckboxGroup";
+import Checkbox from "./shared/Checkbox";
+import { CollapsibleMenuItem } from "./shared/CollapsibleMenu";
 import useUserPermission from "../../../../../utils/useUserPermission";
 
 function FlowList({
@@ -16,6 +16,8 @@ function FlowList({
   const permissions = useUserPermission("project");
   //console.log(`CAN_${permissionName}_FLOW`)
   const name = `CAN_${permissionName.toUpperCase()}_FLOW`;
+  const PROJECT_NAME = `CAN_${permissionName.toUpperCase()}_PROJECT`;
+  const ALL_NAME = `CAN_${permissionName.toUpperCase()}_FLOW_ALL`;
   console.log("NAME:", name);
   useEffect(async () => {
     const data = await getFlowsByProjectService(project);
@@ -78,6 +80,8 @@ function FlowList({
                     //checked={permissions.CAN_EDIT_FLOW.includes(flow._id)}
                     checked={
                       permissions.EVERYTHING ||
+                      permissions[PROJECT_NAME].includes(project._id) ||
+                      permissions[ALL_NAME].includes(project._id) ||
                       (permissionName === "VIEW"
                         ? permissions.CAN_VIEW_FLOW.includes(flow._id)
                         : permissions[name].includes(flow._id))
@@ -96,7 +100,8 @@ function FlowList({
     </>
   );
 }
-
+/*Her şey tiklenmiş mi ?
+Bu projeninin*/
 FlowList.propTypes = {
   project: PropTypes.object.required,
   handleMultiChange: PropTypes.func,

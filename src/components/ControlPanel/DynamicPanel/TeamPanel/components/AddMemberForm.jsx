@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import useUser from "../../../../utils/useUser";
+import useUser from "../../../../../utils/useUser";
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
 import { BsPlusCircle } from "react-icons/bs";
 import { TiTickOutline } from "react-icons/ti";
-import useWorkspace from "../../../../utils/useWorkspace";
-import Avatar from "../../../global/Avatar";
+import useWorkspace from "../../../../../utils/useWorkspace";
+import Avatar from "../../../../global/Avatar";
 import { useDispatch } from "react-redux";
 import {
   addUserToWorkspace,
   assignPermissionToMember,
   removeUserToWorkspace,
-} from "../../../../store/reducers/userReducer";
+} from "../../../../../store/reducers/userReducer";
 
 const UserItem = styled.div`
   margin-left: 10px;

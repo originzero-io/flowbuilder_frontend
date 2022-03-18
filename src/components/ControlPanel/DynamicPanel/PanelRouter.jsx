@@ -12,7 +12,7 @@ import NotFound from "./NotFound";
 import useWorkspace from "../../../utils/useWorkspace";
 import { useDispatch } from "react-redux";
 import AllFlowsPanel from "./ProjectsPanel/AllFlowsPanel";
-import PermissionPage from "./TeamPanel/PermissionPage"
+import PermissionPanel from "./PermissionPanel/PermissionPanel.jsx";
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -46,7 +46,7 @@ export default function PanelRouter() {
           <Route exact path={`${route.url}/all`} component={AllFlowsPanel}/>
           <Route exact path={`${route.url}/projects`} component={FlowsByProjectPanel}/>
           <Route exact path={`${route.url}/team`} component={TeamPanel}/>
-          <Route exact path={`${route.url}/team/:member_id/permissions`} component={PermissionPage}/>
+          <Route exact path={`${route.url}/team/:member_id/permissions`} component={PermissionPanel}/>
           <Route exact path={`${route.url}/learn`} component={LearnPanel}/>
           <Route exact path={`${route.url}/notes`} component={NotesPanel}/>
           <Route exact path={`${route.url}/devices`} component={DevicesPanel}/>

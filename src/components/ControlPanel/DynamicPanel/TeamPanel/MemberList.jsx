@@ -7,7 +7,6 @@ import { setModal } from "../../../../store/reducers/componentReducer";
 import useUser from "../../../../utils/useUser";
 import useWorkspace from "../../../../utils/useWorkspace";
 import Avatar from "../../../global/Avatar";
-import PermissionPage from "./PermissionPage";
 const Box = styled.div`
   margin-top: 3px;
   cursor: pointer;

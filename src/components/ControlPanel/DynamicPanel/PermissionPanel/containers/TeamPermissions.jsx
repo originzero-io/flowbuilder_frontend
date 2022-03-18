@@ -5,7 +5,7 @@ import {
   setSinglePermission,
 } from "../../../../../store/reducers/userPermissionReducer";
 import useUserPermission from "../../../../../utils/useUserPermission";
-import Checkbox from "../components/Checkbox";
+import Checkbox from "../components/shared/Checkbox";
 import {
   PermissionContainer,
   PermissionContent,

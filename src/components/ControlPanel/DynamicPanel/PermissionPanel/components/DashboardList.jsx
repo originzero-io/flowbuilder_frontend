@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import CheckboxGroup from "./CheckboxGroup";
-import Checkbox from "./Checkbox";
-import { CollapsibleMenuItem } from "./CollapsibleMenu";
+import CheckboxGroup from "./shared/CheckboxGroup";
+import Checkbox from "./shared/Checkbox";
+import { CollapsibleMenuItem } from "./shared/CollapsibleMenu";
 
 function DashboardList({ project}) {
   const [dashboards, setDashboards] = useState([]);
