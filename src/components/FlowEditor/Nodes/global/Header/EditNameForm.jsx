@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { SubmitIcon } from "../../../../global/icons";
-import { Submit } from "../../../Menu/GroupBar/style";
-import { useSelector, useDispatch } from "react-redux";
+import { SubmitIcon } from "../../../../Shared/icons";
+import { Submit } from "../../../components/Menu/GroupBar/GroupBar.style";
+import { useDispatch } from "react-redux";
 import {
   changeNodeName,
 } from "../../../../../store/reducers/flow/flowElementsReducer";

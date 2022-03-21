@@ -43,7 +43,7 @@ export default authReducer;
 
 import { loginService, logoutService } from '../../services/authService';
 import { getMeService } from "../../services/authService";
-import { mainNamespace } from "../../components/global/SocketConnections";
+import { mainNamespace } from "../../components/../SocketConnections";
 
 export const loginSuccess = (user) => async dispatch => {
   try {

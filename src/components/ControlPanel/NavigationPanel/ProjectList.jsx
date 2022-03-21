@@ -5,11 +5,11 @@ import { VscTrash } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { setModal } from "../../../store/reducers/componentReducer";
 import { setActiveProject } from "../../../store/reducers/projectReducer";
-import usePermission from "../../../utils/usePermission";
-import useProject from "../../../utils/useProject";
-import useWorkspace from "../../../utils/useWorkspace";
-import { CollapsibleMenuItem } from "../../global/Collapsible/CollapsibleMenu";
-import { projectNamespace } from "../../global/SocketConnections";
+import usePermission from "../../../hooks/usePermission";
+import useProject from "../../../hooks/useProject";
+import useWorkspace from "../../../hooks/useWorkspace";
+import { CollapsibleMenuItem } from "../../Shared/Collapsible/CollapsibleMenu";
+import { projectNamespace } from "../../../SocketConnections";
 import EditProjectForm from "./EditProjectForm";
 export default function ProjectList({ projects }) {
   const dispatch = useDispatch();

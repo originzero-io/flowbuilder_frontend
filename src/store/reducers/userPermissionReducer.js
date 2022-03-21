@@ -141,7 +141,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
               ...state[payload.permissionType],
               [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
               CAN_VIEW_PROJECT: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-              [`${payload.name}_ALL`]: []
+              [`${payload.name}_ALL`]: false
             }
           }
         }
@@ -167,7 +167,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
           }
         }
       }
-      case "SET_ALL_PERMISSION":
+      case "SET_SINGLE_ALL_PERMISSION":
         if (payload.checked) {
           //if (payload.name === "CAN_EDIT_PROJECT" && !state.project.CAN_VIEW_PROJECT.includes(payload.id))
           return {
@@ -183,12 +183,12 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
             ...state,
             [payload.permissionType]: {
               ...state[payload.permissionType],
-              //[payload.name]: state[payload.permissionType][payload.name].filter(s=>payload.data.includes(s._id)),
+              [payload.name]: [],
               [`${payload.name}_ALL`]: false
             },
           }
         }
-      case "SET_NESTED_ALL_PERMISSION":
+      case "SET_MULTIPLE_ALL_PERMISSION":
         if (payload.checked) {
           //if (payload.name === "CAN_EDIT_PROJECT" && !state.project.CAN_VIEW_PROJECT.includes(payload.id))
           return {
@@ -204,7 +204,8 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
             ...state,
             [payload.permissionType]: {
               ...state[payload.permissionType],
-              [payload.name]: state[payload.permissionType][payload.name].filter(s=>payload.data.includes(s._id)),
+              [payload.name]: [],
+              //[payload.name]: state[payload.permissionType][payload.name].filter(s=>payload.data.includes(s._id)),
               [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id)
             },
           }
@@ -236,8 +237,8 @@ export const setCanDoEverytingPermission = (data) => ({
   type: "SET_CAN_DO_EVERYTHING",
   payload: data
 });
-export const setAllPermission = (event,data,permissionType) => ({
-  type: "SET_ALL_PERMISSION",
+export const setSingleAllPermission = (event,data,permissionType) => ({
+  type: "SET_SINGLE_ALL_PERMISSION",
   payload: {
     name: event.target.name,
     checked: event.target.checked,
@@ -246,8 +247,8 @@ export const setAllPermission = (event,data,permissionType) => ({
     permissionType: permissionType
   }
 });
-export const setNestedAllPermission = (event,data,permissionType) => ({
-  type: "SET_NESTED_ALL_PERMISSION",
+export const setMultipleAllPermission = (event,data,permissionType) => ({
+  type: "SET_MULTIPLE_ALL_PERMISSION",
   payload: {
     name: event.target.name,
     checked: event.target.checked,

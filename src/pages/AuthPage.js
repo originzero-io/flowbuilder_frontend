@@ -1,5 +1,5 @@
 import React from "react";
-import { Logo } from "../components/global/icons";
+import { Logo } from "../components/Shared/icons";
 import LoginForm from "../components/Auth/LoginForm";
 import styled from "styled-components"
 const Wrapper = styled.div`

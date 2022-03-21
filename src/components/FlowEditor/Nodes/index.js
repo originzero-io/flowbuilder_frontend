@@ -1,13 +1,13 @@
-import SetVariablesNode from "./SetVariables";
-import NotificationNode from "./Notification";
-import CombineNode from "./Combine";
-import SplitNode from "./Split";
-import CalculateNode from "./Calculate";
-import ExcelReadNode from "./ExcelRead";
-import SerialReadNode from "./SerialRead";
-import HttpRequestNode from "./HttpRequest";
+import SetVariablesNode from "./SetVariables.node";
+import NotificationNode from "./Notification.node";
+import CombineNode from "./Combine.node";
+import SplitNode from "./Split.node";
+import CalculateNode from "./Calculate.node";
+import ExcelReadNode from "./ExcelRead.node";
+import SerialReadNode from "./SerialRead.node";
+import HttpRequestNode from "./HttpRequest.node";
 import * as types from "./constant/nodeTypes"
-import JsonParseNode from "./JsonParse";
+import JsonParseNode from "./JsonParse.node";
 const customNodes = {
   [types.SET_VARIABLES]: SetVariablesNode,
   [types.NOTIFICATION]: NotificationNode,

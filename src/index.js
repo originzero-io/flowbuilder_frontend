@@ -13,8 +13,8 @@ import 'antd/dist/antd.min.css'
 import "react-tabs/style/react-tabs.css";
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore.js";
-import { setAuthorizationToken } from "./app-global/helpers/httpHelpers.js";
-import ErrorFallback from "./components/global/ErrorFallback";
+import { setAuthorizationToken } from "./utils/httpHelpers.js";
+import ErrorFallback from "./components/Shared/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 export const store = configureStore();
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;

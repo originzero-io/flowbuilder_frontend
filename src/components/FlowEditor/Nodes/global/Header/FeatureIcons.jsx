@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { getIncomers, getOutgoers } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
 import { setNodeEnable, setOutgoersEnable } from "../../../../../store/reducers/flow/flowElementsReducer";
-import useActiveFlow from "../../../../../utils/useActiveFlow";
-import RotateButton from "../../../../global/Button/RotateButton";
-import SwitchButton from "../../../../global/Button/SwitchButton";
-import { NameEditIcon } from "../../../../global/icons";
+import useActiveFlow from "../../../../../hooks/useActiveFlow";
+import RotateButton from "../../../Nodes/global/RotateButton";
+import SwitchButton from "../../../Nodes/global/SwitchButton";
+import { NameEditIcon } from "../../../../Shared/icons";
 import toast from "react-hot-toast"
 
 export default function FeatureIcons({ self, edit, setEdit }) {

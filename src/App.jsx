@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { NotificationContainer } from "react-notifications";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import Modal from "./components/global/Modal.jsx";
-import SocketConnections from "./components/global/SocketConnections.jsx";
-import { AppWrapper } from "./components/style-components/AppWrapper";
+import Modal from "./components/Shared/Modal.jsx";
+import SocketConnections from "./SocketConnections";
+import { AppWrapper } from "./components/StyledComponents/AppWrapper";
 import NotFound from "./navigation/NotFound";
 import PrivateRoute from "./navigation/PrivateRoute";
 import AuthPage from "./pages/AuthPage";
@@ -12,8 +11,8 @@ import ControlPanelPage from "./pages/ControlPanelPage";
 import DashboardPage from "./pages/DashboardPage";
 import FlowPage from "./pages/FlowPage";
 import { getMe } from "./store/reducers/authReducer.js";
-import LoadingBar from "./components/global/LoadingBar.jsx";
-import ToastNotification from "./components/global/ToastNotification.jsx";
+import LoadingBar from "./components/Shared/LoadingBar.jsx";
+import ToastNotification from "./components/Shared/ToastNotification.jsx";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -36,7 +35,6 @@ const App = () => {
         />
         <Route path="*" component={NotFound} />
       </Switch>
-      {/* <NotificationContainer /> */}
       <ToastNotification/>
       <Modal />
       <SocketConnections/>

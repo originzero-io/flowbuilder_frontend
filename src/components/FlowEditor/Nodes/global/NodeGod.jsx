@@ -10,11 +10,11 @@ import {
   SourceWrapper,
   TargetWrapper,
   Info,
-} from "../styles";
+} from "../Nodes.style";
 import getIconInstance from "./Icons/iconConstant";
 import { setOutgoersEnable } from "../../../../store/reducers/flow/flowElementsReducer";
 import PropTypes from "prop-types"
-import useActiveFlow from "../../../../utils/useActiveFlow";
+import useActiveFlow from "../../../../hooks/useActiveFlow";
 const NodeGod = ({ self, ioType, children, collapsible }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sources = Array.from(Array(self.data.sourceCount).keys());

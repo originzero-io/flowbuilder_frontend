@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import NavigationPanel from "../components/ControlPanel/NavigationPanel/NavigationPanel";
-import PanelRouter from "../components/ControlPanel/DynamicPanel/PanelRouter";
-import styled from "styled-components";
-import WorkspaceList from "../components/ControlPanel/WorkspacePanel/WorkspaceList.jsx";
-import TopMenu from "../components/ControlPanel/DynamicPanel/TopMenu/TopMenu";
+import WorkspacePanel from "../components/ControlPanel/WorkspacePanel/WorkspacePanel.jsx";
+import DynamicPanel, { TopMenu } from "../components/ControlPanel/DynamicPanel";
 import { useDispatch } from "react-redux";
 import { getAllUsers } from "../store/reducers/userReducer";
+import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,14 +20,14 @@ export default function ControlPanelPage() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllUsers());
-  }, [])
+  }, []);
   return (
     <Wrapper>
       <TopMenu />
       <Content>
-        <WorkspaceList />
+        <WorkspacePanel />
         <NavigationPanel />
-        <PanelRouter />
+        <DynamicPanel />
       </Content>
     </Wrapper>
   );

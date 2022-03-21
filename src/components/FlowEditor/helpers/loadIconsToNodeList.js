@@ -1,0 +1,31 @@
+import {
+    SetVariablesIcon,
+    NotificationIcon,
+    CombineIcon,
+    SplitIcon,
+    CalculateIcon,
+    ExcelReadIcon,
+} from "../Nodes/global/Icons";
+import React from "react"
+import * as types from "../Nodes/constant/nodeTypes";
+
+export const loadIconsToNodeList = (type) => {
+    if (type === types.SET_VARIABLES ) {
+        return <SetVariablesIcon/>
+    }
+    if (type === types.NOTIFICATION ) {
+        return <NotificationIcon/>
+    }
+    if (type === types.COMBINE ) {
+        return <CombineIcon/>
+    }
+    if (type === types.SPLIT ) {
+        return <SplitIcon/>
+    }
+    if (type === types.CALCULATE ) {
+        return <CalculateIcon/>
+    }
+    if (type === types.EXCEL_READ ) {
+        return <ExcelReadIcon/>
+    }
+}

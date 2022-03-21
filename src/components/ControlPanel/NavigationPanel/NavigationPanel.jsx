@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Footer, NavMenu } from "./style";
+import { Container, Footer, NavMenu } from "./NavigationPanel.style";
 import AddProjectForm from "./AddProjectForm";
 import {
   CollapsibleMenu,
   CollapsibleMenuItem,
   CollapsibleTrigger,
-} from "../../global/Collapsible/CollapsibleMenu";
+} from "../../Shared/Collapsible/CollapsibleMenu";
 import NavMenuItem from "./NavMenuItem";
 import ProjectList from "./ProjectList.jsx";
 import { AiOutlineProject } from "react-icons/ai";
@@ -19,14 +19,14 @@ import { RiTeamLine } from "react-icons/ri";
 import { setModal } from "../../../store/reducers/componentReducer";
 import { Link, useRouteMatch } from "react-router-dom";
 import WorkspaceBrand from "./WorkspaceBrand";
-import useAuth from "../../../utils/useAuth";
-import useWorkspace from "../../../utils/useWorkspace";
-import usePermission from "../../../utils/usePermission";
-import useProject from "../../../utils/useProject";
-import Avatar from "../../global/Avatar";
-import useFlow from "../../../utils/useFlow";
+import useAuth from "../../../hooks/useAuth";
+import useWorkspace from "../../../hooks/useWorkspace";
+import usePermission from "../../../hooks/usePermission";
+import useProject from "../../../hooks/useProject";
+import Avatar from "../../Shared/Avatar";
+import useFlow from "../../../hooks/useFlow";
 
-const ControlPanelMenu = () => {
+const NavigationPanel = () => {
   const dispatch = useDispatch();
   const permissions = usePermission("CAN_CREATE_PROJECT");
   const { url } = useRouteMatch();
@@ -94,4 +94,4 @@ const ControlPanelMenu = () => {
   );
 };
 
-export default ControlPanelMenu;
+export default NavigationPanel;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavMenuItemWrapper } from './style'
+import { NavMenuItemWrapper } from './NavigationPanel.style'
 
 export default function NavMenuItem({label,icon,onClick}) {
     return (
