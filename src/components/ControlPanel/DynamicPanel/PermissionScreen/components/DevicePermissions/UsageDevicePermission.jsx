@@ -6,6 +6,11 @@ import PropTypes from "prop-types";
 import CollapsibleMenu, { CollapsibleMenuItem } from "../CollapsibleMenu";
 import PermissionContext from "../../context/PermissionContext";
 
+const propTypes = {
+  permissions: PropTypes.object.isRequired,
+  handleAllChange: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 export default function UsageDevicePermission({
   permissions,
   handleAllChange,
@@ -96,8 +101,4 @@ export default function UsageDevicePermission({
   );
 }
 
-UsageDevicePermission.propTypes = {
-  permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-};
+UsageDevicePermission.propTypes = propTypes;

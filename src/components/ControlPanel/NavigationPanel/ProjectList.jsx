@@ -11,6 +11,10 @@ import useWorkspace from "hooks/useWorkspace";
 import { CollapsibleMenuItem } from "components/Shared/Collapsible/CollapsibleMenu";
 import { projectNamespace } from "SocketConnections";
 import EditProjectForm from "./EditProjectForm";
+
+const propTypes = {
+  projects: PropTypes.array.isRequired,
+};
 export default function ProjectList({ projects }) {
   const dispatch = useDispatch();
   const permission = usePermission();
@@ -67,6 +71,4 @@ export default function ProjectList({ projects }) {
   );
 }
 
-ProjectList.propTypes = {
-  projects: PropTypes.array.isRequired,
-};
+ProjectList.propTypes = propTypes;

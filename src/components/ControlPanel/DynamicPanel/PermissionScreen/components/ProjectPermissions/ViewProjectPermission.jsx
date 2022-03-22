@@ -9,6 +9,14 @@ import CollapsibleMenu, {
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import FlowList from "../FlowList";
 import DashboardList from "../DashboardList";
+
+const propTypes = {
+  projects: PropTypes.object.isRequired,
+  permissions: PropTypes.object.isRequired,
+  handleAllChange: PropTypes.func.isRequired,
+  handleNestedAllChange: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 function ViewProjectPermission({
   projects,
   permissions,
@@ -78,12 +86,6 @@ function ViewProjectPermission({
   );
 }
 
-ViewProjectPermission.propTypes = {
-  projects: PropTypes.object.isRequired,
-  permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
-  handleNestedAllChange: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-};
+ViewProjectPermission.propTypes = propTypes;
 
 export default ViewProjectPermission;

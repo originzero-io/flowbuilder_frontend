@@ -12,6 +12,11 @@ import { WorkspaceBrandWrapper } from "./NavigationPanel.style";
 import PropTypes from "prop-types";
 import { workspaceNamespace } from "SocketConnections";
 import useAuth from "hooks/useAuth";
+
+const propTypes = {
+  workspace: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+};
+
 const WorkspaceBrand = ({ workspace }) => {
   //console.log("TEAM BRAND RENDERED");
   const { role } = useAuth();
@@ -49,7 +54,6 @@ const WorkspaceBrand = ({ workspace }) => {
   );
 };
 
-WorkspaceBrand.propTypes = {
-  workspace: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-};
+WorkspaceBrand.propTypes = propTypes;
+
 export default React.memo(WorkspaceBrand);

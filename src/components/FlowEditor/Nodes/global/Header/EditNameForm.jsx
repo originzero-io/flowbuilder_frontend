@@ -19,6 +19,11 @@ const Input = styled.input`
   padding-left: 4px;
   color: whitesmoke;
 `;
+
+const propTypes = {
+  self: PropTypes.object.isRequired,
+  setEdit: PropTypes.func.isRequired
+};
 export default function EditNameForm({ self, setEdit }) {
   const dispatch = useDispatch();
   const [editedName, setEditedName] = useState(self.data.label);
@@ -46,7 +51,4 @@ export default function EditNameForm({ self, setEdit }) {
   );
 }
 
-EditNameForm.propTypes = {
-  self: PropTypes.object.isRequired,
-  setEdit : PropTypes.func.isRequired
-}
+EditNameForm.propTypes = propTypes;

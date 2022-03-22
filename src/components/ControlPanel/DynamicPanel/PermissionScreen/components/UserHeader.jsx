@@ -12,6 +12,10 @@ export const Title = styled.div`
   margin-top: 5px;
   font-size: 2vmin;
 `;
+
+const propTypes = {
+  member: PropTypes.object.isRequired,
+};
 export default function UserHeader({ member }) {
   const { activeWorkspace } = useWorkspace();
   return (
@@ -24,6 +28,4 @@ export default function UserHeader({ member }) {
   );
 }
 
-UserHeader.propTypes = {
-  member: PropTypes.object.isRequired,
-};
+UserHeader.propTypes = propTypes;

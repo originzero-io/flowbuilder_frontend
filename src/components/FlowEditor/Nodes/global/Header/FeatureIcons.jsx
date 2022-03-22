@@ -9,6 +9,11 @@ import SwitchButton from "../../../Nodes/global/SwitchButton";
 import { NameEditIcon } from "components/Shared/icons";
 import toast from "react-hot-toast"
 
+const propTypes = {
+  self: PropTypes.object.isRequired,
+  edit: PropTypes.bool.isRequired,
+  setEdit: PropTypes.func.isRequired,
+};
 export default function FeatureIcons({ self, edit, setEdit }) {
   const dispatch = useDispatch();
   const { flowElements } = useActiveFlow();
@@ -61,8 +66,4 @@ export default function FeatureIcons({ self, edit, setEdit }) {
   );
 }
 
-FeatureIcons.propTypes = {
-  self: PropTypes.object.isRequired,
-  edit:PropTypes.bool.isRequired,
-  setEdit:PropTypes.func.isRequired,
-}
+FeatureIcons.propTypes = propTypes;

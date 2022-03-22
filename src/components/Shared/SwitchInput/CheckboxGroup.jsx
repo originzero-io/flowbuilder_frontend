@@ -8,6 +8,12 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+const propTypes = {
+  label: PropTypes.string,
+  labelSize:PropTypes.string,
+  children: PropTypes.element,
+};
 export default function CheckboxGroup({ label,labelSize, children }) {
   return (
     <Container>
@@ -17,8 +23,4 @@ export default function CheckboxGroup({ label,labelSize, children }) {
   );
 }
 
-CheckboxGroup.propTypes = {
-  label: PropTypes.string,
-  labelSize:PropTypes.string,
-  children: PropTypes.element,
-};
+CheckboxGroup.propTypes = propTypes;

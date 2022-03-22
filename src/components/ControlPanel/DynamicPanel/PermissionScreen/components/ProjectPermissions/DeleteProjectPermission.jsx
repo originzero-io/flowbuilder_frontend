@@ -9,6 +9,14 @@ import CollapsibleMenu, {
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import FlowList from "../FlowList";
 import DashboardList from "../DashboardList";
+
+const propTypes = {
+  projects: PropTypes.object.isRequired,
+  permissions: PropTypes.object.isRequired,
+  handleAllChange: PropTypes.func.isRequired,
+  handleNestedAllChange: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 function DeleteProjectPermission({
   projects,
   permissions,
@@ -75,12 +83,6 @@ function DeleteProjectPermission({
   );
 }
 
-DeleteProjectPermission.propTypes = {
-  projects: PropTypes.object.isRequired,
-  permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
-  handleNestedAllChange: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-};
+DeleteProjectPermission.propTypes = propTypes;
 
 export default DeleteProjectPermission;

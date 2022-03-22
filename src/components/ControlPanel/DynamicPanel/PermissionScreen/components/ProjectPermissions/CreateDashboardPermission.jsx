@@ -5,6 +5,12 @@ import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import CollapsibleMenu, { CollapsibleMenuItem } from "../CollapsibleMenu";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 
+const propTypes = {
+  projects: PropTypes.object.isRequired,
+  permissions: PropTypes.object.isRequired,
+  handleAllChange: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 function CreateDashboardPermission({
   projects,
   permissions,
@@ -57,11 +63,6 @@ function CreateDashboardPermission({
   );
 }
 
-CreateDashboardPermission.propTypes = {
-  projects: PropTypes.object.isRequired,
-  permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-};
+CreateDashboardPermission.propTypes = propTypes;
 
 export default CreateDashboardPermission;

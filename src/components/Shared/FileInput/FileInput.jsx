@@ -6,6 +6,11 @@ const Container = styled.label``;
 export const Input = styled.input`
   display: none;
 `;
+
+const propTypes = {
+  onChange: PropTypes.func,
+  label: PropTypes.node,
+};
 export function FileInput({ onChange, label }) {
   return (
     <Container>
@@ -15,7 +20,4 @@ export function FileInput({ onChange, label }) {
   );
 }
 
-FileInput.propTypes = {
-  onChange: PropTypes.func,
-  label: PropTypes.node,
-};
+FileInput.propTypes = propTypes;

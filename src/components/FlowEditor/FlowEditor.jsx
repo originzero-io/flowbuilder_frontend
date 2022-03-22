@@ -27,6 +27,9 @@ import PropTypes from "prop-types"
 import useActiveFlow from "hooks/useActiveFlow";
 import toast from "react-hot-toast"
 
+const propTypes = {
+  reactFlowWrapper: PropTypes.object.isRequired,
+};
 export default function FlowEditor({ reactFlowWrapper }) {
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeList);
@@ -254,6 +257,4 @@ export default function FlowEditor({ reactFlowWrapper }) {
   );
 }
 
-FlowEditor.propTypes = {
-  reactFlowWrapper: PropTypes.object.isRequired,
-}
+FlowEditor.propTypes = propTypes;

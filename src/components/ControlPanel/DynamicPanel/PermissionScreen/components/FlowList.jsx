@@ -6,6 +6,12 @@ import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import { CollapsibleMenuItem } from "./CollapsibleMenu";
 import useUserPermission from "hooks/useUserPermission";
 
+const propTypes = {
+  project: PropTypes.object.required,
+  handleMultiChange: PropTypes.func,
+  handleAllChange: PropTypes.func,
+  permissionName: PropTypes.string,
+};
 function FlowList({
   project,
   handleMultiChange,
@@ -108,11 +114,6 @@ function FlowList({
 }
 /*Her şey tiklenmiş mi ?
 Bu projeninin*/
-FlowList.propTypes = {
-  project: PropTypes.object.required,
-  handleMultiChange: PropTypes.func,
-  handleAllChange: PropTypes.func,
-  permissionName: PropTypes.string,
-};
+FlowList.propTypes = propTypes;
 
 export default FlowList;

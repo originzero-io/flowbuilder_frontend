@@ -26,6 +26,11 @@ const Input = styled.input`
   color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
 `;
 
+const propTypes = {
+  editableItem: PropTypes.object.isRequired,
+  setEditableItem: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
+}
 export default function EditForm({ editableItem, setEditableItem, theme }) {
   const dispatch = useDispatch();
   const onSubmitHandle = async (event) => {
@@ -76,8 +81,4 @@ export default function EditForm({ editableItem, setEditableItem, theme }) {
   );
 }
 
-EditForm.propTypes = {
-  editableItem: PropTypes.object.isRequired,
-  setEditableItem: PropTypes.func.isRequired,
-  theme: PropTypes.string.isRequired,
-}
+EditForm.propTypes = propTypes;

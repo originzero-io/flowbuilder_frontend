@@ -12,6 +12,10 @@ import { SearchBar, DashboardsContainer, FlowsContainer, Box } from "./ProjectsS
 import { useDispatch } from "react-redux";
 import usePermission from "hooks/usePermission";
 import PropTypes from "prop-types";
+
+const propTypes = {
+  flows: PropTypes.array.isRequired,
+};
 export default function Panel({ flows }) {
   const dispatch = useDispatch();
   const permission = usePermission();
@@ -65,6 +69,4 @@ export default function Panel({ flows }) {
   );
 }
 
-Panel.propTypes = {
-  flows: PropTypes.array.isRequired,
-};
+Panel.propTypes = propTypes;

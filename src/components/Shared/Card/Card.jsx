@@ -1,19 +1,19 @@
-import React from "react";
 import PropTypes from "prop-types";
-import {
-  CardContainer,
-  CardBody,
-  CardTitle,
-  CardAuthor,
-  CardDescription,
-  CardFooter,
-} from "./Card.style";
+import React from "react";
 import { VscTrash } from "react-icons/vsc";
-import DetailMenu from "./DetailMenu";
-import { deleteFlow } from "store/reducers/flow/flowReducer";
 import { Badge } from "reactstrap";
 import { flowNamespace } from "SocketConnections";
 import Avatar from "../Avatar";
+import {
+  CardBody, CardContainer, CardDescription,
+  CardFooter, CardTitle
+} from "./Card.style";
+import DetailMenu from "./DetailMenu";
+
+const propTypes = {
+  data: PropTypes.object.isRequired,
+};
+
 const Card = ({ data }) => {
   const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
@@ -41,7 +41,7 @@ const Card = ({ data }) => {
     </CardContainer>
   );
 };
+
+Card.propTypes = propTypes; 
+
 export default Card;
-Card.propTypes = {
-  data: PropTypes.object.isRequired,
-};
