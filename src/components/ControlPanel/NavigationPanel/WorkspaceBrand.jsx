@@ -8,10 +8,10 @@ import {
 import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
-import { WorkspaceBrandWrapper } from "./style";
+import { WorkspaceBrandWrapper } from "./NavigationPanel.style";
 import PropTypes from "prop-types";
-import { workspaceNamespace } from "../../global/SocketConnections";
-import useAuth from "../../../utils/useAuth";
+import { workspaceNamespace } from "../../../SocketConnections";
+import useAuth from "../../../hooks/useAuth";
 const WorkspaceBrand = ({ workspace }) => {
   //console.log("TEAM BRAND RENDERED");
   const { role } = useAuth();

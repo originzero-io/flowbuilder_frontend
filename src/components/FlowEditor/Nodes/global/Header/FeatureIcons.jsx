@@ -2,12 +2,13 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { getIncomers, getOutgoers } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
-import { openNotification as notification } from "../../../../../app-global/dom/notification";
 import { setNodeEnable, setOutgoersEnable } from "../../../../../store/reducers/flow/flowElementsReducer";
-import useActiveFlow from "../../../../../utils/useActiveFlow";
-import RotateButton from "../../../../global/Button/RotateButton";
-import SwitchButton from "../../../../global/Button/SwitchButton";
-import { NameEditIcon } from "../../../../global/icons";
+import useActiveFlow from "../../../../../hooks/useActiveFlow";
+import RotateButton from "../../../Nodes/global/RotateButton";
+import SwitchButton from "../../../Nodes/global/SwitchButton";
+import { NameEditIcon } from "../../../../Shared/icons";
+import toast from "react-hot-toast"
+
 export default function FeatureIcons({ self, edit, setEdit }) {
   const dispatch = useDispatch();
   const { flowElements } = useActiveFlow();
@@ -21,7 +22,7 @@ export default function FeatureIcons({ self, edit, setEdit }) {
     const disableCount = incomers.filter(incomer => incomer.data.enable === false).length;
     const enableCount = incomers.filter(incomer => incomer.data.enable === true).length;
     if (incomers.length > 0 && incomers.length === disableCount) {
-      notification("Warning", "First, make sure that at least one of your incomers is enabled.", "warning", 5000);
+      toast("First, make sure that at least one of your incomers is enabled");
     }
     else {
       if (enableCount === 0) {

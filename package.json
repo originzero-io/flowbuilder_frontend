@@ -16,9 +16,11 @@
     "react": "^17.0.2",
     "react-collapsible": "^2.8.4",
     "react-dom": "^17.0.2",
+    "react-error-boundary": "^3.1.4",
     "react-favicon": "0.0.25",
     "react-flow-renderer": "^9.7.1",
     "react-hook-form": "^7.22.5",
+    "react-hot-toast": "^2.2.0",
     "react-icons": "^4.3.1",
     "react-keyboard-event-handler": "^1.5.4",
     "react-modal": "^3.14.4",
@@ -43,7 +45,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start":"react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -72,6 +74,7 @@
     "eslint-plugin-only-warn": "^1.0.3",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "react-app-rewired": "^2.2.1",
     "source-map-loader": "^3.0.0"
   }
 }

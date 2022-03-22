@@ -37,6 +37,6 @@ export const beginTheBar = () => dispatch => {
   dispatch(setLoadingBarProgress(i))
 }
 
-export const endTheBar = () => dispatch => {
-  dispatch(setLoadingBarProgress(100))
+export const endTheBar = () => {
+  return setLoadingBarProgress(100)
 }

@@ -5,14 +5,14 @@ import { FiUsers } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import { logOut } from "../../../../store/reducers/authReducer";
-import useAuth from "../../../../utils/useAuth";
-import Avatar from "../../../global/Avatar";
-import { Logo } from "../../../global/icons";
-import { VerticalDivider } from "../../../style-components/Divider";
+import useAuth from "../../../../hooks/useAuth";
+import Avatar from "../../../Shared/Avatar";
+import { Logo } from "../../../Shared/icons";
+import { VerticalDivider } from "../../../StyledComponents/Divider";
 import {
   DropdownItem,
   DropdownWrapper,
-} from "../../../style-components/DropdownMenu";
+} from "../../../StyledComponents/DropdownMenu";
 import {
   Container,
   ProfileList,
@@ -21,7 +21,7 @@ import {
   RightSideContainer,
   UserInformation,
   Profile,
-} from "./style";
+} from "./TopMenu.style";
 export default function TopMenu() {
   const dispatch = useDispatch();
   const { url } = useRouteMatch();

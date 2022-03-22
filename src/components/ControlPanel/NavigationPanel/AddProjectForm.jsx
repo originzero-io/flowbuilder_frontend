@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { projectNamespace } from "../../global/SocketConnections";
+import { projectNamespace } from "../../../SocketConnections";
 import { setModal } from "../../../store/reducers/componentReducer";
-import useAuth from "../../../utils/useAuth";
-import useWorkspace from "../../../utils/useWorkspace";
+import useAuth from "../../../hooks/useAuth";
+import useWorkspace from "../../../hooks/useWorkspace";
 const AddProjectForm = () => {
   const { activeWorkspace } = useWorkspace();
   const auth = useAuth();
