@@ -8,8 +8,8 @@ import {
   getNodesAndEdges,
   //findElementById
 } from "./elementController";
-import { openNotification as notification } from "../../../utils/notification";
-import { setElements } from "../../../store/reducers/flow/flowElementsReducer";
+import { openNotification as notification } from "utils/notification";
+import { setElements } from "store/reducers/flow/flowElementsReducer";
 import axios from "axios"
 export default class Node {
   elements = [];

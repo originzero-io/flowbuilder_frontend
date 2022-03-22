@@ -6,7 +6,7 @@ import {
   getAllUsersService,
   registerService,
   removeUserToWorkspaceService,
-} from "../../services/userService";
+} from "services/userService";
 import * as actions from "../constants/userContants";
 import toast from "react-hot-toast";
 const userReducer = (state = [], { type, payload }) => {

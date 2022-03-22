@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { noteNamespace } from "../../../../SocketConnections";
-import { setModal } from "../../../../store/reducers/componentReducer";
-import useAuth from "../../../../hooks/useAuth";
-import useWorkspace from "../../../../hooks/useWorkspace";
+import { noteNamespace } from "SocketConnections";
+import { setModal } from "store/reducers/componentReducer";
+import useAuth from "hooks/useAuth";
+import useWorkspace from "hooks/useWorkspace";
 const AddNoteForm = () => {
   const dispatch = useDispatch();
   const { activeWorkspace } = useWorkspace();

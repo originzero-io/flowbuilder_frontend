@@ -8,7 +8,7 @@ import {
 import { FiMoreVertical } from "react-icons/fi";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { setModal } from "../../../store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentReducer";
 import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/MoveFlowForm";
 import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/EditFlowForm";
 import { DropdownWrapper, DropdownItem } from "../../StyledComponents/DropdownMenu";

@@ -1,6 +1,6 @@
 import { isEdge, isNode } from "react-flow-renderer";
 import undoable, { includeAction } from "redux-undo";
-import { getElementsService } from "../../../services/elementService";
+import { getElementsService } from "services/elementService";
 import * as actions from "../../constants/elementsContants";
 
 const elementReducer = (state = [], { type, payload }) => {

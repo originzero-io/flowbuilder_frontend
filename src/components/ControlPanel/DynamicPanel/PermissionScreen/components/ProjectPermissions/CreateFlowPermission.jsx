@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
-import Checkbox from "../../../../../Shared/SwitchInput/Checkbox";
+import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import CollapsibleMenu, { CollapsibleMenuItem } from "../CollapsibleMenu";
-import CheckboxGroup from "../../../../../Shared/SwitchInput/CheckboxGroup";
+import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 
 function CreateFlowPermission({
   projects,

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import useUserPermission from "../../../../../hooks/useUserPermission";
-import Checkbox from "../../../../Shared/SwitchInput/Checkbox";
+import useUserPermission from "hooks/useUserPermission";
+import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import {
   PermissionContainer,
   PermissionContent,

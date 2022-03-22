@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { default as ReactTopLoadingBar } from "react-top-loading-bar";
-import { setLoadingBarProgress } from "../../store/reducers/componentReducer.js";
+import { setLoadingBarProgress } from "store/reducers/componentReducer.js";
 
 function LoadingBar() {
   const dispatch = useDispatch();

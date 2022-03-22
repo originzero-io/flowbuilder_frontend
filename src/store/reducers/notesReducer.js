@@ -1,4 +1,4 @@
-import { getNotesService } from "../../services/noteService";
+import { getNotesService } from "services/noteService";
 import * as actions from "../constants/noteConstants";
 
 const noteReducer = (state = [], { type, payload }) => {

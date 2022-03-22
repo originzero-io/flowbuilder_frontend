@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import Checkbox from "../../../../../Shared/SwitchInput/Checkbox";
-import CheckboxGroup from "../../../../../Shared/SwitchInput/CheckboxGroup";
+import Checkbox from "components/Shared/SwitchInput/Checkbox";
+import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import { PermissionHeader, PermissionContent } from "../PermissionScreen.style";
 import PropTypes from "prop-types";
 import CollapsibleMenu, { CollapsibleMenuItem } from "../CollapsibleMenu";

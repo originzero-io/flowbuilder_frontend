@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import CheckboxGroup from "../../../../Shared/SwitchInput/CheckboxGroup";
-import Checkbox from "../../../../Shared/SwitchInput/Checkbox";
+import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
+import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import { CollapsibleMenuItem } from "./CollapsibleMenu";
 
 function DashboardList({ project}) {

@@ -1,17 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "../../../store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentReducer";
 import {
   deleteWorkspace,
   setActiveWorkspace,
-} from "../../../store/reducers/workspaceReducer";
+} from "store/reducers/workspaceReducer";
 import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
 import { WorkspaceBrandWrapper } from "./NavigationPanel.style";
 import PropTypes from "prop-types";
-import { workspaceNamespace } from "../../../SocketConnections";
-import useAuth from "../../../hooks/useAuth";
+import { workspaceNamespace } from "SocketConnections";
+import useAuth from "hooks/useAuth";
 const WorkspaceBrand = ({ workspace }) => {
   //console.log("TEAM BRAND RENDERED");
   const { role } = useAuth();

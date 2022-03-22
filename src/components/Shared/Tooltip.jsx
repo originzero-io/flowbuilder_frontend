@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import ReactTooltip from "react-tooltip";
-import useActiveFlow from "../../hooks/useActiveFlow";
+import useActiveFlow from "hooks/useActiveFlow";
 
 export default function Tooltip({ id, place, others }) {
   const { flowGui } = useActiveFlow()

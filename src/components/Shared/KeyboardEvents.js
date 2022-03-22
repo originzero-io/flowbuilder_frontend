@@ -9,10 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
 import toast from "react-hot-toast";
-import { setCopiedElements } from "../../store/reducers/controlPanelReducer";
-import { pasteNodes } from "../../store/reducers/flow/flowElementsReducer";
-import { setRotateAllPath } from "../../store/reducers/flow/flowGuiReducer";
-import useActiveFlow from "../../hooks/useActiveFlow";
+import { setCopiedElements } from "store/reducers/controlPanelReducer";
+import { pasteNodes } from "store/reducers/flow/flowElementsReducer";
+import { setRotateAllPath } from "store/reducers/flow/flowGuiReducer";
+import useActiveFlow from "hooks/useActiveFlow";
 const KeyboardEvents = () => {
   const dispatch = useDispatch();
   const { flowGui, flowElements } = useActiveFlow();

@@ -1,5 +1,5 @@
 import * as actions from "../../constants/groupContants";
-import { createGroupService, deleteGroupService, getGroupsService, updateGroupService } from "../../../services/groupService";
+import { createGroupService, deleteGroupService, getGroupsService, updateGroupService } from "services/groupService";
 
 const flowGroupsReducer = (state = [], { type, payload }) => {
   switch (type) {

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
-import Checkbox from "../../../../../Shared/SwitchInput/Checkbox";
+import Checkbox from "components/Shared/SwitchInput/Checkbox";
 
 function CreateProjectPermission({ permissions, handleChange }) {
   return (

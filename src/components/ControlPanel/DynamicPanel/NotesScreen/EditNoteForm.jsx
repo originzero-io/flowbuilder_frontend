@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { noteNamespace } from "../../../../SocketConnections";
-import { setModal } from "../../../../store/reducers/componentReducer";
-import useAuth from "../../../../hooks/useAuth";
+import { noteNamespace } from "SocketConnections";
+import { setModal } from "store/reducers/componentReducer";
+import useAuth from "hooks/useAuth";
 import PropTypes from 'prop-types'
 
 const EditNoteForm = ({ note }) => {

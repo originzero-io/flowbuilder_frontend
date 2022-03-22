@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from "react";
 import { Container } from "./GroupBar.style";
 import { useSelector, useDispatch } from "react-redux";
-import { setGroupBarDisplay } from "../../../../../store/reducers/flow/flowGuiReducer";
-import { GroupIcon } from "../../../../Shared/icons";
-import { getGroups } from "../../../../../store/reducers/flow/flowGroupsReducer";
+import { setGroupBarDisplay } from "store/reducers/flow/flowGuiReducer";
+import { GroupIcon } from "components/Shared/icons";
+import { getGroups } from "store/reducers/flow/flowGroupsReducer";
 import { useParams } from "react-router";
-import useActiveFlow from "../../../../../hooks/useActiveFlow";
+import useActiveFlow from "hooks/useActiveFlow";
 export default function GroupBarIcon({theme}) {
   const { flowGui } = useActiveFlow();
   const { flowId } = useParams();

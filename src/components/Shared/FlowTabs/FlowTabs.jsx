@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import useActiveFlow from "../../../utils/useActiveFlow";
-import useFlow from "../../../utils/useFlow";
+import useActiveFlow from "utils/useActiveFlow";
+import useFlow from "utils/useFlow";
 import { Container, TabItem } from "./style";
 const FlowTabs = () => {
   const flows = useFlow();

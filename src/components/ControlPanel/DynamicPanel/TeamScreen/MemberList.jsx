@@ -3,10 +3,10 @@ import { useDispatch } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import { Badge, Button, Table } from "reactstrap";
 import styled from "styled-components";
-import { setModal } from "../../../../store/reducers/componentReducer";
-import useUser from "../../../../hooks/useUser";
-import useWorkspace from "../../../../hooks/useWorkspace";
-import Avatar from "../../../Shared/Avatar";
+import { setModal } from "store/reducers/componentReducer";
+import useUser from "hooks/useUser";
+import useWorkspace from "hooks/useWorkspace";
+import Avatar from "components/Shared/Avatar";
 const Box = styled.div`
   margin-top: 3px;
   cursor: pointer;

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
-import { editWorkspace } from "../../../store/reducers/workspaceReducer";
-import { setModal } from "../../../store/reducers/componentReducer";
-import { workspaceNamespace } from "../../../SocketConnections";
-import useWorkspace from "../../../hooks/useWorkspace";
+import { editWorkspace } from "store/reducers/workspaceReducer";
+import { setModal } from "store/reducers/componentReducer";
+import { workspaceNamespace } from "SocketConnections";
+import useWorkspace from "hooks/useWorkspace";
 export default function EditWorkspaceForm({ workspace }) {
   const { activeWorkspace } = useWorkspace();
   const [workspaceInfo, setworkspaceInfo] = useState({

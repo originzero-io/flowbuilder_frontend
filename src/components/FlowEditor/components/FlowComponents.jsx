@@ -3,7 +3,7 @@ import { Background, MiniMap } from "react-flow-renderer";
 import AppMenu from "./Menu";
 import PropTypes from "prop-types"
 import AppTooltips from "../../../AppTooltips";
-import KeyboardEvents from "../../Shared/KeyboardEvents";
+import KeyboardEvents from "components/Shared/KeyboardEvents";
 const FlowComponents = ({ theme, miniMapDisplay }) => {
   return (
     <>

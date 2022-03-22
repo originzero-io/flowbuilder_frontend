@@ -9,22 +9,22 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 import nodeTypes from "./Nodes";
 import adjustScreen from "./helpers/adjustScreen";
 import { loadFunctionsToNode } from "./helpers/loadFunctionsToNode";
-import { setReactFlowInstance, setPaneClickPosition } from "../../store/reducers/flow/flowGuiReducer";
-import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "../../store/reducers/flow/flowElementsReducer"
+import { setReactFlowInstance, setPaneClickPosition } from "store/reducers/flow/flowGuiReducer";
+import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "store/reducers/flow/flowElementsReducer"
 import {
   setElementContextMenu,
   setGroupMenu,
   setMultiSelectionContextMenu,
   setPanelContextMenu,
-} from "../../store/reducers/menuReducer";
-import { setNodeList } from "../../store/reducers/nodeListReducer";
-import * as themeColor from "../../constants/ThemeReference";
-import { closeAllNodeGroupMenu } from "../../store/reducers/flow/flowGuiReducer";
+} from "store/reducers/menuReducer";
+import { setNodeList } from "store/reducers/nodeListReducer";
+import * as themeColor from "constants/ThemeReference";
+import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiReducer";
 import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "./helpers/elementController";
 import FlowComponents from "./components/FlowComponents";
 import CustomEdge from './components/Edges/CustomEdge'
 import PropTypes from "prop-types"
-import useActiveFlow from "../../hooks/useActiveFlow";
+import useActiveFlow from "hooks/useActiveFlow";
 import toast from "react-hot-toast"
 
 export default function FlowEditor({ reactFlowWrapper }) {

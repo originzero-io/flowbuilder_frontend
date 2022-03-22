@@ -1,7 +1,7 @@
 import React from "react";
 import Switch from "react-switch";
 import PropTypes from "prop-types";
-import * as themeColor from "../../../../constants/ThemeReference";
+import * as themeColor from "constants/ThemeReference";
 export default function SwitchButton({
   checked=false,
   defaultChecked,

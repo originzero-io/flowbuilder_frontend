@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Menu, MenuItem } from "../ElementContext/ElementContextMenu.style";
 import { isNode, useStoreState } from "react-flow-renderer";
 import { useSelector, useDispatch } from "react-redux";
-import { rotateMultiNode, setElements, setMultipleNodeEnable } from "../../../../../../store/reducers/flow/flowElementsReducer";
-import { setMultiSelectionContextMenu } from "../../../../../../store/reducers/menuReducer";
+import { rotateMultiNode, setElements, setMultipleNodeEnable } from "store/reducers/flow/flowElementsReducer";
+import { setMultiSelectionContextMenu } from "store/reducers/menuReducer";
 import NodeGroupMenu from "../../NodeGroupMenu/NodeGroupMenu";
-import useActiveFlow from "../../../../../../hooks/useActiveFlow";
+import useActiveFlow from "hooks/useActiveFlow";
 
 export default function MultiSelectionContextMenu() {
   const selected = useStoreState((state) => state.selectedElements);

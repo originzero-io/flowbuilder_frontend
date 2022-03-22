@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as themeColor from "../../../../../constants/ThemeReference"
+import * as themeColor from "constants/ThemeReference"
 export const MenuIndex = styled.div`
   position: absolute;
   min-width: 250px;

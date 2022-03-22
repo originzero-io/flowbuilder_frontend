@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setElements, updateGroupOfElement } from "../../../../../store/reducers/flow/flowElementsReducer";
-import { updateGroup } from "../../../../../store/reducers/flow/flowGroupsReducer";
-import { SubmitIcon } from "../../../../Shared/icons";
+import { setElements, updateGroupOfElement } from "store/reducers/flow/flowElementsReducer";
+import { updateGroup } from "store/reducers/flow/flowGroupsReducer";
+import { SubmitIcon } from "components/Shared/icons";
 import { ColorFlag, Submit } from "./GroupBar.style";
-import * as themeColor from "../../../../../constants/ThemeReference";
+import * as themeColor from "constants/ThemeReference";
 import { isEdge, isNode } from "react-flow-renderer";
 import PropTypes from "prop-types"
-import { updateGroupService } from "../../../../../services/groupService";
+import { updateGroupService } from "services/groupService";
 const Form = styled.form`
   position: relative;
   width: 78%;
