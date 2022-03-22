@@ -1,7 +1,7 @@
 import React from "react";
-import Avatar from "../../../../Shared/Avatar";
+import Avatar from "components/Shared/Avatar";
 import PropTypes from "prop-types";
-import useWorkspace from "../../../../../hooks/useWorkspace";
+import useWorkspace from "hooks/useWorkspace";
 import styled from "styled-components";
 export const Container = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as themeColor from "../../constants/ThemeReference"
+import * as themeColor from "constants/ThemeReference"
 export const AppWrapper = styled.div`
   width:100%;
   height:100vh;

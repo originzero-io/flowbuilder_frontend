@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { expandNode } from "../../../../../store/reducers/flow/flowElementsReducer";
-import { closeAllNodeGroupMenu } from "../../../../../store/reducers/flow/flowGuiReducer";
-import useActiveFlow from "../../../../../hooks/useActiveFlow";
+import { expandNode } from "store/reducers/flow/flowElementsReducer";
+import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiReducer";
+import useActiveFlow from "hooks/useActiveFlow";
 import GroupMenu from "../../../components/Menu/NodeGroupMenu/NodeGroupMenu";
 import { Content, FeatureIconsWrapper, Header, Label } from "../../Nodes.style";
 import EditNameForm from "./EditNameForm";

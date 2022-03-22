@@ -4,10 +4,10 @@ import { FaUserCircle } from "react-icons/fa";
 import { FiUsers } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
-import { logOut } from "../../../../store/reducers/authReducer";
-import useAuth from "../../../../hooks/useAuth";
-import Avatar from "../../../Shared/Avatar";
-import { Logo } from "../../../Shared/icons";
+import { logOut } from "store/reducers/authReducer";
+import useAuth from "hooks/useAuth";
+import Avatar from "components/Shared/Avatar";
+import { Logo } from "components/Shared/icons";
 import { VerticalDivider } from "../../../StyledComponents/Divider";
 import {
   DropdownItem,

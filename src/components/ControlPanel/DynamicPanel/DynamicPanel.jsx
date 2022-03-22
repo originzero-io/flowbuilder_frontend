@@ -20,7 +20,7 @@ import {
   PermissionScreen,
 } from "./index";
 import NotFound from "./NotFound";
-import useWorkspace from "../../../hooks/useWorkspace";
+import useWorkspace from "hooks/useWorkspace";
 const Container = styled.div`
   width: 100%;
   height: 100%;

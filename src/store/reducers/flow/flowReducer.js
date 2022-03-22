@@ -1,7 +1,7 @@
 import {
   getFlowsByProjectService,
   getFlowsByWorkspaceService
-} from "../../../services/flowService";
+} from "services/flowService";
 import * as actions from "../../constants/flowConstants";
 
 export const flowReducer = (state = [], { type, payload }) => {

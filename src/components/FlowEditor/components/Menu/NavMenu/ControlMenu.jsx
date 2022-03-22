@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { HorizontalDivider } from "../../../../StyledComponents/Divider";
 import { MenuItem } from "./NavMenu.style";
-import * as tooltip from "../../../../../constants/TooltipReference";
+import * as tooltip from "constants/TooltipReference";
 import {
   RedoIcon,
   UndoIcon,
@@ -21,16 +21,16 @@ import {
   setElements,
   setRotateAll,
   setExpandAll,
-} from "../../../../../store/reducers/flow/flowElementsReducer";
+} from "store/reducers/flow/flowElementsReducer";
 import {
   setRotateAllPath,
-} from "../../../../../store/reducers/flow/flowGuiReducer";
-import * as themeColor from "../../../../../constants/ThemeReference";
+} from "store/reducers/flow/flowGuiReducer";
+import * as themeColor from "constants/ThemeReference";
 import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { useParams } from "react-router";
-import { elementNamespace } from "../../../../../SocketConnections";
-import useActiveFlow from "../../../../../hooks/useActiveFlow";
+import { elementNamespace } from "SocketConnections";
+import useActiveFlow from "hooks/useActiveFlow";
 const Menu = styled.div`
   position: absolute;
   display: flex;

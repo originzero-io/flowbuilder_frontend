@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import * as themeColor from "../../../../../constants/ThemeReference"
+import * as themeColor from "constants/ThemeReference"
 import React from "react";
 export function SetVariablesIcon({ width, height, enable }) {
   return (

@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { isNode, useStoreActions } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import {  useParams } from "react-router";
-import * as themeColor from "../../../../../constants/ThemeReference";
-import { createGroup } from "../../../../../store/reducers/flow/flowGroupsReducer";
-import useActiveFlow from "../../../../../hooks/useActiveFlow";
-import useAuth from "../../../../../hooks/useAuth";
+import * as themeColor from "constants/ThemeReference";
+import { createGroup } from "store/reducers/flow/flowGroupsReducer";
+import useActiveFlow from "hooks/useActiveFlow";
+import useAuth from "hooks/useAuth";
 import {
   AddIcon,
   CancelIcon,
   NonGroupIcon,
   SubmitIcon
-} from "../../../../Shared/icons";
+} from "components/Shared/icons";
 import { HorizontalDivider } from "../../../../StyledComponents/Divider";
 import {
   AddGroupWrapper,

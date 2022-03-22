@@ -2,36 +2,36 @@ import io from "socket.io-client";
 import { store } from "../index";
 const HOST = process.env.REACT_APP_SOCKET_URL;
 import toast from "react-hot-toast";
-import { makeMeOnline } from "../store/reducers/authReducer";
+import { makeMeOnline } from "store/reducers/authReducer";
 import {
   saveElements,
   setElements,
-} from "../store/reducers/flow/flowElementsReducer";
+} from "store/reducers/flow/flowElementsReducer";
 import {
   createFlow,
   deleteFlow,
   editFlow,
   getFlowsByWorkspace,
   moveFlow,
-} from "../store/reducers/flow/flowReducer";
+} from "store/reducers/flow/flowReducer";
 import {
   createNote,
   deleteNote,
   updateNote,
-} from "../store/reducers/notesReducer";
+} from "store/reducers/notesReducer";
 import {
   createProject,
   deleteProject,
   setActiveProject,
   updateProject,
-} from "../store/reducers/projectReducer";
-import { editUser } from "../store/reducers/userReducer";
+} from "store/reducers/projectReducer";
+import { editUser } from "store/reducers/userReducer";
 import {
   createWorkspace,
   deleteWorkspace,
   editWorkspace,
-} from "../store/reducers/workspaceReducer";
-import { endTheBar } from "../store/reducers/componentReducer";
+} from "store/reducers/workspaceReducer";
+import { endTheBar } from "store/reducers/componentReducer";
 const createSocket = (namespace, extraOptions) => {
   console.log("çalıştı->", namespace);
   return new Socket(namespace, extraOptions).socket;

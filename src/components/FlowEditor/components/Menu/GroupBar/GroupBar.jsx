@@ -5,7 +5,7 @@ import GroupBarIcon from "./GroupBarIcon";
 import GroupList from "./GroupList";
 import NewGroupForm from "./NewGroupForm";
 import styled from "styled-components";
-import useActiveFlow from "../../../../../hooks/useActiveFlow";
+import useActiveFlow from "hooks/useActiveFlow";
 const Wrapper = styled.div`
   position: absolute;
   display: flex;

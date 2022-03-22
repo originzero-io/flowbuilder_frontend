@@ -41,9 +41,9 @@ const authReducer = (state = initialState, { type, payload }) => {
 };
 export default authReducer;
 
-import { loginService, logoutService } from '../../services/authService';
-import { getMeService } from "../../services/authService";
-import { mainNamespace } from "../../components/../SocketConnections";
+import { loginService, logoutService } from 'services/authService';
+import { getMeService } from "services/authService";
+import { mainNamespace } from "SocketConnections";
 
 export const loginSuccess = (user) => async dispatch => {
   try {

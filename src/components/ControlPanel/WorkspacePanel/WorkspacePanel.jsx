@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import ReactTooltip from "react-tooltip";
-import { setModal } from "../../../store/reducers/componentReducer";
-import { getFlowsByWorkspace } from "../../../store/reducers/flow/flowReducer";
-import { getNotesByWorkspace } from "../../../store/reducers/notesReducer";
-import { getProjectsByWorkspace } from "../../../store/reducers/projectReducer";
+import { setModal } from "store/reducers/componentReducer";
+import { getFlowsByWorkspace } from "store/reducers/flow/flowReducer";
+import { getNotesByWorkspace } from "store/reducers/notesReducer";
+import { getProjectsByWorkspace } from "store/reducers/projectReducer";
 import {
   getMyWorkspaces,
   setActiveWorkspace,
-} from "../../../store/reducers/workspaceReducer";
-import useAuth from "../../../hooks/useAuth";
-import useDidMountEffect from "../../../hooks/useDidMountEffect";
-import useWorkspace from "../../../hooks/useWorkspace";
+} from "store/reducers/workspaceReducer";
+import useAuth from "hooks/useAuth";
+import useDidMountEffect from "hooks/useDidMountEffect";
+import useWorkspace from "hooks/useWorkspace";
 import AddWorkspaceForm from "./AddWorkspaceForm";
 import {
   WorkspaceContainer,

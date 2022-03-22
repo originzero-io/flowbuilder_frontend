@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as themeColor from "../../../../../../constants/ThemeReference"
+import * as themeColor from "constants/ThemeReference"
 export const Menu = styled.div`
   background:rgb(189, 195, 199);
   position: absolute;

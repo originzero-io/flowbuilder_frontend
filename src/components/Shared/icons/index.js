@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 //test
-import * as themeColor from "../../../constants/ThemeReference";
+import * as themeColor from "constants/ThemeReference";
 import React from "react-redux"
 export function Logo({ theme,width="26px",height="30px" }) {
   return (

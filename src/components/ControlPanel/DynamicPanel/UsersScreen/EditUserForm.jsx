@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form, Label, FormGroup } from "reactstrap";
-import { setModal } from "../../../../store/reducers/componentReducer";
-import { editUser } from "../../../../store/reducers/userReducer";
+import { setModal } from "store/reducers/componentReducer";
+import { editUser } from "store/reducers/userReducer";
 import { Avatar } from "antd";
 import { FaUserCheck } from "react-icons/fa";
 import toast from "react-hot-toast"

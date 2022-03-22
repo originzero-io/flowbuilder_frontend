@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { getFlowsByProjectService } from "../../../../../services/flowService";
-import CheckboxGroup from "../../../../Shared/SwitchInput/CheckboxGroup";
-import Checkbox from "../../../../Shared/SwitchInput/Checkbox";
+import { getFlowsByProjectService } from "services/flowService";
+import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
+import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import { CollapsibleMenuItem } from "./CollapsibleMenu";
-import useUserPermission from "../../../../../hooks/useUserPermission";
+import useUserPermission from "hooks/useUserPermission";
 
 function FlowList({
   project,

@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { getIncomers, getOutgoers } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
-import { setNodeEnable, setOutgoersEnable } from "../../../../../store/reducers/flow/flowElementsReducer";
-import useActiveFlow from "../../../../../hooks/useActiveFlow";
+import { setNodeEnable, setOutgoersEnable } from "store/reducers/flow/flowElementsReducer";
+import useActiveFlow from "hooks/useActiveFlow";
 import RotateButton from "../../../Nodes/global/RotateButton";
 import SwitchButton from "../../../Nodes/global/SwitchButton";
-import { NameEditIcon } from "../../../../Shared/icons";
+import { NameEditIcon } from "components/Shared/icons";
 import toast from "react-hot-toast"
 
 export default function FeatureIcons({ self, edit, setEdit }) {

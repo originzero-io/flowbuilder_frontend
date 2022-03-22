@@ -1,6 +1,6 @@
 import {
   getProjectsByWorkspaceService
-} from "../../services/projectService";
+} from "services/projectService";
 import * as actions from "../constants/projectContants";
 
 const initialState = {

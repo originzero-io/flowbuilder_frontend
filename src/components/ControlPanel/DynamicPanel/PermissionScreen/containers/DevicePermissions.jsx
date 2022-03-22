@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import useUserPermission from "../../../../../hooks/useUserPermission";
+import useUserPermission from "hooks/useUserPermission";
 import CreateDevicePermission from "../components/DevicePermissions/CreateDevicePermission";
 import DeleteDevicePermission from "../components/DevicePermissions/DeleteDevicePermission";
 import EditDevicePermission from "../components/DevicePermissions/EditDevicePermission";

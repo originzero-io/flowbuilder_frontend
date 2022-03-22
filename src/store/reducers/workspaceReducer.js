@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import {
   getMyWorkspacesService
-} from "../../services/workspaceService";
+} from "services/workspaceService";
 import * as actions from "../constants/workspaceConstants";
 
 const initialState = {

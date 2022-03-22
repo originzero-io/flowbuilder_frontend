@@ -6,7 +6,7 @@ import {
   CollapsibleMenu,
   CollapsibleMenuItem,
   CollapsibleTrigger,
-} from "../../Shared/Collapsible/CollapsibleMenu";
+} from "components/Shared/Collapsible/CollapsibleMenu";
 import NavMenuItem from "./NavMenuItem";
 import ProjectList from "./ProjectList.jsx";
 import { AiOutlineProject } from "react-icons/ai";
@@ -16,15 +16,15 @@ import { FiSettings } from "react-icons/fi";
 import { BiBrain } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
 import { RiTeamLine } from "react-icons/ri";
-import { setModal } from "../../../store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentReducer";
 import { Link, useRouteMatch } from "react-router-dom";
 import WorkspaceBrand from "./WorkspaceBrand";
-import useAuth from "../../../hooks/useAuth";
-import useWorkspace from "../../../hooks/useWorkspace";
-import usePermission from "../../../hooks/usePermission";
-import useProject from "../../../hooks/useProject";
-import Avatar from "../../Shared/Avatar";
-import useFlow from "../../../hooks/useFlow";
+import useAuth from "hooks/useAuth";
+import useWorkspace from "hooks/useWorkspace";
+import usePermission from "hooks/usePermission";
+import useProject from "hooks/useProject";
+import Avatar from "components/Shared/Avatar";
+import useFlow from "hooks/useFlow";
 
 const NavigationPanel = () => {
   const dispatch = useDispatch();

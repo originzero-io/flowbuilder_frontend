@@ -3,15 +3,15 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import { Badge, Button, Table } from "reactstrap";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "../../../../store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentReducer";
 import AddUserForm from "./AddUserForm";
-import { deleteUser } from "../../../../store/reducers/userReducer";
+import { deleteUser } from "store/reducers/userReducer";
 import { BiEdit } from "react-icons/bi";
 import { VscTrash } from "react-icons/vsc";
 import { FaUserCircle } from "react-icons/fa";
 import EditUserForm from "./EditUserForm";
-import Avatar from "../../../Shared/Avatar"
-import useUser from "../../../../hooks/useUser";
+import Avatar from "components/Shared/Avatar"
+import useUser from "hooks/useUser";
 import toast from "react-hot-toast"
 
 const UserListContainer = styled.div`

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as themeColor from "../../../../../constants/ThemeReference"
+import * as themeColor from "constants/ThemeReference"
 export const Container = styled.div`
   //position: absolute;
   //border-radius: 6px;

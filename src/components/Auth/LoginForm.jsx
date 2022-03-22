@@ -2,11 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
-import { loginService } from "../../services/authService";
-import { loginError, loginSuccess } from "../../store/reducers/authReducer";
+import { loginService } from "services/authService";
+import { loginError, loginSuccess } from "store/reducers/authReducer";
 import { Input, Text, Submit, ErrorMessage } from "./LoginForm.style";
 import { Redirect } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "hooks/useAuth";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import toast from "react-hot-toast"

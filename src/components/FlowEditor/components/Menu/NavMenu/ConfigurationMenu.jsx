@@ -10,23 +10,23 @@ import {
 } from "reactstrap";
 import styled from "styled-components";
 import { loadFunctionsToNode } from "../../../helpers/loadFunctionsToNode";
-import * as themeColor from "../../../../../constants/ThemeReference";
-import * as tooltip from "../../../../../constants/TooltipReference";
-import { logOut } from "../../../../../store/reducers/authReducer";
+import * as themeColor from "constants/ThemeReference";
+import * as tooltip from "constants/TooltipReference";
+import { logOut } from "store/reducers/authReducer";
 import {
   changeEdgeType,
   importElements,
-} from "../../../../../store/reducers/flow/flowElementsReducer";
+} from "store/reducers/flow/flowElementsReducer";
 import {
   setFlowEdgeType,
   setMiniMapDisplay,
   setTheme,
-} from "../../../../../store/reducers/flow/flowGuiReducer";
-import useActiveFlow from "../../../../../hooks/useActiveFlow";
-import useAuth from "../../../../../hooks/useAuth";
-import Avatar from "../../../../Shared/Avatar";
+} from "store/reducers/flow/flowGuiReducer";
+import useActiveFlow from "hooks/useActiveFlow";
+import useAuth from "hooks/useAuth";
+import Avatar from "components/Shared/Avatar";
 import SwitchButton from "../../../Nodes/global/SwitchButton";
-import { FileInput } from "../../../../Shared/FileInput/FileInput";
+import { FileInput } from "components/Shared/FileInput/FileInput";
 import { VerticalDivider } from "../../../../StyledComponents/Divider";
 import {
   DropdownItem,

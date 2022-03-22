@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import * as themeColor from "../../../../../../constants/ThemeReference";
+import * as themeColor from "constants/ThemeReference";
 import React from "react"
 export function RedoIcon({ theme, disable }) {
   return (

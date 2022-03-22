@@ -10,9 +10,9 @@ import {
 } from "./Card.style";
 import { VscTrash } from "react-icons/vsc";
 import DetailMenu from "./DetailMenu";
-import { deleteFlow } from "../../../store/reducers/flow/flowReducer";
+import { deleteFlow } from "store/reducers/flow/flowReducer";
 import { Badge } from "reactstrap";
-import { flowNamespace } from "../../../components/../SocketConnections";
+import { flowNamespace } from "SocketConnections";
 import Avatar from "../Avatar";
 const Card = ({ data }) => {
   const deleteCardHandler = (e, flow) => {

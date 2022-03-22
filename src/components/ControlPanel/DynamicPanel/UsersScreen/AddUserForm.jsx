@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input, Label, Toast } from "reactstrap";
-import { setModal } from "../../../../store/reducers/componentReducer";
-import { registerUser } from "../../../../store/reducers/userReducer";
+import { setModal } from "store/reducers/componentReducer";
+import { registerUser } from "store/reducers/userReducer";
 import toast from "react-hot-toast";
 export default function AddUserForm() {
   const dispatch = useDispatch();

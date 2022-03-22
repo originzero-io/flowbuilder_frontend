@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteGroup
-} from "../../../../../store/reducers/flow/flowGroupsReducer";
-import { deleteGroupOfElement } from "../../../../../store/reducers/flow/flowElementsReducer";
+} from "store/reducers/flow/flowGroupsReducer";
+import { deleteGroupOfElement } from "store/reducers/flow/flowElementsReducer";
 import { GroupItem, GroupColor, Label } from "./GroupBar.style";
 import { isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";
-import { NameEditIcon } from "../../../../Shared/icons";
+import { NameEditIcon } from "components/Shared/icons";
 import PropTypes from "prop-types";
 import { useParams } from "react-router";
-import useActiveFlow from "../../../../../hooks/useActiveFlow";
+import useActiveFlow from "hooks/useActiveFlow";
 const GroupList = ({ theme }) => {
   const { flowGroups, flowElements, flowGui } =
     useActiveFlow();
