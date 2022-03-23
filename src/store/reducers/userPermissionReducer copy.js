@@ -134,146 +134,19 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
         }
       }
       else {
-        if (payload.name === "CAN_USAGE_PROJECT") {
-          if (!state.project.CAN_EDIT_PROJECT.includes(payload.id) && !state.project.CAN_DELETE_PROJECT.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                CAN_VIEW_PROJECT: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: false
-              }
-            }
-          }
-          else {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: false
-              }
+        if (payload.name === "CAN_EDIT_PROJECT" || payload.name === "CAN_USAGE_PROJECT" || payload.name === "CAN_DELETE_PROJECT") {
+          return {
+            ...state,
+            [payload.permissionType]: {
+              ...state[payload.permissionType],
+              [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+              CAN_VIEW_PROJECT: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+              [`${payload.name}_ALL`]: false
             }
           }
         }
-        else if (payload.name === "CAN_EDIT_PROJECT") {
-          if (!state.project.CAN_USAGE_PROJECT.includes(payload.id) && !state.project.CAN_DELETE_PROJECT.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                CAN_VIEW_PROJECT: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: false
-              }
-            }
-          }
-          else {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: false
-              }
-            }
-          }
-        }
-        else if (payload.name === "CAN_DELETE_PROJECT") {
-          if (!state.project.CAN_USAGE_PROJECT.includes(payload.id) && !state.project.CAN_EDIT_PROJECT.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                CAN_VIEW_PROJECT: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: false
-              }
-            }
-          }
-          else {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: false
-              }
-            }
-          }
-        }
-        ///?problem begins here
-        else if (payload.name === "CAN_USAGE_FLOW") {          
-          if (!state.project.CAN_EDIT_FLOW.includes(payload.id) && !state.project.CAN_DELETE_FLOW.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                CAN_VIEW_FLOW: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-          else {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-        }
-        else if (payload.name === "CAN_EDIT_FLOW") {          
-          if (!state.project.CAN_USAGE_FLOW.includes(payload.id) && !state.project.CAN_DELETE_FLOW.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                CAN_VIEW_FLOW: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-          else {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-        }
-        else if (payload.name === "CAN_DELETE_FLOW") {          
-          if (!state.project.CAN_USAGE_FLOW.includes(payload.id) && !state.project.CAN_EDIT_FLOW.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                CAN_VIEW_FLOW: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-          else {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-        }
-        else if (payload.name === "CAN_VIEW_FLOW") {
+        ///?there is problem here
+        else if (payload.name === "CAN_EDIT_FLOW" || payload.name === "CAN_USAGE_FLOW" || payload.name === "CAN_DELETE_FLOW" || payload.name ==="CAN_VIEW_FLOW") {
           return {
             ...state,
             [payload.permissionType]: {
@@ -284,8 +157,6 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
             }
           }
         }
-        
-        ///?problem ends here
         else {
           return {
             ...state,

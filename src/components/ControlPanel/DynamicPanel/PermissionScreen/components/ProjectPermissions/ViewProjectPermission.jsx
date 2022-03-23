@@ -56,7 +56,9 @@ function ViewProjectPermission({
                       )}
                       disabled={
                         permissions.EVERYTHING ||
-                        permissions.CAN_EDIT_PROJECT.includes(project._id)
+                        permissions.CAN_USAGE_PROJECT.includes(project._id) ||
+                        permissions.CAN_EDIT_PROJECT.includes(project._id) ||
+                        permissions.CAN_DELETE_PROJECT.includes(project._id)
                       }
                       checked={
                         permissions.EVERYTHING ||

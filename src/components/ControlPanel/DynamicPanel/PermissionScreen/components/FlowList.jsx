@@ -61,7 +61,10 @@ function FlowList({
                 id={project._id}
                 onChange={(e) => handleAllChange(e, flows)}
                 defaultChecked={projectPermissions[`${FLOW_NAME}_ALL`]}
-                disabled={projectPermissions.EVERYTHING}
+                disabled={
+                  projectPermissions.EVERYTHING ||
+                  projectPermissions[PROJECT_NAME].includes(project._id)
+                }
                 checked={
                   projectPermissions.EVERYTHING ||
                   projectPermissions[PROJECT_ALL] ||
@@ -82,6 +85,7 @@ function FlowList({
                     //defaultChecked={projectPermissions[FLOW_NAME].includes(flow._id)}
                     disabled={
                       projectPermissions.EVERYTHING ||
+                      projectPermissions[PROJECT_NAME].includes(flow.project._id) ||
                       (permissionName === "VIEW" &&
                         (projectPermissions.CAN_EDIT_FLOW.includes(flow._id) ||
                           projectPermissions.CAN_USAGE_FLOW.includes(flow._id) ||
