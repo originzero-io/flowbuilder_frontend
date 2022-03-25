@@ -13,16 +13,18 @@ import DashboardList from "../DashboardList";
 const propTypes = {
   projects: PropTypes.object.isRequired,
   permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
-  handleNestedAllChange: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
+  handleNestedChange: PropTypes.func.isRequired,
+  handleAllChange: PropTypes.func.isRequired,
+  handleMultiAllChange: PropTypes.func.isRequired,
 };
 function DeleteProjectPermission({
   projects,
   permissions,
-  handleAllChange,
-  handleNestedAllChange,
   handleChange,
+  handleNestedChange,
+  handleAllChange,
+  handleMultiAllChange,
 }) {
   return (
     <>
@@ -33,7 +35,7 @@ function DeleteProjectPermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_DELETE_PROJECT"
-                onChange={(e) => handleAllChange(e, projects)}
+                onChange={handleAllChange}
                 defaultChecked={permissions.CAN_DELETE_PROJECT_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={
@@ -66,8 +68,8 @@ function DeleteProjectPermission({
                 <CollapsibleSubMenu trigger="Flows">
                   <FlowList
                     project={project}
-                    handleMultiChange={handleChange}
-                    handleAllChange={handleNestedAllChange}
+                    handleMultiChange={handleNestedChange}
+                    handleAllChange={handleMultiAllChange}
                     permissionName="DELETE"
                   />
                 </CollapsibleSubMenu>

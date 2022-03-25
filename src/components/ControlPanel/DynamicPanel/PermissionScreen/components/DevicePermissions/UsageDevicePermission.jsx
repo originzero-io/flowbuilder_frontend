@@ -26,7 +26,7 @@ export default function UsageDevicePermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_USAGE_CONTROLLER"
-                onChange={(e) => handleAllChange(e, controllers)}
+                onChange={handleAllChange}
                 defaultChecked={permissions.CAN_USAGE_CONTROLLER_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={

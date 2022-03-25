@@ -15,6 +15,7 @@ import PropTypes from "prop-types";
 const propTypes = {
   setSinglePermission: PropTypes.func,
   setMultiplePermission: PropTypes.func,
+  setNestedMultiplePermission: PropTypes.func,
   setSingleAllPermission: PropTypes.func,
   setMultipleAllPermission: PropTypes.func,
 };
@@ -22,6 +23,7 @@ const propTypes = {
 export default function ProjectPermissions({
   setSinglePermission,
   setMultiplePermission,
+  setNestedMultiplePermission,
   setSingleAllPermission,
   setMultipleAllPermission,
 }) {
@@ -29,25 +31,39 @@ export default function ProjectPermissions({
   const { projects } = useProject();
   const projectPermissions = useUserPermission("project");
   const handleSingleProjectChange = (e) => {
-    console.log("handleChange:", e);
+    console.warn("SINGLE_PROJECT_CHANGE çalıştı");
+
     dispatch(setSinglePermission(e, "project"));
   };
   const handleMultiProjectChange = (e) => {
-    console.log("handleMultiChange:", e.target);
+    //console.log("handleMultiChange:", e.target);
+    console.warn("MULTI_CHANGE çalıştı");
+  
     dispatch(setMultiplePermission(e, "project"));
   };
-  const handleAllChange = (e, data) => {
-    console.log("data:", data);
-    console.log("e:", e.target);
-    const ids = data.map((d) => d._id);
-    dispatch(setSingleAllPermission(e, ids, "project"));
+  const handleAllChange = (e) => {
+    console.warn("ALL_CHANGE çalıştı");
+    dispatch(setSingleAllPermission(e, "project"));
   };
-  const handleNestedAllChange = (e, data) => {
-    console.log("data:", data);
-    console.log("e:", e.target);
-    const ids = data.map((d) => d._id);
-    dispatch(setMultipleAllPermission(e, ids, "project"));
+  const handleMultiAllChange = (e) => {
+    console.warn("MULTI_ALL_CHANGE çalıştı");
+    dispatch(setMultipleAllPermission(e, "project"));
   };
+  const handleNestedMultiChange = (e, flow) => {
+    const { _id, project } = flow;
+    const flowData = {
+      id: _id,
+      projectId:project._id
+    }
+    console.warn("NESTED_MULTI_CHANGE çalıştı")
+    console.log("flowData:", flowData);
+    //console.log("e:", e.target);
+    //const ids = data.map((d) => d._id);
+
+    dispatch(setNestedMultiplePermission(e, flowData,"project"));
+  };
+
+  //console.log('projects permissions rendered');
   return (
     <TabContainer>
       <PermissionContainer size="50%">
@@ -77,8 +93,9 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
+          handleNestedChange={handleNestedMultiChange}
           handleAllChange={handleAllChange}
-          handleNestedAllChange={handleNestedAllChange}
+          handleMultiAllChange={handleMultiAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
@@ -86,8 +103,9 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
+          handleNestedChange={handleNestedMultiChange}
           handleAllChange={handleAllChange}
-          handleNestedAllChange={handleNestedAllChange}
+          handleMultiAllChange={handleMultiAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
@@ -95,8 +113,9 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
+          handleNestedChange={handleNestedMultiChange}
           handleAllChange={handleAllChange}
-          handleNestedAllChange={handleNestedAllChange}
+          handleMultiAllChange={handleMultiAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
@@ -104,8 +123,9 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
+          handleNestedChange={handleNestedMultiChange}
           handleAllChange={handleAllChange}
-          handleNestedAllChange={handleNestedAllChange}
+          handleMultiAllChange={handleMultiAllChange}
         />
       </PermissionContainer>
     </TabContainer>

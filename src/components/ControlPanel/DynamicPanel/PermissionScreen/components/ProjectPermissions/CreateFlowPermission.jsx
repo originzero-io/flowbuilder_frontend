@@ -26,7 +26,7 @@ function CreateFlowPermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_CREATE_FLOW"
-                onChange={(e) => handleAllChange(e, projects)}
+                onChange={handleAllChange}
                 defaultChecked={permissions.CAN_CREATE_FLOW_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={

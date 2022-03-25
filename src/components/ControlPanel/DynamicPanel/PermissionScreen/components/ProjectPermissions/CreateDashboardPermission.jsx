@@ -26,7 +26,7 @@ function CreateDashboardPermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_CREATE_DASHBOARD"
-                onChange={(e) => handleAllChange(e, projects)}
+                onChange={handleAllChange}
                 defaultChecked={permissions.CAN_CREATE_DASHBOARD_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={

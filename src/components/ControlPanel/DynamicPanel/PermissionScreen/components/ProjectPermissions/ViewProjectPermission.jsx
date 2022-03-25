@@ -13,16 +13,18 @@ import DashboardList from "../DashboardList";
 const propTypes = {
   projects: PropTypes.object.isRequired,
   permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
-  handleNestedAllChange: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
+  handleNestedChange: PropTypes.func.isRequired,
+  handleAllChange: PropTypes.func.isRequired,
+  handleMultiAllChange: PropTypes.func.isRequired,
 };
 function ViewProjectPermission({
   projects,
   permissions,
-  handleAllChange,
-  handleNestedAllChange,
   handleChange,
+  handleNestedChange,
+  handleAllChange,
+  handleMultiAllChange,
 }) {
   return (
     <>
@@ -33,7 +35,7 @@ function ViewProjectPermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_VIEW_PROJECT"
-                onChange={(e) => handleAllChange(e, projects)}
+                onChange={handleAllChange}
                 defaultChecked={permissions.CAN_VIEW_PROJECT_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={
@@ -71,8 +73,8 @@ function ViewProjectPermission({
                 <CollapsibleSubMenu trigger="Flows">
                   <FlowList
                     project={project}
-                    handleMultiChange={handleChange}
-                    handleAllChange={handleNestedAllChange}
+                    handleMultiChange={handleNestedChange}
+                    handleAllChange={handleMultiAllChange}
                     permissionName="VIEW"
                   />
                 </CollapsibleSubMenu>

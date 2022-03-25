@@ -29,7 +29,7 @@ export default function EditDevicePermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_EDIT_CONTROLLER"
-                onChange={(e) => handleAllChange(e, controllers)}
+                onChange={handleAllChange}
                 defaultChecked={permissions.CAN_EDIT_CONTROLLER_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={

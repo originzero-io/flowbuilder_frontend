@@ -93,6 +93,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
       return payload;
     case "SET_CAN_DO_EVERYTHING":
       return { ...state, CAN_DO_EVERYTHING: payload };
+    
     case "SET_SINGLE_PERMISSION":
       return {
         ...state,
@@ -101,6 +102,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
           [payload.name]: payload.checked,
         },
       };
+    
     case "SET_MULTIPLE_PERMISSION":
       if (payload.checked) {
         if ((payload.name === "CAN_EDIT_PROJECT" || payload.name === "CAN_USAGE_PROJECT" || payload.name === "CAN_DELETE_PROJECT") && !state.project.CAN_VIEW_PROJECT.includes(payload.id)) {
@@ -113,16 +115,16 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
             },
           };
         }
-        else if ((payload.name === "CAN_EDIT_FLOW" || payload.name === "CAN_USAGE_FLOW" || payload.name === "CAN_DELETE_FLOW") && !state.project.CAN_VIEW_FLOW.includes(payload.id)) {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [payload.name]: [...state[payload.permissionType][payload.name], payload.id],
-              CAN_VIEW_FLOW: [...state[payload.permissionType].CAN_VIEW_FLOW, payload.id]
-            },
-          };
-        }
+        // else if ((payload.name === "CAN_EDIT_FLOW" || payload.name === "CAN_USAGE_FLOW" || payload.name === "CAN_DELETE_FLOW") && !state.project.CAN_VIEW_FLOW.includes(payload.id)) {
+        //   return {
+        //     ...state,
+        //     [payload.permissionType]: {
+        //       ...state[payload.permissionType],
+        //       [payload.name]: [...state[payload.permissionType][payload.name], payload.id],
+        //       CAN_VIEW_FLOW: [...state[payload.permissionType].CAN_VIEW_FLOW, payload.id]
+        //     },
+        //   };
+        // }
         else {
           return {
             ...state,
@@ -203,89 +205,88 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
             }
           }
         }
-        ///?problem begins here
-        else if (payload.name === "CAN_USAGE_FLOW") {          
-          if (!state.project.CAN_EDIT_FLOW.includes(payload.id) && !state.project.CAN_DELETE_FLOW.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                CAN_VIEW_FLOW: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-          else {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-        }
-        else if (payload.name === "CAN_EDIT_FLOW") {          
-          if (!state.project.CAN_USAGE_FLOW.includes(payload.id) && !state.project.CAN_DELETE_FLOW.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                CAN_VIEW_FLOW: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-          else {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-        }
-        else if (payload.name === "CAN_DELETE_FLOW") {          
-          if (!state.project.CAN_USAGE_FLOW.includes(payload.id) && !state.project.CAN_EDIT_FLOW.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                CAN_VIEW_FLOW: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-          else {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
-              }
-            }
-          }
-        }
-        else if (payload.name === "CAN_VIEW_FLOW") {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-              CAN_VIEW_FLOW: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-              [`${payload.name}_ALL`]: []
-            }
-          }
-        }
-        
-        ///?problem ends here
+        // else if (payload.name === "CAN_USAGE_FLOW") {          
+        //   if (!state.project.CAN_EDIT_FLOW.includes(payload.id) && !state.project.CAN_DELETE_FLOW.includes(payload.id)) {
+        //     return {
+        //       ...state,
+        //       [payload.permissionType]: {
+        //         ...state[payload.permissionType],
+        //         [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+        //         CAN_VIEW_FLOW: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+        //         //[`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.id),
+        //         [`${payload.name}_ALL`]: []
+        //       }
+        //     }
+        //   }
+        //   else {
+        //     return {
+        //       ...state,
+        //       [payload.permissionType]: {
+        //         ...state[payload.permissionType],
+        //         [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+        //         //[`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.id)
+        //         [`${payload.name}_ALL`]: []
+        //       }
+        //     }
+        //   }
+        // }
+        // else if (payload.name === "CAN_EDIT_FLOW") {          
+        //   if (!state.project.CAN_USAGE_FLOW.includes(payload.id) && !state.project.CAN_DELETE_FLOW.includes(payload.id)) {
+        //     return {
+        //       ...state,
+        //       [payload.permissionType]: {
+        //         ...state[payload.permissionType],
+        //         [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+        //         CAN_VIEW_FLOW: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+        //         [`${payload.name}_ALL`]: []
+        //       }
+        //     }
+        //   }
+        //   else {
+        //     return {
+        //       ...state,
+        //       [payload.permissionType]: {
+        //         ...state[payload.permissionType],
+        //         [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+        //         [`${payload.name}_ALL`]: []
+        //       }
+        //     }
+        //   }
+        // }
+        // else if (payload.name === "CAN_DELETE_FLOW") {          
+        //   if (!state.project.CAN_USAGE_FLOW.includes(payload.id) && !state.project.CAN_EDIT_FLOW.includes(payload.id)) {
+        //     return {
+        //       ...state,
+        //       [payload.permissionType]: {
+        //         ...state[payload.permissionType],
+        //         [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+        //         CAN_VIEW_FLOW: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+        //         [`${payload.name}_ALL`]: []
+        //       }
+        //     }
+        //   }
+        //   else {
+        //     return {
+        //       ...state,
+        //       [payload.permissionType]: {
+        //         ...state[payload.permissionType],
+        //         [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+        //         [`${payload.name}_ALL`]: []
+        //       }
+        //     }
+        //   }
+        // }
+        // else if (payload.name === "CAN_VIEW_FLOW") {
+        //   return {
+        //     ...state,
+        //     [payload.permissionType]: {
+        //       ...state[payload.permissionType],
+        //       [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+        //       CAN_VIEW_FLOW: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
+        //       [`${payload.name}_ALL`]: []
+        //     }
+        //   }
+        // }
         else {
           return {
             ...state,
@@ -297,7 +298,116 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
           }
         }
       }
-      case "SET_SINGLE_ALL_PERMISSION":
+      
+    case "SET_NESTED_MULTIPLE_PERMISSION":
+      if (payload.checked) {
+        if ((payload.name === "CAN_EDIT_FLOW" || payload.name === "CAN_USAGE_FLOW" || payload.name === "CAN_DELETE_FLOW") && !state.project.CAN_VIEW_FLOW.some(p => p.id === payload.flowData.id)) {
+          return {
+            ...state,
+            [payload.permissionType]: {
+              ...state[payload.permissionType],
+              [payload.name]: [...state[payload.permissionType][payload.name], payload.flowData],
+              CAN_VIEW_FLOW: [...state[payload.permissionType].CAN_VIEW_FLOW, payload.flowData]
+            },
+          };
+        }
+        else {
+          return {
+            ...state,
+            [payload.permissionType]: {
+              ...state[payload.permissionType],
+              [payload.name]: [...state[payload.permissionType][payload.name], payload.flowData],
+            },
+          };
+        }
+      }
+      else if (!payload.checked) {
+        if (payload.name === "CAN_USAGE_FLOW") {
+          if (!state.project.CAN_EDIT_FLOW.some(p => p.id === payload.flowData.id) && !state.project.CAN_DELETE_FLOW.some(p => p.id === payload.flowData.id)) {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
+                CAN_VIEW_FLOW: state[payload.permissionType].CAN_VIEW_FLOW.filter(p => p.id !== payload.flowData.id),
+                //[`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.id),
+                [`${payload.name}_ALL`]: []
+              }
+            }
+          }
+          else {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
+                //[`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.id)
+                [`${payload.name}_ALL`]: []
+              }
+            }
+          }
+        }
+        else if (payload.name === "CAN_EDIT_FLOW") {
+          if (!state.project.CAN_USAGE_FLOW.some(p => p.id === payload.flowData.id) && !state.project.CAN_DELETE_FLOW.some(p => p.id === payload.flowData.id)) {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
+                CAN_VIEW_FLOW: state[payload.permissionType].CAN_VIEW_FLOW.filter(p => p.id !== payload.flowData.id),
+                [`${payload.name}_ALL`]: []
+              }
+            }
+          }
+          else {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
+                [`${payload.name}_ALL`]: []
+              }
+            }
+          }
+        }
+        else if (payload.name === "CAN_DELETE_FLOW") {
+          if (!state.project.CAN_USAGE_FLOW.some(p => p.id === payload.flowData.id) && !state.project.CAN_EDIT_FLOW.some(p => p.id === payload.flowData.id)) {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
+                CAN_VIEW_FLOW: state[payload.permissionType].CAN_VIEW_FLOW.filter(p => p.id !== payload.flowData.id),
+                [`${payload.name}_ALL`]: []
+              }
+            }
+          }
+          else {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
+                [`${payload.name}_ALL`]: []
+              }
+            }
+          }
+        }
+        else if (payload.name === "CAN_VIEW_FLOW") {
+          return {
+            ...state,
+            [payload.permissionType]: {
+              ...state[payload.permissionType],
+              [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
+              [`${payload.name}_ALL`]: []
+            }
+          }
+        }
+        else return state;
+      }
+      else return state;
+      
+    case "SET_SINGLE_ALL_PERMISSION":
         if (payload.checked) {
           //if (payload.name === "CAN_EDIT_PROJECT" && !state.project.CAN_VIEW_PROJECT.includes(payload.id))
           return {
@@ -317,15 +427,17 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
               [`${payload.name}_ALL`]: false
             },
           }
-        }
-      case "SET_MULTIPLE_ALL_PERMISSION":
-        if (payload.checked) {
-          //if (payload.name === "CAN_EDIT_PROJECT" && !state.project.CAN_VIEW_PROJECT.includes(payload.id))
+      }
+      
+    case "SET_MULTIPLE_ALL_PERMISSION":
+      if (payload.checked) {
+        if (!state.project.CAN_VIEW_FLOW_ALL.includes(payload.id)) {
           return {
             ...state,
             [payload.permissionType]: {
               ...state[payload.permissionType],
-              [`${payload.name}_ALL`] :[...state[payload.permissionType][`${payload.name}_ALL`],payload.id]
+              [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
+              CAN_VIEW_FLOW_ALL: [...state[payload.permissionType].CAN_VIEW_FLOW_ALL, payload.id]
             },
           };
         }
@@ -334,18 +446,106 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
             ...state,
             [payload.permissionType]: {
               ...state[payload.permissionType],
+              [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
+            },
+          };
+        }
+      }
+      else if (!payload.checked) {
+        if (payload.name === "CAN_USAGE_FLOW") {
+          if (!state.project.CAN_EDIT_FLOW_ALL.includes(payload.id) && !state.project.CAN_DELETE_FLOW_ALL.includes(payload.id)) {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                //[payload.name]: [],
+                [payload.name]: state[payload.permissionType][payload.name].filter(p=>p.projectId !== payload.id),
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id),
+                CAN_VIEW_FLOW_ALL: state[payload.permissionType].CAN_VIEW_FLOW_ALL.filter(s => s !== payload.id),
+              },
+            }
+          }
+          else {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [payload.name]: [],
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id),
+              },
+            }
+          }
+        }
+        else if (payload.name === "CAN_EDIT_FLOW") {
+          if (!state.project.CAN_USAGE_FLOW_ALL.includes(payload.id) && !state.project.CAN_DELETE_FLOW_ALL.includes(payload.id)) {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [payload.name]: [],
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id),
+                CAN_VIEW_FLOW_ALL: state[payload.permissionType].CAN_VIEW_FLOW_ALL.filter(s => s !== payload.id),
+              },
+            }
+          }
+          else {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [payload.name]: [],
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id),
+              },
+            }
+          }
+        }
+        else if (payload.name === "CAN_DELETE_FLOW") {
+          if (!state.project.CAN_USAGE_FLOW_ALL.includes(payload.id) && !state.project.CAN_EDIT_FLOW_ALL.includes(payload.id)) {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [payload.name]: [],
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id),
+                CAN_VIEW_FLOW_ALL: state[payload.permissionType].CAN_VIEW_FLOW_ALL.filter(s => s !== payload.id),
+              },
+            }
+          }
+          else {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [payload.name]: [],
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id),
+              },
+            }
+          }
+        }
+        else if (payload.name === "CAN_VIEW_FLOW") {
+          return {
+            ...state,
+            [payload.permissionType]: {
+              ...state[payload.permissionType],
               [payload.name]: [],
-              //[payload.name]: state[payload.permissionType][payload.name].filter(s=>payload.data.includes(s._id)),
-              [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id)
+              [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id),
             },
           }
-        }  
+        }
+        else return state;
+      }
+      else return state;
+      
     default:
       return state;
   }
 };
 export default userPermissionReducer;
 
+export const setCanDoEverytingPermission = (data) => ({
+  type: "SET_CAN_DO_EVERYTHING",
+  payload: data
+});
 export const setSinglePermission = (event, permissionType) => ({
   type: "SET_SINGLE_PERMISSION",
   payload: {
@@ -363,27 +563,31 @@ export const setMultiplePermission = (event, permissionType) => ({
     permissionType: permissionType
   },
 });
-export const setCanDoEverytingPermission = (data) => ({
-  type: "SET_CAN_DO_EVERYTHING",
-  payload: data
+export const setNestedMultiplePermission = (event, flowData, permissionType) => ({
+  type: "SET_NESTED_MULTIPLE_PERMISSION",
+  payload: {
+    id: event.target.id,
+    name: event.target.name,
+    checked: event.target.checked,
+    flowData: flowData,
+    permissionType: permissionType
+  },
 });
-export const setSingleAllPermission = (event,data,permissionType) => ({
+export const setSingleAllPermission = (event, permissionType) => ({
   type: "SET_SINGLE_ALL_PERMISSION",
   payload: {
     name: event.target.name,
     checked: event.target.checked,
     id:event.target.id,
-    data: data,
     permissionType: permissionType
   }
 });
-export const setMultipleAllPermission = (event,data,permissionType) => ({
+export const setMultipleAllPermission = (event, permissionType) => ({
   type: "SET_MULTIPLE_ALL_PERMISSION",
   payload: {
     name: event.target.name,
     checked: event.target.checked,
     id:event.target.id,
-    data: data,
     permissionType: permissionType
   }
 });

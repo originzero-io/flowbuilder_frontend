@@ -19,6 +19,7 @@ import { PermissionProvider } from "./context/PermissionContext";
 import {
   setSingleAllPermission,
   setMultiplePermission,
+  setNestedMultiplePermission,
   setSinglePermission,
   setMultipleAllPermission,
 } from "store/reducers/userPermissionReducer";
@@ -84,6 +85,7 @@ export default function PermissionScreen() {
             <ProjectPermissions
               setSinglePermission={setSinglePermission}
               setMultiplePermission={setMultiplePermission}
+              setNestedMultiplePermission={setNestedMultiplePermission}
               setSingleAllPermission={setSingleAllPermission}
               setMultipleAllPermission={setMultipleAllPermission}
             />
