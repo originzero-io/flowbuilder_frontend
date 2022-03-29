@@ -28,22 +28,7 @@ function FlowList({
     const data = await getFlowsByProjectService(project);
     setFlows(data.flows);
   }, []);
-  // const defaultChecked = () => {
-  //   console.log("burdayım");
-  //   if (
-  //     permissionName === "USAGE" ||
-  //     permissionName === "EDIT" ||
-  //     permissionName === "DELETE" ||
-  //     permissionName === "VIEW"
-  //   ) {
-  //     console.log("evet");
-  //     return projectPermissions[`${FLOW_NAME}_ALL`].includes(project._id);
-  //   } else {
-  //     console.log("hayır");
 
-  //     return projectPermissions[`${FLOW_NAME}_ALL`];
-  //   }
-  // };
   return (
     <>
       {flows.length > 0 ? (
@@ -57,7 +42,13 @@ function FlowList({
                 defaultChecked={projectPermissions[`${FLOW_NAME}_ALL`]}
                 disabled={
                   projectPermissions.EVERYTHING ||
-                  projectPermissions[PROJECT_NAME].includes(project._id)
+                  projectPermissions[PROJECT_NAME].includes(project._id) ||
+                  (permissionName === "VIEW" &&
+                        (
+                          projectPermissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
+                          projectPermissions.CAN_EDIT_FLOW_ALL.includes(project._id) ||
+                          projectPermissions.CAN_DELETE_FLOW_ALL.includes(project._id)
+                  ))
                 }
                 checked={
                   projectPermissions.EVERYTHING ||
@@ -84,8 +75,11 @@ function FlowList({
                         (
                           projectPermissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id) ||
                           projectPermissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
-                          projectPermissions.CAN_DELETE_FLOW.some(f=>f.id === flow._id)
-                          //projectPermissions[`${FLOW_NAME}_ALL`].includes(project._id)
+                          projectPermissions.CAN_DELETE_FLOW.some(f => f.id === flow._id) ||
+                        
+                          projectPermissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
+                          projectPermissions.CAN_EDIT_FLOW_ALL.includes(project._id) ||
+                          projectPermissions.CAN_DELETE_FLOW_ALL.includes(project._id)
                         ))
                     }
                     checked={
@@ -93,10 +87,12 @@ function FlowList({
                       projectPermissions[PROJECT_ALL] ||
                       projectPermissions[PROJECT_NAME].includes(project._id) ||
                       projectPermissions[FLOW_ALL].includes(project._id) ||
-                      projectPermissions[FLOW_NAME].some(f=>f.id === flow._id)
-                      // (permissionName === "VIEW"
-                      //   ? projectPermissions.CAN_VIEW_FLOW.includes(flow._id)
-                      //   : projectPermissions[FLOW_NAME].includes(flow._id))
+                      projectPermissions[FLOW_NAME].some(f=>f.id === flow._id) ||
+                      (permissionName === "VIEW" && (
+                        projectPermissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id) ||
+                        projectPermissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
+                        projectPermissions.CAN_DELETE_FLOW.some(f => f.id === flow._id)
+                      ))
                     }
                   />
                 </CheckboxGroup>
