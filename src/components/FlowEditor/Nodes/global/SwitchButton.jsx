@@ -2,6 +2,14 @@ import React from "react";
 import Switch from "react-switch";
 import PropTypes from "prop-types";
 import * as themeColor from "constants/ThemeReference";
+
+const propTypes = {
+  checked: PropTypes.bool.isRequired,
+  defaultChecked: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
+};
 export default function SwitchButton({
   checked=false,
   defaultChecked,
@@ -29,10 +37,4 @@ export default function SwitchButton({
   );
 }
 
-SwitchButton.propTypes = {
-  checked: PropTypes.bool.isRequired,
-  defaultChecked: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  width: PropTypes.number,
-  height: PropTypes.number,
-};
+SwitchButton.propTypes = propTypes;

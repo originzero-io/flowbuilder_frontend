@@ -3,6 +3,11 @@ import { Label } from "../Nodes.style";
 import { useSelector, useDispatch } from "react-redux";
 import { updateNodeHandles } from "store/reducers/flow/flowElementsReducer";
 import PropTypes from "prop-types"
+
+const propTypes = {
+  self: PropTypes.object.isRequired,
+  ioType:PropTypes.string.isRequired
+}
 export default function NodeIOManager({ self, ioType }) {
   const dispatch = useDispatch();
   const [handleCount, setHandleCount] = useState({
@@ -72,7 +77,4 @@ export default function NodeIOManager({ self, ioType }) {
   );
 }
 
-NodeIOManager.propTypes = {
-  self: PropTypes.object.isRequired,
-  ioType:PropTypes.string.isRequired
-}
+NodeIOManager.propTypes = propTypes;

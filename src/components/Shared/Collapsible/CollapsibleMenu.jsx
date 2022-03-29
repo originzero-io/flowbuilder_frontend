@@ -37,18 +37,3 @@ export function CollapsibleTrigger({ children, label, icon, onClick, style }) {
     </TriggerWrapper>
   );
 }
-
-// CollapsibleMenu.propTypes = {
-//   trigger: PropTypes.oneOf([PropTypes.string, PropTypes.element]).isRequired,
-//   open: PropTypes.oneOf([PropTypes.bool,PropTypes.undefined]),
-//   children: PropTypes.arrayOf(PropTypes.element).isRequired
-// };
-// CollapsibleMenuItem.propTypes = {
-//   children: PropTypes.arrayOf(PropTypes.element),
-//   onClick: PropTypes.func.isRequired
-// };
-// CollapsibleTrigger.propTypes = {
-//   children: PropTypes.element,
-//   label: PropTypes.string,
-//   icon: PropTypes.element
-// };

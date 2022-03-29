@@ -411,8 +411,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
       if (payload.checked) {
           //?issuNumber #2
           //if (payload.name === "CAN_EDIT_PROJECT" && !state.project.CAN_VIEW_PROJECT.includes(payload.id))
-        //if(state.project.CAN_VIEW_PROJECT_ALL)  
-        return {
+          return {
             ...state,
             [payload.permissionType]: {
               ...state[payload.permissionType],

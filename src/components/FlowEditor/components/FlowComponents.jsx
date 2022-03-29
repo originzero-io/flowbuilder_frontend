@@ -4,6 +4,13 @@ import AppMenu from "./Menu";
 import PropTypes from "prop-types"
 import AppTooltips from "../../../AppTooltips";
 import KeyboardEvents from "components/Shared/KeyboardEvents";
+
+const propTypes = {
+  theme: PropTypes.string.isRequired,
+  miniMapDisplay: PropTypes.string.isRequired,
+  currentZoom: PropTypes.number
+}
+
 const FlowComponents = ({ theme, miniMapDisplay }) => {
   return (
     <>
@@ -31,8 +38,4 @@ const FlowComponents = ({ theme, miniMapDisplay }) => {
 
 export default React.memo(FlowComponents);
 
-FlowComponents.propTypes = {
-  theme: PropTypes.string.isRequired,
-  miniMapDisplay: PropTypes.string.isRequired,
-  currentZoom: PropTypes.number
-}
+FlowComponents.propTypes = propTypes;

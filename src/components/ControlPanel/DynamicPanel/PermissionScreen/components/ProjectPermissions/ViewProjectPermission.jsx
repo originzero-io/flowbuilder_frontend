@@ -9,12 +9,22 @@ import CollapsibleMenu, {
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import FlowList from "../FlowList";
 import DashboardList from "../DashboardList";
+
+const propTypes = {
+  projects: PropTypes.object.isRequired,
+  permissions: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleNestedChange: PropTypes.func.isRequired,
+  handleAllChange: PropTypes.func.isRequired,
+  handleMultiAllChange: PropTypes.func.isRequired,
+};
 function ViewProjectPermission({
   projects,
   permissions,
-  handleAllChange,
-  handleNestedAllChange,
   handleChange,
+  handleNestedChange,
+  handleAllChange,
+  handleMultiAllChange,
 }) {
   return (
     <>
@@ -25,7 +35,7 @@ function ViewProjectPermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_VIEW_PROJECT"
-                onChange={(e) => handleAllChange(e, projects)}
+                onChange={handleAllChange}
                 defaultChecked={permissions.CAN_VIEW_PROJECT_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={
@@ -48,7 +58,9 @@ function ViewProjectPermission({
                       )}
                       disabled={
                         permissions.EVERYTHING ||
-                        permissions.CAN_EDIT_PROJECT.includes(project._id)
+                        permissions.CAN_USAGE_PROJECT.includes(project._id) ||
+                        permissions.CAN_EDIT_PROJECT.includes(project._id) ||
+                        permissions.CAN_DELETE_PROJECT.includes(project._id)
                       }
                       checked={
                         permissions.EVERYTHING ||
@@ -61,8 +73,8 @@ function ViewProjectPermission({
                 <CollapsibleSubMenu trigger="Flows">
                   <FlowList
                     project={project}
-                    handleMultiChange={handleChange}
-                    handleAllChange={handleNestedAllChange}
+                    handleMultiChange={handleNestedChange}
+                    handleAllChange={handleMultiAllChange}
                     permissionName="VIEW"
                   />
                 </CollapsibleSubMenu>
@@ -78,12 +90,6 @@ function ViewProjectPermission({
   );
 }
 
-ViewProjectPermission.propTypes = {
-  projects: PropTypes.object.isRequired,
-  permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
-  handleNestedAllChange: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-};
+ViewProjectPermission.propTypes = propTypes;
 
 export default ViewProjectPermission;

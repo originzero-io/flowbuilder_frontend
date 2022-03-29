@@ -6,6 +6,9 @@ import { setModal } from "store/reducers/componentReducer";
 import useAuth from "hooks/useAuth";
 import PropTypes from 'prop-types'
 
+const propTypes = {
+  note: PropTypes.object.isRequired
+}
 const EditNoteForm = ({ note }) => {
   const dispatch = useDispatch();
   const auth = useAuth();
@@ -54,7 +57,5 @@ const EditNoteForm = ({ note }) => {
     </>
   );
 };
-EditNoteForm.propTypes = {
-    note: PropTypes.object.isRequired
-}
+EditNoteForm.propTypes = propTypes;
 export default EditNoteForm;

@@ -1,17 +1,19 @@
-import React from "react";
-import {
-  CardMoreButton,
-  DetailMenuList,
-  DetailMenuWrapper,
-  DetailMenuItem,
-} from "./Card.style";
-import { FiMoreVertical } from "react-icons/fi";
 import PropTypes from "prop-types";
+import React from "react";
+import { FiMoreVertical } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { setModal } from "store/reducers/componentReducer";
-import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/MoveFlowForm";
 import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/EditFlowForm";
-import { DropdownWrapper, DropdownItem } from "../../StyledComponents/DropdownMenu";
+import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/MoveFlowForm";
+import { DropdownItem, DropdownWrapper } from "../../StyledComponents/DropdownMenu";
+import {
+  CardMoreButton,
+  DetailMenuList
+} from "./Card.style";
+
+const propTypes = {
+  deleteEvent: PropTypes.func,
+};
 export default function DetailMenu({deleteEvent,data}) {
   const dispatch = useDispatch();
   const moveHandler = (e) => {
@@ -38,6 +40,4 @@ export default function DetailMenu({deleteEvent,data}) {
 }
 
 
-DetailMenu.propTypes = {
-    deleteEvent: PropTypes.func,
-};
+DetailMenu.propTypes = propTypes;

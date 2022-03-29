@@ -9,6 +9,11 @@ import { Content, FeatureIconsWrapper, Header, Label } from "../../Nodes.style";
 import EditNameForm from "./EditNameForm";
 import FeatureIcons from "./FeatureIcons";
 import Flag from "./NodeFlag";
+
+const propTypes = {
+  self: PropTypes.object.isRequired,
+  selectedElements: PropTypes.bool
+};
 export default function NodeHeader({ self, selectedElements }) {
   const dispatch = useDispatch();
   const { flowGui } = useActiveFlow();
@@ -63,7 +68,4 @@ export default function NodeHeader({ self, selectedElements }) {
     </>
   );
 }
-NodeHeader.propTypes = {
-  self: PropTypes.object.isRequired,
-  selectedElements: PropTypes.bool
-}
+NodeHeader.propTypes = propTypes;

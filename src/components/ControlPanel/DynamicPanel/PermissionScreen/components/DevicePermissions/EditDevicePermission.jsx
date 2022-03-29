@@ -5,6 +5,12 @@ import { PermissionHeader, PermissionContent } from "../PermissionScreen.style";
 import PropTypes from "prop-types";
 import CollapsibleMenu, { CollapsibleMenuItem } from "../CollapsibleMenu";
 import PermissionContext from "../../context/PermissionContext";
+
+const propTypes = {
+  permissions: PropTypes.object.isRequired,
+  handleAllChange: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 export default function EditDevicePermission({
   permissions,
   handleAllChange,
@@ -23,7 +29,7 @@ export default function EditDevicePermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_EDIT_CONTROLLER"
-                onChange={(e) => handleAllChange(e, controllers)}
+                onChange={handleAllChange}
                 defaultChecked={permissions.CAN_EDIT_CONTROLLER_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={
@@ -99,8 +105,4 @@ export default function EditDevicePermission({
   );
 }
 
-EditDevicePermission.propTypes = {
-  permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-};
+EditDevicePermission.propTypes = propTypes;

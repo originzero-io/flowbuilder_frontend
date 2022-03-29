@@ -4,6 +4,10 @@ import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import { PermissionHeader, PermissionContent } from "../PermissionScreen.style";
 import PropTypes from "prop-types";
 
+const propTypes = {
+  permissions: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 export default function DeleteDevicePermission({ permissions, handleChange }) {
   return (
     <>
@@ -34,7 +38,4 @@ export default function DeleteDevicePermission({ permissions, handleChange }) {
   );
 }
 
-DeleteDevicePermission.propTypes = {
-  permissions: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
-};
+DeleteDevicePermission.propTypes = propTypes;

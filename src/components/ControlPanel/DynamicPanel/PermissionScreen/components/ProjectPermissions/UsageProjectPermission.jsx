@@ -9,12 +9,22 @@ import CollapsibleMenu, {
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import FlowList from "../FlowList";
 import DashboardList from "../DashboardList";
+
+const propTypes = {
+  projects: PropTypes.object.isRequired,
+  permissions: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleNestedChange: PropTypes.func.isRequired,
+  handleAllChange: PropTypes.func.isRequired,
+  handleMultiAllChange: PropTypes.func.isRequired,
+};
 function UsageProjectPermission({
   projects,
   permissions,
-  handleAllChange,
-  handleNestedAllChange,
   handleChange,
+  handleNestedChange,
+  handleAllChange,
+  handleMultiAllChange,
 }) {
   return (
     <>
@@ -25,7 +35,7 @@ function UsageProjectPermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_USAGE_PROJECT"
-                onChange={(e) => handleAllChange(e, projects)}
+                onChange={handleAllChange}
                 defaultChecked={permissions.CAN_USAGE_PROJECT_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={
@@ -58,8 +68,8 @@ function UsageProjectPermission({
                 <CollapsibleSubMenu trigger="Flows">
                   <FlowList
                     project={project}
-                    handleMultiChange={handleChange}
-                    handleAllChange={handleNestedAllChange}
+                    handleMultiChange={handleNestedChange}
+                    handleAllChange={handleMultiAllChange}
                     permissionName="USAGE"
                   />
                 </CollapsibleSubMenu>
@@ -75,12 +85,6 @@ function UsageProjectPermission({
   );
 }
 
-UsageProjectPermission.propTypes = {
-  projects: PropTypes.object.isRequired,
-  permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
-  handleNestedAllChange: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-};
+UsageProjectPermission.propTypes = propTypes;
 
 export default UsageProjectPermission;

@@ -3,6 +3,10 @@ import {useDispatch} from "react-redux"
 import { rotateNode } from "store/reducers/flow/flowElementsReducer";
 import { HorizontalToVerticalIcon, VerticalToHorizontalIcon } from "./Icons";
 import PropTypes from "prop-types"
+
+const propTypes = {
+  self: PropTypes.object.isRequired
+};
 export default function RotateButton({ self }) {
   const dispatch = useDispatch();
   const rotateHandle = () => {
@@ -19,6 +23,4 @@ export default function RotateButton({ self }) {
   );
 }
 
-RotateButton.propTypes = {
-  self: PropTypes.object.isRequired
-}
+RotateButton.propTypes = propTypes;

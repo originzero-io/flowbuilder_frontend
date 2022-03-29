@@ -15,6 +15,14 @@ import getIconInstance from "./Icons/iconConstant";
 import { setOutgoersEnable } from "store/reducers/flow/flowElementsReducer";
 import PropTypes from "prop-types"
 import useActiveFlow from "hooks/useActiveFlow";
+
+const propTypes = {
+  self: PropTypes.object.isRequired,
+  ioType: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  collapsible: PropTypes.bool,
+};
+
 const NodeGod = ({ self, ioType, children, collapsible }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sources = Array.from(Array(self.data.sourceCount).keys());
@@ -103,9 +111,4 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
 export default React.memo(NodeGod);
 
 
-NodeGod.propTypes = {
-  self: PropTypes.object.isRequired,
-  ioType: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([PropTypes.array,PropTypes.object]),
-  collapsible: PropTypes.bool,
-}
+NodeGod.propTypes = propTypes;

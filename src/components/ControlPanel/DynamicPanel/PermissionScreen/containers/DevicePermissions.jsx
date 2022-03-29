@@ -28,11 +28,11 @@ export default function DevicePermissions({
   const handleMultiDeviceChange = (e) => {
     dispatch(setMultiplePermission(e, "device"));
   };
-  const handleAllChange = (e, data) => {
-    const ids = data.map((d) => d._id);
-    console.log("ids:", ids);
-    dispatch(setSingleAllPermission(e, ids, "device"));
+  const handleAllChange = (e) => {
+    dispatch(setSingleAllPermission(e, "device"));
   };
+  //console.log('device permissions rendered');
+
   return (
     <TabContainer>
       <PermissionContainer>

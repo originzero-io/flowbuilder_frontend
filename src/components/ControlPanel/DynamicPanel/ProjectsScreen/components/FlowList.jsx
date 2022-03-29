@@ -10,6 +10,10 @@ import { getElementsByFlow } from "store/reducers/flow/flowElementsReducer";
 import { elementNamespace } from "SocketConnections";
 import { beginTheBar } from "store/reducers/componentReducer";
 
+const propTypes = {
+  flows: PropTypes.oneOfType([PropTypes.array, null])
+};
+
 const FlowList = ({ flows }) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -33,7 +37,6 @@ const FlowList = ({ flows }) => {
     </>
   );
 }
-FlowList.propTypes = {
-  flows: PropTypes.oneOfType([PropTypes.array, null])
-}
+FlowList.propTypes = propTypes;
+
 export default React.memo(FlowList);

@@ -1,15 +1,20 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { ReactFlowProvider } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import FlowEditor from "../components/FlowEditor/FlowEditor";
-import { getGroups } from "store/reducers/flow/flowGroupsReducer";
 import styled from "styled-components";
+import FlowEditor from "../components/FlowEditor/FlowEditor";
+
 const FlowWrapper = styled.div`
   height:100%;
   width:100%;
 `;
+
+const propTypes = {
+  match: PropTypes.object,
+};
+
 const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowId } = useParams();
@@ -23,8 +28,7 @@ const FlowPage = () => {
     </ReactFlowProvider>
   );
 };
-FlowPage.propTypes = {
-  match: PropTypes.object,
-};
+
+FlowPage.propTypes = propTypes;
 
 export default React.memo(FlowPage);

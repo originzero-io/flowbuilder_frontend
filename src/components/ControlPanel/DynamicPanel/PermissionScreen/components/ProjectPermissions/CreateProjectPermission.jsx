@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 
+const propTypes = {
+  permissions: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 function CreateProjectPermission({ permissions, handleChange }) {
   return (
     <>
@@ -22,9 +26,6 @@ function CreateProjectPermission({ permissions, handleChange }) {
   );
 }
 
-CreateProjectPermission.propTypes = {
-  permissions: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
-};
+CreateProjectPermission.propTypes = propTypes;
 
 export default CreateProjectPermission;

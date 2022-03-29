@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { setAuthorizationToken } from "utils/httpHelpers";
-import { mainNamespace } from 'SocketConnections';
 export const loginService = async (user) => {
     const response = await axios.post("/auth/login", user);
     const token = response.data.access_token;

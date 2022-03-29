@@ -1,5 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
+
+const propTypes = {
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  size: PropTypes.string,
+  type: PropTypes.string,
+  checked: PropTypes.bool,
+  defaultChecked: PropTypes.bool,
+  center: PropTypes.bool,
+  disabled:PropTypes.bool
+};
 export default function Checkbox({
   name,
   onChange,
@@ -56,14 +68,4 @@ export default function Checkbox({
     <>{center ? <div style={centeredStyle}>{checkbox()}</div> : checkbox()}</>
   );
 }
-Checkbox.propTypes = {
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  onClick: PropTypes.func,
-  size: PropTypes.string,
-  type: PropTypes.string,
-  checked: PropTypes.bool,
-  defaultChecked: PropTypes.bool,
-  center: PropTypes.bool,
-  disabled:PropTypes.bool
-};
+Checkbox.propTypes = propTypes;

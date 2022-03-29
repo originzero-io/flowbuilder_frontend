@@ -5,6 +5,12 @@ import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import CollapsibleMenu, { CollapsibleMenuItem } from "../CollapsibleMenu";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 
+const propTypes = {
+  projects: PropTypes.object.isRequired,
+  permissions: PropTypes.object.isRequired,
+  handleAllChange: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 function CreateFlowPermission({
   projects,
   permissions,
@@ -20,7 +26,7 @@ function CreateFlowPermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_CREATE_FLOW"
-                onChange={(e) => handleAllChange(e, projects)}
+                onChange={handleAllChange}
                 defaultChecked={permissions.CAN_CREATE_FLOW_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={
@@ -57,11 +63,6 @@ function CreateFlowPermission({
   );
 }
 
-CreateFlowPermission.propTypes = {
-  projects: PropTypes.object.isRequired,
-  permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-};
+CreateFlowPermission.propTypes = propTypes;
 
 export default CreateFlowPermission;

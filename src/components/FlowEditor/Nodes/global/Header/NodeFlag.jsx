@@ -1,6 +1,11 @@
 import React from "react";
 import { GroupFlagIcon } from "../Icons";
 import PropTypes from "prop-types"
+
+const propTypes = {
+  self: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired
+};
 function Flag({ self, onClick }) {
   return (
     <div onClick={onClick} style={{marginTop: "-4px", marginRight: "-3px" }}>
@@ -8,8 +13,6 @@ function Flag({ self, onClick }) {
     </div>
   );
 }
+Flag.propTypes = propTypes;
+
 export default Flag;
-Flag.propTypes = {
-  self: PropTypes.object.isRequired,
-  onClick:PropTypes.func.isRequired
-}

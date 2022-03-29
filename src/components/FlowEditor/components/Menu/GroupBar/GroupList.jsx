@@ -12,6 +12,11 @@ import { NameEditIcon } from "components/Shared/icons";
 import PropTypes from "prop-types";
 import { useParams } from "react-router";
 import useActiveFlow from "hooks/useActiveFlow";
+
+const propTypes = {
+  theme: PropTypes.string.isRequired,
+};
+
 const GroupList = ({ theme }) => {
   const { flowGroups, flowElements, flowGui } =
     useActiveFlow();
@@ -99,7 +104,5 @@ const GroupList = ({ theme }) => {
   );
 };
 
+GroupList.propTypes = propTypes;
 export default React.memo(GroupList);
-GroupList.propTypes = {
-  theme: PropTypes.string.isRequired,
-};

@@ -4,6 +4,9 @@ import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import { CollapsibleMenuItem } from "./CollapsibleMenu";
 
+const propTypes = {
+  project: PropTypes.object.required
+};
 function DashboardList({ project}) {
   const [dashboards, setDashboards] = useState([]);
   return (
@@ -30,8 +33,5 @@ function DashboardList({ project}) {
   );
 }
 
-DashboardList.propTypes = {
-  project: PropTypes.object.required
-};
-
+DashboardList.propTypes = propTypes;
 export default DashboardList;

@@ -2,6 +2,13 @@ import React from "react";
 import { NodeElement,IconWrapper,Label } from "./PanelContextMenu.style";
 import FavIconManager from "./FavIconManager";
 import PropTypes from "prop-types"
+
+const propTypes = {
+  node: PropTypes.object.isRequired,
+  onDragStart: PropTypes.func.isRequired,
+  addNewNode: PropTypes.func.isRequired,
+  favClick: PropTypes.func.isRequired
+}
 export default function NodeListItem({ node, onDragStart, addNewNode, favClick }) {
   return (
     <NodeElement
@@ -23,9 +30,4 @@ export default function NodeListItem({ node, onDragStart, addNewNode, favClick }
   );
 }
 
-NodeListItem.propTypes = {
-  node: PropTypes.object.isRequired,
-  onDragStart: PropTypes.func.isRequired,
-  addNewNode: PropTypes.func.isRequired,
-  favClick: PropTypes.func.isRequired
-}
+NodeListItem.propTypes = propTypes;

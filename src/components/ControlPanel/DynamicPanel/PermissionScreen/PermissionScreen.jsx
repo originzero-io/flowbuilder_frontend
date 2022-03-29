@@ -19,9 +19,14 @@ import { PermissionProvider } from "./context/PermissionContext";
 import {
   setSingleAllPermission,
   setMultiplePermission,
+  setNestedMultiplePermission,
   setSinglePermission,
   setMultipleAllPermission,
 } from "store/reducers/userPermissionReducer";
+import { Button } from "reactstrap";
+import { AiOutlineSave } from "react-icons/ai";
+import { assignPermissionToMemberService } from "services/userService";
+import toast from "react-hot-toast";
 export default function PermissionScreen() {
   const dispatch = useDispatch();
   const { activeWorkspace } = useWorkspace();
@@ -32,6 +37,12 @@ export default function PermissionScreen() {
     dispatch(setCanDoEverytingPermission(e.target.checked));
   };
   const permissions = useUserPermission();
+
+  const handleSavePermissions = async () => {
+    console.log(permissions);
+    await assignPermissionToMemberService(member, activeWorkspace, permissions);
+    toast.success('Permissions saved')
+  }
   return (
     <PermissionProvider>
       <div style={{ height: "90vh" }}>
@@ -48,6 +59,8 @@ export default function PermissionScreen() {
               checked={permissions.CAN_DO_EVERYTHING}
             />
           </CheckboxGroup>
+
+          
         </AllPermissionsContainer>
         <Tabs
           selectedTabClassName="selected-tab"
@@ -84,6 +97,7 @@ export default function PermissionScreen() {
             <ProjectPermissions
               setSinglePermission={setSinglePermission}
               setMultiplePermission={setMultiplePermission}
+              setNestedMultiplePermission={setNestedMultiplePermission}
               setSingleAllPermission={setSingleAllPermission}
               setMultipleAllPermission={setMultipleAllPermission}
             />
@@ -92,6 +106,7 @@ export default function PermissionScreen() {
             <TeamPermissions setSinglePermission={setSinglePermission} />
           </TabPanel>
         </Tabs>
+        <Button color="success" onClick={handleSavePermissions}><AiOutlineSave style={{ fontSize: '24px' }}/> Save</Button>
       </div>
     </PermissionProvider>
   );

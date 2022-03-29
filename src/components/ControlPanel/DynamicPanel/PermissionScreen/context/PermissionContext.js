@@ -2,6 +2,10 @@ import React, { createContext, useState } from "react";
 import PropTypes from "prop-types";
 
 const PermissionContext = createContext({});
+
+const propTypes = {
+  children: PropTypes.element,
+};
 export function PermissionProvider({ children }) {
   const [controllers, setControllers] = useState([
     {
@@ -55,8 +59,6 @@ export function PermissionProvider({ children }) {
   );
 }
 
-PermissionProvider.propTypes = {
-  children: PropTypes.element,
-};
+PermissionProvider.propTypes = propTypes;
 
 export default PermissionContext;
