@@ -44,11 +44,13 @@ function FlowList({
                   projectPermissions.EVERYTHING ||
                   projectPermissions[PROJECT_NAME].includes(project._id) ||
                   (permissionName === "VIEW" &&
-                        (
-                          projectPermissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
-                          projectPermissions.CAN_EDIT_FLOW_ALL.includes(project._id) ||
-                          projectPermissions.CAN_DELETE_FLOW_ALL.includes(project._id)
-                  ))
+                    (
+                      projectPermissions.CAN_VIEW_PROJECT_ALL ||
+                      projectPermissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
+                      projectPermissions.CAN_EDIT_FLOW_ALL.includes(project._id) ||
+                      projectPermissions.CAN_DELETE_FLOW_ALL.includes(project._id)
+                    )
+                  )
                 }
                 checked={
                   projectPermissions.EVERYTHING ||
@@ -73,6 +75,8 @@ function FlowList({
                       projectPermissions[PROJECT_NAME].includes(flow.project._id) ||
                       (permissionName === "VIEW" &&
                         (
+                          projectPermissions.CAN_VIEW_PROJECT_ALL ||
+                        
                           projectPermissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id) ||
                           projectPermissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
                           projectPermissions.CAN_DELETE_FLOW.some(f => f.id === flow._id) ||
@@ -80,7 +84,8 @@ function FlowList({
                           projectPermissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
                           projectPermissions.CAN_EDIT_FLOW_ALL.includes(project._id) ||
                           projectPermissions.CAN_DELETE_FLOW_ALL.includes(project._id)
-                        ))
+                        )
+                      )
                     }
                     checked={
                       projectPermissions.EVERYTHING ||

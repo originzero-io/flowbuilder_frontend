@@ -41,7 +41,7 @@ export default function ProjectPermissions({
   
     dispatch(setMultiplePermission(e, "project"));
   };
-  const handleAllChange = (e) => {
+  const handleSingleAllChange = (e) => {
     console.warn("ALL_CHANGE çalıştı");
     dispatch(setSingleAllPermission(e, "project"));
   };
@@ -77,7 +77,7 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
-          handleAllChange={handleAllChange}
+          handleAllChange={handleSingleAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
@@ -85,7 +85,7 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
-          handleAllChange={handleAllChange}
+          handleAllChange={handleSingleAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
@@ -94,7 +94,7 @@ export default function ProjectPermissions({
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleNestedChange={handleNestedMultiChange}
-          handleAllChange={handleAllChange}
+          handleAllChange={handleSingleAllChange}
           handleMultiAllChange={handleMultiAllChange}
         />
       </PermissionContainer>
@@ -104,7 +104,7 @@ export default function ProjectPermissions({
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleNestedChange={handleNestedMultiChange}
-          handleAllChange={handleAllChange}
+          handleAllChange={handleSingleAllChange}
           handleMultiAllChange={handleMultiAllChange}
         />
       </PermissionContainer>
@@ -114,7 +114,7 @@ export default function ProjectPermissions({
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleNestedChange={handleNestedMultiChange}
-          handleAllChange={handleAllChange}
+          handleAllChange={handleSingleAllChange}
           handleMultiAllChange={handleMultiAllChange}
         />
       </PermissionContainer>
@@ -124,7 +124,7 @@ export default function ProjectPermissions({
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleNestedChange={handleNestedMultiChange}
-          handleAllChange={handleAllChange}
+          handleAllChange={handleSingleAllChange}
           handleMultiAllChange={handleMultiAllChange}
         />
       </PermissionContainer>
