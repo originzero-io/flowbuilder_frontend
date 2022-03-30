@@ -17,7 +17,7 @@ const propTypes = {
   setMultiplePermission: PropTypes.func,
   setNestedMultiplePermission: PropTypes.func,
   setSingleAllPermission: PropTypes.func,
-  setMultipleAllPermission: PropTypes.func,
+  setNestedAllPermission: PropTypes.func,
 };
 
 export default function ProjectPermissions({
@@ -25,7 +25,7 @@ export default function ProjectPermissions({
   setMultiplePermission,
   setNestedMultiplePermission,
   setSingleAllPermission,
-  setMultipleAllPermission,
+  setNestedAllPermission,
 }) {
   const dispatch = useDispatch();
   const { projects } = useProject();
@@ -36,7 +36,6 @@ export default function ProjectPermissions({
     dispatch(setSinglePermission(e, "project"));
   };
   const handleMultiProjectChange = (e) => {
-    //console.log("handleMultiChange:", e.target);
     console.warn("MULTI_CHANGE çalıştı");
   
     dispatch(setMultiplePermission(e, "project"));
@@ -47,7 +46,7 @@ export default function ProjectPermissions({
   };
   const handleMultiAllChange = (e) => {
     console.warn("MULTI_ALL_CHANGE çalıştı");
-    dispatch(setMultipleAllPermission(e, "project"));
+    dispatch(setNestedAllPermission(e, "project"));
   };
   const handleNestedMultiChange = (e, flow) => {
     const { _id, project } = flow;
@@ -57,8 +56,6 @@ export default function ProjectPermissions({
     }
     console.warn("NESTED_MULTI_CHANGE çalıştı")
     console.log("flowData:", flowData);
-    //console.log("e:", e.target);
-    //const ids = data.map((d) => d._id);
 
     dispatch(setNestedMultiplePermission(e, flowData,"project"));
   };
@@ -93,7 +90,7 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
-          handleNestedChange={handleNestedMultiChange}
+          handleNestedMultiChange={handleNestedMultiChange}
           handleAllChange={handleSingleAllChange}
           handleMultiAllChange={handleMultiAllChange}
         />
@@ -103,7 +100,7 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
-          handleNestedChange={handleNestedMultiChange}
+          handleNestedMultiChange={handleNestedMultiChange}
           handleAllChange={handleSingleAllChange}
           handleMultiAllChange={handleMultiAllChange}
         />
@@ -113,7 +110,7 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
-          handleNestedChange={handleNestedMultiChange}
+          handleNestedMultiChange={handleNestedMultiChange}
           handleAllChange={handleSingleAllChange}
           handleMultiAllChange={handleMultiAllChange}
         />
@@ -123,7 +120,7 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
-          handleNestedChange={handleNestedMultiChange}
+          handleNestedMultiChange={handleNestedMultiChange}
           handleAllChange={handleSingleAllChange}
           handleMultiAllChange={handleMultiAllChange}
         />

@@ -42,6 +42,7 @@ function FlowList({
                 defaultChecked={projectPermissions[`${FLOW_NAME}_ALL`]}
                 disabled={
                   projectPermissions.EVERYTHING ||
+                  projectPermissions[PROJECT_ALL] ||
                   projectPermissions[PROJECT_NAME].includes(project._id) ||
                   (permissionName === "VIEW" &&
                     (
@@ -72,6 +73,7 @@ function FlowList({
                     //defaultChecked={projectPermissions[FLOW_NAME].includes(flow._id)}
                     disabled={
                       projectPermissions.EVERYTHING ||
+                      projectPermissions[PROJECT_ALL] ||
                       projectPermissions[PROJECT_NAME].includes(flow.project._id) ||
                       (permissionName === "VIEW" &&
                         (

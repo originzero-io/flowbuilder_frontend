@@ -433,7 +433,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
         }
       }
       
-    case "SET_MULTIPLE_ALL_PERMISSION":
+    case "SET_NESTED_ALL_PERMISSION":
       if (payload.checked) {
         if (!state.project.CAN_VIEW_FLOW_ALL.includes(payload.id)) {
           return {
@@ -580,8 +580,8 @@ export const setSingleAllPermission = (event, permissionType) => ({
     permissionType: permissionType
   }
 });
-export const setMultipleAllPermission = (event, permissionType) => ({
-  type: "SET_MULTIPLE_ALL_PERMISSION",
+export const setNestedAllPermission = (event, permissionType) => ({
+  type: "SET_NESTED_ALL_PERMISSION",
   payload: {
     name: event.target.name,
     checked: event.target.checked,

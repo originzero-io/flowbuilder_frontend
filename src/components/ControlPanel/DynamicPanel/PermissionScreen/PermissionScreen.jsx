@@ -17,11 +17,11 @@ import ProjectPermissions from "./containers/ProjectPermissions";
 import TeamPermissions from "./containers/TeamPermissions";
 import { PermissionProvider } from "./context/PermissionContext";
 import {
-  setSingleAllPermission,
+  setSinglePermission,
   setMultiplePermission,
   setNestedMultiplePermission,
-  setSinglePermission,
-  setMultipleAllPermission,
+  setSingleAllPermission,
+  setNestedAllPermission,
 } from "store/reducers/userPermissionReducer";
 import { Button } from "reactstrap";
 import { AiOutlineSave } from "react-icons/ai";
@@ -95,11 +95,11 @@ export default function PermissionScreen() {
           </TabPanel>
           <TabPanel style={{ height: "100%" }}>
             <ProjectPermissions
-              setSinglePermission={setSinglePermission}
+              setSingleAllPermission={setSingleAllPermission}
               setMultiplePermission={setMultiplePermission}
               setNestedMultiplePermission={setNestedMultiplePermission}
-              setSingleAllPermission={setSingleAllPermission}
-              setMultipleAllPermission={setMultipleAllPermission}
+              setSinglePermission={setSinglePermission}
+              setNestedAllPermission={setNestedAllPermission}
             />
           </TabPanel>
           <TabPanel style={{ height: "100%" }}>
