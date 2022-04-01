@@ -5,6 +5,7 @@ import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import { CollapsibleMenuItem } from "./CollapsibleMenu";
 import useUserPermission from "hooks/useUserPermission";
+import useDidMountEffect from "hooks/useDidMountEffect";
 
 const propTypes = {
   project: PropTypes.object.required,
@@ -20,10 +21,11 @@ function FlowList({
 }) {
   const [flows, setFlows] = useState([]);
   const projectPermissions = useUserPermission("project");
-  const PROJECT_NAME = `CAN_${permissionName.toUpperCase()}_PROJECT`;
-  const PROJECT_ALL = `CAN_${permissionName.toUpperCase()}_PROJECT_ALL`;
-  const FLOW_ALL = `CAN_${permissionName.toUpperCase()}_FLOW_ALL`;
-  const FLOW_NAME = `CAN_${permissionName.toUpperCase()}_FLOW`;
+  const PROJECT_NAME = `CAN_${permissionName}_PROJECT`;
+  const PROJECT_ALL = `CAN_${permissionName}_PROJECT_ALL`;
+  const FLOW_ALL = `CAN_${permissionName}_FLOW_ALL`;
+  const FLOW_NAME = `CAN_${permissionName}_FLOW`;
+
   useEffect(async () => {
     const data = await getFlowsByProjectService(project);
     setFlows(data.flows);

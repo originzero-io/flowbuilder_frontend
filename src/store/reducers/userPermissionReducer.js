@@ -239,8 +239,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
                 ...state[payload.permissionType],
                 [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
                 CAN_VIEW_FLOW: state[payload.permissionType].CAN_VIEW_FLOW.filter(p => p.id !== payload.flowData.id),
-                //[`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.id),
-                [`${payload.name}_ALL`]: []
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.flowData.projectId),
               }
             }
           }
@@ -250,8 +249,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
               [payload.permissionType]: {
                 ...state[payload.permissionType],
                 [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
-                //[`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.id)
-                [`${payload.name}_ALL`]: []
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.flowData.projectId)
               }
             }
           }
@@ -264,7 +262,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
                 ...state[payload.permissionType],
                 [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
                 CAN_VIEW_FLOW: state[payload.permissionType].CAN_VIEW_FLOW.filter(p => p.id !== payload.flowData.id),
-                [`${payload.name}_ALL`]: []
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.flowData.projectId),
               }
             }
           }
@@ -274,7 +272,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
               [payload.permissionType]: {
                 ...state[payload.permissionType],
                 [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
-                [`${payload.name}_ALL`]: []
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.flowData.projectId),
               }
             }
           }
@@ -287,7 +285,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
                 ...state[payload.permissionType],
                 [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
                 CAN_VIEW_FLOW: state[payload.permissionType].CAN_VIEW_FLOW.filter(p => p.id !== payload.flowData.id),
-                [`${payload.name}_ALL`]: []
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.flowData.projectId),
               }
             }
           }
@@ -297,7 +295,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
               [payload.permissionType]: {
                 ...state[payload.permissionType],
                 [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
-                [`${payload.name}_ALL`]: []
+                [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.flowData.projectId),
               }
             }
           }
@@ -308,7 +306,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
             [payload.permissionType]: {
               ...state[payload.permissionType],
               [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
-              [`${payload.name}_ALL`]: []
+              [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.flowData.projectId),
             }
           }
         }
@@ -435,25 +433,43 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
       
     case "SET_NESTED_ALL_PERMISSION":
       if (payload.checked) {
-        if (!state.project.CAN_VIEW_FLOW_ALL.includes(payload.id)) {
+        if (payload.name === "CAN_VIEW_FLOW" && !state.project.CAN_VIEW_FLOW_ALL.includes(payload.id)) {
           return {
             ...state,
             [payload.permissionType]: {
               ...state[payload.permissionType],
-              [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
-              CAN_VIEW_FLOW_ALL: [...state[payload.permissionType].CAN_VIEW_FLOW_ALL, payload.id]
+              CAN_VIEW_FLOW_ALL: [...state[payload.permissionType].CAN_VIEW_FLOW_ALL, payload.id],
             },
           };
         }
         else {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
-            },
-          };
+          if (!state.project.CAN_VIEW_FLOW_ALL.includes(payload.id)) {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
+                CAN_VIEW_FLOW_ALL: [...state[payload.permissionType].CAN_VIEW_FLOW_ALL, payload.id]
+              },
+            };
+          }
+          else {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
+              },
+            };
+          }
         }
+        // return {
+        //   ...state,
+        //   [payload.permissionType]: {
+        //     ...state[payload.permissionType],
+        //     [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
+        //   },
+        // };
       }
       else if (!payload.checked) {
         if (payload.name === "CAN_USAGE_FLOW") {
@@ -589,3 +605,13 @@ export const setNestedAllPermission = (event, permissionType) => ({
     permissionType: permissionType
   }
 });
+///?
+// export const setAllBy = (event, permissionType) => ({
+//   type: "SET_NESTED_ALL_PERMISSION",
+//   payload: {
+//     name: event.target.name,
+//     checked: event.target.checked,
+//     id:event.target.id,
+//     permissionType: permissionType
+//   }
+// });

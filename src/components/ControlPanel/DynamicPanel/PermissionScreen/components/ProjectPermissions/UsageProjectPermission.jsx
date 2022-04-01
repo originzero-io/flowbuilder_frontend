@@ -11,7 +11,7 @@ import FlowList from "../FlowList";
 import DashboardList from "../DashboardList";
 
 const propTypes = {
-  projects: PropTypes.object.isRequired,
+  projects: PropTypes.array.isRequired,
   permissions: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleNestedMultiChange: PropTypes.func.isRequired,
@@ -26,6 +26,7 @@ function UsageProjectPermission({
   handleAllChange,
   handleMultiAllChange,
 }) {
+  console.log("usage-project-rendered");
   return (
     <>
       <PermissionHeader>Usage</PermissionHeader>
@@ -73,7 +74,7 @@ function UsageProjectPermission({
                     permissionName="USAGE"
                   />
                 </CollapsibleSubMenu>
-                <CollapsibleSubMenu trigger="Dashboards">
+                <CollapsibleSubMenu trigger="Dashboards" open={false}>
                   <DashboardList project={project} />
                 </CollapsibleSubMenu>
               </CollapsibleSubMenu>
@@ -87,4 +88,4 @@ function UsageProjectPermission({
 
 UsageProjectPermission.propTypes = propTypes;
 
-export default UsageProjectPermission;
+export default React.memo(UsageProjectPermission);

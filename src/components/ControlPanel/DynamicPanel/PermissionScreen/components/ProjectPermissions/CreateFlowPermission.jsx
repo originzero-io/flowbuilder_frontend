@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
@@ -17,6 +17,16 @@ function CreateFlowPermission({
   handleAllChange,
   handleChange,
 }) {
+useEffect(() => {
+  if (permissions.CAN_CREATE_FLOW.length === projects.length) {
+    handleAllChange({
+      target: {
+        name: 'CAN_CREATE_FLOW',
+        checked: true,
+      }
+    })
+  }
+}, [permissions.CAN_CREATE_FLOW.length]);
   return (
     <>
       <PermissionHeader>Flow Create</PermissionHeader>

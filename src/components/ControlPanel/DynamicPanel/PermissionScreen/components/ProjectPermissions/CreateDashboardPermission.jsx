@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
@@ -17,6 +17,17 @@ function CreateDashboardPermission({
   handleAllChange,
   handleChange,
 }) {
+
+  useEffect(() => {
+    if (permissions.CAN_CREATE_DASHBOARD.length === projects.length) {
+      handleAllChange({
+        target: {
+          name: 'CAN_CREATE_DASHBOARD',
+          checked: true,
+        }
+      })
+    }
+  }, [permissions.CAN_CREATE_DASHBOARD.length]);
   return (
     <>
       <PermissionHeader>Dashboard Create</PermissionHeader>

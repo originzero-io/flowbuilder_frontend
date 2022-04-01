@@ -11,7 +11,7 @@ import FlowList from "../FlowList";
 import DashboardList from "../DashboardList";
 
 const propTypes = {
-  projects: PropTypes.object.isRequired,
+  projects: PropTypes.array.isRequired,
   permissions: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleNestedMultiChange: PropTypes.func.isRequired,
@@ -73,7 +73,7 @@ function DeleteProjectPermission({
                     permissionName="DELETE"
                   />
                 </CollapsibleSubMenu>
-                <CollapsibleSubMenu trigger="Dashboards">
+                <CollapsibleSubMenu trigger="Dashboards" open={false}>
                   <DashboardList project={project} />
                 </CollapsibleSubMenu>
               </CollapsibleSubMenu>

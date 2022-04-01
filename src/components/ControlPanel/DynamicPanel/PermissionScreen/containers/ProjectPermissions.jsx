@@ -45,7 +45,8 @@ export default function ProjectPermissions({
     dispatch(setSingleAllPermission(e, "project"));
   };
   const handleMultiAllChange = (e) => {
-    console.warn("MULTI_ALL_CHANGE çalıştı");
+    console.log("MULTI_ALL_CHANGE çalıştı");
+    console.log("MULT_ALL_CHANGE",e.target);
     dispatch(setNestedAllPermission(e, "project"));
   };
   const handleNestedMultiChange = (e, flow) => {
@@ -54,9 +55,9 @@ export default function ProjectPermissions({
       id: _id,
       projectId:project._id
     }
-    console.warn("NESTED_MULTI_CHANGE çalıştı")
-    console.log("flowData:", flowData);
-
+    console.log("NESTED_MULTI_CHANGE çalıştı")
+    //console.log("flowData:", flowData);
+    
     dispatch(setNestedMultiplePermission(e, flowData,"project"));
   };
 

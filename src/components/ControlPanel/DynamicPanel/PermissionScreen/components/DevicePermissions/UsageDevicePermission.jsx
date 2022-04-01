@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect } from "react";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import { PermissionHeader, PermissionContent } from "../PermissionScreen.style";
@@ -17,6 +17,26 @@ export default function UsageDevicePermission({
   handleChange,
 }) {
   const { controllers, processors } = useContext(PermissionContext);
+  useEffect(() => {
+    if (permissions.CAN_USAGE_CONTROLLER.length === controllers.length) {
+      handleAllChange({
+        target: {
+          name: 'CAN_USAGE_CONTROLLER',
+          checked: true,
+        }
+      })
+    }
+  }, [permissions.CAN_USAGE_CONTROLLER.length]);
+  useEffect(() => {
+    if (permissions.CAN_USAGE_PROCESSOR.length === processors.length) {
+      handleAllChange({
+        target: {
+          name: 'CAN_USAGE_PROCESSOR',
+          checked: true,
+        }
+      })
+    }
+  }, [permissions.CAN_USAGE_PROCESSOR.length]);
   return (
     <>
       <PermissionHeader>Usage</PermissionHeader>
