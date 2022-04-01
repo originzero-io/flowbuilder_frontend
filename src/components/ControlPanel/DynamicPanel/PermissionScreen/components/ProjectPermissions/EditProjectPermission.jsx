@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
@@ -15,7 +15,7 @@ const propTypes = {
   permissions: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleNestedMultiChange: PropTypes.func.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
+  handleSingleAllChange: PropTypes.func.isRequired,
   handleNestedAllChange: PropTypes.func.isRequired,
 };
 function EditProjectPermission({
@@ -23,9 +23,19 @@ function EditProjectPermission({
   permissions,
   handleChange,
   handleNestedMultiChange,
-  handleAllChange,
+  handleSingleAllChange,
   handleNestedAllChange,
 }) {
+  useEffect(() => {
+    if (projects.length === permissions.CAN_EDIT_PROJECT.length) {
+      handleSingleAllChange({
+        target: {
+          name: 'CAN_EDIT_PROJECT',
+          checked:true
+        }
+      })
+    }
+  }, [permissions.CAN_EDIT_PROJECT.length]);
   return (
     <>
       <PermissionHeader>Edit</PermissionHeader>
@@ -35,7 +45,7 @@ function EditProjectPermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_EDIT_PROJECT"
-                onChange={handleAllChange}
+                onChange={handleSingleAllChange}
                 defaultChecked={permissions.CAN_EDIT_PROJECT_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={

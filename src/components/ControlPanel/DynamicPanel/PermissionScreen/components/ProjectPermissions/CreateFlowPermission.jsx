@@ -8,18 +8,18 @@ import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 const propTypes = {
   projects: PropTypes.object.isRequired,
   permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
+  handleSingleAllChange: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 function CreateFlowPermission({
   projects,
   permissions,
-  handleAllChange,
+  handleSingleAllChange,
   handleChange,
 }) {
 useEffect(() => {
   if (permissions.CAN_CREATE_FLOW.length === projects.length) {
-    handleAllChange({
+    handleSingleAllChange({
       target: {
         name: 'CAN_CREATE_FLOW',
         checked: true,
@@ -36,7 +36,7 @@ useEffect(() => {
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_CREATE_FLOW"
-                onChange={handleAllChange}
+                onChange={handleSingleAllChange}
                 defaultChecked={permissions.CAN_CREATE_FLOW_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={

@@ -25,6 +25,7 @@ import {
 } from "store/reducers/userPermissionReducer";
 import { Button } from "reactstrap";
 import { AiOutlineSave } from "react-icons/ai";
+import { MdOutlineAssignmentInd } from "react-icons/md";
 import { assignPermissionToMemberService } from "services/userService";
 import toast from "react-hot-toast";
 export default function PermissionScreen() {
@@ -42,6 +43,9 @@ export default function PermissionScreen() {
     console.log(permissions);
     await assignPermissionToMemberService(member, activeWorkspace, permissions);
     toast.success('Permissions saved')
+  }
+  const handlePreset = async () => {
+    toast.loading('Presets are developing...')
   }
   return (
     <PermissionProvider>
@@ -106,7 +110,8 @@ export default function PermissionScreen() {
             <TeamPermissions setSinglePermission={setSinglePermission} />
           </TabPanel>
         </Tabs>
-        <Button color="success" onClick={handleSavePermissions}><AiOutlineSave style={{ fontSize: '24px' }}/> Save</Button>
+        <Button color="success" onClick={handleSavePermissions}><AiOutlineSave style={{ fontSize: '24px' }}/> Assign</Button>
+        <Button outline style={{marginLeft:'15px' }} onClick={handlePreset}><MdOutlineAssignmentInd style={{ fontSize: '24px' }}/> Save as preset</Button>
       </div>
     </PermissionProvider>
   );

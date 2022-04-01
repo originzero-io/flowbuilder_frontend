@@ -30,23 +30,17 @@ export default function ProjectPermissions({
   const dispatch = useDispatch();
   const { projects } = useProject();
   const projectPermissions = useUserPermission("project");
-  const handleSingleProjectChange = (e) => {
-    console.warn("SINGLE_PROJECT_CHANGE çalıştı");
 
+  const handleSingleProjectChange = (e) => {
     dispatch(setSinglePermission(e, "project"));
   };
   const handleMultiProjectChange = (e) => {
-    console.warn("MULTI_CHANGE çalıştı");
-  
     dispatch(setMultiplePermission(e, "project"));
   };
   const handleSingleAllChange = (e) => {
-    console.warn("ALL_CHANGE çalıştı");
     dispatch(setSingleAllPermission(e, "project"));
   };
   const handleNestedAllChange = (e) => {
-    console.log("MULTI_ALL_CHANGE çalıştı");
-    console.log("MULT_ALL_CHANGE",e.target);
     dispatch(setNestedAllPermission(e, "project"));
   };
   const handleNestedMultiChange = (e, flow) => {
@@ -54,10 +48,7 @@ export default function ProjectPermissions({
     const flowData = {
       id: _id,
       projectId:project._id
-    }
-    console.log("NESTED_MULTI_CHANGE çalıştı")
-    //console.log("flowData:", flowData);
-    
+    }    
     dispatch(setNestedMultiplePermission(e, flowData,"project"));
   };
 
@@ -75,7 +66,7 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
-          handleAllChange={handleSingleAllChange}
+          handleSingleAllChange={handleSingleAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
@@ -83,7 +74,7 @@ export default function ProjectPermissions({
           projects={projects}
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
-          handleAllChange={handleSingleAllChange}
+          handleSingleAllChange={handleSingleAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
@@ -92,7 +83,7 @@ export default function ProjectPermissions({
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
-          handleAllChange={handleSingleAllChange}
+          handleSingleAllChange={handleSingleAllChange}
           handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
@@ -102,7 +93,7 @@ export default function ProjectPermissions({
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
-          handleAllChange={handleSingleAllChange}
+          handleSingleAllChange={handleSingleAllChange}
           handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
@@ -112,7 +103,7 @@ export default function ProjectPermissions({
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
-          handleAllChange={handleSingleAllChange}
+          handleSingleAllChange={handleSingleAllChange}
           handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
@@ -122,7 +113,7 @@ export default function ProjectPermissions({
           permissions={projectPermissions}
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
-          handleAllChange={handleSingleAllChange}
+          handleSingleAllChange={handleSingleAllChange}
           handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>

@@ -8,19 +8,19 @@ import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 const propTypes = {
   projects: PropTypes.object.isRequired,
   permissions: PropTypes.object.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
+  handleSingleAllChange: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 function CreateDashboardPermission({
   projects,
   permissions,
-  handleAllChange,
+  handleSingleAllChange,
   handleChange,
 }) {
 
   useEffect(() => {
     if (permissions.CAN_CREATE_DASHBOARD.length === projects.length) {
-      handleAllChange({
+      handleSingleAllChange({
         target: {
           name: 'CAN_CREATE_DASHBOARD',
           checked: true,
@@ -37,7 +37,7 @@ function CreateDashboardPermission({
             <CheckboxGroup label="All">
               <Checkbox
                 name="CAN_CREATE_DASHBOARD"
-                onChange={handleAllChange}
+                onChange={handleSingleAllChange}
                 defaultChecked={permissions.CAN_CREATE_DASHBOARD_ALL}
                 disabled={permissions.EVERYTHING}
                 checked={
