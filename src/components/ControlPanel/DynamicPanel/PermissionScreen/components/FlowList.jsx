@@ -21,16 +21,30 @@ function FlowList({
 }) {
   const [flows, setFlows] = useState([]);
   const projectPermissions = useUserPermission("project");
-  const PROJECT_NAME = `CAN_${permissionName}_PROJECT`;
-  const PROJECT_ALL = `CAN_${permissionName}_PROJECT_ALL`;
-  const FLOW_ALL = `CAN_${permissionName}_FLOW_ALL`;
-  const FLOW_NAME = `CAN_${permissionName}_FLOW`;
+  const CAN_X_PROJECT = `CAN_${permissionName}_PROJECT`;
+  const CAN_X_PROJECT_ALL = `CAN_${permissionName}_PROJECT_ALL`;
+  const CAN_X_FLOW = `CAN_${permissionName}_FLOW`;
+  const CAN_X_FLOW_ALL = `CAN_${permissionName}_FLOW_ALL`;
 
   useEffect(async () => {
     const data = await getFlowsByProjectService(project);
     setFlows(data.flows);
   }, []);
 
+  // useDidMountEffect(() => {
+  //   const flowInThisProject = projectPermissions[FLOW_NAME].filter(
+  //     (flow) => flow.projectId === project._id
+  //   );
+  //   if (flowInThisProject.length === flows.length) {
+  //     handleAllChange({
+  //       target: {
+  //         name: FLOW_NAME,
+  //         checked: true,
+  //         id: project._id,
+  //       },
+  //     });
+  //   }
+  // }, [projectPermissions[FLOW_NAME].length]);
   return (
     <>
       {flows.length > 0 ? (
@@ -38,14 +52,14 @@ function FlowList({
           <CollapsibleMenuItem>
             <CheckboxGroup label="All">
               <Checkbox
-                name={FLOW_NAME}
+                name={CAN_X_FLOW}
                 id={project._id}
                 onChange={handleAllChange}
-                defaultChecked={projectPermissions[`${FLOW_NAME}_ALL`]}
+                defaultChecked={projectPermissions[CAN_X_FLOW_ALL]}
                 disabled={
                   projectPermissions.EVERYTHING ||
-                  projectPermissions[PROJECT_ALL] ||
-                  projectPermissions[PROJECT_NAME].includes(project._id) ||
+                  projectPermissions[CAN_X_PROJECT_ALL] ||
+                  projectPermissions[CAN_X_PROJECT].includes(project._id) ||
                   (permissionName === "VIEW" &&
                     (
                       projectPermissions.CAN_VIEW_PROJECT_ALL ||
@@ -57,9 +71,9 @@ function FlowList({
                 }
                 checked={
                   projectPermissions.EVERYTHING ||
-                  projectPermissions[PROJECT_ALL] ||
-                  projectPermissions[`${FLOW_NAME}_ALL`].includes(project._id) ||
-                  projectPermissions[PROJECT_NAME].includes(project._id)
+                  projectPermissions[CAN_X_PROJECT_ALL] ||
+                  projectPermissions[CAN_X_FLOW_ALL].includes(project._id) ||
+                  projectPermissions[CAN_X_PROJECT].includes(project._id)
                 }
               />
             </CheckboxGroup>
@@ -69,18 +83,16 @@ function FlowList({
               <CollapsibleMenuItem key={flow._id}>
                 <CheckboxGroup label={flow.config.name}>
                   <Checkbox
-                    name={FLOW_NAME}
+                    name={CAN_X_FLOW}
                     id={flow._id}
                     onChange={(e) => handleMultiChange(e,flow)}
                     //defaultChecked={projectPermissions[FLOW_NAME].includes(flow._id)}
                     disabled={
                       projectPermissions.EVERYTHING ||
-                      projectPermissions[PROJECT_ALL] ||
-                      projectPermissions[PROJECT_NAME].includes(flow.project._id) ||
+                      projectPermissions[CAN_X_PROJECT_ALL] ||
+                      projectPermissions[CAN_X_PROJECT].includes(flow.project._id) ||
                       (permissionName === "VIEW" &&
                         (
-                          projectPermissions.CAN_VIEW_PROJECT_ALL ||
-                        
                           projectPermissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id) ||
                           projectPermissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
                           projectPermissions.CAN_DELETE_FLOW.some(f => f.id === flow._id) ||
@@ -93,10 +105,10 @@ function FlowList({
                     }
                     checked={
                       projectPermissions.EVERYTHING ||
-                      projectPermissions[PROJECT_ALL] ||
-                      projectPermissions[PROJECT_NAME].includes(project._id) ||
-                      projectPermissions[FLOW_ALL].includes(project._id) ||
-                      projectPermissions[FLOW_NAME].some(f=>f.id === flow._id) ||
+                      projectPermissions[CAN_X_PROJECT_ALL] ||
+                      projectPermissions[CAN_X_PROJECT].includes(project._id) ||
+                      projectPermissions[CAN_X_FLOW_ALL].includes(project._id) ||
+                      projectPermissions[CAN_X_FLOW].some(f=>f.id === flow._id) ||
                       (permissionName === "VIEW" && (
                         projectPermissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id) ||
                         projectPermissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
