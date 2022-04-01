@@ -16,7 +16,7 @@ const propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleNestedMultiChange: PropTypes.func.isRequired,
   handleAllChange: PropTypes.func.isRequired,
-  handleMultiAllChange: PropTypes.func.isRequired,
+  handleNestedAllChange: PropTypes.func.isRequired,
 };
 function DeleteProjectPermission({
   projects,
@@ -24,7 +24,7 @@ function DeleteProjectPermission({
   handleChange,
   handleNestedMultiChange,
   handleAllChange,
-  handleMultiAllChange,
+  handleNestedAllChange,
 }) {
   return (
     <>
@@ -69,7 +69,7 @@ function DeleteProjectPermission({
                   <FlowList
                     project={project}
                     handleMultiChange={handleNestedMultiChange}
-                    handleAllChange={handleMultiAllChange}
+                    handleNestedAllChange={handleNestedAllChange}
                     permissionName="DELETE"
                   />
                 </CollapsibleSubMenu>

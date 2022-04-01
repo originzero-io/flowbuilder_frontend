@@ -92,7 +92,7 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
     case "GET_PERMISSIONS":
       return payload;
     case "SET_CAN_DO_EVERYTHING":
-      return { ...state, CAN_DO_EVERYTHING: payload };
+      return { ...state, CAN_DO_EVERYTHING: payload.checked };
     
     case "SET_SINGLE_PERMISSION":
       return {
@@ -433,14 +433,17 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
       
     case "SET_NESTED_ALL_PERMISSION":
       if (payload.checked) {
-        if (payload.name === "CAN_VIEW_FLOW" && !state.project.CAN_VIEW_FLOW_ALL.includes(payload.id)) {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              CAN_VIEW_FLOW_ALL: [...state.project.CAN_VIEW_FLOW_ALL, payload.id],
-            },
-          };
+        if (payload.name === "CAN_VIEW_FLOW") {
+          if (!state.project.CAN_VIEW_FLOW_ALL.includes(payload.id)) {
+            return {
+              ...state,
+              [payload.permissionType]: {
+                ...state[payload.permissionType],
+                CAN_VIEW_FLOW_ALL: [...state.project.CAN_VIEW_FLOW_ALL, payload.id],
+              },
+            };
+          }
+          else return state;
         }
         else {
           if (!state.project.CAN_VIEW_FLOW_ALL.includes(payload.id)) {
@@ -555,9 +558,11 @@ const userPermissionReducer = (state = initialState, { type, payload }) => {
 };
 export default userPermissionReducer;
 
-export const setCanDoEverytingPermission = (data) => ({
+export const setCanDoEverytingPermission = (event) => ({
   type: "SET_CAN_DO_EVERYTHING",
-  payload: data
+  payload: {
+    checked:event.target.checked
+  }
 });
 export const setSinglePermission = (event, permissionType) => ({
   type: "SET_SINGLE_PERMISSION",
@@ -591,7 +596,6 @@ export const setSingleAllPermission = (event, permissionType) => ({
   payload: {
     name: event.target.name,
     checked: event.target.checked,
-    id:event.target.id,
     permissionType: permissionType
   }
 });
@@ -600,7 +604,7 @@ export const setNestedAllPermission = (event, permissionType) => ({
   payload: {
     name: event.target.name,
     checked: event.target.checked,
-    id:event.target.id,
+    id:event.target.id, //projectId
     permissionType: permissionType
   }
 });

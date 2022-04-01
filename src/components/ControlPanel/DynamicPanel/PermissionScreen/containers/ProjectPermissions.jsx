@@ -44,7 +44,7 @@ export default function ProjectPermissions({
     console.warn("ALL_CHANGE çalıştı");
     dispatch(setSingleAllPermission(e, "project"));
   };
-  const handleMultiAllChange = (e) => {
+  const handleNestedAllChange = (e) => {
     console.log("MULTI_ALL_CHANGE çalıştı");
     console.log("MULT_ALL_CHANGE",e.target);
     dispatch(setNestedAllPermission(e, "project"));
@@ -93,7 +93,7 @@ export default function ProjectPermissions({
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
           handleAllChange={handleSingleAllChange}
-          handleMultiAllChange={handleMultiAllChange}
+          handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
@@ -103,7 +103,7 @@ export default function ProjectPermissions({
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
           handleAllChange={handleSingleAllChange}
-          handleMultiAllChange={handleMultiAllChange}
+          handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
@@ -113,7 +113,7 @@ export default function ProjectPermissions({
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
           handleAllChange={handleSingleAllChange}
-          handleMultiAllChange={handleMultiAllChange}
+          handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
@@ -123,7 +123,7 @@ export default function ProjectPermissions({
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
           handleAllChange={handleSingleAllChange}
-          handleMultiAllChange={handleMultiAllChange}
+          handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
     </TabContainer>

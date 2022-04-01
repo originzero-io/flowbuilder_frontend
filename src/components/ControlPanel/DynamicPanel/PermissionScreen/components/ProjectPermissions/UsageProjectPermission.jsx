@@ -16,7 +16,7 @@ const propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleNestedMultiChange: PropTypes.func.isRequired,
   handleAllChange: PropTypes.func.isRequired,
-  handleMultiAllChange: PropTypes.func.isRequired,
+  handleNestedAllChange: PropTypes.func.isRequired,
 };
 function UsageProjectPermission({
   projects,
@@ -24,7 +24,7 @@ function UsageProjectPermission({
   handleChange,
   handleNestedMultiChange,
   handleAllChange,
-  handleMultiAllChange,
+  handleNestedAllChange,
 }) {
   console.log("usage-project-rendered");
   return (
@@ -70,7 +70,7 @@ function UsageProjectPermission({
                   <FlowList
                     project={project}
                     handleMultiChange={handleNestedMultiChange}
-                    handleAllChange={handleMultiAllChange}
+                    handleNestedAllChange={handleNestedAllChange}
                     permissionName="USAGE"
                   />
                 </CollapsibleSubMenu>

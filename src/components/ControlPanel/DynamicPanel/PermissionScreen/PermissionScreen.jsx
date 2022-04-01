@@ -34,7 +34,7 @@ export default function PermissionScreen() {
   const users = useUser();
   const member = users.find((user) => user._id === params.member_id);
   const handleEverythingPermission = (e) => {
-    dispatch(setCanDoEverytingPermission(e.target.checked));
+    dispatch(setCanDoEverytingPermission(e));
   };
   const permissions = useUserPermission();
 

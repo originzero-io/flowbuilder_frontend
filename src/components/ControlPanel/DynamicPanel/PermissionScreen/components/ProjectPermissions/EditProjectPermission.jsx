@@ -16,7 +16,7 @@ const propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleNestedMultiChange: PropTypes.func.isRequired,
   handleAllChange: PropTypes.func.isRequired,
-  handleMultiAllChange: PropTypes.func.isRequired,
+  handleNestedAllChange: PropTypes.func.isRequired,
 };
 function EditProjectPermission({
   projects,
@@ -24,7 +24,7 @@ function EditProjectPermission({
   handleChange,
   handleNestedMultiChange,
   handleAllChange,
-  handleMultiAllChange,
+  handleNestedAllChange,
 }) {
   return (
     <>
@@ -69,7 +69,7 @@ function EditProjectPermission({
                   <FlowList
                     project={project}
                     handleMultiChange={handleNestedMultiChange}
-                    handleAllChange={handleMultiAllChange}
+                    handleNestedAllChange={handleNestedAllChange}
                     permissionName="EDIT"
                   />
                 </CollapsibleSubMenu>
