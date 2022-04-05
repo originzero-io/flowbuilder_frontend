@@ -43,7 +43,13 @@ export default function UsageDevicePermission({
       <PermissionContent>
         <CollapsibleMenu trigger="Controllers">
           <CollapsibleMenuItem>
-            <CheckboxGroup label="All">
+            <CheckboxGroup
+              label="All"
+              disabled={permissions.EVERYTHING}
+              checked={
+                permissions.EVERYTHING || permissions.CAN_USAGE_CONTROLLER_ALL
+              }
+            >
               <Checkbox
                 name="CAN_USAGE_CONTROLLER"
                 onChange={handleAllChange}
@@ -58,7 +64,13 @@ export default function UsageDevicePermission({
           {controllers.map((controller) => {
             return (
               <CollapsibleMenuItem key={controller._id}>
-                <CheckboxGroup label={controller.name}>
+                <CheckboxGroup label={controller.name}
+                  disabled={permissions.EVERYTHING}
+                  checked={
+                    permissions.EVERYTHING ||
+                    permissions.CAN_USAGE_CONTROLLER_ALL ||
+                    permissions.CAN_USAGE_CONTROLLER.includes(controller._id)
+                  }>
                   <Checkbox
                     name="CAN_USAGE_CONTROLLER"
                     id={controller._id}

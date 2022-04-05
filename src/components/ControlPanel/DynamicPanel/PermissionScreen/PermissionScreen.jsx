@@ -110,7 +110,7 @@ export default function PermissionScreen() {
             <TeamPermissions setSinglePermission={setSinglePermission} />
           </TabPanel>
         </Tabs>
-        <Button color="success" onClick={handleSavePermissions}><AiOutlineSave style={{ fontSize: '24px' }}/> Assign</Button>
+        <Button color="success" onClick={handleSavePermissions}><AiOutlineSave style={{ fontSize: '24px' }} /> Assign this to {member.username}</Button>
         <Button outline style={{marginLeft:'15px' }} onClick={handlePreset}><MdOutlineAssignmentInd style={{ fontSize: '24px' }}/> Save as preset</Button>
       </div>
     </PermissionProvider>

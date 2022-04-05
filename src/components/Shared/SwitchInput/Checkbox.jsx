@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
-
+import { Box } from "components/ControlPanel/DynamicPanel/ProjectsScreen/ProjectsScreen.style";
+import * as Icon from "react-icons/fi";
+import './style.css';
 const propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
@@ -10,13 +12,13 @@ const propTypes = {
   checked: PropTypes.bool,
   defaultChecked: PropTypes.bool,
   center: PropTypes.bool,
-  disabled:PropTypes.bool
+  disabled: PropTypes.bool,
 };
 export default function Checkbox({
   name,
   onChange,
   onClick,
-  size = "17px",
+  size = "25px",
   type,
   checked,
   defaultChecked,
@@ -34,34 +36,36 @@ export default function Checkbox({
   };
   const checkbox = () => {
     return (
-      // <input
-      //   name={name}
-      //   type="checkbox"
-      //   onChange={onChange}
-      //   onClick={onClick}
-      //   style={{ width: checkbox_size, height: checkbox_size,cursor:"pointer" }}
-      //   checked={checked}
-      //   defaultChecked={defaultChecked}
-      //   {...rest}
-      // />
-      <div className="form-check form-switch">
         <input
-          className="form-check-input"
-          type="checkbox"
           name={name}
+          type="checkbox"
           onChange={onChange}
           onClick={onClick}
-          style={{
-            width: "40px",
-            height: "20px",
-            cursor: "pointer",
-          }}
+          style={{ width: checkbox_size, height: checkbox_size,cursor:"pointer" }}
           checked={checked}
           defaultChecked={defaultChecked}
           disabled={disabled}
           {...rest}
         />
-      </div>
+      // <div className="form-check form-switch">
+      //   <input
+      //     className="form-check-input"
+      //     type="checkbox"
+      //     name={name}
+      //     onChange={onChange}
+      //     onClick={onClick}
+      //     style={{
+      //       width: "40px",
+      //       height: "20px",
+      //       cursor: "pointer",
+      //     }}
+      //     checked={checked}
+      //     defaultChecked={defaultChecked}
+      //     disabled={disabled}
+      //     {...rest}
+      //   />
+      // </div>
+      // />
     );
   };
   return (
