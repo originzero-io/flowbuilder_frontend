@@ -15,31 +15,21 @@ export default function CreateDevicePermission({ permissions, handleChange }) {
       <PermissionContent>
         <CheckboxGroup
           label="Controller"
+          name="CAN_CREATE_CONTROLLER"
+          defaultChecked={permissions.CAN_CREATE_CONTROLLER}
           disabled={permissions.EVERYTHING}
           checked={permissions.EVERYTHING || permissions.CAN_CREATE_CONTROLLER}
-        >
-          <Checkbox
-            name="CAN_CREATE_CONTROLLER"
-            defaultChecked={permissions.CAN_CREATE_CONTROLLER}
-            disabled={permissions.EVERYTHING}
-            checked={
-              permissions.EVERYTHING || permissions.CAN_CREATE_CONTROLLER
-            }
-            onChange={handleChange}
-          />
-        </CheckboxGroup>
+          onChange={handleChange}
+        ></CheckboxGroup>
         <CheckboxGroup
           label="Processor"
+          name="CAN_CREATE_PROCESSOR"
+          ltCheck
+          defaued={permissions.CAN_CREATE_PROCESSOR}
+          onChange={handleChange}
           disabled={permissions.EVERYTHING}
           checked={permissions.EVERYTHING || permissions.CAN_CREATE_PROCESSOR}
         >
-          <Checkbox
-            name="CAN_CREATE_PROCESSOR"
-            defaultChecked={permissions.CAN_CREATE_PROCESSOR}
-            onChange={handleChange}
-            disabled={permissions.EVERYTHING}
-            checked={permissions.EVERYTHING || permissions.CAN_CREATE_PROCESSOR}
-          />
         </CheckboxGroup>
       </PermissionContent>
     </>

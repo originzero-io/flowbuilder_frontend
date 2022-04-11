@@ -30,10 +30,10 @@ function EditProjectPermission({
     if (projects.length === permissions.CAN_EDIT_PROJECT.length) {
       handleSingleAllChange({
         target: {
-          name: 'CAN_EDIT_PROJECT',
-          checked:true
-        }
-      })
+          name: "CAN_EDIT_PROJECT",
+          checked: true,
+        },
+      });
     }
   }, [permissions.CAN_EDIT_PROJECT.length]);
   return (
@@ -42,38 +42,36 @@ function EditProjectPermission({
       <PermissionContent>
         <CollapsibleMenu trigger="Projects">
           <CollapsibleMenuItem>
-            <CheckboxGroup label="All">
-              <Checkbox
-                name="CAN_EDIT_PROJECT"
-                onChange={handleSingleAllChange}
-                defaultChecked={permissions.CAN_EDIT_PROJECT_ALL}
-                disabled={permissions.EVERYTHING}
-                checked={
-                  permissions.EVERYTHING || permissions.CAN_EDIT_PROJECT_ALL
-                }
-              />
-            </CheckboxGroup>
+            <CheckboxGroup
+              label="All"
+              name="CAN_EDIT_PROJECT"
+              onChange={handleSingleAllChange}
+              defaultChecked={permissions.CAN_EDIT_PROJECT_ALL}
+              disabled={permissions.EVERYTHING}
+              checked={
+                permissions.EVERYTHING || permissions.CAN_EDIT_PROJECT_ALL
+              }
+            />
           </CollapsibleMenuItem>
           {projects.map((project) => {
             return (
               <CollapsibleSubMenu key={project._id} trigger={`${project.name}`}>
                 <CollapsibleMenuItem>
-                  <CheckboxGroup label="This project">
-                    <Checkbox
-                      name="CAN_EDIT_PROJECT"
-                      id={project._id}
-                      onChange={(e) => handleChange(e)}
-                      defaultChecked={permissions.CAN_EDIT_PROJECT.includes(
-                        project._id
-                      )}
-                      disabled={permissions.EVERYTHING}
-                      checked={
-                        permissions.EVERYTHING ||
-                        permissions.CAN_EDIT_PROJECT_ALL ||
-                        permissions.CAN_EDIT_PROJECT.includes(project._id)
-                      }
-                    />
-                  </CheckboxGroup>
+                  <CheckboxGroup
+                    label="This project"
+                    name="CAN_EDIT_PROJECT"
+                    id={project._id}
+                    onChange={(e) => handleChange(e)}
+                    defaultChecked={permissions.CAN_EDIT_PROJECT.includes(
+                      project._id
+                    )}
+                    disabled={permissions.EVERYTHING}
+                    checked={
+                      permissions.EVERYTHING ||
+                      permissions.CAN_EDIT_PROJECT_ALL ||
+                      permissions.CAN_EDIT_PROJECT.includes(project._id)
+                    }
+                  />
                 </CollapsibleMenuItem>
                 <CollapsibleSubMenu trigger="Flows">
                   <FlowList

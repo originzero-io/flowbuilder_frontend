@@ -16,10 +16,10 @@ import ToastNotification from "./components/Shared/ToastNotification.jsx";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const jwtToken = localStorage.getItem("token");
-    if (jwtToken) {
-      dispatch(getMe(jwtToken));
-    }
+    // const jwtToken = localStorage.getItem("token");
+    // if (jwtToken) {
+    //   dispatch(getMe(jwtToken));
+    // }
   }, []);
   return (
     <AppWrapper>

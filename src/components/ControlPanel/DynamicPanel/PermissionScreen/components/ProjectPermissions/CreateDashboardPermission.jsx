@@ -17,15 +17,14 @@ function CreateDashboardPermission({
   handleSingleAllChange,
   handleChange,
 }) {
-
   useEffect(() => {
     if (permissions.CAN_CREATE_DASHBOARD.length === projects.length) {
       handleSingleAllChange({
         target: {
-          name: 'CAN_CREATE_DASHBOARD',
+          name: "CAN_CREATE_DASHBOARD",
           checked: true,
-        }
-      })
+        },
+      });
     }
   }, [permissions.CAN_CREATE_DASHBOARD.length]);
   return (
@@ -34,37 +33,35 @@ function CreateDashboardPermission({
       <PermissionContent>
         <CollapsibleMenu trigger="Projects">
           <CollapsibleMenuItem>
-            <CheckboxGroup label="All">
-              <Checkbox
-                name="CAN_CREATE_DASHBOARD"
-                onChange={handleSingleAllChange}
-                defaultChecked={permissions.CAN_CREATE_DASHBOARD_ALL}
-                disabled={permissions.EVERYTHING}
-                checked={
-                  permissions.EVERYTHING || permissions.CAN_CREATE_DASHBOARD_ALL
-                }
-              />
-            </CheckboxGroup>
+            <CheckboxGroup
+              label="All"
+              name="CAN_CREATE_DASHBOARD"
+              onChange={handleSingleAllChange}
+              defaultChecked={permissions.CAN_CREATE_DASHBOARD_ALL}
+              disabled={permissions.EVERYTHING}
+              checked={
+                permissions.EVERYTHING || permissions.CAN_CREATE_DASHBOARD_ALL
+              }
+            />
           </CollapsibleMenuItem>
           {projects.map((project) => {
             return (
               <CollapsibleMenuItem key={project._id}>
-                <CheckboxGroup label={project.name}>
-                  <Checkbox
-                    name="CAN_CREATE_DASHBOARD"
-                    id={project._id}
-                    onChange={(e) => handleChange(e)}
-                    defaultChecked={permissions.CAN_CREATE_DASHBOARD.includes(
-                      project._id
-                    )}
-                    disabled={permissions.EVERYTHING}
-                    checked={
-                      permissions.EVERYTHING ||
-                      permissions.CAN_CREATE_DASHBOARD_ALL ||
-                      permissions.CAN_CREATE_DASHBOARD.includes(project._id)
-                    }
-                  />
-                </CheckboxGroup>
+                <CheckboxGroup
+                  label={project.name}
+                  name="CAN_CREATE_DASHBOARD"
+                  id={project._id}
+                  onChange={(e) => handleChange(e)}
+                  defaultChecked={permissions.CAN_CREATE_DASHBOARD.includes(
+                    project._id
+                  )}
+                  disabled={permissions.EVERYTHING}
+                  checked={
+                    permissions.EVERYTHING ||
+                    permissions.CAN_CREATE_DASHBOARD_ALL ||
+                    permissions.CAN_CREATE_DASHBOARD.includes(project._id)
+                  }
+                />
               </CollapsibleMenuItem>
             );
           })}

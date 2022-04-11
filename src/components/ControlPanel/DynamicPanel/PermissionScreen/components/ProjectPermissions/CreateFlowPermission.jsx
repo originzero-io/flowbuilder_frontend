@@ -17,53 +17,51 @@ function CreateFlowPermission({
   handleSingleAllChange,
   handleChange,
 }) {
-useEffect(() => {
-  if (permissions.CAN_CREATE_FLOW.length === projects.length) {
-    handleSingleAllChange({
-      target: {
-        name: 'CAN_CREATE_FLOW',
-        checked: true,
-      }
-    })
-  }
-}, [permissions.CAN_CREATE_FLOW.length]);
+  useEffect(() => {
+    if (permissions.CAN_CREATE_FLOW.length === projects.length) {
+      handleSingleAllChange({
+        target: {
+          name: "CAN_CREATE_FLOW",
+          checked: true,
+        },
+      });
+    }
+  }, [permissions.CAN_CREATE_FLOW.length]);
   return (
     <>
       <PermissionHeader>Flow Create</PermissionHeader>
       <PermissionContent>
         <CollapsibleMenu trigger="Projects">
           <CollapsibleMenuItem>
-            <CheckboxGroup label="All">
-              <Checkbox
-                name="CAN_CREATE_FLOW"
-                onChange={handleSingleAllChange}
-                defaultChecked={permissions.CAN_CREATE_FLOW_ALL}
-                disabled={permissions.EVERYTHING}
-                checked={
-                  permissions.EVERYTHING || permissions.CAN_CREATE_FLOW_ALL
-                }
-              />
-            </CheckboxGroup>
+            <CheckboxGroup
+              label="All"
+              name="CAN_CREATE_FLOW"
+              onChange={handleSingleAllChange}
+              defaultChecked={permissions.CAN_CREATE_FLOW_ALL}
+              disabled={permissions.EVERYTHING}
+              checked={
+                permissions.EVERYTHING || permissions.CAN_CREATE_FLOW_ALL
+              }
+            />
           </CollapsibleMenuItem>
           {projects.map((project) => {
             return (
               <CollapsibleMenuItem key={project._id}>
-                <CheckboxGroup label={project.name}>
-                  <Checkbox
-                    name="CAN_CREATE_FLOW"
-                    id={project._id}
-                    onChange={(e) => handleChange(e)}
-                    defaultChecked={permissions.CAN_CREATE_FLOW.includes(
-                      project._id
-                    )}
-                    disabled={permissions.EVERYTHING}
-                    checked={
-                      permissions.EVERYTHING ||
-                      permissions.CAN_CREATE_FLOW_ALL ||
-                      permissions.CAN_CREATE_FLOW.includes(project._id)
-                    }
-                  />
-                </CheckboxGroup>
+                <CheckboxGroup
+                  label={project.name}
+                  name="CAN_CREATE_FLOW"
+                  id={project._id}
+                  onChange={(e) => handleChange(e)}
+                  defaultChecked={permissions.CAN_CREATE_FLOW.includes(
+                    project._id
+                  )}
+                  disabled={permissions.EVERYTHING}
+                  checked={
+                    permissions.EVERYTHING ||
+                    permissions.CAN_CREATE_FLOW_ALL ||
+                    permissions.CAN_CREATE_FLOW.includes(project._id)
+                  }
+                />
               </CollapsibleMenuItem>
             );
           })}

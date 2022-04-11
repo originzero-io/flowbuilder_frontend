@@ -54,9 +54,7 @@ function FlowList({
       {flows.length > 0 ? (
         <>
           <CollapsibleMenuItem>
-            <CheckboxGroup label="All">
-              <Checkbox
-                name={CAN_X_FLOW}
+            <CheckboxGroup label="All" name={CAN_X_FLOW}
                 id={project._id}
                 onChange={handleNestedAllChange}
                 defaultChecked={projectPermissions[CAN_X_FLOW_ALL]}
@@ -79,48 +77,46 @@ function FlowList({
                   projectPermissions[CAN_X_FLOW_ALL].includes(project._id) ||
                   projectPermissions[CAN_X_PROJECT].includes(project._id)
                 }
-              />
-            </CheckboxGroup>
+            />
           </CollapsibleMenuItem>
           {flows.map((flow) => {
             return (
               <CollapsibleMenuItem key={flow._id}>
-                <CheckboxGroup label={flow.config.name}>
-                  <Checkbox
-                    name={CAN_X_FLOW}
-                    id={flow._id}
-                    onChange={(e) => handleMultiChange(e,flow)}
-                    //defaultChecked={projectPermissions[CAN_X_FLOW].includes(flow._id)}
-                    disabled={
-                      projectPermissions.EVERYTHING ||
-                      projectPermissions[CAN_X_PROJECT_ALL] ||
-                      projectPermissions[CAN_X_PROJECT].includes(flow.project._id) ||
-                      (permissionName === "VIEW" &&
-                        (
-                          projectPermissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id) ||
-                          projectPermissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
-                          projectPermissions.CAN_DELETE_FLOW.some(f => f.id === flow._id) ||
-                        
-                          projectPermissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
-                          projectPermissions.CAN_EDIT_FLOW_ALL.includes(project._id) ||
-                          projectPermissions.CAN_DELETE_FLOW_ALL.includes(project._id)
-                        )
-                      )
-                    }
-                    checked={
-                      projectPermissions.EVERYTHING ||
-                      projectPermissions[CAN_X_PROJECT_ALL] ||
-                      projectPermissions[CAN_X_PROJECT].includes(project._id) ||
-                      projectPermissions[CAN_X_FLOW_ALL].includes(project._id) ||
-                      projectPermissions[CAN_X_FLOW].some(f=>f.id === flow._id) ||
-                      (permissionName === "VIEW" && (
+                <CheckboxGroup
+                  label={flow.config.name}
+                  name={CAN_X_FLOW}
+                  id={flow._id}
+                  onChange={(e) => handleMultiChange(e,flow)}
+                  //defaultChecked={projectPermissions[CAN_X_FLOW].includes(flow._id)}
+                  disabled={
+                    projectPermissions.EVERYTHING ||
+                    projectPermissions[CAN_X_PROJECT_ALL] ||
+                    projectPermissions[CAN_X_PROJECT].includes(flow.project._id) ||
+                    (permissionName === "VIEW" &&
+                      (
                         projectPermissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id) ||
                         projectPermissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
-                        projectPermissions.CAN_DELETE_FLOW.some(f => f.id === flow._id)
-                      ))
-                    }
-                  />
-                </CheckboxGroup>
+                        projectPermissions.CAN_DELETE_FLOW.some(f => f.id === flow._id) ||
+                      
+                        projectPermissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
+                        projectPermissions.CAN_EDIT_FLOW_ALL.includes(project._id) ||
+                        projectPermissions.CAN_DELETE_FLOW_ALL.includes(project._id)
+                      )
+                    )
+                  }
+                  checked={
+                    projectPermissions.EVERYTHING ||
+                    projectPermissions[CAN_X_PROJECT_ALL] ||
+                    projectPermissions[CAN_X_PROJECT].includes(project._id) ||
+                    projectPermissions[CAN_X_FLOW_ALL].includes(project._id) ||
+                    projectPermissions[CAN_X_FLOW].some(f=>f.id === flow._id) ||
+                    (permissionName === "VIEW" && (
+                      projectPermissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id) ||
+                      projectPermissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
+                      projectPermissions.CAN_DELETE_FLOW.some(f => f.id === flow._id)
+                    ))
+                  }
+                />
               </CollapsibleMenuItem>
             );
           })}

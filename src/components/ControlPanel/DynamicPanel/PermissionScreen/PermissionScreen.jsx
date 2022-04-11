@@ -42,11 +42,11 @@ export default function PermissionScreen() {
   const handleSavePermissions = async () => {
     console.log(permissions);
     await assignPermissionToMemberService(member, activeWorkspace, permissions);
-    toast.success('Permissions saved')
-  }
+    toast.success("Permissions saved");
+  };
   const handlePreset = async () => {
-    toast.loading('Presets are developing...')
-  }
+    toast.loading("Presets are developing...");
+  };
   return (
     <PermissionProvider>
       <div style={{ height: "90vh" }}>
@@ -55,16 +55,11 @@ export default function PermissionScreen() {
           <CheckboxGroup
             label="This user can do everything"
             labelSize="1.6vmin"
-          >
-            <Checkbox
-              name="CAN_DO_EVERYTHING"
-              onChange={(e) => handleEverythingPermission(e)}
-              defaultChecked={permissions.CAN_DO_EVERYTHING}
-              checked={permissions.CAN_DO_EVERYTHING}
-            />
-          </CheckboxGroup>
-
-          
+            name="CAN_DO_EVERYTHING"
+            onChange={(e) => handleEverythingPermission(e)}
+            defaultChecked={permissions.CAN_DO_EVERYTHING}
+            checked={permissions.CAN_DO_EVERYTHING}
+          />
         </AllPermissionsContainer>
         <Tabs
           selectedTabClassName="selected-tab"
@@ -110,8 +105,13 @@ export default function PermissionScreen() {
             <TeamPermissions setSinglePermission={setSinglePermission} />
           </TabPanel>
         </Tabs>
-        <Button color="success" onClick={handleSavePermissions}><AiOutlineSave style={{ fontSize: '24px' }} /> Assign this to {member.username}</Button>
-        <Button outline style={{marginLeft:'15px' }} onClick={handlePreset}><MdOutlineAssignmentInd style={{ fontSize: '24px' }}/> Save as preset</Button>
+        <Button color="success" onClick={handleSavePermissions}>
+          <AiOutlineSave style={{ fontSize: "24px" }} /> Assign this to{" "}
+          {member.username}
+        </Button>
+        <Button outline style={{ marginLeft: "15px" }} onClick={handlePreset}>
+          <MdOutlineAssignmentInd style={{ fontSize: "24px" }} /> Save as preset
+        </Button>
       </div>
     </PermissionProvider>
   );

@@ -1,9 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { Box } from "components/ControlPanel/DynamicPanel/ProjectsScreen/ProjectsScreen.style";
-import * as Icon from "react-icons/fi";
 import './style.css';
 const propTypes = {
+  id: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   onClick: PropTypes.func,
@@ -15,6 +14,7 @@ const propTypes = {
   disabled: PropTypes.bool,
 };
 export default function Checkbox({
+  id,
   name,
   onChange,
   onClick,
@@ -36,7 +36,8 @@ export default function Checkbox({
   };
   const checkbox = () => {
     return (
-        <input
+      <input
+          id={id}
           name={name}
           type="checkbox"
           onChange={onChange}
