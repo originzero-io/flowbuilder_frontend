@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { DropdownList,DropdownWrapper } from "../../StyledComponents/DropdownMenu";
 export const CardContainer = styled.div`
   margin: 4px;
-  width: 160px;
+  width: 250px;
   height: 150px;
   //width:15vw;
   //height:25vh;

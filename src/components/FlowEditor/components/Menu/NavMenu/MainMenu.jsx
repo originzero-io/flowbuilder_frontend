@@ -19,6 +19,7 @@ const Menu = styled(MenuIndex)`
       ? themeColor.DARK_MENU_BACKGROUND
       : themeColor.LIGHT_MENU_BACKGROUND};
   border-radius: 6px;
+  width:400px;
 `;
 const Circle = styled.div`
   width: 55px;

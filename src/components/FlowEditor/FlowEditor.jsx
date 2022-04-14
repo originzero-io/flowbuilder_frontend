@@ -79,10 +79,10 @@ export default function FlowEditor({ reactFlowWrapper }) {
     const newElements = removeElements(elementsToRemove, elements);
     dispatch(setElements(newElements));
   };
-  const onLoadHandle = (_reactFlowInstance) => {
+  const onLoadHandle = useCallback((_reactFlowInstance) => {
     dispatch(setReactFlowInstance(_reactFlowInstance));
-    adjustScreen(flowGui,_reactFlowInstance);
-  };
+    adjustScreen(flowGui, _reactFlowInstance);
+  }, [reactFlowInstance]);
   const onDragOverHandle = (event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
@@ -218,9 +218,10 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const closeElementContextMenu = () => {
     dispatch(setElementContextMenu(false));
   };
-  useEffect(() => {
-    nodeClass.applyElements(elements, dispatch);
-  }, [elements]);
+  // useEffect(() => {
+  //   console.log("nodeClass:",nodeClass)
+  //   nodeClass.applyElements(elements, dispatch);
+  // }, [elements]);
   return (
     <>
       <ReactFlow

@@ -16,8 +16,11 @@ import configureStore from "./store/configureStore.js";
 import { setAuthorizationToken } from "./utils/httpHelpers.js";
 import ErrorFallback from "./components/Shared/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
-export const store = configureStore();
+import { PersistGate } from "redux-persist/integration/react";
+
+export const { store, persistor } = configureStore();
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+
 const jwtToken = localStorage.getItem("token");
 if (jwtToken) {
   setAuthorizationToken(jwtToken);
@@ -25,11 +28,13 @@ if (jwtToken) {
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <ErrorBoundary FallbackComponent={ErrorFallback} onReset={()=>store.dispatch({type:'RESET'})}>
-        <App />
-      </ErrorBoundary>
-    </BrowserRouter>
+    <PersistGate persistor={persistor}>
+      <BrowserRouter>
+        <ErrorBoundary FallbackComponent={ErrorFallback} onReset={()=>store.dispatch({type:'RESET'})}>
+          <App />
+        </ErrorBoundary>
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
   rootElement
 );
