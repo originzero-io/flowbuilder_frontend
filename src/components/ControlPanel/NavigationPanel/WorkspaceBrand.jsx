@@ -12,6 +12,7 @@ import { WorkspaceBrandWrapper } from "./NavigationPanel.style";
 import PropTypes from "prop-types";
 import { workspaceNamespace } from "SocketConnections";
 import useAuth from "hooks/useAuth";
+import useWorkspace from "hooks/useWorkspace";
 
 const propTypes = {
   workspace: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -21,10 +22,11 @@ const WorkspaceBrand = ({ workspace }) => {
   //console.log("TEAM BRAND RENDERED");
   const { role } = useAuth();
   const dispatch = useDispatch();
+  const { workspaces } = useWorkspace();
   const deleteWorkspaceHandler = () => {
     if (confirm(`${workspace.name} takımını silmek istiyor musunuz?`)) {
       workspaceNamespace.emit("workspaces:remove", { workspace });
-      dispatch(setActiveWorkspace(""));
+      dispatch(setActiveWorkspace(workspaces[0]));
     }
   };
   const editWorkspaceHandler = () => {

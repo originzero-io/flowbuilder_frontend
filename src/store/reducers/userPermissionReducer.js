@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   CAN_DO_EVERYTHING:false,
   device: {
     CAN_CREATE_CONTROLLER: true,
@@ -89,7 +89,7 @@ const initialState = {
 };
 const userPermissionReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case "GET_PERMISSIONS":
+    case "LOAD_PERMISSION":
       return payload;
     case "SET_CAN_DO_EVERYTHING":
       return { ...state, CAN_DO_EVERYTHING: payload.checked };
@@ -608,13 +608,10 @@ export const setNestedAllPermission = (event, permissionType) => ({
     permissionType: permissionType
   }
 });
-///?
-// export const setAllBy = (event, permissionType) => ({
-//   type: "SET_NESTED_ALL_PERMISSION",
-//   payload: {
-//     name: event.target.name,
-//     checked: event.target.checked,
-//     id:event.target.id,
-//     permissionType: permissionType
-//   }
-// });
+
+
+export const loadPermission = (data) => ({
+  type: "LOAD_PERMISSION",
+  payload: data
+});
+
