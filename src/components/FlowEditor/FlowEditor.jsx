@@ -124,8 +124,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
   const onPaneClickHandle = (e) => {
     dispatch(setPaneClickPosition(e.clientX,e.clientY))
-    closeMultiSelectionContextMenu();
-    closeElementContextMenu();
+    dispatch(setMultiSelectionContextMenu(false));
+    dispatch(setElementContextMenu(false));
     dispatch(closeAllNodeGroupMenu(true));
     dispatch(setAllNodesDeselect());
   };
@@ -202,9 +202,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
       })
     );
   };
-  const closeMultiSelectionContextMenu = () => {
-    dispatch(setMultiSelectionContextMenu(false));
-  };
+
   const openElementContextMenu = (event, node) => {
     dispatch(
       setElementContextMenu({
@@ -214,9 +212,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
         element: node,
       })
     );
-  };
-  const closeElementContextMenu = () => {
-    dispatch(setElementContextMenu(false));
   };
   // useEffect(() => {
   //   console.log("nodeClass:",nodeClass)

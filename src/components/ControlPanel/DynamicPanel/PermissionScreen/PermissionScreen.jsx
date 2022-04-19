@@ -22,9 +22,9 @@ import {
   setSingleAllPermission,
   setNestedAllPermission,
   loadPermission,
-  initialState
+  initialState,
 } from "store/reducers/userPermissionReducer";
-import { Button, Spinner } from "reactstrap";
+import { Button, Input, Spinner } from "reactstrap";
 import { AiOutlineSave } from "react-icons/ai";
 import { MdOutlineAssignmentInd } from "react-icons/md";
 import {
@@ -33,8 +33,9 @@ import {
 } from "services/permissionService";
 import toast from "react-hot-toast";
 import { setModal } from "store/reducers/componentReducer";
-import Presets from "./components/Presets";
+import AddPreset from "./components/AddPreset";
 import useComponentWillMount from "hooks/useComponentWillMount";
+import PresetList from "./components/PresetList";
 export default function PermissionScreen() {
   const dispatch = useDispatch();
   const { activeWorkspace } = useWorkspace();
@@ -55,11 +56,10 @@ export default function PermissionScreen() {
         activeWorkspace._id,
         member._id
       );
-      console.log("data from server:", permission);
+      //console.log("data from server:", permission);
       if (permission) {
         dispatch(loadPermission(permission.permissions));
-      }
-      else {
+      } else {
         dispatch(loadPermission(initialState));
       }
       setLoading(false);
@@ -78,18 +78,23 @@ export default function PermissionScreen() {
       await savePermissionService(data);
       toast.success("Permissions saved");
     } catch (error) {
-      console.log("error:", error);
       toast.error(error.message);
     }
   };
-  const handlePreset = async () => {
-    dispatch(setModal(<Presets permissions={permissions} />));
+  const handleSavePreset = () => {
+    dispatch(setModal(<AddPreset permissions={permissions} />));
+  };
+  const handleLoadPreset = () => {
+    dispatch(setModal(<PresetList/>));
   };
   return (
     <PermissionProvider>
       <div style={{ height: "90vh" }}>
         {loading ? (
-          <Spinner color="success" style={{position:'relative',top:'40%',left:'40%'}} />
+          <Spinner
+            color="success"
+            style={{ position: "relative", top: "40%", left: "40%" }}
+          />
         ) : (
           <>
             <UserHeader member={member} />
@@ -156,10 +161,19 @@ export default function PermissionScreen() {
             <Button
               outline
               style={{ marginLeft: "15px" }}
-              onClick={handlePreset}
+              onClick={handleSavePreset}
             >
               <MdOutlineAssignmentInd style={{ fontSize: "24px" }} /> Save as
               preset
+            </Button>
+            <Button
+              outline
+              color="warning"
+              style={{ marginLeft: "15px" }}
+              onClick={handleLoadPreset}
+            >
+              <MdOutlineAssignmentInd style={{ fontSize: "24px" }} /> Load
+              Preset
             </Button>
           </>
         )}

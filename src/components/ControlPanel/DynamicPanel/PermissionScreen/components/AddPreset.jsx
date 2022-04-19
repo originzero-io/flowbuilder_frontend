@@ -2,20 +2,27 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Alert, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useDispatch } from "react-redux";
+import { savePresetService } from "services/permissionService";
+import toast from "react-hot-toast";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,
 };
-export default function Presets({ permissions }) {
+export default function AddPreset({ permissions }) {
   const dispatch = useDispatch();
   const [presetName, setPresetName] = useState("");
-  const onSubmitHandle = (e) => {
+  const onSubmitHandle = async (e) => {
     e.preventDefault();
     const preset = {
       name: presetName,
-      permissions: permissions,
+      preset: permissions,
     };
-    console.log("PRESET: ", preset);
+    try {
+      await savePresetService(preset);
+      toast.success(`Preferences has been saved as ${preset.name}`);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   const onChangeHandler = (e) => {
     setPresetName(e.target.value);
@@ -37,4 +44,4 @@ export default function Presets({ permissions }) {
   );
 }
 
-Presets.propTypes = propTypes;
+AddPreset.propTypes = propTypes;

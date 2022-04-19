@@ -27,11 +27,11 @@ const WorkspacePanel = () => {
   useEffect(() => {
     dispatch(getMyWorkspaces());
   }, []);
-  // useDidMountEffect(() => {
-  //   if (workspaces.length > 0) {
-  //     dispatch(setActiveWorkspace(workspaces[0]));
-  //   }
-  // }, [workspaces]);
+  useDidMountEffect(() => {
+    if (workspaces.length > 0) {
+      dispatch(setActiveWorkspace(workspaces[0]));
+    }
+  }, [workspaces]);
   useDidMountEffect(() => {
     dispatch(getFlowsByWorkspace(activeWorkspace));
     dispatch(getProjectsByWorkspace(activeWorkspace));
