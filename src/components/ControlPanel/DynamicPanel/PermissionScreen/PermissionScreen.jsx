@@ -27,10 +27,10 @@ import {
 import { Button, Input, Spinner } from "reactstrap";
 import { AiOutlineSave } from "react-icons/ai";
 import { MdOutlineAssignmentInd } from "react-icons/md";
-import {
+import PermissionService, {
   savePermissionService,
   getUserPermissionInThisWorkspaceService,
-} from "services/permissionService";
+} from "services/configurationService/permissionService";
 import toast from "react-hot-toast";
 import { setModal } from "store/reducers/componentReducer";
 import AddPreset from "./components/AddPreset";
@@ -52,7 +52,7 @@ export default function PermissionScreen() {
   useComponentWillMount(async () => {
     try {
       setLoading(true);
-      const { permission } = await getUserPermissionInThisWorkspaceService(
+      const { permission } = await PermissionService.getUserPermissionInThisWorkspace(
         activeWorkspace._id,
         member._id
       );
@@ -75,7 +75,7 @@ export default function PermissionScreen() {
       permissions,
     };
     try {
-      await savePermissionService(data);
+      await PermissionService.savePermission(data);
       toast.success("Permissions saved");
     } catch (error) {
       toast.error(error.message);

@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import axios from "axios";
 import "./assets/css/index.js";
 import App from "./App";
 import "react-notifications/lib/notifications.css";
@@ -13,18 +12,12 @@ import 'antd/dist/antd.min.css'
 import "react-tabs/style/react-tabs.css";
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore.js";
-import { setAuthorizationToken } from "./utils/httpHelpers.js";
 import ErrorFallback from "./components/Shared/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import { PersistGate } from "redux-persist/integration/react";
 
 export const { store, persistor } = configureStore();
-axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
-const jwtToken = localStorage.getItem("token");
-if (jwtToken) {
-  setAuthorizationToken(jwtToken);
-}
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>

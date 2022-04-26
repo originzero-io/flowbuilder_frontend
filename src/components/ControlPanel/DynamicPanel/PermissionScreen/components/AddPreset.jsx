@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Alert, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useDispatch } from "react-redux";
-import { savePresetService } from "services/permissionService";
+import PermissionService from "services/configurationService/permissionService";
 import toast from "react-hot-toast";
 
 const propTypes = {
@@ -18,7 +18,7 @@ export default function AddPreset({ permissions }) {
       preset: permissions,
     };
     try {
-      await savePresetService(preset);
+      await PermissionService.savePreset(preset);
       toast.success(`Preferences has been saved as ${preset.name}`);
     } catch (error) {
       toast.error(error.message);

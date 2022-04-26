@@ -1,6 +1,6 @@
-import {
+import ProjectService, {
   getProjectsByWorkspaceService
-} from "services/projectService";
+} from "services/configurationService/projectService";
 import * as actions from "../constants/projectContants";
 
 const initialState = {
@@ -42,7 +42,7 @@ export const setActiveProject = (params) => {
   };
 };
 export const getProjectsByWorkspace = (workspace) => async (dispatch) => {
-  const projects = await getProjectsByWorkspaceService(workspace);
+  const projects = await ProjectService.getProjectsByWorkspace(workspace);
   dispatch({
     type: actions.GET_PROJECTS,
     payload: projects,

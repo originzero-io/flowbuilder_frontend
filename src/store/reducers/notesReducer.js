@@ -1,4 +1,4 @@
-import { getNotesService } from "services/noteService";
+import NoteService, { getNotesService } from "services/configurationService/noteService";
 import * as actions from "../constants/noteConstants";
 
 const noteReducer = (state = [], { type, payload }) => {
@@ -22,7 +22,7 @@ const noteReducer = (state = [], { type, payload }) => {
 export default noteReducer;
 
 export const getNotesByWorkspace = (workspace) => async (dispatch) => {
-  const { notes } = await getNotesService(workspace);
+  const { notes } = await NoteService.getNotes(workspace);
   dispatch({
     type: actions.GET_NOTES,
     payload: notes,

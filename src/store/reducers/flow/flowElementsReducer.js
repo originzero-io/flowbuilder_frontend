@@ -1,6 +1,6 @@
 import { isEdge, isNode } from "react-flow-renderer";
 import undoable, { includeAction } from "redux-undo";
-import { getElementsService } from "services/elementService";
+import FlowElementService, { getElementsService } from "services/configurationService/elementService";
 import * as actions from "../../constants/elementsContants";
 
 const elementReducer = (state = [], { type, payload }) => {
@@ -373,7 +373,7 @@ export const saveElements = (elements)=> ({
   payload: elements.data
 });
 export const getElementsByFlow = (flow)=> async dispatch => {
-  const { elements } = await getElementsService(flow._id);
+  const { elements } = await FlowElementService.getElements(flow._id);
   dispatch({
     type: actions.SET_ELEMENTS,
     payload: elements

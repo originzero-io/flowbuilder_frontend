@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Input } from "reactstrap";
-import { getPresetsService } from "services/permissionService";
+import PermissionService from "services/configurationService/permissionService";
 import { setModal } from "store/reducers/componentReducer";
 import { loadPermission } from "store/reducers/userPermissionReducer";
 
@@ -10,7 +10,7 @@ export default function PresetList() {
   const [selectedPreset, setSelectedPreset] = useState([]);
   const dispatch = useDispatch();
   useEffect(async () => {
-    const data = await getPresetsService();
+    const data = await PermissionService.getPresets();
     console.log("data:", data);
     setPresets(data.presets);
   }, []);

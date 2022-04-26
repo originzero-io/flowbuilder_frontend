@@ -1,5 +1,5 @@
 import * as actions from "../../constants/groupContants";
-import { createGroupService, deleteGroupService, getGroupsService, updateGroupService } from "services/groupService";
+import FlowGroupService, { createGroupService, deleteGroupService, getGroupsService, updateGroupService } from "services/configurationService/groupService";
 
 const flowGroupsReducer = (state = [], { type, payload }) => {
   switch (type) {
@@ -18,28 +18,28 @@ const flowGroupsReducer = (state = [], { type, payload }) => {
 export default flowGroupsReducer;
 
 export const getGroups = (flow_id) => async dispatch => {
-  const { groups } = await getGroupsService(flow_id);
+  const { groups } = await FlowGroupService.getGroups(flow_id);
   dispatch({
     type: actions.GET_GROUPS,
     payload: groups
   })
 };
 export const createGroup= (flow_id,group) => async dispatch => {
-  const new_group = await createGroupService(flow_id, group);
+  const new_group = await FlowGroupService.createGroup(flow_id, group);
   dispatch({
     type: actions.CREATE_GROUP,
     payload: new_group.group
   })
 };
 export const updateGroup= (currentGroup) => async dispatch => {
-  const { group } = await updateGroupService(currentGroup);
+  const { group } = await FlowGroupService.updateGroup(currentGroup);
   dispatch({
     type: actions.UPDATE_GROUP,
     payload: group
   })
 };
-export const deleteGroup= (group) => async dispatch => {
-  await deleteGroupService(group);
+export const deleteGroup = (group) => async dispatch => {
+  await FlowGroupService.deleteGroup(group);
   dispatch({
     type: actions.DELETE_GROUP,
     payload: group

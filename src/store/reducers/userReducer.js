@@ -1,14 +1,7 @@
-import {
-  addUserToWorkspaceService,
-  assignPermissionToMemberService,
-  deleteUserService,
-  editUserService,
-  getAllUsersService,
-  registerService,
-  removeUserToWorkspaceService,
-} from "services/userService";
-import * as actions from "../constants/userContants";
 import toast from "react-hot-toast";
+import AuthService from "services/authService";
+import UserService from "services/configurationService/userService";
+import * as actions from "../constants/userContants";
 const userReducer = (state = [], { type, payload }) => {
   switch (type) {
     case actions.GET_ALL_USERS:
@@ -30,43 +23,40 @@ const userReducer = (state = [], { type, payload }) => {
 export default userReducer;
 
 export const getAllUsers = () => async (dispatch) => {
-  const { users } = await getAllUsersService();
+  const { users } = await UserService.getAllUsers();
   dispatch({
     type: actions.GET_ALL_USERS,
     payload: users,
   });
 };
-export const registerUser = (userInfo) => async (dispatch) => {
-  const { user } = await registerService(userInfo);
-  dispatch({
-    type: actions.CREATE_USER,
-    payload: user,
-  });
+export const createUser = (userInfo) => async (dispatch) => {
+  try {
+    const { user } = await AuthService.createUser(userInfo);
+    dispatch({
+      type: actions.CREATE_USER,
+      payload: user,
+    });
+    toast.success("User created successfully")
+  } catch (error) {
+    toast.error(error.message);
+  }
 };
 export const editUser = (userInfo) => async (dispatch) => {
-  const { user } = await editUserService(userInfo);
+  const { user } = await UserService.editUser(userInfo);
   dispatch({
     type: actions.EDIT_USER,
     payload: user,
   });
 };
 export const addUserToWorkspace = (userInfo,workspace) => async (dispatch) => {
-  const { user } = await addUserToWorkspaceService(userInfo, workspace);
+  const { user } = await UserService.addUserToWorkspace(userInfo, workspace);
   dispatch({
     type: actions.EDIT_USER,
     payload: user,
   });
 };
 export const removeUserToWorkspace = (userInfo, workspace) => async (dispatch) => {
-  const { user } = await removeUserToWorkspaceService(userInfo, workspace);
-  dispatch({
-    type: actions.EDIT_USER,
-    payload: user,
-  });
-};
-export const assignPermissionToMember = (member,workspace,permissions) => async (dispatch) => {
-  const {user} = await assignPermissionToMemberService(member, workspace, permissions);
-  console.log(user);
+  const { user } = await UserService.removeUserToWorkspace(userInfo, workspace);
   dispatch({
     type: actions.EDIT_USER,
     payload: user,
@@ -74,7 +64,7 @@ export const assignPermissionToMember = (member,workspace,permissions) => async 
 };
 export const deleteUser = (user) => async (dispatch) => {
   try {
-    await deleteUserService(user);
+    await UserService.deleteUser(user);
     dispatch({
       type: actions.DELETE_USER,
       payload: user,

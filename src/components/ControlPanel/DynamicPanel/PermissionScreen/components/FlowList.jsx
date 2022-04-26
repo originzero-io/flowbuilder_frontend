@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { getFlowsByProjectService } from "services/flowService";
+import FlowService from "services/configurationService/flowService";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import { CollapsibleMenuItem } from "./CollapsibleMenu";
@@ -28,7 +28,7 @@ function FlowList({
   const CAN_X_FLOW_ALL = `CAN_${permissionName}_FLOW_ALL`;
 
   useEffect(async () => {
-    const data = await getFlowsByProjectService(project);
+    const data = await FlowService.getFlowsByProject(project);
     setFlows(data.flows);
   }, []);
 

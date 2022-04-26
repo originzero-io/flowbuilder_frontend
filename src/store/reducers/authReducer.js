@@ -1,4 +1,5 @@
 import * as actions from "../constants/authConstants";
+import AuthService from "services/authService";
 
 const initialState = {
   username: "",
@@ -47,7 +48,7 @@ import { mainNamespace } from "SocketConnections";
 
 export const loginSuccess = (user) => async dispatch => {
   try {
-    const { data } = await loginService(user);
+    const { data } = await AuthService.logIn(user);
     dispatch({
       type: actions.LOGIN_SUCCESS,
       payload: data,
@@ -58,7 +59,7 @@ export const loginSuccess = (user) => async dispatch => {
 };
 export const getMe = (token) => async dispatch => {
   try {
-    const { user } = await getMeService(token);
+    const { user } = await AuthService.getMe(token);
     dispatch({
       type: actions.LOGIN_SUCCESS,
       payload: user,
@@ -75,7 +76,7 @@ export const loginError = (error) => {
 };
 export const logOut = () => {
   mainNamespace.disconnect();
-  logoutService();
+  AuthService.logOut();
   return {
     type: actions.LOG_OUT,
   };

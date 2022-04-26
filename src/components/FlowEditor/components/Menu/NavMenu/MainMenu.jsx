@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { elementNamespace } from "SocketConnections";
 import * as themeColor from "constants/ThemeReference";
-import { saveFlowService } from "services/flowService";
+import FlowService from "services/configurationService/flowService";
 import { setElements } from "store/reducers/flow/flowElementsReducer";
 import { getFlowsByWorkspace } from "store/reducers/flow/flowReducer";
 import useWorkspace from "hooks/useWorkspace";
@@ -55,7 +55,7 @@ const MainMenu = () => {
       config: flowConfig,
       gui: { ...flowGui, position, zoom },
     };
-    await saveFlowService(flowId, flow);
+    await FlowService.saveFlowService(flowId, flow);
     //await saveElementsService(flowId, elements);
 
     elementNamespace.emit("elements:save", { flow_id: flowId, elements });

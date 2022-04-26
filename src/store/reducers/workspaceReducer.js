@@ -1,7 +1,8 @@
 import toast from "react-hot-toast";
 import {
   getMyWorkspacesService
-} from "services/workspaceService";
+} from "services/configurationService/workspaceService";
+import WorkspaceService from "services/configurationService/workspaceService"
 import * as actions from "../constants/workspaceConstants";
 
 const initialState = {
@@ -44,7 +45,8 @@ export const setActiveWorkspace = (params) => {
 };
 export const getMyWorkspaces = () => async (dispatch) => {
   try {
-    const workspaces = await getMyWorkspacesService();
+    //const workspaces = await getMyWorkspacesService();
+    const workspaces = await WorkspaceService.getMyWorkspaces();
     dispatch({
       type: actions.GET_WORKSPACES,
       payload: workspaces,

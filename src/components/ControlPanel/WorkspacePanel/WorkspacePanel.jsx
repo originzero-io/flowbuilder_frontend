@@ -36,7 +36,6 @@ const WorkspacePanel = () => {
     dispatch(getFlowsByWorkspace(activeWorkspace));
     dispatch(getProjectsByWorkspace(activeWorkspace));
     dispatch(getNotesByWorkspace(activeWorkspace));
-    console.log("burdayım");
   }, [activeWorkspace])
 
   const clickWorkspaceHandler = (workspace) => {

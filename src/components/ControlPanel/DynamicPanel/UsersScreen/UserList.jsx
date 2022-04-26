@@ -61,8 +61,6 @@ export default function UserList() {
   }
   return (
     <UserListContainer>
-      <Button onClick={toastTestSuccess}>Toast successful</Button>
-      <Button onClick={toastTestError}>Toast error</Button>
       <Table dark hover>
         <thead>
           <tr>

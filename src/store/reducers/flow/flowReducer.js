@@ -1,7 +1,7 @@
-import {
+import FlowService, {
   getFlowsByProjectService,
   getFlowsByWorkspaceService
-} from "services/flowService";
+} from "services/configurationService/flowService";
 import * as actions from "../../constants/flowConstants";
 
 export const flowReducer = (state = [], { type, payload }) => {
@@ -26,7 +26,7 @@ export const flowReducer = (state = [], { type, payload }) => {
 export default flowReducer;
 
 export const getFlowsByWorkspace = (workspace) => async (dispatch) => {
-  const { flows } = await getFlowsByWorkspaceService(workspace);
+  const { flows } = await FlowService.getFlowsByWorkspace(workspace);
   if (workspace) {
     dispatch({
       type: actions.GET_FLOWS,
@@ -40,7 +40,7 @@ export const getFlowsByWorkspace = (workspace) => async (dispatch) => {
   }
 };
 export const getFlowsByProject = (project) => async (dispatch) => {
-  const { flows } = await getFlowsByProjectService(project);
+  const { flows } = await FlowService.getFlowsByProject(project);
   dispatch({
     type: actions.GET_FLOWS,
     payload: flows,

@@ -5,7 +5,6 @@ import { createWorkspace } from "store/reducers/workspaceReducer";
 import { setModal } from "store/reducers/componentReducer";
 import { workspaceNamespace } from "SocketConnections";
 import useAuth from "hooks/useAuth";
-import { addUserToWorkspace, assignPermissionToMember } from "store/reducers/userReducer";
 export default function AddWorkspaceForm() {
   const auth = useAuth();
   const [workspaceInfo, setWorkspaceInfo] = useState({
@@ -19,7 +18,6 @@ export default function AddWorkspaceForm() {
   const onSubmitHandle = (e) => {
     e.preventDefault();
     workspaceNamespace.emit("workspaces:create", { workspace: workspaceInfo });
-    //dispatch(addUserToWorkspace(auth, workspaceInfo));
     dispatch(setModal(false));
   };
   return (

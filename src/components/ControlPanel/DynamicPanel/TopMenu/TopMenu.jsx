@@ -1,26 +1,19 @@
-import React from "react";
-import { BiBrain } from "react-icons/bi";
-import { FaUserCircle } from "react-icons/fa";
-import { FiUsers } from "react-icons/fi";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useRouteMatch } from "react-router-dom";
-import { logOut } from "store/reducers/authReducer";
-import useAuth from "hooks/useAuth";
 import Avatar from "components/Shared/Avatar";
 import { Logo } from "components/Shared/icons";
-import { VerticalDivider } from "../../../StyledComponents/Divider";
+import useAuth from "hooks/useAuth";
+import React from "react";
+import { BiBrain } from "react-icons/bi";
+import { FiUsers } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { Link, useRouteMatch } from "react-router-dom";
+import { logOut } from "store/reducers/authReducer";
 import {
   DropdownItem,
-  DropdownWrapper,
-} from "../../../StyledComponents/DropdownMenu";
+  DropdownWrapper
+} from "components/StyledComponents/DropdownMenu";
 import {
-  Container,
-  ProfileList,
-  MenuItem,
-  LeftSideContainer,
-  RightSideContainer,
-  UserInformation,
-  Profile,
+  Container, LeftSideContainer, MenuItem, Profile, ProfileList, RightSideContainer,
+  UserInformation
 } from "./TopMenu.style";
 export default function TopMenu() {
   const dispatch = useDispatch();
@@ -55,7 +48,7 @@ export default function TopMenu() {
           </Profile>
           <ProfileList>
             <Link to={`${url}/settings`}>
-              <DropdownItem>User settings</DropdownItem>
+              <DropdownItem style={{color:'white'}}>User settings</DropdownItem>
             </Link>
             <DropdownItem onClick={logOutHandle}>Log out</DropdownItem>
           </ProfileList>
