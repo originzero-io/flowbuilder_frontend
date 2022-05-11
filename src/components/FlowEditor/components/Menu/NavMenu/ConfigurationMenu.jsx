@@ -100,7 +100,7 @@ export default function ConfigurationMenu() {
         };
       } else
         
-      toast.error("This file cannot be imported. Please provide JSON file");
+      notification.error("This file cannot be imported. Please provide JSON file");
     },
     [reactFlowInstance]
   );

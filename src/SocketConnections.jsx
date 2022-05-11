@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import createSocket, {
-  elementSubscribe,
-  flowSubscribe,
-  projectSubscribe,
-  workspaceSubscribe,
-  noteSubscribe,
-  mainSubscribe,
-} from "./services/socketApi";
+import {
+  elementListener,
+  flowListener,
+  projectListener,
+  workspaceListener,
+  noteListener,
+  mainListener,
+} from "./services/configurationService/socketListeners";
+import createSocket from "services/SocketService";
 import useAuth from "./hooks/useAuth";
 export let elementNamespace;
 export let flowNamespace;
@@ -24,12 +25,12 @@ export default function SocketConnections() {
       projectNamespace = createSocket("projects");
       workspaceNamespace = createSocket("workspaces");
       noteNamespace = createSocket("notes");
-      mainSubscribe(mainNamespace);
-      elementSubscribe(elementNamespace);
-      flowSubscribe(flowNamespace);
-      projectSubscribe(projectNamespace);
-      workspaceSubscribe(workspaceNamespace);
-      noteSubscribe(noteNamespace);
+      mainListener(mainNamespace);
+      elementListener(elementNamespace);
+      flowListener(flowNamespace);
+      projectListener(projectNamespace);
+      workspaceListener(workspaceNamespace);
+      noteListener(noteNamespace);
     }
   }, [auth.isAuthenticated]);
   return <></>;

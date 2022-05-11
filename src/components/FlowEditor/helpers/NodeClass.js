@@ -8,9 +8,8 @@ import {
   getNodesAndEdges,
   //findElementById
 } from "./elementController";
-import { openNotification as notification } from "utils/notification";
+import notification from "utils/notificationHelper";
 import { setElements } from "store/reducers/flow/flowElementsReducer";
-import axios from "axios"
 export default class Node {
   elements = [];
   nodes = [];
@@ -53,7 +52,7 @@ export default class Node {
     });
     //combined = "This is for " + datas[0].payload;
     //console.log("COMBINED:", combined);
-    notification("Datas combined", combined, "success");
+    notification.success(`Datas combined ${combined}`)
     //const connected = getConnectedEdges([self], this.edges);
     //BURDA KALINDI
     //console.log("combine connected:", connected);
@@ -71,7 +70,8 @@ export default class Node {
         `%c source: ${data.source}\n target: ${data.target}\n payload: ${data.payload}`,
         "background: orange; color: black; display: block;"
       );
-      notification(data.target, data.payload, "success");
+      notification.success(`${data.target} ${data.payload}`)
+
     });
   };
   sendDataToYourOutgoers = (data, self, outgoers) => {

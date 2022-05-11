@@ -8,7 +8,7 @@ import KeyboardEventHandler from "react-keyboard-event-handler";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
-import toast from "react-hot-toast";
+import notification from "utils/notificationHelper";
 import { setCopiedElements } from "store/reducers/controlPanelReducer";
 import { pasteNodes } from "store/reducers/flow/flowElementsReducer";
 import { setRotateAllPath } from "store/reducers/flow/flowGuiReducer";

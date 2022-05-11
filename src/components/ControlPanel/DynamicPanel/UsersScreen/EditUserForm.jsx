@@ -20,7 +20,7 @@ export default function EditUserForm({ user }) {
     e.preventDefault();
     dispatch(editUser(userInfo));
     dispatch(setModal(false));
-    toast.success("User updated");
+    notification.success("User updated");
   };
   const profilePictureHandle = (e) => {
     setUserInfo({ ...userInfo, avatar: e.target.files[0] });

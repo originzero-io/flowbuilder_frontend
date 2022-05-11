@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import axios from "axios";
+import notification from "utils/notificationHelper";
 
 export default class HTTPService {
     constructor() {
@@ -15,6 +16,16 @@ export default class HTTPService {
               const token = localStorage.getItem("token");
               config.headers.Authorization = token ? `Bearer ${token}` : "";
               return config;
+            })
+            this.service.interceptors.response.use(function (response) {
+              // Any status code that lie within the range of 2xx cause this function to trigger
+              // Do something with response data
+              return response;
+            }, function (error) {
+              // Any status codes that falls outside the range of 2xx cause this function to trigger
+              // Do something with response error
+              notification.error(error.response.data.message);
+              return Promise.reject(error);
             });
             return this.service;
         }

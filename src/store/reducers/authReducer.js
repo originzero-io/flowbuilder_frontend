@@ -42,11 +42,18 @@ const authReducer = (state = initialState, { type, payload }) => {
 };
 export default authReducer;
 
-import { loginService, logoutService } from 'services/authService';
+import { loginService, logoutService } from "services/authService";
 import { getMeService } from "services/authService";
-import { mainNamespace } from "SocketConnections";
+import {
+  mainNamespace,
+  workspaceNamespace,
+  projectNamespace,
+  flowNamespace,
+  elementNamespace,
+  noteNamespace,
+} from "SocketConnections";
 
-export const loginSuccess = (user) => async dispatch => {
+export const loginSuccess = (user) => async (dispatch) => {
   try {
     const { data } = await AuthService.logIn(user);
     dispatch({
@@ -57,7 +64,7 @@ export const loginSuccess = (user) => async dispatch => {
     dispatch(loginError(error.response?.data.message));
   }
 };
-export const getMe = (token) => async dispatch => {
+export const getMe = (token) => async (dispatch) => {
   try {
     const { user } = await AuthService.getMe(token);
     dispatch({
@@ -75,8 +82,13 @@ export const loginError = (error) => {
   };
 };
 export const logOut = () => {
-  mainNamespace.disconnect();
   AuthService.logOut();
+  mainNamespace.disconnect();
+  workspaceNamespace.disconnect();
+  projectNamespace.disconnect();
+  flowNamespace.disconnect();
+  noteNamespace.disconnect();
+  elementNamespace.disconnect();
   return {
     type: actions.LOG_OUT,
   };
@@ -84,6 +96,6 @@ export const logOut = () => {
 export const makeMeOnline = (data) => {
   return {
     type: actions.MAKE_ME_ONLINE,
-    payload: data
+    payload: data,
   };
 };

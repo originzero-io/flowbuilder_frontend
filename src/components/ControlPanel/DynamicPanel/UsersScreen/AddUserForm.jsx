@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input, Label, Toast } from "reactstrap";
 import { setModal } from "store/reducers/componentReducer";
 import { createUser } from "store/reducers/userReducer";
-import toast from "react-hot-toast";
+import notification from "utils/notificationHelper";
 export default function AddUserForm() {
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState({

@@ -25,7 +25,7 @@ import FlowComponents from "./components/FlowComponents";
 import CustomEdge from './components/Edges/CustomEdge'
 import PropTypes from "prop-types"
 import useActiveFlow from "hooks/useActiveFlow";
-import toast from "react-hot-toast"
+import notification from "utils/notificationHelper"
 
 const propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
@@ -42,7 +42,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const onConnectHandle = (params) => {
     console.log("params:", params);
     if (params.source === params.target) {
-      toast.error("Nodes cannot connect itself");
+      notification.error("Nodes cannot connect itself");
       
     } else {
       const sourceGroup = elements.find((els) => els.id === params.source).data.group;

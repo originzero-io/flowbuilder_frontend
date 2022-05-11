@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import { HorizontalDivider } from "../../../../StyledComponents/Divider";
+import { HorizontalDivider } from "components/StyledComponents/Divider";
 import { MenuItem } from "./NavMenu.style";
 import * as tooltip from "constants/TooltipReference";
 import {

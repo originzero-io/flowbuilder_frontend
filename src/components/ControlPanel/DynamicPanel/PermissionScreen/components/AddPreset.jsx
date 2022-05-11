@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useDispatch } from "react-redux";
 import PermissionService from "services/configurationService/permissionService";
-import toast from "react-hot-toast";
+import notification from "utils/notificationHelper";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,
@@ -19,9 +19,9 @@ export default function AddPreset({ permissions }) {
     };
     try {
       await PermissionService.savePreset(preset);
-      toast.success(`Preferences has been saved as ${preset.name}`);
+      notification.success(`Preferences has been saved as ${preset.name}`);
     } catch (error) {
-      toast.error(error.message);
+      notification.error(error.message);
     }
   };
   const onChangeHandler = (e) => {

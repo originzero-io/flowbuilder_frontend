@@ -4,8 +4,7 @@ import { ReactFlowProvider } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import FlowEditor from "../components/FlowEditor/FlowEditor";
-
+import FlowEditor from "components/FlowEditor/FlowEditor";
 const FlowWrapper = styled.div`
   height:100%;
   width:100%;

@@ -9,7 +9,7 @@ import { persistStore, persistReducer } from "redux-persist";
 const persistConfig = {
   key: 'persist-key',
   storage,
-  blacklist: ['activeFlow']
+  whitelist:['auth']
 }
 
 

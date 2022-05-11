@@ -9,7 +9,7 @@ import { Redirect } from "react-router-dom";
 import useAuth from "hooks/useAuth";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import toast from "react-hot-toast"
+import notification from "utils/notificationHelper"
 export default function LoginForm() {
   const dispatch = useDispatch();
   const { isAuthenticated, errorMessage } = useAuth();
@@ -22,7 +22,7 @@ export default function LoginForm() {
     try {
       dispatch(loginSuccess(data));
     } catch (error) {
-      toast.error("The server is not active");
+      notification.error("The server is not active");
       dispatch(loginError(error.response?.data.message));
     }
   };

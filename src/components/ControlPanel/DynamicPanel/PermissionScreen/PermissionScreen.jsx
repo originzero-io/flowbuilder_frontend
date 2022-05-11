@@ -31,7 +31,7 @@ import PermissionService, {
   savePermissionService,
   getUserPermissionInThisWorkspaceService,
 } from "services/configurationService/permissionService";
-import toast from "react-hot-toast";
+import notification from "utils/notificationHelper";
 import { setModal } from "store/reducers/componentReducer";
 import AddPreset from "./components/AddPreset";
 import useComponentWillMount from "hooks/useComponentWillMount";
@@ -64,7 +64,7 @@ export default function PermissionScreen() {
       }
       setLoading(false);
     } catch (error) {
-      toast.error(error.message);
+      notification.error(error.message);
     }
   }, [activeWorkspace._id, member._id]);
 
@@ -76,9 +76,9 @@ export default function PermissionScreen() {
     };
     try {
       await PermissionService.savePermission(data);
-      toast.success("Permissions saved");
+      notification.success("Permissions saved");
     } catch (error) {
-      toast.error(error.message);
+      notification.error(error.message);
     }
   };
   const handleSavePreset = () => {

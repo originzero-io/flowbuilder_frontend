@@ -5,7 +5,7 @@ import ReactTooltip from "react-tooltip";
 import { setModal } from "store/reducers/componentReducer";
 import { getFlowsByWorkspace } from "store/reducers/flow/flowReducer";
 import { getNotesByWorkspace } from "store/reducers/notesReducer";
-import { getProjectsByWorkspace } from "store/reducers/projectReducer";
+import { getProjectsByWorkspace, setActiveProject } from "store/reducers/projectReducer";
 import {
   getMyWorkspaces,
   setActiveWorkspace,
@@ -28,7 +28,7 @@ const WorkspacePanel = () => {
     dispatch(getMyWorkspaces());
   }, []);
   useDidMountEffect(() => {
-    if (workspaces.length > 0) {
+    if (!activeWorkspace && workspaces.length > 0) {
       dispatch(setActiveWorkspace(workspaces[0]));
     }
   }, [workspaces]);
@@ -36,6 +36,7 @@ const WorkspacePanel = () => {
     dispatch(getFlowsByWorkspace(activeWorkspace));
     dispatch(getProjectsByWorkspace(activeWorkspace));
     dispatch(getNotesByWorkspace(activeWorkspace));
+    dispatch(setActiveProject(""));
   }, [activeWorkspace])
 
   const clickWorkspaceHandler = (workspace) => {

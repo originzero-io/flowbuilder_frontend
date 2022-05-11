@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+import notification from "utils/notificationHelper";
 import AuthService from "services/authService";
 import UserService from "services/configurationService/userService";
 import * as actions from "../constants/userContants";
@@ -30,16 +30,11 @@ export const getAllUsers = () => async (dispatch) => {
   });
 };
 export const createUser = (userInfo) => async (dispatch) => {
-  try {
-    const { user } = await AuthService.createUser(userInfo);
-    dispatch({
-      type: actions.CREATE_USER,
-      payload: user,
-    });
-    toast.success("User created successfully")
-  } catch (error) {
-    toast.error(error.message);
-  }
+  const { user } = await AuthService.createUser(userInfo);
+  dispatch({
+    type: actions.CREATE_USER,
+    payload: user,
+  });
 };
 export const editUser = (userInfo) => async (dispatch) => {
   const { user } = await UserService.editUser(userInfo);
@@ -48,20 +43,24 @@ export const editUser = (userInfo) => async (dispatch) => {
     payload: user,
   });
 };
-export const addUserToWorkspace = (userInfo,workspace) => async (dispatch) => {
+export const addUserToWorkspace = (userInfo, workspace) => async (dispatch) => {
   const { user } = await UserService.addUserToWorkspace(userInfo, workspace);
   dispatch({
     type: actions.EDIT_USER,
     payload: user,
   });
 };
-export const removeUserToWorkspace = (userInfo, workspace) => async (dispatch) => {
-  const { user } = await UserService.removeUserToWorkspace(userInfo, workspace);
-  dispatch({
-    type: actions.EDIT_USER,
-    payload: user,
-  });
-};
+export const removeUserToWorkspace =
+  (userInfo, workspace) => async (dispatch) => {
+    const { user } = await UserService.removeUserToWorkspace(
+      userInfo,
+      workspace
+    );
+    dispatch({
+      type: actions.EDIT_USER,
+      payload: user,
+    });
+  };
 export const deleteUser = (user) => async (dispatch) => {
   try {
     await UserService.deleteUser(user);
@@ -69,8 +68,7 @@ export const deleteUser = (user) => async (dispatch) => {
       type: actions.DELETE_USER,
       payload: user,
     });
-    
   } catch (error) {
-    toast.error(error.message);
+    notification.error(error.message);
   }
 };

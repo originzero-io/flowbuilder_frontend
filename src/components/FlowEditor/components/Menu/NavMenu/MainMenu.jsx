@@ -55,7 +55,7 @@ const MainMenu = () => {
       config: flowConfig,
       gui: { ...flowGui, position, zoom },
     };
-    await FlowService.saveFlowService(flowId, flow);
+    await FlowService.saveFlow(flowId, flow);
     //await saveElementsService(flowId, elements);
 
     elementNamespace.emit("elements:save", { flow_id: flowId, elements });

@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+import notification from "utils/notificationHelper";
 import {
   getMyWorkspacesService
 } from "services/configurationService/workspaceService";
@@ -52,7 +52,7 @@ export const getMyWorkspaces = () => async (dispatch) => {
       payload: workspaces,
     });
   } catch (error) {
-    toast.error(error.message);
+    notification.error(error.message);
   }
 };
 export const createWorkspace = (workspace) => ({
