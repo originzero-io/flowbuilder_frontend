@@ -56,15 +56,11 @@ const MainMenu = () => {
       gui: { ...flowGui, position, zoom },
     };
     await FlowService.saveFlow(flowId, flow);
-    //await saveElementsService(flowId, elements);
-
     elementNamespace.emit("elements:save", { flow_id: flowId, elements });
-    dispatch(setElements([]));
     dispatch(getFlowsByWorkspace(activeWorkspace));
   };
   const nameClick = () => {
-    console.log("tıkladım");
-    console.log("eLEMENT:", elementNamespace);
+    console.log("Element Namespace:", elementNamespace);
     elementNamespace.emit("elements:messageFromClient", { message: 'Naber elements?' });
   }
   return (
