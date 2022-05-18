@@ -1,8 +1,6 @@
 import notification from "utils/notificationHelper";
-import {
-  getMyWorkspacesService
-} from "services/configurationService/workspaceService";
-import WorkspaceService from "services/configurationService/workspaceService"
+import { getMyWorkspacesService } from "services/configurationService/workspaceService";
+import WorkspaceService from "services/configurationService/workspaceService";
 import * as actions from "../constants/workspaceConstants";
 
 const initialState = {
@@ -44,16 +42,11 @@ export const setActiveWorkspace = (params) => {
   };
 };
 export const getMyWorkspaces = () => async (dispatch) => {
-  try {
-    //const workspaces = await getMyWorkspacesService();
-    const workspaces = await WorkspaceService.getMyWorkspaces();
-    dispatch({
-      type: actions.GET_WORKSPACES,
-      payload: workspaces,
-    });
-  } catch (error) {
-    notification.error(error.message);
-  }
+  const workspaces = await WorkspaceService.getMyWorkspaces();
+  dispatch({
+    type: actions.GET_WORKSPACES,
+    payload: workspaces,
+  });
 };
 export const createWorkspace = (workspace) => ({
   type: actions.CREATE_WORKSPACE,

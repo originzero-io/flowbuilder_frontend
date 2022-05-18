@@ -62,13 +62,9 @@ export const removeUserToWorkspace =
     });
   };
 export const deleteUser = (user) => async (dispatch) => {
-  try {
-    await UserService.deleteUser(user);
-    dispatch({
-      type: actions.DELETE_USER,
-      payload: user,
-    });
-  } catch (error) {
-    notification.error(error.message);
-  }
+  await UserService.deleteUser(user);
+  dispatch({
+    type: actions.DELETE_USER,
+    payload: user,
+  });
 };

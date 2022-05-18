@@ -1,5 +1,8 @@
-export const initialState = {
-  CAN_DO_EVERYTHING:false,
+import PermissionService from "services/configurationService/permissionService"
+import { beginTheBar,endTheBar } from "store/reducers/componentReducer";
+
+export const defaultPermissions = {
+  CAN_DO_EVERYTHING:true,
   device: {
     CAN_CREATE_CONTROLLER: true,
     CAN_CREATE_PROCESSOR: false,
@@ -35,7 +38,7 @@ export const initialState = {
     ],
     CAN_USAGE_FLOW_ALL:[/*project_id*/],
     CAN_USAGE_FLOW: [
-      /*flow_id*/
+      /*{id: flow_id projectId: project_id}/
     ],
     CAN_USAGE_DASHBOARD_ALL:[/*project_id*/],
     CAN_USAGE_DASHBOARD: [
@@ -47,7 +50,7 @@ export const initialState = {
     ],
     CAN_EDIT_FLOW_ALL:[/*project_id*/],
     CAN_EDIT_FLOW: [
-      /*flow_id*/
+     /*{id: flow_id projectId: project_id}/
     ],
     CAN_EDIT_DASHBOARD_ALL:[/*project_id*/],
     CAN_EDIT_DASHBOARD: [
@@ -62,7 +65,7 @@ export const initialState = {
     ],
     CAN_DELETE_FLOW_ALL:[/*project_id*/],
     CAN_DELETE_FLOW: [
-      /*flow_id*/
+      /*{id: flow_id projectId: project_id}/
     ],
     CAN_DELETE_DASHBOARD_ALL:[/*project_id*/],
     CAN_DELETE_DASHBOARD: [
@@ -74,7 +77,7 @@ export const initialState = {
     ],
     CAN_VIEW_FLOW_ALL:[/*project_id*/],
     CAN_VIEW_FLOW: [
-      /*flow_id*/
+      /*{id: flow_id projectId: project_id}/
     ],
     CAN_VIEW_DASHBOARD_ALL:[/*project_id*/],
     CAN_VIEW_DASHBOARD: [
@@ -87,9 +90,9 @@ export const initialState = {
     CAN_ASSIGN_PERMISSION: false,
   },
 };
-const userPermissionReducer = (state = initialState, { type, payload }) => {
+const userPermissionReducer = (state = defaultPermissions, { type, payload }) => {
   switch (type) {
-    case "LOAD_PERMISSION":
+    case "LOAD_USER_PERMISSION":
       return payload;
     case "SET_CAN_DO_EVERYTHING":
       return { ...state, CAN_DO_EVERYTHING: payload.checked };
@@ -610,8 +613,16 @@ export const setNestedAllPermission = (event, permissionType) => ({
 });
 
 
-export const loadPermission = (data) => ({
-  type: "LOAD_PERMISSION",
+export const loadUserPermission = (data) => ({
+  type: "LOAD_USER_PERMISSION",
   payload: data
 });
 
+export const getUserPermissionInThisWorkspace = (workspace,user) => async (dispatch) => {
+  dispatch(beginTheBar());
+  const { permission } = await PermissionService.getUserPermissionInThisWorkspace(workspace._id, user._id);
+  if(permission){
+    dispatch(loadUserPermission(permission.permissions));
+  }
+  dispatch(endTheBar());
+};

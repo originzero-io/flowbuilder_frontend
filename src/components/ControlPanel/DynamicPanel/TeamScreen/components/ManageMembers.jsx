@@ -22,7 +22,7 @@ const Container = styled.div`
   justify-content: space-between;
   cursor: pointer;
 `;
-export default function AddMemberForm() {
+export default function ManageMembers() {
   const dispatch = useDispatch();
   const users = useUser();
   const { activeWorkspace } = useWorkspace();
@@ -39,7 +39,7 @@ export default function AddMemberForm() {
           <Container key={user._id}>
             <Avatar avatar={user.avatar} />
             <UserItem>{user.username}</UserItem>
-            {user.workspaces.some(workspace=>workspace._id === activeWorkspace._id) ? (
+            {user.workspaces.some(workspace=>workspace === activeWorkspace._id) ? (
               <TiTickOutline
                 style={{ fontSize: "30px" }}
                 onClick={() => removeMemberHandle(user)}

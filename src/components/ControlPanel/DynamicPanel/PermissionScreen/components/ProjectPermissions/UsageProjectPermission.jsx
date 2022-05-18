@@ -26,7 +26,7 @@ function UsageProjectPermission({
   handleSingleAllChange,
   handleNestedAllChange,
 }) {
-  console.log("usage-project-rendered");
+  console.log("usage-project-rendered",permissions);
 
   useEffect(() => {
     if (projects.length === permissions.CAN_USAGE_PROJECT.length) {
@@ -77,6 +77,7 @@ function UsageProjectPermission({
                 </CollapsibleMenuItem>
                 <CollapsibleSubMenu trigger="Flows">
                   <FlowList
+                    permissions={permissions}
                     project={project}
                     handleMultiChange={handleNestedMultiChange}
                     handleNestedAllChange={handleNestedAllChange}

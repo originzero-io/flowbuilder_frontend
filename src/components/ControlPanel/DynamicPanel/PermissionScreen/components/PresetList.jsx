@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Button, Input } from "reactstrap";
 import PermissionService from "services/configurationService/permissionService";
 import { setModal } from "store/reducers/componentReducer";
-import { loadPermission } from "store/reducers/userPermissionReducer";
+import { loadUserPermission } from "store/reducers/userPermissionReducer";
 
 export default function PresetList() {
   const [presets, setPresets] = useState([]);
@@ -15,7 +15,7 @@ export default function PresetList() {
     setPresets(data.presets);
   }, []);
   const onSubmitHandle = () => {
-    dispatch(loadPermission(selectedPreset));
+    dispatch(loadUserPermission(selectedPreset));
     dispatch(setModal(false))
   };
   const handlePresetChange = (e) => {

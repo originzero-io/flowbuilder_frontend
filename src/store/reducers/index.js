@@ -12,6 +12,7 @@ import { modalReducer,loadingBarReducer } from "./componentReducer";
 import authReducer from "./authReducer";
 import userReducer from "./userReducer";
 import userPermissionReducer from "./userPermissionReducer";
+import authPermissionReducer from "./authPermissionReducer";
 import workspaceReducer from "./workspaceReducer";
 import projectReducer from "./projectReducer";
 import notesReducer from "./notesReducer";
@@ -19,6 +20,7 @@ import * as actions from "../constants/authConstants";
 const reducers = combineReducers({
   auth:authReducer,
   users: userReducer,
+  authPermissions: authPermissionReducer,
   userPermissions: userPermissionReducer,
   activeFlow: combineReducers({
     flowConfig: flowConfigReducer,

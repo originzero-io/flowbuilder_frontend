@@ -22,7 +22,7 @@ import {
   setSingleAllPermission,
   setNestedAllPermission,
   loadPermission,
-  initialState,
+  getUserPermissionInThisWorkspace,
 } from "store/reducers/userPermissionReducer";
 import { Button, Input, Spinner } from "reactstrap";
 import { AiOutlineSave } from "react-icons/ai";
@@ -36,36 +36,24 @@ import { setModal } from "store/reducers/componentReducer";
 import AddPreset from "./components/AddPreset";
 import useComponentWillMount from "hooks/useComponentWillMount";
 import PresetList from "./components/PresetList";
+import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionReducer";
+import useAuth from "hooks/useAuth";
+
 export default function PermissionScreen() {
   const dispatch = useDispatch();
   const { activeWorkspace } = useWorkspace();
   const params = useParams();
+  const auth = useAuth();
   const users = useUser();
   const member = users.find((user) => user._id === params.member_id);
 
-  const [loading, setLoading] = useState(false);
   const handleEverythingPermission = (e) => {
     dispatch(setCanDoEverytingPermission(e));
   };
   const permissions = useUserPermission();
 
   useComponentWillMount(async () => {
-    try {
-      setLoading(true);
-      const { permission } = await PermissionService.getUserPermissionInThisWorkspace(
-        activeWorkspace._id,
-        member._id
-      );
-      //console.log("data from server:", permission);
-      if (permission) {
-        dispatch(loadPermission(permission.permissions));
-      } else {
-        dispatch(loadPermission(initialState));
-      }
-      setLoading(false);
-    } catch (error) {
-      notification.error(error.message);
-    }
+    dispatch(getUserPermissionInThisWorkspace(activeWorkspace, member));
   }, [activeWorkspace._id, member._id]);
 
   const handleSavePermissions = async () => {
@@ -74,109 +62,104 @@ export default function PermissionScreen() {
       workspaceId: activeWorkspace._id,
       permissions,
     };
-    try {
-      await PermissionService.savePermission(data);
-      notification.success("Permissions saved");
-    } catch (error) {
-      notification.error(error.message);
+    await PermissionService.savePermission(data);
+    if (data.userId === auth._id) {
+      dispatch(getMyPermissionInThisWorkspace(activeWorkspace,auth));
     }
+    notification.success("Permissions saved");
+
   };
   const handleSavePreset = () => {
     dispatch(setModal(<AddPreset permissions={permissions} />));
   };
   const handleLoadPreset = () => {
-    dispatch(setModal(<PresetList/>));
+    dispatch(setModal(<PresetList />));
   };
   return (
     <PermissionProvider>
       <div style={{ height: "90vh" }}>
-        {loading ? (
-          <Spinner
-            color="success"
-            style={{ position: "relative", top: "40%", left: "40%" }}
-          />
-        ) : (
-          <>
-            <UserHeader member={member} />
-            <AllPermissionsContainer>
-              <CheckboxGroup
-                label="This user can do everything"
-                labelSize="1.6vmin"
-                name="CAN_DO_EVERYTHING"
-                onChange={(e) => handleEverythingPermission(e)}
-                defaultChecked={permissions.CAN_DO_EVERYTHING}
-                checked={permissions.CAN_DO_EVERYTHING}
+        <>
+          <UserHeader member={member} />
+          <AllPermissionsContainer>
+            <CheckboxGroup
+              label="This user can do everything"
+              labelSize="1.6vmin"
+              name="CAN_DO_EVERYTHING"
+              onChange={(e) => handleEverythingPermission(e)}
+              defaultChecked={permissions.CAN_DO_EVERYTHING}
+              checked={permissions.CAN_DO_EVERYTHING}
+            />
+          </AllPermissionsContainer>
+          <Tabs
+            selectedTabClassName="selected-tab"
+            style={{ height: "80%" }}
+            forceRenderTabPanel={true}
+          >
+            <TabList
+              style={{
+                marginBottom: "0px",
+                borderBottom: "none",
+              }}
+            >
+              <Tab>
+                <MdDevicesOther style={{ fontSize: "2vmin" }} />
+                <span style={{ marginLeft: "5px" }}>Device</span>
+              </Tab>
+              <Tab>
+                <AiOutlineFundProjectionScreen style={{ fontSize: "2vmin" }} />
+                <span style={{ marginLeft: "5px" }}>Project</span>
+              </Tab>
+              <Tab>
+                <AiOutlineTeam style={{ fontSize: "2vmin" }} />
+                <span style={{ marginLeft: "5px" }}>Team</span>
+              </Tab>
+            </TabList>
+            <TabPanel style={{ height: "100%" }}>
+              <DevicePermissions
+                permissions={{...permissions.device,EVERYTHING:permissions["CAN_DO_EVERYTHING"]}}
+                setSinglePermission={setSinglePermission}
+                setMultiplePermission={setMultiplePermission}
+                setSingleAllPermission={setSingleAllPermission}
               />
-            </AllPermissionsContainer>
-            <Tabs
-              selectedTabClassName="selected-tab"
-              style={{ height: "80%" }}
-              forceRenderTabPanel={true}
-            >
-              <TabList
-                style={{
-                  marginBottom: "0px",
-                  borderBottom: "none",
-                }}
-              >
-                <Tab>
-                  <MdDevicesOther style={{ fontSize: "2vmin" }} />
-                  <span style={{ marginLeft: "5px" }}>Device</span>
-                </Tab>
-                <Tab>
-                  <AiOutlineFundProjectionScreen
-                    style={{ fontSize: "2vmin" }}
-                  />
-                  <span style={{ marginLeft: "5px" }}>Project</span>
-                </Tab>
-                <Tab>
-                  <AiOutlineTeam style={{ fontSize: "2vmin" }} />
-                  <span style={{ marginLeft: "5px" }}>Team</span>
-                </Tab>
-              </TabList>
-              <TabPanel style={{ height: "100%" }}>
-                <DevicePermissions
-                  setSinglePermission={setSinglePermission}
-                  setMultiplePermission={setMultiplePermission}
-                  setSingleAllPermission={setSingleAllPermission}
-                />
-              </TabPanel>
-              <TabPanel style={{ height: "100%" }}>
-                <ProjectPermissions
-                  setSingleAllPermission={setSingleAllPermission}
-                  setMultiplePermission={setMultiplePermission}
-                  setNestedMultiplePermission={setNestedMultiplePermission}
-                  setSinglePermission={setSinglePermission}
-                  setNestedAllPermission={setNestedAllPermission}
-                />
-              </TabPanel>
-              <TabPanel style={{ height: "100%" }}>
-                <TeamPermissions setSinglePermission={setSinglePermission} />
-              </TabPanel>
-            </Tabs>
-            <Button color="success" onClick={handleSavePermissions}>
-              <AiOutlineSave style={{ fontSize: "24px" }} /> Assign this to{" "}
-              {member.username}
-            </Button>
-            <Button
-              outline
-              style={{ marginLeft: "15px" }}
-              onClick={handleSavePreset}
-            >
-              <MdOutlineAssignmentInd style={{ fontSize: "24px" }} /> Save as
-              preset
-            </Button>
-            <Button
-              outline
-              color="warning"
-              style={{ marginLeft: "15px" }}
-              onClick={handleLoadPreset}
-            >
-              <MdOutlineAssignmentInd style={{ fontSize: "24px" }} /> Load
-              Preset
-            </Button>
-          </>
-        )}
+            </TabPanel>
+            <TabPanel style={{ height: "100%" }}>
+              <ProjectPermissions
+                permissions={{...permissions.project,EVERYTHING:permissions["CAN_DO_EVERYTHING"]}}
+                setSingleAllPermission={setSingleAllPermission}
+                setMultiplePermission={setMultiplePermission}
+                setNestedMultiplePermission={setNestedMultiplePermission}
+                setSinglePermission={setSinglePermission}
+                setNestedAllPermission={setNestedAllPermission}
+              />
+            </TabPanel>
+            <TabPanel style={{ height: "100%" }}>
+              <TeamPermissions
+                permissions={{...permissions.team,EVERYTHING:permissions["CAN_DO_EVERYTHING"]}}
+                setSinglePermission={setSinglePermission}
+              />
+            </TabPanel>
+          </Tabs>
+          <Button color="success" onClick={handleSavePermissions}>
+            <AiOutlineSave style={{ fontSize: "24px" }} /> Assign this to{" "}
+            {member.username}
+          </Button>
+          <Button
+            outline
+            style={{ marginLeft: "15px" }}
+            onClick={handleSavePreset}
+          >
+            <MdOutlineAssignmentInd style={{ fontSize: "24px" }} /> Save as
+            preset
+          </Button>
+          <Button
+            outline
+            color="warning"
+            style={{ marginLeft: "15px" }}
+            onClick={handleLoadPreset}
+          >
+            <MdOutlineAssignmentInd style={{ fontSize: "24px" }} /> Load Preset
+          </Button>
+        </>
       </div>
     </PermissionProvider>
   );

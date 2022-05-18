@@ -19,11 +19,13 @@ import {
   WorkspaceItem,
   WorkspaceItemWrapper,
 } from "./WorkspacePanel.style";
+import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionReducer";
+
 const WorkspacePanel = () => {
   const { workspaces, activeWorkspace } = useWorkspace();
-  const { role } = useAuth();
+  const auth = useAuth();
   const dispatch = useDispatch();
-  //console.log("workspace list rendered");
+  //console.log("WORKSPACE_LIST RENDERED");
   useEffect(() => {
     dispatch(getMyWorkspaces());
   }, []);
@@ -37,7 +39,8 @@ const WorkspacePanel = () => {
     dispatch(getProjectsByWorkspace(activeWorkspace));
     dispatch(getNotesByWorkspace(activeWorkspace));
     dispatch(setActiveProject(""));
-  }, [activeWorkspace])
+    dispatch(getMyPermissionInThisWorkspace(activeWorkspace,auth));
+  }, [auth, activeWorkspace])
 
   const clickWorkspaceHandler = (workspace) => {
     dispatch(setActiveWorkspace(workspace));
@@ -71,7 +74,7 @@ const WorkspacePanel = () => {
         );
       })}
 
-      {role === "admin" && (
+      {auth.role === "admin" && (
         <WorkspaceItemWrapper>
           <WorkspaceItem onClick={addWorkspaceHandler}>
             <VscAdd style={{ color: "white" }} />

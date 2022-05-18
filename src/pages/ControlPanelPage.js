@@ -18,6 +18,7 @@ const Content = styled.div`
 
 export default function ControlPanelPage() {
   const dispatch = useDispatch();
+  //console.log("CONTROL_PANEL_PAGE RENDERED")
   useEffect(() => {
     dispatch(getAllUsers());
   }, []);

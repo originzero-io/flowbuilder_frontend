@@ -95,9 +95,9 @@ export const noteListener = (socket) => {
 };
 
 export const mainListener = (socket) => {
-  const { auth } = store.getState();
   socket.emit("main:onlineUser", "MAKE_ME_ONLINE");
   socket.on("main:onlineUser", (data) => {
+    const { auth } = store.getState();
     if (auth._id !== data._id) {
       store.dispatch(editUser(data));
       notification.success(`${data.username} oturum açtı`);
@@ -107,6 +107,7 @@ export const mainListener = (socket) => {
     }
   });
   socket.on("main:offlineUser", (data) => {
+    const { auth } = store.getState();
     if (auth._id !== data._id) {
       store.dispatch(editUser(data));
       notification.warn(`${data.username} oturumu kapadı`);

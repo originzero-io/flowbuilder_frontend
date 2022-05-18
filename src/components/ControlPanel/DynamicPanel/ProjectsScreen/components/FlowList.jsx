@@ -9,6 +9,7 @@ import { setCurrentFlowConfig } from "store/reducers/flow/flowConfigReducer";
 import { getElementsByFlow } from "store/reducers/flow/flowElementsReducer";
 import { elementNamespace } from "SocketConnections";
 import { beginTheBar } from "store/reducers/componentReducer";
+import useAuthPermission from "hooks/useAuthPermission";
 
 const propTypes = {
   flows: PropTypes.oneOfType([PropTypes.array, null])
@@ -17,6 +18,7 @@ const propTypes = {
 const FlowList = ({ flows }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const getPermission = useAuthPermission("project");
   const openPageHandler = async(flow) => {
     dispatch(getElementsByFlow(flow));
     dispatch(beginTheBar());
@@ -28,11 +30,14 @@ const FlowList = ({ flows }) => {
   return (
     <>
       {flows && flows.map((flow) => {
-        return (
-          <div key={flow._id} onClick={() => openPageHandler(flow)}>
-            <Card key={flow._id} data={flow} />
-          </div>
-        );
+        if (getPermission("CAN_VIEW_FLOW", {flowId:flow._id,projectId: flow.project._id})) {
+          return (
+            <div key={flow._id} onClick={() => openPageHandler(flow)}>
+              <Card key={flow._id} data={flow} />
+            </div>
+          );
+        }
+        else return null;
       })}
     </>
   );

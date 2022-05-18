@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useRouteMatch } from "react-router-dom";
-import { Badge, Button, Table } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Button, Table } from "reactstrap";
 import styled from "styled-components";
 import { setModal } from "store/reducers/componentReducer";
 import useUser from "hooks/useUser";
 import useWorkspace from "hooks/useWorkspace";
 import Avatar from "components/Shared/Avatar";
+import useAuthPermission from "hooks/useAuthPermission";
 const Box = styled.div`
   margin-top: 3px;
   cursor: pointer;
@@ -19,11 +20,15 @@ export default function MemberList() {
   const dispatch = useDispatch();
   const users = useUser();
   const { activeWorkspace } = useWorkspace();
-  const { url } = useRouteMatch();
-  console.log("url:", url);
-  const members = users.filter(({ workspaces }) =>
-    workspaces.some((workspace) => workspace?._id === activeWorkspace._id)
+  const getPermissions = useAuthPermission("team");
+  const members = useMemo(
+    () =>
+      users.filter(({ workspaces }) =>
+        workspaces.some((workspace) => workspace === activeWorkspace._id)
+      ),
+    [activeWorkspace,users]
   );
+  console.log("members: ", members);
   return (
     <>
       <Table dark hover>
@@ -55,14 +60,13 @@ export default function MemberList() {
                 <td>{member.email}</td>
                 <td>{member.phone}</td>
                 <td>
-                  <Link to={`/panel/permissions/${member._id}`}>
-                    <Button
-                      color="warning"
-                      style={{ fontSize: "1.2vmin" }}
-                    >
-                      Manage Permissions
-                    </Button>
-                  </Link>
+                  {getPermissions("CAN_ASSIGN_PERMISSION") && (
+                    <Link to={`/panel/permissions/${member._id}`}>
+                      <Button color="warning" style={{ fontSize: "1.2vmin" }}>
+                        Manage Permissions
+                      </Button>
+                    </Link>
+                  )}
                 </td>
               </tr>
             );

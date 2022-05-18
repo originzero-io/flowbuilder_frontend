@@ -75,6 +75,7 @@ function EditProjectPermission({
                 </CollapsibleMenuItem>
                 <CollapsibleSubMenu trigger="Flows">
                   <FlowList
+                    permissions={permissions}
                     project={project}
                     handleMultiChange={handleNestedMultiChange}
                     handleNestedAllChange={handleNestedAllChange}

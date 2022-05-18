@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import useProject from "hooks/useProject";
-import useUserPermission from "hooks/useUserPermission";
 import CreateDashboardPermission from "../components/ProjectPermissions/CreateDashboardPermission";
 import CreateFlowPermission from "../components/ProjectPermissions/CreateFlowPermission";
 import CreateProjectPermission from "../components/ProjectPermissions/CreateProjectPermission";
@@ -13,14 +12,15 @@ import { PermissionContainer, TabContainer } from "../components/PermissionScree
 import PropTypes from "prop-types";
 
 const propTypes = {
+  permissions: PropTypes.object.isRequired,
   setSinglePermission: PropTypes.func,
   setMultiplePermission: PropTypes.func,
   setNestedMultiplePermission: PropTypes.func,
   setSingleAllPermission: PropTypes.func,
   setNestedAllPermission: PropTypes.func,
 };
-
 export default function ProjectPermissions({
+  permissions,
   setSinglePermission,
   setMultiplePermission,
   setNestedMultiplePermission,
@@ -29,7 +29,6 @@ export default function ProjectPermissions({
 }) {
   const dispatch = useDispatch();
   const { projects } = useProject();
-  const projectPermissions = useUserPermission("project");
 
   const handleSingleProjectChange = (e) => {
     dispatch(setSinglePermission(e, "project"));
@@ -57,14 +56,14 @@ export default function ProjectPermissions({
     <TabContainer>
       <PermissionContainer size="50%">
         <CreateProjectPermission
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleSingleProjectChange}
         />
       </PermissionContainer>
       <PermissionContainer>
         <CreateDashboardPermission
           projects={projects}
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleMultiProjectChange}
           handleSingleAllChange={handleSingleAllChange}
         />
@@ -72,7 +71,7 @@ export default function ProjectPermissions({
       <PermissionContainer>
         <CreateFlowPermission
           projects={projects}
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleMultiProjectChange}
           handleSingleAllChange={handleSingleAllChange}
         />
@@ -80,7 +79,7 @@ export default function ProjectPermissions({
       <PermissionContainer>
         <UsageProjectPermission
           projects={projects}
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
           handleSingleAllChange={handleSingleAllChange}
@@ -90,7 +89,7 @@ export default function ProjectPermissions({
       <PermissionContainer>
         <EditProjectPermission
           projects={projects}
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
           handleSingleAllChange={handleSingleAllChange}
@@ -100,7 +99,7 @@ export default function ProjectPermissions({
       <PermissionContainer>
         <DeleteProjectPermission
           projects={projects}
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
           handleSingleAllChange={handleSingleAllChange}
@@ -110,7 +109,7 @@ export default function ProjectPermissions({
       <PermissionContainer>
         <ViewProjectPermission
           projects={projects}
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleMultiProjectChange}
           handleNestedMultiChange={handleNestedMultiChange}
           handleSingleAllChange={handleSingleAllChange}

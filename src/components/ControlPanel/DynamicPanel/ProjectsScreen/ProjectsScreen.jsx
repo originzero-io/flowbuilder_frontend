@@ -19,6 +19,7 @@ import usePermission from "hooks/usePermission";
 import PropTypes from "prop-types";
 import useProject from "hooks/useProject.js";
 import { Alert } from "reactstrap";
+import useAuthPermission from "hooks/useAuthPermission";
 
 const propTypes = {
   flows: PropTypes.array.isRequired,
@@ -26,6 +27,7 @@ const propTypes = {
 export default function Panel({ flows }) {
   const dispatch = useDispatch();
   const { projects, activeProject } = useProject();
+  const getPermission = useAuthPermission("project");
   const flowsCollapseTrigger = () => {
     return (
       <CollapsibleTrigger
@@ -62,11 +64,11 @@ export default function Panel({ flows }) {
             )}
             <FlowsContainer>
               <FlowList flows={searched} />
-              <>
+              {getPermission("CAN_CREATE_FLOW", activeProject._id) && (
                 <Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
                   <VscAdd />
                 </Box>
-              </>
+              )}
             </FlowsContainer>
           </CollapsibleMenu>
           <CollapsibleMenu trigger={dashboardCollapseTrigger()} open={true}>

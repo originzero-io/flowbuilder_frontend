@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import useUserPermission from "hooks/useUserPermission";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import {
   PermissionContainer,
@@ -11,12 +10,12 @@ import {
 import PropTypes from "prop-types";
 
 const propTypes = {
+  permissions: PropTypes.object.isRequired,
   setSinglePermission: PropTypes.func,
 };
 
-export default function TeamPermissions({ setSinglePermission }) {
+export default function TeamPermissions({ permissions, setSinglePermission }) {
   const dispatch = useDispatch();
-  const permissions = useUserPermission("team");
   const handleChange = (e) => {
     dispatch(setSinglePermission(e, "team"));
   };

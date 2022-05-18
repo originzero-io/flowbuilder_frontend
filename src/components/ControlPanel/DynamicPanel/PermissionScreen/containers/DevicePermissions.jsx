@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import useUserPermission from "hooks/useUserPermission";
 import CreateDevicePermission from "../components/DevicePermissions/CreateDevicePermission";
 import DeleteDevicePermission from "../components/DevicePermissions/DeleteDevicePermission";
 import EditDevicePermission from "../components/DevicePermissions/EditDevicePermission";
@@ -9,17 +8,18 @@ import { PermissionContainer, TabContainer } from "../components/PermissionScree
 import PropTypes from "prop-types";
 
 const propTypes = {
+  permissions: PropTypes.object.isRequired,
   setSinglePermission: PropTypes.func,
   setMultiplePermission: PropTypes.func,
   setSingleAllPermission: PropTypes.func,
   setMultipleAllPermission: PropTypes.func,
 };
 export default function DevicePermissions({
+  permissions,
   setSinglePermission,
   setMultiplePermission,
   setSingleAllPermission,
 }) {
-  const devicePermissions = useUserPermission("device");
   const dispatch = useDispatch();
 
   const handleSingleDeviceChange = (e) => {
@@ -37,27 +37,27 @@ export default function DevicePermissions({
     <TabContainer>
       <PermissionContainer>
         <CreateDevicePermission
-          permissions={devicePermissions}
+          permissions={permissions}
           handleChange={handleSingleDeviceChange}
         />
       </PermissionContainer>
       <PermissionContainer>
         <UsageDevicePermission
-          permissions={devicePermissions}
+          permissions={permissions}
           handleChange={handleMultiDeviceChange}
           handleAllChange={handleAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
         <EditDevicePermission
-          permissions={devicePermissions}
+          permissions={permissions}
           handleChange={handleMultiDeviceChange}
           handleAllChange={handleAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
         <DeleteDevicePermission
-          permissions={devicePermissions}
+          permissions={permissions}
           handleChange={handleSingleDeviceChange}
         />
       </PermissionContainer>

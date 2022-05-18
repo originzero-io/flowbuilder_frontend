@@ -5,7 +5,7 @@ import { VscTrash } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { setModal } from "store/reducers/componentReducer";
 import { setActiveProject } from "store/reducers/projectReducer";
-import usePermission from "hooks/usePermission";
+import useAuthPermission from "hooks/useAuthPermission";
 import useProject from "hooks/useProject";
 import useWorkspace from "hooks/useWorkspace";
 import { CollapsibleMenuItem } from "components/Shared/Collapsible/CollapsibleMenu";
@@ -17,9 +17,11 @@ const propTypes = {
 };
 export default function ProjectList({ projects }) {
   const dispatch = useDispatch();
-  const permission = usePermission();
+  const getPermission = useAuthPermission("project");
   const { activeProject } = useProject();
   const { activeWorkspace } = useWorkspace();
+  //console.log("PROJECT_LIST RENDERED");
+
   const clickProjectHandle = (project) => {
     dispatch(setActiveProject(project));
     //dispatch(getFlowsByProject(project));
@@ -50,12 +52,16 @@ export default function ProjectList({ projects }) {
             >
               <div>{project.name}</div>
               <div>
-                <span onClick={() => editProjectHandle(project)}>
-                  <BiEdit style={{ fontSize: "2vmin" }} />
-                </span>
-                <span onClick={() => deleteProjectHandle(project)}>
-                  <VscTrash style={{ fontSize: "2vmin" }} />
-                </span>
+                {getPermission("CAN_EDIT_PROJECT", project._id) && (
+                  <span onClick={() => editProjectHandle(project)}>
+                    <BiEdit style={{ fontSize: "2vmin" }} />
+                  </span>
+                )}
+                {getPermission("CAN_DELETE_PROJECT", project._id) && (
+                  <span onClick={() => deleteProjectHandle(project)}>
+                    <VscTrash style={{ fontSize: "2vmin" }} />
+                  </span>
+                )}
               </div>
             </CollapsibleMenuItem>
           );

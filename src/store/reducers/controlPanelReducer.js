@@ -1,7 +1,6 @@
 import * as actions from "../constants/controlPanelContants";
 
 const panelConfig = {
-  activeProject: {},
   copiedElements: []
 };
 const controlPanelReducer = (state = panelConfig, { type, payload }) => {
