@@ -56,7 +56,7 @@ export const editWorkspace = (workspace) => ({
   type: actions.EDIT_WORKSPACE,
   payload: workspace,
 });
-export const deleteWorkspace = (workspace) => ({
+export const deleteWorkspace = (workspaceId) => ({
   type: actions.DELETE_WORKSPACE,
-  payload: workspace._id,
+  payload: workspaceId,
 });

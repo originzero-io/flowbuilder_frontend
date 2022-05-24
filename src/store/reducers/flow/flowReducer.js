@@ -9,7 +9,7 @@ export const flowReducer = (state = [], { type, payload }) => {
     case actions.CREATE_FLOW:
       return [...state, payload];
     case actions.DELETE_FLOW:
-      return state.filter((state) => state._id !== payload._id);
+      return state.filter((state) => state._id !== payload);
     case actions.GET_FLOWS:
       return payload;
     case actions.UPDATE_FLOW:
@@ -58,7 +58,7 @@ export const moveFlow = (flow) => ({
   type: actions.UPDATE_FLOW,
   payload: flow,
 });
-export const deleteFlow = (flow) => ({
+export const deleteFlow = (flowId) => ({
   type: actions.DELETE_FLOW,
-  payload: flow,
+  payload: flowId,
 });

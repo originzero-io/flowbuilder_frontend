@@ -25,7 +25,7 @@ const WorkspaceBrand = ({ workspace }) => {
   const { workspaces } = useWorkspace();
   const deleteWorkspaceHandler = () => {
     if (confirm(`${workspace.name} takımını silmek istiyor musunuz?`)) {
-      workspaceNamespace.emit("workspaces:remove", { workspace });
+      workspaceNamespace.emit("workspaces:delete", { workspace });
       dispatch(setActiveWorkspace(workspaces[0]));
     }
   };

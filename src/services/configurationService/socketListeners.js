@@ -40,8 +40,8 @@ export const projectListener = (socket) => {
     const activeWorkspace = store.getState().workspaces.activeWorkspace;
     store.dispatch(getFlowsByWorkspace(activeWorkspace));
   });
-  socket.on("projects:remove", (data) => {
-    store.dispatch(deleteProject(data.project));
+  socket.on("projects:delete", (data) => {
+    store.dispatch(deleteProject(data.projectId));
     const activeWorkspace = store.getState().workspaces.activeWorkspace;
     const projects = store.getState().projects.projects;
     store.dispatch(getFlowsByWorkspace(activeWorkspace));
@@ -51,26 +51,32 @@ export const projectListener = (socket) => {
 export const workspaceListener = (socket) => {
   socket.on("workspaces:create", (data) => {
     store.dispatch(createWorkspace(data.workspace));
+    notification.success('Workspace created successfully')
   });
   socket.on("workspaces:update", (data) => {
     store.dispatch(editWorkspace(data.workspace));
   });
-  socket.on("workspaces:remove", (data) => {
-    store.dispatch(deleteWorkspace(data.workspace));
+  socket.on("workspaces:delete", (data) => {
+    store.dispatch(deleteWorkspace(data.workspaceId));
+    notification.success('Workspace deleted successfully')
   });
 };
 export const flowListener = (socket) => {
-  socket.on("flows:remove", (data) => {
-    store.dispatch(deleteFlow(data.flow));
+  socket.on("flows:delete", (data) => {
+    store.dispatch(deleteFlow(data.flowId));
+    notification.success('Flow deleted successfully')
   });
   socket.on("flows:update", (data) => {
     store.dispatch(editFlow(data.flow));
   });
   socket.on("flows:move", (data) => {
     store.dispatch(moveFlow(data.flow));
+    notification.success('Flow moved successfully')
+
   });
   socket.on("flows:create", (data) => {
     store.dispatch(createFlow(data.flow));
+    notification.success('Flow created successfully')
   });
 };
 export const elementListener = (socket) => {
@@ -85,12 +91,14 @@ export const elementListener = (socket) => {
 export const noteListener = (socket) => {
   socket.on("notes:create", (data) => {
     store.dispatch(createNote(data.note));
+    notification.success('Note created successfully')
   });
   socket.on("notes:update", (data) => {
     store.dispatch(updateNote(data.note));
   });
-  socket.on("notes:remove", (data) => {
-    store.dispatch(deleteNote(data.note));
+  socket.on("notes:delete", (data) => {
+    store.dispatch(deleteNote(data.noteId));
+    notification.success('Note deleted successfully')
   });
 };
 

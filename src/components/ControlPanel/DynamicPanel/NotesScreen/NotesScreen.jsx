@@ -22,7 +22,7 @@ export default function NotesScreen() {
   const deleteNoteHandle = (event, note) => {
     event.stopPropagation();
     if (confirm("Sure?")) {
-      noteNamespace.emit("notes:remove", { note });
+      noteNamespace.emit("notes:delete", { note });
     }
   };
   const viewNoteHandle = (note) => {

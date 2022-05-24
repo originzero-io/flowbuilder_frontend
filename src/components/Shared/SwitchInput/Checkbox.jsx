@@ -66,7 +66,6 @@ export default function Checkbox({
       //     {...rest}
       //   />
       // </div>
-      // />
     );
   };
   return (

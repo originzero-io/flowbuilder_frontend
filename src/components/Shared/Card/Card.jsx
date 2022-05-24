@@ -23,7 +23,7 @@ const Card = ({ data }) => {
   const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
-      flowNamespace.emit("flows:remove", { flow });
+      flowNamespace.emit("flows:delete", { flow });
     }
   };
   return (

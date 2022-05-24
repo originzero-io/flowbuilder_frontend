@@ -14,7 +14,7 @@ const noteReducer = (state = [], { type, payload }) => {
         } else return s;
       });
     case actions.DELETE_NOTE:
-      return state.filter((s) => s._id !== payload._id);
+      return state.filter((s) => s._id !== payload);
     default:
       return state;
   }
@@ -36,7 +36,7 @@ export const updateNote = (note) => ({
   type: actions.UPDATE_NOTE,
   payload: note,
 });
-export const deleteNote = (note) => ({
+export const deleteNote = (noteId) => ({
   type: actions.DELETE_NOTE,
-  payload: note,
+  payload: noteId,
 });

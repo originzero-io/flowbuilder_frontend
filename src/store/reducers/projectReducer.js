@@ -56,7 +56,7 @@ export const updateProject = (project) => ({
   type: actions.UPDATE_PROJECT,
   payload: project,
 });
-export const deleteProject = (project) => ({
+export const deleteProject = (projectId) => ({
   type: actions.DELETE_PROJECT,
-  payload: project._id,
+  payload: projectId,
 });

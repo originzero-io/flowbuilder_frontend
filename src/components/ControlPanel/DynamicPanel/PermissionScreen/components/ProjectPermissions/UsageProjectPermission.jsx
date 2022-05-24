@@ -26,8 +26,7 @@ function UsageProjectPermission({
   handleSingleAllChange,
   handleNestedAllChange,
 }) {
-  console.log("usage-project-rendered",permissions);
-
+  
   useEffect(() => {
     if (projects.length === permissions.CAN_USAGE_PROJECT.length) {
       handleSingleAllChange({

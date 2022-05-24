@@ -28,7 +28,7 @@ export default function ProjectList({ projects }) {
   };
   const deleteProjectHandle = (project) => {
     if (confirm("Sure?")) {
-      projectNamespace.emit("projects:remove", { project });
+      projectNamespace.emit("projects:delete", { project });
     }
   };
   const editProjectHandle = (project) => {
