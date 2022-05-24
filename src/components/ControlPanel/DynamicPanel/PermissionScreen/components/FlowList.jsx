@@ -66,9 +66,8 @@ function FlowList({
                   (permissionName === "VIEW" &&
                     (
                       permissions.CAN_VIEW_PROJECT_ALL ||
-                      permissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
-                      permissions.CAN_EDIT_FLOW_ALL.includes(project._id) ||
-                      permissions.CAN_DELETE_FLOW_ALL.includes(project._id)
+                      //permissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
+                      permissions.CAN_EDIT_FLOW_ALL.includes(project._id)
                     )
                   )
                 }
@@ -96,12 +95,10 @@ function FlowList({
                     (permissionName === "VIEW" &&
                       (
                         permissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id) ||
-                        permissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
-                        permissions.CAN_DELETE_FLOW.some(f => f.id === flow._id) ||
+                        //permissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
                       
-                        permissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
-                        permissions.CAN_EDIT_FLOW_ALL.includes(project._id) ||
-                        permissions.CAN_DELETE_FLOW_ALL.includes(project._id)
+                        //permissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
+                        permissions.CAN_EDIT_FLOW_ALL.includes(project._id)
                       )
                     )
                   }
@@ -112,9 +109,8 @@ function FlowList({
                     permissions[CAN_X_FLOW_ALL].includes(project._id) ||
                     permissions[CAN_X_FLOW].some(f=>f.id === flow._id) ||
                     (permissionName === "VIEW" && (
-                      permissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id) ||
-                      permissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
-                      permissions.CAN_DELETE_FLOW.some(f => f.id === flow._id)
+                      //permissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
+                      permissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id)
                     ))
                   }
                 />

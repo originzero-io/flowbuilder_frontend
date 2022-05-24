@@ -41,7 +41,7 @@ const Card = ({ data }) => {
           />
           <div>
             <Badge color="success">{data.project.name || ""}</Badge>
-            {getPermission("CAN_DELETE_FLOW", {
+            {getPermission("CAN_EDIT_FLOW", {
               flowId: data._id,
               projectId: data.project._id,
             }) && (

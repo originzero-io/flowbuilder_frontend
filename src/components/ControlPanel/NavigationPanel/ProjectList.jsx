@@ -53,14 +53,14 @@ export default function ProjectList({ projects }) {
               <div>{project.name}</div>
               <div>
                 {getPermission("CAN_EDIT_PROJECT", project._id) && (
-                  <span onClick={() => editProjectHandle(project)}>
-                    <BiEdit style={{ fontSize: "2vmin" }} />
-                  </span>
-                )}
-                {getPermission("CAN_DELETE_PROJECT", project._id) && (
-                  <span onClick={() => deleteProjectHandle(project)}>
-                    <VscTrash style={{ fontSize: "2vmin" }} />
-                  </span>
+                  <>
+                    <span onClick={() => editProjectHandle(project)}>
+                      <BiEdit style={{ fontSize: "2vmin" }} />
+                    </span>
+                    <span onClick={() => deleteProjectHandle(project)}>
+                      <VscTrash style={{ fontSize: "2vmin" }} />
+                    </span>
+                  </>
                 )}
               </div>
             </CollapsibleMenuItem>

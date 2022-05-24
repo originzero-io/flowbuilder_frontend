@@ -49,9 +49,8 @@ function ViewProjectPermission({
               defaultChecked={permissions.CAN_VIEW_PROJECT_ALL}
               disabled={
                 permissions.EVERYTHING ||
-                permissions.CAN_USAGE_PROJECT_ALL ||
-                permissions.CAN_EDIT_PROJECT_ALL ||
-                permissions.CAN_DELETE_PROJECT_ALL
+                //permissions.CAN_USAGE_PROJECT_ALL ||
+                permissions.CAN_EDIT_PROJECT_ALL
               }
               checked={
                 permissions.EVERYTHING || permissions.CAN_VIEW_PROJECT_ALL
@@ -76,9 +75,8 @@ function ViewProjectPermission({
                     disabled={
                       permissions.EVERYTHING ||
                       permissions.CAN_VIEW_PROJECT_ALL ||
-                      permissions.CAN_USAGE_PROJECT.includes(project._id) ||
-                      permissions.CAN_EDIT_PROJECT.includes(project._id) ||
-                      permissions.CAN_DELETE_PROJECT.includes(project._id)
+                      //permissions.CAN_USAGE_PROJECT.includes(project._id) ||
+                      permissions.CAN_EDIT_PROJECT.includes(project._id)
                     }
                     checked={
                       permissions.EVERYTHING ||

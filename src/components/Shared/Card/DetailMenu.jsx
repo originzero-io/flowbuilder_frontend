@@ -39,21 +39,16 @@ export default function DetailMenu({ deleteEvent, data, getPermission }) {
           flowId: data._id,
           projectId: data.project._id,
         }) && (
-            <>
-              <DropdownItem onClick={moveHandler}>Move</DropdownItem>
-              <DropdownItem onClick={editHandler}>Edit</DropdownItem>
-              <DropdownItem onClick={(e) => e.stopPropagation()}>
-                Duplicate
-              </DropdownItem>
-            </>
-          )}
-        {getPermission("CAN_DELETE_FLOW", {
-          flowId: data._id,
-          projectId: data.project._id,
-        }) && (
-          <DropdownItem onClick={(e) => deleteEvent(e, data)}>
-            Delete
-          </DropdownItem>
+          <>
+            <DropdownItem onClick={moveHandler}>Move</DropdownItem>
+            <DropdownItem onClick={editHandler}>Edit</DropdownItem>
+            <DropdownItem onClick={(e) => e.stopPropagation()}>
+              Duplicate
+            </DropdownItem>
+            <DropdownItem onClick={(e) => deleteEvent(e, data)}>
+              Delete
+            </DropdownItem>
+          </>
         )}
       </DetailMenuList>
     </DropdownWrapper>

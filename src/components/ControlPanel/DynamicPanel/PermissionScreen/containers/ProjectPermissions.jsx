@@ -77,16 +77,6 @@ export default function ProjectPermissions({
         />
       </PermissionContainer>
       <PermissionContainer>
-        <UsageProjectPermission
-          projects={projects}
-          permissions={permissions}
-          handleChange={handleMultiProjectChange}
-          handleNestedMultiChange={handleNestedMultiChange}
-          handleSingleAllChange={handleSingleAllChange}
-          handleNestedAllChange={handleNestedAllChange}
-        />
-      </PermissionContainer>
-      <PermissionContainer>
         <EditProjectPermission
           projects={projects}
           permissions={permissions}
@@ -97,7 +87,7 @@ export default function ProjectPermissions({
         />
       </PermissionContainer>
       <PermissionContainer>
-        <DeleteProjectPermission
+        <UsageProjectPermission
           projects={projects}
           permissions={permissions}
           handleChange={handleMultiProjectChange}
@@ -106,6 +96,16 @@ export default function ProjectPermissions({
           handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
+      {/* <PermissionContainer>
+        <DeleteProjectPermission
+          projects={projects}
+          permissions={permissions}
+          handleChange={handleMultiProjectChange}
+          handleNestedMultiChange={handleNestedMultiChange}
+          handleSingleAllChange={handleSingleAllChange}
+          handleNestedAllChange={handleNestedAllChange}
+        />
+      </PermissionContainer> */}
       <PermissionContainer>
         <ViewProjectPermission
           projects={projects}
