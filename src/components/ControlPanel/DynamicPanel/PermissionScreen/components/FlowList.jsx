@@ -63,9 +63,9 @@ function FlowList({
                   permissions.EVERYTHING ||
                   permissions[CAN_X_PROJECT_ALL] ||
                   permissions[CAN_X_PROJECT].includes(project._id) ||
-                  (permissionName === "VIEW" &&
+                  ((permissionName === "VIEW" || permissionName === "USAGE") &&
                     (
-                      permissions.CAN_VIEW_PROJECT_ALL ||
+                      permissions[CAN_X_PROJECT_ALL] ||
                       //permissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
                       permissions.CAN_EDIT_FLOW_ALL.includes(project._id)
                     )
@@ -87,12 +87,11 @@ function FlowList({
                   name={CAN_X_FLOW}
                   id={flow._id}
                   onChange={(e) => handleMultiChange(e,flow)}
-                  //defaultChecked={projectPermissions[CAN_X_FLOW].includes(flow._id)}
                   disabled={
                     permissions.EVERYTHING ||
                     permissions[CAN_X_PROJECT_ALL] ||
                     permissions[CAN_X_PROJECT].includes(flow.project._id) ||
-                    (permissionName === "VIEW" &&
+                    ((permissionName === "VIEW" || permissionName === "USAGE") &&
                       (
                         permissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id) ||
                         //permissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
@@ -108,7 +107,7 @@ function FlowList({
                     permissions[CAN_X_PROJECT].includes(project._id) ||
                     permissions[CAN_X_FLOW_ALL].includes(project._id) ||
                     permissions[CAN_X_FLOW].some(f=>f.id === flow._id) ||
-                    (permissionName === "VIEW" && (
+                    ((permissionName === "VIEW" || permissionName === "USAGE") && (
                       //permissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
                       permissions.CAN_EDIT_FLOW.some(f=>f.id === flow._id)
                     ))

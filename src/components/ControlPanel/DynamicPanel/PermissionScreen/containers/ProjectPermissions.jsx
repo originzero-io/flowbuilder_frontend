@@ -4,7 +4,6 @@ import useProject from "hooks/useProject";
 import CreateDashboardPermission from "../components/ProjectPermissions/CreateDashboardPermission";
 import CreateFlowPermission from "../components/ProjectPermissions/CreateFlowPermission";
 import CreateProjectPermission from "../components/ProjectPermissions/CreateProjectPermission";
-import DeleteProjectPermission from "../components/ProjectPermissions/DeleteProjectPermission";
 import EditProjectPermission from "../components/ProjectPermissions/EditProjectPermission";
 import UsageProjectPermission from "../components/ProjectPermissions/UsageProjectPermission";
 import ViewProjectPermission from "../components/ProjectPermissions/ViewProjectPermission";
@@ -96,16 +95,6 @@ export default function ProjectPermissions({
           handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
-      {/* <PermissionContainer>
-        <DeleteProjectPermission
-          projects={projects}
-          permissions={permissions}
-          handleChange={handleMultiProjectChange}
-          handleNestedMultiChange={handleNestedMultiChange}
-          handleSingleAllChange={handleSingleAllChange}
-          handleNestedAllChange={handleNestedAllChange}
-        />
-      </PermissionContainer> */}
       <PermissionContainer>
         <ViewProjectPermission
           projects={projects}

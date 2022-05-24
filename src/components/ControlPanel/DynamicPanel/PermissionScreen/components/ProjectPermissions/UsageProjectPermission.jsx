@@ -26,7 +26,6 @@ function UsageProjectPermission({
   handleSingleAllChange,
   handleNestedAllChange,
 }) {
-  
   useEffect(() => {
     if (projects.length === permissions.CAN_USAGE_PROJECT.length) {
       handleSingleAllChange({
@@ -48,7 +47,9 @@ function UsageProjectPermission({
               name="CAN_USAGE_PROJECT"
               onChange={handleSingleAllChange}
               defaultChecked={permissions.CAN_USAGE_PROJECT_ALL}
-              disabled={permissions.EVERYTHING}
+              disabled={
+                permissions.EVERYTHING || permissions.CAN_EDIT_PROJECT_ALL
+              }
               checked={
                 permissions.EVERYTHING || permissions.CAN_USAGE_PROJECT_ALL
               }
@@ -66,7 +67,11 @@ function UsageProjectPermission({
                     defaultChecked={permissions.CAN_USAGE_PROJECT.includes(
                       project._id
                     )}
-                    disabled={permissions.EVERYTHING}
+                    disabled={
+                      permissions.EVERYTHING ||
+                      permissions.CAN_EDIT_PROJECT_ALL ||
+                      permissions.CAN_EDIT_PROJECT.includes(project._id)
+                    }
                     checked={
                       permissions.EVERYTHING ||
                       permissions.CAN_USAGE_PROJECT_ALL ||
