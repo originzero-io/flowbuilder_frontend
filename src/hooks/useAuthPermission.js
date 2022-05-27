@@ -16,7 +16,7 @@ export default function useAuthPermission(permissionType) {
             return true;
         }
         else if (Array.isArray(permissionRecord)) {
-            const FLOW_NESTED_ARRAY = ["CAN_VIEW_FLOW","CAN_DELETE_FLOW","CAN_USAGE_FLOW","CAN_EDIT_FLOW"]
+            const FLOW_NESTED_ARRAY = ["CAN_VIEW_FLOW","CAN_USAGE_FLOW","CAN_EDIT_FLOW"]
             
             const permissionAllState = selectedPermissionCategory[`${permissionName}_ALL`]
             // permissionAllState = project.CAN_VIEW_FLOW_ALL
@@ -46,7 +46,7 @@ export default function useAuthPermission(permissionType) {
                 else if (flowAllState) {
                     return true;
                 }
-                else if (permissionRecord.some(p=>p.id === entity.flowId)) {
+                else if (permissionRecord.some(p=>p.flowId === entity.flowId)) {
                     return true;
                 }
                 else return false;

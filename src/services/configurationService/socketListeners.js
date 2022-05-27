@@ -30,6 +30,7 @@ import {
   editWorkspace,
 } from "store/reducers/workspaceReducer";
 import { endTheBar } from "store/reducers/componentReducer";
+import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionReducer";
 
 export const projectListener = (socket) => {
   socket.on("projects:create", (data) => {
@@ -75,7 +76,9 @@ export const flowListener = (socket) => {
 
   });
   socket.on("flows:create", (data) => {
+    const { auth,workspaces } = store.getState();
     store.dispatch(createFlow(data.flow));
+    store.dispatch(getMyPermissionInThisWorkspace(workspaces.activeWorkspace, auth));
     notification.success('Flow created successfully')
   });
 };

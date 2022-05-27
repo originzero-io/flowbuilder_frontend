@@ -15,7 +15,6 @@ import {
   Box,
 } from "./ProjectsScreen.style";
 import { useDispatch } from "react-redux";
-import usePermission from "hooks/usePermission";
 import PropTypes from "prop-types";
 import useProject from "hooks/useProject.js";
 import { Alert } from "reactstrap";

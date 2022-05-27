@@ -13,15 +13,15 @@ const authPermissionReducer = (state = defaultPermissions, { type, payload }) =>
 export default authPermissionReducer;
 
 export const loadMyPermission = (data) => ({
-    type: "LOAD_MY_PERMISSION",
-    payload: data
-  });
+  type: "LOAD_MY_PERMISSION",
+  payload: data
+});
   
 export const getMyPermissionInThisWorkspace = (workspace, me) => async (dispatch) => {
-    dispatch(beginTheBar());
-    const { permission } = await PermissionService.getUserPermissionInThisWorkspace(workspace._id, me._id);
-    if (permission) {
-      dispatch(loadMyPermission(permission.permissions));
-    }
-    dispatch(endTheBar());
+  dispatch(beginTheBar());
+  const { permission } = await PermissionService.getUserPermissionInThisWorkspace(workspace._id, me._id);
+  if (permission) {
+    dispatch(loadMyPermission(permission.permissions));
+  }
+  dispatch(endTheBar());
 };
