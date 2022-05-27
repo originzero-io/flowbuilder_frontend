@@ -44,7 +44,7 @@ export default function ProjectPermissions({
   const handleNestedMultiChange = (e, flow) => {
     const { _id, project } = flow;
     const flowData = {
-      id: _id,
+      flowId: _id,
       projectId:project._id
     }    
     dispatch(setNestedMultiplePermission(e, flowData,"project"));

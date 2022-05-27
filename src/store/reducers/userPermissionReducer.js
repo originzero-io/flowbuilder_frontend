@@ -175,8 +175,8 @@ const userPermissionReducer = (state = defaultPermissions, { type, payload }) =>
     //? PROJECT_FLOW_FLOWID ==> [...flows,flowId]
     case "SET_NESTED_MULTIPLE_PERMISSION":
       if (payload.checked) {
-        if ((payload.name === "CAN_EDIT_FLOW") && !state.project.CAN_VIEW_FLOW.some(p => p.id === payload.flowData.id)) {
-          if (!state.project.CAN_VIEW_FLOW.some(p => p.id === payload.flowData.id) && !state.project.CAN_USAGE_FLOW.some(p => p.id === payload.flowData.id)) {
+        if ((payload.name === "CAN_EDIT_FLOW") && !state.project.CAN_VIEW_FLOW.some(p => p.flowId === payload.flowData.flowId)) {
+          if (!state.project.CAN_VIEW_FLOW.some(p => p.flowId === payload.flowData.flowId) && !state.project.CAN_USAGE_FLOW.some(p => p.flowId === payload.flowData.flowId)) {
             return {
               ...state,
               [payload.permissionType]: {
@@ -187,7 +187,7 @@ const userPermissionReducer = (state = defaultPermissions, { type, payload }) =>
               },
             };
           }
-          else if (state.project.CAN_VIEW_FLOW.some(p => p.id === payload.flowData.id) && state.project.CAN_USAGE_FLOW.some(p => p.id === payload.flowData.id)) {
+          else if (state.project.CAN_VIEW_FLOW.some(p => p.flowId === payload.flowData.flowId) && state.project.CAN_USAGE_FLOW.some(p => p.flowId === payload.flowData.flowId)) {
             return {
               ...state,
               [payload.permissionType]: {
@@ -196,7 +196,7 @@ const userPermissionReducer = (state = defaultPermissions, { type, payload }) =>
               },
             };
           }
-          else if (!state.project.CAN_USAGE_FLOW.some(p => p.id === payload.flowData.id)) {
+          else if (!state.project.CAN_USAGE_FLOW.some(p => p.flowId === payload.flowData.flowId)) {
             return {
               ...state,
               [payload.permissionType]: {
@@ -206,7 +206,7 @@ const userPermissionReducer = (state = defaultPermissions, { type, payload }) =>
               },
             };
           }
-          else if (!state.project.CAN_VIEW_FLOW.some(p => p.id === payload.flowData.id)) {
+          else if (!state.project.CAN_VIEW_FLOW.some(p => p.flowId === payload.flowData.flowId)) {
             return {
               ...state,
               [payload.permissionType]: {
@@ -234,9 +234,9 @@ const userPermissionReducer = (state = defaultPermissions, { type, payload }) =>
             ...state,
             [payload.permissionType]: {
               ...state[payload.permissionType],
-              [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
-              CAN_VIEW_FLOW: state.project.CAN_VIEW_FLOW.filter(p => p.id !== payload.flowData.id),
-              CAN_USAGE_FLOW: state.project.CAN_USAGE_FLOW.filter(p => p.id !== payload.flowData.id),
+              [payload.name]: state[payload.permissionType][payload.name].filter(p => p.flowId !== payload.flowData.flowId),
+              CAN_VIEW_FLOW: state.project.CAN_VIEW_FLOW.filter(p => p.flowId !== payload.flowData.flowId),
+              CAN_USAGE_FLOW: state.project.CAN_USAGE_FLOW.filter(p => p.flowId !== payload.flowData.flowId),
               [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.flowData.projectId),
             }
           }
@@ -246,7 +246,7 @@ const userPermissionReducer = (state = defaultPermissions, { type, payload }) =>
             ...state,
             [payload.permissionType]: {
               ...state[payload.permissionType],
-              [payload.name]: state[payload.permissionType][payload.name].filter(p => p.id !== payload.flowData.id),
+              [payload.name]: state[payload.permissionType][payload.name].filter(p => p.flowId !== payload.flowData.flowId),
               [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.flowData.projectId),
             }
           }

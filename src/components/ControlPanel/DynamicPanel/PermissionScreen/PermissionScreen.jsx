@@ -102,10 +102,6 @@ export default function PermissionScreen() {
               }}
             >
               <Tab>
-                <MdDevicesOther style={{ fontSize: "2vmin" }} />
-                <span style={{ marginLeft: "5px" }}>Device</span>
-              </Tab>
-              <Tab>
                 <AiOutlineFundProjectionScreen style={{ fontSize: "2vmin" }} />
                 <span style={{ marginLeft: "5px" }}>Project</span>
               </Tab>
@@ -113,15 +109,11 @@ export default function PermissionScreen() {
                 <AiOutlineTeam style={{ fontSize: "2vmin" }} />
                 <span style={{ marginLeft: "5px" }}>Team</span>
               </Tab>
+              <Tab>
+                <MdDevicesOther style={{ fontSize: "2vmin" }} />
+                <span style={{ marginLeft: "5px" }}>Device</span>
+              </Tab>
             </TabList>
-            <TabPanel style={{ height: "100%" }}>
-              <DevicePermissions
-                permissions={{...permissions.device,EVERYTHING:permissions["CAN_DO_EVERYTHING"]}}
-                setSinglePermission={setSinglePermission}
-                setMultiplePermission={setMultiplePermission}
-                setSingleAllPermission={setSingleAllPermission}
-              />
-            </TabPanel>
             <TabPanel style={{ height: "100%" }}>
               <ProjectPermissions
                 permissions={{...permissions.project,EVERYTHING:permissions["CAN_DO_EVERYTHING"]}}
@@ -136,6 +128,14 @@ export default function PermissionScreen() {
               <TeamPermissions
                 permissions={{...permissions.team,EVERYTHING:permissions["CAN_DO_EVERYTHING"]}}
                 setSinglePermission={setSinglePermission}
+              />
+            </TabPanel>
+            <TabPanel style={{ height: "100%" }}>
+              <DevicePermissions
+                permissions={{...permissions.device,EVERYTHING:permissions["CAN_DO_EVERYTHING"]}}
+                setSinglePermission={setSinglePermission}
+                setMultiplePermission={setMultiplePermission}
+                setSingleAllPermission={setSingleAllPermission}
               />
             </TabPanel>
           </Tabs>
