@@ -1,5 +1,5 @@
 import ProjectService, {
-  getProjectsByWorkspaceService
+  getProjectsByWorkspaceService,
 } from "services/configurationService/projectService";
 import * as actions from "../constants/projectContants";
 

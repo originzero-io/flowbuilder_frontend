@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import ReactFlow, {
   addEdge,
   removeElements,
@@ -39,6 +39,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowGui;
   const dispatch = useDispatch();
   const store = useStore();
+
+  const nodeTypesX = useMemo(() => (nodeTypes), []);
   const onConnectHandle = (params) => {
     console.log("params:", params);
     if (params.source === params.target) {
@@ -220,7 +222,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   return (
     <>
       <ReactFlow
-        nodeTypes={nodeTypes}
+        nodeTypes={nodeTypesX}
         edgeTypes={{ custom: CustomEdge }}
         style={{
           background:
