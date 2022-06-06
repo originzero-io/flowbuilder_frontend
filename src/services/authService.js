@@ -15,7 +15,7 @@ class AuthService extends HTTPService {
     return response.data;
   }
   // eslint-disable-next-line class-methods-use-this
-  async logOut() {
+  logOut() {
     localStorage.removeItem("token");
   }
   async createUser(user) {
