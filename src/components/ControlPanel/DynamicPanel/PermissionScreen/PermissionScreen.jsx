@@ -63,8 +63,9 @@ export default function PermissionScreen() {
       permissions,
     };
     await PermissionService.savePermission(data);
+    
     if (data.userId === auth._id) {
-      dispatch(getMyPermissionInThisWorkspace(activeWorkspace,auth));
+      dispatch(getMyPermissionInThisWorkspace({workspace: activeWorkspace,me: auth}));
     }
     notification.success("Permissions saved");
 

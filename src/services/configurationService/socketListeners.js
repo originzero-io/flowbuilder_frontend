@@ -78,7 +78,7 @@ export const flowListener = (socket) => {
   socket.on("flows:create", (data) => {
     const { auth,workspaces } = store.getState();
     store.dispatch(createFlow(data.flow));
-    store.dispatch(getMyPermissionInThisWorkspace(workspaces.activeWorkspace, auth));
+    store.dispatch(getMyPermissionInThisWorkspace({workspace: workspaces.activeWorksapce ,me: auth}));
     notification.success('Flow created successfully')
   });
 };
