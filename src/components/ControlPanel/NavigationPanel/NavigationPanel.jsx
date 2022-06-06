@@ -16,7 +16,7 @@ import { FiSettings } from "react-icons/fi";
 import { BiBrain } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
 import { RiTeamLine } from "react-icons/ri";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import { Link, useRouteMatch } from "react-router-dom";
 import WorkspaceBrand from "./WorkspaceBrand";
 import useAuth from "hooks/useAuth";

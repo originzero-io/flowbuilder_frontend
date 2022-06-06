@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { getIncomers, getOutgoers } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
-import { setNodeEnable, setOutgoersEnable } from "store/reducers/flow/flowElementsReducer";
+import { setNodeEnable, setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 import RotateButton from "../../../Nodes/global/RotateButton";
 import SwitchButton from "../../../Nodes/global/SwitchButton";

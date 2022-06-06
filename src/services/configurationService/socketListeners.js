@@ -1,36 +1,36 @@
 import { store } from "../../index";
 import notification from "utils/notificationHelper";
-import { makeMeOnline } from "store/reducers/authReducer";
+import { makeMeOnline } from "store/reducers/authSlice";
 import {
   saveElements,
   setElements,
-} from "store/reducers/flow/flowElementsReducer";
+} from "store/reducers/flow/flowElementsSlice";
 import {
   createFlow,
   deleteFlow,
   editFlow,
   getFlowsByWorkspace,
   moveFlow,
-} from "store/reducers/flow/flowReducer";
+} from "store/reducers/flow/flowSlice";
 import {
   createNote,
   deleteNote,
   updateNote,
-} from "store/reducers/notesReducer";
+} from "store/reducers/noteSlice";
 import {
   createProject,
   deleteProject,
   setActiveProject,
   updateProject,
-} from "store/reducers/projectReducer";
-import { editUser } from "store/reducers/userReducer";
+} from "store/reducers/projectSlice";
+import { editUser } from "store/reducers/userSlice";
 import {
   createWorkspace,
   deleteWorkspace,
   editWorkspace,
-} from "store/reducers/workspaceReducer";
-import { endTheBar } from "store/reducers/componentReducer";
-import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionReducer";
+} from "store/reducers/workspaceSlice";
+import { endTheBar } from "store/reducers/componentSlice";
+import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
 
 export const projectListener = (socket) => {
   socket.on("projects:create", (data) => {

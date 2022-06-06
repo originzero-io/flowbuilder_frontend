@@ -4,7 +4,7 @@ import { VscTrash } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { Button } from "reactstrap";
 import { noteNamespace } from "SocketConnections";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import useAuth from "hooks/useAuth";
 import useNotes from "hooks/useNotes";
 import Avatar from "components/Shared/Avatar";

@@ -3,7 +3,7 @@ import { isNode, useStoreActions } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import {  useParams } from "react-router";
 import * as themeColor from "constants/ThemeReference";
-import { createGroup } from "store/reducers/flow/flowGroupsReducer";
+import { createGroup } from "store/reducers/flow/flowGroupsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 import useAuth from "hooks/useAuth";
 import {

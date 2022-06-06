@@ -12,16 +12,16 @@ import styled from "styled-components";
 import { loadFunctionsToNode } from "../../../helpers/loadFunctionsToNode";
 import * as themeColor from "constants/ThemeReference";
 import * as tooltip from "constants/TooltipReference";
-import { logOut } from "store/reducers/authReducer";
+import { logOut } from "store/reducers/authSlice";
 import {
   changeEdgeType,
   importElements,
-} from "store/reducers/flow/flowElementsReducer";
+} from "store/reducers/flow/flowElementsSlice";
 import {
   setFlowEdgeType,
   setMiniMapDisplay,
   setTheme,
-} from "store/reducers/flow/flowGuiReducer";
+} from "store/reducers/flow/flowGuiSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 import useAuth from "hooks/useAuth";
 import Avatar from "components/Shared/Avatar";

@@ -4,11 +4,11 @@ import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import Card from "components/Shared/Card/Card";
-import { setCurrentFlowGui } from "store/reducers/flow/flowGuiReducer";
-import { setCurrentFlowConfig } from "store/reducers/flow/flowConfigReducer";
-import { getElementsByFlow } from "store/reducers/flow/flowElementsReducer";
+import { setCurrentFlowGui } from "store/reducers/flow/flowGuiSlice";
+import { setCurrentFlowConfig } from "store/reducers/flow/flowConfigSlice";
+import { getElementsByFlow } from "store/reducers/flow/flowElementsSlice";
 import { elementNamespace } from "SocketConnections";
-import { beginTheBar } from "store/reducers/componentReducer";
+import { beginTheBar } from "store/reducers/componentSlice";
 import useAuthPermission from "hooks/useAuthPermission";
 
 const propTypes = {

@@ -5,10 +5,10 @@ import { useSelector,useDispatch } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import AllNodes from "./AllNodes";
 import FavoriteNodes from "./FavoriteNodes";
-import {addNodeToFavorites, setNodeList} from "store/reducers/nodeListReducer"
+import {addNodeToFavorites, setNodeList} from "store/reducers/nodeListSlice"
 import RecentNodes from "./RecentNodes";
 import { loadFunctionsToNode } from "../../../../helpers/loadFunctionsToNode";
-import { addNewNode } from "store/reducers/flow/flowElementsReducer";
+import { addNewNode } from "store/reducers/flow/flowElementsSlice";
 import { createNode } from "../../../../helpers/elementController";
 import useDidMountEffect  from "hooks/useDidMountEffect";
 import {loadIconsToNodeList} from "../../../../helpers/loadIconsToNodeList";

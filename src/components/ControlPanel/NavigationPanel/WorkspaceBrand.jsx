@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import {
   deleteWorkspace,
   setActiveWorkspace,
-} from "store/reducers/workspaceReducer";
+} from "store/reducers/workspaceSlice";
 import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
@@ -19,10 +19,11 @@ const propTypes = {
 };
 
 const WorkspaceBrand = ({ workspace }) => {
-  //console.log("TEAM BRAND RENDERED");
+  console.log("TEAM BRAND RENDERED");
   const { role } = useAuth();
   const dispatch = useDispatch();
   const { workspaces } = useWorkspace();
+  console.log("workspaceeee: ", workspace);
   const deleteWorkspaceHandler = () => {
     if (confirm(`${workspace.name} takımını silmek istiyor musunuz?`)) {
       workspaceNamespace.emit("workspaces:delete", { workspace });

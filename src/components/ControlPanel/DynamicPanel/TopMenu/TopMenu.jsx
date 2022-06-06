@@ -6,7 +6,7 @@ import { BiBrain } from "react-icons/bi";
 import { FiUsers } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
-import { logOut } from "store/reducers/authReducer";
+import { logOut } from "store/reducers/authSlice";
 import {
   DropdownItem,
   DropdownWrapper

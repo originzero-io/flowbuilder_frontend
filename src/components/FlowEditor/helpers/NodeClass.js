@@ -9,7 +9,7 @@ import {
   //findElementById
 } from "./elementController";
 import notification from "utils/notificationHelper";
-import { setElements } from "store/reducers/flow/flowElementsReducer";
+import { setElements } from "store/reducers/flow/flowElementsSlice";
 export default class Node {
   elements = [];
   nodes = [];

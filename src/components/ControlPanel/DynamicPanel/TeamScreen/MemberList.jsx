@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Table } from "reactstrap";
 import styled from "styled-components";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import useUser from "hooks/useUser";
 import useWorkspace from "hooks/useWorkspace";
 import Avatar from "components/Shared/Avatar";

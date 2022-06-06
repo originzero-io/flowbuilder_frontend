@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
 import notification from "utils/notificationHelper";
-import { setCopiedElements } from "store/reducers/controlPanelReducer";
-import { pasteNodes } from "store/reducers/flow/flowElementsReducer";
-import { setRotateAllPath } from "store/reducers/flow/flowGuiReducer";
+import { setCopiedElements } from "store/reducers/controlPanelSlice";
+import { pasteNodes } from "store/reducers/flow/flowElementsSlice";
+import { setRotateAllPath } from "store/reducers/flow/flowGuiSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 const KeyboardEvents = () => {
   const dispatch = useDispatch();

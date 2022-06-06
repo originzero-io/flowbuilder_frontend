@@ -4,7 +4,7 @@ import { MdDevicesOther } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import { setCanDoEverytingPermission } from "store/reducers/userPermissionReducer";
+import { setCanDoEverytingPermission } from "store/reducers/userPermissionSlice";
 import useUser from "hooks/useUser";
 import useUserPermission from "hooks/useUserPermission";
 import useWorkspace from "hooks/useWorkspace";
@@ -23,7 +23,7 @@ import {
   setNestedAllPermission,
   loadPermission,
   getUserPermissionInThisWorkspace,
-} from "store/reducers/userPermissionReducer";
+} from "store/reducers/userPermissionSlice";
 import { Button, Input, Spinner } from "reactstrap";
 import { AiOutlineSave } from "react-icons/ai";
 import { MdOutlineAssignmentInd } from "react-icons/md";
@@ -32,11 +32,11 @@ import PermissionService, {
   getUserPermissionInThisWorkspaceService,
 } from "services/configurationService/permissionService";
 import notification from "utils/notificationHelper";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import AddPreset from "./components/AddPreset";
 import useComponentWillMount from "hooks/useComponentWillMount";
 import PresetList from "./components/PresetList";
-import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionReducer";
+import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
 import useAuth from "hooks/useAuth";
 
 export default function PermissionScreen() {

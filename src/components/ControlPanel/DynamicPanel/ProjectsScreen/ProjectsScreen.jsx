@@ -4,7 +4,7 @@ import {
   CollapsibleTrigger,
 } from "components/Shared/Collapsible/CollapsibleMenu";
 import FlowList from "./components/FlowList.jsx";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import AddFlowForm from "./forms/AddFlowForm";
 import AddDashboardForm from "./forms/AddDashboardForm";
 import { VscAdd } from "react-icons/vsc";

@@ -3,7 +3,7 @@ import React from "react";
 import { MdOutlineManageAccounts } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { Button } from "reactstrap";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import ManageMembers from "./components/ManageMembers.jsx";
 import MemberList from "./MemberList.jsx";
 

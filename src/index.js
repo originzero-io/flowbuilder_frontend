@@ -10,18 +10,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import 'antd/dist/antd.min.css'
 import "react-tabs/style/react-tabs.css";
 import { Provider } from "react-redux";
-import configureStore from "./store/configureStore.js";
+import configureAppStore from "./store/configureAppStore";
 import ErrorFallback from "./components/Shared/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import { PersistGate } from "redux-persist/integration/react";
-import notification from "utils/notificationHelper";
+import { persistStore } from 'redux-persist'
 
-export const { store, persistor } = configureStore();
+export const store = configureAppStore();
 
-// window.onunhandledrejection = function (error) {
-//   notification.error(error.reason.response.data.message)
-//   console.log("error reason: ",error.reason.response.data.message);
-// };
+const persistor = persistStore(store);
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(

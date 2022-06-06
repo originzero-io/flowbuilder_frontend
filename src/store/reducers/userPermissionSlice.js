@@ -1,5 +1,5 @@
 import PermissionService from "services/configurationService/permissionService"
-import { beginTheBar,endTheBar } from "store/reducers/componentReducer";
+import { beginTheBar,endTheBar } from "store/reducers/componentSlice";
 
 export const defaultPermissions = {
   CAN_DO_EVERYTHING:true,

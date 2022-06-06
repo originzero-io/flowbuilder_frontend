@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Input } from "reactstrap";
 import PermissionService from "services/configurationService/permissionService";
-import { setModal } from "store/reducers/componentReducer";
-import { loadUserPermission } from "store/reducers/userPermissionReducer";
+import { setModal } from "store/reducers/componentSlice";
+import { loadUserPermission } from "store/reducers/userPermissionSlice";
 
 export default function PresetList() {
   const [presets, setPresets] = useState([]);

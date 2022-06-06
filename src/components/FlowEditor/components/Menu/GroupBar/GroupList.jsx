@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteGroup
-} from "store/reducers/flow/flowGroupsReducer";
-import { deleteGroupOfElement } from "store/reducers/flow/flowElementsReducer";
+} from "store/reducers/flow/flowGroupsSlice";
+import { deleteGroupOfElement } from "store/reducers/flow/flowElementsSlice";
 import { GroupItem, GroupColor, Label } from "./GroupBar.style";
 import { isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../NavMenu/Icons";

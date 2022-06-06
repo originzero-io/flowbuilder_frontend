@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Label } from "../Nodes.style";
 import { useSelector, useDispatch } from "react-redux";
-import { updateNodeHandles } from "store/reducers/flow/flowElementsReducer";
+import { updateNodeHandles } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types"
 
 const propTypes = {

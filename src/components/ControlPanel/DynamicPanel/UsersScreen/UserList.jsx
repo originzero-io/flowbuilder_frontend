@@ -3,9 +3,9 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import { Badge, Button, Table } from "reactstrap";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import AddUserForm from "./AddUserForm";
-import { deleteUser } from "store/reducers/userReducer";
+import { deleteUser, getAllUsers } from "store/reducers/userSlice";
 import { BiEdit } from "react-icons/bi";
 import { VscTrash } from "react-icons/vsc";
 import { FaUserCircle } from "react-icons/fa";
@@ -56,6 +56,7 @@ export default function UserList() {
   return (
     <UserListContainer>
       <button onClick={()=>notification.warn("Notification test")}>Notification test</button>
+      <Button onClick={()=>dispatch(getAllUsers())}>Get Users</Button>
       <Table dark hover>
         <thead>
           <tr>

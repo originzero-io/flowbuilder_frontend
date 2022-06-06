@@ -12,7 +12,7 @@ import {
   Info,
 } from "../Nodes.style";
 import getIconInstance from "./Icons/iconConstant";
-import { setOutgoersEnable } from "store/reducers/flow/flowElementsReducer";
+import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types"
 import useActiveFlow from "hooks/useActiveFlow";
 

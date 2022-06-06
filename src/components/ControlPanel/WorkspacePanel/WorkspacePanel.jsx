@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import ReactTooltip from "react-tooltip";
-import { setModal } from "store/reducers/componentReducer";
-import { getFlowsByWorkspace } from "store/reducers/flow/flowReducer";
-import { getNotesByWorkspace } from "store/reducers/notesReducer";
-import { getProjectsByWorkspace, setActiveProject } from "store/reducers/projectReducer";
+import { setModal } from "store/reducers/componentSlice";
+import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
+import { getNotesByWorkspace } from "store/reducers/noteSlice";
+import { getProjectsByWorkspace, setActiveProject } from "store/reducers/projectSlice";
 import {
   getMyWorkspaces,
   setActiveWorkspace,
-} from "store/reducers/workspaceReducer";
+} from "store/reducers/workspaceSlice";
 import useAuth from "hooks/useAuth";
 import useDidMountEffect from "hooks/useDidMountEffect";
 import useWorkspace from "hooks/useWorkspace";
@@ -19,7 +19,7 @@ import {
   WorkspaceItem,
   WorkspaceItemWrapper,
 } from "./WorkspacePanel.style";
-import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionReducer";
+import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
 
 const WorkspacePanel = () => {
   const { workspaces, activeWorkspace } = useWorkspace();

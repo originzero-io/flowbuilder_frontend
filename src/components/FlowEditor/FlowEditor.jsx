@@ -9,17 +9,17 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 import nodeTypes from "./Nodes";
 import adjustScreen from "./helpers/adjustScreen";
 import { loadFunctionsToNode } from "./helpers/loadFunctionsToNode";
-import { setReactFlowInstance, setPaneClickPosition } from "store/reducers/flow/flowGuiReducer";
-import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "store/reducers/flow/flowElementsReducer"
+import { setReactFlowInstance, setPaneClickPosition } from "store/reducers/flow/flowGuiSlice";
+import {addNewNode, selectNodes, setAllNodesDeselect, setElements, setNodeEnable} from "store/reducers/flow/flowElementsSlice"
 import {
   setElementContextMenu,
   setGroupMenu,
   setMultiSelectionContextMenu,
   setPanelContextMenu,
-} from "store/reducers/menuReducer";
-import { setNodeList } from "store/reducers/nodeListReducer";
+} from "store/reducers/menuSlice";
+import { setNodeList } from "store/reducers/nodeListSlice";
 import * as themeColor from "constants/ThemeReference";
-import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiReducer";
+import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
 import { createNode, isEdgeExist, removeEdgeFromArray, setSourceColorToEdge } from "./helpers/elementController";
 import FlowComponents from "./components/FlowComponents";
 import CustomEdge from './components/Edges/CustomEdge'

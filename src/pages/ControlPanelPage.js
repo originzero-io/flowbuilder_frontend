@@ -3,7 +3,7 @@ import NavigationPanel from "../components/ControlPanel/NavigationPanel/Navigati
 import WorkspacePanel from "../components/ControlPanel/WorkspacePanel/WorkspacePanel.jsx";
 import DynamicPanel, { TopMenu } from "../components/ControlPanel/DynamicPanel";
 import { useDispatch } from "react-redux";
-import { getAllUsers } from "store/reducers/userReducer";
+import { getAllUsers } from "store/reducers/userSlice";
 import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;

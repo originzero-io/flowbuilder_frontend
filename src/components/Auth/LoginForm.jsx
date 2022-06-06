@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
 import { loginService } from "services/authService";
-import { loginError, loginSuccess } from "store/reducers/authReducer";
+import { loginError, loginSuccess } from "store/reducers/authSlice";
 import { Input, Text, Submit, ErrorMessage } from "./LoginForm.style";
 import { Redirect } from "react-router-dom";
 import useAuth from "hooks/useAuth";

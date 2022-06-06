@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/EditFlowForm";
 import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/MoveFlowForm";
 import {

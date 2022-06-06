@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from "react";
 import { Container } from "./GroupBar.style";
 import { useSelector, useDispatch } from "react-redux";
-import { setGroupBarDisplay } from "store/reducers/flow/flowGuiReducer";
+import { setGroupBarDisplay } from "store/reducers/flow/flowGuiSlice";
 import { GroupIcon } from "components/Shared/icons";
-import { getGroups } from "store/reducers/flow/flowGroupsReducer";
+import { getGroups } from "store/reducers/flow/flowGroupsSlice";
 import { useParams } from "react-router";
 import useActiveFlow from "hooks/useActiveFlow";
 export default function GroupBarIcon({theme}) {

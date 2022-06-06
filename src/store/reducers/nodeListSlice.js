@@ -1,4 +1,3 @@
-import * as actionTypes from "../constants/nodeListConstants";
 import * as types from "../../components/FlowEditor/Nodes/constant/nodeTypes";
 import React from "react";
 import {
@@ -9,6 +8,7 @@ import {
   CalculateIcon,
   ExcelReadIcon,
 } from "../../components/FlowEditor/Nodes/global/Icons";
+import { createSlice } from "@reduxjs/toolkit";
 const panelNodeList = [
   {
     id: 1,
@@ -219,24 +219,19 @@ const panelNodeList = [
     createdDate: undefined,
   },
 ];
-const nodeListReducer = (state = panelNodeList, {type,payload}) => {
-  switch (type) {
-    case actionTypes.SET_NODE_LIST:
+
+export const nodeListSlice = createSlice({
+  name: 'nodeListReducer',
+  initialState: panelNodeList,
+  reducers: {
+    setNodeList(state, { payload }) {
       return payload;
-    case actionTypes.ADD_NODE_TO_FAVORITES:
-      return state.map(state=>state.id === payload.id ? {...state,fav:!state.fav} : state);
-    default:
-      return state;
+    },
+    addNodeToFavorites(state, { payload }) {
+      return state.map(node => node.id === payload.id ? { ...node, fav: !node.fav } : node);    
+    }
   }
-};
-export default nodeListReducer;
+})
 
-
-export const setNodeList = (data) => ({
-  type: actionTypes.SET_NODE_LIST,
-  payload: data
-});
-export const addNodeToFavorites = (node) => ({
-  type: actionTypes.ADD_NODE_TO_FAVORITES,
-  payload: node
-});
+export const { setNodeList, addNodeToFavorites } = nodeListSlice.actions;
+export default nodeListSlice.reducer;

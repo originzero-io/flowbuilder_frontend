@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import {
   addUserToWorkspace,
   removeUserToWorkspace,
-} from "store/reducers/userReducer";
+} from "store/reducers/userSlice";
 
 const UserItem = styled.div`
   margin-left: 10px;

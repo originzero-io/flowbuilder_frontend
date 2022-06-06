@@ -1,6 +1,6 @@
 import PermissionService from "services/configurationService/permissionService";
-import { beginTheBar,endTheBar } from "store/reducers/componentReducer";
-import { defaultPermissions } from "./userPermissionReducer";
+import { beginTheBar,endTheBar } from "store/reducers/componentSlice";
+import { defaultPermissions } from "./userPermissionSlice";
 
 const authPermissionReducer = (state = defaultPermissions, { type, payload }) => {
   switch (type) {

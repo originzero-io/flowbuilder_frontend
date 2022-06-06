@@ -21,10 +21,10 @@ import {
   setElements,
   setRotateAll,
   setExpandAll,
-} from "store/reducers/flow/flowElementsReducer";
+} from "store/reducers/flow/flowElementsSlice";
 import {
   setRotateAllPath,
-} from "store/reducers/flow/flowGuiReducer";
+} from "store/reducers/flow/flowGuiSlice";
 import * as themeColor from "constants/ThemeReference";
 import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
 import { ActionCreators as UndoActionCreators } from 'redux-undo';

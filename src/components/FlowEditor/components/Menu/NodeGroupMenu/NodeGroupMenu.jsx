@@ -3,7 +3,7 @@ import { useStoreActions, useStoreState } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { setGroupToNodes } from "../../../helpers/elementController";
-import { setGroupMultiple, setGroupSingle } from "store/reducers/flow/flowElementsReducer";
+import { setGroupMultiple, setGroupSingle } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 import { GroupColor, Label } from "../GroupBar/GroupBar.style";
 const Container = styled.div`

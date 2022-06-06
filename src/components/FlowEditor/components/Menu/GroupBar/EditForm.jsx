@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setElements, updateGroupOfElement } from "store/reducers/flow/flowElementsReducer";
-import { updateGroup } from "store/reducers/flow/flowGroupsReducer";
+import { setElements, updateGroupOfElement } from "store/reducers/flow/flowElementsSlice";
+import { updateGroup } from "store/reducers/flow/flowGroupsSlice";
 import { SubmitIcon } from "components/Shared/icons";
 import { ColorFlag, Submit } from "./GroupBar.style";
 import * as themeColor from "constants/ThemeReference";

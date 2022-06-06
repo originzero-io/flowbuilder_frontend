@@ -1,22 +1,23 @@
 import { combineReducers } from "redux";
-import flowElementsReducer from "./flow/flowElementsReducer";
-import nodeClassReducer from "./flow/nodeClassReducer";
-import flowGroupsReducer from "./flow/flowGroupsReducer";
-import flowConfigReducer from "./flow/flowConfigReducer";
-import flowGuiReducer from "./flow/flowGuiReducer";
-import flowReducer from "./flow/flowReducer";
-import menuReducer from "./menuReducer";
-import nodeListReducer from "./nodeListReducer";
-import controlPanelReducer from "./controlPanelReducer";
-import { modalReducer,loadingBarReducer } from "./componentReducer";
-import authReducer from "./authReducer";
-import userReducer from "./userReducer";
-import userPermissionReducer from "./userPermissionReducer";
-import authPermissionReducer from "./authPermissionReducer";
-import workspaceReducer from "./workspaceReducer";
-import projectReducer from "./projectReducer";
-import notesReducer from "./notesReducer";
+import flowElementsReducer from "./flow/flowElementsSlice";
+import nodeClassReducer from "./flow/nodeClassSlice";
+import flowGroupsReducer from "./flow/flowGroupsSlice";
+import flowConfigReducer from "./flow/flowConfigSlice";
+import flowGuiReducer from "./flow/flowGuiSlice";
+import flowReducer from "./flow/flowSlice";
+import menuReducer from "./menuSlice";
+import nodeListReducer from "./nodeListSlice";
+import controlPanelReducer from "./controlPanelSlice";
+import { modalReducer,loadingBarReducer } from "./componentSlice";
+import authReducer from "./authSlice";
+import userReducer from "./userSlice";
+import userPermissionReducer from "./userPermissionSlice";
+import authPermissionReducer from "./authPermissionSlice";
+import workspaceReducer from "./workspaceSlice";
+import projectReducer from "./projectSlice";
+import notesReducer from "./noteSlice";
 import * as actions from "../constants/authConstants";
+
 const reducers = combineReducers({
   auth:authReducer,
   users: userReducer,
