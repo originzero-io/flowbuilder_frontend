@@ -59,7 +59,7 @@ export default function ControlMenu() {
   const saveFlow = useCallback(() => {
     //saveToDb(flowConfig,flowGui);
     const { position, zoom, elements } = reactFlowInstance.toObject();
-    elementNamespace.emit('elements:save', { flow_id: flowId, elements })
+    elementNamespace.emit('elements:save', { flowId: flowId, elements: elements })
   }, [reactFlowInstance]);
 
   const deleteAllNodes = () => {

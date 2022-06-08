@@ -56,7 +56,7 @@ const MainMenu = () => {
       gui: { ...flowGui, position, zoom },
     };
     await FlowService.saveFlow(flowId, flow);
-    elementNamespace.emit("elements:save", { flow_id: flowId, elements });
+    elementNamespace.emit("elements:save", { flowId: flowId, elements: elements });
     dispatch(getFlowsByWorkspace(activeWorkspace));
   };
   const nameClick = () => {
