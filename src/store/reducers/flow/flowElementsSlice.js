@@ -331,7 +331,7 @@ const elementReducer = (state = [], { type, payload }) => {
       return state;
   }
 };
-
+///21 adet
 const undoableElements = undoable(elementReducer, {
   limit: 10,
   filter: includeAction([
