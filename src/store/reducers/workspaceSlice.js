@@ -21,7 +21,6 @@ export const workspaceSlice = createSlice({
     },
     editWorkspace(state, { payload }) {
       const index = state.workspaces.findIndex(workspace => workspace._id === payload._id);
-      console.log("indexxxxx: ", index);
       state.workspaces[index] = {
         ...state.workspaces[index],
         ...payload,

@@ -73,7 +73,6 @@ export const flowListener = (socket) => {
   socket.on("flows:move", (data) => {
     store.dispatch(moveFlow(data.flow));
     notification.success('Flow moved successfully')
-
   });
   socket.on("flows:create", (data) => {
     const { auth,workspaces } = store.getState();

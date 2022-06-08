@@ -49,7 +49,7 @@ const NewGroupForm = ({ theme }) => {
   };
   const addNewGroup = async (event) => {
     event.preventDefault();
-    dispatch(createGroup(flowId, groupInfo));
+    dispatch(createGroup({flowId: flowId, group: groupInfo}));
   };
   const selectNonGroupsHandle = () => {
     const nonGroups = elements.filter(

@@ -46,7 +46,6 @@ export const userSlice = createSlice({
     },
     [editUser.fulfilled]: (state, { payload }) => {
       const index = state.findIndex(user => user._id === payload._id);
-      console.log("indexxxxx: ", index);
       state[index] = {
         ...state[index],
         ...payload,

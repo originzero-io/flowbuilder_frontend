@@ -125,7 +125,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     }
   };
   const onPaneClickHandle = (e) => {
-    dispatch(setPaneClickPosition(e.clientX,e.clientY))
+    dispatch(setPaneClickPosition({x: e.clientX, y: e.clientY}))
     dispatch(setMultiSelectionContextMenu(false));
     dispatch(setElementContextMenu(false));
     dispatch(closeAllNodeGroupMenu(true));

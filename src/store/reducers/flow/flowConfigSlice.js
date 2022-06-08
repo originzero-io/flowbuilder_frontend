@@ -1,17 +1,14 @@
-import * as actions from "../../constants/flowConstants";
+import { createSlice } from "@reduxjs/toolkit";
 
-const flowConfigReducer = (state = {}, { type, payload }) => {
-  switch (type) {
-    case actions.SET_CURRENT_FLOW_CONFIG:
+export const flowConfigSlice = createSlice({
+  name: "flowConfig",
+  initialState: {},
+  reducers: {
+    setCurrentFlowConfig(state, { payload }) {
       return payload;
-    default:
-      return state;
+    }
   }
-};
-
-export default flowConfigReducer;
-
-export const setCurrentFlowConfig = (data) => ({
-  type: actions.SET_CURRENT_FLOW_CONFIG,
-  payload: data,
 });
+
+export default flowConfigSlice.reducer;
+export const { setCurrentFlowConfig } = flowConfigSlice.actions;
