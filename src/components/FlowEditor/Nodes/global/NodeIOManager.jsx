@@ -21,7 +21,7 @@ export default function NodeIOManager({ self, ioType }) {
       ...handleCount,
       [name]: value,
     });
-    dispatch(updateNodeHandles(name, value, self));
+    dispatch(updateNodeHandles({self: self, name: name, value: value}));
   };
   return (
     <>

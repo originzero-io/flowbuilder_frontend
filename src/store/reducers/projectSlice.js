@@ -25,7 +25,6 @@ export const projectSlice = createSlice({
     },
     updateProject(state, { payload }) {
       const index = state.projects.findIndex(project => project._id === payload._id);
-      console.log("indexxxxx: ", index);
       state.projects[index] = {
         ...state.projects[index],
         ...payload,

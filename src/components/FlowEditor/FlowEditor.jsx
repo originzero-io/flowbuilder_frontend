@@ -35,7 +35,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const nodeList = useSelector((state) => state.nodeList);
   const selectedElements = useStoreState((state) => state.selectedElements);
   const { flowElements, flowGui } = useActiveFlow();
-  const elements = flowElements.present;
+  const elements = flowElements;
   const { reactFlowInstance, rotateAllPath, miniMapDisplay, edgeType, theme } = flowGui;
   const dispatch = useDispatch();
   const store = useStore();
@@ -59,12 +59,12 @@ export default function FlowEditor({ reactFlowWrapper }) {
       const sourceEnable = newElements.find(els => els.id === params.source).data.enable;
       const self = newElements.find(els => els.id === params.target);
       dispatch(setElements(newElements));
-      dispatch(setNodeEnable(self,sourceEnable))
+      dispatch(setNodeEnable({self: self,checked: sourceEnable}))
     }
   };
 
   const onEdgeUpdateHandle = (oldEdge, newConnection) => {
-    const elementArray = store.getState().activeFlow.flowElements.present;
+    const elementArray = store.getState().activeFlow.flowElements;
     const edgeExist = isEdgeExist(newConnection,elementArray);
     if (edgeExist) {
       const newElements = removeEdgeFromArray(oldEdge,elementArray);

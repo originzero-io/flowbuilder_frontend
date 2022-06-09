@@ -13,12 +13,13 @@ import { setCopiedElements } from "store/reducers/controlPanelSlice";
 import { pasteNodes } from "store/reducers/flow/flowElementsSlice";
 import { setRotateAllPath } from "store/reducers/flow/flowGuiSlice";
 import useActiveFlow from "hooks/useActiveFlow";
+
 const KeyboardEvents = () => {
   const dispatch = useDispatch();
   const { flowGui, flowElements } = useActiveFlow();
   const { copiedElements } = useSelector((state) => state.controlPanel);
   const { paneClickPosition, reactFlowInstance, rotateAllPath } = flowGui;
-  const elements = flowElements.present;
+  const elements = flowElements;
   const selectedElements = useStoreState((state) => state.selectedElements);
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements
@@ -29,12 +30,12 @@ const KeyboardEvents = () => {
     e.preventDefault();
     setSelectedElements(elements);
   };
-  const undoEvent = () => {
-    dispatch(UndoActionCreators.undo());
-  };
-  const redoEvent = () => {
-    dispatch(UndoActionCreators.redo());
-  };
+  // const undoEvent = () => {
+  //   dispatch(UndoActionCreators.undo());
+  // };
+  // const redoEvent = () => {
+  //   dispatch(UndoActionCreators.redo());
+  // };
   const fitViewEvent = () => {
     fitView({ padding: 0.2, includeHiddenNodes: true });
   };
@@ -53,7 +54,7 @@ const KeyboardEvents = () => {
   const copyNodesEvent = (key, e) => {
     e.preventDefault();
     dispatch(setCopiedElements(selectedElements));
-    toast(`${selectedElements.length} nodes copied`, { icon: "👏",position:'top-center' });
+    notification.success(`${selectedElements.length} nodes copied`, { icon: "👏",position:'top-center' });
   };
   const getPosition = (index) => {
     const position = reactFlowInstance.project({
@@ -80,8 +81,8 @@ const KeyboardEvents = () => {
         handleKeys={["ctrl+a"]}
         onKeyEvent={selectAllNodesEvent}
       />
-      <KeyboardEventHandler handleKeys={["ctrl+z"]} onKeyEvent={undoEvent} />
-      <KeyboardEventHandler handleKeys={["ctrl+y"]} onKeyEvent={redoEvent} />
+      {/* <KeyboardEventHandler handleKeys={["ctrl+z"]} onKeyEvent={undoEvent} />
+      <KeyboardEventHandler handleKeys={["ctrl+y"]} onKeyEvent={redoEvent} /> */}
       <KeyboardEventHandler
         handleKeys={["ctrl+s"]}
         onKeyEvent={saveFlowEvent}

@@ -20,10 +20,10 @@ export const menuSlice = createSlice({
       state.panelMenu = payload
     },
     setElementContextMenu(state, { payload }) {
-      state.multiSelectionMenu = payload
+      state.elementMenu = payload
     },
     setMultiSelectionContextMenu(state, { payload }) {
-      state.elementMenu = payload
+      state.multiSelectionMenu = payload
     },
     setGroupMenu(state, { payload }) {
       state.groupMenu = payload

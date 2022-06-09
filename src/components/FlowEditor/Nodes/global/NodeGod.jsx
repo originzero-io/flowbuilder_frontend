@@ -28,7 +28,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
   const sources = Array.from(Array(self.data.sourceCount).keys());
   const targets = Array.from(Array(self.data.targetCount).keys());
   const { flowElements } = useActiveFlow();
-  const elements = flowElements.present;
+  const elements = flowElements;
   const dispatch = useDispatch();
   const { selected, align, expand, enable, group } = self.data;
   useEffect(() => {
@@ -39,7 +39,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
   useEffect(() => {
     const outgoers = getOutgoers(self, elements);
     const outgoersIds = outgoers.map(o => o.id);
-    dispatch(setOutgoersEnable(outgoersIds,enable));
+    dispatch(setOutgoersEnable({ outgoersIds: outgoersIds, enable: enable }));
   }, [enable])
   return (
     <NodeWrapper align={align} selected={selected} enable={enable}>

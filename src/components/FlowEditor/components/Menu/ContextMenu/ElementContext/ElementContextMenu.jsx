@@ -7,8 +7,8 @@ import useActiveFlow from "hooks/useActiveFlow";
 
 export default function ElementMenu() {
   const { flowElements } = useActiveFlow();
-  const elements = flowElements.present;
-  const {elementMenu} = useSelector((state) => state.menus);
+  const elements = flowElements;
+  const { elementMenu } = useSelector((state) => state.menus);
   const theme = useSelector((state) => state.themeReducer);
   const dispatch = useDispatch();
 
@@ -26,7 +26,8 @@ export default function ElementMenu() {
       newAlign = "horizontal";
     }
     else newAlign = "vertical"
-    dispatch(rotateNode(element,newAlign));
+    
+    dispatch(rotateNode({self: element, path: newAlign}))
     dispatch(setElementContextMenu(false));
   }
   return (

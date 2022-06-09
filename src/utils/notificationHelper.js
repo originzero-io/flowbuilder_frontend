@@ -6,11 +6,11 @@ class Notification {
   constructor(component) {
     this.component = component;
   }
-  success(message) {
-    this.component.success(message);
+  success(message, options) {
+    this.component.success(message, options);
   }
-  error(message) {
-    this.component.error(message);
+  error(message, options) {
+    this.component.error(message, options);
   }
   warn(message) {
     this.component.success(message, {

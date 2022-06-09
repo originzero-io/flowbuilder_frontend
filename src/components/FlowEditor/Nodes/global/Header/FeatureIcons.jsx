@@ -17,7 +17,7 @@ const propTypes = {
 export default function FeatureIcons({ self, edit, setEdit }) {
   const dispatch = useDispatch();
   const { flowElements } = useActiveFlow();
-  const elements = flowElements.present;
+  const elements = flowElements;
   const nameEditHandle = () => {
     setEdit(!edit);
   };
@@ -33,16 +33,16 @@ export default function FeatureIcons({ self, edit, setEdit }) {
       if (enableCount === 0) {
         console.log("enable count",enableCount)
         setChecked(checked);
-        dispatch(setNodeEnable(self, checked))
+        dispatch(setNodeEnable({self, checked}))
         const outgoers = getOutgoers(self, elements);
         const outgoersIds = outgoers.map(o => o.id);
-        dispatch(setOutgoersEnable(outgoersIds,checked));
+        dispatch(setOutgoersEnable({outgoersIds: outgoersIds, enable: checked}));
       }
       else {
         console.log("enable count",enableCount)
 
         setChecked(checked);
-        dispatch(setNodeEnable(self, checked))
+        dispatch(setNodeEnable({self, checked}))
       }
       
     }

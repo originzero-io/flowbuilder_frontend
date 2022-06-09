@@ -9,7 +9,7 @@ import NodeGod from "./global/NodeGod";
 import NodeIOManager from "./global/NodeIOManager";
 const SplitNode = (self) => {
   const { flowElements } = useActiveFlow();
-  const elements = flowElements.present;
+  const elements = flowElements;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const dispatch = useDispatch();
   const [values, setValues] = useState([

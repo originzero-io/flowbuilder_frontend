@@ -28,7 +28,7 @@ const NewGroupForm = ({ theme }) => {
   const [formOpen, setFormOpen] = useState(false);
   const { flowElements } = useActiveFlow();
   const auth = useAuth();
-  const elements = flowElements.present;
+  const elements = flowElements;
   const { flowId } = useParams();
   const setSelectedElements = useStoreActions(
     (actions) => actions.setSelectedElements

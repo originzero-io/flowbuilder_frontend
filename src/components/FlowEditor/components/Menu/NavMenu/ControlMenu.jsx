@@ -49,8 +49,8 @@ const Menu = styled.div`
 export default function ControlMenu() {
   const { flowGui,flowConfig,flowElements } = useActiveFlow();
   const { reactFlowInstance,rotateAllPath,theme } = flowGui;
-  const canUndo = flowElements.past.length > 0;
-  const canRedo = flowElements.future.length > 0;
+  // const canUndo = flowElements.past.length > 0;
+  // const canRedo = flowElements.future.length > 0;
   const { zoomIn, zoomOut, fitView } = useZoomPanHelper();
   const setInteractive = useStoreActions((actions) => actions.setInteractive);
   const dispatch = useDispatch();
@@ -94,12 +94,12 @@ export default function ControlMenu() {
   const lockHandle = () => {
     setLock(!lock);
   };
-  const undoHandle = () => {
-    dispatch(UndoActionCreators.undo());
-  }
-  const redoHandle = () => {
-    dispatch(UndoActionCreators.redo());
-  }
+  // const undoHandle = () => {
+  //   dispatch(UndoActionCreators.undo());
+  // }
+  // const redoHandle = () => {
+  //   dispatch(UndoActionCreators.redo());
+  // }
   useEffect(() => {
     setInteractive(lock);
   }, [lock]);
@@ -114,12 +114,12 @@ export default function ControlMenu() {
         <SaveIcon theme={theme} />
       </MenuItem>
       <HorizontalDivider theme={theme} />
-      <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO} onClick={undoHandle}>
+      {/* <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO} onClick={undoHandle}>
         <UndoIcon theme={theme} disable={!canUndo} />
       </MenuItem>
       <MenuItem theme={theme} data-tip="Redo" data-for={tooltip.REDO} onClick={redoHandle}>
         <RedoIcon theme={theme} disable={!canRedo} />
-      </MenuItem>
+      </MenuItem> */}
       <HorizontalDivider theme={theme} />
       <MenuItem
         theme={theme}

@@ -43,7 +43,7 @@ const Content = styled.div`
 `;
 export default function GroupMenu({ self }) {
   const { flowElements,flowGroups } = useActiveFlow();
-  const elements = flowElements.present;
+  const elements = flowElements;
   const dispatch = useDispatch();
   const selectedElements = useStoreState((state) => state.selectedElements);
   const setSelectedElements = useStoreActions(
@@ -76,12 +76,12 @@ export default function GroupMenu({ self }) {
   };
 
   const singleSelectionHandle = (group) => {
-    dispatch(setGroupSingle(self, group));
+    dispatch(setGroupSingle({self: self, group: group}));
   };
 
   const multiSelectionHandle = (group) => {
     const selectedElementIds = selectedElements.map(m => m.id)
-    dispatch(setGroupMultiple(selectedElementIds, group));
+    dispatch(setGroupMultiple({selectedIDArray: selectedElementIds, group: group}));
     const newElements = setGroupToNodes(selectedElementIds, elements, group);
     const newSelected = newElements.filter(els=>selectedElementIds.includes(els.id))
     setSelectedElements(newSelected);

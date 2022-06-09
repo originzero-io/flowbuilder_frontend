@@ -31,11 +31,11 @@ const GroupList = ({ theme }) => {
     if (confirm("Are you sure?")) {
       console.log("group:", group);
       dispatch(deleteGroup(group));
-      dispatch(deleteGroupOfElement(group));
+      dispatch(deleteGroupOfElement(group._id));
     }
   };
   const groupItemClickHandle = (group) => {
-    const newArr = flowElements.present.filter(
+    const newArr = flowElements.filter(
       (els) => isNode(els) && els.data.group._id === group._id
     );
     setSelectedElements(newArr);

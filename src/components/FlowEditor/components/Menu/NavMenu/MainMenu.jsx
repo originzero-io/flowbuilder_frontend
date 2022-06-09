@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { elementNamespace } from "SocketConnections";
 import * as themeColor from "constants/ThemeReference";
 import FlowService from "services/configurationService/flowService";
-import { setElements } from "store/reducers/flow/flowElementsSlice";
 import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
 import useWorkspace from "hooks/useWorkspace";
 import useActiveFlow from "hooks/useActiveFlow";

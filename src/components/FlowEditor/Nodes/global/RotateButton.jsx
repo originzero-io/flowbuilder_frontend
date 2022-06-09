@@ -12,7 +12,7 @@ export default function RotateButton({ self }) {
   const rotateHandle = () => {
     const currentAlign = self.data.align;
     const newPath = currentAlign === "horizontal" ? "vertical" : "horizontal"
-    dispatch(rotateNode(self,newPath))
+    dispatch(rotateNode({ self: self, path: newPath }));
   };
   return (
     <div onClick={rotateHandle}>

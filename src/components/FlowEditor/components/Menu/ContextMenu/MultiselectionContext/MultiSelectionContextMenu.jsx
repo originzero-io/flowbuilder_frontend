@@ -14,7 +14,7 @@ export default function MultiSelectionContextMenu() {
   );
   const { flowElements, flowGui } = useActiveFlow();
   const { theme } = flowGui;
-  const elements = flowElements.present;
+  const elements = flowElements;
   const dispatch = useDispatch();
   const deleteItems = () => {
     if (confirm("Are you sure?")) {
@@ -39,7 +39,7 @@ export default function MultiSelectionContextMenu() {
   useEffect(() => {
     if (selected) {
       const selectedElementIds = selected.map(s => s.id);
-      dispatch(rotateMultiNode(selectedElementIds, rotatePath));
+      dispatch(rotateMultiNode({selectedIDArray: selectedElementIds, path: rotatePath}));
     }
   }, [rotatePath])
 
