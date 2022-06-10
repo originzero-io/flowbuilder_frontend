@@ -39,7 +39,7 @@ const WorkspacePanel = () => {
     dispatch(getProjectsByWorkspace(activeWorkspace));
     dispatch(getNotesByWorkspace(activeWorkspace));
     dispatch(setActiveProject(""));
-    dispatch(getMyPermissionInThisWorkspace(activeWorkspace,auth));
+    dispatch(getMyPermissionInThisWorkspace({ workspace: activeWorkspace, me: auth }));
   }, [auth, activeWorkspace])
 
   const clickWorkspaceHandler = (workspace) => {
