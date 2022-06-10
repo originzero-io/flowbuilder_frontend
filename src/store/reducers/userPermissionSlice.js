@@ -94,7 +94,6 @@ export const userPermissionSlice = createSlice({
 
     setCanDoEverythingPermission(state, action) {
       const event = action.payload;
-      console.log("event.checked= ", event.target.checked);
       state.CAN_DO_EVERYTHING = event.target.checked;
     },
     
@@ -115,45 +114,34 @@ export const userPermissionSlice = createSlice({
       const permissionType = action.payload.permissionType;
       
       if (checked) {
-        if (name === "CAN_EDIT_PROJECT") {
+        state[permissionType][name].push(id);
+        
+        if (name === "CAN_EDIT_PROJECT") {  
           if (!state.project.CAN_VIEW_PROJECT.includes(id) && !state.project.CAN_USAGE_PROJECT.includes(id)) {
-            state[permissionType][name].push(id);
             state.project.CAN_VIEW_PROJECT.push(id);
             state.project.CAN_USAGE_PROJECT.push(id);
           }
-          else if (state.project.CAN_VIEW_PROJECT.includes(id) && state.project.CAN_USAGE_PROJECT.includes(id)) {
-            state[permissionType][name].push(id);
-          }
           else if (!state.project.CAN_USAGE_PROJECT.includes(id)) {
-            state[permissionType][name].push(id);
             state.project.CAN_USAGE_PROJECT.push(id);
           }
           else if (!state.project.CAN_VIEW_PROJECT.includes(id)) {
-            state[permissionType][name].push(id);
             state.project.CAN_VIEW_PROJECT.push(id);
           }
         }
-        else {
-          state[permissionType][name].push(id);
-        }
       }
       else if (!checked) {
+        state[permissionType][name] = state[permissionType][name].filter(p => p !== id);
+        state[permissionType][`${name}_ALL`] = false;
+        
         if (name === "CAN_EDIT_PROJECT") {
-          state[permissionType][name] = state[permissionType][name].filter(p => p !== id);
           state.project.CAN_VIEW_PROJECT = state.project.CAN_VIEW_PROJECT.filter(p => p !== id);
           state.project.CAN_USAGE_PROJECT = state.project.CAN_USAGE_PROJECT.filter(p => p !== id);
-          state[permissionType][`${name}_ALL`] = false;
-        }
-        else {
-          state[permissionType][name] = state[permissionType][name].filter(p => p !== id);
-          state[permissionType][`${name}_ALL`] = false;
         }
       }
     },
 
-    //* PROJECT_FLOW_FLOWID ==> [...flows,flowId]
+    //* PROJECT_FLOW_FLOWID ==> [{flowId: x, projectId: y}]
     setNestedMultiplePermission(state, action) {
-      const id = action.payload.event.target.id;
       const name = action.payload.event.target.name;
       const checked = action.payload.event.target.checked;
       
@@ -161,38 +149,27 @@ export const userPermissionSlice = createSlice({
       const permissionType = action.payload.permissionType;
       
       if (checked) {
+        state[permissionType][name].push(flowData);
         if ((name === "CAN_EDIT_FLOW") && !state.project.CAN_VIEW_FLOW.some(p => p.flowId === flowData.flowId)) {
           if (!state.project.CAN_VIEW_FLOW.some(p => p.flowId === flowData.flowId) && !state.project.CAN_USAGE_FLOW.some(p => p.flowId === flowData.flowId)) {
-            state[permissionType][name].push(flowData);
             state.project.CAN_VIEW_FLOW.push(flowData);
             state.project.CAN_USAGE_FLOW.push(flowData);
           }
-          else if (state.project.CAN_VIEW_FLOW.some(p => p.flowId === flowData.flowId) && state.project.CAN_USAGE_FLOW.some(p => p.flowId === flowData.flowId)) {
-            state[permissionType][name].push(flowData);
-          }
           else if (!state.project.CAN_USAGE_FLOW.some(p => p.flowId === flowData.flowId)) {
-            state[permissionType][name].push(flowData);
             state.project.CAN_USAGE_FLOW.push(flowData);
           }
           else if (!state.project.CAN_VIEW_FLOW.some(p => p.flowId === flowData.flowId)) {
-            state[permissionType][name].push(flowData);
             state.project.CAN_VIEW_FLOW.push(flowData);
           }
         }
-        else {
-          state[permissionType][name].push(flowData);
-        }
       }
       else if (!checked) {
+        state[permissionType][name] = state[permissionType][name].filter(p => p.flowId !== flowData.flowId);
+        state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter(p => p !== flowData.projectId);
+        
         if (name === "CAN_EDIT_FLOW") {
-          state[permissionType][name] = state[permissionType][name].filter(p => p.flowId !== flowData.flowId);
           state.project.CAN_VIEW_FLOW = state.project.CAN_VIEW_FLOW.filter(p => p.flowId !== flowData.flowId);
           state.project.CAN_USAGE_FLOW = state.project.CAN_USAGE_FLOW.filter(p => p.flowId !== flowData.flowId);
-          state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter(p => p !== flowData.projectId);
-        }
-        else {
-          state[permissionType][name] = state[permissionType][name].filter(p => p.flowId !== flowData.flowId);
-          state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter(p => p !== flowData.projectId);  
         }
       }
     },
@@ -204,24 +181,20 @@ export const userPermissionSlice = createSlice({
       const permissionType = action.payload.permissionType;
       
       if (checked) {
+        state[permissionType][`${name}_ALL`] = true;
+        
         if (name === "CAN_EDIT_PROJECT") {
-          state[permissionType][`${name}_ALL`] = true;
           state.project.CAN_VIEW_PROJECT_ALL = true;
           state.project.CAN_USAGE_PROJECT_ALL = true;
         }
-        else {
-          state[permissionType][`${name}_ALL`] = true;
-        }
       }
       else if (!checked) {
+        state[permissionType][`${name}_ALL`] = false;
+        
         if (name === "CAN_EDIT_PROJECT") {
-          state[permissionType][`${name}_ALL`] = false;
           state.project.CAN_VIEW_PROJECT_ALL = false;
           state.project.CAN_USAGE_PROJECT_ALL = false;
-        }
-        else {
-          state[permissionType][`${name}_ALL`] = false;
-        }
+        }     
       } 
     },
 
@@ -233,39 +206,27 @@ export const userPermissionSlice = createSlice({
       const permissionType = action.payload.permissionType;
       
       if (checked) {
+        state[permissionType][`${name}_ALL`].push(id);
+        
         if (name === "CAN_EDIT_FLOW") {
           if(!state.project.CAN_VIEW_FLOW_ALL.includes(id) && !state.project.CAN_USAGE_FLOW_ALL.includes(id)){
             state.project.CAN_VIEW_FLOW_ALL.push(id);
             state.project.CAN_USAGE_FLOW_ALL.push(id);
-            state[permissionType][`${name}_ALL`].push(id);
-          }
-          else if (state.project.CAN_VIEW_FLOW_ALL.includes(id) && state.project.CAN_USAGE_FLOW_ALL.includes(id)) {
-            state[permissionType][`${name}_ALL`].push(id);
-          }
+          }        
           else if (!state.project.CAN_VIEW_FLOW_ALL.includes(id)) {
             state.project.CAN_VIEW_FLOW_ALL.push(id);
-            state[permissionType][`${name}_ALL`].push(id);
           }
           else if (!state.project.CAN_USAGE_FLOW_ALL.includes(id)) {
             state.project.CAN_USAGE_FLOW_ALL.push(id);
-            state[permissionType][`${name}_ALL`].push(id);
           }
-          else {
-            state[permissionType][`${name}_ALL`].push(id);
-          }
-        }
-        else {
-          state[permissionType][`${name}_ALL`].push(id);
-        }
+        }       
       }
       else if (!checked) {
+        state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter(p => p !== id);  
+        
         if (name === "CAN_EDIT_FLOW") {
-          state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter(p => p !== id);  
           state.project.CAN_VIEW_FLOW_ALL = state.project.CAN_VIEW_FLOW_ALL.filter(p => p !== id);
           state.project.CAN_USAGE_FLOW_ALL = state.project.CAN_USAGE_FLOW_ALL.filter(p => p !== id);
-        }
-        else {
-          state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter(p => p !== id);  
         }
       } 
     },
@@ -279,7 +240,6 @@ export const userPermissionSlice = createSlice({
     },
   }
 })
-
 
 export default userPermissionSlice.reducer;
 export const {
