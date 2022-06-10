@@ -1,5 +1,6 @@
-import PermissionService from "services/configurationService/permissionService"
-import { beginTheBar,endTheBar } from "store/reducers/componentSlice";
+import PermissionService from "services/configurationService/permissionService";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { beginTheBar, endTheBar } from "./componentSlice";
 
 export const defaultPermissions = {
   CAN_DO_EVERYTHING:true,
@@ -75,388 +76,218 @@ export const defaultPermissions = {
     CAN_ASSIGN_PERMISSION: false,
   },
 };
-const userPermissionReducer = (state = defaultPermissions, { type, payload }) => {
-  switch (type) {
-    case "LOAD_USER_PERMISSION":
-      return payload;
-    case "SET_CAN_DO_EVERYTHING":
-      return { ...state, CAN_DO_EVERYTHING: payload.checked };
-    //? PROJECT_CREATE ==> true/false
-    case "SET_SINGLE_PERMISSION":
-      return {
-        ...state,
-        [payload.permissionType]: {
-          ...state[payload.permissionType],
-          [payload.name]: payload.checked,
-        },
-      };
-    //? FLOW_CREATE ==> [...projects, projectId]
-    case "SET_MULTIPLE_PERMISSION":
-      if (payload.checked) {
-        if ((payload.name === "CAN_EDIT_PROJECT")) {
-          if (!state.project.CAN_VIEW_PROJECT.includes(payload.id) && !state.project.CAN_USAGE_PROJECT.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: [...state[payload.permissionType][payload.name], payload.id],
-                CAN_VIEW_PROJECT: [...state[payload.permissionType].CAN_VIEW_PROJECT, payload.id],
-                CAN_USAGE_PROJECT: [...state[payload.permissionType].CAN_USAGE_PROJECT, payload.id],
-              },
-            };
-          }
-          else if (state.project.CAN_VIEW_PROJECT.includes(payload.id) && state.project.CAN_USAGE_PROJECT.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: [...state[payload.permissionType][payload.name], payload.id],
-              },
-            };
-          }
-          else if (!state.project.CAN_USAGE_PROJECT.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: [...state[payload.permissionType][payload.name], payload.id],
-                CAN_USAGE_PROJECT: [...state[payload.permissionType].CAN_USAGE_PROJECT, payload.id],
-              },
-            };
-          }
-          else if (!state.project.CAN_VIEW_PROJECT.includes(payload.id)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: [...state[payload.permissionType][payload.name], payload.id],
-                CAN_VIEW_PROJECT: [...state[payload.permissionType].CAN_VIEW_PROJECT, payload.id],
-              },
-            };
-          }
-          else return state;
-        }
-        else {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [payload.name]: [...state[payload.permissionType][payload.name], payload.id],
-            },
-          };
-        }
-      }
-      else if (!payload.checked) {
-        if (payload.name === "CAN_EDIT_PROJECT") {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-              CAN_VIEW_PROJECT: state[payload.permissionType].CAN_VIEW_PROJECT.filter(p => p !== payload.id),
-              CAN_USAGE_PROJECT: state[payload.permissionType].CAN_USAGE_PROJECT.filter(p => p !== payload.id),
-              [`${payload.name}_ALL`]: false
-            }
-          }
-        }
-        else {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [payload.name]: state[payload.permissionType][payload.name].filter(p => p !== payload.id),
-              [`${payload.name}_ALL`]: false
-            }
-          }
-        }
-      }
-      else return state;
-    
-    //? PROJECT_FLOW_FLOWID ==> [...flows,flowId]
-    case "SET_NESTED_MULTIPLE_PERMISSION":
-      if (payload.checked) {
-        if ((payload.name === "CAN_EDIT_FLOW") && !state.project.CAN_VIEW_FLOW.some(p => p.flowId === payload.flowData.flowId)) {
-          if (!state.project.CAN_VIEW_FLOW.some(p => p.flowId === payload.flowData.flowId) && !state.project.CAN_USAGE_FLOW.some(p => p.flowId === payload.flowData.flowId)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: [...state[payload.permissionType][payload.name], payload.flowData],
-                CAN_VIEW_FLOW: [...state.project.CAN_VIEW_FLOW, payload.flowData],
-                CAN_USAGE_FLOW: [...state.project.CAN_USAGE_FLOW, payload.flowData],
-              },
-            };
-          }
-          else if (state.project.CAN_VIEW_FLOW.some(p => p.flowId === payload.flowData.flowId) && state.project.CAN_USAGE_FLOW.some(p => p.flowId === payload.flowData.flowId)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: [...state[payload.permissionType][payload.name], payload.flowData]
-              },
-            };
-          }
-          else if (!state.project.CAN_USAGE_FLOW.some(p => p.flowId === payload.flowData.flowId)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: [...state[payload.permissionType][payload.name], payload.flowData],
-                CAN_USAGE_FLOW: [...state.project.CAN_USAGE_FLOW, payload.flowData],
-              },
-            };
-          }
-          else if (!state.project.CAN_VIEW_FLOW.some(p => p.flowId === payload.flowData.flowId)) {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [payload.name]: [...state[payload.permissionType][payload.name], payload.flowData],
-                CAN_VIEW_FLOW: [...state.project.CAN_VIEW_FLOW, payload.flowData],
-              },
-            };
-          }
-          else return state;
-        }
-        else {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [payload.name]: [...state[payload.permissionType][payload.name], payload.flowData],
-            },
-          };
-        }
-      }
-      else if (!payload.checked) {
-        if (payload.name === "CAN_EDIT_FLOW") {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [payload.name]: state[payload.permissionType][payload.name].filter(p => p.flowId !== payload.flowData.flowId),
-              CAN_VIEW_FLOW: state.project.CAN_VIEW_FLOW.filter(p => p.flowId !== payload.flowData.flowId),
-              CAN_USAGE_FLOW: state.project.CAN_USAGE_FLOW.filter(p => p.flowId !== payload.flowData.flowId),
-              [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.flowData.projectId),
-            }
-          }
-        }
-        else {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [payload.name]: state[payload.permissionType][payload.name].filter(p => p.flowId !== payload.flowData.flowId),
-              [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(p => p !== payload.flowData.projectId),
-            }
-          }
-        }
-      }
-      else return state;
 
-    //? PROJECT_ALL ==> true/false  
-    case "SET_SINGLE_ALL_PERMISSION":
-      if (payload.checked) {
-        if ((payload.name === "CAN_EDIT_PROJECT")) {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [`${payload.name}_ALL`]: true,
-              CAN_VIEW_PROJECT_ALL:true,
-              CAN_USAGE_PROJECT_ALL:true,
-            },
-          } 
-        }
-        else {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [`${payload.name}_ALL`]: true
-            },
-          };
-        }
-      }
-      else {
-        if (payload.name === "CAN_EDIT_PROJECT") {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [`${payload.name}_ALL`]: false,
-              CAN_VIEW_PROJECT_ALL: false,
-              CAN_USAGE_PROJECT_ALL: false,
-            },
-          }
-        }
-        else {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [`${payload.name}_ALL`]: false,
-            }
-          }
-        }
-      }
+export const getUserPermissionInThisWorkspace = createAsyncThunk("permissions/get_in_this_workspace", async ({ workspace, user }, thunkApi) => {
+  thunkApi.dispatch(beginTheBar());
+  const { permission } = await PermissionService.getUserPermissionInThisWorkspace(workspace._id, user._id);
+  thunkApi.dispatch(endTheBar());
+  return permission;
+});
+
+export const userPermissionSlice = createSlice({
+  name: "userPermission",
+  initialState: defaultPermissions,
+  reducers: {
+    loadUserPermission(state, action) {
+      return action.payload;
+    },
+
+    setCanDoEverythingPermission(state, action) {
+      const event = action.payload;
+      console.log("event.checked= ", event.target.checked);
+      state.CAN_DO_EVERYTHING = event.target.checked;
+    },
     
-    //? PROJECT_FLOW_ALL ==> [flow_id]  
-    case "SET_NESTED_ALL_PERMISSION":
-      if (payload.checked) {
-        if (payload.name === "CAN_EDIT_FLOW") {
-          if(!state.project.CAN_VIEW_FLOW_ALL.includes(payload.id) && !state.project.CAN_USAGE_FLOW_ALL.includes(payload.id)){
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
-                CAN_VIEW_FLOW_ALL: [...state.project.CAN_VIEW_FLOW_ALL, payload.id],
-                CAN_USAGE_FLOW_ALL: [...state.project.CAN_USAGE_FLOW_ALL, payload.id],
-              },
-            };
+    //* PROJECT_CREATE ==> true/false
+    setSinglePermission(state, action) {
+      const name = action.payload.event.target.name;
+      const checked = action.payload.event.target.checked;
+      const permissionType = action.payload.permissionType;
+      
+      state[permissionType][name] = checked; 
+    },
+
+    //* FLOW_CREATE ==> [...projects, projectId]
+    setMultiplePermission(state, action) {
+      const id = action.payload.event.target.id;
+      const name = action.payload.event.target.name;
+      const checked = action.payload.event.target.checked;
+      const permissionType = action.payload.permissionType;
+      
+      if (checked) {
+        if (name === "CAN_EDIT_PROJECT") {
+          if (!state.project.CAN_VIEW_PROJECT.includes(id) && !state.project.CAN_USAGE_PROJECT.includes(id)) {
+            state[permissionType][name].push(id);
+            state.project.CAN_VIEW_PROJECT.push(id);
+            state.project.CAN_USAGE_PROJECT.push(id);
           }
-          else if(state.project.CAN_VIEW_FLOW_ALL.includes(payload.id) && state.project.CAN_USAGE_FLOW_ALL.includes(payload.id)){
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
-              },
-            };
+          else if (state.project.CAN_VIEW_PROJECT.includes(id) && state.project.CAN_USAGE_PROJECT.includes(id)) {
+            state[permissionType][name].push(id);
           }
-          else if(!state.project.CAN_VIEW_FLOW_ALL.includes(payload.id)){
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
-                CAN_VIEW_FLOW_ALL: [...state.project.CAN_VIEW_FLOW_ALL, payload.id],
-              },
-            };
+          else if (!state.project.CAN_USAGE_PROJECT.includes(id)) {
+            state[permissionType][name].push(id);
+            state.project.CAN_USAGE_PROJECT.push(id);
           }
-          else if(!state.project.CAN_USAGE_FLOW_ALL.includes(payload.id)){
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
-                CAN_USAGE_FLOW_ALL: [...state.project.CAN_USAGE_FLOW_ALL, payload.id],
-              },
-            };
+          else if (!state.project.CAN_VIEW_PROJECT.includes(id)) {
+            state[permissionType][name].push(id);
+            state.project.CAN_VIEW_PROJECT.push(id);
+          }
+        }
+        else {
+          state[permissionType][name].push(id);
+        }
+      }
+      else if (!checked) {
+        if (name === "CAN_EDIT_PROJECT") {
+          state[permissionType][name] = state[permissionType][name].filter(p => p !== id);
+          state.project.CAN_VIEW_PROJECT = state.project.CAN_VIEW_PROJECT.filter(p => p !== id);
+          state.project.CAN_USAGE_PROJECT = state.project.CAN_USAGE_PROJECT.filter(p => p !== id);
+          state[permissionType][`${name}_ALL`] = false;
+        }
+        else {
+          state[permissionType][name] = state[permissionType][name].filter(p => p !== id);
+          state[permissionType][`${name}_ALL`] = false;
+        }
+      }
+    },
+
+    //* PROJECT_FLOW_FLOWID ==> [...flows,flowId]
+    setNestedMultiplePermission(state, action) {
+      const id = action.payload.event.target.id;
+      const name = action.payload.event.target.name;
+      const checked = action.payload.event.target.checked;
+      
+      const flowData = action.payload.flowData;
+      const permissionType = action.payload.permissionType;
+      
+      if (checked) {
+        if ((name === "CAN_EDIT_FLOW") && !state.project.CAN_VIEW_FLOW.some(p => p.flowId === flowData.flowId)) {
+          if (!state.project.CAN_VIEW_FLOW.some(p => p.flowId === flowData.flowId) && !state.project.CAN_USAGE_FLOW.some(p => p.flowId === flowData.flowId)) {
+            state[permissionType][name].push(flowData);
+            state.project.CAN_VIEW_FLOW.push(flowData);
+            state.project.CAN_USAGE_FLOW.push(flowData);
+          }
+          else if (state.project.CAN_VIEW_FLOW.some(p => p.flowId === flowData.flowId) && state.project.CAN_USAGE_FLOW.some(p => p.flowId === flowData.flowId)) {
+            state[permissionType][name].push(flowData);
+          }
+          else if (!state.project.CAN_USAGE_FLOW.some(p => p.flowId === flowData.flowId)) {
+            state[permissionType][name].push(flowData);
+            state.project.CAN_USAGE_FLOW.push(flowData);
+          }
+          else if (!state.project.CAN_VIEW_FLOW.some(p => p.flowId === flowData.flowId)) {
+            state[permissionType][name].push(flowData);
+            state.project.CAN_VIEW_FLOW.push(flowData);
+          }
+        }
+        else {
+          state[permissionType][name].push(flowData);
+        }
+      }
+      else if (!checked) {
+        if (name === "CAN_EDIT_FLOW") {
+          state[permissionType][name] = state[permissionType][name].filter(p => p.flowId !== flowData.flowId);
+          state.project.CAN_VIEW_FLOW = state.project.CAN_VIEW_FLOW.filter(p => p.flowId !== flowData.flowId);
+          state.project.CAN_USAGE_FLOW = state.project.CAN_USAGE_FLOW.filter(p => p.flowId !== flowData.flowId);
+          state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter(p => p !== flowData.projectId);
+        }
+        else {
+          state[permissionType][name] = state[permissionType][name].filter(p => p.flowId !== flowData.flowId);
+          state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter(p => p !== flowData.projectId);  
+        }
+      }
+    },
+
+    //* PROJECT_ALL ==> true/false
+    setSingleAllPermission(state, action) {
+      const name = action.payload.event.target.name;
+      const checked = action.payload.event.target.checked;
+      const permissionType = action.payload.permissionType;
+      
+      if (checked) {
+        if (name === "CAN_EDIT_PROJECT") {
+          state[permissionType][`${name}_ALL`] = true;
+          state.project.CAN_VIEW_PROJECT_ALL = true;
+          state.project.CAN_USAGE_PROJECT_ALL = true;
+        }
+        else {
+          state[permissionType][`${name}_ALL`] = true;
+        }
+      }
+      else if (!checked) {
+        if (name === "CAN_EDIT_PROJECT") {
+          state[permissionType][`${name}_ALL`] = false;
+          state.project.CAN_VIEW_PROJECT_ALL = false;
+          state.project.CAN_USAGE_PROJECT_ALL = false;
+        }
+        else {
+          state[permissionType][`${name}_ALL`] = false;
+        }
+      } 
+    },
+
+    //* PROJECT_FLOW_ALL ==> [flow_id]
+    setNestedAllPermission(state, action) {
+      const id = action.payload.event.target.id; //projectId
+      const name = action.payload.event.target.name;
+      const checked = action.payload.event.target.checked;
+      const permissionType = action.payload.permissionType;
+      
+      if (checked) {
+        if (name === "CAN_EDIT_FLOW") {
+          if(!state.project.CAN_VIEW_FLOW_ALL.includes(id) && !state.project.CAN_USAGE_FLOW_ALL.includes(id)){
+            state.project.CAN_VIEW_FLOW_ALL.push(id);
+            state.project.CAN_USAGE_FLOW_ALL.push(id);
+            state[permissionType][`${name}_ALL`].push(id);
+          }
+          else if (state.project.CAN_VIEW_FLOW_ALL.includes(id) && state.project.CAN_USAGE_FLOW_ALL.includes(id)) {
+            state[permissionType][`${name}_ALL`].push(id);
+          }
+          else if (!state.project.CAN_VIEW_FLOW_ALL.includes(id)) {
+            state.project.CAN_VIEW_FLOW_ALL.push(id);
+            state[permissionType][`${name}_ALL`].push(id);
+          }
+          else if (!state.project.CAN_USAGE_FLOW_ALL.includes(id)) {
+            state.project.CAN_USAGE_FLOW_ALL.push(id);
+            state[permissionType][`${name}_ALL`].push(id);
           }
           else {
-            return {
-              ...state,
-              [payload.permissionType]: {
-                ...state[payload.permissionType],
-                [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
-              },
-            };
+            state[permissionType][`${name}_ALL`].push(id);
           }
         }
         else {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [`${payload.name}_ALL`]: [...state[payload.permissionType][`${payload.name}_ALL`], payload.id],
-            },
-          }
+          state[permissionType][`${name}_ALL`].push(id);
         }
       }
-      else if (!payload.checked) {
-        if (payload.name === "CAN_EDIT_FLOW") {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id),
-              CAN_VIEW_FLOW_ALL: state[payload.permissionType].CAN_VIEW_FLOW_ALL.filter(s => s !== payload.id),
-              CAN_USAGE_FLOW_ALL: state[payload.permissionType].CAN_USAGE_FLOW_ALL.filter(s => s !== payload.id),
-            },
-          }
+      else if (!checked) {
+        if (name === "CAN_EDIT_FLOW") {
+          state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter(p => p !== id);  
+          state.project.CAN_VIEW_FLOW_ALL = state.project.CAN_VIEW_FLOW_ALL.filter(p => p !== id);
+          state.project.CAN_USAGE_FLOW_ALL = state.project.CAN_USAGE_FLOW_ALL.filter(p => p !== id);
         }
         else {
-          return {
-            ...state,
-            [payload.permissionType]: {
-              ...state[payload.permissionType],
-              [`${payload.name}_ALL`]: state[payload.permissionType][`${payload.name}_ALL`].filter(s => s !== payload.id),
-            },
-          }
+          state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter(p => p !== id);  
         }
+      } 
+    },
+  },
+  extraReducers: {
+    [getUserPermissionInThisWorkspace.fulfilled]: (state, { payload }) => {
+      console.log("user permissions: ", payload);
+      if (payload) {
+        return payload.permissions;
       }
-      else return state;
-      
-    default:
-      return state;
+    },
   }
-};
-export default userPermissionReducer;
-
-export const setCanDoEverytingPermission = (event) => ({
-  type: "SET_CAN_DO_EVERYTHING",
-  payload: {
-    checked:event.target.checked
-  }
-});
-export const setSinglePermission = (event, permissionType) => ({
-  type: "SET_SINGLE_PERMISSION",
-  payload: {
-    name: event.target.name,
-    checked: event.target.checked,
-    permissionType: permissionType,
-  },
-});
-export const setMultiplePermission = (event, permissionType) => ({
-  type: "SET_MULTIPLE_PERMISSION",
-  payload: {
-    id: event.target.id,
-    name: event.target.name,
-    checked: event.target.checked,
-    permissionType: permissionType
-  },
-});
-export const setNestedMultiplePermission = (event, flowData, permissionType) => ({
-  type: "SET_NESTED_MULTIPLE_PERMISSION",
-  payload: {
-    id: event.target.id,
-    name: event.target.name,
-    checked: event.target.checked,
-    flowData: flowData,
-    permissionType: permissionType
-  },
-});
-export const setSingleAllPermission = (event, permissionType) => ({
-  type: "SET_SINGLE_ALL_PERMISSION",
-  payload: {
-    name: event.target.name,
-    checked: event.target.checked,
-    permissionType: permissionType
-  }
-});
-export const setNestedAllPermission = (event, permissionType) => ({
-  type: "SET_NESTED_ALL_PERMISSION",
-  payload: {
-    name: event.target.name,
-    checked: event.target.checked,
-    id:event.target.id, //projectId
-    permissionType: permissionType
-  }
-});
+})
 
 
-export const loadUserPermission = (data) => ({
-  type: "LOAD_USER_PERMISSION",
-  payload: data
-});
-
-export const getUserPermissionInThisWorkspace = (workspace,user) => async (dispatch) => {
-  dispatch(beginTheBar());
-  const { permission } = await PermissionService.getUserPermissionInThisWorkspace(workspace._id, user._id);
-  if(permission){
-    dispatch(loadUserPermission(permission.permissions));
-  }
-  dispatch(endTheBar());
-};
+export default userPermissionSlice.reducer;
+export const {
+  loadUserPermission,
+  setCanDoEverythingPermission,
+  setSinglePermission,
+  setMultiplePermission,
+  setNestedMultiplePermission,
+  setSingleAllPermission,
+  setNestedAllPermission
+} = userPermissionSlice.actions;

@@ -15,10 +15,7 @@ export const noteSlice = createSlice({
     },
     updateNote(state, { payload }) {
       const index = state.findIndex(note => note._id === payload._id);
-      state[index] = {
-        ...state[index],
-        ...payload,
-      };
+      state[index] = payload
     },
     deleteNote(state, { payload }) {
       return state.filter(note => note._id !== payload);

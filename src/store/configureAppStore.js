@@ -14,7 +14,10 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default function configureAppStore() {
-  const store = configureStore({ reducer: persistedReducer });
+  const store = configureStore({
+    reducer: persistedReducer,
+    devTools: process.env.NODE_ENV === "development" ? true : false
+  });
 
   if (process.env.NODE_ENV !== "production" && module.hot) {
     module.hot.accept("./reducers", () => store.replaceReducer(rootReducer));

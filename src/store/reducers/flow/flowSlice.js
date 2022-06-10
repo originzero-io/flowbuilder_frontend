@@ -26,17 +26,11 @@ export const flowSlice = createSlice({
     },
     editFlow(state, { payload }) {
       const index = state.findIndex(flow => flow._id === payload._id);
-      state[index] = {
-        ...state[index],
-        ...payload,
-      };
+      state[index] = payload
     },
     moveFlow(state, { payload }) {
       const index = state.findIndex(flow => flow._id === payload._id);
-      state[index] = {
-        ...state[index],
-        ...payload,
-      };
+      state[index] = payload
     },
     deleteFlow(state, { payload }) {
       return state.filter((flow) => flow._id !== payload)

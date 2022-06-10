@@ -39,10 +39,7 @@ export const flowGroupsSlice = createSlice({
     },
     [updateGroup.fulfilled]: (state, { payload }) => {
       const index = state.findIndex(group => group._id === payload.group._id);
-      state[index] = {
-        ...state[index],
-        ...payload,
-      };
+      state[index] = payload
     },
     [deleteGroup.fulfilled]: (state, { payload }) => {
       return state.filter((group) => group._id !== payload.group._id)

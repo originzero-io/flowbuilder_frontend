@@ -27,10 +27,10 @@ export default function ManageMembers() {
   const users = useUser();
   const { activeWorkspace } = useWorkspace();
   const addMemberHandle = (user) => {
-    dispatch(addUserToWorkspace(user, activeWorkspace));
+    dispatch(addUserToWorkspace({userInfo: user, workspace: activeWorkspace}));
   };
   const removeMemberHandle = (user) => {
-    dispatch(removeUserToWorkspace(user, activeWorkspace));
+    dispatch(removeUserToWorkspace({ userInfo: user, workspace: activeWorkspace }));
   };
   return (
     <div>

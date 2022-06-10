@@ -30,16 +30,16 @@ export default function ProjectPermissions({
   const { projects } = useProject();
 
   const handleSingleProjectChange = (e) => {
-    dispatch(setSinglePermission(e, "project"));
+    dispatch(setSinglePermission({ event: e, permissionType: "project" }));
   };
   const handleMultiProjectChange = (e) => {
-    dispatch(setMultiplePermission(e, "project"));
+    dispatch(setMultiplePermission({ event: e, permissionType: "project" }));
   };
   const handleSingleAllChange = (e) => {
-    dispatch(setSingleAllPermission(e, "project"));
+    dispatch(setSingleAllPermission({ event: e, permissionType: "project" }));
   };
   const handleNestedAllChange = (e) => {
-    dispatch(setNestedAllPermission(e, "project"));
+    dispatch(setNestedAllPermission({ event: e, permissionType: "project" }));
   };
   const handleNestedMultiChange = (e, flow) => {
     const { _id, project } = flow;
@@ -47,7 +47,7 @@ export default function ProjectPermissions({
       flowId: _id,
       projectId:project._id
     }    
-    dispatch(setNestedMultiplePermission(e, flowData,"project"));
+    dispatch(setNestedMultiplePermission({ event: e, flowData: flowData, permissionType: "project" }));
   };
 
   //console.log('projects permissions rendered');

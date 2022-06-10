@@ -25,10 +25,7 @@ export const projectSlice = createSlice({
     },
     updateProject(state, { payload }) {
       const index = state.projects.findIndex(project => project._id === payload._id);
-      state.projects[index] = {
-        ...state.projects[index],
-        ...payload,
-      };
+      state.projects[index] = payload;
     },
     deleteProject(state, { payload }) {
       state.projects = state.projects.filter(

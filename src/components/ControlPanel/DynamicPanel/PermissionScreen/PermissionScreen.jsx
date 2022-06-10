@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineFundProjectionScreen, AiOutlineTeam } from "react-icons/ai";
 import { MdDevicesOther } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import { setCanDoEverytingPermission } from "store/reducers/userPermissionSlice";
 import useUser from "hooks/useUser";
 import useUserPermission from "hooks/useUserPermission";
 import useWorkspace from "hooks/useWorkspace";
@@ -16,21 +15,18 @@ import ProjectPermissions from "./containers/ProjectPermissions";
 import TeamPermissions from "./containers/TeamPermissions";
 import { PermissionProvider } from "./context/PermissionContext";
 import {
+  setCanDoEverythingPermission,
   setSinglePermission,
   setMultiplePermission,
   setNestedMultiplePermission,
   setSingleAllPermission,
   setNestedAllPermission,
-  loadPermission,
   getUserPermissionInThisWorkspace,
 } from "store/reducers/userPermissionSlice";
-import { Button, Input, Spinner } from "reactstrap";
+import { Button } from "reactstrap";
 import { AiOutlineSave } from "react-icons/ai";
 import { MdOutlineAssignmentInd } from "react-icons/md";
-import PermissionService, {
-  savePermissionService,
-  getUserPermissionInThisWorkspaceService,
-} from "services/configurationService/permissionService";
+import PermissionService from "services/configurationService/permissionService";
 import notification from "utils/notificationHelper";
 import { setModal } from "store/reducers/componentSlice";
 import AddPreset from "./components/AddPreset";
@@ -48,12 +44,12 @@ export default function PermissionScreen() {
   const member = users.find((user) => user._id === params.member_id);
 
   const handleEverythingPermission = (e) => {
-    dispatch(setCanDoEverytingPermission(e));
+    dispatch(setCanDoEverythingPermission(e));
   };
   const permissions = useUserPermission();
 
   useComponentWillMount(async () => {
-    dispatch(getUserPermissionInThisWorkspace(activeWorkspace, member));
+    dispatch(getUserPermissionInThisWorkspace({ workspace: activeWorkspace, user: member }));
   }, [activeWorkspace._id, member._id]);
 
   const handleSavePermissions = async () => {
@@ -65,7 +61,7 @@ export default function PermissionScreen() {
     await PermissionService.savePermission(data);
     
     if (data.userId === auth._id) {
-      dispatch(getMyPermissionInThisWorkspace({workspace: activeWorkspace,me: auth}));
+      dispatch(getMyPermissionInThisWorkspace({ workspace: activeWorkspace, me: auth }));
     }
     notification.success("Permissions saved");
 

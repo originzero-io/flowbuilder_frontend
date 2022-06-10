@@ -21,10 +21,7 @@ export const workspaceSlice = createSlice({
     },
     editWorkspace(state, { payload }) {
       const index = state.workspaces.findIndex(workspace => workspace._id === payload._id);
-      state.workspaces[index] = {
-        ...state.workspaces[index],
-        ...payload,
-      };
+      state.workspaces[index] = payload;
     },
     deleteWorkspace(state, { payload }) {
       state.workspaces = state.workspaces.filter(

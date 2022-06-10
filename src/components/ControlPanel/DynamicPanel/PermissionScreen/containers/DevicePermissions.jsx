@@ -22,13 +22,13 @@ export default function DevicePermissions({
   const dispatch = useDispatch();
 
   const handleSingleDeviceChange = (e) => {
-    dispatch(setSinglePermission(e, "device"));
+    dispatch(setSinglePermission({ event: e, permissionType: "device" }));
   };
   const handleMultiDeviceChange = (e) => {
-    dispatch(setMultiplePermission(e, "device"));
+    dispatch(setMultiplePermission({ event: e, permissionType: "device" }));
   };
   const handleAllChange = (e) => {
-    dispatch(setSingleAllPermission(e, "device"));
+    dispatch(setSingleAllPermission({ event: e, permissionType: "device" }));
   };
   //console.log('device permissions rendered');
 

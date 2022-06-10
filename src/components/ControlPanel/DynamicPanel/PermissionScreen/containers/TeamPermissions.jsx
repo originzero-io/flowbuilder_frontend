@@ -17,7 +17,7 @@ const propTypes = {
 export default function TeamPermissions({ permissions, setSinglePermission }) {
   const dispatch = useDispatch();
   const handleChange = (e) => {
-    dispatch(setSinglePermission(e, "team"));
+    dispatch(setSinglePermission({event: e, permissionType: "team"}));
   };
   return (
     <TabContainer>
