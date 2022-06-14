@@ -28,6 +28,7 @@ import {
   createWorkspace,
   deleteWorkspace,
   editWorkspace,
+  setActiveWorkspace,
 } from "store/reducers/workspaceSlice";
 import { endTheBar } from "store/reducers/componentSlice";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
@@ -56,6 +57,7 @@ export const workspaceListener = (socket) => {
   });
   socket.on("workspaces:update", (data) => {
     store.dispatch(editWorkspace(data.workspace));
+    store.dispatch(setActiveWorkspace(data.workspace));
   });
   socket.on("workspaces:delete", (data) => {
     store.dispatch(deleteWorkspace(data.workspaceId));

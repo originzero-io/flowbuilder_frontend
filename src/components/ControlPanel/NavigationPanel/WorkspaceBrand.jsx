@@ -1,8 +1,7 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setModal } from "store/reducers/componentSlice";
 import {
-  deleteWorkspace,
   setActiveWorkspace,
 } from "store/reducers/workspaceSlice";
 import { VscTrash } from "react-icons/vsc";
@@ -19,7 +18,6 @@ const propTypes = {
 };
 
 const WorkspaceBrand = ({ workspace }) => {
-  console.log("TEAM BRAND RENDERED");
   const { role } = useAuth();
   const dispatch = useDispatch();
   const { workspaces } = useWorkspace();
@@ -32,6 +30,7 @@ const WorkspaceBrand = ({ workspace }) => {
   const editWorkspaceHandler = () => {
     dispatch(setModal(<EditWorkspaceForm workspace={workspace} />));
   };
+
   return (
     <WorkspaceBrandWrapper>
       {workspace && (

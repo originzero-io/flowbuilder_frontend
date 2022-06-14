@@ -59,7 +59,6 @@ const MainMenu = () => {
     dispatch(getFlowsByWorkspace(activeWorkspace));
   };
   const nameClick = () => {
-    console.log("Element Namespace:", elementNamespace);
     elementNamespace.emit("elements:messageFromClient", { message: 'Naber elements?' });
   }
   return (
