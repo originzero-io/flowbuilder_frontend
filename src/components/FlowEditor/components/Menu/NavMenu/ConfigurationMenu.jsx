@@ -38,7 +38,7 @@ import { ShareIcon, TuneIcon } from "./Icons";
 import { Menu, MenuItem } from "./NavMenu.style";
 import { GoDeviceDesktop } from "react-icons/go";
 import { VscRunAll } from "react-icons/vsc";
-import toast from "react-hot-toast"
+import notification from "utils/notificationHelper";
 
 const dummyDevices = [
   {

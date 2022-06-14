@@ -23,9 +23,8 @@ const WorkspaceBrand = ({ workspace }) => {
   const { role } = useAuth();
   const dispatch = useDispatch();
   const { workspaces } = useWorkspace();
-  console.log("workspaceeee: ", workspace);
   const deleteWorkspaceHandler = () => {
-    if (confirm(`${workspace.name} takımını silmek istiyor musunuz?`)) {
+    if (confirm(`Would you like to delete ${workspace.name} workspace?`)) {
       workspaceNamespace.emit("workspaces:delete", { workspace });
       dispatch(setActiveWorkspace(workspaces[0]));
     }
