@@ -21,12 +21,13 @@ import {
   setElements,
   setRotateAll,
   setExpandAll,
+  deleteAllElements,
 } from "store/reducers/flow/flowElementsSlice";
 import {
   setRotateAllPath,
 } from "store/reducers/flow/flowGuiSlice";
 import * as themeColor from "constants/ThemeReference";
-import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
+import { useStore, useReactFlow } from "react-flow-renderer";
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { useParams } from "react-router";
 import { elementNamespace } from "SocketConnections";
@@ -48,11 +49,15 @@ const Menu = styled.div`
 `;
 export default function ControlMenu() {
   const { flowGui,flowConfig,flowElements } = useActiveFlow();
-  const { reactFlowInstance,rotateAllPath,theme } = flowGui;
+  const { rotateAllPath,theme } = flowGui;
+  const reactFlowInstance = useReactFlow();
   // const canUndo = flowElements.past.length > 0;
   // const canRedo = flowElements.future.length > 0;
-  const { zoomIn, zoomOut, fitView } = useZoomPanHelper();
-  const setInteractive = useStoreActions((actions) => actions.setInteractive);
+
+  //Todo: useReactFlow();
+  //const { zoomIn, zoomOut, fitView } = useReactFlow();
+
+  //const setInteractive = useStore((actions) => actions.setInteractive);
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
   const { flowId } = useParams();
@@ -64,7 +69,7 @@ export default function ControlMenu() {
 
   const deleteAllNodes = () => {
     if (confirm("Are you sure?")) {
-      dispatch(setElements([]));
+      dispatch(deleteAllElements());
     }
   };
   const closeAllNodes = () => {
@@ -83,13 +88,13 @@ export default function ControlMenu() {
   }, [rotateAllPath]);
 
   const zoomInHandle = () => {
-    zoomIn();
+    reactFlowInstance.zoomIn();
   };
   const zoomOutHandle = () => {
-    zoomOut();
+    reactFlowInstance.zoomOut();
   };
   const fitViewHandle = () => {
-    fitView({ padding: 0.2, includeHiddenNodes: true });
+    reactFlowInstance.fitView({ padding: 0.2, includeHiddenNodes: true });
   };
   const lockHandle = () => {
     setLock(!lock);
@@ -100,9 +105,11 @@ export default function ControlMenu() {
   // const redoHandle = () => {
   //   dispatch(UndoActionCreators.redo());
   // }
-  useEffect(() => {
-    setInteractive(lock);
-  }, [lock]);
+
+  
+  // useEffect(() => {
+  //   setInteractive(lock);
+  // }, [lock]);
   return (
     <Menu theme={theme}>
       <MenuItem

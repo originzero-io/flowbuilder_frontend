@@ -3,42 +3,33 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteGroup
 } from "store/reducers/flow/flowGroupsSlice";
-import { deleteGroupOfElement } from "store/reducers/flow/flowElementsSlice";
+import { selectElements } from "store/reducers/flow/flowElementsSlice";
 import { GroupItem, GroupColor, Label } from "./GroupBar.style";
-import { isNode, useStoreActions } from "react-flow-renderer";
 import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";
 import { NameEditIcon } from "components/Shared/icons";
 import PropTypes from "prop-types";
-import { useParams } from "react-router";
 import useActiveFlow from "hooks/useActiveFlow";
 
 const propTypes = {
   theme: PropTypes.string.isRequired,
+  flowId: PropTypes.string,
 };
 
-const GroupList = ({ theme }) => {
-  const { flowGroups, flowElements, flowGui } =
-    useActiveFlow();
+const GroupList = ({ theme, flowId }) => {
+  const { flowGroups, flowElements } = useActiveFlow();
   const dispatch = useDispatch();
   const [hover, setHover] = useState(null);
   const [editableItem, setEditableItem] = useState({ state: false, group: {} });
-  const { flowId } = useParams();
-  const setSelectedElements = useStoreActions(
-    (actions) => actions.setSelectedElements
-  );
+  
   const deleteIconClickHandle = (group) => {
     if (confirm("Are you sure?")) {
-      console.log("group:", group);
       dispatch(deleteGroup(group));
-      dispatch(deleteGroupOfElement(group._id));
     }
   };
   const groupItemClickHandle = (group) => {
-    const newArr = flowElements.filter(
-      (els) => isNode(els) && els.data.group._id === group._id
-    );
-    setSelectedElements(newArr);
+    const nodesByGroup = flowElements.nodes.filter(node => node.data.group._id === group._id);
+    dispatch(selectElements(nodesByGroup));
   };
   const editIconClickHandle = (group) => {
     if (group._id !== editableItem.group._id) {

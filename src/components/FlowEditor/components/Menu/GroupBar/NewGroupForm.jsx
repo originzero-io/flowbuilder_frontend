@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { isNode, useStoreActions } from "react-flow-renderer";
+import { isNode, useStore, useStoreActions } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import {  useParams } from "react-router";
 import * as themeColor from "constants/ThemeReference";
@@ -23,16 +23,14 @@ import {
   Submit,
   Title
 } from "./GroupBar.style";
+import { selectElements } from "store/reducers/flow/flowElementsSlice";
 
 const NewGroupForm = ({ theme }) => {
   const [formOpen, setFormOpen] = useState(false);
   const { flowElements } = useActiveFlow();
   const auth = useAuth();
-  const elements = flowElements;
   const { flowId } = useParams();
-  const setSelectedElements = useStoreActions(
-    (actions) => actions.setSelectedElements
-    );
+
   const dispatch = useDispatch();
   const [groupInfo, setGroupInfo] = useState({
     name: "",
@@ -52,10 +50,8 @@ const NewGroupForm = ({ theme }) => {
     dispatch(createGroup({flowId: flowId, group: groupInfo}));
   };
   const selectNonGroupsHandle = () => {
-    const nonGroups = elements.filter(
-      (els) => isNode(els) && els.data.group.id === 0
-    );
-    setSelectedElements(nonGroups);
+    const nonGroups = flowElements.nodes.filter(node => node.data.group._id === 0);
+    dispatch(selectElements(nonGroups));
   };
   return (
     <AddGroupWrapper onSubmit={addNewGroup}>

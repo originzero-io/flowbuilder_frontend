@@ -4,10 +4,6 @@ import {
   //getConnectedEdges,
   isEdge
 } from "react-flow-renderer";
-import {
-  getNodesAndEdges,
-  //findElementById
-} from "./elementController";
 import notification from "utils/notificationHelper";
 import { setElements } from "store/reducers/flow/flowElementsSlice";
 export default class Node {
@@ -21,10 +17,10 @@ export default class Node {
     );
   }
   applyElements = (elements, dispatch) => {
-    const { nodes, edges } = getNodesAndEdges(elements);
+    //const { nodes, edges } = getNodesAndEdges(elements);
     this.elements = elements;
-    this.nodes = nodes;
-    this.edges = edges;
+    this.nodes = [];
+    this.edges = [];
     this.dispatch = dispatch;
   };
 

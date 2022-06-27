@@ -2,32 +2,24 @@ import React from "react";
 import { Menu, MenuItem } from "./ElementContextMenu.style";
 import { useSelector, useDispatch } from "react-redux";
 import { setElementContextMenu } from "store/reducers/menuSlice";
-import { rotateNode, setElements } from "store/reducers/flow/flowElementsSlice";
+import { deleteNode, rotateNode, setElements, setNodes } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 
 export default function ElementMenu() {
   const { flowElements } = useActiveFlow();
-  const elements = flowElements;
+  //const elements = flowElements;
   const { elementMenu } = useSelector((state) => state.menus);
   const theme = useSelector((state) => state.themeReducer);
   const dispatch = useDispatch();
 
   const deleteItem = () => {
     const { element } = elementMenu;
-    const newElements = elements.filter((els) => els.id !== element.id);
-    dispatch(setElements(newElements));
+    dispatch(deleteNode(element));
     dispatch(setElementContextMenu(false));
   };
   const rotateItem = () => {
     const { element } = elementMenu;
-    const currentAlign = element.data.align;
-    let newAlign;
-    if (currentAlign === "vertical") {
-      newAlign = "horizontal";
-    }
-    else newAlign = "vertical"
-    
-    dispatch(rotateNode({self: element, path: newAlign}))
+    dispatch(rotateNode(element));
     dispatch(setElementContextMenu(false));
   }
   return (

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getOutgoers } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
-import { getNodesAndEdges } from "../helpers/elementController";
 import useActiveFlow from "hooks/useActiveFlow";
 import useDidMountEffect from "hooks/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
@@ -19,20 +18,22 @@ const SetVariables = React.memo((self) => {
   ]);
   const [text, setText] = useState("Anaks");
   const [checked, setChecked] = useState(false);
-  let outgoers = getOutgoers(self, elements);
+
+  let outgoers = getOutgoers(self, flowElements.nodes,flowElements.edges);
+  
   const checkboxChange = (e) => {
     setChecked(!checked);
-    const { edges } = getNodesAndEdges(elements);
-    const mySources = edges.filter((edge) => edge.source === self.id);
-    const handles = mySources.map((s) => s.sourceHandle);
-    //console.log("my-handles", handles);
-    const src = handles.map((h) => {
-      return { [h]: text };
-    });
-    //-console.log("src:", src);
-    if (src.length > 0) {
-      setValues([...src]);
-    }
+    // const { edges } = getNodesAndEdges(elements);
+    // const mySources = edges.filter((edge) => edge.source === self.id);
+    // const handles = mySources.map((s) => s.sourceHandle);
+    // //console.log("my-handles", handles);
+    // const src = handles.map((h) => {
+    //   return { [h]: text };
+    // });
+    // //-console.log("src:", src);
+    // if (src.length > 0) {
+    //   setValues([...src]);
+    // }
   };
   const textChange = (e) => {
     setText(e.target.value);
@@ -85,4 +86,4 @@ const SetVariables = React.memo((self) => {
   );
 });
 
-export default SetVariables;
+export default React.memo(SetVariables);

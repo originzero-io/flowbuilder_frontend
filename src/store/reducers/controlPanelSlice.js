@@ -4,14 +4,14 @@ export const controlPanelSlice = createSlice({
   name: 'controlPanelReducer',
   initialState: {
     activeProject: {},
-    copiedElements: []
+    copiedNodes: [],
   },
   reducers: {
-    setCopiedElements(state, { payload }) {
-      state.copiedElements = payload
+    setCopiedNodes(state, { payload }) {
+      state.copiedNodes = payload;
     }
   }
 })
 
-export const { setCopiedElements } = controlPanelSlice.actions;
+export const { setCopiedNodes } = controlPanelSlice.actions;
 export default controlPanelSlice.reducer;

@@ -6,6 +6,7 @@ import GroupList from "./GroupList";
 import NewGroupForm from "./NewGroupForm";
 import styled from "styled-components";
 import useActiveFlow from "hooks/useActiveFlow";
+import { useParams } from "react-router-dom";
 const Wrapper = styled.div`
   position: absolute;
   display: flex;
@@ -19,12 +20,13 @@ const Wrapper = styled.div`
 const GroupBar = () => {
   const { flowGui } = useActiveFlow();
   const { theme, groupBarDisplay } = flowGui;
+  const { flowId } = useParams();
   return (
     <Wrapper visible={groupBarDisplay}>
-      <GroupBarIcon theme={theme} />
+      <GroupBarIcon theme={theme} flowId={flowId} />
       <GroupBarWrapper visible={groupBarDisplay} theme={theme}>
         <NewGroupForm theme={theme} />
-        <GroupList theme={theme} />
+        <GroupList theme={theme} flowId={flowId} />
       </GroupBarWrapper>
     </Wrapper>
   );

@@ -1,5 +1,6 @@
 import FlowGroupService from "services/configurationService/groupService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import flowElementsSlice, { deleteGroupOfElement, updateGroupOfElement } from "./flowElementsSlice";
 
 export const getGroups = createAsyncThunk(
   'groups/get',
@@ -15,14 +16,15 @@ export const createGroup = createAsyncThunk(
 )
 export const updateGroup = createAsyncThunk(
   'groups/update',
-  async (currentGroup) => {
-    console.log("currentGroup: ", currentGroup);
+  async (currentGroup, thunkApi) => {
+    thunkApi.dispatch(updateGroupOfElement(currentGroup));
     return await FlowGroupService.updateGroup(currentGroup);
   }
 )
 export const deleteGroup = createAsyncThunk(
   'groups/delete',
-  async (group) => {
+  async (group, thunkApi) => {
+    thunkApi.dispatch(deleteGroupOfElement(group._id));
     return await FlowGroupService.deleteGroup(group);
   }
 )
@@ -38,11 +40,13 @@ export const flowGroupsSlice = createSlice({
       state.push(payload.group);
     },
     [updateGroup.fulfilled]: (state, { payload }) => {
-      const index = state.findIndex(group => group._id === payload.group._id);
-      state[index] = payload
+      const { group } = payload;
+      const index = state.findIndex(s => s._id === group._id);
+      state[index] = group
     },
     [deleteGroup.fulfilled]: (state, { payload }) => {
-      return state.filter((group) => group._id !== payload.group._id)
+      const { group } = payload;
+      return state.filter((s) => s._id !== group._id)
     }
   },
 })

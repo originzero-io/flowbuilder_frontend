@@ -88,6 +88,7 @@ export const elementListener = (socket) => {
     store.dispatch(saveElements(data.data.elements));
   });
   socket.on("elements:getElements", (data) => {
+    //! not setElements
     store.dispatch(setElements(data.data));
     store.dispatch(endTheBar());
   });

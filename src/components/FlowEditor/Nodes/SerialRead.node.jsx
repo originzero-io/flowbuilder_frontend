@@ -21,4 +21,4 @@ const SerialReadNode = (self) => {
   );
 };
 
-export default SerialReadNode;
+export default React.memo(SerialReadNode);

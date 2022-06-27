@@ -1,6 +1,7 @@
-import { isEdge, isNode } from "react-flow-renderer";
+import { addEdge, updateEdge, applyEdgeChanges, applyNodeChanges, getOutgoers } from "react-flow-renderer";
 import FlowElementService from "services/configurationService/flowElementService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { isEdgeExist, setSourceNodeColorToEdge } from "components/FlowEditor/helpers/elementController";
 
 export const getElementsByFlow = createAsyncThunk(
   "elements/getByFlow",
@@ -11,190 +12,210 @@ export const getElementsByFlow = createAsyncThunk(
 
 export const flowElementsSlice = createSlice({
   name: "elements",
-  initialState: [],
+  initialState: {
+    nodes: [],
+    edges: []
+  },
   reducers: {
-    setElements(state, { payload }) {
-      return payload;
+    setNodes(state, { payload }) {
+      const appliedNodes = applyNodeChanges(payload, state.nodes); 
+      state.nodes = appliedNodes;
+    },
+    setEdges(state, { payload }) {
+      const appliedEdges = applyEdgeChanges(payload, state.edges);
+      state.edges = appliedEdges;
     },
     importElements(state, { payload }) {
       return payload;
     },
     addNewNode(state, { payload }) {
-      state.push(payload);
+      state.nodes.push(payload);
+    },
+    addNewEdge(state, { payload }) {
+      const newEdges = addEdge(payload, state.edges);
+      state.edges = newEdges;
+    },
+    deleteNode(state, { payload }) {
+      state.nodes = state.nodes.filter(node => node.id !== payload.id);
+    },
+    deleteAllElements(state, { payload }) {
+      state.nodes = [];
+      state.edges = [];
+    },
+    updateEdgePath(state, { payload }) {
+      const { oldEdge, newConnection } = payload;
+      const edgeExist = isEdgeExist(newConnection, state.edges);
+      
+      if (edgeExist) {
+        //remove old edge
+        state.edges = state.edges.filter(edge => edge.id !== oldEdge.id);
+      }
+      else {
+        //update edge
+        const updatedEdges = updateEdge(oldEdge, newConnection, state.edges);
+        const newArray = setSourceNodeColorToEdge(newConnection, updatedEdges, state.nodes);
+        state.edges = newArray;
+      }
     },
     pasteNodes(state, { payload }) {
-      state.push(...payload);
+      state.nodes.push(...payload);
     },
     setRotateAll(state, { payload }) {
-      state.forEach((element) => {
-        if (isNode(element)) {
-          element.data.align = payload;
-        }
-      });
+      state.nodes.forEach(node => {
+        node.data.align = payload;
+      })
     },
     setExpandAll(state, { payload }) {
-      state.forEach((element) => {
-        if (isNode(element)) {
-          element.data.expand = payload;
-        }
-      });
+      state.nodes.forEach(node => {
+        node.data.expand = payload;
+      })
     },
     rotateNode(state, { payload }) {
-      state.forEach((element) => {
-        if (element.id === payload.self.id) {
-          element.data.align = payload.path;
-        } else return element;
-      });
-    },
-    rotateMultiNode(state, { payload }) {
-      state.forEach((element) => {
-        if (payload.selectedIDArray.includes(element.id)) {
-          element.data.align = payload.path;
+      const node = payload;
+      const currentAlign = node.data.align;
+
+      state.nodes.forEach(node => {
+        if (node.id === payload.id) {
+          node.data.align = currentAlign === "vertical" ? "horizontal" : "vertical";
         }
-      });
+      })
+    },
+    rotateSelectedNodes(state, { payload }) {
+      const { path } = payload;
+      state.nodes.forEach(node => {
+        if (node.selected) {
+          node.data.align = path;
+        }
+      })
+    },
+    deleteSelectedNodes(state, { payload }) {
+      state.nodes = state.nodes.filter(node => !node.selected);
+      state.edges = state.edges.filter(edge => !edge.selected)
     },
     expandNode(state, { payload }) {
-      state.forEach((element) => {
-        if (element.id === payload.id) {
-          element.data.expand = !payload.data.expand;
+      state.nodes.forEach((node) => {
+        if (node.id === payload.id) {
+          node.data.expand = !payload.data.expand;
         }
       });
     },
+    selectElements(state, { payload }) {
+      const nodeIds = payload.map(p => p.id);
+      
+      //firstly, all nodes deselected
+      state.nodes.forEach(node => node.selected = false)
+      
+      state.nodes.forEach(node => {
+        if (nodeIds.includes(node.id)) {
+          node.selected = true;
+        }
+      })
+    },
     changeNodeName(state, { payload }) {
-      state.forEach((element) => {
-        if (element.id === payload.self.id) {
-          element.data.label = payload.newName;
+      state.nodes.forEach((node) => {
+        if (node.id === payload.self.id) {
+          node.data.label = payload.newName;
         }
       });
     },
     setNodeEnable(state, { payload }) {
-      state.forEach((element) => {
-        if (element.id === payload.self.id) {
-          element.data.enable = payload.checked;
+      const { self, checked } = payload;
+
+      state.nodes.forEach((node) => {
+        if (node.id === self.id) {
+          node.data.enable = checked;
         }
       });
     },
     changeEdgeType(state, { payload }) {
-      state.forEach((element) => {
-        if (isEdge(element)) {
-          element.type = payload;
-        }
-      });
+      state.edges.forEach(edge => {
+        edge.type = payload;
+      })
     },
-    setMultipleNodeEnable(state, { payload }) {
-      state.forEach((element) => {
-        if (payload.includes(element.id)) {
-          element.data.enable = !element.data.enable;
+    setEnableSelectedNodes(state, { payload }) {
+      state.nodes.forEach((node) => {
+        if (node.selected) {
+          node.data.enable = !node.data.enable;
         }
       });
     },
     setOutgoersEnable(state, { payload }) {
-      state.forEach((element) => {
-        if (payload.outgoersIds.includes(element.id)) {
-          element.data.enable = payload.enable;
-        }
-      });
-    },
-    setAllNodesDeselect(state, { payload }) {
-      state.forEach((element) => {
-        if (isEdge(element)) {
-          element.animated = false;
-        } else if (isNode(element)) {
-          element.data.selected = false;
+      const { self, enable } = payload;
+      const outgoers = getOutgoers(self, state.nodes, state.edges);
+      const outgoersIds = outgoers.map(o => o.id);
+      state.nodes.forEach((node) => {
+        if (outgoersIds.includes(node.id)) {
+          node.data.enable = enable;
         }
       });
     },
     setGroupSingle(state, { payload }) {
-      state.forEach((element) => {
-        if (isNode(element)) {
-          if (element.id === payload.self.id) {
-            element.data.group = payload.group;
-          }
+      state.nodes.forEach(node => {
+        if (node.id === payload.self.id) {
+          node.data.group = payload.group;
         }
-        else if (isEdge(element)) {
-          if (element.source === payload.self.id) {
-            element.group = payload.group;
-            element.style.stroke = payload.group.color;
-          }
+      });
+      state.edges.forEach(edge => {
+        if (edge.source === payload.self.id) {
+          edge.group = payload.group;
+          edge.style.stroke = payload.group.color;
         }
       });
     },
-    setGroupMultiple(state, { payload }) {
-      state.forEach((element) => {
-        if (isNode(element)) {
-          if (payload.selectedIDArray.includes(element.id)) {
-            element.data.group = payload.group;
-          }
+    setGroupSelectedElements(state, { payload }) {
+      state.nodes.forEach(node => {
+        if (node.selected) {
+          node.data.group = payload;
         }
-        else if (isEdge(element)) {
-          if (payload.selectedIDArray.includes(element.source)) {
-            element.group = payload.group;
-            element.style.stroke = payload.group.color;
-          }
+      });
+      state.edges.forEach(edge => {
+        if (edge.selected) {
+          edge.group = payload;
+          edge.style.stroke = payload.color;
         }
       });
     },
-    selectNodes(state, { payload }) {
-      state.forEach((element) => {
-        if (payload.includes(element.id)) {
-          if (isEdge(element)) {
-            element.animated = true;
-          } else if (isNode(element)) {
-            element.data.selected = true;
-          }
-        } else {
-          if (isEdge(element)) {
-            if (
-              payload.includes(element.source) ||
-              payload.includes(element.target)
-            ) {
-              element.animated = true;
-            } else element.animated = false;
-          } else if (isNode(element)) {
-            element.data.selected = false;
-          }
-        }
-      });
+    selectAllElements(state, { payload }) {
+      state.nodes.forEach(node => {
+        node.selected = true;
+      })
     },
     deleteGroupOfElement(state, { payload }) {
-      state.forEach((element) => {
-        if (isNode(element)) {
-          if (element.data.group._id === payload) {
-            element.data.group = {};
-          }
+      state.nodes.forEach(node => {
+        if (node.data.group._id === payload) {
+          node.data.group = { _id: 0 };
         }
-        else if (isEdge(element)) {
-          if (element.group._id === payload) {
-            element.group = {};
-            element.style.stroke = "";
-          }
+      })
+      state.edges.forEach(edge => {
+        if (edge.group._id === payload) {
+          edge.group = { _id: 0 };
+          edge.style.stroke = "";
         }
-      });
+      })
     },
     updateGroupOfElement(state, { payload }) {
-      state.forEach((element) => {
-        if (isNode(element)) {
-          if (element.data.group._id === payload._id) {
-            element.group.name = payload.name;
-            element.group.color = payload.color;
-            element.style.stroke = payload.color;
-          }
+      console.log("groupOfElement payload: ", payload);
+      const group = payload;
+      state.nodes.forEach(node => {
+        if (node.data.group._id === group._id) {
+          node.data.group.name = group.name;
+          node.data.group.color = group.color;
         }
-        else if (isEdge(element)) {
-          if (element.group._id && element.group._id === payload._id) {
-            element.group.name = payload.name;
-            element.group.color = payload.color;
-            element.style.stroke = payload.color;
-          }
+      });
+      state.edges.forEach(edge => {
+        if (edge.group._id && edge.group._id === group._id) {
+          edge.group.name = group.name;
+          edge.group.color = group.color;
+          edge.style.stroke = group.color;
         }
       });
     },
     updateNodeHandles(state, { payload }) {
-      state.forEach((element) => {
-        if (element.id === payload.self.id) {
-          element.data[payload.name] = payload.value;
-        } else return element;
-      });
+      state.nodes.forEach(node => {
+        if (node.id === payload.self.id) {
+          node.data[payload.name] = payload.value;
+        }
+      })
     },
     saveElements(state, { payload }) {
       return payload;
@@ -210,23 +231,30 @@ export const flowElementsSlice = createSlice({
 export default flowElementsSlice.reducer;
 export const {
   setElements,
+  setNodes,
+  setEdges,
   importElements,
   addNewNode,
+  addNewEdge,
+  deleteNode,
+  deleteAllElements,
+  updateEdgePath,
   pasteNodes,
   setRotateAll,
   setExpandAll,
   rotateNode,
-  rotateMultiNode,
+  rotateSelectedNodes,
+  deleteSelectedNodes,
   expandNode,
+  selectElements,
   changeNodeName,
   setNodeEnable,
-  setMultipleNodeEnable,
+  setEnableSelectedNodes,
   changeEdgeType,
   setOutgoersEnable,
-  setAllNodesDeselect,
   setGroupSingle,
-  setGroupMultiple,
-  selectNodes,
+  setGroupSelectedElements,
+  selectAllElements,
   deleteGroupOfElement,
   updateGroupOfElement,
   updateNodeHandles,

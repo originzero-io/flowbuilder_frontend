@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useStoreActions, useStoreState } from "react-flow-renderer";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setGroupToNodes } from "../../../helpers/elementController";
-import { setGroupMultiple, setGroupSingle } from "store/reducers/flow/flowElementsSlice";
+import { getSelectedNodes } from "../../../helpers/elementController";
+import { setGroupSelectedElements, setGroupSingle } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 import { GroupColor, Label } from "../GroupBar/GroupBar.style";
 const Container = styled.div`
@@ -43,12 +42,8 @@ const Content = styled.div`
 `;
 export default function GroupMenu({ self }) {
   const { flowElements,flowGroups } = useActiveFlow();
-  const elements = flowElements;
   const dispatch = useDispatch();
-  const selectedElements = useStoreState((state) => state.selectedElements);
-  const setSelectedElements = useStoreActions(
-    (actions) => actions.setSelectedElements
-  );
+  
   const [searched, setSearched] = useState([]);
   useEffect(() => {
     setSearched(flowGroups);
@@ -68,24 +63,13 @@ export default function GroupMenu({ self }) {
     }
   };
   const selectGroup = (group) => {
-    if (selectedElements.length > 1) {
-      multiSelectionHandle(group);
+    if (getSelectedNodes(flowElements.nodes).length > 1) {
+      dispatch(setGroupSelectedElements(group));
     } else {
-      singleSelectionHandle(group);
+      dispatch(setGroupSingle({self: self, group: group}));
     }
   };
 
-  const singleSelectionHandle = (group) => {
-    dispatch(setGroupSingle({self: self, group: group}));
-  };
-
-  const multiSelectionHandle = (group) => {
-    const selectedElementIds = selectedElements.map(m => m.id)
-    dispatch(setGroupMultiple({selectedIDArray: selectedElementIds, group: group}));
-    const newElements = setGroupToNodes(selectedElementIds, elements, group);
-    const newSelected = newElements.filter(els=>selectedElementIds.includes(els.id))
-    setSelectedElements(newSelected);
-  };
   return (
     <Container>
       <SearchBar

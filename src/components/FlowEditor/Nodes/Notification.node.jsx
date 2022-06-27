@@ -18,4 +18,4 @@ const NotificationNode = (self) => {
   );
 };
 
-export default NotificationNode;
+export default React.memo(NotificationNode);

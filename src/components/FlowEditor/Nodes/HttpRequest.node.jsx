@@ -19,4 +19,4 @@ const HttpRequestNode = (self) => {
   );
 };
 
-export default HttpRequestNode;
+export default React.memo(HttpRequestNode);

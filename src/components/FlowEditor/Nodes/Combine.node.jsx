@@ -19,4 +19,4 @@ const CombineNode = (self) => {
   );
 };
 
-export default CombineNode;
+export default React.memo(CombineNode);

@@ -20,13 +20,14 @@ const FlowList = ({ flows }) => {
   const history = useHistory();
   const getPermission = useAuthPermission("project");
   const openPageHandler = async(flow) => {
-    dispatch(getElementsByFlow(flow));
+    //dispatch(getElementsByFlow(flow));
     dispatch(beginTheBar());
     elementNamespace.emit('elements:getElements',{flow_id:flow._id});
     dispatch(setCurrentFlowConfig(flow.config));
     dispatch(setCurrentFlowGui(flow.gui));
     history.push(`/flow/${flow._id}`);
   };
+  
   return (
     <>
       {flows && flows.map((flow) => {

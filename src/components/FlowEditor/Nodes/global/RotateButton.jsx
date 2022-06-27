@@ -10,9 +10,7 @@ const propTypes = {
 export default function RotateButton({ self }) {
   const dispatch = useDispatch();
   const rotateHandle = () => {
-    const currentAlign = self.data.align;
-    const newPath = currentAlign === "horizontal" ? "vertical" : "horizontal"
-    dispatch(rotateNode({ self: self, path: newPath }));
+    dispatch(rotateNode(self));
   };
   return (
     <div onClick={rotateHandle}>

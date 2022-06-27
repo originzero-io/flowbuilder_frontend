@@ -19,4 +19,4 @@ const JsonParseNode = (self) => {
   );
 };
 
-export default JsonParseNode;
+export default React.memo(JsonParseNode);

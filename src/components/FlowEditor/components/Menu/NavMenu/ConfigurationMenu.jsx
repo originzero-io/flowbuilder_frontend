@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { useStoreActions } from "react-flow-renderer";
+import { useStore, useStoreActions } from "react-flow-renderer";
 import { BiBrain } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -58,7 +58,7 @@ export default function ConfigurationMenu() {
   const auth = useAuth();
   const { reactFlowInstance, miniMapDisplay, theme } = flowGui;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const setSelectedElements = useStoreActions(
+  const setSelectedElements = useStore(
     (actions) => actions.setSelectedElements
   );
   const dispatch = useDispatch();

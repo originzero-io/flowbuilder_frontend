@@ -17,34 +17,19 @@ const propTypes = {
 export default function FeatureIcons({ self, edit, setEdit }) {
   const dispatch = useDispatch();
   const { flowElements } = useActiveFlow();
-  const elements = flowElements;
   const nameEditHandle = () => {
     setEdit(!edit);
   };
   const [checked, setChecked] = useState(self.data.enable);
   const enableChangeHandle = (checked) => {
-    const incomers = getIncomers(self, elements);
+    const incomers = getIncomers(self, flowElements.nodes, flowElements.edges);
     const disableCount = incomers.filter(incomer => incomer.data.enable === false).length;
-    const enableCount = incomers.filter(incomer => incomer.data.enable === true).length;
     if (incomers.length > 0 && incomers.length === disableCount) {
       toast("First, make sure that at least one of your incomers is enabled");
     }
     else {
-      if (enableCount === 0) {
-        console.log("enable count",enableCount)
-        setChecked(checked);
-        dispatch(setNodeEnable({self, checked}))
-        const outgoers = getOutgoers(self, elements);
-        const outgoersIds = outgoers.map(o => o.id);
-        dispatch(setOutgoersEnable({outgoersIds: outgoersIds, enable: checked}));
-      }
-      else {
-        console.log("enable count",enableCount)
-
-        setChecked(checked);
-        dispatch(setNodeEnable({self, checked}))
-      }
-      
+      setChecked(checked);
+      dispatch(setNodeEnable({self, checked})) 
     }
   };
   return (

@@ -13,14 +13,18 @@ import { createNode } from "../../../../helpers/elementController";
 import useDidMountEffect  from "hooks/useDidMountEffect";
 import {loadIconsToNodeList} from "../../../../helpers/loadIconsToNodeList";
 import useActiveFlow from "hooks/useActiveFlow";
+import { useReactFlow } from "react-flow-renderer";
 
 const PanelContextMenu = () => {
   const { panelMenu } = useSelector((state) => state.menus);
   const { flowGui } = useActiveFlow();
-  const { reactFlowInstance,rotateAllPath,theme } = flowGui;
+  const { rotateAllPath,theme } = flowGui;
   const nodeList = useSelector((state) => state.nodeList);
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const dispatch = useDispatch();
+
+  const reactFlowInstance = useReactFlow();
+  
   const onDragStart = (event, nodeType) => {
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.effectAllowed = "move";
@@ -29,12 +33,11 @@ const PanelContextMenu = () => {
     dispatch(addNodeToFavorites(node))
   };
   const addNewNodeHandle = (node) => {
-    const nodeFunction = loadFunctionsToNode(node.type, nodeClass);
     const position = reactFlowInstance.project({
       x: panelMenu.x - 200,
       y: panelMenu.y,
     });
-    const newNode = createNode(node.type, position, rotateAllPath, nodeFunction);
+    const newNode = createNode(node.type, position, rotateAllPath, nodeClass);
     dispatch(addNewNode(newNode));
   }
   return (
