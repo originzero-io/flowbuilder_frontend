@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { getSelectedNodes } from "../../../helpers/elementController";
+import { getSelectedNodes } from "../../../helpers/elementHelper";
 import { setGroupSelectedElements, setGroupSingle } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 import { GroupColor, Label } from "../GroupBar/GroupBar.style";

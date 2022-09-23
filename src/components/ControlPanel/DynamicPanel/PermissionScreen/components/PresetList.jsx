@@ -10,9 +10,11 @@ export default function PresetList() {
   const [selectedPreset, setSelectedPreset] = useState([]);
   const dispatch = useDispatch();
   useEffect(async () => {
-    const data = await PermissionService.getPresets();
-    console.log("data:", data);
-    setPresets(data.presets);
+    async function fetch() {
+      const presets = await PermissionService.getPresets();
+      setPresets(presets);
+    }
+    fetch();
   }, []);
   const onSubmitHandle = () => {
     dispatch(loadUserPermission(selectedPreset));

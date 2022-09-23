@@ -18,14 +18,14 @@ class PermissionService extends ConfigurationService {
     const response = await this.service.get("/permissions/preset/all");
     return response.data;
   }
-  async savePreset(preset) {
+  async createPreset(preset) {
     const { auth, workspaces } = store.getState();
     const data = {
         workspaceId: workspaces.activeWorkspace._id,
         createdBy: auth._id,
         ...preset
     }
-    const response = await this.service.post("/permissions/preset/save",data);
+    const response = await this.service.post("/permissions/preset",data);
     return response.data;
   }
 }

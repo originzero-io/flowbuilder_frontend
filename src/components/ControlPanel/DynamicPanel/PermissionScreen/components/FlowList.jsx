@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import FlowService from "services/configurationService/flowService";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
-import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import { CollapsibleMenuItem } from "./CollapsibleMenu";
-import useUserPermission from "hooks/useUserPermission";
 import useDidMountEffect from "hooks/useDidMountEffect";
 
 const propTypes = {
@@ -22,15 +20,17 @@ function FlowList({
   permissionName,
 }) {
   const [flows, setFlows] = useState([]);
-  //const projectPermissions = useUserPermission("project");
   const CAN_X_PROJECT = `CAN_${permissionName}_PROJECT`;
   const CAN_X_PROJECT_ALL = `CAN_${permissionName}_PROJECT_ALL`;
   const CAN_X_FLOW = `CAN_${permissionName}_FLOW`;
   const CAN_X_FLOW_ALL = `CAN_${permissionName}_FLOW_ALL`;
 
-  useEffect(async () => {
-    const data = await FlowService.getFlowsByProject(project);
-    setFlows(data.flows);
+  useEffect(() => {
+    async function fetch() {
+      const flowsInThisProject = await FlowService.getFlowsByProject(project);
+      setFlows(flowsInThisProject);
+    }
+    fetch();
   }, []);
 
   const flowInThisProject = permissions[CAN_X_FLOW].filter(

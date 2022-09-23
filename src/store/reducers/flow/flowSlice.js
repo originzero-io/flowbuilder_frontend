@@ -38,10 +38,10 @@ export const flowSlice = createSlice({
   },
   extraReducers: {
     [getFlowsByProject.fulfilled]: (state, { payload }) => {
-      return payload.flows;
+      return payload;
     },
     [getFlowsByWorkspace.fulfilled]: (state, { payload }) => {
-      return payload.flows;
+      return payload;
     },
   },
 })

@@ -79,7 +79,7 @@ export const defaultPermissions = {
 
 export const getUserPermissionInThisWorkspace = createAsyncThunk("permissions/get_in_this_workspace", async ({ workspace, user }, thunkApi) => {
   thunkApi.dispatch(beginTheBar());
-  const { permission } = await PermissionService.getUserPermissionInThisWorkspace(workspace._id, user._id);
+  const permission = await PermissionService.getUserPermissionInThisWorkspace(workspace._id, user._id);
   thunkApi.dispatch(endTheBar());
   return permission;
 });

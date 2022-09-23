@@ -3,7 +3,6 @@ import {
   useKeyPress,
   useReactFlow
 } from "react-flow-renderer";
-import KeyboardEventHandler from "react-keyboard-event-handler";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
@@ -78,40 +77,6 @@ const KeyboardEvents = () => {
     return position;
   };
 
-  return (
-    <>
-      {/* <KeyboardEventHandler
-        handleKeys={["ctrl+a"]}
-        onKeyEvent={selectAllNodesEvent}
-      /> */}
-      {/* <KeyboardEventHandler handleKeys={["ctrl+z"]} onKeyEvent={undoEvent} />
-      <KeyboardEventHandler handleKeys={["ctrl+y"]} onKeyEvent={redoEvent} /> */}
-      {/* <KeyboardEventHandler
-        handleKeys={["ctrl+s"]}
-        onKeyEvent={saveFlowEvent}
-      />
-      <KeyboardEventHandler
-        handleKeys={["ctrl+r"]}
-        onKeyEvent={rotateAllNodesEvent}
-      />
-      <KeyboardEventHandler
-        handleKeys={["ctrl+c"]}
-        onKeyEvent={copyNodesEvent}
-      />
-      <KeyboardEventHandler
-        handleKeys={["ctrl+v"]}
-        onKeyEvent={pasteNodesEvent}
-      />
-      <KeyboardEventHandler handleKeys={["f2"]} onKeyEvent={fitViewEvent} /> */}      
-      {/* <KeyboardEventHandler
-        handleKeys={["ctrl+c"]}
-        onKeyEvent={copyNodesEvent}
-      />
-      <KeyboardEventHandler
-        handleKeys={["ctrl+v"]}
-        onKeyEvent={pasteNodesEvent}
-      /> */}
-    </>
-  );
+  return null;
 };
 export default KeyboardEvents;

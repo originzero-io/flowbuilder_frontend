@@ -7,11 +7,8 @@ import AllNodes from "./AllNodes";
 import FavoriteNodes from "./FavoriteNodes";
 import {addNodeToFavorites, setNodeList} from "store/reducers/nodeListSlice"
 import RecentNodes from "./RecentNodes";
-import { loadFunctionsToNode } from "../../../../helpers/loadFunctionsToNode";
 import { addNewNode } from "store/reducers/flow/flowElementsSlice";
-import { createNode } from "../../../../helpers/elementController";
-import useDidMountEffect  from "hooks/useDidMountEffect";
-import {loadIconsToNodeList} from "../../../../helpers/loadIconsToNodeList";
+import { createNode } from "../../../../helpers/elementHelper";
 import useActiveFlow from "hooks/useActiveFlow";
 import { useReactFlow } from "react-flow-renderer";
 

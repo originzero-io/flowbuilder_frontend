@@ -1,6 +1,5 @@
 //import cogoToast from "cogo-toast";
 import toast from "react-hot-toast";
-import cogoToast from "cogo-toast";
 
 class Notification {
   constructor(component) {

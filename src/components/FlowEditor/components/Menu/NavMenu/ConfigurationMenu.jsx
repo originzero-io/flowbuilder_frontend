@@ -9,14 +9,10 @@ import {
   DropdownMenu,
 } from "reactstrap";
 import styled from "styled-components";
-import { loadFunctionsToNode } from "../../../helpers/loadFunctionsToNode";
 import * as themeColor from "constants/ThemeReference";
 import * as tooltip from "constants/TooltipReference";
 import { logOut } from "store/reducers/authSlice";
-import {
-  changeEdgeType,
-  importElements,
-} from "store/reducers/flow/flowElementsSlice";
+import { changeEdgeType } from "store/reducers/flow/flowElementsSlice";
 import {
   setFlowEdgeType,
   setMiniMapDisplay,
@@ -79,29 +75,29 @@ export default function ConfigurationMenu() {
     }
   };
   const fileUploadHandle = useCallback(
-    (e) => {
-      const fileReader = new FileReader();
-      const fileType = e.target.files[0]?.type;
-      if (fileType === "application/json") {
-        fileReader.readAsText(e.target.files[0], "UTF-8");
-        fileReader.onload = (e) => {
-          const flow = JSON.parse(e.target.result);
-          const newArray = flow.elements.map((els) => {
-            return {
-              ...els,
-              data: {
-                ...els.data,
-                onChange: loadFunctionsToNode(els.type, nodeClass),
-              },
-            };
-          });
-          dispatch(importElements(newArray));
-          setSelectedElements(newArray);
-        };
-      } else
+    // (e) => {
+    //   const fileReader = new FileReader();
+    //   const fileType = e.target.files[0]?.type;
+    //   if (fileType === "application/json") {
+    //     fileReader.readAsText(e.target.files[0], "UTF-8");
+    //     fileReader.onload = (e) => {
+    //       const flow = JSON.parse(e.target.result);
+    //       const newArray = flow.elements.map((els) => {
+    //         return {
+    //           ...els,
+    //           data: {
+    //             ...els.data,
+    //             onChange: loadFunctionsToNode(els.type, nodeClass),
+    //           },
+    //         };
+    //       });
+    //       dispatch(setElements(newArray));
+    //       setSelectedElements(newArray);
+    //     };
+    //   } else
         
-      notification.error("This file cannot be imported. Please provide JSON file");
-    },
+    //   notification.error("This file cannot be imported. Please provide JSON file");
+    // },
     [reactFlowInstance]
   );
   const [active, setActive] = useState({
@@ -136,10 +132,6 @@ export default function ConfigurationMenu() {
 
   return (
     <Menu theme={theme}>
-      {/* <MenuItem>
-        <Button color="success">Execute</Button>
-      </MenuItem> */}
-
       <DropdownWrapper tabIndex="1">
         <MenuItem>
           <Button style={{width:'100px',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'5px'}} color="success"><VscRunAll></VscRunAll><div>Execute</div></Button>

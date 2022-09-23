@@ -1,6 +1,6 @@
 import React from "react";
 import { Background, MiniMap } from "react-flow-renderer";
-import AppMenu from "./Menu";
+import FlowEditorMenus from "./Menu/FlowEditorMenus";
 import PropTypes from "prop-types"
 import AppTooltips from "../../../AppTooltips";
 import KeyboardEvents from "components/Shared/KeyboardEvents";
@@ -14,7 +14,7 @@ const propTypes = {
 const FlowComponents = ({ theme, miniMapDisplay }) => {
   return (
     <>
-      <AppMenu/>
+      <FlowEditorMenus/>
       <Background
         variant="lines"
         gap={80}

@@ -7,13 +7,11 @@ import NodeGroupMenu from "../../NodeGroupMenu/NodeGroupMenu";
 import useActiveFlow from "hooks/useActiveFlow";
 
 export default function MultiSelectionContextMenu() {
-  //const selected = useStore((state) => state.selectedElements);
   const { multiSelectionMenu } = useSelector(
     (state) => state.menus
   );
   const { flowGui } = useActiveFlow();
   const { theme } = flowGui;
-  //const elements = flowElements;
   const dispatch = useDispatch();
   const deleteItems = () => {
     if (confirm("Are you sure?")) {

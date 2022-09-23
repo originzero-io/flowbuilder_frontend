@@ -33,7 +33,7 @@ export default function EditNameForm({ self, setEdit }) {
   const onSubmitHandle = (e) => {
     e.preventDefault();
     setEdit(false);
-    dispatch(changeNodeName({self: self, newName: editedName}));
+    dispatch(changeNodeName({node: self, name: editedName}));
   };
   return (
     <Form onSubmit={onSubmitHandle}>

@@ -2,13 +2,10 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
-
 import Card from "components/Shared/Card/Card";
 import { setCurrentFlowGui } from "store/reducers/flow/flowGuiSlice";
 import { setCurrentFlowConfig } from "store/reducers/flow/flowConfigSlice";
-import { getElementsByFlow } from "store/reducers/flow/flowElementsSlice";
 import { elementNamespace } from "SocketConnections";
-import { beginTheBar } from "store/reducers/componentSlice";
 import useAuthPermission from "hooks/useAuthPermission";
 
 const propTypes = {
@@ -20,8 +17,6 @@ const FlowList = ({ flows }) => {
   const history = useHistory();
   const getPermission = useAuthPermission("project");
   const openPageHandler = async(flow) => {
-    //dispatch(getElementsByFlow(flow));
-    dispatch(beginTheBar());
     elementNamespace.emit('elements:getElements',{flow_id:flow._id});
     dispatch(setCurrentFlowConfig(flow.config));
     dispatch(setCurrentFlowGui(flow.gui));

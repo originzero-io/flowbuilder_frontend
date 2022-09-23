@@ -3,28 +3,28 @@ import UserService from "services/configurationService/userService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getAllUsers = createAsyncThunk("users/getAll", async () => {
-  const { users } = await UserService.getAllUsers();
+  const users = await UserService.getAllUsers();
   return users;
 });
 export const createUser = createAsyncThunk("users/create", async (userInfo) => {
-  const { user } = await AuthService.createUser(userInfo);
+  const user = await AuthService.createUser(userInfo);
   return user;
 });
 export const editUser = createAsyncThunk("users/edit", async (userInfo) => {
-  const { user } = await UserService.editUser(userInfo);
+  const user = await UserService.editUser(userInfo);
   return user;
 });
 export const addUserToWorkspace = createAsyncThunk(
   "users/add_to_workspace",
   async ({ userInfo, workspace }) => {
-    const { user } = await UserService.addUserToWorkspace(userInfo, workspace);
+    const user = await UserService.addUserToWorkspace(userInfo, workspace);
     return user;
   }
 );
 export const removeUserToWorkspace = createAsyncThunk(
   "users/remove_from_workspace",
   async ({ userInfo, workspace }) => {
-    const { user } = await UserService.removeUserToWorkspace(
+    const user = await UserService.removeUserToWorkspace(
       userInfo,
       workspace
     );

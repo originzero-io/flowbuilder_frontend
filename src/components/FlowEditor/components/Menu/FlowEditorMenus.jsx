@@ -1,13 +1,13 @@
 import React from "react";
-import NavMenus from "./NavMenu"
+import NavMenu from "./NavMenu/NavMenu"
 import PanelContextMenu from "./ContextMenu/PanelContext/PanelContextMenu";
 import MultiSelectionContextMenu from "./ContextMenu/MultiselectionContext/MultiSelectionContextMenu";
 import ElementContextMenu from "./ContextMenu/ElementContext/ElementContextMenu";
 import GroupBar from "./GroupBar/GroupBar";
-const AppMenu = () => {
+const FlowEditorMenus = () => {
   return (
     <>
-      <NavMenus/>
+      <NavMenu/>
       <PanelContextMenu/>
       <MultiSelectionContextMenu />
       <ElementContextMenu />
@@ -16,4 +16,4 @@ const AppMenu = () => {
   );
 }
 
-export default React.memo(AppMenu);
+export default React.memo(FlowEditorMenus);

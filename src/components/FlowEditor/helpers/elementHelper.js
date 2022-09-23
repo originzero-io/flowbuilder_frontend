@@ -1,6 +1,4 @@
-import { getConnectedEdges, isEdge, isNode } from "react-flow-renderer";
 import uuid from "react-uuid";
-import { loadFunctionsToNode } from "./loadFunctionsToNode";
 
 export const createNode = (type,position,align,nodeClass) => {
   return {
@@ -20,6 +18,9 @@ export const createNode = (type,position,align,nodeClass) => {
     }
   };
 }
+const loadFunctionsToNode = (type, nodeClass) => {
+  return nodeClass[`do${type}`];
+};
 
 export const isEdgeExist = (newConnection, edges) => {
   let exist = false;
@@ -57,3 +58,6 @@ export const setSourceNodeColorToEdge = (connection, updatedEdges, nodes) => {
 export const getSelectedNodes = (nodes) => {
   return nodes.filter(node => node.selected === true);
 };
+
+
+

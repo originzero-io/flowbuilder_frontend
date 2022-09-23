@@ -30,7 +30,7 @@ import {
   editWorkspace,
   setActiveWorkspace,
 } from "store/reducers/workspaceSlice";
-import { endTheBar } from "store/reducers/componentSlice";
+import { beginTheBar, endTheBar } from "store/reducers/componentSlice";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
 
 export const projectListener = (socket) => {
@@ -88,7 +88,7 @@ export const elementListener = (socket) => {
     store.dispatch(saveElements(data.data.elements));
   });
   socket.on("elements:getElements", (data) => {
-    //! not setElements
+    store.dispatch(beginTheBar());
     store.dispatch(setElements(data.data));
     store.dispatch(endTheBar());
   });

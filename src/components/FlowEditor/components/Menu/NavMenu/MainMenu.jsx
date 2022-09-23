@@ -11,6 +11,9 @@ import useActiveFlow from "hooks/useActiveFlow";
 import { Logo } from "components/Shared/icons";
 import { MenuIndex, MenuItem } from "./NavMenu.style";
 import { useReactFlow } from "react-flow-renderer";
+import { addSubFlow } from "store/reducers/flow/flowElementsSlice";
+import { toPng } from 'html-to-image';
+
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;
@@ -52,33 +55,42 @@ const MainMenu = () => {
   const reactFlowInstance = useReactFlow();
   const homeClickHandle = async () => {
     const { nodes, edges, viewport } = reactFlowInstance.toObject();
-    console.log("nodes: ", nodes);
-    console.log("edges: ", edges);
-    console.log("viewport: ", viewport);
     const flow = {
       config: flowConfig,
-      gui: { ...flowGui, viewport },
-    };
-    console.log("flow: ", flow);
+      gui: {
+        ...flowGui,
+        viewport
+      }
+    }
+    await FlowService.saveFlowGui(flowId, flow);
+    elementNamespace.emit("elements:save", { flowId: flowId, elements: { nodes, edges } });
+    dispatch(getFlowsByWorkspace(activeWorkspace));
+  };
 
-    
-    // await FlowService.saveFlowGui(flowId, flow);
-    // elementNamespace.emit("elements:save", { flowId: flowId, elements: elements });
-    // dispatch(getFlowsByWorkspace(activeWorkspace));
-  };
-  const homeClickHandleCopy = async () => {
-    const { position, zoom, elements } = reactFlowInstance.toObject();
-    const flow = {
-      config: flowConfig,
-      gui: { ...flowGui, position, zoom },
-    };
-    
-    // await FlowService.saveFlowGui(flowId, flow);
-    // elementNamespace.emit("elements:save", { flowId: flowId, elements: elements });
-    // dispatch(getFlowsByWorkspace(activeWorkspace));
-  };
   const nameClick = () => {
     elementNamespace.emit("elements:messageFromClient", { message: 'Naber elements?' });
+  }
+  function downloadImage(dataUrl) {
+    const a = document.createElement('a');
+  
+    a.setAttribute('download', 'reactflow.png');
+    a.setAttribute('href', dataUrl);
+    a.click();
+  }
+  const downloadPageAsImage = () => {
+    toPng(document.querySelector('.react-flow'), {
+      filter: (node) => {
+        // we don't want to add the minimap and the controls to the image
+        if (
+          node?.classList?.contains('react-flow__minimap') ||
+          node?.classList?.contains('react-flow__controls')
+        ) {
+          return false;
+        }
+
+        return true;
+      },
+    }).then(downloadImage);
   }
   return (
     <>
@@ -92,6 +104,8 @@ const MainMenu = () => {
           </Link>
         </div>
         <MenuItem theme={theme} onClick={nameClick}>{flowConfig.name}</MenuItem>
+        <MenuItem theme={theme} onClick={()=>dispatch(addSubFlow())}>Add sub flow</MenuItem>
+        <MenuItem theme={theme} onClick={downloadPageAsImage}>Export as Image</MenuItem>
       </Menu>
     </>
   );

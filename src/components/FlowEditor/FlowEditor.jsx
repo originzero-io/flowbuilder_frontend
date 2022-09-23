@@ -1,8 +1,7 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import ReactFlow, { useReactFlow } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
 import nodeTypes from "./Nodes";
-import adjustScreen from "./helpers/adjustScreen";
 import { setPaneClickPosition } from "store/reducers/flow/flowGuiSlice";
 import {addNewNode, addNewEdge, setNodes, setEdges, setNodeEnable, updateEdgePath} from "store/reducers/flow/flowElementsSlice"
 import {
@@ -14,12 +13,12 @@ import {
 import { setNodeList } from "store/reducers/nodeListSlice";
 import * as themeColor from "constants/ThemeReference";
 import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
-import { createNode } from "./helpers/elementController";
+import { createNode } from "./helpers/elementHelper";
 import FlowComponents from "./components/FlowComponents";
 import PropTypes from "prop-types"
 import useActiveFlow from "hooks/useActiveFlow";
 import notification from "utils/notificationHelper"
-
+import { openElementContextMenu, openMultiSelectionContextMenu, openPaneContextMenu } from "./helpers/menuHelper";
 
 const propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
@@ -70,7 +69,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
       const sourceEnable = flowElements.nodes.find(els => els.id === params.source).data.enable;
       const self = flowElements.nodes.find(els => els.id === params.target);
       dispatch(addNewEdge(edge));
-      dispatch(setNodeEnable({ self: self, checked: sourceEnable }))
+      dispatch(setNodeEnable({ self: self, checked: sourceEnable }));
     }
   }, [addNewEdge, flowElements.nodes]);
 
@@ -78,10 +77,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(updateEdgePath({ oldEdge: oldEdge, newConnection: newConnection }));
   }, [updateEdgePath]);
 
-  const onInitHandle = (_reactFlowInstance) => {
-    //console.log(_reactFlowInstance);
-    //dispatch(setReactFlowInstance(_reactFlowInstance));
-    //adjustScreen(flowGui, _reactFlowInstance);
+  const onInitHandle = (reactFlowInstance) => {
+    reactFlowInstance.setViewport(flowGui.viewport);
   };
   const onDragOver = (event) => {
     event.preventDefault();
@@ -96,6 +93,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top,
     });
+
+    console.log("type: ", type);
     if (!(type === "")) {
       const newNode = createNode(type, position, rotateAllPath, nodeClass);  
       dispatch(addNewNode(newNode));
@@ -108,100 +107,24 @@ export default function FlowEditor({ reactFlowWrapper }) {
     });
     dispatch(setNodeList(newList));
   };
-  const onDoubleClick = (event) => {
-    event.preventDefault();
+  
+  const onNodeContextMenu = (event, node) => openElementContextMenu(event, node);
+  
+  const onPaneContextMenu = (event) => openPaneContextMenu(event);
+
+  const onSelectionContextMenu = (event) => openMultiSelectionContextMenu(event);
+
+  const onDoubleClick = () => {
     dispatch(setPanelContextMenu(false));
     dispatch(setGroupMenu(false));
   };
-  const onNodeContextMenu = (event, node) => {
-    event.preventDefault();
-    openElementContextMenu(event, node);
-  };
-  const onPaneClick = (e) => {
-    dispatch(setPaneClickPosition({x: e.clientX, y: e.clientY}))
+  const onPaneClick = (event) => {
+    dispatch(setPaneClickPosition({x: event.clientX, y: event.clientY}))
     dispatch(setMultiSelectionContextMenu(false));
     dispatch(setElementContextMenu(false));
     dispatch(closeAllNodeGroupMenu(true));
   };
-  const onPaneContextMenu = (e) => {
-    e.preventDefault();
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
-    const clientX = e.clientX;
-    const clientY = e.clientY;
-    //sağdan taşma
-    if (windowWidth < clientX + 150) {
-      console.log("sola dönecek");
-      dispatch(
-        setPanelContextMenu({
-          state: true,
-          x: e.clientX - 250,
-          y: e.clientY,
-        })
-      );
-    }
-    //soldan taşma
-    else if (clientX < 200) {
-      dispatch(
-        setPanelContextMenu({
-          state: true,
-          x: e.clientX,
-          y: e.clientY,
-        })
-      );
-    }
-    //alttan taşma
-    else if (windowHeight < clientY + 150) {
-      dispatch(
-        setPanelContextMenu({
-          state: true,
-          x: e.clientX,
-          y: e.clientY - 400,
-        })
-      );
-    }
-    //normal
-    else {
-      dispatch(
-        setPanelContextMenu({
-          state: true,
-          x: e.clientX,
-          y: e.clientY,
-        })
-      );
-    }
-  };
-  const onSelectionContextMenu = (event) => {
-    event.preventDefault();
-    openMultiSelectionContextMenu(event);
-  };
-
-  const openMultiSelectionContextMenu = (event) => {
-    dispatch(
-      setMultiSelectionContextMenu({
-        state: true,
-        x: event.clientX,
-        y: event.clientY,
-      })
-    );
-  };
-
-  const openElementContextMenu = (event, node) => {
-    dispatch(
-      setElementContextMenu({
-        state: true,
-        x: event.clientX,
-        y: event.clientY,
-        element: node,
-      })
-    );
-  };
-  // useEffect(() => {
-  //   console.log("nodeClass:",nodeClass)
-  //   nodeClass.applyElements(elements, dispatch);
-  // }, [elements]);
   return (
-    <>
       <ReactFlow
         nodeTypes={nodeTypes}
         style={flowStyle}
@@ -230,7 +153,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
       >
         <FlowComponents theme={theme} miniMapDisplay={miniMapDisplay} />
       </ReactFlow>
-    </>
   );
 }
 

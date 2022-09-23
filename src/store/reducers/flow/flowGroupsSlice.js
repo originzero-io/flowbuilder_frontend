@@ -34,18 +34,18 @@ export const flowGroupsSlice = createSlice({
   initialState: [],
   extraReducers: {
     [getGroups.fulfilled]: (state, { payload }) => {
-      return payload.groups
+      return payload
     },
     [createGroup.fulfilled]: (state, { payload }) => {
-      state.push(payload.group);
+      state.push(payload);
     },
     [updateGroup.fulfilled]: (state, { payload }) => {
-      const { group } = payload;
+      const group = payload;
       const index = state.findIndex(s => s._id === group._id);
       state[index] = group
     },
     [deleteGroup.fulfilled]: (state, { payload }) => {
-      const { group } = payload;
+      const group = payload;
       return state.filter((s) => s._id !== group._id)
     }
   },

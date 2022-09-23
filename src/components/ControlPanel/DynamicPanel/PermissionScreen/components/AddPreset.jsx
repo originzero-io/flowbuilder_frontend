@@ -18,7 +18,7 @@ export default function AddPreset({ permissions }) {
       preset: permissions,
     };
     try {
-      await PermissionService.savePreset(preset);
+      await PermissionService.createPreset(preset);
       notification.success(`Preferences has been saved as ${preset.name}`);
     } catch (error) {
       notification.error(error.message);
