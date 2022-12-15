@@ -127,3 +127,9 @@ export const mainListener = (socket) => {
     } else alert("Oturum başka bir tabde açık");
   });
 };
+
+export const flowExecutorListener = (socket) => {
+  socket.on("flowExecutor:response", (data) => {
+    console.log("flowExecutor:response ", data);
+  });
+};

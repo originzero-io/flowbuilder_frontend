@@ -1,58 +1,61 @@
-import React, { useCallback, useState } from "react";
-import { useStore, useStoreActions } from "react-flow-renderer";
-import { BiBrain } from "react-icons/bi";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useState } from 'react';
+import { useReactFlow, useStore, useStoreActions } from 'react-flow-renderer';
+import { BiBrain } from 'react-icons/bi';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
-} from "reactstrap";
-import styled from "styled-components";
-import * as themeColor from "constants/ThemeReference";
-import * as tooltip from "constants/TooltipReference";
-import { logOut } from "store/reducers/authSlice";
-import { changeEdgeType } from "store/reducers/flow/flowElementsSlice";
+} from 'reactstrap';
+import styled from 'styled-components';
+import * as themeColor from 'constants/ThemeReference';
+import * as tooltip from 'constants/TooltipReference';
+import { logOut } from 'store/reducers/authSlice';
+import { changeEdgeType } from 'store/reducers/flow/flowElementsSlice';
 import {
   setFlowEdgeType,
   setMiniMapDisplay,
   setTheme,
-} from "store/reducers/flow/flowGuiSlice";
-import useActiveFlow from "hooks/useActiveFlow";
-import useAuth from "hooks/useAuth";
-import Avatar from "components/Shared/Avatar";
-import SwitchButton from "../../../Nodes/global/SwitchButton";
-import { FileInput } from "components/Shared/FileInput/FileInput";
-import { VerticalDivider } from "../../../../StyledComponents/Divider";
+} from 'store/reducers/flow/flowGuiSlice';
+import useActiveFlow from 'hooks/useActiveFlow';
+import useAuth from 'hooks/useAuth';
+import Avatar from 'components/Shared/Avatar';
+import SwitchButton from '../../../Nodes/global/SwitchButton';
+import { FileInput } from 'components/Shared/FileInput/FileInput';
+import { VerticalDivider } from '../../../../StyledComponents/Divider';
 import {
   DropdownItem,
   DropdownList,
   DropdownWrapper,
-} from "../../../../StyledComponents/DropdownMenu";
-import { Circle } from "../../../../StyledComponents/Shapes";
-import { ShareIcon, TuneIcon } from "./Icons";
-import { Menu, MenuItem } from "./NavMenu.style";
-import { GoDeviceDesktop } from "react-icons/go";
-import { VscRunAll } from "react-icons/vsc";
-import notification from "utils/notificationHelper";
+} from '../../../../StyledComponents/DropdownMenu';
+import { Circle } from '../../../../StyledComponents/Shapes';
+import { ShareIcon, TuneIcon } from './Icons';
+import { Menu, MenuItem } from './NavMenu.style';
+import { GoDeviceDesktop } from 'react-icons/go';
+import { VscRunAll } from 'react-icons/vsc';
+import notification from 'utils/notificationHelper';
+import { flowExecutorNamespace } from 'SocketConnections';
+import { flowDataSeperator } from 'utils/flowHelpers';
 
 const dummyDevices = [
   {
-    id: "1",
-    name: "Akin-PC",
-    ip: "192.168.1.101",
+    id: '1',
+    name: 'Akin-PC',
+    ip: '192.168.1.101',
   },
   {
-    id: "2",
-    name: "Anil-PC",
-    ip: "192.168.1.102",
+    id: '2',
+    name: 'Anil-PC',
+    ip: '192.168.1.102',
   },
 ];
 
 export default function ConfigurationMenu() {
   const { flowGui, flowConfig } = useActiveFlow();
   const auth = useAuth();
-  const { reactFlowInstance, miniMapDisplay, theme } = flowGui;
+  const { miniMapDisplay, theme } = flowGui;
+  const reactFlowInstance = useReactFlow();
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const setSelectedElements = useStore(
     (actions) => actions.setSelectedElements
@@ -60,14 +63,15 @@ export default function ConfigurationMenu() {
   const dispatch = useDispatch();
 
   const downloadFlowHandle = () => {
-    if (confirm("Download?")) {
+    if (confirm('Download?')) {
       if (reactFlowInstance) {
-        const { elements } = reactFlowInstance.toObject();
-        let hiddenElement = document.createElement("a");
+        const elements = reactFlowInstance.toObject();
+        console.log('elements: ', reactFlowInstance.toObject());
+        let hiddenElement = document.createElement('a');
         hiddenElement.href =
-          "data:application/octet-stream;base64," +
+          'data:application/octet-stream;base64,' +
           window.btoa(JSON.stringify(elements));
-        hiddenElement.target = "_blank";
+        hiddenElement.target = '_blank';
         hiddenElement.download = `${flowConfig.name}.json`;
         hiddenElement.click();
         hiddenElement.remove();
@@ -95,7 +99,7 @@ export default function ConfigurationMenu() {
     //       setSelectedElements(newArray);
     //     };
     //   } else
-        
+
     //   notification.error("This file cannot be imported. Please provide JSON file");
     // },
     [reactFlowInstance]
@@ -105,18 +109,18 @@ export default function ConfigurationMenu() {
     miniMap: false,
   });
   const changeTheme = (checked) => {
-    if (theme === "dark") {
-      dispatch(setTheme("light"));
+    if (theme === 'dark') {
+      dispatch(setTheme('light'));
     } else {
-      dispatch(setTheme("dark"));
+      dispatch(setTheme('dark'));
     }
     setActive({ ...active, theme: checked });
   };
   const changeMiniMapDisplay = (checked) => {
-    if (miniMapDisplay === "visible") {
-      dispatch(setMiniMapDisplay("hidden"));
+    if (miniMapDisplay === 'visible') {
+      dispatch(setMiniMapDisplay('hidden'));
     } else {
-      dispatch(setMiniMapDisplay("visible"));
+      dispatch(setMiniMapDisplay('visible'));
     }
     setActive({ ...active, miniMap: checked });
   };
@@ -125,16 +129,32 @@ export default function ConfigurationMenu() {
     dispatch(changeEdgeType(e.target.value));
   };
   const logOutHandle = () => {
-    if (confirm("Are you sure?")) {
+    if (confirm('Are you sure?')) {
       dispatch(logOut());
     }
+  };
+  const executeHandle = () => {
+    const elements = reactFlowInstance.toObject();
+    flowExecutorNamespace.emit("flowData", flowDataSeperator(elements));
   };
 
   return (
     <Menu theme={theme}>
       <DropdownWrapper tabIndex="1">
         <MenuItem>
-          <Button style={{width:'100px',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'5px'}} color="success"><VscRunAll></VscRunAll><div>Execute</div></Button>
+          <Button
+            style={{
+              width: '100px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '5px',
+            }}
+            color="success"
+          >
+            <VscRunAll></VscRunAll>
+            <div onClick = {executeHandle}>Execute</div>
+          </Button>
         </MenuItem>
         <DropdownList theme={theme}>
           <DropdownItem>
@@ -142,9 +162,16 @@ export default function ConfigurationMenu() {
           </DropdownItem>
           {dummyDevices.map((device) => {
             return (
-              <DropdownItem style={{ fontSize: "1.5vmin" }} key={device.id}>
-                <GoDeviceDesktop style={{fontSize:'36px',marginRight:'5px'}}/>
-                <div>{device.name} <span style={{color:'gray',fontSize:'1.2vmin'}}>{device.ip}</span></div>
+              <DropdownItem style={{ fontSize: '1.5vmin' }} key={device.id}>
+                <GoDeviceDesktop
+                  style={{ fontSize: '36px', marginRight: '5px' }}
+                />
+                <div>
+                  {device.name}{' '}
+                  <span style={{ color: 'gray', fontSize: '1.2vmin' }}>
+                    {device.ip}
+                  </span>
+                </div>
               </DropdownItem>
             );
           })}
@@ -167,7 +194,7 @@ export default function ConfigurationMenu() {
       <MenuItem data-tip="Settings" data-for={tooltip.SETTINGS}>
         <TuneIcon
           color={
-            theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
+            theme === 'dark' ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
           }
         />
       </MenuItem>
@@ -176,9 +203,9 @@ export default function ConfigurationMenu() {
       <MenuItem data-tip="Learn" data-for={tooltip.LEARN}>
         <BiBrain
           style={{
-            fontSize: "25px",
+            fontSize: '25px',
             color:
-              theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON,
+              theme === 'dark' ? themeColor.DARK_ICON : themeColor.LIGHT_ICON,
           }}
         />
       </MenuItem>
