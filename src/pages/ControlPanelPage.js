@@ -5,6 +5,7 @@ import DynamicPanel, { TopMenu } from "../components/ControlPanel/DynamicPanel";
 import { useDispatch } from "react-redux";
 import { getAllUsers } from "store/reducers/userSlice";
 import styled from "styled-components";
+import { flowExecutorNamespace } from "SocketConnections";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,6 +22,7 @@ export default function ControlPanelPage() {
   //console.log("CONTROL_PANEL_PAGE RENDERED")
   useEffect(() => {
     dispatch(getAllUsers());
+    flowExecutorNamespace.emit('leaveAllFlowRooms');
   }, []);
   return (
     <Wrapper>

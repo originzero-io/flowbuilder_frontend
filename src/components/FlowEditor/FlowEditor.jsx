@@ -19,13 +19,15 @@ import PropTypes from "prop-types"
 import useActiveFlow from "hooks/useActiveFlow";
 import notification from "utils/notificationHelper"
 import { openElementContextMenu, openMultiSelectionContextMenu, openPaneContextMenu } from "./helpers/menuHelper";
+import { flowExecutorNamespace } from "SocketConnections";
+import { useParams } from "react-router-dom";
 
 const propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
 };
 export default function FlowEditor({ reactFlowWrapper }) {
   const dispatch = useDispatch();
-  
+  const { flowId } = useParams();
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeList);
 
@@ -124,6 +126,10 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setElementContextMenu(false));
     dispatch(closeAllNodeGroupMenu(true));
   };
+  useEffect(() => {
+    flowExecutorNamespace.emit('joinFlowRoom', { flowId });
+  }, [])
+  
   return (
       <ReactFlow
         nodeTypes={nodeTypes}

@@ -1,6 +1,7 @@
-export function flowDataSeperator(flow) {
+export function backendFlowDataBuilder(flowId, elements) {
     return {
-        nodes: flow.nodes.map(node => {
+        flowId: flowId,
+        nodes: elements.nodes.map(node => {
             return {
                 id: node.id,
                 type: node.type,
@@ -11,7 +12,7 @@ export function flowDataSeperator(flow) {
                 }
             }
         }),
-        edges: flow.edges.map(edge => {
+        edges: elements.edges.map(edge => {
             return {
                 id: edge.id,
                 source: edge.source,

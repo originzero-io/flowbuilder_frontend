@@ -129,7 +129,7 @@ export const mainListener = (socket) => {
 };
 
 export const flowExecutorListener = (socket) => {
-  socket.on("flowExecutor:response", (data) => {
-    console.log("flowExecutor:response ", data);
+  socket.on("executeFlow:response", (data) => {
+    console.log("executeFlow:response ", data);
   });
 };

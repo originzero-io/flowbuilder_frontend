@@ -36,7 +36,8 @@ import { GoDeviceDesktop } from 'react-icons/go';
 import { VscRunAll } from 'react-icons/vsc';
 import notification from 'utils/notificationHelper';
 import { flowExecutorNamespace } from 'SocketConnections';
-import { flowDataSeperator } from 'utils/flowHelpers';
+import { backendFlowDataBuilder } from 'utils/flowHelpers';
+import { useParams } from 'react-router-dom';
 
 const dummyDevices = [
   {
@@ -53,6 +54,7 @@ const dummyDevices = [
 
 export default function ConfigurationMenu() {
   const { flowGui, flowConfig } = useActiveFlow();
+  const { flowId } = useParams();
   const auth = useAuth();
   const { miniMapDisplay, theme } = flowGui;
   const reactFlowInstance = useReactFlow();
@@ -135,7 +137,7 @@ export default function ConfigurationMenu() {
   };
   const executeHandle = () => {
     const elements = reactFlowInstance.toObject();
-    flowExecutorNamespace.emit("flowData", flowDataSeperator(elements));
+    flowExecutorNamespace.emit("executeFlow", backendFlowDataBuilder(flowId, elements));
   };
 
   return (
