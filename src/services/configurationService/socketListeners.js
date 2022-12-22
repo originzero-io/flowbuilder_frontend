@@ -107,9 +107,9 @@ export const noteListener = (socket) => {
   });
 };
 
-export const mainListener = (socket) => {
-  socket.emit("main:onlineUser", "MAKE_ME_ONLINE");
-  socket.on("main:onlineUser", (data) => {
+export const userListener = (socket) => {
+  socket.emit("user:onlineUser", "MAKE_ME_ONLINE");
+  socket.on("user:onlineUser", (data) => {
     const { auth } = store.getState();
     if (auth._id !== data._id) {
       store.dispatch(editUser(data));
@@ -119,7 +119,7 @@ export const mainListener = (socket) => {
       store.dispatch(makeMeOnline(data));
     }
   });
-  socket.on("main:offlineUser", (data) => {
+  socket.on("user:offlineUser", (data) => {
     const { auth } = store.getState();
     if (auth._id !== data._id) {
       store.dispatch(editUser(data));

@@ -3,7 +3,7 @@ import {
   //getIncomers,
   //getConnectedEdges,
   isEdge
-} from "react-flow-renderer";
+} from "reactflow";
 import notification from "utils/notificationHelper";
 import { setElements } from "store/reducers/flow/flowElementsSlice";
 export default class Node {

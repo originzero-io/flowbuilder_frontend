@@ -27,7 +27,7 @@ import {
   setRotateAllPath,
 } from "store/reducers/flow/flowGuiSlice";
 import * as themeColor from "constants/ThemeReference";
-import { useStore, useReactFlow } from "react-flow-renderer";
+import { useStore, useReactFlow } from "reactflow";
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { useParams } from "react-router";
 import { elementNamespace } from "SocketConnections";

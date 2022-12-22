@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import ReactFlow, { useReactFlow } from "react-flow-renderer";
+import ReactFlow, { useReactFlow } from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
 import nodeTypes from "./Nodes";
 import { setPaneClickPosition } from "store/reducers/flow/flowGuiSlice";

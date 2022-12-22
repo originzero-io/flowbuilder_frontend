@@ -5,7 +5,7 @@ import {
   projectListener,
   workspaceListener,
   noteListener,
-  mainListener,
+  userListener,
   flowExecutorListener,
 } from './services/configurationService/socketListeners';
 import createSocket from 'services/SocketService';
@@ -15,20 +15,20 @@ export let flowNamespace;
 export let projectNamespace;
 export let workspaceNamespace;
 export let noteNamespace;
-export let mainNamespace;
+export let userNamespace;
 export let flowExecutorNamespace;
 export default function SocketConnections() {
   const auth = useAuth();
   useEffect(() => {
     if (auth.isAuthenticated) {
-      mainNamespace = createSocket({ namespace: 'main' });
+      userNamespace = createSocket({ namespace: 'users' });
       elementNamespace = createSocket({ namespace: 'elements' });
       flowNamespace = createSocket({ namespace: 'flows' });
       projectNamespace = createSocket({ namespace: 'projects' });
       workspaceNamespace = createSocket({ namespace: 'workspaces' });
       noteNamespace = createSocket({ namespace: 'notes' });
       flowExecutorNamespace = createSocket({ url: 'http://localhost:5002' });
-      mainListener(mainNamespace);
+      userListener(userNamespace);
       elementListener(elementNamespace);
       flowListener(flowNamespace);
       projectListener(projectNamespace);

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Handle, useUpdateNodeInternals,Position } from "react-flow-renderer";
+import { Handle, useUpdateNodeInternals,Position } from "reactflow";
 import { useSelector, useDispatch } from "react-redux";
 import { InfoIcon } from "./Icons";
 import NodeHeader from "./Header/index";
@@ -28,7 +28,6 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
   const sources = Array.from(Array(self.data.sourceCount).keys());
   const targets = Array.from(Array(self.data.targetCount).keys());
   const dispatch = useDispatch();
-  //const { group } = self;
   const { align, expand, enable, group } = self.data;
   
   useEffect(() => {
@@ -55,7 +54,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
                   : "node-handle horizontal"
               }`}
               style={{
-                backgroundColor: group.color,
+                backgroundColor: group.color || "gray",
                 visibility: ioType === "target" || ioType === "both" ? "visible" : "hidden"
               }}
             />
@@ -95,7 +94,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
                   : "node-handle horizontal"
               }`}
               style={{
-                backgroundColor: group.color,
+                backgroundColor: group.color || "gray",
                 visibility: ioType === "source" || ioType === "both" ? "visible" : "hidden"
               }}
             />

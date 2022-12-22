@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useRef, useEffect } from "react";
-import { ReactFlowProvider } from "react-flow-renderer";
+import { ReactFlowProvider } from "reactflow";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";

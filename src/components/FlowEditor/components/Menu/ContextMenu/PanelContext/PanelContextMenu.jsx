@@ -10,7 +10,7 @@ import RecentNodes from "./RecentNodes";
 import { addNewNode } from "store/reducers/flow/flowElementsSlice";
 import { createNode } from "../../../../helpers/elementHelper";
 import useActiveFlow from "hooks/useActiveFlow";
-import { useReactFlow } from "react-flow-renderer";
+import { useReactFlow } from "reactflow";
 
 const PanelContextMenu = () => {
   const { panelMenu } = useSelector((state) => state.menus);

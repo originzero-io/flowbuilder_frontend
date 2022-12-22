@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getOutgoers } from "react-flow-renderer";
+import { getOutgoers } from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
 import useActiveFlow from "hooks/useActiveFlow";
 import useDidMountEffect from "hooks/useDidMountEffect";

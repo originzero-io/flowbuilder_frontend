@@ -1,7 +1,7 @@
 import React from "react";
 import {
   useStore
-} from "react-flow-renderer";
+} from "reactflow";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";

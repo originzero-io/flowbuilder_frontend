@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useReactFlow, useStore, useStoreActions } from 'react-flow-renderer';
+import { useReactFlow, useStore, useStoreActions } from 'reactflow';
 import { BiBrain } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import {

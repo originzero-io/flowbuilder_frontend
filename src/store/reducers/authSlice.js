@@ -1,6 +1,6 @@
 import AuthService from "services/authService";
 import {
-  mainNamespace,
+  userNamespace,
   workspaceNamespace,
   projectNamespace,
   flowNamespace,
@@ -33,7 +33,7 @@ export const authSlice = createSlice({
       state.user = "";
       state.isAuthenticated = false;
 
-      mainNamespace.disconnect();
+      userNamespace.disconnect();
       workspaceNamespace.disconnect();
       projectNamespace.disconnect();
       flowNamespace.disconnect();

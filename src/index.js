@@ -2,6 +2,8 @@ import ReactDOM from "react-dom";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./assets/css/index.js";
+import 'reactflow/dist/style.css';
+
 import App from "./App";
 import "@fortawesome/fontawesome-free/js/brands";
 import "@fortawesome/fontawesome-free/js/solid";

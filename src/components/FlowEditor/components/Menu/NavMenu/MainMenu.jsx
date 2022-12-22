@@ -10,7 +10,7 @@ import useWorkspace from "hooks/useWorkspace";
 import useActiveFlow from "hooks/useActiveFlow";
 import { Logo } from "components/Shared/icons";
 import { MenuIndex, MenuItem } from "./NavMenu.style";
-import { useReactFlow } from "react-flow-renderer";
+import { useReactFlow } from "reactflow";
 import { addSubFlow } from "store/reducers/flow/flowElementsSlice";
 import { toPng } from 'html-to-image';
 

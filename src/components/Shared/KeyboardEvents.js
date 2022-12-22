@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import {
   useKeyPress,
   useReactFlow
-} from "react-flow-renderer";
+} from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
 import { ActionCreators as UndoActionCreators } from "redux-undo";

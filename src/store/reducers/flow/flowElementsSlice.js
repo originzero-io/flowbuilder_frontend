@@ -1,4 +1,4 @@
-import { addEdge, updateEdge, applyEdgeChanges, applyNodeChanges, getOutgoers } from "react-flow-renderer";
+import { addEdge, updateEdge, applyEdgeChanges, applyNodeChanges, getOutgoers } from "reactflow";
 import FlowElementService from "services/configurationService/flowElementService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { isEdgeExist, setSourceNodeColorToEdge } from "components/FlowEditor/helpers/elementHelper";

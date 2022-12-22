@@ -9,7 +9,7 @@ import { Content, FeatureIconsWrapper, Header, Label } from '../../Nodes.style';
 import EditNameForm from './EditNameForm';
 import FeatureIcons from './FeatureIcons';
 import Flag from './NodeFlag';
-import { getIncomers, getOutgoers } from 'react-flow-renderer';
+import { getIncomers, getOutgoers } from 'reactflow';
 
 const propTypes = {
   self: PropTypes.object.isRequired,
