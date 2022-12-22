@@ -2,7 +2,7 @@ import ConfigurationService from ".";
 
 class UserService extends ConfigurationService {
   async getAllUsers() {
-    const response = await this.service.get("/users/getAll")
+    const response = await this.service.get("/users")
     return response.data;
   }
   async addUserToWorkspace(user,workspace) {

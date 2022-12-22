@@ -6,19 +6,19 @@ class FlowService extends ConfigurationService{
         return response.data;
     }
     async getAllFlows() {
-        const response = await this.service.get("/flows/all");
+        const response = await this.service.get("/flows");
         return response.data;
     }
     async getFlowsByProject(project) {
-        const response = await this.service.get(`/flows/byProject/${project._id}`);
+        const response = await this.service.get(`/flows/project/${project._id}`);
         return response.data;
     }
     async getFlowsByWorkspace(workspace) {
-        const response = await this.service.get(`/flows/byWorkspace/${workspace._id}`);
+        const response = await this.service.get(`/flows/workspace/${workspace._id}`);
         return response.data;
     }
     async saveFlowGui(flow_id, flow) {
-        const response = await this.service.put(`/flows/save/${flow_id}`, flow);
+        const response = await this.service.put(`/flows/${flow_id}`, flow);
         return response.data;
     }
 }

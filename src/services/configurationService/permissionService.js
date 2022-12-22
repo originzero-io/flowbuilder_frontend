@@ -3,19 +3,19 @@ import ConfigurationService from ".";
 
 class PermissionService extends ConfigurationService {
   async getAllPermissions() {
-    const response = await this.service.get("/permissions/all");
+    const response = await this.service.get("/permissions");
     return response.data;
   }
   async getUserPermissionInThisWorkspace(workspaceId,userId) {
-    const response = await this.service.get(`/permissions/${workspaceId}/${userId}`)
+    const response = await this.service.get(`/permissions/workspace/${workspaceId}/user/${userId}`)
     return response.data;
   }
   async savePermission(permission) {
-    const response = await this.service.post("/permissions/save",permission);
+    const response = await this.service.post("/permissions",permission);
     return response.data;
   }
   async getPresets() {
-    const response = await this.service.get("/permissions/preset/all");
+    const response = await this.service.get("/permissions/presets");
     return response.data;
   }
   async createPreset(preset) {
@@ -25,7 +25,7 @@ class PermissionService extends ConfigurationService {
         createdBy: auth._id,
         ...preset
     }
-    const response = await this.service.post("/permissions/preset",data);
+    const response = await this.service.post("/permissions/presets",data);
     return response.data;
   }
 }
