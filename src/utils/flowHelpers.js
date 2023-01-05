@@ -6,6 +6,7 @@ export function backendFlowDataBuilder(flowId, elements) {
                 id: node.id,
                 type: node.type,
                 data: {
+                    label:node.data.label,
                     enable: node.data.enable,
                     targetCount: node.data.targetCount,
                     sourceCount: node.data.sourceCount,

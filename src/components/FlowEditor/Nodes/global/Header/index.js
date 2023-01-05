@@ -58,8 +58,8 @@ export default function NodeHeader({ self, selectedElements }) {
         onMouseLeave={onMouseLeaveHandle}
         selected={selectedElements}
       >
-        <button onClick={nodeIncomers}>incomers</button>
-        <button onClick={nodeOutgoers}>outgoers</button>
+        {/* <button onClick={nodeIncomers}>incomers</button>
+        <button onClick={nodeOutgoers}>outgoers</button> */}
         {/* <NodeIcon/> */}
         <Content>
           {edit ? (

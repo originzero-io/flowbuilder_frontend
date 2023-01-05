@@ -135,9 +135,9 @@ export default function ConfigurationMenu() {
       dispatch(logOut());
     }
   };
-  const executeHandle = () => {
+  const debugFlow = () => {
     const elements = reactFlowInstance.toObject();
-    flowExecutorNamespace.emit("executeFlow", backendFlowDataBuilder(flowId, elements));
+    flowExecutorNamespace.emit("debugFlow", backendFlowDataBuilder(flowId, elements));
   };
 
   return (
@@ -155,7 +155,7 @@ export default function ConfigurationMenu() {
             color="success"
           >
             <VscRunAll></VscRunAll>
-            <div onClick = {executeHandle}>Execute</div>
+            <div onClick = {debugFlow}>Debug</div>
           </Button>
         </MenuItem>
         <DropdownList theme={theme}>
