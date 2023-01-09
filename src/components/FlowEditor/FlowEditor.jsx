@@ -21,6 +21,7 @@ import notification from "utils/notificationHelper"
 import { openElementContextMenu, openMultiSelectionContextMenu, openPaneContextMenu } from "./helpers/menuHelper";
 import { flowExecutorNamespace } from "SocketConnections";
 import { useParams } from "react-router-dom";
+import { isConnectionCyclic } from "utils/flowHelpers";
 
 const propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
@@ -59,25 +60,40 @@ export default function FlowEditor({ reactFlowWrapper }) {
     if (params.source === params.target) {
       notification.error("Nodes cannot connect itself");
     } else {
-      const sourceGroup = flowElements.nodes.find((els) => els.id === params.source)?.data.group;
-      const edge = {
-        ...params,
-        type: edgeType,
-        group: sourceGroup,
-        style: { stroke: sourceGroup?.color, strokeWidth: "2px" },
-        data: { source: "", target: "", payload: "Anaks" },
-      };
-
-      const sourceEnable = flowElements.nodes.find(els => els.id === params.source).data.enable;
-      const self = flowElements.nodes.find(els => els.id === params.target);
-      dispatch(addNewEdge(edge));
-      dispatch(setNodeEnable({ self: self, checked: sourceEnable }));
+      if (isConnectionCyclic(flowElements, params)) {
+        notification.error("Connection is Cyclic! You should not do this :)");
+      }
+      else {
+        const sourceGroup = flowElements.nodes.find((els) => els.id === params.source)?.data.group;
+        const edge = {
+          ...params,
+          type: edgeType,
+          group: sourceGroup,
+          style: { stroke: sourceGroup?.color, strokeWidth: "2px" },
+          data: { source: "", target: "", payload: "Anaks" },
+        };
+  
+        const sourceEnable = flowElements.nodes.find(els => els.id === params.source).data.enable;
+        const self = flowElements.nodes.find(els => els.id === params.target);
+        dispatch(addNewEdge(edge));
+        dispatch(setNodeEnable({ self: self, checked: sourceEnable }));
+      }
     }
-  }, [addNewEdge, flowElements.nodes]);
+  }, [addNewEdge, flowElements]);
 
   const onEdgeUpdate = useCallback((oldEdge, newConnection) => {
-    dispatch(updateEdgePath({ oldEdge: oldEdge, newConnection: newConnection }));
-  }, [updateEdgePath]);
+    if (newConnection.source === newConnection.target) {
+      notification.error("Nodes cannot connect itself");
+    }
+    else {
+      if (isConnectionCyclic(flowElements, newConnection)) {
+        notification.error("Connection is Cyclic! You should not do this :)");
+      }
+      else {
+        dispatch(updateEdgePath({ oldEdge: oldEdge, newConnection: newConnection }));
+      }
+    }
+  }, [updateEdgePath, flowElements]);
 
   const onInitHandle = (reactFlowInstance) => {
     reactFlowInstance.setViewport(flowGui.viewport);
