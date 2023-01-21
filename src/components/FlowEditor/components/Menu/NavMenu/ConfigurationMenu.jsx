@@ -137,7 +137,12 @@ export default function ConfigurationMenu() {
   };
   const debugFlow = () => {
     const elements = reactFlowInstance.toObject();
-    flowExecutorNamespace.emit("debugFlow", backendFlowDataBuilder(flowId, elements));
+    const triggerNodes = elements.nodes.filter((node) => node.type === "Trigger");
+    if (triggerNodes.length > 0) {
+      flowExecutorNamespace.emit("debugFlow", backendFlowDataBuilder(flowId, elements));
+    } else {
+      notification.error('Flow does not contain any trigger node.');
+    }
   };
 
   return (
