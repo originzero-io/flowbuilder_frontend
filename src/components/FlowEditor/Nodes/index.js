@@ -9,7 +9,8 @@ import HttpRequestNode from "./HttpRequest.node";
 import * as types from "./constant/nodeTypes"
 import JsonParseNode from "./JsonParse.node";
 const customNodes = {
-  [types.SET_VARIABLES]: SetVariablesNode,
+  [types.TRIGGER]: SetVariablesNode,
+  [types.CONSTANT]: SetVariablesNode,
   [types.NOTIFICATION]: NotificationNode,
   [types.SPLIT]: SplitNode,
   [types.COMBINE]: CombineNode,

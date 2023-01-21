@@ -12,8 +12,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const panelNodeList = [
   {
     id: 1,
-    name: types.SET_VARIABLES,
-    type: types.SET_VARIABLES,
+    name: types.TRIGGER,
+    type: types.TRIGGER,
+    icon: <SetVariablesIcon />,
+    fav: false,
+    createdDate: undefined,
+  },
+  {
+    id: '1xxx',
+    name: types.CONSTANT,
+    type: types.CONSTANT,
     icon: <SetVariablesIcon />,
     fav: false,
     createdDate: undefined,

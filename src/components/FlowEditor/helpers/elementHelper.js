@@ -2,7 +2,7 @@ import uuid from "react-uuid";
 
 export const createNode = (type,position,align,nodeClass) => {
   return {
-    id: uuid(),
+    id: `${type}-${uuid()}`,
     type,
     position,
     data: {
