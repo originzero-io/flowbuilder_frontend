@@ -104,11 +104,11 @@ export function CollapsibleMenuItem({ children, ...rest }) {
 }
 
 CollapsibleMenu.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.array,
   trigger: PropTypes.string,
 };
 CollapsibleSubMenu.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.array,
   trigger: PropTypes.string,
 };
 CollapsibleMenuItem.propTypes = {

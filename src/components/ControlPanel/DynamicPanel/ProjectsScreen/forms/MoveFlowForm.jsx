@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form } from "reactstrap";
 import { flowNamespace } from "SocketConnections";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import useProject from "hooks/useProject";
 
 export default function MoveFlow({ flow }) {

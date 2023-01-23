@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { DropdownList,DropdownWrapper } from "../../StyledComponents/DropdownMenu";
 export const CardContainer = styled.div`
   margin: 4px;
-  width: 160px;
+  width: 250px;
   height: 150px;
   //width:15vw;
   //height:25vh;
@@ -33,7 +33,7 @@ export const CardTitle = styled.div`
   //display: flex;
   //justify-content: center;
   text-align: center;
-  font-size: 20px;
+  font-size: 1.6vmin;
   padding: 8px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -47,7 +47,7 @@ export const CardAuthor = styled.div`
   justify-content: center;
 `;
 export const CardDescription = styled.div`
-  font-size: 12px;
+  font-size: 1.2vmin;
   padding-right:5px;
   padding-left:5px;
   text-align:center;

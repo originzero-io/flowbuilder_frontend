@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getOutgoers, Handle, useUpdateNodeInternals } from "react-flow-renderer";
+import { Handle, useUpdateNodeInternals,Position } from "reactflow";
 import { useSelector, useDispatch } from "react-redux";
 import { InfoIcon } from "./Icons";
 import NodeHeader from "./Header/index";
@@ -12,7 +12,7 @@ import {
   Info,
 } from "../Nodes.style";
 import getIconInstance from "./Icons/iconConstant";
-import { setOutgoersEnable } from "store/reducers/flow/flowElementsReducer";
+import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types"
 import useActiveFlow from "hooks/useActiveFlow";
 
@@ -27,29 +27,26 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sources = Array.from(Array(self.data.sourceCount).keys());
   const targets = Array.from(Array(self.data.targetCount).keys());
-  const { flowElements } = useActiveFlow();
-  const elements = flowElements.present;
   const dispatch = useDispatch();
-  const { selected, align, expand, enable, group } = self.data;
+  const { align, expand, enable, group } = self.data;
+  
   useEffect(() => {
     updateNodeInternals(self.id);
   }, [self.data.targetCount, self.data.sourceCount, align]);
 
   const NodeIcon = getIconInstance(self.type);
   useEffect(() => {
-    const outgoers = getOutgoers(self, elements);
-    const outgoersIds = outgoers.map(o => o.id);
-    dispatch(setOutgoersEnable(outgoersIds,enable));
+    dispatch(setOutgoersEnable({ self, enable }));
   }, [enable])
   return (
-    <NodeWrapper align={align} selected={selected} enable={enable}>
+    <NodeWrapper align={align} selected={self.selected} enable={enable}>
       <TargetWrapper align={align}>
         {targets.map((i, index) => {
           return (
             <Handle
               key={index}
               type="target"
-              position={align === "vertical" ? "top" : "left"}
+              position={align === "vertical" ? Position.Top : Position.Left}
               id={`target${index + 1}`}
               className={`${
                 align === "vertical"
@@ -57,7 +54,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
                   : "node-handle horizontal"
               }`}
               style={{
-                backgroundColor: self.data.group.color,
+                backgroundColor: group.color || "gray",
                 visibility: ioType === "target" || ioType === "both" ? "visible" : "hidden"
               }}
             />
@@ -69,7 +66,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
         <NodeHeader
           self={self}
           collapsible={collapsible}
-          selectedElements={selected}
+          selectedElements={self.selected}
         />
         {expand ? (
           <NodeContent>{children}</NodeContent>
@@ -89,7 +86,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
             <Handle
               key={index}
               type="source"
-              position={align === "vertical" ? "bottom" : "right"}
+              position={align === "vertical" ? Position.Bottom : Position.Right}
               id={`source${index + 1}`}
               className={`${
                 align === "vertical"
@@ -97,7 +94,7 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
                   : "node-handle horizontal"
               }`}
               style={{
-                backgroundColor: group.color,
+                backgroundColor: group.color || "gray",
                 visibility: ioType === "source" || ioType === "both" ? "visible" : "hidden"
               }}
             />

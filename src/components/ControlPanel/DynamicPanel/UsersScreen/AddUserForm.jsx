@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input, Label, Toast } from "reactstrap";
-import { setModal } from "store/reducers/componentReducer";
-import { registerUser } from "store/reducers/userReducer";
-import toast from "react-hot-toast";
+import { setModal } from "store/reducers/componentSlice";
+import { createUser } from "store/reducers/userSlice";
+import notification from "utils/notificationHelper";
 export default function AddUserForm() {
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState({
@@ -19,7 +19,6 @@ export default function AddUserForm() {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
   const onSubmitHandle = (e) => {
-    
     var formData = new FormData();
     formData.append("name", userInfo.name);
     formData.append("username", userInfo.username);
@@ -27,10 +26,9 @@ export default function AddUserForm() {
     formData.append("email", userInfo.email);
     formData.append("avatar", userInfo.avatar);
     formData.append("phone", userInfo.phone);
-    dispatch(registerUser(formData));
+    dispatch(createUser(formData));
     e.preventDefault();
     //dispatch(setModal(false));
-    toast.success("Register successful")
   };
   const profilePictureHandle = (e) => {
     setUserInfo({ ...userInfo, avatar: e.target.files[0] });

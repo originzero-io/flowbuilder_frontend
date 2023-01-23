@@ -4,21 +4,29 @@ import {
   CollapsibleTrigger,
 } from "components/Shared/Collapsible/CollapsibleMenu";
 import FlowList from "./components/FlowList.jsx";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import AddFlowForm from "./forms/AddFlowForm";
 import AddDashboardForm from "./forms/AddDashboardForm";
 import { VscAdd } from "react-icons/vsc";
-import { SearchBar, DashboardsContainer, FlowsContainer, Box } from "./ProjectsScreen.style";
+import {
+  SearchBar,
+  DashboardsContainer,
+  FlowsContainer,
+  Box,
+} from "./ProjectsScreen.style";
 import { useDispatch } from "react-redux";
-import usePermission from "hooks/usePermission";
 import PropTypes from "prop-types";
+import useProject from "hooks/useProject.js";
+import { Alert } from "reactstrap";
+import useAuthPermission from "hooks/useAuthPermission";
 
 const propTypes = {
   flows: PropTypes.array.isRequired,
 };
 export default function Panel({ flows }) {
   const dispatch = useDispatch();
-  const permission = usePermission();
+  const { projects, activeProject } = useProject();
+  const getPermission = useAuthPermission("project");
   const flowsCollapseTrigger = () => {
     return (
       <CollapsibleTrigger
@@ -43,28 +51,38 @@ export default function Panel({ flows }) {
   }, [flows]);
   return (
     <>
-      <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
-        {flows.length > 0 && (
-          <SearchBar
-            placeholder="Search flows"
-            spellCheck={false}
-            onChange={searchHandle}
-          />
-        )}
-        <FlowsContainer>
-          <FlowList flows={searched} />
-          <Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
-            <VscAdd />
-          </Box>
-        </FlowsContainer>
-      </CollapsibleMenu>
-      <CollapsibleMenu trigger={dashboardCollapseTrigger()} open={true}>
-        <DashboardsContainer>
-          <Box onClick={() => dispatch(setModal(<AddDashboardForm />))}>
-            <VscAdd />
-          </Box>
-        </DashboardsContainer>
-      </CollapsibleMenu>
+      {activeProject ? (
+        <>
+          <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
+            {flows.length > 0 && (
+              <SearchBar
+                placeholder="Search flows"
+                spellCheck={false}
+                onChange={searchHandle}
+              />
+            )}
+            <FlowsContainer>
+              <FlowList flows={searched} />
+              {getPermission("CAN_CREATE_FLOW", activeProject._id) && (
+                <Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
+                  <VscAdd />
+                </Box>
+              )}
+            </FlowsContainer>
+          </CollapsibleMenu>
+          <CollapsibleMenu trigger={dashboardCollapseTrigger()} open={true}>
+            <DashboardsContainer>
+              <Box onClick={() => dispatch(setModal(<AddDashboardForm />))}>
+                <VscAdd />
+              </Box>
+            </DashboardsContainer>
+          </CollapsibleMenu>
+        </>
+      ) : (
+        <Alert color="info" style={{ marginLeft: "10px" }}>
+          You can start by adding a project to this workspace
+        </Alert>
+      )}
     </>
   );
 }

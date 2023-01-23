@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getOutgoers } from "react-flow-renderer";
+import { getOutgoers } from "reactflow";
 import { useSelector, useDispatch } from "react-redux";
 import useActiveFlow from "hooks/useActiveFlow";
 import useDidMountEffect from "hooks/useDidMountEffect";
@@ -9,7 +9,7 @@ import NodeGod from "./global/NodeGod";
 import NodeIOManager from "./global/NodeIOManager";
 const SplitNode = (self) => {
   const { flowElements } = useActiveFlow();
-  const elements = flowElements.present;
+  //const elements = flowElements;
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const dispatch = useDispatch();
   const [values, setValues] = useState([
@@ -24,11 +24,11 @@ const SplitNode = (self) => {
     },
   ]);
 
-  let outgoers = getOutgoers(self, elements);
+  //let outgoers = getOutgoers(self, elements);
 
   useDidMountEffect(() => {
     //const data = Object.values(values);
-    nodeClass.doSplit(values, self, outgoers);
+    //nodeClass.doSplit(values, self, outgoers);
   }, [values]);
   const [align, setAlign] = useState("vertical");
   return (
@@ -68,4 +68,4 @@ const SplitNode = (self) => {
   );
 };
 
-export default SplitNode;
+export default React.memo(SplitNode);

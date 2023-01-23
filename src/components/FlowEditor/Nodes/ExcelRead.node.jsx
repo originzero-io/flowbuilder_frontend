@@ -20,4 +20,4 @@ const ExcelReadNode = (self) => {
   );
 };
 
-export default ExcelReadNode;
+export default React.memo(ExcelReadNode);

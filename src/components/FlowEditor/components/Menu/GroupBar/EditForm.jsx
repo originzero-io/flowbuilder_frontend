@@ -1,14 +1,11 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setElements, updateGroupOfElement } from "store/reducers/flow/flowElementsReducer";
-import { updateGroup } from "store/reducers/flow/flowGroupsReducer";
+import { updateGroup } from "store/reducers/flow/flowGroupsSlice";
 import { SubmitIcon } from "components/Shared/icons";
 import { ColorFlag, Submit } from "./GroupBar.style";
 import * as themeColor from "constants/ThemeReference";
-import { isEdge, isNode } from "react-flow-renderer";
 import PropTypes from "prop-types"
-import { updateGroupService } from "services/groupService";
 const Form = styled.form`
   position: relative;
   width: 78%;
@@ -36,7 +33,6 @@ export default function EditForm({ editableItem, setEditableItem, theme }) {
   const onSubmitHandle = async (event) => {
     event.preventDefault();
     dispatch(updateGroup(editableItem.group));
-    dispatch(updateGroupOfElement(editableItem))
     setEditableItem({state:false,group:{}});
   };
   const updateChangeHandle = (event) => {

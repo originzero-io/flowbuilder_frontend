@@ -3,8 +3,9 @@ import NavigationPanel from "../components/ControlPanel/NavigationPanel/Navigati
 import WorkspacePanel from "../components/ControlPanel/WorkspacePanel/WorkspacePanel.jsx";
 import DynamicPanel, { TopMenu } from "../components/ControlPanel/DynamicPanel";
 import { useDispatch } from "react-redux";
-import { getAllUsers } from "store/reducers/userReducer";
+import { getAllUsers } from "store/reducers/userSlice";
 import styled from "styled-components";
+import { flowExecutorNamespace } from "SocketConnections";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,8 +19,10 @@ const Content = styled.div`
 
 export default function ControlPanelPage() {
   const dispatch = useDispatch();
+  //console.log("CONTROL_PANEL_PAGE RENDERED")
   useEffect(() => {
     dispatch(getAllUsers());
+    flowExecutorNamespace.emit('leaveAllFlowRooms');
   }, []);
   return (
     <Wrapper>

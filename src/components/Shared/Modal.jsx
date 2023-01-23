@@ -1,7 +1,7 @@
 import React from "react";
 import ReactModal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import {AiFillCloseCircle} from "react-icons/ai"
 const customStyles = {
   content: {

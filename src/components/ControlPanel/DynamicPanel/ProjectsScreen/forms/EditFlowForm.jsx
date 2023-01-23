@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form, Label, FormGroup } from "reactstrap";
 import { flowNamespace } from "SocketConnections";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import useAuth from "hooks/useAuth";
 
 export default function EditFlow({ flow }) {

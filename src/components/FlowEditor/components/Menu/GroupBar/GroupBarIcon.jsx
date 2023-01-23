@@ -1,27 +1,26 @@
-import React,{useState,useEffect} from "react";
+import React from "react";
 import { Container } from "./GroupBar.style";
-import { useSelector, useDispatch } from "react-redux";
-import { setGroupBarDisplay } from "store/reducers/flow/flowGuiReducer";
+import { useDispatch } from "react-redux";
+import { setGroupBarDisplay } from "store/reducers/flow/flowGuiSlice";
 import { GroupIcon } from "components/Shared/icons";
-import { getGroups } from "store/reducers/flow/flowGroupsReducer";
-import { useParams } from "react-router";
 import useActiveFlow from "hooks/useActiveFlow";
-export default function GroupBarIcon({theme}) {
+import { getGroups } from "store/reducers/flow/flowGroupsSlice";
+
+export default function GroupBarIcon({ theme, flowId }) {
   const { flowGui } = useActiveFlow();
-  const { flowId } = useParams();
   const dispatch = useDispatch();
   const { groupBarDisplay } = flowGui;
   const groupBarDisplayHandle = () => {
     if (groupBarDisplay === "visible") {
       dispatch(setGroupBarDisplay("hidden"));
-    } else {
       dispatch(getGroups(flowId));
+    } else {
       dispatch(setGroupBarDisplay("visible"));
     }
   };
   return (
     <Container onClick={groupBarDisplayHandle} theme={theme}>
-      <GroupIcon width="50px" height="50px" color="whitesmoke" theme={theme}/>
+      <GroupIcon width="50px" height="50px" color="whitesmoke" theme={theme} />
     </Container>
   );
 }

@@ -7,6 +7,7 @@ export const Item = styled.div`
   justify-content: flex-start;
 `;
 export const WorkspaceContainer = styled.div`
+  position:relative;
   background: #212529;
   display: flex;
   flex-direction: column;

@@ -18,10 +18,10 @@ function DashboardList({ project}) {
               <Checkbox name="processorCreate" />
             </CheckboxGroup>
           </CollapsibleMenuItem>
-          {dashboards.map((flow) => {
+          {dashboards.map((dashboard) => {
             return (
-              <CollapsibleMenuItem key={flow._id}>
-                <CheckboxGroup label={flow.config.name}>
+              <CollapsibleMenuItem key={dashboard._id}>
+                <CheckboxGroup label={dashboard.config.name}>
                   <Checkbox name="processorCreate" />
                 </CheckboxGroup>
               </CollapsibleMenuItem>

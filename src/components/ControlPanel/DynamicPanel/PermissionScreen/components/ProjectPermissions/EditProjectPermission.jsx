@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
@@ -11,69 +11,78 @@ import FlowList from "../FlowList";
 import DashboardList from "../DashboardList";
 
 const propTypes = {
-  projects: PropTypes.object.isRequired,
+  projects: PropTypes.array.isRequired,
   permissions: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
-  handleNestedChange: PropTypes.func.isRequired,
-  handleAllChange: PropTypes.func.isRequired,
-  handleMultiAllChange: PropTypes.func.isRequired,
+  handleNestedMultiChange: PropTypes.func.isRequired,
+  handleSingleAllChange: PropTypes.func.isRequired,
+  handleNestedAllChange: PropTypes.func.isRequired,
 };
 function EditProjectPermission({
   projects,
   permissions,
   handleChange,
-  handleNestedChange,
-  handleAllChange,
-  handleMultiAllChange,
+  handleNestedMultiChange,
+  handleSingleAllChange,
+  handleNestedAllChange,
 }) {
+  useEffect(() => {
+    if (projects.length === permissions.CAN_EDIT_PROJECT.length) {
+      handleSingleAllChange({
+        target: {
+          name: "CAN_EDIT_PROJECT",
+          checked: true,
+        },
+      });
+    }
+  }, [permissions.CAN_EDIT_PROJECT.length]);
   return (
     <>
       <PermissionHeader>Edit</PermissionHeader>
       <PermissionContent>
         <CollapsibleMenu trigger="Projects">
           <CollapsibleMenuItem>
-            <CheckboxGroup label="All">
-              <Checkbox
-                name="CAN_EDIT_PROJECT"
-                onChange={handleAllChange}
-                defaultChecked={permissions.CAN_EDIT_PROJECT_ALL}
-                disabled={permissions.EVERYTHING}
-                checked={
-                  permissions.EVERYTHING || permissions.CAN_EDIT_PROJECT_ALL
-                }
-              />
-            </CheckboxGroup>
+            <CheckboxGroup
+              label="All"
+              name="CAN_EDIT_PROJECT"
+              onChange={handleSingleAllChange}
+              defaultChecked={permissions.CAN_EDIT_PROJECT_ALL}
+              disabled={permissions.EVERYTHING}
+              checked={
+                permissions.EVERYTHING || permissions.CAN_EDIT_PROJECT_ALL
+              }
+            />
           </CollapsibleMenuItem>
           {projects.map((project) => {
             return (
               <CollapsibleSubMenu key={project._id} trigger={`${project.name}`}>
                 <CollapsibleMenuItem>
-                  <CheckboxGroup label="This project">
-                    <Checkbox
-                      name="CAN_EDIT_PROJECT"
-                      id={project._id}
-                      onChange={(e) => handleChange(e)}
-                      defaultChecked={permissions.CAN_EDIT_PROJECT.includes(
-                        project._id
-                      )}
-                      disabled={permissions.EVERYTHING}
-                      checked={
-                        permissions.EVERYTHING ||
-                        permissions.CAN_EDIT_PROJECT_ALL ||
-                        permissions.CAN_EDIT_PROJECT.includes(project._id)
-                      }
-                    />
-                  </CheckboxGroup>
+                  <CheckboxGroup
+                    label="This project"
+                    name="CAN_EDIT_PROJECT"
+                    id={project._id}
+                    onChange={(e) => handleChange(e)}
+                    defaultChecked={permissions.CAN_EDIT_PROJECT.includes(
+                      project._id
+                    )}
+                    disabled={permissions.EVERYTHING}
+                    checked={
+                      permissions.EVERYTHING ||
+                      permissions.CAN_EDIT_PROJECT_ALL ||
+                      permissions.CAN_EDIT_PROJECT.includes(project._id)
+                    }
+                  />
                 </CollapsibleMenuItem>
                 <CollapsibleSubMenu trigger="Flows">
                   <FlowList
+                    permissions={permissions}
                     project={project}
-                    handleMultiChange={handleNestedChange}
-                    handleAllChange={handleMultiAllChange}
+                    handleMultiChange={handleNestedMultiChange}
+                    handleNestedAllChange={handleNestedAllChange}
                     permissionName="EDIT"
                   />
                 </CollapsibleSubMenu>
-                <CollapsibleSubMenu trigger="Dashboards">
+                <CollapsibleSubMenu trigger="Dashboards" open={false}>
                   <DashboardList project={project} />
                 </CollapsibleSubMenu>
               </CollapsibleSubMenu>

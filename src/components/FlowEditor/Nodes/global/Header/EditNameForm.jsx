@@ -5,7 +5,7 @@ import { Submit } from "../../../components/Menu/GroupBar/GroupBar.style";
 import { useDispatch } from "react-redux";
 import {
   changeNodeName,
-} from "store/reducers/flow/flowElementsReducer";
+} from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types"
 const Form = styled.form`
   position: relative;
@@ -33,7 +33,7 @@ export default function EditNameForm({ self, setEdit }) {
   const onSubmitHandle = (e) => {
     e.preventDefault();
     setEdit(false);
-    dispatch(changeNodeName(self, editedName));
+    dispatch(changeNodeName({node: self, name: editedName}));
   };
   return (
     <Form onSubmit={onSubmitHandle}>

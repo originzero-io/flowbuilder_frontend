@@ -4,7 +4,7 @@ import { VscTrash } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { Button } from "reactstrap";
 import { noteNamespace } from "SocketConnections";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import useAuth from "hooks/useAuth";
 import useNotes from "hooks/useNotes";
 import Avatar from "components/Shared/Avatar";
@@ -22,7 +22,7 @@ export default function NotesScreen() {
   const deleteNoteHandle = (event, note) => {
     event.stopPropagation();
     if (confirm("Sure?")) {
-      noteNamespace.emit("notes:remove", { note });
+      noteNamespace.emit("notes:delete", { note });
     }
   };
   const viewNoteHandle = (note) => {

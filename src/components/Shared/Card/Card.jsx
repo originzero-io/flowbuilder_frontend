@@ -1,3 +1,4 @@
+import useAuthPermission from "hooks/useAuthPermission";
 import PropTypes from "prop-types";
 import React from "react";
 import { VscTrash } from "react-icons/vsc";
@@ -5,8 +6,11 @@ import { Badge } from "reactstrap";
 import { flowNamespace } from "SocketConnections";
 import Avatar from "../Avatar";
 import {
-  CardBody, CardContainer, CardDescription,
-  CardFooter, CardTitle
+  CardBody,
+  CardContainer,
+  CardDescription,
+  CardFooter,
+  CardTitle,
 } from "./Card.style";
 import DetailMenu from "./DetailMenu";
 
@@ -15,26 +19,36 @@ const propTypes = {
 };
 
 const Card = ({ data }) => {
+  const getPermission = useAuthPermission("project");
   const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
-      flowNamespace.emit("flows:remove", { flow });
+      flowNamespace.emit("flows:delete", { flow });
     }
   };
   return (
     <CardContainer>
       <CardTitle>{data.config.name || ""}</CardTitle>
-      <DetailMenu deleteEvent={deleteCardHandler} data={data} />
+      <DetailMenu deleteEvent={deleteCardHandler} data={data} getPermission={getPermission} />
       <CardBody>
         {/* <CardAuthor>{data.config.createdBy.username || ""}</CardAuthor> */}
         <CardDescription>{data.config.description || ""}</CardDescription>
         <CardFooter>
-          <Avatar avatar={data.config.createdBy.avatar} size={24} style={{marginLeft:'3px'}} />
+          <Avatar
+            avatar={data.config.createdBy.avatar}
+            size={24}
+            style={{ marginLeft: "3px" }}
+          />
           <div>
             <Badge color="success">{data.project.name || ""}</Badge>
-            <span onClick={(e) => deleteCardHandler(e, data)}>
-              <VscTrash style={{ fontSize: "22px" }} />
-            </span>
+            {getPermission("CAN_EDIT_FLOW", {
+              flowId: data._id,
+              projectId: data.project._id,
+            }) && (
+              <span onClick={(e) => deleteCardHandler(e, data)}>
+                <VscTrash style={{ fontSize: "22px" }} />
+              </span>
+            )}
           </div>
         </CardFooter>
       </CardBody>
@@ -42,6 +56,6 @@ const Card = ({ data }) => {
   );
 };
 
-Card.propTypes = propTypes; 
+Card.propTypes = propTypes;
 
 export default Card;

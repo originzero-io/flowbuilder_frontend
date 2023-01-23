@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import { HorizontalDivider } from "../../../../StyledComponents/Divider";
+import { HorizontalDivider } from "components/StyledComponents/Divider";
 import { MenuItem } from "./NavMenu.style";
 import * as tooltip from "constants/TooltipReference";
 import {
@@ -21,12 +21,13 @@ import {
   setElements,
   setRotateAll,
   setExpandAll,
-} from "store/reducers/flow/flowElementsReducer";
+  deleteAllElements,
+} from "store/reducers/flow/flowElementsSlice";
 import {
   setRotateAllPath,
-} from "store/reducers/flow/flowGuiReducer";
+} from "store/reducers/flow/flowGuiSlice";
 import * as themeColor from "constants/ThemeReference";
-import { useZoomPanHelper, useStoreActions } from "react-flow-renderer";
+import { useStore, useReactFlow } from "reactflow";
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { useParams } from "react-router";
 import { elementNamespace } from "SocketConnections";
@@ -48,23 +49,27 @@ const Menu = styled.div`
 `;
 export default function ControlMenu() {
   const { flowGui,flowConfig,flowElements } = useActiveFlow();
-  const { reactFlowInstance,rotateAllPath,theme } = flowGui;
-  const canUndo = flowElements.past.length > 0;
-  const canRedo = flowElements.future.length > 0;
-  const { zoomIn, zoomOut, fitView } = useZoomPanHelper();
-  const setInteractive = useStoreActions((actions) => actions.setInteractive);
+  const { rotateAllPath,theme } = flowGui;
+  const reactFlowInstance = useReactFlow();
+  // const canUndo = flowElements.past.length > 0;
+  // const canRedo = flowElements.future.length > 0;
+
+  //Todo: useReactFlow();
+  //const { zoomIn, zoomOut, fitView } = useReactFlow();
+
+  //const setInteractive = useStore((actions) => actions.setInteractive);
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
   const { flowId } = useParams();
   const saveFlow = useCallback(() => {
     //saveToDb(flowConfig,flowGui);
     const { position, zoom, elements } = reactFlowInstance.toObject();
-    elementNamespace.emit('elements:save', { flow_id: flowId, elements })
+    elementNamespace.emit('elements:save', { flowId: flowId, elements: elements })
   }, [reactFlowInstance]);
 
   const deleteAllNodes = () => {
     if (confirm("Are you sure?")) {
-      dispatch(setElements([]));
+      dispatch(deleteAllElements());
     }
   };
   const closeAllNodes = () => {
@@ -83,26 +88,28 @@ export default function ControlMenu() {
   }, [rotateAllPath]);
 
   const zoomInHandle = () => {
-    zoomIn();
+    reactFlowInstance.zoomIn();
   };
   const zoomOutHandle = () => {
-    zoomOut();
+    reactFlowInstance.zoomOut();
   };
   const fitViewHandle = () => {
-    fitView({ padding: 0.2, includeHiddenNodes: true });
+    reactFlowInstance.fitView({ padding: 0.2, includeHiddenNodes: true });
   };
   const lockHandle = () => {
     setLock(!lock);
   };
-  const undoHandle = () => {
-    dispatch(UndoActionCreators.undo());
-  }
-  const redoHandle = () => {
-    dispatch(UndoActionCreators.redo());
-  }
-  useEffect(() => {
-    setInteractive(lock);
-  }, [lock]);
+  // const undoHandle = () => {
+  //   dispatch(UndoActionCreators.undo());
+  // }
+  // const redoHandle = () => {
+  //   dispatch(UndoActionCreators.redo());
+  // }
+
+  
+  // useEffect(() => {
+  //   setInteractive(lock);
+  // }, [lock]);
   return (
     <Menu theme={theme}>
       <MenuItem
@@ -114,12 +121,12 @@ export default function ControlMenu() {
         <SaveIcon theme={theme} />
       </MenuItem>
       <HorizontalDivider theme={theme} />
-      <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO} onClick={undoHandle}>
+      {/* <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO} onClick={undoHandle}>
         <UndoIcon theme={theme} disable={!canUndo} />
       </MenuItem>
       <MenuItem theme={theme} data-tip="Redo" data-for={tooltip.REDO} onClick={redoHandle}>
         <RedoIcon theme={theme} disable={!canRedo} />
-      </MenuItem>
+      </MenuItem> */}
       <HorizontalDivider theme={theme} />
       <MenuItem
         theme={theme}

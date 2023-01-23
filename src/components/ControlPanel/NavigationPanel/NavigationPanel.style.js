@@ -5,7 +5,7 @@ export const Container = styled.div`
   box-shadow: 0px -1px 50px -33px rgba(0, 0, 0, 0.75);
   background:#212529;
   z-index: 1;
-  flex-basis: 13%;
+  flex-basis: 18%;
   position:relative;
   resize: both;
   //border:1px solid rgb(40, 40, 40);

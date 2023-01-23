@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from 'reactstrap';
 import { projectNamespace } from "SocketConnections";
-import { setModal } from "store/reducers/componentReducer";
+import { setModal } from "store/reducers/componentSlice";
 import useProject from "hooks/useProject";
 const EditProjectForm = ({project}) => {
   const { activeProject } = useProject();

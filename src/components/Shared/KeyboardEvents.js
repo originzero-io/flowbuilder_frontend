@@ -1,60 +1,74 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
-  useStoreActions,
-  useStoreState,
-  useZoomPanHelper,
-} from "react-flow-renderer";
-import KeyboardEventHandler from "react-keyboard-event-handler";
+  useKeyPress,
+  useReactFlow
+} from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
-import toast from "react-hot-toast";
-import { setCopiedElements } from "store/reducers/controlPanelReducer";
-import { pasteNodes } from "store/reducers/flow/flowElementsReducer";
-import { setRotateAllPath } from "store/reducers/flow/flowGuiReducer";
+import notification from "utils/notificationHelper";
+import { setCopiedNodes } from "store/reducers/controlPanelSlice";
+import { pasteNodes, selectAllElements } from "store/reducers/flow/flowElementsSlice";
+import { setRotateAllPath } from "store/reducers/flow/flowGuiSlice";
 import useActiveFlow from "hooks/useActiveFlow";
+
 const KeyboardEvents = () => {
   const dispatch = useDispatch();
   const { flowGui, flowElements } = useActiveFlow();
-  const { copiedElements } = useSelector((state) => state.controlPanel);
-  const { paneClickPosition, reactFlowInstance, rotateAllPath } = flowGui;
-  const elements = flowElements.present;
-  const selectedElements = useStoreState((state) => state.selectedElements);
-  const setSelectedElements = useStoreActions(
-    (actions) => actions.setSelectedElements
-  );
-  const { fitView } = useZoomPanHelper();
+  const { copiedNodes } = useSelector((state) => state.controlPanel);
+  const { paneClickPosition, rotateAllPath } = flowGui;
 
-  const selectAllNodesEvent = (key, e) => {
-    e.preventDefault();
-    setSelectedElements(elements);
-  };
-  const undoEvent = () => {
-    dispatch(UndoActionCreators.undo());
-  };
-  const redoEvent = () => {
-    dispatch(UndoActionCreators.redo());
-  };
-  const fitViewEvent = () => {
-    fitView({ padding: 0.2, includeHiddenNodes: true });
-  };
-  const saveFlowEvent = (key, e) => {
-    e.preventDefault();
-    //saveToDb(reactFlowInstance);
-  };
-  const rotateAllNodesEvent = (key, e) => {
-    e.preventDefault();
-    if (rotateAllPath === "vertical") {
-      dispatch(setRotateAllPath("horizontal"));
-    } else {
-      dispatch(setRotateAllPath("vertical"));
+  const reactFlowInstance = useReactFlow();
+
+  const f2Pressed = useKeyPress("F2");
+  const ctrlAndAPressed = useKeyPress(['Control+a']);
+  const shiftAndRPressed = useKeyPress(['Shift+R']);
+  const ctrlAndCPressed = useKeyPress(['Control+c']);
+  const ctrlAndVPressed = useKeyPress(['Control+v']);
+
+  useEffect(() => {
+    if (ctrlAndAPressed) {
+      dispatch(selectAllElements());
     }
-  };
-  const copyNodesEvent = (key, e) => {
-    e.preventDefault();
-    dispatch(setCopiedElements(selectedElements));
-    toast(`${selectedElements.length} nodes copied`, { icon: "👏",position:'top-center' });
-  };
+  }, [ctrlAndAPressed]);
+
+  useEffect(() => {
+    if (shiftAndRPressed) {
+      if (rotateAllPath === "vertical") {
+        dispatch(setRotateAllPath("horizontal"));
+      } else {
+        dispatch(setRotateAllPath("vertical"));
+      }
+    }
+  }, [shiftAndRPressed]);
+
+  useEffect(() => {
+    if (f2Pressed) {
+      reactFlowInstance.fitView({ padding: 0.2, includeHiddenNodes: true });
+    }
+  }, [f2Pressed]);
+  
+  useEffect(() => {
+    if (ctrlAndCPressed) {
+      const selectedNodes = flowElements.nodes.filter(node => node.selected);
+      dispatch(setCopiedNodes(selectedNodes));
+      notification.success(`${selectedNodes.length} nodes copied`, { icon: "👏",position:'top-center' });
+    }
+  }, [ctrlAndCPressed]);
+
+  useEffect(() => {
+    if (ctrlAndVPressed) {
+      const copiedNodesArray = copiedNodes.map((els, index) => {
+        return {
+          ...els,
+          id: uuid(),
+          position: getPosition(index),
+        };
+      });
+      dispatch(pasteNodes(copiedNodesArray));
+    }
+  }, [ctrlAndVPressed]);
+  
   const getPosition = (index) => {
     const position = reactFlowInstance.project({
       x: paneClickPosition.x - index * 200 - 100,
@@ -62,44 +76,7 @@ const KeyboardEvents = () => {
     });
     return position;
   };
-  const pasteNodesEvent = (key, e) => {
-    e.preventDefault();
-    const newNodes = copiedElements.map((els, index) => {
-      return {
-        ...els,
-        id: uuid(),
-        position: getPosition(index),
-      };
-    });
-    dispatch(pasteNodes(newNodes));
-    setSelectedElements(newNodes);
-  };
-  return (
-    <>
-      <KeyboardEventHandler
-        handleKeys={["ctrl+a"]}
-        onKeyEvent={selectAllNodesEvent}
-      />
-      <KeyboardEventHandler handleKeys={["ctrl+z"]} onKeyEvent={undoEvent} />
-      <KeyboardEventHandler handleKeys={["ctrl+y"]} onKeyEvent={redoEvent} />
-      <KeyboardEventHandler
-        handleKeys={["ctrl+s"]}
-        onKeyEvent={saveFlowEvent}
-      />
-      <KeyboardEventHandler
-        handleKeys={["ctrl+r"]}
-        onKeyEvent={rotateAllNodesEvent}
-      />
-      <KeyboardEventHandler
-        handleKeys={["ctrl+c"]}
-        onKeyEvent={copyNodesEvent}
-      />
-      <KeyboardEventHandler
-        handleKeys={["ctrl+v"]}
-        onKeyEvent={pasteNodesEvent}
-      />
-      <KeyboardEventHandler handleKeys={["f2"]} onKeyEvent={fitViewEvent} />
-    </>
-  );
+
+  return null;
 };
-export default React.memo(KeyboardEvents);
+export default KeyboardEvents;

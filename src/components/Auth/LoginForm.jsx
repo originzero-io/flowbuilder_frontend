@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
-import { loginService } from "services/authService";
-import { loginError, loginSuccess } from "store/reducers/authReducer";
+import { login } from "store/reducers/authSlice";
 import { Input, Text, Submit, ErrorMessage } from "./LoginForm.style";
 import { Redirect } from "react-router-dom";
 import useAuth from "hooks/useAuth";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import toast from "react-hot-toast"
+
 export default function LoginForm() {
   const dispatch = useDispatch();
   const { isAuthenticated, errorMessage } = useAuth();
@@ -19,12 +18,7 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm({});
   const onSubmitHandle = async (data) => {
-    try {
-      dispatch(loginSuccess(data));
-    } catch (error) {
-      toast.error("The server is not active");
-      dispatch(loginError(error.response?.data.message));
-    }
+    dispatch(login(data));
   };
   return (
     <>

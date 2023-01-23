@@ -1,25 +1,26 @@
 body {
   margin: 0px;
 }
-@font-face {
+/* @font-face {
   font-family: "Prime-Regular";
-  src: /* Modern Browsers */ 
+  src:
       url("../fonts/Prime-Regular.ttf")
       format("truetype");
 }
 @font-face {
   font-family: "Prime-Light";
-  src: /* Modern Browsers */ 
+  src:
       url("../fonts/Prime-Light.ttf")
       format("truetype");
-}
+} */
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Prime-Regular";
+  /* font-family: "Prime-Regular"; */
+  font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 1px;
 }
 input[type="color" i] {

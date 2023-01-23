@@ -1,11 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import useProject from "hooks/useProject";
-import useUserPermission from "hooks/useUserPermission";
 import CreateDashboardPermission from "../components/ProjectPermissions/CreateDashboardPermission";
 import CreateFlowPermission from "../components/ProjectPermissions/CreateFlowPermission";
 import CreateProjectPermission from "../components/ProjectPermissions/CreateProjectPermission";
-import DeleteProjectPermission from "../components/ProjectPermissions/DeleteProjectPermission";
 import EditProjectPermission from "../components/ProjectPermissions/EditProjectPermission";
 import UsageProjectPermission from "../components/ProjectPermissions/UsageProjectPermission";
 import ViewProjectPermission from "../components/ProjectPermissions/ViewProjectPermission";
@@ -13,54 +11,43 @@ import { PermissionContainer, TabContainer } from "../components/PermissionScree
 import PropTypes from "prop-types";
 
 const propTypes = {
+  permissions: PropTypes.object.isRequired,
   setSinglePermission: PropTypes.func,
   setMultiplePermission: PropTypes.func,
   setNestedMultiplePermission: PropTypes.func,
   setSingleAllPermission: PropTypes.func,
-  setMultipleAllPermission: PropTypes.func,
+  setNestedAllPermission: PropTypes.func,
 };
-
 export default function ProjectPermissions({
+  permissions,
   setSinglePermission,
   setMultiplePermission,
   setNestedMultiplePermission,
   setSingleAllPermission,
-  setMultipleAllPermission,
+  setNestedAllPermission,
 }) {
   const dispatch = useDispatch();
   const { projects } = useProject();
-  const projectPermissions = useUserPermission("project");
-  const handleSingleProjectChange = (e) => {
-    console.warn("SINGLE_PROJECT_CHANGE çalıştı");
 
-    dispatch(setSinglePermission(e, "project"));
+  const handleSingleProjectChange = (e) => {
+    dispatch(setSinglePermission({ event: e, permissionType: "project" }));
   };
   const handleMultiProjectChange = (e) => {
-    //console.log("handleMultiChange:", e.target);
-    console.warn("MULTI_CHANGE çalıştı");
-  
-    dispatch(setMultiplePermission(e, "project"));
+    dispatch(setMultiplePermission({ event: e, permissionType: "project" }));
   };
-  const handleAllChange = (e) => {
-    console.warn("ALL_CHANGE çalıştı");
-    dispatch(setSingleAllPermission(e, "project"));
+  const handleSingleAllChange = (e) => {
+    dispatch(setSingleAllPermission({ event: e, permissionType: "project" }));
   };
-  const handleMultiAllChange = (e) => {
-    console.warn("MULTI_ALL_CHANGE çalıştı");
-    dispatch(setMultipleAllPermission(e, "project"));
+  const handleNestedAllChange = (e) => {
+    dispatch(setNestedAllPermission({ event: e, permissionType: "project" }));
   };
   const handleNestedMultiChange = (e, flow) => {
     const { _id, project } = flow;
     const flowData = {
-      id: _id,
+      flowId: _id,
       projectId:project._id
-    }
-    console.warn("NESTED_MULTI_CHANGE çalıştı")
-    console.log("flowData:", flowData);
-    //console.log("e:", e.target);
-    //const ids = data.map((d) => d._id);
-
-    dispatch(setNestedMultiplePermission(e, flowData,"project"));
+    }    
+    dispatch(setNestedMultiplePermission({ event: e, flowData: flowData, permissionType: "project" }));
   };
 
   //console.log('projects permissions rendered');
@@ -68,64 +55,54 @@ export default function ProjectPermissions({
     <TabContainer>
       <PermissionContainer size="50%">
         <CreateProjectPermission
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleSingleProjectChange}
         />
       </PermissionContainer>
       <PermissionContainer>
         <CreateDashboardPermission
           projects={projects}
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleMultiProjectChange}
-          handleAllChange={handleAllChange}
+          handleSingleAllChange={handleSingleAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
         <CreateFlowPermission
           projects={projects}
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleMultiProjectChange}
-          handleAllChange={handleAllChange}
-        />
-      </PermissionContainer>
-      <PermissionContainer>
-        <UsageProjectPermission
-          projects={projects}
-          permissions={projectPermissions}
-          handleChange={handleMultiProjectChange}
-          handleNestedChange={handleNestedMultiChange}
-          handleAllChange={handleAllChange}
-          handleMultiAllChange={handleMultiAllChange}
+          handleSingleAllChange={handleSingleAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
         <EditProjectPermission
           projects={projects}
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleMultiProjectChange}
-          handleNestedChange={handleNestedMultiChange}
-          handleAllChange={handleAllChange}
-          handleMultiAllChange={handleMultiAllChange}
+          handleNestedMultiChange={handleNestedMultiChange}
+          handleSingleAllChange={handleSingleAllChange}
+          handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
-        <DeleteProjectPermission
+        <UsageProjectPermission
           projects={projects}
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleMultiProjectChange}
-          handleNestedChange={handleNestedMultiChange}
-          handleAllChange={handleAllChange}
-          handleMultiAllChange={handleMultiAllChange}
+          handleNestedMultiChange={handleNestedMultiChange}
+          handleSingleAllChange={handleSingleAllChange}
+          handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
       <PermissionContainer>
         <ViewProjectPermission
           projects={projects}
-          permissions={projectPermissions}
+          permissions={permissions}
           handleChange={handleMultiProjectChange}
-          handleNestedChange={handleNestedMultiChange}
-          handleAllChange={handleAllChange}
-          handleMultiAllChange={handleMultiAllChange}
+          handleNestedMultiChange={handleNestedMultiChange}
+          handleSingleAllChange={handleSingleAllChange}
+          handleNestedAllChange={handleNestedAllChange}
         />
       </PermissionContainer>
     </TabContainer>
