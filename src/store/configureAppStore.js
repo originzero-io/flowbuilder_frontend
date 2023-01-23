@@ -20,10 +20,10 @@ export default function configureAppStore() {
     getDefaultMiddleware({
       serializableCheck: false,
     }),
-    devTools: process.env.NODE_ENV === "development" ? true : false
+    devTools: process.env.REACT_APP_HOST_ENV === "development" ? true : false
   });
 
-  if (process.env.NODE_ENV !== "production" && module.hot) {
+  if (process.env.REACT_APP_HOST_ENV !== "production" && module.hot) {
     module.hot.accept("./reducers", () => store.replaceReducer(rootReducer));
   }
 

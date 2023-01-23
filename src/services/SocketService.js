@@ -7,7 +7,10 @@ class SocketService {
     console.log(namespace, extraOptions, url);
     this.namespace = namespace;
     this.extraOptions = extraOptions;
-    const URL = process.env.REACT_APP_SOCKET_URL + namespace;
+    // const URL = process.env.REACT_APP_SOCKET_URL + namespace;
+    const URL = (process.env.REACT_APP_HOST_ENV === 'development'
+      ? process.env.REACT_APP_SOCKET_LOCAL_URL
+      : process.env.REACT_APP_SOCKET_CLOUD_URL) + namespace;
   
     this.socket = io.connect(url ? url : URL, {
       transports: ["websocket"],

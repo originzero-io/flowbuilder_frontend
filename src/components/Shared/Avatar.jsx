@@ -5,7 +5,11 @@ export default function Avatar({ avatar,size,...rest }) {
   return (
     <AntdAvatar
       size={size || 42}
-      src={`${process.env.REACT_APP_BASE_URL}/uploads/${avatar}`}
+      src={`${
+        process.env.REACT_APP_HOST_ENV === 'development'
+          ? process.env.REACT_APP_BASE_LOCAL_URL
+          : process.env.REACT_APP_BASE_CLOUD_URL
+      }/uploads/${avatar}`}
       icon={<FaUserCircle style={{ fontSize: "4vmin" }} />}
       {...rest}
     />

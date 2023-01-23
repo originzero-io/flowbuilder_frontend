@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Input, Button, Form, Label, FormGroup } from "reactstrap";
-import { setModal } from "store/reducers/componentSlice";
-import { editUser } from "store/reducers/userSlice";
-import { Avatar } from "antd";
-import { FaUserCheck } from "react-icons/fa";
-import toast from "react-hot-toast"
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Input, Button, Form, Label, FormGroup } from 'reactstrap';
+import { setModal } from 'store/reducers/componentSlice';
+import { editUser } from 'store/reducers/userSlice';
+import { Avatar } from 'antd';
+import { FaUserCheck } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 export default function EditUserForm({ user }) {
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState(user);
@@ -20,15 +20,23 @@ export default function EditUserForm({ user }) {
     e.preventDefault();
     dispatch(editUser(userInfo));
     dispatch(setModal(false));
-    notification.success("User updated");
+    notification.success('User updated');
   };
   const profilePictureHandle = (e) => {
     setUserInfo({ ...userInfo, avatar: e.target.files[0] });
   };
   return (
     <Form onSubmit={onSubmitHandle}>
-      <div style={{marginLeft:'35%'}}>
-        <Avatar size={108} src={`${process.env.REACT_APP_BASE_URL}/uploads/${user.avatar}`} icon={<FaUserCheck style={{fontSize:'48px'}}/>}/>
+      <div style={{ marginLeft: '35%' }}>
+        <Avatar
+          size={108}
+          src={`${
+            process.env.REACT_APP_HOST_ENV === 'development'
+              ? process.env.REACT_APP_BASE_LOCAL_URL
+              : process.env.REACT_APP_BASE_CLOUD_URL
+          }/uploads/${user.avatar}`}
+          icon={<FaUserCheck style={{ fontSize: '48px' }} />}
+        />
       </div>
       {/* <Input
         type="file"

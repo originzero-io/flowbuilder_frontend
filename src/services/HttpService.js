@@ -2,6 +2,7 @@
 import axios from "axios";
 import notification from "utils/notificationHelper";
 
+console.log("envvvv: ", process.env.REACT_APP_HOST_ENV);
 export default class HTTPService {
     constructor() {
         this.service = axios;
@@ -9,7 +10,11 @@ export default class HTTPService {
     createService(serviceName) {
         if (typeof serviceName !== 'undefined') {
             this.service = axios.create({
-              baseURL: `${process.env.REACT_APP_BASE_URL}/${serviceName}`,
+              baseURL: `${
+                process.env.REACT_APP_HOST_ENV === 'development'
+                  ? process.env.REACT_APP_BASE_LOCAL_URL
+                  : process.env.REACT_APP_BASE_CLOUD_URL
+              }/${serviceName}`,
               timeout: 3000,
             });
             this.service.interceptors.request.use(function (config) {
