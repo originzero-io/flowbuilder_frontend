@@ -25,15 +25,25 @@ const persistor = persistStore(store);
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate persistor={persistor}>
       <BrowserRouter>
         <ErrorBoundary FallbackComponent={ErrorFallback} onReset={()=>store.dispatch({type:'RESET'})}>
           <App />
         </ErrorBoundary>
       </BrowserRouter>
-    </PersistGate>
   </Provider>,
   rootElement
 );
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <PersistGate persistor={persistor}>
+//       <BrowserRouter>
+//         <ErrorBoundary FallbackComponent={ErrorFallback} onReset={()=>store.dispatch({type:'RESET'})}>
+//           <App />
+//         </ErrorBoundary>
+//       </BrowserRouter>
+//     </PersistGate>
+//   </Provider>,
+//   rootElement
+// );
 
 //reportWebVitals(console.log);

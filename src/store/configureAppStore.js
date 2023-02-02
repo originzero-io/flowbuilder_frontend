@@ -13,9 +13,10 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+//? if you want to persistance, change rootReducer to persistedReducer in reducer property
 export default function configureAppStore() {
   const store = configureStore({
-    reducer: persistedReducer,
+    reducer: rootReducer,
     middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
