@@ -3,7 +3,6 @@ export { default as DevicesScreen } from "./DevicesScreen/DevicesScreen";
 export { default as LearnScreen } from "./LearnScreen/LearnScreen";
 export { default as NotesScreen } from "./NotesScreen/NotesScreen";
 export { default as PermissionScreen } from "./PermissionScreen/PermissionScreen";
-export { default as AllFlowsPanel } from "./ProjectsScreen/AllFlowsPanel";
 export { default as FlowsByProjectPanel } from "./ProjectsScreen/FlowsByProjectPanel";
 export { default as SettingsScreen } from "./SettingsScreen/SettingsScreen";
 export { default as TeamScreen } from "./TeamScreen/TeamScreen";

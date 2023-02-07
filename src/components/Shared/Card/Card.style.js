@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { DropdownList,DropdownWrapper } from "../../StyledComponents/DropdownMenu";
 export const CardContainer = styled.div`
   margin: 4px;
-  width: 250px;
+  width: 220px;
   height: 150px;
   //width:15vw;
   //height:25vh;
@@ -14,12 +14,11 @@ export const CardContainer = styled.div`
   color: white;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
   &:hover {
-    background-color: rgba(22, 139, 63,0.8);
+    border: 2px solid rgb(22, 139, 63);
   }
   display: flex;
   flex-direction: column;
   position: relative;
-  //border:1px solid rgb(22, 139, 63);
   text-overflow: ellipsis;
 `;
 export const CardBody = styled.div`
@@ -45,6 +44,10 @@ export const CardTitle = styled.div`
 export const CardAuthor = styled.div`
   display: flex;
   justify-content: center;
+  background: rgb(22, 139, 63);
+  margin-left: 6px;
+  padding: 5px;
+  font-size: 1.1vmin;
 `;
 export const CardDescription = styled.div`
   font-size: 1.2vmin;
@@ -66,12 +69,11 @@ export const CardFooter = styled.div`
 `;
 export const CardMoreButton = styled.div`
   font-size: 20px;
-  color: rgb(46, 204, 113);
   position: absolute;
   right: 2px;
   top: 1px;
   &:hover {
-    color: #2ecc71;
+    color: rgb(46, 204, 113);
   }
 `;
 export const DetailMenuList = styled(DropdownList)`

@@ -11,7 +11,6 @@ import styled from "styled-components";
 import {
   LearnScreen,
   NotesScreen,
-  AllFlowsPanel,
   FlowsByProjectPanel,
   SettingsScreen,
   DevicesScreen,
@@ -36,17 +35,10 @@ const PanelComponentWrapper = styled.div`
 `;
 export default function DynamicPanel() {
   const route = useRouteMatch();
-  const { activeWorkspace } = useWorkspace();
-  const history = useHistory();
-  //page redirects to /panel/all automatically when activeWorkspace changed
-  useEffect(() => {
-    history.push(`${route.url}/all`);
-  }, [activeWorkspace]);
   return (
     <Container>
       <PanelComponentWrapper>
         <Switch>
-          <Route exact path={`${route.url}/all`} component={AllFlowsPanel} />
           <Route
             exact
             path={`${route.url}/projects`}

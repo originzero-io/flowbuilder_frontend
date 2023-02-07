@@ -13,7 +13,6 @@ import { AiOutlineProject } from "react-icons/ai";
 import { CgNotes } from "react-icons/cg";
 import { MdDevicesOther } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
-import { BiBrain } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
 import { RiTeamLine } from "react-icons/ri";
 import { setModal } from "store/reducers/componentSlice";
@@ -24,7 +23,6 @@ import useWorkspace from "hooks/useWorkspace";
 import useAuthPermission from "hooks/useAuthPermission";
 import useProject from "hooks/useProject";
 import Avatar from "components/Shared/Avatar";
-import useFlow from "hooks/useFlow";
 
 const NavigationPanel = () => {
   const dispatch = useDispatch();
@@ -32,7 +30,6 @@ const NavigationPanel = () => {
   const { url } = useRouteMatch();
   const { activeWorkspace } = useWorkspace();
   const { projects } = useProject();
-  const flows = useFlow();
   const { name, avatar } = useAuth();
   //console.log("NAVIGATION_PANEL RENDERED");
   const showModalHandle = (e) => {
@@ -65,12 +62,6 @@ const NavigationPanel = () => {
     <Container>
       <NavMenu>
         <WorkspaceBrand workspace={activeWorkspace} />
-        <Link to={`${url}/all`}>
-          <NavMenuItem
-            label={`All Flows (${flows.length})`}
-            icon={<BiBrain />}
-          />
-        </Link>
         <CollapsibleMenu trigger={projectItem()}>
           <Link to={`${url}/projects`}>
             <ProjectList projects={projects} />

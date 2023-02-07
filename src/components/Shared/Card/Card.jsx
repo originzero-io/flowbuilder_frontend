@@ -2,15 +2,14 @@ import useAuthPermission from "hooks/useAuthPermission";
 import PropTypes from "prop-types";
 import React from "react";
 import { VscTrash } from "react-icons/vsc";
-import { Badge } from "reactstrap";
 import { flowNamespace } from "SocketConnections";
-import Avatar from "../Avatar";
 import {
   CardBody,
   CardContainer,
   CardDescription,
   CardFooter,
   CardTitle,
+  CardAuthor
 } from "./Card.style";
 import DetailMenu from "./DetailMenu";
 
@@ -31,22 +30,16 @@ const Card = ({ data }) => {
       <CardTitle>{data.config.name || ""}</CardTitle>
       <DetailMenu deleteEvent={deleteCardHandler} data={data} getPermission={getPermission} />
       <CardBody>
-        {/* <CardAuthor>{data.config.createdBy.username || ""}</CardAuthor> */}
         <CardDescription>{data.config.description || ""}</CardDescription>
         <CardFooter>
-          <Avatar
-            avatar={data.config.createdBy.avatar}
-            size={24}
-            style={{ marginLeft: "3px" }}
-          />
+        <CardAuthor>{data.config.createdBy.username || ""}</CardAuthor>
           <div>
-            <Badge color="success">{data.project.name || ""}</Badge>
             {getPermission("CAN_EDIT_FLOW", {
               flowId: data._id,
               projectId: data.project._id,
             }) && (
               <span onClick={(e) => deleteCardHandler(e, data)}>
-                <VscTrash style={{ fontSize: "22px" }} />
+                <VscTrash style={{ fontSize: "22px", marginRight: '6px' }} />
               </span>
             )}
           </div>

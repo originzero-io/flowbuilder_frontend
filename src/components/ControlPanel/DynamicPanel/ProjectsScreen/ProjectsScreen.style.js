@@ -8,14 +8,13 @@ export const ProjectsContainerIndex = styled.div`
   //min-height: 200px;
 `;
 export const Box = styled(CardContainer)`
-  background: rgb(22, 137, 63);
   font-size: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease-in-out;
   &:hover {
-    background-color: #27ae60;
+    background-color: rgb(22, 137, 63);
     transition: background-color 0.2s ease-in-out;
   }
 `;
@@ -29,7 +28,7 @@ export const SearchBar = styled.input`
   background-color: #212529;
   border:2px solid rgba(75,75,75,0.4);;
   color: whitesmoke;
-  width: 250px;
+  width: 220px;
   height:3vh;
   user-select: none;
   outline-color:green;
