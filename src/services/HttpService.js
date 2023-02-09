@@ -12,8 +12,8 @@ export default class HTTPService {
             this.service = axios.create({
               baseURL: `${
                 process.env.REACT_APP_HOST_ENV === 'development'
-                  ? process.env.REACT_APP_BASE_LOCAL_URL
-                  : process.env.REACT_APP_BASE_CLOUD_URL
+                  ? process.env.REACT_APP_GATEWAY_LOCAL_URL
+                  : process.env.REACT_APP_GATEWAY_CLOUD_URL
               }/${serviceName}`,
               timeout: 3000,
             });

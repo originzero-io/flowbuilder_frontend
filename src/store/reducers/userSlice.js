@@ -40,9 +40,6 @@ export const userSlice = createSlice({
   name: "users",
   initialState: [],
   reducers: {
-    setActiveProject(state, { payload }) {
-      state.activeProject = payload;
-    },
   },
   extraReducers: {
     [getAllUsers.fulfilled]: (state, { payload }) => {

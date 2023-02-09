@@ -144,7 +144,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
   useEffect(() => {
     flowExecutorNamespace.emit('joinFlowRoom', { flowId });
-  }, [])
+  }, [flowExecutorNamespace])
   
   return (
       <ReactFlow

@@ -55,7 +55,6 @@ export default function UserList() {
   };
   return (
     <UserListContainer>
-      <button onClick={()=>notification.warn("Notification test")}>Notification test</button>
       <Button onClick={()=>dispatch(getAllUsers())}>Get Users</Button>
       <Table dark hover>
         <thead>

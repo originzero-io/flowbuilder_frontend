@@ -3,23 +3,24 @@ import notification from "utils/notificationHelper";
 
 class SocketService {
   constructor(config) {
-    const { namespace = "", extraOptions, url } = config;
-    console.log(namespace, extraOptions, url);
+    const { namespace = "", path = "", extraOptions } = config;
+    
     this.namespace = namespace;
     this.extraOptions = extraOptions;
-    // const URL = process.env.REACT_APP_SOCKET_URL + namespace;
-    const URL = (process.env.REACT_APP_HOST_ENV === 'development'
-      ? process.env.REACT_APP_SOCKET_LOCAL_URL
-      : process.env.REACT_APP_SOCKET_CLOUD_URL) + namespace;
-  
-    this.socket = io.connect(url ? url : URL, {
+    
+    const URL = `${
+      process.env.REACT_APP_HOST_ENV === 'development'
+        ? process.env.REACT_APP_GATEWAY_LOCAL_URL
+        : process.env.REACT_APP_GATEWAY_CLOUD_URL
+    }`;
+    this.socket = io.connect(`${URL}/${namespace}`, {
       transports: ["websocket"],
+      path: path,
       reconnectionAttempts: 3,
       auth: { token: localStorage.getItem("token") },
       ...extraOptions,
     });
     this.socket.on("connect", () => {
-      console.log(`${namespace} namespaceine bağlandı.`);
       notification.success(`${this.namespace} namespace connected`);
     });
     this.socket.on(`${this.namespace}:welcome`, (data) => {

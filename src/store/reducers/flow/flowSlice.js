@@ -18,9 +18,6 @@ export const flowSlice = createSlice({
   name: 'flows',
   initialState: [],
   reducers: {
-    setActiveProject(state, { payload }) {
-      state.activeProject = payload
-    },
     createFlow(state, { payload }) {
       state.push(payload);
     },
