@@ -35,6 +35,12 @@ const PanelComponentWrapper = styled.div`
 `;
 export default function DynamicPanel() {
   const route = useRouteMatch();
+  const history = useHistory();
+  
+  useEffect(() => {
+    history.push('/panel/projects')
+  }, [])
+  
   return (
     <Container>
       <PanelComponentWrapper>

@@ -4,6 +4,7 @@ import useFlow from "hooks/useFlow";
 import useProject from "hooks/useProject";
 export default function FlowsByProjectPanel() {
   const { activeProject } = useProject();
+  console.log("activeProo: ", activeProject);
   const flows = useFlow().filter(
     (flow) => flow.project._id === activeProject._id
   );
