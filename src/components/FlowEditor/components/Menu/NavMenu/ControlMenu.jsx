@@ -32,6 +32,8 @@ import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { useParams } from "react-router";
 import { elementNamespace } from "SocketConnections";
 import useActiveFlow from "hooks/useActiveFlow";
+import FlowService from "services/configurationService/flowService";
+import notification from "utils/notificationHelper";
 const Menu = styled.div`
   position: absolute;
   display: flex;
@@ -61,11 +63,20 @@ export default function ControlMenu() {
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
   const { flowId } = useParams();
-  const saveFlow = useCallback(() => {
+  const saveFlow = async () => {
     //saveToDb(flowConfig,flowGui);
-    const { position, zoom, elements } = reactFlowInstance.toObject();
-    elementNamespace.emit('elements:save', { flowId: flowId, elements: elements })
-  }, [reactFlowInstance]);
+    const { nodes, edges, viewport } = reactFlowInstance.toObject();
+    const flow = {
+      config: flowConfig,
+      gui: {
+        ...flowGui,
+        viewport
+      }
+    }
+    await FlowService.saveFlowGui(flowId, flow);
+    elementNamespace.emit("elements:save", { flowId: flowId, elements: { nodes, edges } });
+    notification.success('Flow saved successfully');
+  };
 
   const deleteAllNodes = () => {
     if (confirm("Are you sure?")) {

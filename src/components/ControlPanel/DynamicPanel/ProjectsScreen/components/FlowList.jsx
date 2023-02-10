@@ -7,6 +7,9 @@ import { setCurrentFlowGui } from "store/reducers/flow/flowGuiSlice";
 import { setCurrentFlowConfig } from "store/reducers/flow/flowConfigSlice";
 import { elementNamespace } from "SocketConnections";
 import useAuthPermission from "hooks/useAuthPermission";
+import { useEffect } from "react";
+import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
+import useWorkspace from "hooks/useWorkspace";
 
 const propTypes = {
   flows: PropTypes.oneOfType([PropTypes.array, null])
@@ -15,6 +18,8 @@ const propTypes = {
 const FlowList = ({ flows }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { activeWorkspace } = useWorkspace();
+
   const getPermission = useAuthPermission("project");
   const openPageHandler = async(flow) => {
     elementNamespace.emit('elements:getElements',{flow_id:flow._id});
@@ -22,6 +27,10 @@ const FlowList = ({ flows }) => {
     dispatch(setCurrentFlowGui(flow.gui));
     history.push(`/flow/${flow._id}`);
   };
+  useEffect(() => {
+    dispatch(getFlowsByWorkspace(activeWorkspace));
+  }, [])
+  
   
   return (
     <>

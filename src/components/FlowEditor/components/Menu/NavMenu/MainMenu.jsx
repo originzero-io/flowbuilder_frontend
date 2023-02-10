@@ -54,17 +54,16 @@ const MainMenu = () => {
   const dispatch = useDispatch();
   const reactFlowInstance = useReactFlow();
   const homeClickHandle = async () => {
-    const { nodes, edges, viewport } = reactFlowInstance.toObject();
-    const flow = {
-      config: flowConfig,
-      gui: {
-        ...flowGui,
-        viewport
-      }
-    }
-    await FlowService.saveFlowGui(flowId, flow);
-    elementNamespace.emit("elements:save", { flowId: flowId, elements: { nodes, edges } });
-    dispatch(getFlowsByWorkspace(activeWorkspace));
+    // const { nodes, edges, viewport } = reactFlowInstance.toObject();
+    // const flow = {
+    //   config: flowConfig,
+    //   gui: {
+    //     ...flowGui,
+    //     viewport
+    //   }
+    // }
+    // await FlowService.saveFlowGui(flowId, flow);
+    // elementNamespace.emit("elements:save", { flowId: flowId, elements: { nodes, edges } });
   };
 
   const nameClick = () => {

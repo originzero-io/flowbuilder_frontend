@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./assets/css/index.js";
@@ -23,15 +23,15 @@ export const store = configureAppStore();
 const persistor = persistStore(store);
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(
+const root = createRoot(rootElement);
+root.render(
   <Provider store={store}>
       <BrowserRouter>
         <ErrorBoundary FallbackComponent={ErrorFallback} onReset={()=>store.dispatch({type:'RESET'})}>
           <App />
         </ErrorBoundary>
       </BrowserRouter>
-  </Provider>,
-  rootElement
+  </Provider>
 );
 // ReactDOM.render(
 //   <Provider store={store}>
