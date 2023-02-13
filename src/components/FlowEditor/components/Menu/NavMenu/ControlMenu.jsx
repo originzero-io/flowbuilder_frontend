@@ -63,7 +63,7 @@ export default function ControlMenu() {
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
   const { flowId } = useParams();
-  const saveFlow = async () => {
+  const saveFlow = useCallback(async () => {
     //saveToDb(flowConfig,flowGui);
     const { nodes, edges, viewport } = reactFlowInstance.toObject();
     const flow = {
@@ -76,7 +76,7 @@ export default function ControlMenu() {
     await FlowService.saveFlowGui(flowId, flow);
     elementNamespace.emit("elements:save", { flowId: flowId, elements: { nodes, edges } });
     notification.success('Flow saved successfully');
-  };
+  }, [reactFlowInstance]);
 
   const deleteAllNodes = () => {
     if (confirm("Are you sure?")) {
