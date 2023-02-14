@@ -10,7 +10,7 @@ const SplitNode = (self) => {
       align={align}
       setAlign={setAlign}
       ioType="both"
-      collapsable={true}
+      collapsable
     >
       <NodeIOManager self={self} ioType="source" />
     </NodeGod>

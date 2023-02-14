@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import {DropdownList} from "../StyledComponents/DropdownMenu"
+import { DropdownList } from "./DropdownMenu";
+
 export const Circle = styled.button`
   width: 55px;
   height: 55px;

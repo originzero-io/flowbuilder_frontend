@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { updateGroup } from "store/reducers/flow/flowGroupsSlice";
 import { SubmitIcon } from "components/Shared/icons";
-import { ColorFlag, Submit } from "./GroupBar.style";
 import * as themeColor from "constants/ThemeReference";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
+import { ColorFlag, Submit } from "./GroupBar.style";
+
 const Form = styled.form`
   position: relative;
   width: 78%;
@@ -27,13 +28,13 @@ const propTypes = {
   editableItem: PropTypes.object.isRequired,
   setEditableItem: PropTypes.func.isRequired,
   theme: PropTypes.string.isRequired,
-}
+};
 export default function EditForm({ editableItem, setEditableItem, theme }) {
   const dispatch = useDispatch();
   const onSubmitHandle = async (event) => {
     event.preventDefault();
     dispatch(updateGroup(editableItem.group));
-    setEditableItem({state:false,group:{}});
+    setEditableItem({ state: false, group: {} });
   };
   const updateChangeHandle = (event) => {
     const { name, value } = event.target;
@@ -46,34 +47,32 @@ export default function EditForm({ editableItem, setEditableItem, theme }) {
     });
   };
   return (
-    <>
-      <Form onSubmit={onSubmitHandle}>
-        <Input
-          theme={theme}
-          placeholder="edit name"
-          required
-          onChange={updateChangeHandle}
-          name="name"
-          value={editableItem.group.name}
-          maxLength={12}
-        />
-        <ColorFlag
-          type="color"
-          onChange={updateChangeHandle}
-          name="color"
-          value={editableItem.group.color}
-        />
-        <Submit type="submit">
-          <SubmitIcon
-            width={"22px"}
-            height={"22px"}
-            color={
+    <Form onSubmit={onSubmitHandle}>
+      <Input
+        theme={theme}
+        placeholder="edit name"
+        required
+        onChange={updateChangeHandle}
+        name="name"
+        value={editableItem.group.name}
+        maxLength={12}
+      />
+      <ColorFlag
+        type="color"
+        onChange={updateChangeHandle}
+        name="color"
+        value={editableItem.group.color}
+      />
+      <Submit type="submit">
+        <SubmitIcon
+          width="22px"
+          height="22px"
+          color={
               theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
             }
-          />
-        </Submit>
-      </Form>
-    </>
+        />
+      </Submit>
+    </Form>
   );
 }
 

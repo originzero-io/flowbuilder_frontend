@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const NoteContainer = styled.div`
   margin-top: 8px;
   margin-bottom: 8px;

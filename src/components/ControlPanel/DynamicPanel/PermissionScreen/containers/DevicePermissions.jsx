@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import CreateDevicePermission from "../components/DevicePermissions/CreateDevicePermission";
 import EditDevicePermission from "../components/DevicePermissions/EditDevicePermission";
 import UsageDevicePermission from "../components/DevicePermissions/UsageDevicePermission";
 import { PermissionContainer, TabContainer } from "../components/PermissionScreen.style";
-import PropTypes from "prop-types";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,
@@ -30,7 +30,7 @@ export default function DevicePermissions({
   const handleAllChange = (e) => {
     dispatch(setSingleAllPermission({ event: e, permissionType: "device" }));
   };
-  //console.log('device permissions rendered');
+  // console.log('device permissions rendered');
 
   return (
     <TabContainer>

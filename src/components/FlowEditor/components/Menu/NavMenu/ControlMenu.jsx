@@ -1,21 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { HorizontalDivider } from "components/StyledComponents/Divider";
-import { MenuItem } from "./NavMenu.style";
 import * as tooltip from "constants/TooltipReference";
-import {
-  RedoIcon,
-  UndoIcon,
-  SaveIcon,
-  DeleteIcon,
-  RotateAllIcon,
-  FitViewIcon,
-  ZoomInIcon,
-  ZoomOutIcon,
-  LockIcon,
-  UnLockIcon,
-  ExpandAllIcon,
-} from "./Icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setElements,
@@ -34,6 +20,21 @@ import { elementNamespace } from "SocketConnections";
 import useActiveFlow from "hooks/useActiveFlow";
 import FlowService from "services/configurationService/flowService";
 import notification from "utils/notificationHelper";
+import {
+  RedoIcon,
+  UndoIcon,
+  SaveIcon,
+  DeleteIcon,
+  RotateAllIcon,
+  FitViewIcon,
+  ZoomInIcon,
+  ZoomOutIcon,
+  LockIcon,
+  UnLockIcon,
+  ExpandAllIcon,
+} from "./Icons";
+import { MenuItem } from "./NavMenu.style";
+
 const Menu = styled.div`
   position: absolute;
   display: flex;
@@ -42,39 +43,37 @@ const Menu = styled.div`
   bottom: 10px;
   left: 10px;
   padding: 4px;
-  background: ${(props) =>
-    props.theme === "dark"
-      ? themeColor.DARK_MENU_BACKGROUND
-      : themeColor.LIGHT_MENU_BACKGROUND};
-  color: ${(props) =>
-    props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON};
+  background: ${(props) => (props.theme === "dark"
+    ? themeColor.DARK_MENU_BACKGROUND
+    : themeColor.LIGHT_MENU_BACKGROUND)};
+  color: ${(props) => (props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON)};
 `;
 export default function ControlMenu() {
-  const { flowGui,flowConfig,flowElements } = useActiveFlow();
-  const { rotateAllPath,theme } = flowGui;
+  const { flowGui, flowConfig, flowElements } = useActiveFlow();
+  const { rotateAllPath, theme } = flowGui;
   const reactFlowInstance = useReactFlow();
   // const canUndo = flowElements.past.length > 0;
   // const canRedo = flowElements.future.length > 0;
 
-  //Todo: useReactFlow();
-  //const { zoomIn, zoomOut, fitView } = useReactFlow();
+  // Todo: useReactFlow();
+  // const { zoomIn, zoomOut, fitView } = useReactFlow();
 
-  //const setInteractive = useStore((actions) => actions.setInteractive);
+  // const setInteractive = useStore((actions) => actions.setInteractive);
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
   const { flowId } = useParams();
   const saveFlow = async () => {
-    //saveToDb(flowConfig,flowGui);
+    // saveToDb(flowConfig,flowGui);
     const { nodes, edges, viewport } = reactFlowInstance.toObject();
     const flow = {
       config: flowConfig,
       gui: {
         ...flowGui,
-        viewport
-      }
-    }
+        viewport,
+      },
+    };
     await FlowService.saveFlowGui(flowId, flow);
-    elementNamespace.emit("elements:save", { flowId: flowId, elements: { nodes, edges } });
+    elementNamespace.emit("elements:save", { flowId, elements: { nodes, edges } });
     notification.success('Flow saved successfully');
   };
 
@@ -117,7 +116,6 @@ export default function ControlMenu() {
   //   dispatch(UndoActionCreators.redo());
   // }
 
-  
   // useEffect(() => {
   //   setInteractive(lock);
   // }, [lock]);

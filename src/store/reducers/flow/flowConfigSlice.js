@@ -6,8 +6,8 @@ export const flowConfigSlice = createSlice({
   reducers: {
     setCurrentFlowConfig(state, { payload }) {
       return payload;
-    }
-  }
+    },
+  },
 });
 
 export default flowConfigSlice.reducer;

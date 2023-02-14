@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { SubmitIcon } from "components/Shared/icons";
-import { Submit } from "../../../components/Menu/GroupBar/GroupBar.style";
 import { useDispatch } from "react-redux";
 import {
   changeNodeName,
 } from "store/reducers/flow/flowElementsSlice";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
+import { Submit } from "../../../components/Menu/GroupBar/GroupBar.style";
+
 const Form = styled.form`
   position: relative;
 `;
@@ -22,7 +23,7 @@ const Input = styled.input`
 
 const propTypes = {
   self: PropTypes.object.isRequired,
-  setEdit: PropTypes.func.isRequired
+  setEdit: PropTypes.func.isRequired,
 };
 export default function EditNameForm({ self, setEdit }) {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export default function EditNameForm({ self, setEdit }) {
   const onSubmitHandle = (e) => {
     e.preventDefault();
     setEdit(false);
-    dispatch(changeNodeName({node: self, name: editedName}));
+    dispatch(changeNodeName({ node: self, name: editedName }));
   };
   return (
     <Form onSubmit={onSubmitHandle}>

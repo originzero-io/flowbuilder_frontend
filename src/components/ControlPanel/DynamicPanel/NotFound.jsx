@@ -7,11 +7,11 @@ export default function NotFound() {
     <div>
       <Empty
         image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-        description={
+        description={(
           <span color="success" style={{ fontSize: "2vmin" }}>
             No menu selection
           </span>
-        }
+        )}
       />
     </div>
   );

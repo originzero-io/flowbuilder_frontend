@@ -3,6 +3,7 @@ import Avatar from "components/Shared/Avatar";
 import PropTypes from "prop-types";
 import useWorkspace from "hooks/useWorkspace";
 import styled from "styled-components";
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,7 +23,9 @@ export default function UserHeader({ member }) {
     <Container>
       <Avatar avatar={member.avatar} size={60} />
       <Title>
-        {member.username}'s Permissions of {activeWorkspace.name}
+        {member.username}
+        's Permissions of
+        {activeWorkspace.name}
       </Title>
     </Container>
   );

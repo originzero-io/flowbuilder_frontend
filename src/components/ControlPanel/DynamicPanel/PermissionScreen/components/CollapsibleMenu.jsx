@@ -3,6 +3,7 @@ import Collapsible from "react-collapsible";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
+
 const MenuItem = styled.div`
   padding: 2px;
   padding-left: 8px;
@@ -31,7 +32,7 @@ export default function CollapsibleMenu({ children, trigger, ...rest }) {
   };
   const openTriggerStyle = {
     ...triggerStyle,
-    background: '#3e464d'
+    background: '#3e464d',
   };
   return (
     <Collapsible
@@ -44,11 +45,21 @@ export default function CollapsibleMenu({ children, trigger, ...rest }) {
       trigger={
         open ? (
           <>
-            <MdExpandLess /> <TriggerLabel>{trigger} </TriggerLabel>
+            <MdExpandLess />
+            {' '}
+            <TriggerLabel>
+              {trigger}
+              {' '}
+            </TriggerLabel>
           </>
         ) : (
           <>
-            <MdExpandMore /> <TriggerLabel>{trigger} </TriggerLabel>
+            <MdExpandMore />
+            {' '}
+            <TriggerLabel>
+              {trigger}
+              {' '}
+            </TriggerLabel>
           </>
         )
       }
@@ -61,18 +72,18 @@ export default function CollapsibleMenu({ children, trigger, ...rest }) {
 export function CollapsibleSubMenu({ children, trigger, ...rest }) {
   const [open, setOpen] = useState(rest.open || true);
   const triggerStyle = {
-    marginTop:'3px',
+    marginTop: '3px',
     marginLeft: "7px",
     padding: "3px",
     display: 'flex',
     alignItems: 'center',
-    paddingLeft: '4px'
+    paddingLeft: '4px',
   };
   const openTriggerStyle = {
     ...triggerStyle,
     background: '#3e464d',
-    borderTopLeftRadius:'4px',
-    borderTopRightRadius:'4px',
+    borderTopLeftRadius: '4px',
+    borderTopRightRadius: '4px',
   };
   return (
     <Collapsible
@@ -85,11 +96,21 @@ export function CollapsibleSubMenu({ children, trigger, ...rest }) {
       trigger={
         open ? (
           <>
-            <MdExpandLess /> <TriggerLabel>{trigger} </TriggerLabel>
+            <MdExpandLess />
+            {' '}
+            <TriggerLabel>
+              {trigger}
+              {' '}
+            </TriggerLabel>
           </>
         ) : (
           <>
-             <MdExpandMore /> <TriggerLabel>{trigger} </TriggerLabel>
+            <MdExpandMore />
+            {' '}
+            <TriggerLabel>
+              {trigger}
+              {' '}
+            </TriggerLabel>
           </>
         )
       }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { getSelectedNodes } from "../../../helpers/elementHelper";
 import { setGroupSelectedElements, setGroupSingle } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
+import { getSelectedNodes } from "../../../helpers/elementHelper";
 import { GroupColor, Label } from "../GroupBar/GroupBar.style";
+
 const Container = styled.div`
   position: absolute;
   right: -120px;
@@ -41,9 +42,9 @@ const Content = styled.div`
   margin-top: 2px;
 `;
 export default function GroupMenu({ self }) {
-  const { flowElements,flowGroups } = useActiveFlow();
+  const { flowElements, flowGroups } = useActiveFlow();
   const dispatch = useDispatch();
-  
+
   const [searched, setSearched] = useState([]);
   useEffect(() => {
     setSearched(flowGroups);
@@ -52,10 +53,8 @@ export default function GroupMenu({ self }) {
     setSearched(flowGroups);
   }, []);
   const searchHandle = (e) => {
-    const value = e.target.value;
-    const filtered = flowGroups.filter((group) =>
-      group.name.toLowerCase().includes(value.toLowerCase())
-    );
+    const { value } = e.target;
+    const filtered = flowGroups.filter((group) => group.name.toLowerCase().includes(value.toLowerCase()));
     if (value === "") {
       setSearched([]);
     } else {
@@ -66,7 +65,7 @@ export default function GroupMenu({ self }) {
     if (getSelectedNodes(flowElements.nodes).length > 1) {
       dispatch(setGroupSelectedElements(group));
     } else {
-      dispatch(setGroupSingle({self: self, group: group}));
+      dispatch(setGroupSingle({ self, group }));
     }
   };
 
@@ -78,14 +77,12 @@ export default function GroupMenu({ self }) {
         onChange={searchHandle}
       />
       <Content>
-        {searched.map((group) => {
-          return (
-            <GroupItem key={group._id} onClick={() => selectGroup(group)}>
-              <Label style={{ fontSize: "12px" }}>{group.name}</Label>
-              <GroupColor width="15px" height="15px" value={group.color} />
-            </GroupItem>
-          );
-        })}
+        {searched.map((group) => (
+          <GroupItem key={group._id} onClick={() => selectGroup(group)}>
+            <Label style={{ fontSize: "12px" }}>{group.name}</Label>
+            <GroupColor width="15px" height="15px" value={group.color} />
+          </GroupItem>
+        ))}
       </Content>
     </Container>
   );

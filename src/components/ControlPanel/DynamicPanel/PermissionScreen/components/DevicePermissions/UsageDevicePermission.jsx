@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
-import { PermissionHeader, PermissionContent } from "../PermissionScreen.style";
 import PropTypes from "prop-types";
+import { PermissionHeader, PermissionContent } from "../PermissionScreen.style";
 import CollapsibleMenu, { CollapsibleMenuItem } from "../CollapsibleMenu";
 import PermissionContext from "../../context/PermissionContext";
 
@@ -54,27 +54,25 @@ export default function UsageDevicePermission({
               }
             />
           </CollapsibleMenuItem>
-          {controllers.map((controller) => {
-            return (
-              <CollapsibleMenuItem key={controller._id}>
-                <CheckboxGroup
-                  label={controller.name}
-                  name="CAN_USAGE_CONTROLLER"
-                  id={controller._id}
-                  onChange={(e) => handleChange(e)}
-                  defaultChecked={permissions.CAN_USAGE_CONTROLLER.includes(
-                    controller._id
-                  )}
-                  disabled={permissions.EVERYTHING}
-                  checked={
-                    permissions.EVERYTHING ||
-                    permissions.CAN_USAGE_CONTROLLER_ALL ||
-                    permissions.CAN_USAGE_CONTROLLER.includes(controller._id)
+          {controllers.map((controller) => (
+            <CollapsibleMenuItem key={controller._id}>
+              <CheckboxGroup
+                label={controller.name}
+                name="CAN_USAGE_CONTROLLER"
+                id={controller._id}
+                onChange={(e) => handleChange(e)}
+                defaultChecked={permissions.CAN_USAGE_CONTROLLER.includes(
+                  controller._id,
+                )}
+                disabled={permissions.EVERYTHING}
+                checked={
+                    permissions.EVERYTHING
+                    || permissions.CAN_USAGE_CONTROLLER_ALL
+                    || permissions.CAN_USAGE_CONTROLLER.includes(controller._id)
                   }
-                ></CheckboxGroup>
-              </CollapsibleMenuItem>
-            );
-          })}
+              />
+            </CollapsibleMenuItem>
+          ))}
         </CollapsibleMenu>
         <CollapsibleMenu trigger="Processors">
           <CollapsibleMenuItem>
@@ -89,28 +87,26 @@ export default function UsageDevicePermission({
               }
             />
           </CollapsibleMenuItem>
-          {processors.map((processor) => {
-            return (
-              <CollapsibleMenuItem key={processor._id}>
-                <CheckboxGroup
-                  label={processor.name}
-                  name="CAN_USAGE_PROCESSOR"
-                  id={processor._id}
-                  onChange={(e) => handleChange(e)}
-                  //checked={processor.canUse}
-                  defaultChecked={permissions.CAN_USAGE_PROCESSOR.includes(
-                    processor._id
-                  )}
-                  disabled={permissions.EVERYTHING}
-                  checked={
-                    permissions.EVERYTHING ||
-                    permissions.CAN_USAGE_PROCESSOR_ALL ||
-                    permissions.CAN_USAGE_PROCESSOR.includes(processor._id)
+          {processors.map((processor) => (
+            <CollapsibleMenuItem key={processor._id}>
+              <CheckboxGroup
+                label={processor.name}
+                name="CAN_USAGE_PROCESSOR"
+                id={processor._id}
+                onChange={(e) => handleChange(e)}
+                  // checked={processor.canUse}
+                defaultChecked={permissions.CAN_USAGE_PROCESSOR.includes(
+                  processor._id,
+                )}
+                disabled={permissions.EVERYTHING}
+                checked={
+                    permissions.EVERYTHING
+                    || permissions.CAN_USAGE_PROCESSOR_ALL
+                    || permissions.CAN_USAGE_PROCESSOR.includes(processor._id)
                   }
-                ></CheckboxGroup>
-              </CollapsibleMenuItem>
-            );
-          })}
+              />
+            </CollapsibleMenuItem>
+          ))}
         </CollapsibleMenu>
       </PermissionContent>
     </>

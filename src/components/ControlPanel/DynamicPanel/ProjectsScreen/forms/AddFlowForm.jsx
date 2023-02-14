@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import {
+  Button, Form, FormGroup, Input, Label,
+} from "reactstrap";
 import { flowNamespace } from "SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "hooks/useAuth";
@@ -22,7 +24,7 @@ export default function AddFlowForm() {
   });
   const dispatch = useDispatch();
   const onChangeHandler = (e) => {
-    //setFlowInfo({ ...flowInfo, [e.target.name]: e.target.value });
+    // setFlowInfo({ ...flowInfo, [e.target.name]: e.target.value });
     setFlowInfo({ ...flowInfo, [e.target.name]: e.target.value });
   };
   const onSubmitHandle = (e) => {

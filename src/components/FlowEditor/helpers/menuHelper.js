@@ -9,9 +9,9 @@ export const openPaneContextMenu = (event) => {
   event.preventDefault();
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
-  const clientX = event.clientX;
-  const clientY = event.clientY;
-  //sağdan taşma
+  const { clientX } = event;
+  const { clientY } = event;
+  // sağdan taşma
   if (windowWidth < clientX + 150) {
     console.log("sola dönecek");
     store.dispatch(
@@ -19,37 +19,37 @@ export const openPaneContextMenu = (event) => {
         state: true,
         x: event.clientX - 250,
         y: event.clientY,
-      })
+      }),
     );
   }
-  //soldan taşma
+  // soldan taşma
   else if (clientX < 200) {
     store.dispatch(
       setPanelContextMenu({
         state: true,
         x: event.clientX,
         y: event.clientY,
-      })
+      }),
     );
   }
-  //alttan taşma
+  // alttan taşma
   else if (windowHeight < clientY + 150) {
     store.dispatch(
       setPanelContextMenu({
         state: true,
         x: event.clientX,
         y: event.clientY - 400,
-      })
+      }),
     );
   }
-  //normal
+  // normal
   else {
     store.dispatch(
       setPanelContextMenu({
         state: true,
         x: event.clientX,
         y: event.clientY,
-      })
+      }),
     );
   }
 };
@@ -61,7 +61,7 @@ export const openMultiSelectionContextMenu = (event) => {
       state: true,
       x: event.clientX,
       y: event.clientY,
-    })
+    }),
   );
 };
 
@@ -73,6 +73,6 @@ export const openElementContextMenu = (event, node) => {
       x: event.clientX,
       y: event.clientY,
       element: node,
-    })
+    }),
   );
 };

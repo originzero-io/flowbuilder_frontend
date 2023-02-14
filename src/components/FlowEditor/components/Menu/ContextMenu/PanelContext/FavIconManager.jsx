@@ -1,5 +1,6 @@
 import React from "react";
 import { LikeNodeIcon, DislikeNodeIcon } from "./Icons/index";
+
 export default function FavIconManager({ node, favClick }) {
   return (
     <>

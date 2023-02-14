@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const Text = styled.div`
   letter-spacing: 2px;
   color: whitesmoke;

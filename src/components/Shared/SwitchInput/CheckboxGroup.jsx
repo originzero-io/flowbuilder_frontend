@@ -9,8 +9,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   //background:${(props) => (props.disabled ? "gray" : "yellow")};
-  /* background: 4px solid ${(props) =>
-    props.checked ? "#b7e4c7" : "transparent"}; */
+  /* background: 4px solid ${(props) => (props.checked ? "#b7e4c7" : "transparent")}; */
   opacity: ${(props) => (props.disabled ? "0.3" : "1")};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "auto")};
 `;

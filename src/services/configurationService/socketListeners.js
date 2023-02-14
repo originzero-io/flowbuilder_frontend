@@ -1,4 +1,3 @@
-import { store } from "../../index";
 import notification from "utils/notificationHelper";
 import { makeMeOnline } from "store/reducers/authSlice";
 import {
@@ -32,6 +31,7 @@ import {
 } from "store/reducers/workspaceSlice";
 import { beginTheBar, endTheBar } from "store/reducers/componentSlice";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
+import { store } from "../../index";
 
 export const projectListener = (socket) => {
   socket.on("projects:create", (data) => {
@@ -39,13 +39,13 @@ export const projectListener = (socket) => {
   });
   socket.on("projects:update", (data) => {
     store.dispatch(updateProject(data.project));
-    const activeWorkspace = store.getState().workspaces.activeWorkspace;
+    const { activeWorkspace } = store.getState().workspaces;
     store.dispatch(getFlowsByWorkspace(activeWorkspace));
   });
   socket.on("projects:delete", (data) => {
     store.dispatch(deleteProject(data.projectId));
-    const activeWorkspace = store.getState().workspaces.activeWorkspace;
-    const projects = store.getState().projects.projects;
+    const { activeWorkspace } = store.getState().workspaces;
+    const { projects } = store.getState().projects;
     store.dispatch(getFlowsByWorkspace(activeWorkspace));
     store.dispatch(setActiveProject(projects[0]));
   });
@@ -53,7 +53,7 @@ export const projectListener = (socket) => {
 export const workspaceListener = (socket) => {
   socket.on("workspaces:create", (data) => {
     store.dispatch(createWorkspace(data.workspace));
-    notification.success('Workspace created successfully')
+    notification.success('Workspace created successfully');
   });
   socket.on("workspaces:update", (data) => {
     store.dispatch(editWorkspace(data.workspace));
@@ -61,26 +61,26 @@ export const workspaceListener = (socket) => {
   });
   socket.on("workspaces:delete", (data) => {
     store.dispatch(deleteWorkspace(data.workspaceId));
-    notification.success('Workspace deleted successfully')
+    notification.success('Workspace deleted successfully');
   });
 };
 export const flowListener = (socket) => {
   socket.on("flows:delete", (data) => {
     store.dispatch(deleteFlow(data.flowId));
-    notification.success('Flow deleted successfully')
+    notification.success('Flow deleted successfully');
   });
   socket.on("flows:update", (data) => {
     store.dispatch(editFlow(data.flow));
   });
   socket.on("flows:move", (data) => {
     store.dispatch(moveFlow(data.flow));
-    notification.success('Flow moved successfully')
+    notification.success('Flow moved successfully');
   });
   socket.on("flows:create", (data) => {
-    const { auth,workspaces } = store.getState();
+    const { auth, workspaces } = store.getState();
     store.dispatch(createFlow(data.flow));
-    store.dispatch(getMyPermissionInThisWorkspace({workspace: workspaces.activeWorksapce ,me: auth}));
-    notification.success('Flow created successfully')
+    store.dispatch(getMyPermissionInThisWorkspace({ workspace: workspaces.activeWorksapce, me: auth }));
+    notification.success('Flow created successfully');
   });
 };
 export const elementListener = (socket) => {
@@ -96,14 +96,14 @@ export const elementListener = (socket) => {
 export const noteListener = (socket) => {
   socket.on("notes:create", (data) => {
     store.dispatch(createNote(data.note));
-    notification.success('Note created successfully')
+    notification.success('Note created successfully');
   });
   socket.on("notes:update", (data) => {
     store.dispatch(updateNote(data.note));
   });
   socket.on("notes:delete", (data) => {
     store.dispatch(deleteNote(data.noteId));
-    notification.success('Note deleted successfully')
+    notification.success('Note deleted successfully');
   });
 };
 

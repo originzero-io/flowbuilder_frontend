@@ -1,10 +1,10 @@
 import React from "react";
-import { Container } from "./GroupBar.style";
 import { useDispatch } from "react-redux";
 import { setGroupBarDisplay } from "store/reducers/flow/flowGuiSlice";
 import { GroupIcon } from "components/Shared/icons";
 import useActiveFlow from "hooks/useActiveFlow";
 import { getGroups } from "store/reducers/flow/flowGroupsSlice";
+import { Container } from "./GroupBar.style";
 
 export default function GroupBarIcon({ theme, flowId }) {
   const { flowGui } = useActiveFlow();

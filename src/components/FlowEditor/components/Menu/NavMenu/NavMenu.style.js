@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import * as themeColor from "constants/ThemeReference"
+import * as themeColor from "constants/ThemeReference";
+
 export const MenuIndex = styled.div`
   position: absolute;
   min-width: 250px;
@@ -13,10 +14,9 @@ export const MenuIndex = styled.div`
   padding: 4px;
 `;
 export const Menu = styled(MenuIndex)`
-  background: ${(props) =>
-    props.theme === "dark"
-      ? themeColor.DARK_MENU_BACKGROUND
-      : themeColor.LIGHT_MENU_BACKGROUND};
+  background: ${(props) => (props.theme === "dark"
+    ? themeColor.DARK_MENU_BACKGROUND
+    : themeColor.LIGHT_MENU_BACKGROUND)};
   border-radius: 6px;
   top: 10px;
   right: 45px;

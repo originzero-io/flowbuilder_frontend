@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import useProject from "hooks/useProject";
+import PropTypes from "prop-types";
 import CreateDashboardPermission from "../components/ProjectPermissions/CreateDashboardPermission";
 import CreateFlowPermission from "../components/ProjectPermissions/CreateFlowPermission";
 import CreateProjectPermission from "../components/ProjectPermissions/CreateProjectPermission";
@@ -8,7 +9,6 @@ import EditProjectPermission from "../components/ProjectPermissions/EditProjectP
 import UsageProjectPermission from "../components/ProjectPermissions/UsageProjectPermission";
 import ViewProjectPermission from "../components/ProjectPermissions/ViewProjectPermission";
 import { PermissionContainer, TabContainer } from "../components/PermissionScreen.style";
-import PropTypes from "prop-types";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,
@@ -45,12 +45,12 @@ export default function ProjectPermissions({
     const { _id, project } = flow;
     const flowData = {
       flowId: _id,
-      projectId:project._id
-    }    
-    dispatch(setNestedMultiplePermission({ event: e, flowData: flowData, permissionType: "project" }));
+      projectId: project._id,
+    };
+    dispatch(setNestedMultiplePermission({ event: e, flowData, permissionType: "project" }));
   };
 
-  //console.log('projects permissions rendered');
+  // console.log('projects permissions rendered');
   return (
     <TabContainer>
       <PermissionContainer size="50%">

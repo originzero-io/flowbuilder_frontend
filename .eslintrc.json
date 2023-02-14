@@ -5,7 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "airbnb"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -20,12 +21,17 @@
         "jsx-a11y",
         "only-warn"
     ],
+    
     "rules": {
         "react/display-name":"off",
         "class-methods-use-this": "warn",
         "eqeqeq":"warn",
         "no-case-declarations":"warn",
         "no-empty-pattern":"warn",
-        "no-new-wrappers":"warn"
+        "no-new-wrappers":"warn",
+        "quotes": "off",
+        "linebreak-style": "off",
+        "react/function-component-definition": "off",
+        "import/no-unresolved": "off"
     }
 }

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const CollapseIndex = styled.button`
   background:none;
   border:none;
@@ -19,7 +20,7 @@ export const CollapsableItem = styled(CollapseIndex)`
   margin-right:3px;
   padding-left: 13%;
   border-radius:3px;
-  background:${props => props.active ? "rgba(22, 139, 63,0.6)" : "none"};
+  background:${(props) => (props.active ? "rgba(22, 139, 63,0.6)" : "none")};
   border-bottom:1px solid rgb(50, 50, 50);
   &:focus {
     background-color: rgba(22, 139, 63,0.6);

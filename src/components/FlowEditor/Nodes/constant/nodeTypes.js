@@ -20,7 +20,7 @@ export const MAX_ARRAY = "Max_Element";
 
 export const TCP_IN = "TCP_In";
 export const TCP_OUT = "TCP_Out";
-export const MODBUS_READ= "Modbus_Read";
+export const MODBUS_READ = "Modbus_Read";
 export const MODBUS_WRITE = "Modbus_Write";
 export const S7_READ = "S7_Read";
 export const S7_WRITE = "S7_Write";
@@ -29,6 +29,3 @@ export const SEND_SMS = "Send SMS";
 export const SEND_MAIL = "Send Mail";
 
 export const FILE = "File";
-
-
-

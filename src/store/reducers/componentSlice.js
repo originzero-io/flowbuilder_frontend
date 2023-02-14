@@ -6,28 +6,28 @@ const modalSlice = createSlice({
   reducers: {
     setModal(state, { payload }) {
       return payload;
-    }
-  }
-})
+    },
+  },
+});
 
 const loadingBarSlice = createSlice({
   name: 'modal',
-  initialState: {progress:0},
+  initialState: { progress: 0 },
   reducers: {
     beginTheBar(state, { payload }) {
-      let i = Math.floor(Math.random() * 40) + 10;
+      const i = Math.floor(Math.random() * 40) + 10;
       state.progress = i;
     },
     endTheBar(state, { payload }) {
       state.progress = 100;
-    }
-  }
-})
+    },
+  },
+});
 
 const modalReducer = modalSlice.reducer;
 export { modalReducer };
 export const { setModal } = modalSlice.actions;
 
 const loadingBarReducer = loadingBarSlice.reducer;
-export { loadingBarReducer }
+export { loadingBarReducer };
 export const { beginTheBar, endTheBar } = loadingBarSlice.actions;

@@ -39,14 +39,12 @@ export const authSlice = createSlice({
       flowNamespace.disconnect();
       noteNamespace.disconnect();
       elementNamespace.disconnect();
-    }
+    },
   },
   extraReducers: {
-    [login.fulfilled]: (state, { payload }) => {
-      return state = {
-        ...payload,
-        isAuthenticated: true,
-      }
+    [login.fulfilled]: (state, { payload }) => state = {
+      ...payload,
+      isAuthenticated: true,
     },
     [login.rejected]: (state, { payload }) => {
       state.isAuthenticated = false;

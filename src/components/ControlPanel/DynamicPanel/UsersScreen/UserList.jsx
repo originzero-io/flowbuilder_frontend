@@ -4,15 +4,15 @@ import { Badge, Button, Table } from "reactstrap";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "store/reducers/componentSlice";
-import AddUserForm from "./AddUserForm";
 import { deleteUser, getAllUsers } from "store/reducers/userSlice";
 import { BiEdit } from "react-icons/bi";
 import { VscTrash } from "react-icons/vsc";
 import { FaUserCircle } from "react-icons/fa";
-import EditUserForm from "./EditUserForm";
-import Avatar from "components/Shared/Avatar"
+import Avatar from "components/Shared/Avatar";
 import useUser from "hooks/useUser";
 import notification from "utils/notificationHelper";
+import EditUserForm from "./EditUserForm";
+import AddUserForm from "./AddUserForm";
 
 const UserListContainer = styled.div`
   display: flex;
@@ -55,42 +55,41 @@ export default function UserList() {
   };
   return (
     <UserListContainer>
-      <Button onClick={()=>dispatch(getAllUsers())}>Get Users</Button>
+      <Button onClick={() => dispatch(getAllUsers())}>Get Users</Button>
       <Table dark hover>
         <thead>
           <tr>
-            <th></th>
-            <th></th>
+            <th />
+            <th />
             <th>Online</th>
             <th>Full Name</th>
             <th>Username</th>
             <th>E-Mail</th>
             <th>Phone</th>
             <th>Role</th>
-            <th></th>
+            <th />
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => {
-            return (
-              <tr key={user._id}>
-                <th scope="row">{index + 1}</th>
-                <td>
-                  <Avatar avatar={user.avatar} />
-                </td>
-                <td>
-                  <Box online={user.online} />
-                </td>
-                <td>{user.name}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>{user.phone}</td>
-                <td>
+          {users.map((user, index) => (
+            <tr key={user._id}>
+              <th scope="row">{index + 1}</th>
+              <td>
+                <Avatar avatar={user.avatar} />
+              </td>
+              <td>
+                <Box online={user.online} />
+              </td>
+              <td>{user.name}</td>
+              <td>{user.username}</td>
+              <td>{user.email}</td>
+              <td>{user.phone}</td>
+              <td>
                 <Badge color={user.role === "admin" ? "primary" : "warning"}>
                   {user.role}
                 </Badge>
-                </td>
-                <Td>
+              </td>
+              <Td>
                 <TdItem>
                   <BiEdit
                     onClick={() => editUserHandle(user)}
@@ -101,9 +100,8 @@ export default function UserList() {
                   <VscTrash style={{ fontSize: "20px" }} />
                 </TdItem>
               </Td>
-              </tr>
-            );
-          })}
+            </tr>
+          ))}
         </tbody>
       </Table>
       <Button color="primary" onClick={addUserHandle} style={{ width: "5%" }}>

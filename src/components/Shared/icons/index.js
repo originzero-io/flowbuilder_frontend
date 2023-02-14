@@ -1,38 +1,37 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-//test
+// test
 import * as themeColor from "constants/ThemeReference";
-import React from "react-redux"
-export function Logo({ theme,width="26px",height="30px" }) {
+import React from "react-redux";
+
+export function Logo({ theme, width = "26px", height = "30px" }) {
   return (
-    <>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 156.74 220.09"
-        width={width}
-        height={height}
-        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-      >
-        <polygon
-          points="22.18 1.52 1.09 149.46 10.18 154.33 35.21 80.46 75.34 80.27 58.65 140.83 100.09 141.02 56.68 18.96 22.18 1.52"
-          stroke="#000"
-          strokeMiterlimit={10}
-          strokeWidth="2px"
-        />
-        <polygon
-          points="113.73 48.63 143.82 144.4 155.64 70.15 113.73 48.63"
-          stroke="#000"
-          strokeMiterlimit={10}
-          strokeWidth="2px"
-        />
-        <polygon
-          points="59.49 179.83 132.9 218.55 139.09 179.83 59.49 179.83"
-          stroke="#000"
-          strokeMiterlimit={10}
-          strokeWidth="2px"
-        />
-      </svg>
-    </>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 156.74 220.09"
+      width={width}
+      height={height}
+      fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+    >
+      <polygon
+        points="22.18 1.52 1.09 149.46 10.18 154.33 35.21 80.46 75.34 80.27 58.65 140.83 100.09 141.02 56.68 18.96 22.18 1.52"
+        stroke="#000"
+        strokeMiterlimit={10}
+        strokeWidth="2px"
+      />
+      <polygon
+        points="113.73 48.63 143.82 144.4 155.64 70.15 113.73 48.63"
+        stroke="#000"
+        strokeMiterlimit={10}
+        strokeWidth="2px"
+      />
+      <polygon
+        points="59.49 179.83 132.9 218.55 139.09 179.83 59.49 179.83"
+        stroke="#000"
+        strokeMiterlimit={10}
+        strokeWidth="2px"
+      />
+    </svg>
   );
 }
 export function AddIcon({ width, height, color }) {
@@ -77,7 +76,9 @@ export function CancelIcon({ width, height, color }) {
     </svg>
   );
 }
-export function NameEditIcon({ width, height, onClick, theme }) {
+export function NameEditIcon({
+  width, height, onClick, theme,
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -186,7 +187,9 @@ export function NameEditIcon({ width, height, onClick, theme }) {
     </svg>
   );
 }
-export function GroupIcon({ width, height, color, theme }) {
+export function GroupIcon({
+  width, height, color, theme,
+}) {
   return (
     <svg
       data-name="Layer 1"
@@ -310,7 +313,9 @@ export function GroupIcon({ width, height, color, theme }) {
     </svg>
   );
 }
-export function NonGroupIcon({ width, height, color, onClick, theme }) {
+export function NonGroupIcon({
+  width, height, color, onClick, theme,
+}) {
   return (
     <svg
       id="Layer_1"

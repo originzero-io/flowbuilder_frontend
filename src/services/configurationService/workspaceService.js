@@ -5,6 +5,7 @@ class WorkspaceService extends ConfigurationService {
     const response = await this.service.get("/workspaces");
     return response.data;
   }
+
   async getMyWorkspaces() {
     const response = await this.service.get("/workspaces/my-workspaces");
     return response.data;

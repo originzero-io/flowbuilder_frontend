@@ -19,17 +19,17 @@ export const addUserToWorkspace = createAsyncThunk(
   async ({ userInfo, workspace }) => {
     const user = await UserService.addUserToWorkspace(userInfo, workspace);
     return user;
-  }
+  },
 );
 export const removeUserToWorkspace = createAsyncThunk(
   "users/remove_from_workspace",
   async ({ userInfo, workspace }) => {
     const user = await UserService.removeUserToWorkspace(
       userInfo,
-      workspace
+      workspace,
     );
     return user;
-  }
+  },
 );
 export const deleteUser = createAsyncThunk("users/delete", async (user) => {
   await UserService.deleteUser(user);
@@ -42,26 +42,22 @@ export const userSlice = createSlice({
   reducers: {
   },
   extraReducers: {
-    [getAllUsers.fulfilled]: (state, { payload }) => {
-      return payload;
-    },
+    [getAllUsers.fulfilled]: (state, { payload }) => payload,
     [createUser.fulfilled]: (state, { payload }) => {
       state.push(payload);
     },
     [editUser.fulfilled]: (state, { payload }) => {
       const index = state.findIndex((user) => user._id === payload._id);
-      state[index] = payload
+      state[index] = payload;
     },
-    [deleteUser.fulfilled]: (state, { payload }) => {
-      return state.filter((user) => user._id !== payload._id);
-    },
+    [deleteUser.fulfilled]: (state, { payload }) => state.filter((user) => user._id !== payload._id),
     [addUserToWorkspace.fulfilled]: (state, { payload }) => {
       const index = state.findIndex((user) => user._id === payload._id);
-      state[index] = payload
+      state[index] = payload;
     },
-    [removeUserToWorkspace.fulfilled]: (state,  {payload }) => {
+    [removeUserToWorkspace.fulfilled]: (state, { payload }) => {
       const index = state.findIndex((user) => user._id === payload._id);
-      state[index] = payload
+      state[index] = payload;
     },
   },
 });

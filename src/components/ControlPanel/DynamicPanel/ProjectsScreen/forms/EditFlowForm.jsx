@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Input, Button, Form, Label, FormGroup } from "reactstrap";
+import {
+  Input, Button, Form, Label, FormGroup,
+} from "reactstrap";
 import { flowNamespace } from "SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "hooks/useAuth";
@@ -11,7 +13,7 @@ export default function EditFlow({ flow }) {
   const [flowConfig, setFlowConfig] = useState({
     name: flow.config.name,
     description: flow.config.description,
-    createdBy:auth._id
+    createdBy: auth._id,
   });
 
   const onChangeHandler = (e) => {
@@ -22,7 +24,7 @@ export default function EditFlow({ flow }) {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    flowNamespace.emit('flows:update',{flow,flowConfig})
+    flowNamespace.emit('flows:update', { flow, flowConfig });
     dispatch(setModal(false));
   };
   return (

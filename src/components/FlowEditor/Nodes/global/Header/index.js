@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux';
 import { expandNode } from 'store/reducers/flow/flowElementsSlice';
 import { closeAllNodeGroupMenu } from 'store/reducers/flow/flowGuiSlice';
 import useActiveFlow from 'hooks/useActiveFlow';
+import { getIncomers, getOutgoers } from 'reactflow';
 import GroupMenu from '../../../components/Menu/NodeGroupMenu/NodeGroupMenu';
-import { Content, FeatureIconsWrapper, Header, Label } from '../../Nodes.style';
+import {
+  Content, FeatureIconsWrapper, Header, Label,
+} from '../../Nodes.style';
 import EditNameForm from './EditNameForm';
 import FeatureIcons from './FeatureIcons';
 import Flag from './NodeFlag';
-import { getIncomers, getOutgoers } from 'reactflow';
 
 const propTypes = {
   self: PropTypes.object.isRequired,
@@ -37,7 +39,7 @@ export default function NodeHeader({ self, selectedElements }) {
     setHover(false);
   };
 
-  //const NodeIcon = getIconComponent(self.type);
+  // const NodeIcon = getIconComponent(self.type);
   const [edit, setEdit] = useState(false);
   const expandHandle = () => {
     dispatch(expandNode(self));
@@ -52,29 +54,27 @@ export default function NodeHeader({ self, selectedElements }) {
   };
 
   return (
-    <>
-      <Header
-        onMouseEnter={onMouseEnterHandle}
-        onMouseLeave={onMouseLeaveHandle}
-        selected={selectedElements}
-      >
-        {/* <button onClick={nodeIncomers}>incomers</button>
+    <Header
+      onMouseEnter={onMouseEnterHandle}
+      onMouseLeave={onMouseLeaveHandle}
+      selected={selectedElements}
+    >
+      {/* <button onClick={nodeIncomers}>incomers</button>
         <button onClick={nodeOutgoers}>outgoers</button> */}
-        {/* <NodeIcon/> */}
-        <Content>
-          {edit ? (
-            <EditNameForm setEdit={setEdit} self={self} />
-          ) : (
-            <Label onDoubleClick={expandHandle}>{self.data.label}</Label>
-          )}
-        </Content>
-        <FeatureIconsWrapper>
-          {hover && <FeatureIcons self={self} edit={edit} setEdit={setEdit} />}
-        </FeatureIconsWrapper>
-        <Flag self={self} onClick={groupHandle} />
-        {showGroup && <GroupMenu self={self} />}
-      </Header>
-    </>
+      {/* <NodeIcon/> */}
+      <Content>
+        {edit ? (
+          <EditNameForm setEdit={setEdit} self={self} />
+        ) : (
+          <Label onDoubleClick={expandHandle}>{self.data.label}</Label>
+        )}
+      </Content>
+      <FeatureIconsWrapper>
+        {hover && <FeatureIcons self={self} edit={edit} setEdit={setEdit} />}
+      </FeatureIconsWrapper>
+      <Flag self={self} onClick={groupHandle} />
+      {showGroup && <GroupMenu self={self} />}
+    </Header>
   );
 }
 NodeHeader.propTypes = propTypes;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const Item = styled.div`
   padding:7px 7px 7px 2px;
   width:100%;
@@ -16,7 +17,7 @@ export const WorkspaceContainer = styled.div`
   flex-basis: 4%;
 `;
 export const WorkspaceItemWrapper = styled(Item)`
-  background:${props => props.active ? "#343a40" : "none"};
+  background:${(props) => (props.active ? "#343a40" : "none")};
   display:flex;
   justify-content:center;
 `;
@@ -24,7 +25,7 @@ export const WorkspaceItem = styled.div`
   color:white;
   font-size:1.5vmin;
   border-radius:50%;
-  background:${props => props.active ? "rgb(22, 139, 63)" : "#343A40"};
+  background:${(props) => (props.active ? "rgb(22, 139, 63)" : "#343A40")};
   width:50%;
   padding:2px;
   text-align:center;

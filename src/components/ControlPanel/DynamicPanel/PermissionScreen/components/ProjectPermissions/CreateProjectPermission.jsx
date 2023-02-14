@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
+import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,
@@ -15,7 +15,7 @@ function CreateProjectPermission({ permissions, handleChange }) {
         <Checkbox
           name="CAN_CREATE_PROJECT"
           size="30px"
-          center={true}
+          center
           defaultChecked={permissions.CAN_CREATE_PROJECT}
           disabled={permissions.EVERYTHING}
           checked={permissions.EVERYTHING || permissions.CAN_CREATE_PROJECT}

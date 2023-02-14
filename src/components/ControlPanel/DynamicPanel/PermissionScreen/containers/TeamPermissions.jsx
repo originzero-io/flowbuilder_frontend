@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
+import PropTypes from "prop-types";
 import {
   PermissionContainer,
   PermissionContent,
   TabContainer,
   PermissionHeader,
 } from "../components/PermissionScreen.style";
-import PropTypes from "prop-types";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,
@@ -17,7 +17,7 @@ const propTypes = {
 export default function TeamPermissions({ permissions, setSinglePermission }) {
   const dispatch = useDispatch();
   const handleChange = (e) => {
-    dispatch(setSinglePermission({event: e, permissionType: "team"}));
+    dispatch(setSinglePermission({ event: e, permissionType: "team" }));
   };
   return (
     <TabContainer>
@@ -28,7 +28,7 @@ export default function TeamPermissions({ permissions, setSinglePermission }) {
             name="CAN_INVITE_MEMBER"
             size="30px"
             defaultChecked={permissions.CAN_INVITE_MEMBER}
-            center={true}
+            center
             onChange={(e) => handleChange(e)}
             disabled={permissions.EVERYTHING}
             checked={permissions.EVERYTHING || permissions.CAN_INVITE_MEMBER}
@@ -42,7 +42,7 @@ export default function TeamPermissions({ permissions, setSinglePermission }) {
             name="CAN_REMOVE_MEMBER"
             size="30px"
             defaultChecked={permissions.CAN_REMOVE_MEMBER}
-            center={true}
+            center
             onChange={(e) => handleChange(e)}
             disabled={permissions.EVERYTHING}
             checked={permissions.EVERYTHING || permissions.CAN_REMOVE_MEMBER}
@@ -56,7 +56,7 @@ export default function TeamPermissions({ permissions, setSinglePermission }) {
             name="CAN_ASSIGN_PERMISSION"
             size="30px"
             defaultChecked={permissions.CAN_ASSIGN_PERMISSION}
-            center={true}
+            center
             onChange={(e) => handleChange(e)}
             disabled={permissions.EVERYTHING}
             checked={

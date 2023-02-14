@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import * as themeColor from "constants/ThemeReference"
+import * as themeColor from "constants/ThemeReference";
+
 export const Container = styled.div`
   //position: absolute;
   //border-radius: 6px;
@@ -18,10 +19,9 @@ export const Container = styled.div`
   display:flex;
   justify-content:center;
   align-items:center;
-  background:${(props) =>
-    props.theme === "dark"
-      ? themeColor.DARK_MENU_BACKGROUND
-      : themeColor.LIGHT_MENU_BACKGROUND};;
+  background:${(props) => (props.theme === "dark"
+    ? themeColor.DARK_MENU_BACKGROUND
+    : themeColor.LIGHT_MENU_BACKGROUND)};;
 `;
 
 export const GroupItem = styled.div`
@@ -116,8 +116,8 @@ export const ColorFlag = styled.input`
   top:0;
 `;
 export const GroupColor = styled.div`
-  width: ${props=>props.width};
-  height: ${props=>props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   background: ${(props) => props.value};
   border-radius: 2px;
 `;

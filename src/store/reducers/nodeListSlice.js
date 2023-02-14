@@ -1,5 +1,6 @@
-import * as types from "../../components/FlowEditor/Nodes/constant/nodeTypes";
 import React from "react";
+import { createSlice } from "@reduxjs/toolkit";
+import * as types from "../../components/FlowEditor/Nodes/constant/nodeTypes";
 import {
   SetVariablesIcon,
   NotificationIcon,
@@ -8,7 +9,7 @@ import {
   CalculateIcon,
   ExcelReadIcon,
 } from "../../components/FlowEditor/Nodes/global/Icons";
-import { createSlice } from "@reduxjs/toolkit";
+
 const panelNodeList = [
   {
     id: 1,
@@ -236,10 +237,10 @@ export const nodeListSlice = createSlice({
       return payload;
     },
     addNodeToFavorites(state, { payload }) {
-      return state.map(node => node.id === payload.id ? { ...node, fav: !node.fav } : node);    
-    }
-  }
-})
+      return state.map((node) => (node.id === payload.id ? { ...node, fav: !node.fav } : node));
+    },
+  },
+});
 
 export const { setNodeList, addNodeToFavorites } = nodeListSlice.actions;
 export default nodeListSlice.reducer;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {
   useKeyPress,
-  useReactFlow
+  useReactFlow,
 } from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
@@ -47,28 +47,26 @@ const KeyboardEvents = () => {
       reactFlowInstance.fitView({ padding: 0.2, includeHiddenNodes: true });
     }
   }, [f2Pressed]);
-  
+
   useEffect(() => {
     if (ctrlAndCPressed) {
-      const selectedNodes = flowElements.nodes.filter(node => node.selected);
+      const selectedNodes = flowElements.nodes.filter((node) => node.selected);
       dispatch(setCopiedNodes(selectedNodes));
-      notification.success(`${selectedNodes.length} nodes copied`, { icon: "👏",position:'top-center' });
+      notification.success(`${selectedNodes.length} nodes copied`, { icon: "👏", position: 'top-center' });
     }
   }, [ctrlAndCPressed]);
 
   useEffect(() => {
     if (ctrlAndVPressed) {
-      const copiedNodesArray = copiedNodes.map((els, index) => {
-        return {
-          ...els,
-          id: uuid(),
-          position: getPosition(index),
-        };
-      });
+      const copiedNodesArray = copiedNodes.map((els, index) => ({
+        ...els,
+        id: uuid(),
+        position: getPosition(index),
+      }));
       dispatch(pasteNodes(copiedNodesArray));
     }
   }, [ctrlAndVPressed]);
-  
+
   const getPosition = (index) => {
     const position = reactFlowInstance.project({
       x: paneClickPosition.x - index * 200 - 100,

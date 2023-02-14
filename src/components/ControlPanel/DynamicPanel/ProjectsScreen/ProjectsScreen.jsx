@@ -3,22 +3,22 @@ import {
   CollapsibleMenu,
   CollapsibleTrigger,
 } from "components/Shared/Collapsible/CollapsibleMenu";
-import FlowList from "./components/FlowList.jsx";
 import { setModal } from "store/reducers/componentSlice";
-import AddFlowForm from "./forms/AddFlowForm";
-import AddDashboardForm from "./forms/AddDashboardForm";
 import { VscAdd } from "react-icons/vsc";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import useProject from "hooks/useProject.js";
+import { Alert } from "reactstrap";
+import useAuthPermission from "hooks/useAuthPermission";
 import {
   SearchBar,
   DashboardsContainer,
   FlowsContainer,
   Box,
 } from "./ProjectsScreen.style";
-import { useDispatch } from "react-redux";
-import PropTypes from "prop-types";
-import useProject from "hooks/useProject.js";
-import { Alert } from "reactstrap";
-import useAuthPermission from "hooks/useAuthPermission";
+import AddDashboardForm from "./forms/AddDashboardForm";
+import AddFlowForm from "./forms/AddFlowForm";
+import FlowList from "./components/FlowList.jsx";
 
 const propTypes = {
   flows: PropTypes.array.isRequired,
@@ -27,23 +27,17 @@ export default function Panel({ flows }) {
   const dispatch = useDispatch();
   const { projects, activeProject } = useProject();
   const getPermission = useAuthPermission("project");
-  const flowsCollapseTrigger = () => {
-    return (
-      <CollapsibleTrigger
-        label={`Flows (${flows.length})`}
-        style={{ color: "white" }}
-      />
-    );
-  };
-  const dashboardCollapseTrigger = () => {
-    return <CollapsibleTrigger label="Dashboards" style={{ color: "white" }} />;
-  };
+  const flowsCollapseTrigger = () => (
+    <CollapsibleTrigger
+      label={`Flows (${flows.length})`}
+      style={{ color: "white" }}
+    />
+  );
+  const dashboardCollapseTrigger = () => <CollapsibleTrigger label="Dashboards" style={{ color: "white" }} />;
   const [searched, setSearched] = useState(flows);
   const searchHandle = (e) => {
-    const value = e.target.value;
-    const filtered = flows.filter((flow) =>
-      flow.config.name.toLowerCase().includes(value.toLowerCase())
-    );
+    const { value } = e.target;
+    const filtered = flows.filter((flow) => flow.config.name.toLowerCase().includes(value.toLowerCase()));
     setSearched(filtered);
   };
   useEffect(() => {
@@ -53,7 +47,7 @@ export default function Panel({ flows }) {
     <>
       {activeProject ? (
         <>
-          <CollapsibleMenu trigger={flowsCollapseTrigger()} open={true}>
+          <CollapsibleMenu trigger={flowsCollapseTrigger()} open>
             {flows.length > 0 && (
               <SearchBar
                 placeholder="Search flows"
@@ -70,7 +64,7 @@ export default function Panel({ flows }) {
               )}
             </FlowsContainer>
           </CollapsibleMenu>
-          <CollapsibleMenu trigger={dashboardCollapseTrigger()} open={true}>
+          <CollapsibleMenu trigger={dashboardCollapseTrigger()} open>
             <DashboardsContainer>
               <Box onClick={() => dispatch(setModal(<AddDashboardForm />))}>
                 <VscAdd />

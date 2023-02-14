@@ -5,16 +5,13 @@ const NotificationNode = (self) => {
   const [align, setAlign] = useState("vertical");
 
   return (
-    <>
-      <NodeGod
-        self={self}
-        align={align}
-        setAlign={setAlign}
-        ioType="target"
-        collapsable={false}
-      >
-      </NodeGod>
-    </>
+    <NodeGod
+      self={self}
+      align={align}
+      setAlign={setAlign}
+      ioType="target"
+      collapsable={false}
+    />
   );
 };
 

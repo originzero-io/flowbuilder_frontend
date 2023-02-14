@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
-import CollapsibleMenu, { CollapsibleMenuItem } from "../CollapsibleMenu";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
+import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
+import CollapsibleMenu, { CollapsibleMenuItem } from "../CollapsibleMenu";
 
 const propTypes = {
   projects: PropTypes.object.isRequired,
@@ -44,27 +44,25 @@ function CreateFlowPermission({
               }
             />
           </CollapsibleMenuItem>
-          {projects.map((project) => {
-            return (
-              <CollapsibleMenuItem key={project._id}>
-                <CheckboxGroup
-                  label={project.name}
-                  name="CAN_CREATE_FLOW"
-                  id={project._id}
-                  onChange={(e) => handleChange(e)}
-                  defaultChecked={permissions.CAN_CREATE_FLOW.includes(
-                    project._id
-                  )}
-                  disabled={permissions.EVERYTHING}
-                  checked={
-                    permissions.EVERYTHING ||
-                    permissions.CAN_CREATE_FLOW_ALL ||
-                    permissions.CAN_CREATE_FLOW.includes(project._id)
+          {projects.map((project) => (
+            <CollapsibleMenuItem key={project._id}>
+              <CheckboxGroup
+                label={project.name}
+                name="CAN_CREATE_FLOW"
+                id={project._id}
+                onChange={(e) => handleChange(e)}
+                defaultChecked={permissions.CAN_CREATE_FLOW.includes(
+                  project._id,
+                )}
+                disabled={permissions.EVERYTHING}
+                checked={
+                    permissions.EVERYTHING
+                    || permissions.CAN_CREATE_FLOW_ALL
+                    || permissions.CAN_CREATE_FLOW.includes(project._id)
                   }
-                />
-              </CollapsibleMenuItem>
-            );
-          })}
+              />
+            </CollapsibleMenuItem>
+          ))}
         </CollapsibleMenu>
       </PermissionContent>
     </>

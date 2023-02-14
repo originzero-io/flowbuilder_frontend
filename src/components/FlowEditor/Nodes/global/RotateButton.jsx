@@ -1,11 +1,11 @@
 import React from "react";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux";
 import { rotateNode } from "store/reducers/flow/flowElementsSlice";
+import PropTypes from "prop-types";
 import { HorizontalToVerticalIcon, VerticalToHorizontalIcon } from "./Icons";
-import PropTypes from "prop-types"
 
 const propTypes = {
-  self: PropTypes.object.isRequired
+  self: PropTypes.object.isRequired,
 };
 export default function RotateButton({ self }) {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export default function RotateButton({ self }) {
   return (
     <div onClick={rotateHandle}>
       {
-        self.data.align === "horizontal" ? <HorizontalToVerticalIcon/> : <VerticalToHorizontalIcon/>
+        self.data.align === "horizontal" ? <HorizontalToVerticalIcon /> : <VerticalToHorizontalIcon />
       }
     </div>
   );

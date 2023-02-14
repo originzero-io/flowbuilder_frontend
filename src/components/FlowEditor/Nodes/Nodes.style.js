@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const NodeWrapper = styled.div`
   display: flex;
   flex-direction: ${(props) => (props.align === "vertical" ? "column" : "row")};
@@ -13,7 +14,7 @@ export const NodeWrapper = styled.div`
   box-shadow: 0.261px 1.5px 3px 0px rgba(0, 0, 0, 0.996);
   opacity: ${(props) => (props.enable ? "1" : "0.5")};
   background:${(props) => (props.selected ? "#1DB954" : "#000000")};
-  background-image:${props=>props.selected ? "linear-gradient(355deg,rgb(7,46,21) 0%,rgb(22,139,63) 80%)":"linear-gradient(355deg,#323232 0%,#505050 80%)"};
+  background-image:${(props) => (props.selected ? "linear-gradient(355deg,rgb(7,46,21) 0%,rgb(22,139,63) 80%)" : "linear-gradient(355deg,#323232 0%,#505050 80%)")};
 `;
 
 export const NodeArea = styled.div`
@@ -57,7 +58,7 @@ export const NodeContent = styled.div`
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  flex-grow:${props=>props.type === "logo" ? "1" : "none"};
+  flex-grow:${(props) => (props.type === "logo" ? "1" : "none")};
 `;
 
 export const TargetWrapper = styled.div`

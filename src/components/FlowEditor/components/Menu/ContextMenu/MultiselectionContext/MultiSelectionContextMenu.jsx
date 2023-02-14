@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Menu, MenuItem } from "../ElementContext/ElementContextMenu.style";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteSelectedNodes, rotateSelectedNodes, setEnableSelectedNodes } from "store/reducers/flow/flowElementsSlice";
 import { setMultiSelectionContextMenu } from "store/reducers/menuSlice";
-import NodeGroupMenu from "../../NodeGroupMenu/NodeGroupMenu";
 import useActiveFlow from "hooks/useActiveFlow";
+import NodeGroupMenu from "../../NodeGroupMenu/NodeGroupMenu";
+import { Menu, MenuItem } from "../ElementContext/ElementContextMenu.style";
 
 export default function MultiSelectionContextMenu() {
   const { multiSelectionMenu } = useSelector(
-    (state) => state.menus
+    (state) => state.menus,
   );
   const { flowGui } = useActiveFlow();
   const { theme } = flowGui;
@@ -32,16 +32,16 @@ export default function MultiSelectionContextMenu() {
   };
   useEffect(() => {
     dispatch(rotateSelectedNodes({ path: rotatePath }));
-  }, [rotatePath])
+  }, [rotatePath]);
 
   useEffect(() => {
     setShowGroup(false);
     setOpen(false);
-  }, [multiSelectionMenu.state])
+  }, [multiSelectionMenu.state]);
 
   const disableHandle = () => {
     dispatch(setEnableSelectedNodes());
-  }
+  };
   return (
     <div>
       {multiSelectionMenu.state && (

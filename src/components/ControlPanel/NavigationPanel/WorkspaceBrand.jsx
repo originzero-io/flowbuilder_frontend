@@ -6,12 +6,12 @@ import {
 } from "store/reducers/workspaceSlice";
 import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
-import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
-import { WorkspaceBrandWrapper } from "./NavigationPanel.style";
 import PropTypes from "prop-types";
 import { workspaceNamespace } from "SocketConnections";
 import useAuth from "hooks/useAuth";
 import useWorkspace from "hooks/useWorkspace";
+import { WorkspaceBrandWrapper } from "./NavigationPanel.style";
+import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
 
 const propTypes = {
   workspace: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),

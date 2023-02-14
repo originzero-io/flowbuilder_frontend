@@ -16,7 +16,7 @@ const SetVariables = React.memo((self) => {
   ]);
   const [text, setText] = useState("Anaks");
   const [checked, setChecked] = useState(false);
-  
+
   const checkboxChange = (e) => {
     setChecked(!checked);
     // const { edges } = getNodesAndEdges(elements);
@@ -36,7 +36,7 @@ const SetVariables = React.memo((self) => {
   };
 
   const [align, setAlign] = useState(self.data.align);
-  
+
   useEffect(() => {
     // const { edges } = getNodesAndEdges(elements);
     // const mySources = edges.filter((edge) => edge.source === self.id);
@@ -50,29 +50,27 @@ const SetVariables = React.memo((self) => {
     //   setValues([...src]);
     // }
   }, [self.data.sourceCount, checked, text]);
-  
+
   return (
-    <>
-      <NodeGod
-        self={self}
-        align={align}
-        setAlign={setAlign}
-        ioType="source"
-        collapsable={true}
-      >
-        <Label>Payload</Label>
-        <div>
-          <input
-            type="text"
-            className="nodrag nowheel"
-            value={text}
-            onChange={textChange}
-          />
-          <input type="checkbox" onChange={checkboxChange} value={checked} />
-        </div>
-        <NodeIOmanager self={self} ioType="source"/>
-      </NodeGod>
-    </>
+    <NodeGod
+      self={self}
+      align={align}
+      setAlign={setAlign}
+      ioType="source"
+      collapsable
+    >
+      <Label>Payload</Label>
+      <div>
+        <input
+          type="text"
+          className="nodrag nowheel"
+          value={text}
+          onChange={textChange}
+        />
+        <input type="checkbox" onChange={checkboxChange} value={checked} />
+      </div>
+      <NodeIOmanager self={self} ioType="source" />
+    </NodeGod>
   );
 });
 

@@ -5,9 +5,9 @@ import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import { CollapsibleMenuItem } from "./CollapsibleMenu";
 
 const propTypes = {
-  project: PropTypes.object.required
+  project: PropTypes.object.required,
 };
-function DashboardList({ project}) {
+function DashboardList({ project }) {
   const [dashboards, setDashboards] = useState([]);
   return (
     <>
@@ -18,17 +18,15 @@ function DashboardList({ project}) {
               <Checkbox name="processorCreate" />
             </CheckboxGroup>
           </CollapsibleMenuItem>
-          {dashboards.map((dashboard) => {
-            return (
-              <CollapsibleMenuItem key={dashboard._id}>
-                <CheckboxGroup label={dashboard.config.name}>
-                  <Checkbox name="processorCreate" />
-                </CheckboxGroup>
-              </CollapsibleMenuItem>
-            );
-          })}
+          {dashboards.map((dashboard) => (
+            <CollapsibleMenuItem key={dashboard._id}>
+              <CheckboxGroup label={dashboard.config.name}>
+                <Checkbox name="processorCreate" />
+              </CheckboxGroup>
+            </CollapsibleMenuItem>
+          ))}
         </>
-      ) : <div style={{paddingLeft:'10px',fontSize:'1.3vmin'}}>No dashboard in this project</div>}
+      ) : <div style={{ paddingLeft: '10px', fontSize: '1.3vmin' }}>No dashboard in this project</div>}
     </>
   );
 }

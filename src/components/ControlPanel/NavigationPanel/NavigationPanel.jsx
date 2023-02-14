@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Footer, NavMenu } from "./NavigationPanel.style";
-import AddProjectForm from "./AddProjectForm";
 import {
   CollapsibleMenu,
   CollapsibleMenuItem,
   CollapsibleTrigger,
 } from "components/Shared/Collapsible/CollapsibleMenu";
-import NavMenuItem from "./NavMenuItem";
-import ProjectList from "./ProjectList.jsx";
 import { AiOutlineProject } from "react-icons/ai";
 import { CgNotes } from "react-icons/cg";
 import { MdDevicesOther } from "react-icons/md";
@@ -17,12 +13,16 @@ import { BsPlusCircle } from "react-icons/bs";
 import { RiTeamLine } from "react-icons/ri";
 import { setModal } from "store/reducers/componentSlice";
 import { Link, useRouteMatch } from "react-router-dom";
-import WorkspaceBrand from "./WorkspaceBrand";
 import useAuth from "hooks/useAuth";
 import useWorkspace from "hooks/useWorkspace";
 import useAuthPermission from "hooks/useAuthPermission";
 import useProject from "hooks/useProject";
 import Avatar from "components/Shared/Avatar";
+import WorkspaceBrand from "./WorkspaceBrand";
+import ProjectList from "./ProjectList.jsx";
+import NavMenuItem from "./NavMenuItem";
+import AddProjectForm from "./AddProjectForm";
+import { Container, Footer, NavMenu } from "./NavigationPanel.style";
 
 const NavigationPanel = () => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const NavigationPanel = () => {
   const { activeWorkspace } = useWorkspace();
   const { projects } = useProject();
   const { name, avatar } = useAuth();
-  //console.log("NAVIGATION_PANEL RENDERED");
+  // console.log("NAVIGATION_PANEL RENDERED");
   const showModalHandle = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -39,25 +39,21 @@ const NavigationPanel = () => {
       dispatch(setModal(<AddProjectForm />));
     } else alert("Firstly, create a workspace.");
   };
-  const projectItem = () => {
-    return (
-      <CollapsibleTrigger
-        label={`Projects (${projects.length})`}
-        icon={<AiOutlineProject />}
-      >
-        {
+  const projectItem = () => (
+    <CollapsibleTrigger
+      label={`Projects (${projects.length})`}
+      icon={<AiOutlineProject />}
+    >
+      {
           getPermission("CAN_CREATE_PROJECT") && (
             <div onClick={(e) => showModalHandle(e)}>
               <BsPlusCircle style={{ fontSize: "2vmin" }} />
             </div>
           )
         }
-      </CollapsibleTrigger>
-    );
-  };
-  const settingsItem = () => {
-    return <CollapsibleTrigger label="Settings" icon={<FiSettings />} />;
-  };
+    </CollapsibleTrigger>
+  );
+  const settingsItem = () => <CollapsibleTrigger label="Settings" icon={<FiSettings />} />;
   return (
     <Container>
       <NavMenu>

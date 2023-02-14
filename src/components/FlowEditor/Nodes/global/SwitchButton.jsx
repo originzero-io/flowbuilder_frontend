@@ -11,29 +11,27 @@ const propTypes = {
   height: PropTypes.number,
 };
 export default function SwitchButton({
-  checked=false,
+  checked = false,
   defaultChecked,
   onChange,
-  width=30,
-  height=15
+  width = 30,
+  height = 15,
 }) {
   return (
-    <>
-      <Switch
-        checked={checked}
-        defaultChecked={defaultChecked}
-        onChange={onChange}
-        onColor="#888888"
-        onHandleColor={themeColor.HOVER_COLOR}
-        handleDiameter={height}
-        uncheckedIcon={false}
-        checkedIcon={false}
-        height={height}
-        width={width}
-        className="react-switch"
-        id="material-switch"
-      />
-    </>
+    <Switch
+      checked={checked}
+      defaultChecked={defaultChecked}
+      onChange={onChange}
+      onColor="#888888"
+      onHandleColor={themeColor.HOVER_COLOR}
+      handleDiameter={height}
+      uncheckedIcon={false}
+      checkedIcon={false}
+      height={height}
+      width={width}
+      className="react-switch"
+      id="material-switch"
+    />
   );
 }
 

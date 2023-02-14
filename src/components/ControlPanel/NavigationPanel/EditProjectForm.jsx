@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Form, FormGroup, Input } from 'reactstrap';
+import {
+  Button, Form, FormGroup, Input,
+} from 'reactstrap';
 import { projectNamespace } from "SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useProject from "hooks/useProject";
-const EditProjectForm = ({project}) => {
+
+const EditProjectForm = ({ project }) => {
   const { activeProject } = useProject();
   const [projectInfo, setprojectInfo] = useState({
     name: null,
@@ -32,6 +35,6 @@ const EditProjectForm = ({project}) => {
       <Button type="submit">Submit</Button>
     </Form>
   );
-}
+};
 
 export default EditProjectForm;

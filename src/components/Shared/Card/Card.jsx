@@ -9,7 +9,7 @@ import {
   CardDescription,
   CardFooter,
   CardTitle,
-  CardAuthor
+  CardAuthor,
 } from "./Card.style";
 import DetailMenu from "./DetailMenu";
 
@@ -32,7 +32,7 @@ const Card = ({ data }) => {
       <CardBody>
         <CardDescription>{data.config.description || ""}</CardDescription>
         <CardFooter>
-        <CardAuthor>{data.config.createdBy.username || ""}</CardAuthor>
+          <CardAuthor>{data.config.createdBy.username || ""}</CardAuthor>
           <div>
             {getPermission("CAN_EDIT_FLOW", {
               flowId: data._id,

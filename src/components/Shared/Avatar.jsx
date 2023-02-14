@@ -1,7 +1,8 @@
 import React from "react";
 import { Avatar as AntdAvatar } from "antd";
 import { FaUserCircle } from "react-icons/fa";
-export default function Avatar({ avatar,size,...rest }) {
+
+export default function Avatar({ avatar, size, ...rest }) {
   return (
     <AntdAvatar
       size={size || 42}

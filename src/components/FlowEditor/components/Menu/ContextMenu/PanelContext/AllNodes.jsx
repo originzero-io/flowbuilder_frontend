@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { NodeWrapper } from "./PanelContextMenu.style";
 import styled from "styled-components";
+import { NodeWrapper } from "./PanelContextMenu.style";
 import NodeListItem from "./NodeListItem";
 
 const SearchBar = styled.input`
@@ -22,10 +22,8 @@ export default function AllNodes({
 }) {
   const [searched, setSearched] = useState(nodeList);
   const searchHandle = (e) => {
-    const value = e.target.value;
-    const filtered = nodeList.filter((node) =>
-      node.name.toLowerCase().includes(value.toLowerCase())
-    );
+    const { value } = e.target;
+    const filtered = nodeList.filter((node) => node.name.toLowerCase().includes(value.toLowerCase()));
     setSearched(filtered);
   };
   useEffect(() => {
@@ -33,21 +31,17 @@ export default function AllNodes({
   }, [nodeList]);
 
   return (
-    <>
-      <NodeWrapper>
-        <SearchBar placeholder="search" onChange={searchHandle} />
-        {searched.map((node) => {
-          return (
-            <NodeListItem
-              key={node.id}
-              node={node}
-              onDragStart={onDragStart}
-              addNewNode={addNewNode}
-              favClick={favClick}
-            />
-          );
-        })}
-      </NodeWrapper>
-    </>
+    <NodeWrapper>
+      <SearchBar placeholder="search" onChange={searchHandle} />
+      {searched.map((node) => (
+        <NodeListItem
+          key={node.id}
+          node={node}
+          onDragStart={onDragStart}
+          addNewNode={addNewNode}
+          favClick={favClick}
+        />
+      ))}
+    </NodeWrapper>
   );
 }

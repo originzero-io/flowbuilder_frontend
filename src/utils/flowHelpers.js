@@ -4,29 +4,25 @@ import { store } from "../index";
 
 export function backendFlowDataBuilder(flowId, elements) {
   return {
-    flowId: flowId,
-    nodes: elements.nodes.map((node) => {
-      return {
-        id: node.id,
-        type: node.type,
-        data: {
-          label: node.data.label,
-          enable: node.data.enable,
-          targetCount: node.data.targetCount,
-          sourceCount: node.data.sourceCount,
-        },
-      };
-    }),
-    edges: elements.edges.map((edge) => {
-      return {
-        id: edge.id,
-        source: edge.source,
-        sourceHandle: edge.sourceHandle,
-        target: edge.target,
-        targetHandle: edge.targetHandle,
-        data: edge.data,
-      };
-    }),
+    flowId,
+    nodes: elements.nodes.map((node) => ({
+      id: node.id,
+      type: node.type,
+      data: {
+        label: node.data.label,
+        enable: node.data.enable,
+        targetCount: node.data.targetCount,
+        sourceCount: node.data.sourceCount,
+      },
+    })),
+    edges: elements.edges.map((edge) => ({
+      id: edge.id,
+      source: edge.source,
+      sourceHandle: edge.sourceHandle,
+      target: edge.target,
+      targetHandle: edge.targetHandle,
+      data: edge.data,
+    })),
   };
 }
 
@@ -39,19 +35,18 @@ export function isConnectionCyclic(elements, params) {
   const sourceNode = findNodeById(source, elements);
   addIncomersToArray(sourceNode, elements, dependencyArray);
   store.dispatch(selectElements(dependencyArray));
-  return dependencyArray.some(d=>d.id === target);
+  return dependencyArray.some((d) => d.id === target);
 }
 
 function addIncomersToArray(node, elements, dependencyArray) {
   const { nodes, edges } = elements;
   const currentNodeIncomers = getIncomers(node, nodes, edges);
   if (currentNodeIncomers.length === 0) {
-    return;
-  }
-  else {
-    currentNodeIncomers.forEach(childIncomer => {
+
+  } else {
+    currentNodeIncomers.forEach((childIncomer) => {
       dependencyArray.push(childIncomer);
       addIncomersToArray(childIncomer, elements, dependencyArray);
-    })
+    });
   }
 }

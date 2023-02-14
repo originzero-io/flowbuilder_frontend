@@ -11,6 +11,7 @@ import Avatar from "components/Shared/Avatar";
 import AddNoteForm from "./AddNoteForm";
 import EditNoteForm from "./EditNoteForm";
 import { NoteContainer, NoteContent, NoteTitle } from "./NotesScreen.style";
+
 export default function NotesScreen() {
   const notes = useNotes();
   const auth = useAuth();
@@ -31,55 +32,55 @@ export default function NotesScreen() {
   return (
     <>
       <Button color="success" onClick={addNoteHandle}>
-        <BsPlusCircle style={{ fontSize: "2.5vmin" }} /> Add Note
+        <BsPlusCircle style={{ fontSize: "2.5vmin" }} />
+        {' '}
+        Add Note
       </Button>
-      {notes.map((note) => {
-        return (
-          <NoteContainer
-            key={note._id}
-            onMouseEnter={() => setHoveredNote(note._id)}
-            onMouseLeave={() => setHoveredNote(false)}
-            onClick={() => viewNoteHandle(note)}
-          >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div style={{ width: "95%"}}>
-                <NoteTitle>{note.title}</NoteTitle>
-                <NoteContent>{note.content}</NoteContent>
-              </div>
-              {hoveredNote === note._id && note.createdBy._id === auth._id && (
-                <div
-                  style={{
-                    width: "5%",
-                    cursor: "pointer",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <VscTrash
-                    style={{ fontSize: "3vmin",color:"tomato" }}
-                    onClick={(event) => deleteNoteHandle(event,note)}
-                  />
-                </div>
-              )}
+      {notes.map((note) => (
+        <NoteContainer
+          key={note._id}
+          onMouseEnter={() => setHoveredNote(note._id)}
+          onMouseLeave={() => setHoveredNote(false)}
+          onClick={() => viewNoteHandle(note)}
+        >
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ width: "95%" }}>
+              <NoteTitle>{note.title}</NoteTitle>
+              <NoteContent>{note.content}</NoteContent>
             </div>
-            <div>
-              <div style={{ float: "right" }}>
-                <Avatar avatar={note.createdBy.avatar} size={24} />
-                <span
-                  style={{
-                    fontSize: "1.2vmin",
-                    paddingRight: "10px",
-                    paddingLeft: "5px",
-                    color: "#7f8c8d",
-                  }}
-                >
-                  {note.createdBy.name}
-                </span>
-              </div>
+            {hoveredNote === note._id && note.createdBy._id === auth._id && (
+            <div
+              style={{
+                width: "5%",
+                cursor: "pointer",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <VscTrash
+                style={{ fontSize: "3vmin", color: "tomato" }}
+                onClick={(event) => deleteNoteHandle(event, note)}
+              />
             </div>
-          </NoteContainer>
-        );
-      })}
+            )}
+          </div>
+          <div>
+            <div style={{ float: "right" }}>
+              <Avatar avatar={note.createdBy.avatar} size={24} />
+              <span
+                style={{
+                  fontSize: "1.2vmin",
+                  paddingRight: "10px",
+                  paddingLeft: "5px",
+                  color: "#7f8c8d",
+                }}
+              >
+                {note.createdBy.name}
+              </span>
+            </div>
+          </div>
+        </NoteContainer>
+      ))}
     </>
   );
 }

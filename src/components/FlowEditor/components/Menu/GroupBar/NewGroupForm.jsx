@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { isNode, useStore, useStoreActions } from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
-import {  useParams } from "react-router";
+import { useParams } from "react-router";
 import * as themeColor from "constants/ThemeReference";
 import { createGroup } from "store/reducers/flow/flowGroupsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
@@ -10,8 +10,9 @@ import {
   AddIcon,
   CancelIcon,
   NonGroupIcon,
-  SubmitIcon
+  SubmitIcon,
 } from "components/Shared/icons";
+import { selectElements } from "store/reducers/flow/flowElementsSlice";
 import { HorizontalDivider } from "../../../../StyledComponents/Divider";
 import {
   AddGroupWrapper,
@@ -21,9 +22,8 @@ import {
   Input,
   InputWrapper,
   Submit,
-  Title
+  Title,
 } from "./GroupBar.style";
-import { selectElements } from "store/reducers/flow/flowElementsSlice";
 
 const NewGroupForm = ({ theme }) => {
   const [formOpen, setFormOpen] = useState(false);
@@ -36,7 +36,7 @@ const NewGroupForm = ({ theme }) => {
     name: "",
     color: "",
     createdBy: auth._id,
-    flow:flowId
+    flow: flowId,
   });
   const groupHandle = (event) => {
     const { name, value } = event.target;
@@ -47,10 +47,10 @@ const NewGroupForm = ({ theme }) => {
   };
   const addNewGroup = async (event) => {
     event.preventDefault();
-    dispatch(createGroup({flowId: flowId, group: groupInfo}));
+    dispatch(createGroup({ flowId, group: groupInfo }));
   };
   const selectNonGroupsHandle = () => {
-    const nonGroups = flowElements.nodes.filter(node => node.data.group._id === 0);
+    const nonGroups = flowElements.nodes.filter((node) => node.data.group._id === 0);
     dispatch(selectElements(nonGroups));
   };
   return (
@@ -59,16 +59,16 @@ const NewGroupForm = ({ theme }) => {
         <IconWrapper onClick={() => setFormOpen(!formOpen)}>
           {formOpen === true ? (
             <CancelIcon
-              width={"25px"}
-              height={"25px"}
+              width="25px"
+              height="25px"
               color={
                 theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
               }
             />
           ) : (
             <AddIcon
-              width={"25px"}
-              height={"25px"}
+              width="25px"
+              height="25px"
               color={
                 theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
               }
@@ -99,14 +99,14 @@ const NewGroupForm = ({ theme }) => {
             type="color"
             onChange={groupHandle}
             name="color"
-            inForm={true}
+            inForm
             defaultValue="#2ecc71"
             value={groupInfo.color}
           />
           <Submit type="submit">
             <SubmitIcon
-              width={"22px"}
-              height={"22px"}
+              width="22px"
+              height="22px"
               color={
                 theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
               }
@@ -117,5 +117,5 @@ const NewGroupForm = ({ theme }) => {
       <HorizontalDivider theme={theme} />
     </AddGroupWrapper>
   );
-}
+};
 export default React.memo(NewGroupForm);

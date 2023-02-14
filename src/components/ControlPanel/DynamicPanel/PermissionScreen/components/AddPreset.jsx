@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import {
+  Form, FormGroup, Label, Input, Button,
+} from "reactstrap";
 import { useDispatch } from "react-redux";
 import PermissionService from "services/configurationService/permissionService";
 import notification from "utils/notificationHelper";
@@ -28,19 +30,17 @@ export default function AddPreset({ permissions }) {
     setPresetName(e.target.value);
   };
   return (
-    <>
-      <Form onSubmit={onSubmitHandle}>
-        <FormGroup>
-          <Label>Assign name for this permission preferences</Label>
-          <Input
-            name="presetName"
-            placeholder="name"
-            onChange={onChangeHandler}
-          />
-        </FormGroup>
-        <Button type="submit">Submit</Button>
-      </Form>
-    </>
+    <Form onSubmit={onSubmitHandle}>
+      <FormGroup>
+        <Label>Assign name for this permission preferences</Label>
+        <Input
+          name="presetName"
+          placeholder="name"
+          onChange={onChangeHandler}
+        />
+      </FormGroup>
+      <Button type="submit">Submit</Button>
+    </Form>
   );
 }
 

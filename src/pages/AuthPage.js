@@ -1,7 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 import { Logo } from "../components/Shared/icons";
 import LoginForm from "../components/Auth/LoginForm";
-import styled from "styled-components"
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;

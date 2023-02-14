@@ -4,17 +4,17 @@ import {
   getEdgeCenter,
   getMarkerEnd,
 } from 'reactflow';
-import styled from "styled-components"
+import styled from "styled-components";
+
 const Body = styled.body`
   //background:red;
 
-`
+`;
 const foreignObjectSize = 40;
 const onEdgeClick = (evt, id) => {
   evt.stopPropagation();
   alert(`remove ${id}`);
 };
-
 
 export default function CustomEdge({
   id,
@@ -57,11 +57,13 @@ export default function CustomEdge({
       <foreignObject
         width={foreignObjectSize}
         height={foreignObjectSize}
-        minWidth={"200px"}
+        minWidth="200px"
         x={edgeCenterX - foreignObjectSize / 2}
         y={edgeCenterY - foreignObjectSize / 2}
         requiredExtensions="http://www.w3.org/1999/xhtml"
-        style={{display:'flex',minWidth:'200px',height:'30px',background:'red'}}
+        style={{
+          display: 'flex', minWidth: '200px', height: '30px', background: 'red',
+        }}
       >
         <Body>
           <text>

@@ -20,11 +20,11 @@ export default function ProjectList({ projects }) {
   const getPermission = useAuthPermission("project");
   const { activeProject } = useProject();
   const { activeWorkspace } = useWorkspace();
-  //console.log("PROJECT_LIST RENDERED");
+  // console.log("PROJECT_LIST RENDERED");
 
   const clickProjectHandle = (project) => {
     dispatch(setActiveProject(project));
-    //dispatch(getFlowsByProject(project));
+    // dispatch(getFlowsByProject(project));
   };
   const deleteProjectHandle = (project) => {
     if (confirm("Sure?")) {
@@ -43,29 +43,27 @@ export default function ProjectList({ projects }) {
   return (
     <>
       {projects.length > 0 ? (
-        projects.map((project) => {
-          return (
-            <CollapsibleMenuItem
-              key={project._id}
-              onClick={() => clickProjectHandle(project)}
-              active={project._id === activeProject._id}
-            >
-              <div>{project.name}</div>
-              <div>
-                {getPermission("CAN_EDIT_PROJECT", project._id) && (
-                  <>
-                    <span onClick={() => editProjectHandle(project)}>
-                      <BiEdit style={{ fontSize: "2vmin" }} />
-                    </span>
-                    <span onClick={() => deleteProjectHandle(project)}>
-                      <VscTrash style={{ fontSize: "2vmin" }} />
-                    </span>
-                  </>
-                )}
-              </div>
-            </CollapsibleMenuItem>
-          );
-        })
+        projects.map((project) => (
+          <CollapsibleMenuItem
+            key={project._id}
+            onClick={() => clickProjectHandle(project)}
+            active={project._id === activeProject._id}
+          >
+            <div>{project.name}</div>
+            <div>
+              {getPermission("CAN_EDIT_PROJECT", project._id) && (
+              <>
+                <span onClick={() => editProjectHandle(project)}>
+                  <BiEdit style={{ fontSize: "2vmin" }} />
+                </span>
+                <span onClick={() => deleteProjectHandle(project)}>
+                  <VscTrash style={{ fontSize: "2vmin" }} />
+                </span>
+              </>
+              )}
+            </div>
+          </CollapsibleMenuItem>
+        ))
       ) : (
         <span
           style={{ color: "white", fontSize: "1.5vmin", paddingLeft: "10%" }}

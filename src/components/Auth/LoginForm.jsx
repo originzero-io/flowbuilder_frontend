@@ -3,11 +3,13 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
 import { login } from "store/reducers/authSlice";
-import { Input, Text, Submit, ErrorMessage } from "./LoginForm.style";
 import { Redirect } from "react-router-dom";
 import useAuth from "hooks/useAuth";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
+import {
+  Input, Text, Submit, ErrorMessage,
+} from "./LoginForm.style";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -25,7 +27,7 @@ export default function LoginForm() {
       <Text>Welcome to flow builder.📗 Please login</Text>
       <Form onSubmit={(e) => e.preventDefault()}>
         <FormGroup>
-          <FaUser style={{fontSize:'2.5vmin',color:'whitesmoke',marginRight:'8px'}}/>
+          <FaUser style={{ fontSize: '2.5vmin', color: 'whitesmoke', marginRight: '8px' }} />
           <Input
             defaultValue="akinsibay"
             {...register("username", {
@@ -38,7 +40,7 @@ export default function LoginForm() {
           )}
         </FormGroup>
         <FormGroup>
-          <RiLockPasswordFill style={{fontSize:'2.5vmin',color:'whitesmoke',marginRight:'8px'}}/>
+          <RiLockPasswordFill style={{ fontSize: '2.5vmin', color: 'whitesmoke', marginRight: '8px' }} />
           <Input
             defaultValue="1234"
             type="password"

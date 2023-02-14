@@ -6,8 +6,9 @@ import CalculateNode from "./Calculate.node";
 import ExcelReadNode from "./ExcelRead.node";
 import SerialReadNode from "./SerialRead.node";
 import HttpRequestNode from "./HttpRequest.node";
-import * as types from "./constant/nodeTypes"
+import * as types from "./constant/nodeTypes";
 import JsonParseNode from "./JsonParse.node";
+
 const customNodes = {
   [types.TRIGGER]: SetVariablesNode,
   [types.CONSTANT]: SetVariablesNode,

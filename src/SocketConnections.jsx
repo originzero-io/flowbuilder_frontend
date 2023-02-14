@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
+import createSocket from 'services/SocketService';
+import { useDispatch } from 'react-redux';
 import {
   elementListener,
   flowListener,
   projectListener,
   workspaceListener,
   noteListener,
-  userListener
+  userListener,
 } from './services/configurationService/socketListeners';
-import createSocket from 'services/SocketService';
 import useAuth from './hooks/useAuth';
-import { useDispatch } from 'react-redux';
 
 export let elementNamespace;
 export let flowNamespace;

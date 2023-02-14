@@ -8,6 +8,7 @@ import FlowEditor from "components/FlowEditor/FlowEditor";
 import { getGroups } from "store/reducers/flow/flowGroupsSlice";
 import { flowExecutorListener } from "services/configurationService/socketListeners";
 import { flowExecutorNamespace } from "SocketConnections";
+
 const FlowWrapper = styled.div`
   height: 100%;
   width: 100%;

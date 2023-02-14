@@ -8,7 +8,7 @@ import flowReducer from "./flow/flowSlice";
 import menuReducer from "./menuSlice";
 import nodeListReducer from "./nodeListSlice";
 import controlPanelReducer from "./controlPanelSlice";
-import { modalReducer,loadingBarReducer } from "./componentSlice";
+import { modalReducer, loadingBarReducer } from "./componentSlice";
 import authReducer from "./authSlice";
 import userReducer from "./userSlice";
 import userPermissionReducer from "./userPermissionSlice";
@@ -18,7 +18,7 @@ import projectReducer from "./projectSlice";
 import notesReducer from "./noteSlice";
 
 const reducers = combineReducers({
-  auth:authReducer,
+  auth: authReducer,
   users: userReducer,
   authPermissions: authPermissionReducer,
   userPermissions: userPermissionReducer,
@@ -40,11 +40,11 @@ const reducers = combineReducers({
   nodeClassReducer,
 });
 
-//resetting reducers after user log out
+// resetting reducers after user log out
 const rootReducer = (state, action) => {
   if (action.type === 'auth/logOut' || action.type === "RESET") {
     state = undefined;
   }
   return reducers(state, action);
-}
+};
 export default rootReducer;

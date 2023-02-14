@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
+import styled from "styled-components";
+import { flowExecutorNamespace } from "SocketConnections";
 import NavigationPanel from "../components/ControlPanel/NavigationPanel/NavigationPanel";
 import WorkspacePanel from "../components/ControlPanel/WorkspacePanel/WorkspacePanel.jsx";
 import DynamicPanel, { TopMenu } from "../components/ControlPanel/DynamicPanel";
-import styled from "styled-components";
-import { flowExecutorNamespace } from "SocketConnections";
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,7 +17,7 @@ const Content = styled.div`
 `;
 
 export default function ControlPanelPage() {
-  //console.log("CONTROL_PANEL_PAGE RENDERED")
+  // console.log("CONTROL_PANEL_PAGE RENDERED")
   useEffect(() => {
     flowExecutorNamespace.emit('leaveAllFlowRooms');
     flowExecutorNamespace.removeAllListeners();

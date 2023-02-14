@@ -1,9 +1,9 @@
 import PermissionService from "services/configurationService/permissionService";
-import { beginTheBar,endTheBar } from "store/reducers/componentSlice";
-import { defaultPermissions } from "./userPermissionSlice";
+import { beginTheBar, endTheBar } from "store/reducers/componentSlice";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-  
-export const getMyPermissionInThisWorkspace = createAsyncThunk("authPermission/getMyPermissionsInThisWorkspace", async ({workspace, me}) => {
+import { defaultPermissions } from "./userPermissionSlice";
+
+export const getMyPermissionInThisWorkspace = createAsyncThunk("authPermission/getMyPermissionsInThisWorkspace", async ({ workspace, me }) => {
   beginTheBar();
   const { permission } = await PermissionService.getUserPermissionInThisWorkspace(workspace._id, me._id);
   endTheBar();
@@ -17,9 +17,8 @@ export const authPermissionSlice = createSlice({
       if (payload) {
         return payload.permissions;
       }
-    }
+    },
   },
 });
-
 
 export default authPermissionSlice.reducer;

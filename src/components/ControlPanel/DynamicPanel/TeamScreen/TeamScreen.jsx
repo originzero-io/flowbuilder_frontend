@@ -15,8 +15,8 @@ export default function TeamScreen() {
   };
   return (
     <>
-      {(getPermission("CAN_REMOVE_MEMBER") &&
-        getPermission("CAN_INVITE_MEMBER")) && (
+      {(getPermission("CAN_REMOVE_MEMBER")
+        && getPermission("CAN_INVITE_MEMBER")) && (
         <Button
           color="success"
           onClick={addMemberToTeamHandle}

@@ -8,6 +8,7 @@ import {
   useParams,
 } from "react-router-dom";
 import styled from "styled-components";
+import useWorkspace from "hooks/useWorkspace";
 import {
   LearnScreen,
   NotesScreen,
@@ -19,7 +20,7 @@ import {
   PermissionScreen,
 } from "./index";
 import NotFound from "./NotFound";
-import useWorkspace from "hooks/useWorkspace";
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -36,11 +37,11 @@ const PanelComponentWrapper = styled.div`
 export default function DynamicPanel() {
   const route = useRouteMatch();
   const history = useHistory();
-  
+
   useEffect(() => {
-    history.push('/panel/projects')
-  }, [])
-  
+    history.push('/panel/projects');
+  }, []);
+
   return (
     <Container>
       <PanelComponentWrapper>

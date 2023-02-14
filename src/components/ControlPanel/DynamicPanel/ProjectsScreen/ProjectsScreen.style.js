@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { CardContainer } from "components/Shared/Card/Card.style";
+
 export const ProjectsContainerIndex = styled.div`
   display: flex;
   flex-wrap: wrap;

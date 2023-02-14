@@ -1,13 +1,13 @@
-import { addEdge, updateEdge, applyEdgeChanges, applyNodeChanges, getOutgoers } from "reactflow";
+import {
+  addEdge, updateEdge, applyEdgeChanges, applyNodeChanges, getOutgoers,
+} from "reactflow";
 import FlowElementService from "services/configurationService/flowElementService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { isEdgeExist, setSourceNodeColorToEdge } from "components/FlowEditor/helpers/elementHelper";
 
 export const getElementsByFlow = createAsyncThunk(
   "elements/getByFlow",
-  async (flow) => {
-    return await FlowElementService.getElements(flow._id);
-  }
+  async (flow) => await FlowElementService.getElements(flow._id),
 );
 
 export const flowElementsSlice = createSlice({
@@ -47,15 +47,15 @@ export const flowElementsSlice = createSlice({
       const edgeExist = isEdgeExist(newConnection, state.edges);
 
       if (edgeExist) {
-        //remove old edge
+        // remove old edge
         state.edges = state.edges.filter((edge) => edge.id !== oldEdge.id);
       } else {
-        //update edge
+        // update edge
         const updatedEdges = updateEdge(oldEdge, newConnection, state.edges);
         const newArray = setSourceNodeColorToEdge(
           newConnection,
           updatedEdges,
-          state.nodes
+          state.nodes,
         );
         state.edges = newArray;
       }
@@ -79,8 +79,7 @@ export const flowElementsSlice = createSlice({
 
       state.nodes.forEach((node) => {
         if (node.id === payload.id) {
-          node.data.align =
-            currentAlign === "vertical" ? "horizontal" : "vertical";
+          node.data.align = currentAlign === "vertical" ? "horizontal" : "vertical";
         }
       });
     },
@@ -106,7 +105,7 @@ export const flowElementsSlice = createSlice({
     selectElements(state, { payload }) {
       const nodeIds = payload.map((p) => p.id);
 
-      //firstly, all nodes deselected
+      // firstly, all nodes deselected
       state.nodes.forEach((node) => (node.selected = false));
 
       state.nodes.forEach((node) => {
@@ -173,7 +172,7 @@ export const flowElementsSlice = createSlice({
         }
       });
 
-      //? target node un grubu değiştiğinde ona bağlı edge in rengi de değişiyor
+      // ? target node un grubu değiştiğinde ona bağlı edge in rengi de değişiyor
       state.edges.forEach((edge) => {
         if (edge.selected) {
           edge.group = payload;
@@ -227,39 +226,39 @@ export const flowElementsSlice = createSlice({
       return payload;
     },
     addSubFlow(state, { payload }) {
-      state.nodes.push({
-        id: "A",
-        type: "group",
-        data: { label: null },
-        position: { x: 0, y: 0 },
-        style: {
-          width: 350,
-          height: 320,
+      state.nodes.push(
+        {
+          id: "A",
+          type: "group",
+          data: { label: null },
+          position: { x: 0, y: 0 },
+          style: {
+            width: 350,
+            height: 320,
+          },
         },
-      },
-      {
-        id: "B",
-        type: "input",
-        data: { label: "child node 1" },
-        position: { x: 10, y: 10 },
-        parentNode: "A",
-        extent: "parent",
-      },
-      {
-        id: "C",
-        data: { label: "child node 2" },
-        position: { x: 10, y: 90 },
-        parentNode: "A",
-        extent: "parent",
-      })
+        {
+          id: "B",
+          type: "input",
+          data: { label: "child node 1" },
+          position: { x: 10, y: 10 },
+          parentNode: "A",
+          extent: "parent",
+        },
+        {
+          id: "C",
+          data: { label: "child node 2" },
+          position: { x: 10, y: 90 },
+          parentNode: "A",
+          extent: "parent",
+        },
+      );
 
       state.edges.push({ id: "b-c", source: "B", target: "C" });
     },
   },
   extraReducers: {
-    [getElementsByFlow.fulfilled]: (state, { payload }) => {
-      return payload.elements;
-    },
+    [getElementsByFlow.fulfilled]: (state, { payload }) => payload.elements,
   },
 });
 
@@ -293,5 +292,5 @@ export const {
   deleteGroupOfElement,
   updateGroupOfElement,
   updateNodeHandles,
-  saveElements
+  saveElements,
 } = flowElementsSlice.actions;

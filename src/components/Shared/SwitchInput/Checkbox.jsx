@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import './style.css';
+
 const propTypes = {
   id: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -34,40 +35,38 @@ export default function Checkbox({
     justifyContent: "center",
     alignItems: "center",
   };
-  const checkbox = () => {
-    return (
-      <input
-          id={id}
-          name={name}
-          type="checkbox"
-          onChange={onChange}
-          onClick={onClick}
-          style={{ width: checkbox_size, height: checkbox_size,cursor:"pointer" }}
-          checked={checked}
-          defaultChecked={defaultChecked}
-          disabled={disabled}
-          {...rest}
-        />
-      // <div className="form-check form-switch">
-      //   <input
-      //     className="form-check-input"
-      //     type="checkbox"
-      //     name={name}
-      //     onChange={onChange}
-      //     onClick={onClick}
-      //     style={{
-      //       width: "40px",
-      //       height: "20px",
-      //       cursor: "pointer",
-      //     }}
-      //     checked={checked}
-      //     defaultChecked={defaultChecked}
-      //     disabled={disabled}
-      //     {...rest}
-      //   />
-      // </div>
-    );
-  };
+  const checkbox = () => (
+    <input
+      id={id}
+      name={name}
+      type="checkbox"
+      onChange={onChange}
+      onClick={onClick}
+      style={{ width: checkbox_size, height: checkbox_size, cursor: "pointer" }}
+      checked={checked}
+      defaultChecked={defaultChecked}
+      disabled={disabled}
+      {...rest}
+    />
+    // <div className="form-check form-switch">
+    //   <input
+    //     className="form-check-input"
+    //     type="checkbox"
+    //     name={name}
+    //     onChange={onChange}
+    //     onClick={onClick}
+    //     style={{
+    //       width: "40px",
+    //       height: "20px",
+    //       cursor: "pointer",
+    //     }}
+    //     checked={checked}
+    //     defaultChecked={defaultChecked}
+    //     disabled={disabled}
+    //     {...rest}
+    //   />
+    // </div>
+  );
   return (
     <>{center ? <div style={centeredStyle}>{checkbox()}</div> : checkbox()}</>
   );

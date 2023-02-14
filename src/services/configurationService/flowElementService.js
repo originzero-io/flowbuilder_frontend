@@ -5,7 +5,8 @@ class FlowElementService extends ConfigurationService {
     const response = await this.service.get(`/elements/${flow_id}`);
     return response.data;
   }
-  async saveElements(flow_id,elements) {
+
+  async saveElements(flow_id, elements) {
     const response = await this.service.put(`/elements/${flow_id}`, elements);
     return response.data;
   }

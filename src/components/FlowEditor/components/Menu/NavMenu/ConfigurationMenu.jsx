@@ -21,23 +21,23 @@ import {
 import useActiveFlow from 'hooks/useActiveFlow';
 import useAuth from 'hooks/useAuth';
 import Avatar from 'components/Shared/Avatar';
-import SwitchButton from '../../../Nodes/global/SwitchButton';
 import { FileInput } from 'components/Shared/FileInput/FileInput';
-import { VerticalDivider } from '../../../../StyledComponents/Divider';
-import {
-  DropdownItem,
-  DropdownList,
-  DropdownWrapper,
-} from '../../../../StyledComponents/DropdownMenu';
-import { Circle } from '../../../../StyledComponents/Shapes';
-import { ShareIcon, TuneIcon } from './Icons';
-import { Menu, MenuItem } from './NavMenu.style';
 import { GoDeviceDesktop } from 'react-icons/go';
 import { VscRunAll } from 'react-icons/vsc';
 import notification from 'utils/notificationHelper';
 import { flowExecutorNamespace } from 'SocketConnections';
 import { backendFlowDataBuilder } from 'utils/flowHelpers';
 import { useParams } from 'react-router-dom';
+import { Menu, MenuItem } from './NavMenu.style';
+import { ShareIcon, TuneIcon } from './Icons';
+import { Circle } from '../../../../StyledComponents/Shapes';
+import {
+  DropdownItem,
+  DropdownList,
+  DropdownWrapper,
+} from '../../../../StyledComponents/DropdownMenu';
+import { VerticalDivider } from '../../../../StyledComponents/Divider';
+import SwitchButton from '../../../Nodes/global/SwitchButton';
 
 const dummyDevices = [
   {
@@ -60,7 +60,7 @@ export default function ConfigurationMenu() {
   const reactFlowInstance = useReactFlow();
   const nodeClass = useSelector((state) => state.nodeClassReducer);
   const setSelectedElements = useStore(
-    (actions) => actions.setSelectedElements
+    (actions) => actions.setSelectedElements,
   );
   const dispatch = useDispatch();
 
@@ -69,10 +69,9 @@ export default function ConfigurationMenu() {
       if (reactFlowInstance) {
         const elements = reactFlowInstance.toObject();
         console.log('elements: ', reactFlowInstance.toObject());
-        let hiddenElement = document.createElement('a');
-        hiddenElement.href =
-          'data:application/octet-stream;base64,' +
-          window.btoa(JSON.stringify(elements));
+        const hiddenElement = document.createElement('a');
+        hiddenElement.href = `data:application/octet-stream;base64,${
+          window.btoa(JSON.stringify(elements))}`;
         hiddenElement.target = '_blank';
         hiddenElement.download = `${flowConfig.name}.json`;
         hiddenElement.click();
@@ -107,7 +106,7 @@ export default function ConfigurationMenu() {
     (e) => {
       console.log(e);
     },
-    [reactFlowInstance]
+    [reactFlowInstance],
   );
   const [active, setActive] = useState({
     theme: false,
@@ -162,29 +161,28 @@ export default function ConfigurationMenu() {
             }}
             color="success"
           >
-            <VscRunAll></VscRunAll>
-            <div onClick = {debugFlow}>Debug</div>
+            <VscRunAll />
+            <div onClick={debugFlow}>Debug</div>
           </Button>
         </MenuItem>
         <DropdownList theme={theme}>
           <DropdownItem>
             <div>This PC</div>
           </DropdownItem>
-          {dummyDevices.map((device) => {
-            return (
-              <DropdownItem style={{ fontSize: '1.5vmin' }} key={device.id}>
-                <GoDeviceDesktop
-                  style={{ fontSize: '36px', marginRight: '5px' }}
-                />
-                <div>
-                  {device.name}{' '}
-                  <span style={{ color: 'gray', fontSize: '1.2vmin' }}>
-                    {device.ip}
-                  </span>
-                </div>
-              </DropdownItem>
-            );
-          })}
+          {dummyDevices.map((device) => (
+            <DropdownItem style={{ fontSize: '1.5vmin' }} key={device.id}>
+              <GoDeviceDesktop
+                style={{ fontSize: '36px', marginRight: '5px' }}
+              />
+              <div>
+                {device.name}
+                {' '}
+                <span style={{ color: 'gray', fontSize: '1.2vmin' }}>
+                  {device.ip}
+                </span>
+              </div>
+            </DropdownItem>
+          ))}
         </DropdownList>
       </DropdownWrapper>
 

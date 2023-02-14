@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   padding: 5px 5px 5px 5px;
-  background: ${props=>props.theme === "dark" ? "rgba(53, 59, 72,0.8)" : "rgba(189, 195, 199,0.8)"};
+  background: ${(props) => (props.theme === "dark" ? "rgba(53, 59, 72,0.8)" : "rgba(189, 195, 199,0.8)")};
   position: absolute;
   top: ${(props) => `${props.y - 25}px`};
   left: ${(props) => `${props.x + 5}px`};

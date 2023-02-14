@@ -18,21 +18,19 @@ export default function PresetList() {
   }, []);
   const onSubmitHandle = () => {
     dispatch(loadUserPermission(selectedPreset));
-    dispatch(setModal(false))
+    dispatch(setModal(false));
   };
   const handlePresetChange = (e) => {
     console.log("submitt", e.target.value);
     const selected = presets.find(
-      (preset) => preset.name === e.target.value
+      (preset) => preset.name === e.target.value,
     ).preset;
     setSelectedPreset(selected);
   };
   return (
     <>
       <Input type="select" onChange={handlePresetChange}>
-        {presets.map((preset) => {
-          return <option key={preset._id}>{preset.name}</option>;
-        })}
+        {presets.map((preset) => <option key={preset._id}>{preset.name}</option>)}
       </Input>
       <Button onClick={onSubmitHandle}>Submit</Button>
     </>

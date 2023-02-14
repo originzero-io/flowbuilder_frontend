@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const Container = styled.div`
   position: absolute;
   border-radius: 6px;
@@ -35,7 +36,7 @@ export const Button = styled.button`
   padding-left:1px;
   padding-right:1px;
   color:#c0392b;
-`
+`;
 export const AddButton = styled.button`
   display:flex;
   justify-content:center;
