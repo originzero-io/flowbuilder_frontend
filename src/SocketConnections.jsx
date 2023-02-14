@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   elementListener,
   flowListener,
   projectListener,
   workspaceListener,
   noteListener,
-  userListener,
-  flowExecutorListener,
+  userListener
 } from './services/configurationService/socketListeners';
 import createSocket from 'services/SocketService';
 import useAuth from './hooks/useAuth';
+import { useDispatch } from 'react-redux';
 
 export let elementNamespace;
 export let flowNamespace;
@@ -56,8 +56,7 @@ export default function SocketConnections() {
       projectListener(projectNamespace);
       workspaceListener(workspaceNamespace);
       noteListener(noteNamespace);
-      flowExecutorListener(flowExecutorNamespace);
     }
   }, [auth.isAuthenticated]);
-  return <></>;
+  return null;
 }

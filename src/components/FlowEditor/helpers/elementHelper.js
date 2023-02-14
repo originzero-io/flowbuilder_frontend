@@ -1,13 +1,12 @@
 import uuid from "react-uuid";
 
-export const createNode = (type,position,align,nodeClass) => {
+export const createNode = (type, position, align) => {
   return {
     id: `${type}-${uuid()}`,
     type,
     position,
     data: {
       label: `${type}`,
-      onChange: loadFunctionsToNode(type, nodeClass),
       targetCount: 1,
       sourceCount: 1,
       align: align,
@@ -18,9 +17,6 @@ export const createNode = (type,position,align,nodeClass) => {
     }
   };
 }
-const loadFunctionsToNode = (type, nodeClass) => {
-  return nodeClass[`do${type}`];
-};
 
 export const isEdgeExist = (newConnection, edges) => {
   let exist = false;

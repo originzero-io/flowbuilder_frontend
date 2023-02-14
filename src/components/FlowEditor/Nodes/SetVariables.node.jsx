@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getOutgoers } from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
 import useActiveFlow from "hooks/useActiveFlow";
-import useDidMountEffect from "hooks/useDidMountEffect";
 import NodeGod from "./global/NodeGod";
 import NodeIOmanager from "./global/NodeIOManager";
 import { Label } from "./Nodes.style";
@@ -18,8 +16,6 @@ const SetVariables = React.memo((self) => {
   ]);
   const [text, setText] = useState("Anaks");
   const [checked, setChecked] = useState(false);
-
-  let outgoers = getOutgoers(self, flowElements.nodes,flowElements.edges);
   
   const checkboxChange = (e) => {
     setChecked(!checked);
@@ -54,13 +50,7 @@ const SetVariables = React.memo((self) => {
     //   setValues([...src]);
     // }
   }, [self.data.sourceCount, checked, text]);
-
-  useDidMountEffect(() => {
-    nodeClass.doInput(values, self, outgoers);
-  }, [values]);
   
-
-  //console.log("self:", self);
   return (
     <>
       <NodeGod

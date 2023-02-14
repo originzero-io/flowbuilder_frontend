@@ -104,6 +104,9 @@ export default function ConfigurationMenu() {
 
     //   notification.error("This file cannot be imported. Please provide JSON file");
     // },
+    (e) => {
+      console.log(e);
+    },
     [reactFlowInstance]
   );
   const [active, setActive] = useState({

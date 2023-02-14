@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import FlowEditor from "components/FlowEditor/FlowEditor";
 import { getGroups } from "store/reducers/flow/flowGroupsSlice";
+import { flowExecutorListener } from "services/configurationService/socketListeners";
+import { flowExecutorNamespace } from "SocketConnections";
 const FlowWrapper = styled.div`
   height: 100%;
   width: 100%;
@@ -23,6 +25,8 @@ const FlowPage = () => {
 
   useEffect(() => {
     dispatch(getGroups(flowId));
+    flowExecutorListener(flowExecutorNamespace);
+    flowExecutorNamespace.emit('joinFlowRoom', { flowId });
   }, []);
 
   return (

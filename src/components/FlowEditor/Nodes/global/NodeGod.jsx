@@ -15,6 +15,9 @@ import getIconInstance from "./Icons/iconConstant";
 import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types"
 import useActiveFlow from "hooks/useActiveFlow";
+import { flowExecutorNamespace } from "SocketConnections";
+import { useState } from "react";
+import { Badge } from "reactstrap";
 
 const propTypes = {
   self: PropTypes.object.isRequired,
@@ -29,7 +32,8 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
   const targets = Array.from(Array(self.data.targetCount).keys());
   const dispatch = useDispatch();
   const { align, expand, enable, group } = self.data;
-  
+  const [serverData, setServerData] = useState("");
+
   useEffect(() => {
     updateNodeInternals(self.id);
   }, [self.data.targetCount, self.data.sourceCount, align]);
@@ -38,7 +42,17 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
   useEffect(() => {
     dispatch(setOutgoersEnable({ self, enable }));
   }, [enable])
+
+  useEffect(() => {
+    console.log("self: ",self);
+    flowExecutorNamespace.emit('nodeComm', { message: `Hi! My type: ${self.type}`, id: self.id, type: self.type })
+    flowExecutorNamespace.on(self.id, (data) => {
+      console.log(`data from server for ${self.id}: `, data);
+      setServerData(data)
+    })
+  }, [])
   return (
+    <>
     <NodeWrapper align={align} selected={self.selected} enable={enable}>
       <TargetWrapper align={align}>
         {targets.map((i, index) => {
@@ -102,6 +116,8 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
         })}
       </SourceWrapper>
     </NodeWrapper>
+    <Badge color="success">{serverData.message}</Badge>
+    </>
   );
 };
 

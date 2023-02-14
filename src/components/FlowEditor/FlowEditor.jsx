@@ -19,8 +19,6 @@ import PropTypes from "prop-types"
 import useActiveFlow from "hooks/useActiveFlow";
 import notification from "utils/notificationHelper"
 import { openElementContextMenu, openMultiSelectionContextMenu, openPaneContextMenu } from "./helpers/menuHelper";
-import { flowExecutorNamespace } from "SocketConnections";
-import { useParams } from "react-router-dom";
 import { isConnectionCyclic } from "utils/flowHelpers";
 
 const propTypes = {
@@ -28,8 +26,6 @@ const propTypes = {
 };
 export default function FlowEditor({ reactFlowWrapper }) {
   const dispatch = useDispatch();
-  const { flowId } = useParams();
-  const nodeClass = useSelector((state) => state.nodeClassReducer);
   const nodeList = useSelector((state) => state.nodeList);
 
   const { flowElements, flowGui } = useActiveFlow();
@@ -114,7 +110,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
 
     console.log("type: ", type);
     if (!(type === "")) {
-      const newNode = createNode(type, position, rotateAllPath, nodeClass);  
+      const newNode = createNode(type, position, rotateAllPath); 
       dispatch(addNewNode(newNode));
       updateRecentStatus(type);
     }
@@ -142,9 +138,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setElementContextMenu(false));
     dispatch(closeAllNodeGroupMenu(true));
   };
-  useEffect(() => {
-    flowExecutorNamespace.emit('joinFlowRoom', { flowId });
-  }, [flowExecutorNamespace])
   
   return (
       <ReactFlow

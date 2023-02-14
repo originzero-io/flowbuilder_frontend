@@ -11,6 +11,7 @@ import DashboardPage from "./pages/DashboardPage";
 import FlowPage from "./pages/FlowPage";
 import LoadingBar from "./components/Shared/LoadingBar.jsx";
 import ToastNotification from "./components/Shared/ToastNotification.jsx";
+import InitialFetchs from "InitialFetchs.jsx";
 const App = () => {
   return (
     <AppWrapper>
@@ -28,7 +29,8 @@ const App = () => {
       </Switch>
       <ToastNotification/>
       <Modal />
-      <SocketConnections/>
+      <SocketConnections />
+      <InitialFetchs/>
     </AppWrapper>
   );
 };
