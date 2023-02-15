@@ -3,20 +3,25 @@ import { NodeWrapper } from "./PanelContextMenu.style";
 import NodeListItem from "./NodeListItem";
 
 export default function FavoriteNodes({
-  nodeList, favClick, onDragStart, addNewNode,
+  nodeList,
+  favClick,
+  onDragStart,
+  addNewNode,
 }) {
   const favoriteNodes = nodeList.filter((node) => node.fav === true);
   return (
     <NodeWrapper>
-      {favoriteNodes.length > 0 ? favoriteNodes.map((node) => (
-        <NodeListItem
-          key={node.id}
-          node={node}
-          onDragStart={onDragStart}
-          addNewNode={addNewNode}
-          favClick={favClick}
-        />
-      )) : "Click the star button to fav nodes"}
+      {favoriteNodes.length > 0
+        ? favoriteNodes.map((node) => (
+            <NodeListItem
+              key={node.id}
+              node={node}
+              onDragStart={onDragStart}
+              addNewNode={addNewNode}
+              favClick={favClick}
+            />
+          ))
+        : "Click the star button to fav nodes"}
     </NodeWrapper>
   );
 }

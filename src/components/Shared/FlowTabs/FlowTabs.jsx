@@ -52,9 +52,7 @@ const FlowTabs = () => {
             selected={flowConfig.id === flow.config.id}
             key={flow.config.id}
           >
-            <div style={{ paddingRight: '20px' }}>
-              {flow.config.name}
-            </div>
+            <div style={{ paddingRight: "20px" }}>{flow.config.name}</div>
           </TabItem>
         </div>
       ))}

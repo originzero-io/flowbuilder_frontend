@@ -1,9 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setModal } from "store/reducers/componentSlice";
-import {
-  setActiveWorkspace,
-} from "store/reducers/workspaceSlice";
+import { setActiveWorkspace } from "store/reducers/workspaceSlice";
 import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
 import PropTypes from "prop-types";

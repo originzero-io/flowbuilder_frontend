@@ -12,11 +12,11 @@ const Wrapper = styled.div`
   position: absolute;
   display: flex;
   flex-direction: row;
-  justify-content:space-around;
+  justify-content: space-around;
   top: 20%;
   //align-items:center;
-  max-height:70vh;
-  right:${({ visible }) => (visible === "visible" ? "0px" : "-25px")};
+  max-height: 70vh;
+  right: ${({ visible }) => (visible === "visible" ? "0px" : "-25px")};
 `;
 const GroupBar = () => {
   const { flowGui } = useActiveFlow();

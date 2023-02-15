@@ -4,12 +4,15 @@ import { NodeWrapper, NodeElement } from "./PanelContextMenu.style";
 import NodeListItem from "./NodeListItem";
 
 export default function RecentNodes({
-  nodeList, favClick, onDragStart, addNewNode,
+  nodeList,
+  favClick,
+  onDragStart,
+  addNewNode,
 }) {
   const recent = nodeList.filter((node) => node.createdDate !== undefined);
   const [recentNodes, setRecentNodes] = useState([]);
   useEffect(() => {
-    const sortByDate = sortBy(recent, 'createdDate').reverse().slice(0, 3);
+    const sortByDate = sortBy(recent, "createdDate").reverse().slice(0, 3);
     setRecentNodes(sortByDate);
   }, [nodeList]);
   return (

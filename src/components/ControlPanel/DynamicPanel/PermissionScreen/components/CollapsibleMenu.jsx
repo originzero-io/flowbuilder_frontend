@@ -14,25 +14,25 @@ const MenuItem = styled.div`
   }
 `;
 const TriggerLabel = styled.span`
-  padding-left:7px;
+  padding-left: 7px;
 `;
 const SubMenu = styled.div`
   margin-left: 7px;
   background: #292d31;
   border-left: 1px solid #3e464d;
-  border-bottom-left-radius:4px;
+  border-bottom-left-radius: 4px;
   margin-bottom: 5px;
 `;
 export default function CollapsibleMenu({ children, trigger, ...rest }) {
   const [open, setOpen] = useState(rest.open || true);
   const triggerStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '2px 2px 2px 8px',
+    display: "flex",
+    alignItems: "center",
+    padding: "2px 2px 2px 8px",
   };
   const openTriggerStyle = {
     ...triggerStyle,
-    background: '#3e464d',
+    background: "#3e464d",
   };
   return (
     <Collapsible
@@ -45,21 +45,11 @@ export default function CollapsibleMenu({ children, trigger, ...rest }) {
       trigger={
         open ? (
           <>
-            <MdExpandLess />
-            {' '}
-            <TriggerLabel>
-              {trigger}
-              {' '}
-            </TriggerLabel>
+            <MdExpandLess /> <TriggerLabel>{trigger} </TriggerLabel>
           </>
         ) : (
           <>
-            <MdExpandMore />
-            {' '}
-            <TriggerLabel>
-              {trigger}
-              {' '}
-            </TriggerLabel>
+            <MdExpandMore /> <TriggerLabel>{trigger} </TriggerLabel>
           </>
         )
       }
@@ -72,18 +62,18 @@ export default function CollapsibleMenu({ children, trigger, ...rest }) {
 export function CollapsibleSubMenu({ children, trigger, ...rest }) {
   const [open, setOpen] = useState(rest.open || true);
   const triggerStyle = {
-    marginTop: '3px',
+    marginTop: "3px",
     marginLeft: "7px",
     padding: "3px",
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: '4px',
+    display: "flex",
+    alignItems: "center",
+    paddingLeft: "4px",
   };
   const openTriggerStyle = {
     ...triggerStyle,
-    background: '#3e464d',
-    borderTopLeftRadius: '4px',
-    borderTopRightRadius: '4px',
+    background: "#3e464d",
+    borderTopLeftRadius: "4px",
+    borderTopRightRadius: "4px",
   };
   return (
     <Collapsible
@@ -96,21 +86,11 @@ export function CollapsibleSubMenu({ children, trigger, ...rest }) {
       trigger={
         open ? (
           <>
-            <MdExpandLess />
-            {' '}
-            <TriggerLabel>
-              {trigger}
-              {' '}
-            </TriggerLabel>
+            <MdExpandLess /> <TriggerLabel>{trigger} </TriggerLabel>
           </>
         ) : (
           <>
-            <MdExpandMore />
-            {' '}
-            <TriggerLabel>
-              {trigger}
-              {' '}
-            </TriggerLabel>
+            <MdExpandMore /> <TriggerLabel>{trigger} </TriggerLabel>
           </>
         )
       }

@@ -28,7 +28,11 @@ const Card = ({ data }) => {
   return (
     <CardContainer>
       <CardTitle>{data.config.name || ""}</CardTitle>
-      <DetailMenu deleteEvent={deleteCardHandler} data={data} getPermission={getPermission} />
+      <DetailMenu
+        deleteEvent={deleteCardHandler}
+        data={data}
+        getPermission={getPermission}
+      />
       <CardBody>
         <CardDescription>{data.config.description || ""}</CardDescription>
         <CardFooter>
@@ -39,7 +43,7 @@ const Card = ({ data }) => {
               projectId: data.project._id,
             }) && (
               <span onClick={(e) => deleteCardHandler(e, data)}>
-                <VscTrash style={{ fontSize: "22px", marginRight: '6px' }} />
+                <VscTrash style={{ fontSize: "22px", marginRight: "6px" }} />
               </span>
             )}
           </div>

@@ -32,9 +32,7 @@ export default function NotesScreen() {
   return (
     <>
       <Button color="success" onClick={addNoteHandle}>
-        <BsPlusCircle style={{ fontSize: "2.5vmin" }} />
-        {' '}
-        Add Note
+        <BsPlusCircle style={{ fontSize: "2.5vmin" }} /> Add Note
       </Button>
       {notes.map((note) => (
         <NoteContainer
@@ -49,19 +47,19 @@ export default function NotesScreen() {
               <NoteContent>{note.content}</NoteContent>
             </div>
             {hoveredNote === note._id && note.createdBy._id === auth._id && (
-            <div
-              style={{
-                width: "5%",
-                cursor: "pointer",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <VscTrash
-                style={{ fontSize: "3vmin", color: "tomato" }}
-                onClick={(event) => deleteNoteHandle(event, note)}
-              />
-            </div>
+              <div
+                style={{
+                  width: "5%",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <VscTrash
+                  style={{ fontSize: "3vmin", color: "tomato" }}
+                  onClick={(event) => deleteNoteHandle(event, note)}
+                />
+              </div>
             )}
           </div>
           <div>

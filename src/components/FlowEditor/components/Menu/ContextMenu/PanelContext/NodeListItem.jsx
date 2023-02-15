@@ -10,7 +10,10 @@ const propTypes = {
   favClick: PropTypes.func.isRequired,
 };
 export default function NodeListItem({
-  node, onDragStart, addNewNode, favClick,
+  node,
+  onDragStart,
+  addNewNode,
+  favClick,
 }) {
   return (
     <NodeElement
@@ -18,13 +21,16 @@ export default function NodeListItem({
       onDoubleClick={() => addNewNode(node)}
       draggable
     >
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
         {node.icon}
         <Label>{node.name}</Label>
       </div>
       <IconWrapper>
         <div onClick={() => addNewNode(node)}>
-          <i className="fas fa-plus" style={{ width: '15px', height: '15px' }} />
+          <i
+            className="fas fa-plus"
+            style={{ width: "15px", height: "15px" }}
+          />
         </div>
         <FavIconManager node={node} favClick={favClick} />
       </IconWrapper>

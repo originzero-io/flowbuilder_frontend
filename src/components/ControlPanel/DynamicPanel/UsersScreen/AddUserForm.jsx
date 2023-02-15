@@ -9,7 +9,7 @@ export default function AddUserForm() {
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState({
     name: "",
-    username: '',
+    username: "",
     password: "",
     email: "",
     avatar: null,

@@ -2,7 +2,10 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setElementContextMenu } from "store/reducers/menuSlice";
 import {
-  deleteNode, rotateNode, setElements, setNodes,
+  deleteNode,
+  rotateNode,
+  setElements,
+  setNodes,
 } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 import { Menu, MenuItem } from "./ElementContextMenu.style";

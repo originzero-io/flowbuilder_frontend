@@ -39,7 +39,7 @@ export default function DynamicPanel() {
   const history = useHistory();
 
   useEffect(() => {
-    history.push('/panel/projects');
+    history.push("/panel/projects");
   }, []);
 
   return (

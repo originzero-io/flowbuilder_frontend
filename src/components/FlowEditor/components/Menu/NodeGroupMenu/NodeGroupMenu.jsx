@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setGroupSelectedElements, setGroupSingle } from "store/reducers/flow/flowElementsSlice";
+import {
+  setGroupSelectedElements,
+  setGroupSingle,
+} from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 import { getSelectedNodes } from "../../../helpers/elementHelper";
 import { GroupColor, Label } from "../GroupBar/GroupBar.style";
@@ -54,7 +57,9 @@ export default function GroupMenu({ self }) {
   }, []);
   const searchHandle = (e) => {
     const { value } = e.target;
-    const filtered = flowGroups.filter((group) => group.name.toLowerCase().includes(value.toLowerCase()));
+    const filtered = flowGroups.filter((group) =>
+      group.name.toLowerCase().includes(value.toLowerCase()),
+    );
     if (value === "") {
       setSearched([]);
     } else {

@@ -62,16 +62,16 @@ export default function EditDevicePermission({
                 name="CAN_EDIT_CONTROLLER"
                 id={controller._id}
                 onChange={(e) => handleChange(e)}
-                  // checked={controller.canEdit}
+                // checked={controller.canEdit}
                 defaultChecked={permissions.CAN_EDIT_CONTROLLER.includes(
                   controller._id,
                 )}
                 disabled={permissions.EVERYTHING}
                 checked={
-                    permissions.EVERYTHING
-                    || permissions.CAN_EDIT_CONTROLLER_ALL
-                    || permissions.CAN_EDIT_CONTROLLER.includes(controller._id)
-                  }
+                  permissions.EVERYTHING ||
+                  permissions.CAN_EDIT_CONTROLLER_ALL ||
+                  permissions.CAN_EDIT_CONTROLLER.includes(controller._id)
+                }
               />
             </CollapsibleMenuItem>
           ))}
@@ -96,16 +96,16 @@ export default function EditDevicePermission({
                 name="CAN_EDIT_PROCESSOR"
                 id={processor._id}
                 onChange={(e) => handleChange(e)}
-                  // checked={processor.canEdit}
+                // checked={processor.canEdit}
                 defaultChecked={permissions.CAN_EDIT_PROCESSOR.includes(
                   processor._id,
                 )}
                 disabled={permissions.EVERYTHING}
                 checked={
-                    permissions.EVERYTHING
-                    || permissions.CAN_EDIT_PROCESSOR_ALL
-                    || permissions.CAN_EDIT_PROCESSOR.includes(processor._id)
-                  }
+                  permissions.EVERYTHING ||
+                  permissions.CAN_EDIT_PROCESSOR_ALL ||
+                  permissions.CAN_EDIT_PROCESSOR.includes(processor._id)
+                }
               />
             </CollapsibleMenuItem>
           ))}

@@ -1,11 +1,13 @@
 import React from "react";
-import { AiOutlineFundProjectionScreen, AiOutlineTeam, AiOutlineSave } from "react-icons/ai";
+import {
+  AiOutlineFundProjectionScreen,
+  AiOutlineTeam,
+  AiOutlineSave,
+} from "react-icons/ai";
 import { MdDevicesOther, MdOutlineAssignmentInd } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-  Tab, TabList, TabPanel, Tabs,
-} from "react-tabs";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import useUser from "hooks/useUser";
 import useUserPermission from "hooks/useUserPermission";
 import useWorkspace from "hooks/useWorkspace";
@@ -50,7 +52,12 @@ export default function PermissionScreen() {
   const permissions = useUserPermission();
 
   useComponentWillMount(async () => {
-    dispatch(getUserPermissionInThisWorkspace({ workspace: activeWorkspace, user: member }));
+    dispatch(
+      getUserPermissionInThisWorkspace({
+        workspace: activeWorkspace,
+        user: member,
+      }),
+    );
   }, [activeWorkspace._id, member._id]);
 
   const handleSavePermissions = async () => {
@@ -62,7 +69,12 @@ export default function PermissionScreen() {
     await PermissionService.savePermission(data);
 
     if (data.userId === auth._id) {
-      dispatch(getMyPermissionInThisWorkspace({ workspace: activeWorkspace, me: auth }));
+      dispatch(
+        getMyPermissionInThisWorkspace({
+          workspace: activeWorkspace,
+          me: auth,
+        }),
+      );
     }
     notification.success("Permissions saved");
   };
@@ -112,7 +124,10 @@ export default function PermissionScreen() {
           </TabList>
           <TabPanel style={{ height: "100%" }}>
             <ProjectPermissions
-              permissions={{ ...permissions.project, EVERYTHING: permissions.CAN_DO_EVERYTHING }}
+              permissions={{
+                ...permissions.project,
+                EVERYTHING: permissions.CAN_DO_EVERYTHING,
+              }}
               setSingleAllPermission={setSingleAllPermission}
               setMultiplePermission={setMultiplePermission}
               setNestedMultiplePermission={setNestedMultiplePermission}
@@ -122,13 +137,19 @@ export default function PermissionScreen() {
           </TabPanel>
           <TabPanel style={{ height: "100%" }}>
             <TeamPermissions
-              permissions={{ ...permissions.team, EVERYTHING: permissions.CAN_DO_EVERYTHING }}
+              permissions={{
+                ...permissions.team,
+                EVERYTHING: permissions.CAN_DO_EVERYTHING,
+              }}
               setSinglePermission={setSinglePermission}
             />
           </TabPanel>
           <TabPanel style={{ height: "100%" }}>
             <DevicePermissions
-              permissions={{ ...permissions.device, EVERYTHING: permissions.CAN_DO_EVERYTHING }}
+              permissions={{
+                ...permissions.device,
+                EVERYTHING: permissions.CAN_DO_EVERYTHING,
+              }}
               setSinglePermission={setSinglePermission}
               setMultiplePermission={setMultiplePermission}
               setSingleAllPermission={setSingleAllPermission}
@@ -136,10 +157,7 @@ export default function PermissionScreen() {
           </TabPanel>
         </Tabs>
         <Button color="success" onClick={handleSavePermissions}>
-          <AiOutlineSave style={{ fontSize: "24px" }} />
-          {' '}
-          Assign this to
-          {" "}
+          <AiOutlineSave style={{ fontSize: "24px" }} /> Assign this to{" "}
           {member.username}
         </Button>
         <Button
@@ -147,10 +165,7 @@ export default function PermissionScreen() {
           style={{ marginLeft: "15px" }}
           onClick={handleSavePreset}
         >
-          <MdOutlineAssignmentInd style={{ fontSize: "24px" }} />
-          {' '}
-          Save as
-          preset
+          <MdOutlineAssignmentInd style={{ fontSize: "24px" }} /> Save as preset
         </Button>
         <Button
           outline
@@ -158,9 +173,7 @@ export default function PermissionScreen() {
           style={{ marginLeft: "15px" }}
           onClick={handleLoadPreset}
         >
-          <MdOutlineAssignmentInd style={{ fontSize: "24px" }} />
-          {' '}
-          Load Preset
+          <MdOutlineAssignmentInd style={{ fontSize: "24px" }} /> Load Preset
         </Button>
       </div>
     </PermissionProvider>

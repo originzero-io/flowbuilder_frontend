@@ -22,7 +22,7 @@ const FlowList = ({ flows }) => {
 
   const getPermission = useAuthPermission("project");
   const openPageHandler = async (flow) => {
-    elementNamespace.emit('elements:getElements', { flow_id: flow._id });
+    elementNamespace.emit("elements:getElements", { flow_id: flow._id });
     dispatch(setCurrentFlowConfig(flow.config));
     dispatch(setCurrentFlowGui(flow.gui));
     history.push(`/flow/${flow._id}`);
@@ -33,16 +33,22 @@ const FlowList = ({ flows }) => {
 
   return (
     <>
-      {flows && flows.map((flow) => {
-        if (getPermission("CAN_VIEW_FLOW", { flowId: flow._id, projectId: flow.project._id })) {
-          return (
-            <div key={flow._id} onClick={() => openPageHandler(flow)}>
-              <Card key={flow._id} data={flow} />
-            </div>
-          );
-        }
-        return null;
-      })}
+      {flows &&
+        flows.map((flow) => {
+          if (
+            getPermission("CAN_VIEW_FLOW", {
+              flowId: flow._id,
+              projectId: flow.project._id,
+            })
+          ) {
+            return (
+              <div key={flow._id} onClick={() => openPageHandler(flow)}>
+                <Card key={flow._id} data={flow} />
+              </div>
+            );
+          }
+          return null;
+        })}
     </>
   );
 };

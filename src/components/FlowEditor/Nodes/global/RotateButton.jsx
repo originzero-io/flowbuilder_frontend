@@ -14,9 +14,11 @@ export default function RotateButton({ self }) {
   };
   return (
     <div onClick={rotateHandle}>
-      {
-        self.data.align === "horizontal" ? <HorizontalToVerticalIcon /> : <VerticalToHorizontalIcon />
-      }
+      {self.data.align === "horizontal" ? (
+        <HorizontalToVerticalIcon />
+      ) : (
+        <VerticalToHorizontalIcon />
+      )}
     </div>
   );
 }

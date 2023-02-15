@@ -66,10 +66,10 @@ export default function UsageDevicePermission({
                 )}
                 disabled={permissions.EVERYTHING}
                 checked={
-                    permissions.EVERYTHING
-                    || permissions.CAN_USAGE_CONTROLLER_ALL
-                    || permissions.CAN_USAGE_CONTROLLER.includes(controller._id)
-                  }
+                  permissions.EVERYTHING ||
+                  permissions.CAN_USAGE_CONTROLLER_ALL ||
+                  permissions.CAN_USAGE_CONTROLLER.includes(controller._id)
+                }
               />
             </CollapsibleMenuItem>
           ))}
@@ -94,16 +94,16 @@ export default function UsageDevicePermission({
                 name="CAN_USAGE_PROCESSOR"
                 id={processor._id}
                 onChange={(e) => handleChange(e)}
-                  // checked={processor.canUse}
+                // checked={processor.canUse}
                 defaultChecked={permissions.CAN_USAGE_PROCESSOR.includes(
                   processor._id,
                 )}
                 disabled={permissions.EVERYTHING}
                 checked={
-                    permissions.EVERYTHING
-                    || permissions.CAN_USAGE_PROCESSOR_ALL
-                    || permissions.CAN_USAGE_PROCESSOR.includes(processor._id)
-                  }
+                  permissions.EVERYTHING ||
+                  permissions.CAN_USAGE_PROCESSOR_ALL ||
+                  permissions.CAN_USAGE_PROCESSOR.includes(processor._id)
+                }
               />
             </CollapsibleMenuItem>
           ))}

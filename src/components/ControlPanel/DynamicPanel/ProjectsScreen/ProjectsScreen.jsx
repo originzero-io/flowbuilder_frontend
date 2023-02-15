@@ -33,11 +33,15 @@ export default function Panel({ flows }) {
       style={{ color: "white" }}
     />
   );
-  const dashboardCollapseTrigger = () => <CollapsibleTrigger label="Dashboards" style={{ color: "white" }} />;
+  const dashboardCollapseTrigger = () => (
+    <CollapsibleTrigger label="Dashboards" style={{ color: "white" }} />
+  );
   const [searched, setSearched] = useState(flows);
   const searchHandle = (e) => {
     const { value } = e.target;
-    const filtered = flows.filter((flow) => flow.config.name.toLowerCase().includes(value.toLowerCase()));
+    const filtered = flows.filter((flow) =>
+      flow.config.name.toLowerCase().includes(value.toLowerCase()),
+    );
     setSearched(filtered);
   };
   useEffect(() => {

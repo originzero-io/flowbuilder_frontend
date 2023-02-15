@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Button, Form, FormGroup, Input, Label,
-} from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { noteNamespace } from "SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "hooks/useAuth";
@@ -14,7 +12,7 @@ const AddNoteForm = () => {
   const auth = useAuth();
   const [noteInfo, setNoteInfo] = useState({
     title: null,
-    content: '',
+    content: "",
     createdBy: auth._id,
     workspace: activeWorkspace._id,
   });
@@ -23,18 +21,29 @@ const AddNoteForm = () => {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    noteNamespace.emit('notes:create', { note: noteInfo });
+    noteNamespace.emit("notes:create", { note: noteInfo });
     dispatch(setModal(false));
   };
   return (
     <Form onSubmit={onSubmitHandle}>
       <FormGroup>
         <Label>Title</Label>
-        <Input name="title" placeholder="Title" onChange={onChangeHandler} required />
+        <Input
+          name="title"
+          placeholder="Title"
+          onChange={onChangeHandler}
+          required
+        />
       </FormGroup>
       <FormGroup>
         <Label>Content</Label>
-        <Input name="content" placeholder="Content" type="textarea" onChange={onChangeHandler} required />
+        <Input
+          name="content"
+          placeholder="Content"
+          type="textarea"
+          onChange={onChangeHandler}
+          required
+        />
       </FormGroup>
       <Button type="submit">Create</Button>
     </Form>

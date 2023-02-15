@@ -23,7 +23,9 @@ export default function AllNodes({
   const [searched, setSearched] = useState(nodeList);
   const searchHandle = (e) => {
     const { value } = e.target;
-    const filtered = nodeList.filter((node) => node.name.toLowerCase().includes(value.toLowerCase()));
+    const filtered = nodeList.filter((node) =>
+      node.name.toLowerCase().includes(value.toLowerCase()),
+    );
     setSearched(filtered);
   };
   useEffect(() => {

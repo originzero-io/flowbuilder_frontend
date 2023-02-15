@@ -9,12 +9,10 @@ import {
   setExpandAll,
   deleteAllElements,
 } from "store/reducers/flow/flowElementsSlice";
-import {
-  setRotateAllPath,
-} from "store/reducers/flow/flowGuiSlice";
+import { setRotateAllPath } from "store/reducers/flow/flowGuiSlice";
 import * as themeColor from "constants/ThemeReference";
 import { useStore, useReactFlow } from "reactflow";
-import { ActionCreators as UndoActionCreators } from 'redux-undo';
+import { ActionCreators as UndoActionCreators } from "redux-undo";
 import { useParams } from "react-router";
 import { elementNamespace } from "SocketConnections";
 import useActiveFlow from "hooks/useActiveFlow";
@@ -43,10 +41,12 @@ const Menu = styled.div`
   bottom: 10px;
   left: 10px;
   padding: 4px;
-  background: ${(props) => (props.theme === "dark"
-    ? themeColor.DARK_MENU_BACKGROUND
-    : themeColor.LIGHT_MENU_BACKGROUND)};
-  color: ${(props) => (props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON)};
+  background: ${(props) =>
+    props.theme === "dark"
+      ? themeColor.DARK_MENU_BACKGROUND
+      : themeColor.LIGHT_MENU_BACKGROUND};
+  color: ${(props) =>
+    props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON};
 `;
 export default function ControlMenu() {
   const { flowGui, flowConfig, flowElements } = useActiveFlow();
@@ -73,8 +73,11 @@ export default function ControlMenu() {
       },
     };
     await FlowService.saveFlowGui(flowId, flow);
-    elementNamespace.emit("elements:save", { flowId, elements: { nodes, edges } });
-    notification.success('Flow saved successfully');
+    elementNamespace.emit("elements:save", {
+      flowId,
+      elements: { nodes, edges },
+    });
+    notification.success("Flow saved successfully");
   };
 
   const deleteAllNodes = () => {

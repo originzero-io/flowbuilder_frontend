@@ -16,8 +16,8 @@ function ToastNotification() {
           // borderRadius: "10px",
           background: "#343a40",
           color: "#fff",
-          boxShadow: '0px 0px 8px -4px rgba(255,255,255,1)',
-          border: '2px solid #6c757d',
+          boxShadow: "0px 0px 8px -4px rgba(255,255,255,1)",
+          border: "2px solid #6c757d",
         },
       }}
     />

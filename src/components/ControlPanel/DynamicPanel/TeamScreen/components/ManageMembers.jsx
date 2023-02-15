@@ -27,10 +27,14 @@ export default function ManageMembers() {
   const users = useUser();
   const { activeWorkspace } = useWorkspace();
   const addMemberHandle = (user) => {
-    dispatch(addUserToWorkspace({ userInfo: user, workspace: activeWorkspace }));
+    dispatch(
+      addUserToWorkspace({ userInfo: user, workspace: activeWorkspace }),
+    );
   };
   const removeMemberHandle = (user) => {
-    dispatch(removeUserToWorkspace({ userInfo: user, workspace: activeWorkspace }));
+    dispatch(
+      removeUserToWorkspace({ userInfo: user, workspace: activeWorkspace }),
+    );
   };
   return (
     <div>
@@ -38,7 +42,9 @@ export default function ManageMembers() {
         <Container key={user._id}>
           <Avatar avatar={user.avatar} />
           <UserItem>{user.username}</UserItem>
-          {user.workspaces.some((workspace) => workspace === activeWorkspace._id) ? (
+          {user.workspaces.some(
+            (workspace) => workspace === activeWorkspace._id,
+          ) ? (
             <TiTickOutline
               style={{ fontSize: "30px" }}
               onClick={() => removeMemberHandle(user)}

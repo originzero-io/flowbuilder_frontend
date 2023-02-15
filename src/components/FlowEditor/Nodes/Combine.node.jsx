@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import NodeGod from './global/NodeGod';
-import NodeIOManager from './global/NodeIOManager';
+import React, { useState } from "react";
+import NodeGod from "./global/NodeGod";
+import NodeIOManager from "./global/NodeIOManager";
 
 const CombineNode = (self) => {
-  const [align, setAlign] = useState('vertical');
+  const [align, setAlign] = useState("vertical");
   // console.log("combine-rendered");
   return (
     <NodeGod

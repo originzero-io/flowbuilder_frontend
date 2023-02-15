@@ -1,54 +1,54 @@
-import React, { useCallback, useState } from 'react';
-import { useReactFlow, useStore, useStoreActions } from 'reactflow';
-import { BiBrain } from 'react-icons/bi';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useState } from "react";
+import { useReactFlow, useStore, useStoreActions } from "reactflow";
+import { BiBrain } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
-} from 'reactstrap';
-import styled from 'styled-components';
-import * as themeColor from 'constants/ThemeReference';
-import * as tooltip from 'constants/TooltipReference';
-import { logOut } from 'store/reducers/authSlice';
-import { changeEdgeType } from 'store/reducers/flow/flowElementsSlice';
+} from "reactstrap";
+import styled from "styled-components";
+import * as themeColor from "constants/ThemeReference";
+import * as tooltip from "constants/TooltipReference";
+import { logOut } from "store/reducers/authSlice";
+import { changeEdgeType } from "store/reducers/flow/flowElementsSlice";
 import {
   setFlowEdgeType,
   setMiniMapDisplay,
   setTheme,
-} from 'store/reducers/flow/flowGuiSlice';
-import useActiveFlow from 'hooks/useActiveFlow';
-import useAuth from 'hooks/useAuth';
-import Avatar from 'components/Shared/Avatar';
-import { FileInput } from 'components/Shared/FileInput/FileInput';
-import { GoDeviceDesktop } from 'react-icons/go';
-import { VscRunAll } from 'react-icons/vsc';
-import notification from 'utils/notificationHelper';
-import { flowExecutorNamespace } from 'SocketConnections';
-import { backendFlowDataBuilder } from 'utils/flowHelpers';
-import { useParams } from 'react-router-dom';
-import { Menu, MenuItem } from './NavMenu.style';
-import { ShareIcon, TuneIcon } from './Icons';
-import { Circle } from '../../../../StyledComponents/Shapes';
+} from "store/reducers/flow/flowGuiSlice";
+import useActiveFlow from "hooks/useActiveFlow";
+import useAuth from "hooks/useAuth";
+import Avatar from "components/Shared/Avatar";
+import { FileInput } from "components/Shared/FileInput/FileInput";
+import { GoDeviceDesktop } from "react-icons/go";
+import { VscRunAll } from "react-icons/vsc";
+import notification from "utils/notificationHelper";
+import { flowExecutorNamespace } from "SocketConnections";
+import { backendFlowDataBuilder } from "utils/flowHelpers";
+import { useParams } from "react-router-dom";
+import { Menu, MenuItem } from "./NavMenu.style";
+import { ShareIcon, TuneIcon } from "./Icons";
+import { Circle } from "../../../../StyledComponents/Shapes";
 import {
   DropdownItem,
   DropdownList,
   DropdownWrapper,
-} from '../../../../StyledComponents/DropdownMenu';
-import { VerticalDivider } from '../../../../StyledComponents/Divider';
-import SwitchButton from '../../../Nodes/global/SwitchButton';
+} from "../../../../StyledComponents/DropdownMenu";
+import { VerticalDivider } from "../../../../StyledComponents/Divider";
+import SwitchButton from "../../../Nodes/global/SwitchButton";
 
 const dummyDevices = [
   {
-    id: '1',
-    name: 'Akin-PC',
-    ip: '192.168.1.101',
+    id: "1",
+    name: "Akin-PC",
+    ip: "192.168.1.101",
   },
   {
-    id: '2',
-    name: 'Anil-PC',
-    ip: '192.168.1.102',
+    id: "2",
+    name: "Anil-PC",
+    ip: "192.168.1.102",
   },
 ];
 
@@ -65,14 +65,15 @@ export default function ConfigurationMenu() {
   const dispatch = useDispatch();
 
   const downloadFlowHandle = () => {
-    if (confirm('Download?')) {
+    if (confirm("Download?")) {
       if (reactFlowInstance) {
         const elements = reactFlowInstance.toObject();
-        console.log('elements: ', reactFlowInstance.toObject());
-        const hiddenElement = document.createElement('a');
-        hiddenElement.href = `data:application/octet-stream;base64,${
-          window.btoa(JSON.stringify(elements))}`;
-        hiddenElement.target = '_blank';
+        console.log("elements: ", reactFlowInstance.toObject());
+        const hiddenElement = document.createElement("a");
+        hiddenElement.href = `data:application/octet-stream;base64,${window.btoa(
+          JSON.stringify(elements),
+        )}`;
+        hiddenElement.target = "_blank";
         hiddenElement.download = `${flowConfig.name}.json`;
         hiddenElement.click();
         hiddenElement.remove();
@@ -113,18 +114,18 @@ export default function ConfigurationMenu() {
     miniMap: false,
   });
   const changeTheme = (checked) => {
-    if (theme === 'dark') {
-      dispatch(setTheme('light'));
+    if (theme === "dark") {
+      dispatch(setTheme("light"));
     } else {
-      dispatch(setTheme('dark'));
+      dispatch(setTheme("dark"));
     }
     setActive({ ...active, theme: checked });
   };
   const changeMiniMapDisplay = (checked) => {
-    if (miniMapDisplay === 'visible') {
-      dispatch(setMiniMapDisplay('hidden'));
+    if (miniMapDisplay === "visible") {
+      dispatch(setMiniMapDisplay("hidden"));
     } else {
-      dispatch(setMiniMapDisplay('visible'));
+      dispatch(setMiniMapDisplay("visible"));
     }
     setActive({ ...active, miniMap: checked });
   };
@@ -133,17 +134,22 @@ export default function ConfigurationMenu() {
     dispatch(changeEdgeType(e.target.value));
   };
   const logOutHandle = () => {
-    if (confirm('Are you sure?')) {
+    if (confirm("Are you sure?")) {
       dispatch(logOut());
     }
   };
   const debugFlow = () => {
     const elements = reactFlowInstance.toObject();
-    const triggerNodes = elements.nodes.filter((node) => node.type === "Trigger");
+    const triggerNodes = elements.nodes.filter(
+      (node) => node.type === "Trigger",
+    );
     if (triggerNodes.length > 0) {
-      flowExecutorNamespace.emit("debugFlow", backendFlowDataBuilder(flowId, elements));
+      flowExecutorNamespace.emit(
+        "debugFlow",
+        backendFlowDataBuilder(flowId, elements),
+      );
     } else {
-      notification.error('Flow does not contain any trigger node.');
+      notification.error("Flow does not contain any trigger node.");
     }
   };
 
@@ -153,11 +159,11 @@ export default function ConfigurationMenu() {
         <MenuItem>
           <Button
             style={{
-              width: '100px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '5px',
+              width: "100px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "5px",
             }}
             color="success"
           >
@@ -170,14 +176,13 @@ export default function ConfigurationMenu() {
             <div>This PC</div>
           </DropdownItem>
           {dummyDevices.map((device) => (
-            <DropdownItem style={{ fontSize: '1.5vmin' }} key={device.id}>
+            <DropdownItem style={{ fontSize: "1.5vmin" }} key={device.id}>
               <GoDeviceDesktop
-                style={{ fontSize: '36px', marginRight: '5px' }}
+                style={{ fontSize: "36px", marginRight: "5px" }}
               />
               <div>
-                {device.name}
-                {' '}
-                <span style={{ color: 'gray', fontSize: '1.2vmin' }}>
+                {device.name}{" "}
+                <span style={{ color: "gray", fontSize: "1.2vmin" }}>
                   {device.ip}
                 </span>
               </div>
@@ -202,7 +207,7 @@ export default function ConfigurationMenu() {
       <MenuItem data-tip="Settings" data-for={tooltip.SETTINGS}>
         <TuneIcon
           color={
-            theme === 'dark' ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
+            theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
           }
         />
       </MenuItem>
@@ -211,9 +216,9 @@ export default function ConfigurationMenu() {
       <MenuItem data-tip="Learn" data-for={tooltip.LEARN}>
         <BiBrain
           style={{
-            fontSize: '25px',
+            fontSize: "25px",
             color:
-              theme === 'dark' ? themeColor.DARK_ICON : themeColor.LIGHT_ICON,
+              theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON,
           }}
         />
       </MenuItem>

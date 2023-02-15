@@ -48,9 +48,9 @@ function ViewProjectPermission({
               onChange={handleSingleAllChange}
               defaultChecked={permissions.CAN_VIEW_PROJECT_ALL}
               disabled={
-                permissions.EVERYTHING
+                permissions.EVERYTHING ||
                 // permissions.CAN_USAGE_PROJECT_ALL ||
-                || permissions.CAN_EDIT_PROJECT_ALL
+                permissions.CAN_EDIT_PROJECT_ALL
               }
               checked={
                 permissions.EVERYTHING || permissions.CAN_VIEW_PROJECT_ALL
@@ -72,16 +72,16 @@ function ViewProjectPermission({
                     project._id,
                   )}
                   disabled={
-                      permissions.EVERYTHING
-                      || permissions.CAN_VIEW_PROJECT_ALL
-                      // permissions.CAN_USAGE_PROJECT.includes(project._id) ||
-                      || permissions.CAN_EDIT_PROJECT.includes(project._id)
-                    }
+                    permissions.EVERYTHING ||
+                    permissions.CAN_VIEW_PROJECT_ALL ||
+                    // permissions.CAN_USAGE_PROJECT.includes(project._id) ||
+                    permissions.CAN_EDIT_PROJECT.includes(project._id)
+                  }
                   checked={
-                      permissions.EVERYTHING
-                      || permissions.CAN_VIEW_PROJECT_ALL
-                      || permissions.CAN_VIEW_PROJECT.includes(project._id)
-                    }
+                    permissions.EVERYTHING ||
+                    permissions.CAN_VIEW_PROJECT_ALL ||
+                    permissions.CAN_VIEW_PROJECT.includes(project._id)
+                  }
                 />
               </CollapsibleMenuItem>
               <CollapsibleSubMenu trigger="Flows">

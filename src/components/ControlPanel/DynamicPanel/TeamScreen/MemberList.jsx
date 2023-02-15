@@ -23,7 +23,10 @@ export default function MemberList() {
   const { activeWorkspace } = useWorkspace();
   const getPermissions = useAuthPermission("team");
   const members = useMemo(
-    () => users.filter(({ workspaces }) => workspaces.some((workspace) => workspace === activeWorkspace._id)),
+    () =>
+      users.filter(({ workspaces }) =>
+        workspaces.some((workspace) => workspace === activeWorkspace._id),
+      ),
     [activeWorkspace, users],
   );
   console.log("members: ", members);

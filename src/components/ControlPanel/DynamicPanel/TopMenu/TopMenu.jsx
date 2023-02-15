@@ -12,7 +12,12 @@ import {
   DropdownWrapper,
 } from "components/StyledComponents/DropdownMenu";
 import {
-  Container, LeftSideContainer, MenuItem, Profile, ProfileList, RightSideContainer,
+  Container,
+  LeftSideContainer,
+  MenuItem,
+  Profile,
+  ProfileList,
+  RightSideContainer,
   UserInformation,
 } from "./TopMenu.style";
 
@@ -34,14 +39,14 @@ export default function TopMenu() {
         <Link to={`${url}/learn`}>
           <MenuItem>
             <BiBrain />
-            <span style={{ marginLeft: '5px' }}>Learn</span>
+            <span style={{ marginLeft: "5px" }}>Learn</span>
           </MenuItem>
         </Link>
         {role === "admin" && (
           <Link to={`${url}/users`}>
             <MenuItem>
               <FiUsers />
-              <span style={{ marginLeft: '5px' }}>Users</span>
+              <span style={{ marginLeft: "5px" }}>Users</span>
             </MenuItem>
           </Link>
         )}
@@ -50,12 +55,14 @@ export default function TopMenu() {
             <Avatar avatar={avatar} size={36} />
             <UserInformation>
               <div>{name}</div>
-              <div style={{ textAlign: 'center', opacity: '0.6' }}>{role}</div>
+              <div style={{ textAlign: "center", opacity: "0.6" }}>{role}</div>
             </UserInformation>
           </Profile>
           <ProfileList>
             <Link to={`${url}/settings`}>
-              <DropdownItem style={{ color: 'white' }}>User settings</DropdownItem>
+              <DropdownItem style={{ color: "white" }}>
+                User settings
+              </DropdownItem>
             </Link>
             <DropdownItem onClick={logOutHandle}>Log out</DropdownItem>
           </ProfileList>

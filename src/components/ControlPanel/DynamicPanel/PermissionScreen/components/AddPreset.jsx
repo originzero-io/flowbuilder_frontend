@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  Form, FormGroup, Label, Input, Button,
-} from "reactstrap";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useDispatch } from "react-redux";
 import PermissionService from "services/configurationService/permissionService";
 import notification from "utils/notificationHelper";

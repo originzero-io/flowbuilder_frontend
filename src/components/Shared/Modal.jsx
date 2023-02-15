@@ -22,11 +22,10 @@ const customStyles = {
     boxShadow: "-1px 1px 16px -9px rgba(0,0,0,0.75)",
     color: "white",
     border: "1px solid rgba(100,100,100,0.6)",
-
   },
   overlay: {
     background: "rgba(53, 59, 72,0.4)",
-    zIndex: '6',
+    zIndex: "6",
   },
 };
 const closeButtonWrapperStyle = {
@@ -56,7 +55,7 @@ export default function Modal() {
       shouldCloseOnOverlayClick
     >
       <div style={closeButtonWrapperStyle} onClick={closeModal}>
-        <AiFillCloseCircle style={{ fontSize: '3vh' }} />
+        <AiFillCloseCircle style={{ fontSize: "3vh" }} />
       </div>
       <div style={childrenStyle}>{modal}</div>
     </ReactModal>

@@ -66,10 +66,10 @@ function EditProjectPermission({
                   )}
                   disabled={permissions.EVERYTHING}
                   checked={
-                      permissions.EVERYTHING
-                      || permissions.CAN_EDIT_PROJECT_ALL
-                      || permissions.CAN_EDIT_PROJECT.includes(project._id)
-                    }
+                    permissions.EVERYTHING ||
+                    permissions.CAN_EDIT_PROJECT_ALL ||
+                    permissions.CAN_EDIT_PROJECT.includes(project._id)
+                  }
                 />
               </CollapsibleMenuItem>
               <CollapsibleSubMenu trigger="Flows">

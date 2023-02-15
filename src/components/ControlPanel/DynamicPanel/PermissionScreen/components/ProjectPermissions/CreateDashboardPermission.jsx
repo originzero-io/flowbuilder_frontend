@@ -56,10 +56,10 @@ function CreateDashboardPermission({
                 )}
                 disabled={permissions.EVERYTHING}
                 checked={
-                    permissions.EVERYTHING
-                    || permissions.CAN_CREATE_DASHBOARD_ALL
-                    || permissions.CAN_CREATE_DASHBOARD.includes(project._id)
-                  }
+                  permissions.EVERYTHING ||
+                  permissions.CAN_CREATE_DASHBOARD_ALL ||
+                  permissions.CAN_CREATE_DASHBOARD.includes(project._id)
+                }
               />
             </CollapsibleMenuItem>
           ))}

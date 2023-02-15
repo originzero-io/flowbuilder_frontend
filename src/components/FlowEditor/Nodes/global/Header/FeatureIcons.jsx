@@ -2,7 +2,10 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { getIncomers, getOutgoers } from "reactflow";
 import { useDispatch } from "react-redux";
-import { setNodeEnable, setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
+import {
+  setNodeEnable,
+  setOutgoersEnable,
+} from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 import { NameEditIcon } from "components/Shared/icons";
 import toast from "react-hot-toast";
@@ -23,7 +26,9 @@ export default function FeatureIcons({ self, edit, setEdit }) {
   const [checked, setChecked] = useState(self.data.enable);
   const enableChangeHandle = (checked) => {
     const incomers = getIncomers(self, flowElements.nodes, flowElements.edges);
-    const disableCount = incomers.filter((incomer) => incomer.data.enable === false).length;
+    const disableCount = incomers.filter(
+      (incomer) => incomer.data.enable === false,
+    ).length;
     if (incomers.length > 0 && incomers.length === disableCount) {
       toast("First, make sure that at least one of your incomers is enabled");
     } else {

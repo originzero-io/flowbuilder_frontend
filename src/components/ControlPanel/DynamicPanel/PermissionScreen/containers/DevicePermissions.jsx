@@ -4,7 +4,10 @@ import PropTypes from "prop-types";
 import CreateDevicePermission from "../components/DevicePermissions/CreateDevicePermission";
 import EditDevicePermission from "../components/DevicePermissions/EditDevicePermission";
 import UsageDevicePermission from "../components/DevicePermissions/UsageDevicePermission";
-import { PermissionContainer, TabContainer } from "../components/PermissionScreen.style";
+import {
+  PermissionContainer,
+  TabContainer,
+} from "../components/PermissionScreen.style";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,

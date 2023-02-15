@@ -50,7 +50,9 @@ const NewGroupForm = ({ theme }) => {
     dispatch(createGroup({ flowId, group: groupInfo }));
   };
   const selectNonGroupsHandle = () => {
-    const nonGroups = flowElements.nodes.filter((node) => node.data.group._id === 0);
+    const nonGroups = flowElements.nodes.filter(
+      (node) => node.data.group._id === 0,
+    );
     dispatch(selectElements(nonGroups));
   };
   return (

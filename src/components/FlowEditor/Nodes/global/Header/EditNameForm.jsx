@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { SubmitIcon } from "components/Shared/icons";
 import { useDispatch } from "react-redux";
-import {
-  changeNodeName,
-} from "store/reducers/flow/flowElementsSlice";
+import { changeNodeName } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types";
 import { Submit } from "../../../components/Menu/GroupBar/GroupBar.style";
 

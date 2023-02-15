@@ -1,28 +1,28 @@
-import React, { useEffect } from 'react';
-import { VscAdd } from 'react-icons/vsc';
-import { useDispatch } from 'react-redux';
-import ReactTooltip from 'react-tooltip';
-import { setModal } from 'store/reducers/componentSlice';
-import { getFlowsByWorkspace } from 'store/reducers/flow/flowSlice';
-import { getNotesByWorkspace } from 'store/reducers/noteSlice';
+import React, { useEffect } from "react";
+import { VscAdd } from "react-icons/vsc";
+import { useDispatch } from "react-redux";
+import ReactTooltip from "react-tooltip";
+import { setModal } from "store/reducers/componentSlice";
+import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
+import { getNotesByWorkspace } from "store/reducers/noteSlice";
 import {
   getProjectsByWorkspace,
   setActiveProject,
-} from 'store/reducers/projectSlice';
+} from "store/reducers/projectSlice";
 import {
   getMyWorkspaces,
   setActiveWorkspace,
-} from 'store/reducers/workspaceSlice';
-import useAuth from 'hooks/useAuth';
-import useDidMountEffect from 'hooks/useDidMountEffect';
-import useWorkspace from 'hooks/useWorkspace';
-import { getMyPermissionInThisWorkspace } from 'store/reducers/authPermissionSlice';
-import AddWorkspaceForm from './AddWorkspaceForm';
+} from "store/reducers/workspaceSlice";
+import useAuth from "hooks/useAuth";
+import useDidMountEffect from "hooks/useDidMountEffect";
+import useWorkspace from "hooks/useWorkspace";
+import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
+import AddWorkspaceForm from "./AddWorkspaceForm";
 import {
   WorkspaceContainer,
   WorkspaceItem,
   WorkspaceItemWrapper,
-} from './WorkspacePanel.style';
+} from "./WorkspacePanel.style";
 
 const WorkspacePanel = () => {
   const { workspaces, activeWorkspace } = useWorkspace();
@@ -41,7 +41,7 @@ const WorkspacePanel = () => {
     dispatch(getFlowsByWorkspace(activeWorkspace));
     dispatch(getProjectsByWorkspace(activeWorkspace));
     dispatch(getNotesByWorkspace(activeWorkspace));
-    dispatch(setActiveProject(''));
+    dispatch(setActiveProject(""));
     dispatch(
       getMyPermissionInThisWorkspace({ workspace: activeWorkspace, me: auth }),
     );
@@ -66,7 +66,7 @@ const WorkspacePanel = () => {
             data-tip={workspace.name}
             data-for={workspace._id}
           >
-            {workspace.name.split('')[0].toUpperCase()}
+            {workspace.name.split("")[0].toUpperCase()}
           </WorkspaceItem>
           <ReactTooltip
             id={workspace._id}
@@ -77,10 +77,10 @@ const WorkspacePanel = () => {
         </WorkspaceItemWrapper>
       ))}
 
-      {auth.role === 'admin' && (
+      {auth.role === "admin" && (
         <WorkspaceItemWrapper>
           <WorkspaceItem onClick={addWorkspaceHandler}>
-            <VscAdd style={{ color: 'white' }} />
+            <VscAdd style={{ color: "white" }} />
           </WorkspaceItem>
         </WorkspaceItemWrapper>
       )}

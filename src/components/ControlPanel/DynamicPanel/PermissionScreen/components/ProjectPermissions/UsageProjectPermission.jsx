@@ -67,15 +67,15 @@ function UsageProjectPermission({
                     project._id,
                   )}
                   disabled={
-                      permissions.EVERYTHING
-                      || permissions.CAN_EDIT_PROJECT_ALL
-                      || permissions.CAN_EDIT_PROJECT.includes(project._id)
-                    }
+                    permissions.EVERYTHING ||
+                    permissions.CAN_EDIT_PROJECT_ALL ||
+                    permissions.CAN_EDIT_PROJECT.includes(project._id)
+                  }
                   checked={
-                      permissions.EVERYTHING
-                      || permissions.CAN_USAGE_PROJECT_ALL
-                      || permissions.CAN_USAGE_PROJECT.includes(project._id)
-                    }
+                    permissions.EVERYTHING ||
+                    permissions.CAN_USAGE_PROJECT_ALL ||
+                    permissions.CAN_USAGE_PROJECT.includes(project._id)
+                  }
                 />
               </CollapsibleMenuItem>
               <CollapsibleSubMenu trigger="Flows">

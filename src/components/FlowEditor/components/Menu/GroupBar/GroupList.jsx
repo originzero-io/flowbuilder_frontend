@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteGroup,
-} from "store/reducers/flow/flowGroupsSlice";
+import { deleteGroup } from "store/reducers/flow/flowGroupsSlice";
 import { selectElements } from "store/reducers/flow/flowElementsSlice";
 import { NameEditIcon } from "components/Shared/icons";
 import PropTypes from "prop-types";
@@ -28,7 +26,9 @@ const GroupList = ({ theme, flowId }) => {
     }
   };
   const groupItemClickHandle = (group) => {
-    const nodesByGroup = flowElements.nodes.filter((node) => node.data.group._id === group._id);
+    const nodesByGroup = flowElements.nodes.filter(
+      (node) => node.data.group._id === group._id,
+    );
     dispatch(selectElements(nodesByGroup));
   };
   const editIconClickHandle = (group) => {
@@ -45,46 +45,42 @@ const GroupList = ({ theme, flowId }) => {
     <>
       {flowGroups.length > 0
         ? flowGroups.map((group) => (
-          <GroupItem
-            key={group._id}
-            theme={theme}
-            onMouseEnter={() => setHover(group._id)}
-            onMouseLeave={() => setHover(null)}
-            onClick={() => groupItemClickHandle(group)}
-          >
-            {editableItem.state && editableItem.group._id === group._id ? (
-              <EditForm
-                editableItem={editableItem}
-                setEditableItem={setEditableItem}
-                theme={theme}
-              />
-            ) : (
-              <>
-                <GroupColor
-                  width="22px"
-                  height="22px"
-                  value={group.color}
+            <GroupItem
+              key={group._id}
+              theme={theme}
+              onMouseEnter={() => setHover(group._id)}
+              onMouseLeave={() => setHover(null)}
+              onClick={() => groupItemClickHandle(group)}
+            >
+              {editableItem.state && editableItem.group._id === group._id ? (
+                <EditForm
+                  editableItem={editableItem}
+                  setEditableItem={setEditableItem}
+                  theme={theme}
                 />
-                <Label onClick={labelClickHandle}>{group.name}</Label>
-              </>
-            )}
+              ) : (
+                <>
+                  <GroupColor width="22px" height="22px" value={group.color} />
+                  <Label onClick={labelClickHandle}>{group.name}</Label>
+                </>
+              )}
 
-            {hover === group._id && (
-            <>
-              <NameEditIcon
-                width="25px"
-                height="25px"
-                onClick={() => editIconClickHandle(group)}
-                theme={theme}
-              />
-              <DeleteIcon
-                theme={theme}
-                onClick={() => deleteIconClickHandle(group)}
-              />
-            </>
-            )}
-          </GroupItem>
-        ))
+              {hover === group._id && (
+                <>
+                  <NameEditIcon
+                    width="25px"
+                    height="25px"
+                    onClick={() => editIconClickHandle(group)}
+                    theme={theme}
+                  />
+                  <DeleteIcon
+                    theme={theme}
+                    onClick={() => deleteIconClickHandle(group)}
+                  />
+                </>
+              )}
+            </GroupItem>
+          ))
         : "There is no group"}
     </>
   );

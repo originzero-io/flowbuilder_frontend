@@ -26,7 +26,11 @@ function DashboardList({ project }) {
             </CollapsibleMenuItem>
           ))}
         </>
-      ) : <div style={{ paddingLeft: '10px', fontSize: '1.3vmin' }}>No dashboard in this project</div>}
+      ) : (
+        <div style={{ paddingLeft: "10px", fontSize: "1.3vmin" }}>
+          No dashboard in this project
+        </div>
+      )}
     </>
   );
 }

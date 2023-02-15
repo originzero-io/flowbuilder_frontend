@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Tooltip from "./components/Shared/Tooltip";
 import * as tooltip from "./constants/TooltipReference";
 

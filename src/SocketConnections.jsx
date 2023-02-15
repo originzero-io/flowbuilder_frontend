@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import createSocket from 'services/SocketService';
-import { useDispatch } from 'react-redux';
+import { useEffect } from "react";
+import createSocket from "services/SocketService";
+import { useDispatch } from "react-redux";
 import {
   elementListener,
   flowListener,
@@ -8,8 +8,8 @@ import {
   workspaceListener,
   noteListener,
   userListener,
-} from './services/configurationService/socketListeners';
-import useAuth from './hooks/useAuth';
+} from "./services/configurationService/socketListeners";
+import useAuth from "./hooks/useAuth";
 
 export let elementNamespace;
 export let flowNamespace;
@@ -23,31 +23,31 @@ export default function SocketConnections() {
   useEffect(() => {
     if (auth.isAuthenticated) {
       userNamespace = createSocket({
-        path: '/configuration_socket',
-        namespace: 'users',
+        path: "/configuration_socket",
+        namespace: "users",
       });
       elementNamespace = createSocket({
-        path: '/configuration_socket',
-        namespace: 'elements',
+        path: "/configuration_socket",
+        namespace: "elements",
       });
       flowNamespace = createSocket({
-        path: '/configuration_socket',
-        namespace: 'flows',
+        path: "/configuration_socket",
+        namespace: "flows",
       });
       projectNamespace = createSocket({
-        path: '/configuration_socket',
-        namespace: 'projects',
+        path: "/configuration_socket",
+        namespace: "projects",
       });
       workspaceNamespace = createSocket({
-        path: '/configuration_socket',
-        namespace: 'workspaces',
+        path: "/configuration_socket",
+        namespace: "workspaces",
       });
       noteNamespace = createSocket({
-        path: '/configuration_socket',
-        namespace: 'notes',
+        path: "/configuration_socket",
+        namespace: "notes",
       });
       flowExecutorNamespace = createSocket({
-        path: '/flowExecutor_socket',
+        path: "/flowExecutor_socket",
       });
 
       userListener(userNamespace);

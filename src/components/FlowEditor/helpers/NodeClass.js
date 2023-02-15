@@ -1,23 +1,28 @@
 import {
   getOutgoers,
-  //getIncomers,
-  //getConnectedEdges,
+  // getIncomers,
+  // getConnectedEdges,
   isEdge,
 } from "reactflow";
 import notification from "utils/notificationHelper";
 import { setElements } from "store/reducers/flow/flowElementsSlice";
+
 export default class Node {
   elements = [];
+
   nodes = [];
+
   edges = [];
+
   constructor(message) {
     console.log(
       `%c ${message}`,
       "background: green; color: white; display: block;",
     );
   }
+
   applyElements = (elements, dispatch) => {
-    //const { nodes, edges } = getNodesAndEdges(elements);
+    // const { nodes, edges } = getNodesAndEdges(elements);
     this.elements = elements;
     this.nodes = [];
     this.edges = [];
@@ -25,16 +30,18 @@ export default class Node {
   };
 
   doInput = async (data, self, outgoers) => {
-    //console.log("inject outgoers", outgoers);
+    // console.log("inject outgoers", outgoers);
     console.log("Input fonksiyonuna gelen data", data);
-    //const res = await axios.get('http://localhost:5000/users/getAll');
-    //console.log("res:", res);
+    // const res = await axios.get('http://localhost:5000/users/getAll');
+    // console.log("res:", res);
     this.sendDataToYourOutgoers(data, self, outgoers);
   };
+
   doSplit = (data, self, outgoers) => {
-    //console.log("split data:", data);
+    // console.log("split data:", data);
     this.sendDataToYourOutgoers(data, self, outgoers);
   };
+
   doCombine = (data, self, outgoers) => {
     console.log("Combine fonksiyonuna gelen data:", data);
     const datas = this.solveDataFromMyEdges(self);
@@ -44,16 +51,17 @@ export default class Node {
     );
     let combined = "";
     datas.map((data) => {
-      return (combined += data.payload + " ");
+      return (combined += `${data.payload} `);
     });
-    //combined = "This is for " + datas[0].payload;
-    //console.log("COMBINED:", combined);
+    // combined = "This is for " + datas[0].payload;
+    // console.log("COMBINED:", combined);
     notification.success(`Datas combined ${combined}`);
-    //const connected = getConnectedEdges([self], this.edges);
-    //BURDA KALINDI
-    //console.log("combine connected:", connected);
+    // const connected = getConnectedEdges([self], this.edges);
+    // BURDA KALINDI
+    // console.log("combine connected:", connected);
     this.sendDataToYourOutgoers([{ source1: combined }], self, outgoers);
   };
+
   doNotification = (data, self, outgoers) => {
     console.log("Notification fonksiyonuna gelen data:", data);
     const datas = this.solveDataFromMyEdges(self);
@@ -69,11 +77,12 @@ export default class Node {
       notification.success(`${data.target} ${data.payload}`);
     });
   };
+
   sendDataToYourOutgoers = (data, self, outgoers) => {
     console.log("SEND DATA TO YOUR OUTGOERS");
     console.log("-----------------------------");
     this.combineEdgesWithData(data, self);
-    //console.log("BİRLEŞTİRİLMİŞ DATA", this.elements);
+    // console.log("BİRLEŞTİRİLMİŞ DATA", this.elements);
     outgoers.map((node) => {
       console.log(`"${node.type}" FONKSİYONU ÇAĞIRILIYOR...`);
       const childOutgoers = getOutgoers(node, this.elements);
@@ -81,17 +90,19 @@ export default class Node {
     });
     console.log("-----------------------------");
   };
+
   solveDataFromMyEdges = (self) => {
     const targets = this.edges.filter((edge) => edge.target === self.id);
-    //console.log("edges that target is me", targets);
+    // console.log("edges that target is me", targets);
     return targets.map((target) => target.data);
   };
+
   combineEdgesWithData = (data, self) => {
-    console.log(self.type + "-->EDGELER İLE BİRLEŞTİRİLECEK DATA-->", data);
+    console.log(`${self.type}-->EDGELER İLE BİRLEŞTİRİLECEK DATA-->`, data);
     let indis = 0;
     const newElements = this.elements.map((element, index) => {
       if (isEdge(element)) {
-        //benden çıkan edge
+        // benden çıkan edge
         if (element.source === self.id) {
           console.log("BİRLEŞTİRİLMİŞ DATA:", element);
           return {

@@ -68,8 +68,8 @@ export default function EditForm({ editableItem, setEditableItem, theme }) {
           width="22px"
           height="22px"
           color={
-              theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-            }
+            theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
+          }
         />
       </Submit>
     </Form>

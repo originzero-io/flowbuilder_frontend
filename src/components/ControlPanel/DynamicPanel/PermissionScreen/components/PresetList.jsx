@@ -30,7 +30,9 @@ export default function PresetList() {
   return (
     <>
       <Input type="select" onChange={handlePresetChange}>
-        {presets.map((preset) => <option key={preset._id}>{preset.name}</option>)}
+        {presets.map((preset) => (
+          <option key={preset._id}>{preset.name}</option>
+        ))}
       </Input>
       <Button onClick={onSubmitHandle}>Submit</Button>
     </>

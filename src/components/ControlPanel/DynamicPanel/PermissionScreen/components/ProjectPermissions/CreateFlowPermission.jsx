@@ -56,10 +56,10 @@ function CreateFlowPermission({
                 )}
                 disabled={permissions.EVERYTHING}
                 checked={
-                    permissions.EVERYTHING
-                    || permissions.CAN_CREATE_FLOW_ALL
-                    || permissions.CAN_CREATE_FLOW.includes(project._id)
-                  }
+                  permissions.EVERYTHING ||
+                  permissions.CAN_CREATE_FLOW_ALL ||
+                  permissions.CAN_CREATE_FLOW.includes(project._id)
+                }
               />
             </CollapsibleMenuItem>
           ))}

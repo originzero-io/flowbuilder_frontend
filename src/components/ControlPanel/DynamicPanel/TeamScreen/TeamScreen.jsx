@@ -15,19 +15,19 @@ export default function TeamScreen() {
   };
   return (
     <>
-      {(getPermission("CAN_REMOVE_MEMBER")
-        && getPermission("CAN_INVITE_MEMBER")) && (
-        <Button
-          color="success"
-          onClick={addMemberToTeamHandle}
-          style={{ marginBottom: "5px" }}
-        >
-          <MdOutlineManageAccounts
-            style={{ fontSize: "2.5vmin", marginRight: "5px" }}
-          />
-          Manage Members
-        </Button>
-      )}
+      {getPermission("CAN_REMOVE_MEMBER") &&
+        getPermission("CAN_INVITE_MEMBER") && (
+          <Button
+            color="success"
+            onClick={addMemberToTeamHandle}
+            style={{ marginBottom: "5px" }}
+          >
+            <MdOutlineManageAccounts
+              style={{ fontSize: "2.5vmin", marginRight: "5px" }}
+            />
+            Manage Members
+          </Button>
+        )}
       <MemberList />
     </>
   );

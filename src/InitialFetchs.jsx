@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getAllUsers } from 'store/reducers/userSlice';
-import useAuth from './hooks/useAuth';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllUsers } from "store/reducers/userSlice";
+import useAuth from "./hooks/useAuth";
 
 export default function InitialFetchs() {
   const auth = useAuth();

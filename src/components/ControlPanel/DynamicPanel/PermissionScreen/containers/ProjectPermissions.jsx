@@ -8,7 +8,10 @@ import CreateProjectPermission from "../components/ProjectPermissions/CreateProj
 import EditProjectPermission from "../components/ProjectPermissions/EditProjectPermission";
 import UsageProjectPermission from "../components/ProjectPermissions/UsageProjectPermission";
 import ViewProjectPermission from "../components/ProjectPermissions/ViewProjectPermission";
-import { PermissionContainer, TabContainer } from "../components/PermissionScreen.style";
+import {
+  PermissionContainer,
+  TabContainer,
+} from "../components/PermissionScreen.style";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,
@@ -47,7 +50,13 @@ export default function ProjectPermissions({
       flowId: _id,
       projectId: project._id,
     };
-    dispatch(setNestedMultiplePermission({ event: e, flowData, permissionType: "project" }));
+    dispatch(
+      setNestedMultiplePermission({
+        event: e,
+        flowData,
+        permissionType: "project",
+      }),
+    );
   };
 
   // console.log('projects permissions rendered');

@@ -26,16 +26,12 @@ const propTypes = {
   collapsible: PropTypes.bool,
 };
 
-const NodeGod = ({
-  self, ioType, children, collapsible,
-}) => {
+const NodeGod = ({ self, ioType, children, collapsible }) => {
   const updateNodeInternals = useUpdateNodeInternals();
   const sources = Array.from(Array(self.data.sourceCount).keys());
   const targets = Array.from(Array(self.data.targetCount).keys());
   const dispatch = useDispatch();
-  const {
-    align, expand, enable, group,
-  } = self.data;
+  const { align, expand, enable, group } = self.data;
   const [serverData, setServerData] = useState("");
 
   useEffect(() => {
@@ -49,7 +45,11 @@ const NodeGod = ({
 
   useEffect(() => {
     console.log("self: ", self);
-    flowExecutorNamespace.emit('nodeComm', { message: `Hi! My type: ${self.type}`, id: self.id, type: self.type });
+    flowExecutorNamespace.emit("nodeComm", {
+      message: `Hi! My type: ${self.type}`,
+      id: self.id,
+      type: self.type,
+    });
     flowExecutorNamespace.on(self.id, (data) => {
       console.log(`data from server for ${self.id}: `, data);
       setServerData(data);
@@ -72,7 +72,10 @@ const NodeGod = ({
               }`}
               style={{
                 backgroundColor: group.color || "gray",
-                visibility: ioType === "target" || ioType === "both" ? "visible" : "hidden",
+                visibility:
+                  ioType === "target" || ioType === "both"
+                    ? "visible"
+                    : "hidden",
               }}
             />
           ))}
@@ -110,7 +113,10 @@ const NodeGod = ({
               }`}
               style={{
                 backgroundColor: group.color || "gray",
-                visibility: ioType === "source" || ioType === "both" ? "visible" : "hidden",
+                visibility:
+                  ioType === "source" || ioType === "both"
+                    ? "visible"
+                    : "hidden",
               }}
             />
           ))}

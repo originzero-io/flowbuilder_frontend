@@ -4,9 +4,7 @@ import Collapsible from "react-collapsible";
 import PropTypes from "prop-types";
 import { CollapsableItem, TriggerWrapper } from "./CollapsibleMenu.style";
 
-export function CollapsibleMenu({
-  trigger, open, children, style, ...props
-}) {
+export function CollapsibleMenu({ trigger, open, children, style, ...props }) {
   return (
     <Collapsible
       trigger={trigger}
@@ -28,14 +26,12 @@ export function CollapsibleMenuItem({ children, onClick, active }) {
     </CollapsableItem>
   );
 }
-export function CollapsibleTrigger({
-  children, label, icon, onClick, style,
-}) {
+export function CollapsibleTrigger({ children, label, icon, onClick, style }) {
   return (
     <TriggerWrapper onClick={onClick} style={style}>
       <div style={{ display: "flex", alignItems: "center" }}>
         {icon}
-        <div style={{ paddingLeft: "5px", fontSize: '1.5vmin' }}>{label}</div>
+        <div style={{ paddingLeft: "5px", fontSize: "1.5vmin" }}>{label}</div>
       </div>
       {children}
     </TriggerWrapper>

@@ -1,14 +1,9 @@
-import React from 'react';
-import {
-  getBezierPath,
-  getEdgeCenter,
-  getMarkerEnd,
-} from 'reactflow';
+import React from "react";
+import { getBezierPath, getEdgeCenter, getMarkerEnd } from "reactflow";
 import styled from "styled-components";
 
 const Body = styled.body`
   //background:red;
-
 `;
 const foreignObjectSize = 40;
 const onEdgeClick = (evt, id) => {
@@ -62,13 +57,14 @@ export default function CustomEdge({
         y={edgeCenterY - foreignObjectSize / 2}
         requiredExtensions="http://www.w3.org/1999/xhtml"
         style={{
-          display: 'flex', minWidth: '200px', height: '30px', background: 'red',
+          display: "flex",
+          minWidth: "200px",
+          height: "30px",
+          background: "red",
         }}
       >
         <Body>
-          <text>
-            {label}
-          </text>
+          <text>{label}</text>
           <button>A</button>
         </Body>
       </foreignObject>

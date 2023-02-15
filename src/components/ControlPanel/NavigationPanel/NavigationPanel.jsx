@@ -44,16 +44,16 @@ const NavigationPanel = () => {
       label={`Projects (${projects.length})`}
       icon={<AiOutlineProject />}
     >
-      {
-          getPermission("CAN_CREATE_PROJECT") && (
-            <div onClick={(e) => showModalHandle(e)}>
-              <BsPlusCircle style={{ fontSize: "2vmin" }} />
-            </div>
-          )
-        }
+      {getPermission("CAN_CREATE_PROJECT") && (
+        <div onClick={(e) => showModalHandle(e)}>
+          <BsPlusCircle style={{ fontSize: "2vmin" }} />
+        </div>
+      )}
     </CollapsibleTrigger>
   );
-  const settingsItem = () => <CollapsibleTrigger label="Settings" icon={<FiSettings />} />;
+  const settingsItem = () => (
+    <CollapsibleTrigger label="Settings" icon={<FiSettings />} />
+  );
   return (
     <Container>
       <NavMenu>

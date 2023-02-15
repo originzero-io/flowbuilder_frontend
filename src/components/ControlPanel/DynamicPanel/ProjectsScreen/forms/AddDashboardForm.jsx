@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  Button, Form, FormGroup, Label, Input,
-} from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import uuid from "react-uuid";
 import { setModal } from "store/reducers/componentSlice";
 
