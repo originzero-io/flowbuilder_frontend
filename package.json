@@ -49,7 +49,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
     "prettier": "prettier --check \"src/utils/**/*.js\"",
-    "prettier:fix": "prettier --write \"src/**/*.js\""
+    "prettier:fix": "prettier --write \"src/**/*.js\"",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -81,6 +82,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.4",
     "react-app-rewired": "^2.2.1",
-    "source-map-loader": "^4.0.0"
+    "source-map-loader": "^4.0.0",
+    "husky": "^8.0.0"
   }
 }
