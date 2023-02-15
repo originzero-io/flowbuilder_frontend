@@ -1,9 +1,16 @@
 import {
-  addEdge, updateEdge, applyEdgeChanges, applyNodeChanges, getOutgoers,
+  addEdge,
+  updateEdge,
+  applyEdgeChanges,
+  applyNodeChanges,
+  getOutgoers,
 } from "reactflow";
 import FlowElementService from "services/configurationService/flowElementService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { isEdgeExist, setSourceNodeColorToEdge } from "components/FlowEditor/helpers/elementHelper";
+import {
+  isEdgeExist,
+  setSourceNodeColorToEdge,
+} from "components/FlowEditor/helpers/elementHelper";
 
 export const getElementsByFlow = createAsyncThunk(
   "elements/getByFlow",
@@ -79,7 +86,8 @@ export const flowElementsSlice = createSlice({
 
       state.nodes.forEach((node) => {
         if (node.id === payload.id) {
-          node.data.align = currentAlign === "vertical" ? "horizontal" : "vertical";
+          node.data.align =
+            currentAlign === "vertical" ? "horizontal" : "vertical";
         }
       });
     },

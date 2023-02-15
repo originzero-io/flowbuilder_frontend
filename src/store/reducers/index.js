@@ -42,7 +42,7 @@ const reducers = combineReducers({
 
 // resetting reducers after user log out
 const rootReducer = (state, action) => {
-  if (action.type === 'auth/logOut' || action.type === "RESET") {
+  if (action.type === "auth/logOut" || action.type === "RESET") {
     state = undefined;
   }
   return reducers(state, action);

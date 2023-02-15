@@ -2,7 +2,7 @@ import {
   getOutgoers,
   //getIncomers,
   //getConnectedEdges,
-  isEdge
+  isEdge,
 } from "reactflow";
 import notification from "utils/notificationHelper";
 import { setElements } from "store/reducers/flow/flowElementsSlice";
@@ -13,7 +13,7 @@ export default class Node {
   constructor(message) {
     console.log(
       `%c ${message}`,
-      "background: green; color: white; display: block;"
+      "background: green; color: white; display: block;",
     );
   }
   applyElements = (elements, dispatch) => {
@@ -24,7 +24,7 @@ export default class Node {
     this.dispatch = dispatch;
   };
 
-  doInput = async(data, self, outgoers) => {
+  doInput = async (data, self, outgoers) => {
     //console.log("inject outgoers", outgoers);
     console.log("Input fonksiyonuna gelen data", data);
     //const res = await axios.get('http://localhost:5000/users/getAll');
@@ -40,7 +40,7 @@ export default class Node {
     const datas = this.solveDataFromMyEdges(self);
     console.log(
       "Combine: Edgelerim içerisinden sadece datanın filtrelenmişi:",
-      datas
+      datas,
     );
     let combined = "";
     datas.map((data) => {
@@ -48,7 +48,7 @@ export default class Node {
     });
     //combined = "This is for " + datas[0].payload;
     //console.log("COMBINED:", combined);
-    notification.success(`Datas combined ${combined}`)
+    notification.success(`Datas combined ${combined}`);
     //const connected = getConnectedEdges([self], this.edges);
     //BURDA KALINDI
     //console.log("combine connected:", connected);
@@ -59,15 +59,14 @@ export default class Node {
     const datas = this.solveDataFromMyEdges(self);
     console.log(
       "Notification: Edgelerim içerisinden sadece datanın filtrelenmişi: ",
-      datas
+      datas,
     );
     datas.map((data) => {
       console.log(
         `%c source: ${data.source}\n target: ${data.target}\n payload: ${data.payload}`,
-        "background: orange; color: black; display: block;"
+        "background: orange; color: black; display: block;",
       );
-      notification.success(`${data.target} ${data.payload}`)
-
+      notification.success(`${data.target} ${data.payload}`);
     });
   };
   sendDataToYourOutgoers = (data, self, outgoers) => {
@@ -100,8 +99,8 @@ export default class Node {
             data: {
               source: element.sourceHandle,
               target: element.targetHandle,
-              payload: data[indis++][element.sourceHandle]
-            }
+              payload: data[indis++][element.sourceHandle],
+            },
           };
         }
         return element;

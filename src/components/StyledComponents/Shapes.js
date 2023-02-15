@@ -4,7 +4,7 @@ import { DropdownList } from "./DropdownMenu";
 export const Circle = styled.button`
   width: 55px;
   height: 55px;
-  background: rgba(29, 185, 84,0.5);
+  background: rgba(29, 185, 84, 0.5);
   border-radius: 50%;
   position: absolute;
   top: -29px;
@@ -34,9 +34,9 @@ export const Triangle = styled.div`
   width: 0px;
   height: 0px;
   border-top-right-radius: 4px;
-  align-self:flex-start;
-  position:relative;
-  cursor:pointer;  
+  align-self: flex-start;
+  position: relative;
+  cursor: pointer;
 `;
 export const Flag = styled.div`
   margin: -3px -3px;

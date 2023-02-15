@@ -1,5 +1,5 @@
-import { getIncomers, getOutgoers } from 'reactflow';
-import { selectElements } from 'store/reducers/flow/flowElementsSlice';
+import { getIncomers, getOutgoers } from "reactflow";
+import { selectElements } from "store/reducers/flow/flowElementsSlice";
 import { store } from "../index";
 
 export function backendFlowDataBuilder(flowId, elements) {
@@ -42,7 +42,6 @@ function addIncomersToArray(node, elements, dependencyArray) {
   const { nodes, edges } = elements;
   const currentNodeIncomers = getIncomers(node, nodes, edges);
   if (currentNodeIncomers.length === 0) {
-
   } else {
     currentNodeIncomers.forEach((childIncomer) => {
       dependencyArray.push(childIncomer);

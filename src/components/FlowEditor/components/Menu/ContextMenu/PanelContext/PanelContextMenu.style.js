@@ -2,7 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   padding: 5px 5px 5px 5px;
-  background: ${(props) => (props.theme === "dark" ? "rgba(53, 59, 72,0.8)" : "rgba(189, 195, 199,0.8)")};
+  background: ${(props) =>
+    props.theme === "dark"
+      ? "rgba(53, 59, 72,0.8)"
+      : "rgba(189, 195, 199,0.8)"};
   position: absolute;
   top: ${(props) => `${props.y - 25}px`};
   left: ${(props) => `${props.x + 5}px`};
@@ -10,15 +13,15 @@ export const Container = styled.div`
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  max-height:50vh;
-  overflow-y:auto;
+  max-height: 50vh;
+  overflow-y: auto;
 `;
 export const NodeWrapper = styled.div`
   border-radius: 2px;
   color: rgb(200, 200, 200);
   transition: all 0.1s ease;
-  position:relative;
-  padding:6px;
+  position: relative;
+  padding: 6px;
 `;
 
 export const NodeElement = styled.div`
@@ -45,9 +48,9 @@ export const Label = styled.div`
   font-family: "Prime-Light";
 `;
 export const IconWrapper = styled.div`
-  width:50px;
-  display:flex;
-  justify-content:space-around;
+  width: 50px;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
-  cursor:pointer;
+  cursor: pointer;
 `;

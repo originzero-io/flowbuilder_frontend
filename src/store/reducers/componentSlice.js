@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const modalSlice = createSlice({
-  name: 'modal',
+  name: "modal",
   initialState: null,
   reducers: {
     setModal(state, { payload }) {
@@ -11,7 +11,7 @@ const modalSlice = createSlice({
 });
 
 const loadingBarSlice = createSlice({
-  name: 'modal',
+  name: "modal",
   initialState: { progress: 0 },
   reducers: {
     beginTheBar(state, { payload }) {

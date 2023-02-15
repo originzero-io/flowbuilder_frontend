@@ -9,7 +9,7 @@ class SocketService {
     this.extraOptions = extraOptions;
 
     const URL = `${
-      process.env.REACT_APP_HOST_ENV === 'development'
+      process.env.REACT_APP_HOST_ENV === "development"
         ? process.env.REACT_APP_GATEWAY_LOCAL_URL
         : process.env.REACT_APP_GATEWAY_CLOUD_URL
     }`;

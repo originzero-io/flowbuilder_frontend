@@ -10,9 +10,9 @@ export const Container = styled.div`
   user-select: none;
 `;
 export const TabItem = styled.button`
-  border-top-left-radius:4px;
-  border-top-right-radius:4px;
-  border:none;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border: none;
   min-width: 120px;
   cursor: pointer;
   color: black;
@@ -20,19 +20,20 @@ export const TabItem = styled.button`
   margin-right: 5px;
   padding: 2px;
   text-align: center;
-  background: ${({ selected }) => (selected ? themeColor.HOVER_COLOR : "rgba(189, 195, 199,0.6)")};
-  position:relative;
+  background: ${({ selected }) =>
+    selected ? themeColor.HOVER_COLOR : "rgba(189, 195, 199,0.6)"};
+  position: relative;
   &:hover {
     transform: scale(1.1);
-    background: ${themeColor.HOVER_COLOR};  
+    background: ${themeColor.HOVER_COLOR};
   }
 `;
 export const AddButton = styled.div`
-  background:rgba(189, 195, 199,0.6);
-  border-top-left-radius:4px;
-  border-top-right-radius:4px;
+  background: rgba(189, 195, 199, 0.6);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
   min-width: 20px;
-  font-size:18px;
+  font-size: 18px;
   cursor: pointer;
   color: black;
   margin-left: 5px;
@@ -45,7 +46,7 @@ export const AddButton = styled.div`
   }
 `;
 export const CloseButton = styled.div`
-  position:absolute;
-  top:0px;
-  right:0;
+  position: absolute;
+  top: 0px;
+  right: 0;
 `;

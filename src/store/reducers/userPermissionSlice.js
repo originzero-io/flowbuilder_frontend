@@ -34,11 +34,15 @@ export const defaultPermissions = {
     CAN_USAGE_PROJECT: [
       /* project_id */
     ],
-    CAN_USAGE_FLOW_ALL: [/* project_id */],
+    CAN_USAGE_FLOW_ALL: [
+      /* project_id */
+    ],
     CAN_USAGE_FLOW: [
       /* {id: flow_id projectId: project_id} */
     ],
-    CAN_USAGE_DASHBOARD_ALL: [/* project_id */],
+    CAN_USAGE_DASHBOARD_ALL: [
+      /* project_id */
+    ],
     CAN_USAGE_DASHBOARD: [
       /* dashboard_id */
     ],
@@ -46,11 +50,15 @@ export const defaultPermissions = {
     CAN_EDIT_PROJECT: [
       /* project_id */
     ],
-    CAN_EDIT_FLOW_ALL: [/* project_id */],
+    CAN_EDIT_FLOW_ALL: [
+      /* project_id */
+    ],
     CAN_EDIT_FLOW: [
       /* {id: flow_id projectId: project_id} */
     ],
-    CAN_EDIT_DASHBOARD_ALL: [/* project_id */],
+    CAN_EDIT_DASHBOARD_ALL: [
+      /* project_id */
+    ],
     CAN_EDIT_DASHBOARD: [
       /* dashboard_id */
     ],
@@ -61,11 +69,15 @@ export const defaultPermissions = {
     CAN_VIEW_PROJECT: [
       /* project_id */
     ],
-    CAN_VIEW_FLOW_ALL: [/* project_id */],
+    CAN_VIEW_FLOW_ALL: [
+      /* project_id */
+    ],
     CAN_VIEW_FLOW: [
       /* {id: flow_id projectId: project_id} */
     ],
-    CAN_VIEW_DASHBOARD_ALL: [/* project_id */],
+    CAN_VIEW_DASHBOARD_ALL: [
+      /* project_id */
+    ],
     CAN_VIEW_DASHBOARD: [
       /* dashboard_id */
     ],
@@ -77,12 +89,18 @@ export const defaultPermissions = {
   },
 };
 
-export const getUserPermissionInThisWorkspace = createAsyncThunk("permissions/get_in_this_workspace", async ({ workspace, user }, thunkApi) => {
-  thunkApi.dispatch(beginTheBar());
-  const permission = await PermissionService.getUserPermissionInThisWorkspace(workspace._id, user._id);
-  thunkApi.dispatch(endTheBar());
-  return permission;
-});
+export const getUserPermissionInThisWorkspace = createAsyncThunk(
+  "permissions/get_in_this_workspace",
+  async ({ workspace, user }, thunkApi) => {
+    thunkApi.dispatch(beginTheBar());
+    const permission = await PermissionService.getUserPermissionInThisWorkspace(
+      workspace._id,
+      user._id,
+    );
+    thunkApi.dispatch(endTheBar());
+    return permission;
+  },
+);
 
 export const userPermissionSlice = createSlice({
   name: "userPermission",
@@ -117,7 +135,10 @@ export const userPermissionSlice = createSlice({
         state[permissionType][name].push(id);
 
         if (name === "CAN_EDIT_PROJECT") {
-          if (!state.project.CAN_VIEW_PROJECT.includes(id) && !state.project.CAN_USAGE_PROJECT.includes(id)) {
+          if (
+            !state.project.CAN_VIEW_PROJECT.includes(id) &&
+            !state.project.CAN_USAGE_PROJECT.includes(id)
+          ) {
             state.project.CAN_VIEW_PROJECT.push(id);
             state.project.CAN_USAGE_PROJECT.push(id);
           } else if (!state.project.CAN_USAGE_PROJECT.includes(id)) {
@@ -127,12 +148,16 @@ export const userPermissionSlice = createSlice({
           }
         }
       } else if (!checked) {
-        state[permissionType][name] = state[permissionType][name].filter((p) => p !== id);
+        state[permissionType][name] = state[permissionType][name].filter(
+          (p) => p !== id,
+        );
         state[permissionType][`${name}_ALL`] = false;
 
         if (name === "CAN_EDIT_PROJECT") {
-          state.project.CAN_VIEW_PROJECT = state.project.CAN_VIEW_PROJECT.filter((p) => p !== id);
-          state.project.CAN_USAGE_PROJECT = state.project.CAN_USAGE_PROJECT.filter((p) => p !== id);
+          state.project.CAN_VIEW_PROJECT =
+            state.project.CAN_VIEW_PROJECT.filter((p) => p !== id);
+          state.project.CAN_USAGE_PROJECT =
+            state.project.CAN_USAGE_PROJECT.filter((p) => p !== id);
         }
       }
     },
@@ -147,23 +172,49 @@ export const userPermissionSlice = createSlice({
 
       if (checked) {
         state[permissionType][name].push(flowData);
-        if ((name === "CAN_EDIT_FLOW") && !state.project.CAN_VIEW_FLOW.some((p) => p.flowId === flowData.flowId)) {
-          if (!state.project.CAN_VIEW_FLOW.some((p) => p.flowId === flowData.flowId) && !state.project.CAN_USAGE_FLOW.some((p) => p.flowId === flowData.flowId)) {
+        if (
+          name === "CAN_EDIT_FLOW" &&
+          !state.project.CAN_VIEW_FLOW.some((p) => p.flowId === flowData.flowId)
+        ) {
+          if (
+            !state.project.CAN_VIEW_FLOW.some(
+              (p) => p.flowId === flowData.flowId,
+            ) &&
+            !state.project.CAN_USAGE_FLOW.some(
+              (p) => p.flowId === flowData.flowId,
+            )
+          ) {
             state.project.CAN_VIEW_FLOW.push(flowData);
             state.project.CAN_USAGE_FLOW.push(flowData);
-          } else if (!state.project.CAN_USAGE_FLOW.some((p) => p.flowId === flowData.flowId)) {
+          } else if (
+            !state.project.CAN_USAGE_FLOW.some(
+              (p) => p.flowId === flowData.flowId,
+            )
+          ) {
             state.project.CAN_USAGE_FLOW.push(flowData);
-          } else if (!state.project.CAN_VIEW_FLOW.some((p) => p.flowId === flowData.flowId)) {
+          } else if (
+            !state.project.CAN_VIEW_FLOW.some(
+              (p) => p.flowId === flowData.flowId,
+            )
+          ) {
             state.project.CAN_VIEW_FLOW.push(flowData);
           }
         }
       } else if (!checked) {
-        state[permissionType][name] = state[permissionType][name].filter((p) => p.flowId !== flowData.flowId);
-        state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter((p) => p !== flowData.projectId);
+        state[permissionType][name] = state[permissionType][name].filter(
+          (p) => p.flowId !== flowData.flowId,
+        );
+        state[permissionType][`${name}_ALL`] = state[permissionType][
+          `${name}_ALL`
+        ].filter((p) => p !== flowData.projectId);
 
         if (name === "CAN_EDIT_FLOW") {
-          state.project.CAN_VIEW_FLOW = state.project.CAN_VIEW_FLOW.filter((p) => p.flowId !== flowData.flowId);
-          state.project.CAN_USAGE_FLOW = state.project.CAN_USAGE_FLOW.filter((p) => p.flowId !== flowData.flowId);
+          state.project.CAN_VIEW_FLOW = state.project.CAN_VIEW_FLOW.filter(
+            (p) => p.flowId !== flowData.flowId,
+          );
+          state.project.CAN_USAGE_FLOW = state.project.CAN_USAGE_FLOW.filter(
+            (p) => p.flowId !== flowData.flowId,
+          );
         }
       }
     },
@@ -202,7 +253,10 @@ export const userPermissionSlice = createSlice({
         state[permissionType][`${name}_ALL`].push(id);
 
         if (name === "CAN_EDIT_FLOW") {
-          if (!state.project.CAN_VIEW_FLOW_ALL.includes(id) && !state.project.CAN_USAGE_FLOW_ALL.includes(id)) {
+          if (
+            !state.project.CAN_VIEW_FLOW_ALL.includes(id) &&
+            !state.project.CAN_USAGE_FLOW_ALL.includes(id)
+          ) {
             state.project.CAN_VIEW_FLOW_ALL.push(id);
             state.project.CAN_USAGE_FLOW_ALL.push(id);
           } else if (!state.project.CAN_VIEW_FLOW_ALL.includes(id)) {
@@ -212,11 +266,15 @@ export const userPermissionSlice = createSlice({
           }
         }
       } else if (!checked) {
-        state[permissionType][`${name}_ALL`] = state[permissionType][`${name}_ALL`].filter((p) => p !== id);
+        state[permissionType][`${name}_ALL`] = state[permissionType][
+          `${name}_ALL`
+        ].filter((p) => p !== id);
 
         if (name === "CAN_EDIT_FLOW") {
-          state.project.CAN_VIEW_FLOW_ALL = state.project.CAN_VIEW_FLOW_ALL.filter((p) => p !== id);
-          state.project.CAN_USAGE_FLOW_ALL = state.project.CAN_USAGE_FLOW_ALL.filter((p) => p !== id);
+          state.project.CAN_VIEW_FLOW_ALL =
+            state.project.CAN_VIEW_FLOW_ALL.filter((p) => p !== id);
+          state.project.CAN_USAGE_FLOW_ALL =
+            state.project.CAN_USAGE_FLOW_ALL.filter((p) => p !== id);
         }
       }
     },

@@ -2,16 +2,16 @@ import FlowService from "services/configurationService/flowService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getFlowsByWorkspace = createAsyncThunk(
-  'flows/getByWorkspace',
+  "flows/getByWorkspace",
   async (workspace) => await FlowService.getFlowsByWorkspace(workspace),
 );
 export const getFlowsByProject = createAsyncThunk(
-  'flows/getByProject',
+  "flows/getByProject",
   async (project) => await FlowService.getFlowsByProject(project),
 );
 
 export const flowSlice = createSlice({
-  name: 'flows',
+  name: "flows",
   initialState: [],
   reducers: {
     createFlow(state, { payload }) {
@@ -36,6 +36,5 @@ export const flowSlice = createSlice({
 });
 
 export default flowSlice.reducer;
-export const {
-  setActiveProject, createFlow, editFlow, moveFlow, deleteFlow,
-} = flowSlice.actions;
+export const { setActiveProject, createFlow, editFlow, moveFlow, deleteFlow } =
+  flowSlice.actions;

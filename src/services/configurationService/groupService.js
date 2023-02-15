@@ -1,4 +1,4 @@
-import ConfigurationService from '.';
+import ConfigurationService from ".";
 
 class FlowGroupService extends ConfigurationService {
   async getGroups(flow_id) {
@@ -12,7 +12,10 @@ class FlowGroupService extends ConfigurationService {
   }
 
   async updateGroup(group) {
-    const response = await this.service.put(`/flows/groups/${group._id}`, group);
+    const response = await this.service.put(
+      `/flows/groups/${group._id}`,
+      group,
+    );
     return response.data;
   }
 

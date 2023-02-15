@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const controlPanelSlice = createSlice({
-  name: 'controlPanelReducer',
+  name: "controlPanelReducer",
   initialState: {
     activeProject: {},
     copiedNodes: [],

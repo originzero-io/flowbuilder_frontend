@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { DropdownList, DropdownWrapper } from "../../StyledComponents/DropdownMenu";
+import {
+  DropdownList,
+  DropdownWrapper,
+} from "../../StyledComponents/DropdownMenu";
 
 export const CardContainer = styled.div`
   margin: 4px;
@@ -38,8 +41,8 @@ export const CardTitle = styled.div`
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   color: white;
-  overflow:hidden;
-  white-space:nowrap;
+  overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 `;
 export const CardAuthor = styled.div`
@@ -52,20 +55,20 @@ export const CardAuthor = styled.div`
 `;
 export const CardDescription = styled.div`
   font-size: 1.2vmin;
-  padding-right:5px;
-  padding-left:5px;
-  text-align:center;
+  padding-right: 5px;
+  padding-left: 5px;
+  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top:-40px;
+  margin-top: -40px;
 `;
 export const CardFooter = styled.div`
   position: absolute;
   bottom: 5px;
   left: 2px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
 `;
 export const CardMoreButton = styled.div`
@@ -81,15 +84,15 @@ export const DetailMenuList = styled(DropdownList)`
   font-size: 12px;
   min-width: 80px;
   color: black;
-  background:whitesmoke;
+  background: whitesmoke;
   top: 30px;
   left: -10px;
   ${DropdownWrapper}:focus-within & {
     visibility: visible;
   }
-  background:#212529;
-  border:1px solid rgba(75, 75, 75, 0.4);
-  color:whitesmoke;
+  background: #212529;
+  border: 1px solid rgba(75, 75, 75, 0.4);
+  color: whitesmoke;
 `;
 export const DetailMenuItem = styled.li`
   padding: 8px;

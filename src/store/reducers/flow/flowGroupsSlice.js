@@ -1,24 +1,28 @@
 import FlowGroupService from "services/configurationService/groupService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import flowElementsSlice, { deleteGroupOfElement, updateGroupOfElement } from "./flowElementsSlice";
+import flowElementsSlice, {
+  deleteGroupOfElement,
+  updateGroupOfElement,
+} from "./flowElementsSlice";
 
 export const getGroups = createAsyncThunk(
-  'groups/get',
+  "groups/get",
   async (flow_id) => await FlowGroupService.getGroups(flow_id),
 );
 export const createGroup = createAsyncThunk(
-  'groups/create',
-  async ({ flowId, group }) => await FlowGroupService.createGroup(flowId, group),
+  "groups/create",
+  async ({ flowId, group }) =>
+    await FlowGroupService.createGroup(flowId, group),
 );
 export const updateGroup = createAsyncThunk(
-  'groups/update',
+  "groups/update",
   async (currentGroup, thunkApi) => {
     thunkApi.dispatch(updateGroupOfElement(currentGroup));
     return await FlowGroupService.updateGroup(currentGroup);
   },
 );
 export const deleteGroup = createAsyncThunk(
-  'groups/delete',
+  "groups/delete",
   async (group, thunkApi) => {
     thunkApi.dispatch(deleteGroupOfElement(group._id));
     return await FlowGroupService.deleteGroup(group);
@@ -26,7 +30,7 @@ export const deleteGroup = createAsyncThunk(
 );
 
 export const flowGroupsSlice = createSlice({
-  name: 'flowGroups',
+  name: "flowGroups",
   initialState: [],
   extraReducers: {
     [getGroups.fulfilled]: (state, { payload }) => payload,

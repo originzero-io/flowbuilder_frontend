@@ -16,25 +16,22 @@ export const createNode = (type, position, align) => ({
   },
 });
 
-export const isEdgeExist = (newConnection, edges) => {
-  let exist = false;
-  edges.map((edge) => {
-    if (
-      edge.source === newConnection.source
-      && edge.target === newConnection.target
-      && edge.sourceHandle === newConnection.sourceHandle
-      && edge.targetHandle === newConnection.targetHandle
-    ) {
-      exist = true;
-    }
-  });
-  return exist;
-};
+export const isEdgeExist = (newConnection, edges) =>
+  edges.some(
+    (edge) =>
+      edge.source === newConnection.source &&
+      edge.target === newConnection.target &&
+      edge.sourceHandle === newConnection.sourceHandle &&
+      edge.targetHandle === newConnection.targetHandle,
+  );
 
 export const setSourceNodeColorToEdge = (connection, updatedEdges, nodes) => {
   const group = nodes.find((node) => node.id === connection.source)?.data.group;
   const newEdges = updatedEdges.map((edge) => {
-    if (edge.source === connection.source && edge.target === connection.target) {
+    if (
+      edge.source === connection.source &&
+      edge.target === connection.target
+    ) {
       return {
         ...edge,
         group,
@@ -49,4 +46,5 @@ export const setSourceNodeColorToEdge = (connection, updatedEdges, nodes) => {
   return newEdges;
 };
 
-export const getSelectedNodes = (nodes) => nodes.filter((node) => node.selected === true);
+export const getSelectedNodes = (nodes) =>
+  nodes.filter((node) => node.selected === true);

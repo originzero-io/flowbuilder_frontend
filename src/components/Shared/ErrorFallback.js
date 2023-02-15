@@ -8,7 +8,7 @@ const propTypes = {
 };
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
-    <div style={{ padding: '10px' }}>
+    <div style={{ padding: "10px" }}>
       <h2>Something went wrong:</h2>
       <pre>{error.message}</pre>
       <Button onClick={resetErrorBoundary}>Refresh the page</Button>

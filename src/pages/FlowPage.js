@@ -27,7 +27,7 @@ const FlowPage = () => {
   useEffect(() => {
     dispatch(getGroups(flowId));
     flowExecutorListener(flowExecutorNamespace);
-    flowExecutorNamespace.emit('joinFlowRoom', { flowId });
+    flowExecutorNamespace.emit("joinFlowRoom", { flowId });
   }, []);
 
   return (

@@ -20,7 +20,7 @@ const panelNodeList = [
     createdDate: undefined,
   },
   {
-    id: '1xxx',
+    id: "1xxx",
     name: types.CONSTANT,
     type: types.CONSTANT,
     icon: <SetVariablesIcon />,
@@ -68,7 +68,7 @@ const panelNodeList = [
     createdDate: undefined,
   },
   {
-    id: '1299',
+    id: "1299",
     name: types.EXCEL_WRITE,
     type: types.EXCEL_WRITE,
     icon: <ExcelReadIcon />,
@@ -230,14 +230,16 @@ const panelNodeList = [
 ];
 
 export const nodeListSlice = createSlice({
-  name: 'nodeListReducer',
+  name: "nodeListReducer",
   initialState: panelNodeList,
   reducers: {
     setNodeList(state, { payload }) {
       return payload;
     },
     addNodeToFavorites(state, { payload }) {
-      return state.map((node) => (node.id === payload.id ? { ...node, fav: !node.fav } : node));
+      return state.map((node) =>
+        node.id === payload.id ? { ...node, fav: !node.fav } : node,
+      );
     },
   },
 });

@@ -6,12 +6,12 @@ export function RedoIcon({ theme, disable }) {
   return (
     <svg
       fill={
-          disable === true
-            ? "gray"
-            : theme === "dark"
-              ? themeColor.DARK_ICON
-              : themeColor.LIGHT_ICON
-        }
+        disable === true
+          ? "gray"
+          : theme === "dark"
+          ? themeColor.DARK_ICON
+          : themeColor.LIGHT_ICON
+      }
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
       width="25px"
@@ -19,32 +19,32 @@ export function RedoIcon({ theme, disable }) {
     >
       <path
         fill={
-            disable === true
-              ? "gray"
-              : theme === "dark"
-                ? themeColor.DARK_ICON
-                : themeColor.LIGHT_ICON
-          }
+          disable === true
+            ? "gray"
+            : theme === "dark"
+            ? themeColor.DARK_ICON
+            : themeColor.LIGHT_ICON
+        }
         d="M37,36h30L56,25l7-7l16,16l7,7l-7,7L63,64l-7-7l11-11H37c-7.168,0-13,5.832-13,13s5.832,13,13,13h9 v10h-9c-12.683,0-23-10.318-23-23S24.317,36,37,36z"
       />
       <path
         fill={
-            disable === true
-              ? "gray"
-              : theme === "dark"
-                ? themeColor.DARK_ICON
-                : themeColor.LIGHT_ICON
-          }
+          disable === true
+            ? "gray"
+            : theme === "dark"
+            ? themeColor.DARK_ICON
+            : themeColor.LIGHT_ICON
+        }
         d="M69 31c-.128 0-.256-.049-.354-.146l-5-5c-.195-.195-.195-.512 0-.707s.512-.195.707 0l5 5c.195.195.195.512 0 .707C69.256 30.951 69.128 31 69 31zM75.5 37.5c-.128 0-.256-.049-.354-.146l-2.5-2.5c-.195-.195-.195-.512 0-.707s.512-.195.707 0l2.5 2.5c.195.195.195.512 0 .707C75.756 37.451 75.628 37.5 75.5 37.5zM64 57c-.128 0-.256-.049-.354-.146-.195-.195-.195-.512 0-.707l11-11c.195-.195.512-.195.707 0s.195.512 0 .707l-11 11C64.256 56.951 64.128 57 64 57zM79.5 41.5c-.128 0-.256-.049-.354-.146l-1.5-1.5c-.195-.195-.195-.512 0-.707s.512-.195.707 0l1.5 1.5c.195.195.195.512 0 .707C79.756 41.451 79.628 41.5 79.5 41.5z"
       />
       <path
         fill={
-            disable === true
-              ? "gray"
-              : theme === "dark"
-                ? themeColor.DARK_ICON
-                : themeColor.LIGHT_ICON
-          }
+          disable === true
+            ? "gray"
+            : theme === "dark"
+            ? themeColor.DARK_ICON
+            : themeColor.LIGHT_ICON
+        }
         d="M46,83h-9c-13.233,0-24-10.767-24-24s10.767-24,24-24h27.586l-9.293-9.293 c-0.391-0.391-0.391-1.023,0-1.414l7-7c0.391-0.391,1.023-0.391,1.414,0l23,23c0.391,0.391,0.391,1.023,0,1.414l-23,23 c-0.391,0.391-1.023,0.391-1.414,0l-7-7c-0.391-0.391-0.391-1.023,0-1.414L64.586,47H37c-6.617,0-12,5.383-12,12s5.383,12,12,12h9 c0.553,0,1,0.447,1,1v10C47,82.553,46.553,83,46,83z M37,37c-12.131,0-22,9.869-22,22s9.869,22,22,22h8v-8h-8c-7.72,0-14-6.28-14-14 s6.28-14,14-14h30c0.404,0,0.77,0.243,0.924,0.617c0.155,0.374,0.069,0.804-0.217,1.09L57.414,57L63,62.586L84.586,41L63,19.414 L57.414,25l10.293,10.293c0.286,0.286,0.372,0.716,0.217,1.09C67.77,36.757,67.404,37,67,37H37z"
       />
     </svg>
@@ -54,12 +54,12 @@ export function UndoIcon({ theme, disable }) {
   return (
     <svg
       fill={
-          disable === true
-            ? "gray"
-            : theme === "dark"
-              ? themeColor.DARK_ICON
-              : themeColor.LIGHT_ICON
-        }
+        disable === true
+          ? "gray"
+          : theme === "dark"
+          ? themeColor.DARK_ICON
+          : themeColor.LIGHT_ICON
+      }
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
       width="25px"
@@ -67,32 +67,32 @@ export function UndoIcon({ theme, disable }) {
     >
       <path
         fill={
-            disable === true
-              ? "gray"
-              : theme === "dark"
-                ? themeColor.DARK_ICON
-                : themeColor.LIGHT_ICON
-          }
+          disable === true
+            ? "gray"
+            : theme === "dark"
+            ? themeColor.DARK_ICON
+            : themeColor.LIGHT_ICON
+        }
         d="M63,36H33l11-11l-7-7L21,34l-7,7l7,7l16,16l7-7L33,46h30c7.168,0,13,5.832,13,13s-5.832,13-13,13h-9 v10h9c12.683,0,23-10.318,23-23S75.683,36,63,36z"
       />
       <path
         fill={
-            disable === true
-              ? "gray"
-              : theme === "dark"
-                ? themeColor.DARK_ICON
-                : themeColor.LIGHT_ICON
-          }
+          disable === true
+            ? "gray"
+            : theme === "dark"
+            ? themeColor.DARK_ICON
+            : themeColor.LIGHT_ICON
+        }
         d="M31 31c-.128 0-.256-.049-.354-.146-.195-.195-.195-.512 0-.707l5-5c.195-.195.512-.195.707 0s.195.512 0 .707l-5 5C31.256 30.951 31.128 31 31 31zM24.5 37.5c-.128 0-.256-.049-.354-.146-.195-.195-.195-.512 0-.707l2.5-2.5c.195-.195.512-.195.707 0s.195.512 0 .707l-2.5 2.5C24.756 37.451 24.628 37.5 24.5 37.5zM36 57c-.128 0-.256-.049-.354-.146l-11-11c-.195-.195-.195-.512 0-.707s.512-.195.707 0l11 11c.195.195.195.512 0 .707C36.256 56.951 36.128 57 36 57zM20.5 41.5c-.128 0-.256-.049-.354-.146-.195-.195-.195-.512 0-.707l1.5-1.5c.195-.195.512-.195.707 0s.195.512 0 .707l-1.5 1.5C20.756 41.451 20.628 41.5 20.5 41.5z"
       />
       <path
         fill={
-            disable === true
-              ? "gray"
-              : theme === "dark"
-                ? themeColor.DARK_ICON
-                : themeColor.LIGHT_ICON
-          }
+          disable === true
+            ? "gray"
+            : theme === "dark"
+            ? themeColor.DARK_ICON
+            : themeColor.LIGHT_ICON
+        }
         d="M63,83h-9c-0.553,0-1-0.447-1-1V72c0-0.553,0.447-1,1-1h9c6.617,0,12-5.383,12-12s-5.383-12-12-12 H35.414l9.293,9.293c0.391,0.391,0.391,1.023,0,1.414l-7,7c-0.391,0.391-1.023,0.391-1.414,0l-23-23 c-0.391-0.391-0.391-1.023,0-1.414l23-23c0.391-0.391,1.023-0.391,1.414,0l7,7c0.391,0.391,0.391,1.023,0,1.414L35.414,35H63 c13.233,0,24,10.767,24,24S76.233,83,63,83z M55,81h8c12.131,0,22-9.869,22-22s-9.869-22-22-22H33c-0.404,0-0.77-0.243-0.924-0.617 c-0.155-0.374-0.069-0.804,0.217-1.09L42.586,25L37,19.414L15.414,41L37,62.586L42.586,57L32.293,46.707 c-0.286-0.286-0.372-0.716-0.217-1.09C32.23,45.243,32.596,45,33,45h30c7.72,0,14,6.28,14,14s-6.28,14-14,14h-8V81z"
       />
     </svg>
@@ -236,9 +236,7 @@ export function ProfileIcon({ color, width, height }) {
     </svg>
   );
 }
-export function ShareIcon({
-  width, height, onClick, theme,
-}) {
+export function ShareIcon({ width, height, onClick, theme }) {
   return (
     <svg
       fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
@@ -370,16 +368,11 @@ export function RotateAllIcon({ theme }) {
         strokeWidth="1"
       >
         <g
-          fill={
-              theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-            }
+          fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
           id="Icons-Device"
           transform="translate(-210.000000, -124.000000)"
         >
-          <g
-            id="screen-rotation"
-            transform="translate(210.000000, 124.000000)"
-          >
+          <g id="screen-rotation" transform="translate(210.000000, 124.000000)">
             <path
               d="M16.5,2.5 C19.8,4 22.1,7.2 22.5,11 L24,11 C23.4,4.8 18.3,0 12,0 L11.3,0 L15.1,3.8 L16.5,2.5 L16.5,2.5 Z M10.2,1.7 C9.6,1.1 8.7,1.1 8.1,1.7 L1.7,8.1 C1.1,8.7 1.1,9.6 1.7,10.2 L13.7,22.2 C14.3,22.8 15.2,22.8 15.8,22.2 L22.2,15.8 C22.8,15.2 22.8,14.3 22.2,13.7 L10.2,1.7 L10.2,1.7 Z M14.8,21.2 L2.8,9.2 L9.2,2.8 L21.2,14.8 L14.8,21.2 L14.8,21.2 Z M7.5,21.5 C4.2,20 1.9,16.8 1.5,13 L0.1,13 C0.6,19.2 5.7,24 12,24 L12.7,24 L8.9,20.2 L7.5,21.5 L7.5,21.5 Z"
               id="Shape"
@@ -406,9 +399,7 @@ export function SelectAllIcon({ theme }) {
         width="230"
         height="230"
         fill="none"
-        stroke={
-            theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-          }
+        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="7px"
@@ -443,9 +434,7 @@ export function SelectAllIcon({ theme }) {
         x2="151.49"
         y2="145.84"
         fill="none"
-        stroke={
-            theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-          }
+        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="9px"
@@ -454,9 +443,7 @@ export function SelectAllIcon({ theme }) {
       <polygon
         points="143.95 138.29 156.21 186.37 191.08 151.49 143.95 138.29"
         fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-        stroke={
-            theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-          }
+        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="5px"

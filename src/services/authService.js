@@ -3,7 +3,7 @@ import HTTPService from "./HttpService";
 class AuthService extends HTTPService {
   constructor() {
     super();
-    this.service = this.createService('');
+    this.service = this.createService("");
   }
 
   async logIn(user) {

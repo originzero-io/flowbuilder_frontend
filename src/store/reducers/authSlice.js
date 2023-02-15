@@ -42,10 +42,11 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: {
-    [login.fulfilled]: (state, { payload }) => state = {
-      ...payload,
-      isAuthenticated: true,
-    },
+    [login.fulfilled]: (state, { payload }) =>
+      (state = {
+        ...payload,
+        isAuthenticated: true,
+      }),
     [login.rejected]: (state, { payload }) => {
       state.isAuthenticated = false;
     },

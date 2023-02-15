@@ -6,9 +6,9 @@ import { persistReducer } from "redux-persist";
 import rootReducer from "./reducers/index";
 
 const persistConfig = {
-  key: 'persist-key',
+  key: "persist-key",
   storage,
-  whitelist: ['auth'],
+  whitelist: ["auth"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -17,9 +17,10 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export default function configureAppStore() {
   const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
     devTools: process.env.REACT_APP_HOST_ENV === "development",
   });
 

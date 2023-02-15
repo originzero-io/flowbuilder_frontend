@@ -8,10 +8,10 @@ export default class HTTPService {
   }
 
   createService(serviceName) {
-    if (typeof serviceName !== 'undefined') {
+    if (typeof serviceName !== "undefined") {
       this.service = axios.create({
         baseURL: `${
-          process.env.REACT_APP_HOST_ENV === 'development'
+          process.env.REACT_APP_HOST_ENV === "development"
             ? process.env.REACT_APP_GATEWAY_LOCAL_URL
             : process.env.REACT_APP_GATEWAY_CLOUD_URL
         }/${serviceName}`,
@@ -24,12 +24,12 @@ export default class HTTPService {
       });
       this.service.interceptors.response.use(
         (response) =>
-        // Any status code that lie within the range of 2xx cause this function to trigger
-        // Do something with response data
+          // Any status code that lie within the range of 2xx cause this function to trigger
+          // Do something with response data
           response,
         (error) => {
-        // Any status codes that falls outside the range of 2xx cause this function to trigger
-        // Do something with response error
+          // Any status codes that falls outside the range of 2xx cause this function to trigger
+          // Do something with response error
           notification.error(error.response.data.message);
           return Promise.reject(error);
         },

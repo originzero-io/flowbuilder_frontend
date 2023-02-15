@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const menuSlice = createSlice({
-  name: 'menu',
+  name: "menu",
   initialState: {
     panelMenu: initialState,
     multiSelectionMenu: initialState,
@@ -32,6 +32,9 @@ export const menuSlice = createSlice({
 });
 
 export const {
-  setPanelContextMenu, setElementContextMenu, setMultiSelectionContextMenu, setGroupMenu,
+  setPanelContextMenu,
+  setElementContextMenu,
+  setMultiSelectionContextMenu,
+  setGroupMenu,
 } = menuSlice.actions;
 export default menuSlice.reducer;

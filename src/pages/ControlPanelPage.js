@@ -19,7 +19,7 @@ const Content = styled.div`
 export default function ControlPanelPage() {
   // console.log("CONTROL_PANEL_PAGE RENDERED")
   useEffect(() => {
-    flowExecutorNamespace.emit('leaveAllFlowRooms');
+    flowExecutorNamespace.emit("leaveAllFlowRooms");
     flowExecutorNamespace.removeAllListeners();
   }, []);
   return (

@@ -76,9 +76,7 @@ export function CancelIcon({ width, height, color }) {
     </svg>
   );
 }
-export function NameEditIcon({
-  width, height, onClick, theme,
-}) {
+export function NameEditIcon({ width, height, onClick, theme }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -187,9 +185,7 @@ export function NameEditIcon({
     </svg>
   );
 }
-export function GroupIcon({
-  width, height, color, theme,
-}) {
+export function GroupIcon({ width, height, color, theme }) {
   return (
     <svg
       data-name="Layer 1"
@@ -313,9 +309,7 @@ export function GroupIcon({
     </svg>
   );
 }
-export function NonGroupIcon({
-  width, height, color, onClick, theme,
-}) {
+export function NonGroupIcon({ width, height, color, onClick, theme }) {
   return (
     <svg
       id="Layer_1"

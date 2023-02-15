@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import {
-  useKeyPress,
-  useReactFlow,
-} from "reactflow";
+import { useKeyPress, useReactFlow } from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
 import notification from "utils/notificationHelper";
 import { setCopiedNodes } from "store/reducers/controlPanelSlice";
-import { pasteNodes, selectAllElements } from "store/reducers/flow/flowElementsSlice";
+import {
+  pasteNodes,
+  selectAllElements,
+} from "store/reducers/flow/flowElementsSlice";
 import { setRotateAllPath } from "store/reducers/flow/flowGuiSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 
@@ -21,10 +21,10 @@ const KeyboardEvents = () => {
   const reactFlowInstance = useReactFlow();
 
   const f2Pressed = useKeyPress("F2");
-  const ctrlAndAPressed = useKeyPress(['Control+a']);
-  const shiftAndRPressed = useKeyPress(['Shift+R']);
-  const ctrlAndCPressed = useKeyPress(['Control+c']);
-  const ctrlAndVPressed = useKeyPress(['Control+v']);
+  const ctrlAndAPressed = useKeyPress(["Control+a"]);
+  const shiftAndRPressed = useKeyPress(["Shift+R"]);
+  const ctrlAndCPressed = useKeyPress(["Control+c"]);
+  const ctrlAndVPressed = useKeyPress(["Control+v"]);
 
   useEffect(() => {
     if (ctrlAndAPressed) {
@@ -52,7 +52,10 @@ const KeyboardEvents = () => {
     if (ctrlAndCPressed) {
       const selectedNodes = flowElements.nodes.filter((node) => node.selected);
       dispatch(setCopiedNodes(selectedNodes));
-      notification.success(`${selectedNodes.length} nodes copied`, { icon: "👏", position: 'top-center' });
+      notification.success(`${selectedNodes.length} nodes copied`, {
+        icon: "👏",
+        position: "top-center",
+      });
     }
   }, [ctrlAndCPressed]);
 

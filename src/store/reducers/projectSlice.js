@@ -22,7 +22,9 @@ export const projectSlice = createSlice({
       state.projects.push(payload);
     },
     updateProject(state, { payload }) {
-      const index = state.projects.findIndex((project) => project._id === payload._id);
+      const index = state.projects.findIndex(
+        (project) => project._id === payload._id,
+      );
       state.projects[index] = payload;
     },
     deleteProject(state, { payload }) {
@@ -39,9 +41,5 @@ export const projectSlice = createSlice({
 });
 
 export default projectSlice.reducer;
-export const {
-  setActiveProject,
-  createProject,
-  updateProject,
-  deleteProject,
-} = projectSlice.actions;
+export const { setActiveProject, createProject, updateProject, deleteProject } =
+  projectSlice.actions;

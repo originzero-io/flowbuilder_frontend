@@ -24,16 +24,15 @@ export const SearchBar = styled.input`
   border-radius: 4px;
   padding-left: 10px;
   margin-right: 5px;
-  margin-left:9px;
+  margin-left: 9px;
   margin-top: 5px;
   background-color: #212529;
-  border:2px solid rgba(75,75,75,0.4);;
+  border: 2px solid rgba(75, 75, 75, 0.4);
   color: whitesmoke;
   width: 220px;
-  height:3vh;
+  height: 3vh;
   user-select: none;
-  outline-color:green;
+  outline-color: green;
 `;
-export const FlowsContainer = styled(ProjectsContainerIndex)`
-`;
+export const FlowsContainer = styled(ProjectsContainerIndex)``;
 export const DashboardsContainer = styled(ProjectsContainerIndex)``;

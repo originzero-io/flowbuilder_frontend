@@ -19,7 +19,7 @@ const Content = styled.div`
   border-radius: 4px;
   box-shadow: 3px 3px 83px 2px rgba(29, 185, 84, 1);
   transition: all 0.8s ease;
-  &:hover{
+  &:hover {
     box-shadow: 3px 3px 170px 50px rgba(29, 185, 84, 1);
   }
   //overflow-y:auto;

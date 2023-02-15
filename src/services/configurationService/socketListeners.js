@@ -11,11 +11,7 @@ import {
   getFlowsByWorkspace,
   moveFlow,
 } from "store/reducers/flow/flowSlice";
-import {
-  createNote,
-  deleteNote,
-  updateNote,
-} from "store/reducers/noteSlice";
+import { createNote, deleteNote, updateNote } from "store/reducers/noteSlice";
 import {
   createProject,
   deleteProject,
@@ -53,7 +49,7 @@ export const projectListener = (socket) => {
 export const workspaceListener = (socket) => {
   socket.on("workspaces:create", (data) => {
     store.dispatch(createWorkspace(data.workspace));
-    notification.success('Workspace created successfully');
+    notification.success("Workspace created successfully");
   });
   socket.on("workspaces:update", (data) => {
     store.dispatch(editWorkspace(data.workspace));
@@ -61,26 +57,31 @@ export const workspaceListener = (socket) => {
   });
   socket.on("workspaces:delete", (data) => {
     store.dispatch(deleteWorkspace(data.workspaceId));
-    notification.success('Workspace deleted successfully');
+    notification.success("Workspace deleted successfully");
   });
 };
 export const flowListener = (socket) => {
   socket.on("flows:delete", (data) => {
     store.dispatch(deleteFlow(data.flowId));
-    notification.success('Flow deleted successfully');
+    notification.success("Flow deleted successfully");
   });
   socket.on("flows:update", (data) => {
     store.dispatch(editFlow(data.flow));
   });
   socket.on("flows:move", (data) => {
     store.dispatch(moveFlow(data.flow));
-    notification.success('Flow moved successfully');
+    notification.success("Flow moved successfully");
   });
   socket.on("flows:create", (data) => {
     const { auth, workspaces } = store.getState();
     store.dispatch(createFlow(data.flow));
-    store.dispatch(getMyPermissionInThisWorkspace({ workspace: workspaces.activeWorksapce, me: auth }));
-    notification.success('Flow created successfully');
+    store.dispatch(
+      getMyPermissionInThisWorkspace({
+        workspace: workspaces.activeWorksapce,
+        me: auth,
+      }),
+    );
+    notification.success("Flow created successfully");
   });
 };
 export const elementListener = (socket) => {
@@ -96,14 +97,14 @@ export const elementListener = (socket) => {
 export const noteListener = (socket) => {
   socket.on("notes:create", (data) => {
     store.dispatch(createNote(data.note));
-    notification.success('Note created successfully');
+    notification.success("Note created successfully");
   });
   socket.on("notes:update", (data) => {
     store.dispatch(updateNote(data.note));
   });
   socket.on("notes:delete", (data) => {
     store.dispatch(deleteNote(data.noteId));
-    notification.success('Note deleted successfully');
+    notification.success("Note deleted successfully");
   });
 };
 

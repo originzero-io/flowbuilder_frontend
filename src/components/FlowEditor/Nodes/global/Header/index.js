@@ -1,17 +1,15 @@
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { expandNode } from 'store/reducers/flow/flowElementsSlice';
-import { closeAllNodeGroupMenu } from 'store/reducers/flow/flowGuiSlice';
-import useActiveFlow from 'hooks/useActiveFlow';
-import { getIncomers, getOutgoers } from 'reactflow';
-import GroupMenu from '../../../components/Menu/NodeGroupMenu/NodeGroupMenu';
-import {
-  Content, FeatureIconsWrapper, Header, Label,
-} from '../../Nodes.style';
-import EditNameForm from './EditNameForm';
-import FeatureIcons from './FeatureIcons';
-import Flag from './NodeFlag';
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { expandNode } from "store/reducers/flow/flowElementsSlice";
+import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
+import useActiveFlow from "hooks/useActiveFlow";
+import { getIncomers, getOutgoers } from "reactflow";
+import GroupMenu from "../../../components/Menu/NodeGroupMenu/NodeGroupMenu";
+import { Content, FeatureIconsWrapper, Header, Label } from "../../Nodes.style";
+import EditNameForm from "./EditNameForm";
+import FeatureIcons from "./FeatureIcons";
+import Flag from "./NodeFlag";
 
 const propTypes = {
   self: PropTypes.object.isRequired,
@@ -46,11 +44,11 @@ export default function NodeHeader({ self, selectedElements }) {
   };
   const nodeIncomers = () => {
     const incomers = getIncomers(self, flowElements.nodes, flowElements.edges);
-    console.log('incomers: ', incomers);
+    console.log("incomers: ", incomers);
   };
   const nodeOutgoers = () => {
     const outgoers = getOutgoers(self, flowElements.nodes, flowElements.edges);
-    console.log('outgoers: ', outgoers);
+    console.log("outgoers: ", outgoers);
   };
 
   return (

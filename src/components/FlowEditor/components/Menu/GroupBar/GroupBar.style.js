@@ -4,8 +4,8 @@ import * as themeColor from "constants/ThemeReference";
 export const Container = styled.div`
   //position: absolute;
   //border-radius: 6px;
-  border-top-left-radius:6px;
-  border-bottom-left-radius:6px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
   //top: 40%;
   //left: -50px;
   //right:0px;
@@ -13,15 +13,16 @@ export const Container = styled.div`
   z-index: 6;
   user-select: none;
   font-size: 24px;
-  padding-right:4px;
-  width:55px;
-  height:65px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:${(props) => (props.theme === "dark"
-    ? themeColor.DARK_MENU_BACKGROUND
-    : themeColor.LIGHT_MENU_BACKGROUND)};;
+  padding-right: 4px;
+  width: 55px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: ${(props) =>
+    props.theme === "dark"
+      ? themeColor.DARK_MENU_BACKGROUND
+      : themeColor.LIGHT_MENU_BACKGROUND};
 `;
 
 export const GroupItem = styled.div`
@@ -60,21 +61,21 @@ export const Header = styled.div`
   justify-content: flex-start;
   align-items: center;
   color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
-  width:100%;
+  width: 100%;
 `;
 export const Title = styled.div`
   margin-left: 6px;
   user-select: none;
-  width:80%;
+  width: 80%;
 `;
 export const IconWrapper = styled.div`
   cursor: pointer;
 `;
 export const Label = styled.div`
   padding-left: 10px;
-  width:70%;
-  text-align:start;
-  font-size:16px;
+  width: 70%;
+  text-align: start;
+  font-size: 16px;
 `;
 
 export const InputWrapper = styled.div`
@@ -107,13 +108,13 @@ export const ColorFlag = styled.input`
   border: none;
   border-image: none;
   width: 22px;
-  height:26px;
+  height: 26px;
   background: none;
   color: transparent;
   cursor: pointer;
-  position:absolute;
-  left:0px;
-  top:0;
+  position: absolute;
+  left: 0px;
+  top: 0;
 `;
 export const GroupColor = styled.div`
   width: ${(props) => props.width};
