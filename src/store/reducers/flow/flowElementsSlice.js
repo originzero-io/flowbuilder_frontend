@@ -226,7 +226,7 @@ export const flowElementsSlice = createSlice({
     updateNodeHandles(state, { payload }) {
       state.nodes.forEach((node) => {
         if (node.id === payload.self.id) {
-          node.data[payload.name] = payload.value;
+          node.data.engine[payload.name] = payload.value;
         }
       });
     },

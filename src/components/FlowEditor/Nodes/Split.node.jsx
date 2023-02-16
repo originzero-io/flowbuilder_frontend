@@ -1,20 +1,8 @@
-import React, { useState } from "react";
-import NodeGod from "./global/NodeGod";
-import NodeIOManager from "./global/NodeIOManager";
+import React from "react";
+import NodeGod from "./shared/NodeGod";
 
 const SplitNode = (self) => {
-  const [align, setAlign] = useState("vertical");
-  return (
-    <NodeGod
-      self={self}
-      align={align}
-      setAlign={setAlign}
-      ioType="both"
-      collapsable
-    >
-      <NodeIOManager self={self} ioType="source" />
-    </NodeGod>
-  );
+  return <NodeGod self={self} collapsable />;
 };
 
 export default React.memo(SplitNode);

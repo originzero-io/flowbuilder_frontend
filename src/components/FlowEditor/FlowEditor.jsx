@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import ReactFlow, { useReactFlow } from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -21,11 +21,10 @@ import {
 } from "store/reducers/menuSlice";
 import { setNodeList } from "store/reducers/nodeListSlice";
 import * as themeColor from "constants/ThemeReference";
-
 import PropTypes from "prop-types";
 import useActiveFlow from "hooks/useActiveFlow";
 import notification from "utils/notificationHelper";
-import { isConnectionCyclic } from "utils/flowHelpers";
+import { isConnectionCyclic } from "components/FlowEditor/helpers/flowHelper";
 import {
   openElementContextMenu,
   openMultiSelectionContextMenu,
@@ -33,7 +32,7 @@ import {
 } from "./helpers/menuHelper";
 import FlowComponents from "./components/FlowComponents";
 import { createNode } from "./helpers/elementHelper";
-import nodeTypes from "./Nodes";
+import { createCustomNodeObject } from "./helpers/nodeTypeHelper";
 
 const propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
@@ -157,10 +156,10 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setElementContextMenu(false));
     dispatch(closeAllNodeGroupMenu(true));
   };
-
+  const customNodes = useMemo(() => createCustomNodeObject(), []);
   return (
     <ReactFlow
-      nodeTypes={nodeTypes}
+      nodeTypes={customNodes}
       style={flowStyle}
       onInit={onInitHandle}
       nodes={flowElements.nodes}

@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useActiveFlow from "hooks/useActiveFlow";
-import NodeGod from "./global/NodeGod";
-import NodeIOmanager from "./global/NodeIOManager";
-import { Label } from "./Nodes.style";
+import NodeGod from "./shared/NodeGod";
+import NodeIOmanager from "./shared/NodeIOManager";
+import { Label } from "./shared/Node.style";
 
-const SetVariables = React.memo((self) => {
-  const nodeClass = useSelector((state) => state.nodeClassReducer);
-  const { flowElements } = useActiveFlow();
-  const elements = flowElements;
+const Trigger = React.memo((self) => {
   const [values, setValues] = useState([
     {
       source1: "Anaks",
@@ -34,31 +31,8 @@ const SetVariables = React.memo((self) => {
   const textChange = (e) => {
     setText(e.target.value);
   };
-
-  const [align, setAlign] = useState(self.data.align);
-
-  useEffect(() => {
-    // const { edges } = getNodesAndEdges(elements);
-    // const mySources = edges.filter((edge) => edge.source === self.id);
-    // const handles = mySources.map((s) => s.sourceHandle);
-    // console.log("my-elements", handles);
-    // const src = handles.map((h) => {
-    //   return { [h]: text };
-    // });
-    // console.log("src:", src);
-    // if (src.length > 0) {
-    //   setValues([...src]);
-    // }
-  }, [self.data.sourceCount, checked, text]);
-
   return (
-    <NodeGod
-      self={self}
-      align={align}
-      setAlign={setAlign}
-      ioType="source"
-      collapsable
-    >
+    <NodeGod self={self} collapsable>
       <Label>Payload</Label>
       <div>
         <input
@@ -69,9 +43,8 @@ const SetVariables = React.memo((self) => {
         />
         <input type="checkbox" onChange={checkboxChange} value={checked} />
       </div>
-      <NodeIOmanager self={self} ioType="source" />
     </NodeGod>
   );
 });
 
-export default React.memo(SetVariables);
+export default React.memo(Trigger);

@@ -3,7 +3,7 @@
 import * as themeColor from "constants/ThemeReference";
 import React from "react";
 
-export function SetVariablesIcon({ width, height, enable }) {
+export function TriggerIcon({ width, height, enable }) {
   return (
     <svg
       data-name="Layer 1"

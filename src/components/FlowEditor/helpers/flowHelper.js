@@ -1,6 +1,6 @@
 import { getIncomers, getOutgoers } from "reactflow";
 import { selectElements } from "store/reducers/flow/flowElementsSlice";
-import { store } from "../index";
+import { store } from "../../../index";
 
 export function backendFlowDataBuilder(flowId, elements) {
   return {
@@ -9,10 +9,9 @@ export function backendFlowDataBuilder(flowId, elements) {
       id: node.id,
       type: node.type,
       data: {
+        engine: node.data.engine,
         label: node.data.label,
         enable: node.data.enable,
-        targetCount: node.data.targetCount,
-        sourceCount: node.data.sourceCount,
       },
     })),
     edges: elements.edges.map((edge) => ({
@@ -29,15 +28,6 @@ export function backendFlowDataBuilder(flowId, elements) {
 export function findNodeById(nodeId, elements) {
   return elements.nodes.find((node) => node.id === nodeId);
 }
-export function isConnectionCyclic(elements, params) {
-  const { source, target } = params;
-  const dependencyArray = [];
-  const sourceNode = findNodeById(source, elements);
-  addIncomersToArray(sourceNode, elements, dependencyArray);
-  store.dispatch(selectElements(dependencyArray));
-  return dependencyArray.some((d) => d.id === target);
-}
-
 function addIncomersToArray(node, elements, dependencyArray) {
   const { nodes, edges } = elements;
   const currentNodeIncomers = getIncomers(node, nodes, edges);
@@ -48,4 +38,12 @@ function addIncomersToArray(node, elements, dependencyArray) {
       addIncomersToArray(childIncomer, elements, dependencyArray);
     });
   }
+}
+export function isConnectionCyclic(elements, params) {
+  const { source, target } = params;
+  const dependencyArray = [];
+  const sourceNode = findNodeById(source, elements);
+  addIncomersToArray(sourceNode, elements, dependencyArray);
+  store.dispatch(selectElements(dependencyArray));
+  return dependencyArray.some((d) => d.id === target);
 }

@@ -31,6 +31,7 @@
       }
     ],
     "react/display-name": "off",
+    "react/forbid-prop-types": "off",
     "class-methods-use-this": "warn",
     "eqeqeq": "warn",
     "no-case-declarations": "warn",
@@ -40,6 +41,7 @@
     "linebreak-style": "off",
     "react/function-component-definition": "off",
     "import/no-unresolved": "off",
+    "import/no-cycle": "off",
     "no-param-reassign": "off",
     "max-len": ["error", { "code": 150 }]
   }

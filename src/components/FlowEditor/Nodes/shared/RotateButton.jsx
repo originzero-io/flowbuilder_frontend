@@ -2,7 +2,10 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { rotateNode } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types";
-import { HorizontalToVerticalIcon, VerticalToHorizontalIcon } from "./Icons";
+import {
+  HorizontalToVerticalIcon,
+  VerticalToHorizontalIcon,
+} from "./NodeIcons";
 
 const propTypes = {
   self: PropTypes.object.isRequired,

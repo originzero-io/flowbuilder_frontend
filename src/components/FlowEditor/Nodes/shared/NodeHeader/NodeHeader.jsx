@@ -6,7 +6,7 @@ import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 import { getIncomers, getOutgoers } from "reactflow";
 import GroupMenu from "../../../components/Menu/NodeGroupMenu/NodeGroupMenu";
-import { Content, FeatureIconsWrapper, Header, Label } from "../../Nodes.style";
+import { Content, FeatureIconsWrapper, Header, Label } from "../Node.style";
 import EditNameForm from "./EditNameForm";
 import FeatureIcons from "./FeatureIcons";
 import Flag from "./NodeFlag";
@@ -15,7 +15,7 @@ const propTypes = {
   self: PropTypes.object.isRequired,
   selectedElements: PropTypes.bool,
 };
-export default function NodeHeader({ self, selectedElements }) {
+export default function NodeHeader({ self }) {
   const dispatch = useDispatch();
   const { flowGui, flowElements } = useActiveFlow();
   const { nodeGroupMenuDisplay } = flowGui;
@@ -52,11 +52,7 @@ export default function NodeHeader({ self, selectedElements }) {
   };
 
   return (
-    <Header
-      onMouseEnter={onMouseEnterHandle}
-      onMouseLeave={onMouseLeaveHandle}
-      selected={selectedElements}
-    >
+    <Header onMouseEnter={onMouseEnterHandle} onMouseLeave={onMouseLeaveHandle}>
       {/* <button onClick={nodeIncomers}>incomers</button>
         <button onClick={nodeOutgoers}>outgoers</button> */}
       {/* <NodeIcon/> */}

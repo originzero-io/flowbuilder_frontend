@@ -1,18 +1,8 @@
 import React, { useState } from "react";
-import NodeGod from "./global/NodeGod";
+import NodeGod from "./shared/NodeGod";
 
 const NotificationNode = (self) => {
-  const [align, setAlign] = useState("vertical");
-
-  return (
-    <NodeGod
-      self={self}
-      align={align}
-      setAlign={setAlign}
-      ioType="target"
-      collapsable={false}
-    />
-  );
+  return <NodeGod self={self} collapsable={false} />;
 };
 
 export default React.memo(NotificationNode);

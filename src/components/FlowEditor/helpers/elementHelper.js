@@ -1,15 +1,14 @@
 import uuid from "react-uuid";
+import { getNodeEngineData } from "./nodeTypeHelper";
 
 export const createNode = (type, position, align) => ({
   id: `${type}-${uuid()}`,
   type,
   position,
   data: {
+    engine: getNodeEngineData(type),
     label: `${type}`,
-    targetCount: 1,
-    sourceCount: 1,
     align,
-    selected: false,
     expand: false,
     enable: true,
     group: { _id: 0, color: null },

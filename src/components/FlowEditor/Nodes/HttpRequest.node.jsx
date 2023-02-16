@@ -1,21 +1,8 @@
-import React, { useState } from "react";
-import NodeGod from "./global/NodeGod";
-import NodeIOManager from "./global/NodeIOManager";
+import React from "react";
+import NodeGod from "./shared/NodeGod";
 
 const HttpRequestNode = (self) => {
-  const [align, setAlign] = useState("vertical");
-  console.log("http-request-rendered");
-  return (
-    <NodeGod
-      self={self}
-      align={align}
-      setAlign={setAlign}
-      ioType="both"
-      collapsable
-    >
-      {/* <NodeIOManager self={self} ioType="both" /> */}
-    </NodeGod>
-  );
+  return <NodeGod self={self} collapsable />;
 };
 
 export default React.memo(HttpRequestNode);

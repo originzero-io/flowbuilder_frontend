@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateNodeHandles } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types";
-import { Label } from "../Nodes.style";
+import { Label } from "./Node.style";
 
 const propTypes = {
   self: PropTypes.object.isRequired,
   ioType: PropTypes.string.isRequired,
 };
-export default function NodeIOManager({ self, ioType }) {
+export default function NodeIOManager({ self }) {
+  const { sourceCount, targetCount, ioType } = self.data.engine;
+
   const dispatch = useDispatch();
   const [handleCount, setHandleCount] = useState({
-    targetCount: self.data.targetCount,
-    sourceCount: self.data.sourceCount,
+    targetCount,
+    sourceCount,
   });
   const handleCountChange = (e) => {
     const { name } = e.target;

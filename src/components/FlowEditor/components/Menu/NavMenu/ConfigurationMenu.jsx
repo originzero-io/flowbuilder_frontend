@@ -26,7 +26,7 @@ import { GoDeviceDesktop } from "react-icons/go";
 import { VscRunAll } from "react-icons/vsc";
 import notification from "utils/notificationHelper";
 import { flowExecutorNamespace } from "SocketConnections";
-import { backendFlowDataBuilder } from "utils/flowHelpers";
+import { backendFlowDataBuilder } from "components/FlowEditor/helpers/flowHelper";
 import { useParams } from "react-router-dom";
 import { Menu, MenuItem } from "./NavMenu.style";
 import { ShareIcon, TuneIcon } from "./Icons";
@@ -37,7 +37,7 @@ import {
   DropdownWrapper,
 } from "../../../../StyledComponents/DropdownMenu";
 import { VerticalDivider } from "../../../../StyledComponents/Divider";
-import SwitchButton from "../../../Nodes/global/SwitchButton";
+import SwitchButton from "../../../Nodes/shared/SwitchButton";
 
 const dummyDevices = [
   {

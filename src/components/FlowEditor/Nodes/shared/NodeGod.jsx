@@ -7,7 +7,7 @@ import useActiveFlow from "hooks/useActiveFlow";
 import { flowExecutorNamespace } from "SocketConnections";
 
 import { Badge } from "reactstrap";
-import getIconInstance from "./Icons/iconConstant";
+import { getIconComponent } from "components/FlowEditor/helpers/nodeTypeHelper";
 import {
   NodeArea,
   NodeContent,
@@ -15,36 +15,36 @@ import {
   SourceWrapper,
   TargetWrapper,
   Info,
-} from "../Nodes.style";
-import NodeHeader from "./Header/index";
-import { InfoIcon } from "./Icons";
+} from "./Node.style";
+import NodeHeader from "./NodeHeader/NodeHeader";
+import { InfoIcon } from "./NodeIcons";
+import NodeIOManager from "./NodeIOManager";
 
 const propTypes = {
   self: PropTypes.object.isRequired,
-  ioType: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   collapsible: PropTypes.bool,
 };
 
-const NodeGod = ({ self, ioType, children, collapsible }) => {
+const NodeGod = ({ self, children, collapsible }) => {
+  const { sourceCount, targetCount, ioType } = self.data.engine;
   const updateNodeInternals = useUpdateNodeInternals();
-  const sources = Array.from(Array(self.data.sourceCount).keys());
-  const targets = Array.from(Array(self.data.targetCount).keys());
+  const sources = Array.from(Array(sourceCount).keys());
+  const targets = Array.from(Array(targetCount).keys());
   const dispatch = useDispatch();
   const { align, expand, enable, group } = self.data;
   const [serverData, setServerData] = useState("");
 
   useEffect(() => {
     updateNodeInternals(self.id);
-  }, [self.data.targetCount, self.data.sourceCount, align]);
+  }, [targetCount, sourceCount, align]);
 
-  const NodeIcon = getIconInstance(self.type);
+  const NodeIcon = getIconComponent(self.type);
   useEffect(() => {
     dispatch(setOutgoersEnable({ self, enable }));
   }, [enable]);
 
   useEffect(() => {
-    console.log("self: ", self);
     flowExecutorNamespace.emit("nodeComm", {
       message: `Hi! My type: ${self.type}`,
       id: self.id,
@@ -82,13 +82,12 @@ const NodeGod = ({ self, ioType, children, collapsible }) => {
         </TargetWrapper>
 
         <NodeArea>
-          <NodeHeader
-            self={self}
-            collapsible={collapsible}
-            selectedElements={self.selected}
-          />
+          <NodeHeader self={self} collapsible={collapsible} />
           {expand ? (
-            <NodeContent>{children}</NodeContent>
+            <NodeContent>
+              {children}
+              <NodeIOManager self={self} />
+            </NodeContent>
           ) : (
             <NodeContent type="logo">
               <NodeIcon width="70px" height="70px" enable={enable} />

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { GroupFlagIcon } from "../Icons";
+import { GroupFlagIcon } from "../NodeIcons";
 
 const propTypes = {
   self: PropTypes.object.isRequired,
