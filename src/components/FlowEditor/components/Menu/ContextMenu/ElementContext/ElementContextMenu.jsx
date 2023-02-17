@@ -14,7 +14,6 @@ export default function ElementMenu() {
   const { flowElements } = useActiveFlow();
   // const elements = flowElements;
   const { elementMenu } = useSelector((state) => state.menus);
-  const theme = useSelector((state) => state.themeReducer);
   const dispatch = useDispatch();
 
   const deleteItem = () => {
@@ -30,7 +29,7 @@ export default function ElementMenu() {
   return (
     <div>
       {elementMenu.state === true && (
-        <Menu x={elementMenu.x} y={elementMenu.y} theme={theme}>
+        <Menu x={elementMenu.x} y={elementMenu.y}>
           <MenuItem>Edit</MenuItem>
           <MenuItem onClick={rotateItem}>Rotate</MenuItem>
           <MenuItem onClick={deleteItem}>Delete</MenuItem>

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 // test
-import * as themeColor from "constants/ThemeReference";
+import themeColor from "constants/ThemeReference";
 import React from "react-redux";
 
 export function Logo({ theme, width = "26px", height = "30px" }) {
@@ -11,7 +11,7 @@ export function Logo({ theme, width = "26px", height = "30px" }) {
       viewBox="0 0 156.74 220.09"
       width={width}
       height={height}
-      fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+      fill={themeColor[theme].iconColor}
     >
       <polygon
         points="22.18 1.52 1.09 149.46 10.18 154.33 35.21 80.46 75.34 80.27 58.65 140.83 100.09 141.02 56.68 18.96 22.18 1.52"
@@ -159,7 +159,7 @@ export function NameEditIcon({ width, height, onClick, theme }) {
         />
         <path
           fillRule="nonzero"
-          fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+          fill={themeColor[theme].iconColor}
           fillOpacity="1"
           d="M 188.980469 78.882812 L 63.84375 204.023438 L 36 176.183594 L 161.136719 51.039062 Z M 188.980469 78.882812 "
         />
@@ -199,26 +199,21 @@ export function GroupIcon({ width, height, color, theme }) {
         cx="54.69"
         cy="124.92"
         r="23"
-        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        fill={themeColor[theme].iconColor}
       />
       <circle
         cx="153.26"
         cy="170.92"
         r="23"
-        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        fill={themeColor[theme].iconColor}
       />
-      <circle
-        cx="153.26"
-        cy="59.2"
-        r="23"
-        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
-      />
+      <circle cx="153.26" cy="59.2" r="23" fill={themeColor[theme].iconColor} />
       <circle
         cx="76.04"
         cy="64.13"
         r="23"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -227,7 +222,7 @@ export function GroupIcon({ width, height, color, theme }) {
         cy="123.27"
         r="23"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -236,7 +231,7 @@ export function GroupIcon({ width, height, color, theme }) {
         cy="172.56"
         r="23"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -246,7 +241,7 @@ export function GroupIcon({ width, height, color, theme }) {
         x2="141.58"
         y2="79.02"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -256,7 +251,7 @@ export function GroupIcon({ width, height, color, theme }) {
         x2="105.3"
         y2="97.72"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -266,7 +261,7 @@ export function GroupIcon({ width, height, color, theme }) {
         x2="164.93"
         y2="120.48"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -276,7 +271,7 @@ export function GroupIcon({ width, height, color, theme }) {
         x2="131.99"
         y2="134.78"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -286,7 +281,7 @@ export function GroupIcon({ width, height, color, theme }) {
         x2="77.43"
         y2="121.5"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -294,7 +289,7 @@ export function GroupIcon({ width, height, color, theme }) {
         cx="120.4"
         cy="115.06"
         r="23"
-        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        fill={themeColor[theme].iconColor}
       />
       <line
         x1="97.4"
@@ -302,7 +297,7 @@ export function GroupIcon({ width, height, color, theme }) {
         x2="108.57"
         y2="134.78"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -325,19 +320,19 @@ export function NonGroupIcon({ width, height, color, onClick, theme }) {
         cx="180.83"
         cy="102.87"
         r="26.72"
-        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        fill={themeColor[theme].iconColor}
       />
       <circle
         cx="66.33"
         cy="49.44"
         r="26.72"
-        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        fill={themeColor[theme].iconColor}
       />
       <circle
         cx="66.33"
         cy="179.21"
         r="26.72"
-        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        fill={themeColor[theme].iconColor}
       />
       <line
         x1="91.03"
@@ -345,7 +340,7 @@ export function NonGroupIcon({ width, height, color, onClick, theme }) {
         x2="79.89"
         y2="156.19"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -355,7 +350,7 @@ export function NonGroupIcon({ width, height, color, onClick, theme }) {
         x2="91.03"
         y2="91.42"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -365,7 +360,7 @@ export function NonGroupIcon({ width, height, color, onClick, theme }) {
         x2="154.42"
         y2="106.84"
         fill="none"
-        stroke={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        stroke={themeColor[theme].iconColor}
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
@@ -373,7 +368,7 @@ export function NonGroupIcon({ width, height, color, onClick, theme }) {
         cx="104.5"
         cy="114.32"
         r="26.72"
-        fill={theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON}
+        fill={themeColor[theme].iconColor}
       />
       <path
         d="M201,176.62a33.11,33.11,0,1,1-33.11-33.1A33.11,33.11,0,0,1,201,176.62Z"

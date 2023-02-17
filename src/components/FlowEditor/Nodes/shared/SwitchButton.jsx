@@ -1,7 +1,7 @@
 import React from "react";
 import Switch from "react-switch";
 import PropTypes from "prop-types";
-import * as themeColor from "constants/ThemeReference";
+import theme from "constants/ThemeReference";
 
 const propTypes = {
   checked: PropTypes.bool.isRequired,
@@ -23,7 +23,7 @@ export default function SwitchButton({
       defaultChecked={defaultChecked}
       onChange={onChange}
       onColor="#888888"
-      onHandleColor={themeColor.HOVER_COLOR}
+      onHandleColor={theme.dark.hoverColor}
       handleDiameter={height}
       uncheckedIcon={false}
       checkedIcon={false}

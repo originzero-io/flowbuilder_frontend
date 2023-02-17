@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import * as themeColor from "constants/ThemeReference";
 
 export const Menu = styled.div`
   background: rgb(189, 195, 199);
@@ -20,6 +19,6 @@ export const MenuItem = styled.div`
   padding: 6px;
   &:hover {
     transform: scale(1.1);
-    background: ${themeColor.HOVER_COLOR};
+    background: ${(props) => props.theme.hoverColor};
   }
 `;

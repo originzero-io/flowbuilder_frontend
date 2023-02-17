@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import * as themeColor from "constants/ThemeReference";
 
 export const Container = styled.div`
   //position: absolute;
@@ -19,10 +18,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(props) =>
-    props.theme === "dark"
-      ? themeColor.DARK_MENU_BACKGROUND
-      : themeColor.LIGHT_MENU_BACKGROUND};
+  background: ${(props) => props.theme.menuBackground};
 `;
 
 export const GroupItem = styled.div`
@@ -33,13 +29,13 @@ export const GroupItem = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
+  color: ${(props) => props.theme.iconColor};
   margin: 4px;
   border-radius: 4px;
   user-select: none;
   font-size: 12px;
   &:hover {
-    background: ${themeColor.HOVER_COLOR};
+    background: ${(props) => props.theme.hoverColor};
   }
 `;
 export const ColorBox = styled.div`
@@ -60,7 +56,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
+  color: ${(props) => props.theme.iconColor};
   width: 100%;
 `;
 export const Title = styled.div`
@@ -90,7 +86,7 @@ export const Input = styled.input`
   background-color: transparent;
   border: 1px solid #636e72;
   user-select: none;
-  color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
+  color: ${(props) => props.theme.iconColor};
   font-size: 11px;
   &:focus {
     box-shadow: 0px 0px 44px -4px rgba(0, 0, 0, 0.75);

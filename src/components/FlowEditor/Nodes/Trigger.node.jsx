@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useActiveFlow from "hooks/useActiveFlow";
 import NodeGod from "./shared/NodeGod";
-import NodeIOmanager from "./shared/NodeIOManager";
 import { Label } from "./shared/Node.style";
 
 const Trigger = React.memo((self) => {

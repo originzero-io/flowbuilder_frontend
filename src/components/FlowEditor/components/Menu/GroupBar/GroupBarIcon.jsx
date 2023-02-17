@@ -19,8 +19,8 @@ export default function GroupBarIcon({ theme, flowId }) {
     }
   };
   return (
-    <Container onClick={groupBarDisplayHandle} theme={theme}>
-      <GroupIcon width="50px" height="50px" color="whitesmoke" theme={theme} />
+    <Container onClick={groupBarDisplayHandle}>
+      <GroupIcon width="50px" height="50px" theme={theme} color="whitesmoke" />
     </Container>
   );
 }

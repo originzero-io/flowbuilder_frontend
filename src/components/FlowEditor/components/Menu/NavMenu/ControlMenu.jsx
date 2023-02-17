@@ -10,7 +10,6 @@ import {
   deleteAllElements,
 } from "store/reducers/flow/flowElementsSlice";
 import { setRotateAllPath } from "store/reducers/flow/flowGuiSlice";
-import * as themeColor from "constants/ThemeReference";
 import { useStore, useReactFlow } from "reactflow";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
 import { useParams } from "react-router";
@@ -41,12 +40,7 @@ const Menu = styled.div`
   bottom: 10px;
   left: 10px;
   padding: 4px;
-  background: ${(props) =>
-    props.theme === "dark"
-      ? themeColor.DARK_MENU_BACKGROUND
-      : themeColor.LIGHT_MENU_BACKGROUND};
-  color: ${(props) =>
-    props.theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON};
+  background: ${(props) => props.theme.menuBackground};
 `;
 export default function ControlMenu() {
   const { flowGui, flowConfig, flowElements } = useActiveFlow();
@@ -123,7 +117,7 @@ export default function ControlMenu() {
   //   setInteractive(lock);
   // }, [lock]);
   return (
-    <Menu theme={theme}>
+    <Menu>
       <MenuItem
         theme={theme}
         onClick={saveFlow}

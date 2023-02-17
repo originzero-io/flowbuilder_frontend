@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { isNode, useStore, useStoreActions } from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import * as themeColor from "constants/ThemeReference";
+import themeColor from "constants/ThemeReference";
 import { createGroup } from "store/reducers/flow/flowGroupsSlice";
 import useActiveFlow from "hooks/useActiveFlow";
 import useAuth from "hooks/useAuth";
@@ -57,23 +56,19 @@ const NewGroupForm = ({ theme }) => {
   };
   return (
     <AddGroupWrapper onSubmit={addNewGroup}>
-      <Header theme={theme}>
+      <Header>
         <IconWrapper onClick={() => setFormOpen(!formOpen)}>
           {formOpen === true ? (
             <CancelIcon
               width="25px"
               height="25px"
-              color={
-                theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-              }
+              color={themeColor[theme].iconColor}
             />
           ) : (
             <AddIcon
               width="25px"
               height="25px"
-              color={
-                theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-              }
+              color={themeColor[theme].iconColor}
             />
           )}
         </IconWrapper>
@@ -89,7 +84,6 @@ const NewGroupForm = ({ theme }) => {
       {formOpen && (
         <InputWrapper>
           <Input
-            theme={theme}
             placeholder="Add Group Name"
             required
             onChange={groupHandle}
@@ -109,14 +103,12 @@ const NewGroupForm = ({ theme }) => {
             <SubmitIcon
               width="22px"
               height="22px"
-              color={
-                theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-              }
+              color={themeColor[theme].iconColor}
             />
           </Submit>
         </InputWrapper>
       )}
-      <HorizontalDivider theme={theme} />
+      <HorizontalDivider />
     </AddGroupWrapper>
   );
 };

@@ -2,14 +2,8 @@ import React, { useCallback, useState } from "react";
 import { useReactFlow, useStore, useStoreActions } from "reactflow";
 import { BiBrain } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Button,
-  ButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-} from "reactstrap";
-import styled from "styled-components";
-import * as themeColor from "constants/ThemeReference";
+import { Button } from "reactstrap";
+import themeColor from "constants/ThemeReference";
 import * as tooltip from "constants/TooltipReference";
 import { logOut } from "store/reducers/authSlice";
 import { changeEdgeType } from "store/reducers/flow/flowElementsSlice";
@@ -154,7 +148,7 @@ export default function ConfigurationMenu() {
   };
 
   return (
-    <Menu theme={theme}>
+    <Menu>
       <DropdownWrapper tabIndex="1">
         <MenuItem>
           <Button
@@ -171,7 +165,7 @@ export default function ConfigurationMenu() {
             <div onClick={debugFlow}>Debug</div>
           </Button>
         </MenuItem>
-        <DropdownList theme={theme}>
+        <DropdownList>
           <DropdownItem>
             <div>This PC</div>
           </DropdownItem>
@@ -195,38 +189,33 @@ export default function ConfigurationMenu() {
         <MenuItem>
           <ShareIcon width="25px" height="25px" theme={theme} />
         </MenuItem>
-        <DropdownList theme={theme}>
+        <DropdownList>
           <DropdownItem>
             <FileInput onChange={fileUploadHandle} label="Import Flow" />
           </DropdownItem>
           <DropdownItem onClick={downloadFlowHandle}>Export Flow</DropdownItem>
         </DropdownList>
       </DropdownWrapper>
-      <VerticalDivider theme={theme} />
+      <VerticalDivider />
 
       <MenuItem data-tip="Settings" data-for={tooltip.SETTINGS}>
-        <TuneIcon
-          color={
-            theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-          }
-        />
+        <TuneIcon color={themeColor[theme].iconColor} />
       </MenuItem>
-      <VerticalDivider theme={theme} />
+      <VerticalDivider />
 
       <MenuItem data-tip="Learn" data-for={tooltip.LEARN}>
         <BiBrain
           style={{
             fontSize: "25px",
-            color:
-              theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON,
+            color: themeColor[theme].iconColor,
           }}
         />
       </MenuItem>
       <DropdownWrapper tabIndex="1">
-        <Circle theme={theme}>
+        <Circle>
           <Avatar avatar={auth.avatar} />
         </Circle>
-        <DropdownList theme={theme} align="right">
+        <DropdownList align="right">
           <DropdownItem>
             Dark Theme
             <SwitchButton checked={active.theme} onChange={changeTheme} />

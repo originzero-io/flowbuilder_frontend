@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import * as themeColor from "constants/ThemeReference";
+import theme from "constants/ThemeReference";
 import React from "react";
 
 export function TriggerIcon({ width, height, enable }) {
@@ -18,17 +18,17 @@ export function TriggerIcon({ width, height, enable }) {
       <path
         d="M68.51,225.44H49a22.36,22.36,0,0,1-16.5-6.51q-6.53-6.51-6.52-16.51V139.19L7.08,121.67v-3.25L25.94,101V44.86q0-10,6.52-16.51A22.36,22.36,0,0,1,49,21.84H68.51V35.42c-1,0-2.72-.05-5.23-.16s-4.43-.17-5.78-.17q-15.84,0-15.83,11.68V98.88a16.83,16.83,0,0,1-5.51,12.35q-5.73,4.38-11.34,8.87L36.16,129q5.51,5.4,5.51,12.25v59.4q0,11.56,15.83,11.57c1.35,0,3.27-.05,5.78-.17s4.25-.16,5.23-.16Z"
         transform="translate(-7.08 -21.84)"
-        fill={themeColor.NODE_ICON.primary}
+        fill={theme.dark.nodeIconBackground}
       />
       <path
         d="M158.9,197.59H143.74l-18.42-43.23-18.65,43.23H92v-.45l25.5-55.7L93.54,88.32H108.7l16.84,40.09,17.3-40.09h14.48v.45L133.4,141Z"
         transform="translate(-7.08 -21.84)"
-        fill={themeColor.NODE_ICON.primary}
+        fill={theme.dark.nodeIconBackground}
       />
       <path
         d="M243.79,121.67l-18.87,17.52v63.23a22.46,22.46,0,0,1-23,23H182.35V211.86c1,0,2.72,0,5.23.16s4.43.17,5.78.17q15.94,0,15.95-11.57v-59.4a16.73,16.73,0,0,1,5.5-12.25q5.61-4.48,11.23-8.87-5.61-4.48-11.23-8.87a16.81,16.81,0,0,1-5.5-12.35V46.77q0-11.69-15.95-11.68c-1.35,0-3.28,0-5.78.17s-4.25.16-5.23.16V21.84H201.9a22.46,22.46,0,0,1,23,23V101l18.87,17.41Z"
         transform="translate(-7.08 -21.84)"
-        fill={themeColor.NODE_ICON.primary}
+        fill={theme.dark.nodeIconBackground}
       />
     </svg>
   );
@@ -49,7 +49,7 @@ export function NotificationIcon({ width, height, enable }) {
         d="M32,151s-2-21,13-29M31.91,110.5C11.82,121,13.38,151,13.38,151m205.17-.31s2-21-13-29m31.62,29s1.56-30-18.53-40.5M95,202s29.25,52,63.12,0M115,16V32m0,1c-10,3-44,21-44,45,0,20.26-3.27,57.53-4.52,71a15.92,15.92,0,0,1-3.88,9A249.49,249.49,0,0,1,45,176.12C32.05,188.2,41.92,189,42,189H210c-2.47,0,0,0,0,0,.39-.26,7.79-5.69-.5-13.25C201,168,197,167,189,156c-7.83-10.77-6.08-50.31-6-51.95A.06.06,0,0,0,183,104c-1.86-.22-53.55-7.08-34-66.91,0-.08,0-.09,0-.1L136,33a.07.07,0,0,1,0-.06L135.63,16a.05.05,0,0,0,0-.05C127.23,6,115,16,115,16"
         transform="translate(-8.6 -6.81)"
         fill="none"
-        stroke={themeColor.NODE_ICON.primary}
+        stroke={theme.dark.nodeIconBackground}
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="9.5px"
@@ -58,7 +58,7 @@ export function NotificationIcon({ width, height, enable }) {
       <path
         d="M194.6,42.27h-7.91V34.21h7.91Zm-.07,39.48h-7.77V47.23h7.77Z"
         transform="translate(-8.6 -6.81)"
-        fill={themeColor.NODE_ICON.primary}
+        fill={theme.dark.nodeIconBackground}
       />
     </svg>
   );
@@ -79,7 +79,7 @@ export function CombineIcon({ width, height, enable }) {
         d="M192.52,124.35l46.75.14m0-.25-22-23.5M217.4,148l22-23.5m-119-33.3a44.25,44.25,0,1,0,27.28-9.41,44.17,44.17,0,0,0-27.28,9.41m7.78,34.84a19.25,19.25,0,1,1,19.25,19.25A19.25,19.25,0,0,1,128.14,126.06Zm-115.22-78c0-.42,0-.83,0-1.25a24.21,24.21,0,1,1,0,1.25m51.4,78.11a24.25,24.25,0,1,1-24.25-24.25,24.25,24.25,0,0,1,24.25,24.25m-47.5,78a24.25,24.25,0,1,1,24.25,24.25A24.25,24.25,0,0,1,16.82,204.17Zm86.57-78.11H64.32m55.91,34.74A207.66,207.66,0,0,0,95.5,189.74c-9.07,13.06-22.15,14.87-30.18,14.53M63.64,47.82C72,47.6,85.17,49.58,94.37,62.23a209.72,209.72,0,0,0,26,29"
         transform="translate(-8.14 -17.81)"
         fill="none"
-        stroke={themeColor.NODE_ICON.primary}
+        stroke={theme.dark.nodeIconBackground}
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="9.5px"
@@ -103,7 +103,7 @@ export function SplitIcon({ width, height, enable }) {
         d="M84.88,159.33a44.25,44.25,0,1,1,17-34.84,44,44,0,0,1-17,34.84m-27-54.09A19.25,19.25,0,1,0,77.1,124.49,19.25,19.25,0,0,0,57.85,105.24Zm134.47,97.25A24.25,24.25,0,1,0,168.1,228c13.39,0,24.9-11,24.25-24.25,0-.42,0-.83,0-1.25m-51.41-78.11a24.25,24.25,0,1,0,24.25-24.25,24.25,24.25,0,0,0-24.25,24.25M164.16,22.13a24.25,24.25,0,1,0,24.25,24.25A24.25,24.25,0,0,0,164.16,22.13ZM140.91,124.49,102,125m37.92-78.72c-8-.34-21.11,1.47-30.18,14.53A207.66,207.66,0,0,1,85,89.75m-.13,69.58a209.72,209.72,0,0,1,26,29c9.2,12.65,22.37,14.63,30.73,14.41M190.9,46.37l46.75.13m0-.25-22-23.5M215.78,70l22-23.5m-.13,79-46.75-.13m46.75-.12-22-23.5m.13,47.28,22-23.5M192.9,203.37l46.75.13m0-.25-22-23.5m.13,47.28,22-23.5"
         transform="translate(-8.6 -17.38)"
         fill="none"
-        stroke={themeColor.NODE_ICON.primary}
+        stroke={theme.dark.nodeIconBackground}
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="9.5px"
@@ -127,7 +127,7 @@ export function CalculateIcon({ width, height, enable }) {
         <path
           d="M107,51a13.33,13.33,0,0,1-1.63-.06l-.69-.07-.59-.1a7.52,7.52,0,0,1-1.93-.57,4.43,4.43,0,0,1-1.29-.9l-1.1-1c-1.47-1.36-2.85-2.79-4.38-4.15a12.6,12.6,0,0,0-5.3-3,11.28,11.28,0,0,0-5.91.4c-3.81,1.22-6.93,4.31-9.22,8a46,46,0,0,0-5.14,12.26c-2.38,8.76-3.21,18-3.55,27.26-.14,4.64-.15,9.28-.08,13.93s.26,9.31.5,14a182,182,0,0,1-.44,29c-.2,2.43-.58,4.86-.91,7.28s-.84,4.85-1.39,7.26a100.46,100.46,0,0,1-4.17,14.3A68.3,68.3,0,0,1,53,188.37c-2.89,4.26-6.48,8.36-11.45,11a18.45,18.45,0,0,1-8.3,2.23,8.83,8.83,0,0,1-1.15,0,9.45,9.45,0,0,1-1.18-.07,10.42,10.42,0,0,1-1.2-.16c-.41-.07-.83-.16-1.16-.24l-1.06-.25-1-.29c-.69-.19-1.3-.41-2-.63a18.14,18.14,0,0,1-6.6-3.95,8.37,8.37,0,0,1-2.23-3.17A9.45,9.45,0,0,1,15,188a12.13,12.13,0,0,1,4.77-.24A8.92,8.92,0,0,1,23.15,189a29.47,29.47,0,0,1,5.27,3.87,19.68,19.68,0,0,0,2.41,1.81,3.73,3.73,0,0,0,.54.29,2.24,2.24,0,0,0,.53.2,4,4,0,0,0,1.22.19,10.61,10.61,0,0,0,5.21-1.66c3.39-2,6-5.5,8.09-9.24A55.83,55.83,0,0,0,51,172a113.53,113.53,0,0,0,2.34-13.35c.57-4.52.91-9.09,1.19-13.67s.43-9.2.59-13.83l.13-7,.05-7q0-7.23.4-14.46c.26-4.83.67-9.66,1.28-14.47a132.78,132.78,0,0,1,6.42-28.6,55.2,55.2,0,0,1,6.82-13.43,31.47,31.47,0,0,1,5.35-5.73A20.93,20.93,0,0,1,82.7,36.7a21.63,21.63,0,0,1,8.16-.55,31.55,31.55,0,0,1,8,1.75A17.05,17.05,0,0,1,107,44a5.13,5.13,0,0,1,.93,1.87,5.49,5.49,0,0,1,.11,2.34A6.85,6.85,0,0,1,107,51Z"
           transform="translate(-4.5 -20.5)"
-          fill={themeColor.NODE_ICON.primary}
+          fill={theme.dark.nodeIconBackground}
         />
         <path
           d="M50.5,189.5"
@@ -152,7 +152,7 @@ export function CalculateIcon({ width, height, enable }) {
           d="M88.2,118.5"
           transform="translate(-4.5 -20.5)"
           fill="none"
-          stroke={themeColor.NODE_ICON.primary}
+          stroke={theme.dark.nodeIconBackground}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="10px"
@@ -160,7 +160,7 @@ export function CalculateIcon({ width, height, enable }) {
         <polyline
           points="71.7 105 89 105 107 156 136 61 223.84 61"
           fill="none"
-          stroke={themeColor.NODE_ICON.primary}
+          stroke={theme.dark.nodeIconBackground}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="10px"
@@ -169,7 +169,7 @@ export function CalculateIcon({ width, height, enable }) {
           d="M166,105s-15-2-17,15,6,45-11,43"
           transform="translate(-4.5 -20.5)"
           fill="none"
-          stroke={themeColor.NODE_ICON.primary}
+          stroke={theme.dark.nodeIconBackground}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="10px"
@@ -180,7 +180,7 @@ export function CalculateIcon({ width, height, enable }) {
           x2="154.66"
           y2="117.66"
           fill="none"
-          stroke={themeColor.NODE_ICON.primary}
+          stroke={theme.dark.nodeIconBackground}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="10px"
@@ -189,7 +189,7 @@ export function CalculateIcon({ width, height, enable }) {
           d="M184,111s-27,20-1,51"
           transform="translate(-4.5 -20.5)"
           fill="none"
-          stroke={themeColor.NODE_ICON.primary}
+          stroke={theme.dark.nodeIconBackground}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="10px"
@@ -198,7 +198,7 @@ export function CalculateIcon({ width, height, enable }) {
           d="M216.2,111.39s27,20,1,51"
           transform="translate(-4.5 -20.5)"
           fill="none"
-          stroke={themeColor.NODE_ICON.primary}
+          stroke={theme.dark.nodeIconBackground}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="10px"
@@ -209,7 +209,7 @@ export function CalculateIcon({ width, height, enable }) {
           x2="207.5"
           y2="127.5"
           fill="none"
-          stroke={themeColor.NODE_ICON.primary}
+          stroke={theme.dark.nodeIconBackground}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="8px"
@@ -220,7 +220,7 @@ export function CalculateIcon({ width, height, enable }) {
           x2="184.5"
           y2="127.48"
           fill="none"
-          stroke={themeColor.NODE_ICON.primary}
+          stroke={theme.dark.nodeIconBackground}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="8px"
@@ -231,7 +231,7 @@ export function CalculateIcon({ width, height, enable }) {
           x2="171"
           y2="73.06"
           fill="none"
-          stroke={themeColor.NODE_ICON.primary}
+          stroke={theme.dark.nodeIconBackground}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="5px"

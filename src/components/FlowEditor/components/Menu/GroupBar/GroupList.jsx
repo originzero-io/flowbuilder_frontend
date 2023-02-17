@@ -47,7 +47,6 @@ const GroupList = ({ theme, flowId }) => {
         ? flowGroups.map((group) => (
             <GroupItem
               key={group._id}
-              theme={theme}
               onMouseEnter={() => setHover(group._id)}
               onMouseLeave={() => setHover(null)}
               onClick={() => groupItemClickHandle(group)}
@@ -56,7 +55,6 @@ const GroupList = ({ theme, flowId }) => {
                 <EditForm
                   editableItem={editableItem}
                   setEditableItem={setEditableItem}
-                  theme={theme}
                 />
               ) : (
                 <>
@@ -71,12 +69,8 @@ const GroupList = ({ theme, flowId }) => {
                     width="25px"
                     height="25px"
                     onClick={() => editIconClickHandle(group)}
-                    theme={theme}
                   />
-                  <DeleteIcon
-                    theme={theme}
-                    onClick={() => deleteIconClickHandle(group)}
-                  />
+                  <DeleteIcon onClick={() => deleteIconClickHandle(group)} />
                 </>
               )}
             </GroupItem>

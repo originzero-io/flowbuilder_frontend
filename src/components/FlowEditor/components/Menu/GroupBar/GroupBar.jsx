@@ -20,14 +20,14 @@ const Wrapper = styled.div`
 `;
 const GroupBar = () => {
   const { flowGui } = useActiveFlow();
-  const { theme, groupBarDisplay } = flowGui;
+  const { groupBarDisplay, theme } = flowGui;
   const { flowId } = useParams();
   return (
     <Wrapper visible={groupBarDisplay}>
-      <GroupBarIcon theme={theme} flowId={flowId} />
-      <GroupBarWrapper visible={groupBarDisplay} theme={theme}>
+      <GroupBarIcon flowId={flowId} theme={theme} />
+      <GroupBarWrapper visible={groupBarDisplay}>
         <NewGroupForm theme={theme} />
-        <GroupList theme={theme} flowId={flowId} />
+        <GroupList flowId={flowId} theme={theme} />
       </GroupBarWrapper>
     </Wrapper>
   );

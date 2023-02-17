@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import * as themeColor from "constants/ThemeReference";
+import themeColor from "constants/ThemeReference";
 import { useSelector, useDispatch } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { addNodeToFavorites, setNodeList } from "store/reducers/nodeListSlice";
@@ -40,12 +40,11 @@ const PanelContextMenu = () => {
   return (
     <>
       {panelMenu.state && (
-        <Container x={panelMenu.x} y={panelMenu.y} theme={theme}>
+        <Container x={panelMenu.x} y={panelMenu.y}>
           <Tabs
             selectedTabClassName="selected-tab"
             style={{
-              color:
-                theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON,
+              color: themeColor[theme].iconColor,
             }}
           >
             <TabList style={{ position: "sticky", top: "0", zIndex: "6" }}>

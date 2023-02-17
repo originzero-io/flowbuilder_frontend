@@ -20,11 +20,11 @@ import {
   setPanelContextMenu,
 } from "store/reducers/menuSlice";
 import { setNodeList } from "store/reducers/nodeListSlice";
-import * as themeColor from "constants/ThemeReference";
 import PropTypes from "prop-types";
 import useActiveFlow from "hooks/useActiveFlow";
 import notification from "utils/notificationHelper";
 import { isConnectionCyclic } from "components/FlowEditor/helpers/flowHelper";
+import themeColor from "constants/ThemeReference";
 import {
   openElementContextMenu,
   openMultiSelectionContextMenu,
@@ -61,8 +61,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   );
 
   const flowStyle = {
-    background:
-      theme === "light" ? themeColor.LIGHT_PANE : themeColor.DARK_PANE,
+    background: themeColor[theme].paneBackground,
   };
 
   const onConnect = useCallback(
@@ -119,14 +118,14 @@ export default function FlowEditor({ reactFlowWrapper }) {
     event.preventDefault();
     const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
     const type = event.dataTransfer.getData("application/reactflow");
-    const position = reactFlowInstance.project({
+    const initialPosition = reactFlowInstance.project({
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top,
     });
 
     console.log("type: ", type);
     if (!(type === "")) {
-      const newNode = createNode(type, position, rotateAllPath);
+      const newNode = createNode(type, initialPosition, rotateAllPath);
       dispatch(addNewNode(newNode));
       updateRecentStatus(type);
     }
@@ -184,7 +183,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
       connectionLineStyle={{ stroke: "rgb(22,139,63)", strokeWidth: "2px" }}
       attributionPosition="bottom-left"
     >
-      <FlowComponents theme={theme} miniMapDisplay={miniMapDisplay} />
+      <FlowComponents miniMapDisplay={miniMapDisplay} />
     </ReactFlow>
   );
 }

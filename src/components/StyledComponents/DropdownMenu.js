@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as themeColor from "constants/ThemeReference";
+import theme from "constants/ThemeReference";
 
 export const DropdownWrapper = styled.div`
   position: relative;
@@ -13,9 +13,8 @@ export const DropdownList = styled.ul`
   display: none;
   flex-direction: column;
   min-width: 120px;
-  background: ${(props) =>
-    props.theme === "dark" ? "rgb(53, 59, 72)" : "rgb(189, 195, 199)"};
-  color: ${(props) => (props.theme === "dark" ? "#dcdcdc" : "black")};
+  background: ${(props) => props.theme.menuBackground};
+  color: ${(props) => props.theme.iconColor};
   right: ${(props) => (props.align === "right" ? "-50px" : "none")};
   left: ${(props) => (props.align === "right" ? "none" : "0px")};
   list-style: none;
@@ -34,6 +33,6 @@ export const DropdownItem = styled.li`
   justify-content: space-between;
   align-items: center;
   &:hover {
-    background: ${themeColor.HOVER_COLOR};
+    background: ${(props) => props.theme.hoverColor};
   }
 `;

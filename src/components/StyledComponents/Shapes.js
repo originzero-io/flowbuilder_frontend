@@ -8,8 +8,7 @@ export const Circle = styled.button`
   border-radius: 50%;
   position: absolute;
   top: -29px;
-  border: 7px solid
-    ${(props) => (props.theme === "dark" ? "#232323" : "#d7d7d7")};
+  border: 7px solid ${(props) => props.theme.paneBackground};
   text-align: center;
   cursor: pointer;
   display: flex;

@@ -3,10 +3,6 @@ import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { elementNamespace } from "SocketConnections";
-import * as themeColor from "constants/ThemeReference";
-import FlowService from "services/configurationService/flowService";
-import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
-import useWorkspace from "hooks/useWorkspace";
 import useActiveFlow from "hooks/useActiveFlow";
 import { Logo } from "components/Shared/icons";
 import { useReactFlow } from "reactflow";
@@ -17,26 +13,19 @@ import { MenuIndex, MenuItem } from "./NavMenu.style";
 const Menu = styled(MenuIndex)`
   top: 10px;
   left: 50px;
-  background: ${(props) =>
-    props.theme === "dark"
-      ? themeColor.DARK_MENU_BACKGROUND
-      : themeColor.LIGHT_MENU_BACKGROUND};
+  background: ${(props) => props.theme.menuBackground};
   border-radius: 6px;
   width: 400px;
 `;
 const Circle = styled.div`
   width: 55px;
   height: 55px;
-  background: ${(props) =>
-    props.theme === "dark"
-      ? "rgba(53, 59, 72,0.5)"
-      : "rgba(189, 195, 199,0.5)"};
+  background: ${(props) => props.theme.menuBackground};
   border-radius: 50%;
   position: absolute;
   top: -8px;
   left: -45px;
-  border: 7px solid
-    ${(props) => (props.theme === "dark" ? "#232323" : "#d7d7d7")};
+  border: 7px solid ${(props) => props.theme.paneBackground};
   text-align: center;
   cursor: pointer;
   display: flex;
@@ -48,9 +37,7 @@ const Circle = styled.div`
 `;
 const MainMenu = () => {
   const { flowGui, flowConfig } = useActiveFlow();
-  const { activeWorkspace } = useWorkspace();
   const { theme } = flowGui;
-  const { flowId } = useParams();
   const dispatch = useDispatch();
   const reactFlowInstance = useReactFlow();
   const homeClickHandle = async () => {
@@ -94,24 +81,18 @@ const MainMenu = () => {
     }).then(downloadImage);
   };
   return (
-    <Menu theme={theme}>
-      <Circle theme={theme}>
+    <Menu>
+      <Circle>
         <Logo theme={theme} />
       </Circle>
       <div onClick={homeClickHandle}>
         <Link to="/panel/projects">
-          <MenuItem theme={theme}>Home</MenuItem>
+          <MenuItem>Home</MenuItem>
         </Link>
       </div>
-      <MenuItem theme={theme} onClick={nameClick}>
-        {flowConfig.name}
-      </MenuItem>
-      <MenuItem theme={theme} onClick={() => dispatch(addSubFlow())}>
-        Add sub flow
-      </MenuItem>
-      <MenuItem theme={theme} onClick={downloadPageAsImage}>
-        Export as Image
-      </MenuItem>
+      <MenuItem onClick={nameClick}>{flowConfig.name}</MenuItem>
+      <MenuItem onClick={() => dispatch(addSubFlow())}>Add sub flow</MenuItem>
+      <MenuItem onClick={downloadPageAsImage}>Export as Image</MenuItem>
     </Menu>
   );
 };

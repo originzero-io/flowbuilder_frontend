@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { updateGroup } from "store/reducers/flow/flowGroupsSlice";
 import { SubmitIcon } from "components/Shared/icons";
-import * as themeColor from "constants/ThemeReference";
+import themeColor from "constants/ThemeReference";
 import PropTypes from "prop-types";
 import { ColorFlag, Submit } from "./GroupBar.style";
 
@@ -21,7 +21,7 @@ const Input = styled.input`
   border: 1px solid #636e72;
   border-radius: 2px;
   user-select: none;
-  color: ${(props) => (props.theme === "dark" ? "whitesmoke" : "black")};
+  color: ${(props) => props.theme.iconColor};
 `;
 
 const propTypes = {
@@ -49,7 +49,6 @@ export default function EditForm({ editableItem, setEditableItem, theme }) {
   return (
     <Form onSubmit={onSubmitHandle}>
       <Input
-        theme={theme}
         placeholder="edit name"
         required
         onChange={updateChangeHandle}
@@ -67,9 +66,7 @@ export default function EditForm({ editableItem, setEditableItem, theme }) {
         <SubmitIcon
           width="22px"
           height="22px"
-          color={
-            theme === "dark" ? themeColor.DARK_ICON : themeColor.LIGHT_ICON
-          }
+          color={themeColor[theme].iconColor}
         />
       </Submit>
     </Form>

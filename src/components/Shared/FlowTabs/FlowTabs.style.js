@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import * as themeColor from "../../../config/ThemeReference";
 
 export const Container = styled.div`
   display: flex;
@@ -20,12 +19,12 @@ export const TabItem = styled.button`
   margin-right: 5px;
   padding: 2px;
   text-align: center;
-  background: ${({ selected }) =>
-    selected ? themeColor.HOVER_COLOR : "rgba(189, 195, 199,0.6)"};
+  background: ${(props) =>
+    props.selected ? props.theme.hoverColor : "rgba(189, 195, 199,0.6)"};
   position: relative;
   &:hover {
     transform: scale(1.1);
-    background: ${themeColor.HOVER_COLOR};
+    background: ${(props) => props.theme.hoverColor};
   }
 `;
 export const AddButton = styled.div`
@@ -42,7 +41,7 @@ export const AddButton = styled.div`
   text-align: center;
   &:hover {
     transform: scale(1.1);
-    background: ${themeColor.HOVER_COLOR};
+    background: ${(props) => props.theme.hoverColor};
   }
 `;
 export const CloseButton = styled.div`

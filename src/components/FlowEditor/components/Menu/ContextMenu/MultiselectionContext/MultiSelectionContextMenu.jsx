@@ -12,8 +12,6 @@ import { Menu, MenuItem } from "../ElementContext/ElementContextMenu.style";
 
 export default function MultiSelectionContextMenu() {
   const { multiSelectionMenu } = useSelector((state) => state.menus);
-  const { flowGui } = useActiveFlow();
-  const { theme } = flowGui;
   const dispatch = useDispatch();
   const deleteItems = () => {
     if (confirm("Are you sure?")) {
@@ -47,7 +45,7 @@ export default function MultiSelectionContextMenu() {
   return (
     <div>
       {multiSelectionMenu.state && (
-        <Menu x={multiSelectionMenu.x} y={multiSelectionMenu.y} theme={theme}>
+        <Menu x={multiSelectionMenu.x} y={multiSelectionMenu.y}>
           <MenuItem onClick={rotateHandle}>Rotate</MenuItem>
           <MenuItem onClick={disableHandle}>Disable</MenuItem>
           <MenuItem onClick={groupHandle}>
