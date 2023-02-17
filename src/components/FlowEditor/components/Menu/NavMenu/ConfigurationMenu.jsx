@@ -135,7 +135,7 @@ export default function ConfigurationMenu() {
   const debugFlow = () => {
     const elements = reactFlowInstance.toObject();
     const triggerNodes = elements.nodes.filter(
-      (node) => node.type === "Trigger",
+      (node) => node.type === "TRIGGER",
     );
     if (triggerNodes.length > 0) {
       flowExecutorNamespace.emit(
