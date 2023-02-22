@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { expandNode } from "store/reducers/flow/flowElementsSlice";
 import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
-import useActiveFlow from "hooks/useActiveFlow";
+import useActiveFlow from "utils/hooks/useActiveFlow";
 import { getIncomers, getOutgoers } from "reactflow";
 import GroupMenu from "../../../components/Menu/NodeGroupMenu/NodeGroupMenu";
 import { Content, FeatureIconsWrapper, Header, Label } from "../Node.style";

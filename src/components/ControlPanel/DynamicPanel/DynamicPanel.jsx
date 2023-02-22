@@ -8,7 +8,7 @@ import {
   useParams,
 } from "react-router-dom";
 import styled from "styled-components";
-import useWorkspace from "hooks/useWorkspace";
+import useWorkspace from "utils/hooks/useWorkspace";
 import {
   LearnScreen,
   NotesScreen,

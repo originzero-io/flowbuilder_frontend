@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input, Label, Toast } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import { createUser } from "store/reducers/userSlice";
-import notification from "utils/notificationHelper";
+import notification from "utils/ui/notificationHelper";
 
 export default function AddUserForm() {
   const dispatch = useDispatch();

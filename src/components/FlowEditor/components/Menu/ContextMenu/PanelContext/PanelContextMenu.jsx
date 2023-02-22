@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import themeColor from "constants/ThemeReference";
+import themeColor from "components/Shared/ThemeReference";
 import { useSelector, useDispatch } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { addNodeToFavorites, setNodeList } from "store/reducers/nodeListSlice";
 import { addNewNode } from "store/reducers/flow/flowElementsSlice";
-import useActiveFlow from "hooks/useActiveFlow";
+import useActiveFlow from "utils/hooks/useActiveFlow";
 import { useReactFlow } from "reactflow";
 import AllNodes from "./AllNodes";
 import FavoriteNodes from "./FavoriteNodes";

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
-import ReactTooltip from "react-tooltip";
 import { setModal } from "store/reducers/componentSlice";
 import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
 import { getNotesByWorkspace } from "store/reducers/noteSlice";
@@ -13,9 +12,9 @@ import {
   getMyWorkspaces,
   setActiveWorkspace,
 } from "store/reducers/workspaceSlice";
-import useAuth from "hooks/useAuth";
-import useDidMountEffect from "hooks/useDidMountEffect";
-import useWorkspace from "hooks/useWorkspace";
+import useAuth from "utils/hooks/useAuth";
+import useDidMountEffect from "utils/hooks/useDidMountEffect";
+import useWorkspace from "utils/hooks/useWorkspace";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
 import AddWorkspaceForm from "./AddWorkspaceForm";
 import {
@@ -23,6 +22,7 @@ import {
   WorkspaceItem,
   WorkspaceItemWrapper,
 } from "./WorkspacePanel.style";
+import Tooltip from "components/Shared/Tooltip/Tooltip";
 
 const WorkspacePanel = () => {
   const { workspaces, activeWorkspace } = useWorkspace();
@@ -68,12 +68,7 @@ const WorkspacePanel = () => {
           >
             {workspace.name.split("")[0].toUpperCase()}
           </WorkspaceItem>
-          <ReactTooltip
-            id={workspace._id}
-            place="right"
-            type="light"
-            effect="solid"
-          />
+          <Tooltip id={workspace._id} place="top" type="light" />
         </WorkspaceItemWrapper>
       ))}
 

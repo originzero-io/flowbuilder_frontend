@@ -1,6 +1,6 @@
-import HTTPService from "./HttpService";
+import HttpClient from "./httpClient";
 
-class AuthService extends HTTPService {
+class AuthService extends HttpClient {
   constructor() {
     super();
     this.service = this.createService("");

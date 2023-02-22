@@ -8,9 +8,9 @@ import { deleteUser, getAllUsers } from "store/reducers/userSlice";
 import { BiEdit } from "react-icons/bi";
 import { VscTrash } from "react-icons/vsc";
 import { FaUserCircle } from "react-icons/fa";
-import Avatar from "components/Shared/Avatar";
-import useUser from "hooks/useUser";
-import notification from "utils/notificationHelper";
+import Avatar from "components/Shared/Avatar/Avatar";
+import useUser from "utils/hooks/useUser";
+import notification from "utils/ui/notificationHelper";
 import EditUserForm from "./EditUserForm";
 import AddUserForm from "./AddUserForm";
 

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import themeColor from "constants/ThemeReference";
+import themeColor from "components/Shared/ThemeReference";
 import { createGroup } from "store/reducers/flow/flowGroupsSlice";
-import useActiveFlow from "hooks/useActiveFlow";
-import useAuth from "hooks/useAuth";
+import useActiveFlow from "utils/hooks/useActiveFlow";
+import useAuth from "utils/hooks/useAuth";
 import {
   AddIcon,
   CancelIcon,

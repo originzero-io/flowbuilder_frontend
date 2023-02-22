@@ -16,9 +16,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import ErrorFallback from "./components/Shared/ErrorFallback";
 import configureAppStore from "./store/configureAppStore";
-import App from "./App";
+import App from "./app/App";
 
-export const store = configureAppStore();
+const store = configureAppStore();
+export default store;
 
 const persistor = persistStore(store);
 

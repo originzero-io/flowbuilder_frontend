@@ -7,9 +7,9 @@ import styled, { ThemeProvider } from "styled-components";
 import FlowEditor from "components/FlowEditor/FlowEditor";
 import { getGroups } from "store/reducers/flow/flowGroupsSlice";
 import { flowExecutorListener } from "services/configurationService/socketListeners";
-import { flowExecutorNamespace } from "SocketConnections";
-import useActiveFlow from "hooks/useActiveFlow";
-import theme from "constants/ThemeReference";
+import { flowExecutorNamespace } from "app/SocketConnections";
+import useActiveFlow from "utils/hooks/useActiveFlow";
+import theme from "components/Shared/ThemeReference";
 
 const FlowWrapper = styled.div`
   height: 100%;

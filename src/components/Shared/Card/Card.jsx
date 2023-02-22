@@ -1,8 +1,8 @@
-import useAuthPermission from "hooks/useAuthPermission";
+import useAuthPermission from "utils/hooks/useAuthPermission";
 import PropTypes from "prop-types";
 import React from "react";
 import { VscTrash } from "react-icons/vsc";
-import { flowNamespace } from "SocketConnections";
+import { flowNamespace } from "app/SocketConnections";
 import {
   CardBody,
   CardContainer,

@@ -1,12 +1,12 @@
 import React from "react";
-import useFlow from "hooks/useFlow";
-import useProject from "hooks/useProject";
-import Panel from "./ProjectsScreen";
+import useFlow from "utils/hooks/useFlow";
+import useProject from "utils/hooks/useProject";
+import ProjectsScreen from "./ProjectsScreen";
 
 export default function FlowsByProjectPanel() {
   const { activeProject } = useProject();
   const flows = useFlow().filter(
     (flow) => flow.project._id === activeProject._id,
   );
-  return <Panel flows={flows} />;
+  return <ProjectsScreen flows={flows} />;
 }

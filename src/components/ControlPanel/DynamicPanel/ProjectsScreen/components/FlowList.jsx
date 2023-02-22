@@ -5,11 +5,11 @@ import PropTypes from "prop-types";
 import Card from "components/Shared/Card/Card";
 import { setCurrentFlowGui } from "store/reducers/flow/flowGuiSlice";
 import { setCurrentFlowConfig } from "store/reducers/flow/flowConfigSlice";
-import { elementNamespace } from "SocketConnections";
-import useAuthPermission from "hooks/useAuthPermission";
+import { elementNamespace } from "app/SocketConnections";
+import useAuthPermission from "utils/hooks/useAuthPermission";
 
 import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
-import useWorkspace from "hooks/useWorkspace";
+import useWorkspace from "utils/hooks/useWorkspace";
 
 const propTypes = {
   flows: PropTypes.oneOfType([PropTypes.array, null]),

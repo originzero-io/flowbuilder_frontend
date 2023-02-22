@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import theme from "constants/ThemeReference";
+import theme from "components/Shared/ThemeReference";
 import React from "react";
 
 export function TriggerIcon({ width, height, enable }) {

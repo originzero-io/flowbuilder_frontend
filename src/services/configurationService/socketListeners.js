@@ -1,4 +1,4 @@
-import notification from "utils/notificationHelper";
+import notification from "utils/ui/notificationHelper";
 import { makeMeOnline } from "store/reducers/authSlice";
 import {
   saveElements,
@@ -27,7 +27,7 @@ import {
 } from "store/reducers/workspaceSlice";
 import { beginTheBar, endTheBar } from "store/reducers/componentSlice";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
-import { store } from "../../index";
+import store from "index";
 
 export const projectListener = (socket) => {
   socket.on("projects:create", (data) => {

@@ -8,9 +8,9 @@ import { MdDevicesOther, MdOutlineAssignmentInd } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import useUser from "hooks/useUser";
-import useUserPermission from "hooks/useUserPermission";
-import useWorkspace from "hooks/useWorkspace";
+import useUser from "utils/hooks/useUser";
+import useUserPermission from "utils/hooks/useUserPermission";
+import useWorkspace from "utils/hooks/useWorkspace";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import {
   setCanDoEverythingPermission,
@@ -24,11 +24,11 @@ import {
 import { Button } from "reactstrap";
 
 import PermissionService from "services/configurationService/permissionService";
-import notification from "utils/notificationHelper";
+import notification from "utils/ui/notificationHelper";
 import { setModal } from "store/reducers/componentSlice";
-import useComponentWillMount from "hooks/useComponentWillMount";
+import useComponentWillMount from "utils/hooks/useComponentWillMount";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
-import useAuth from "hooks/useAuth";
+import useAuth from "utils/hooks/useAuth";
 import { PermissionProvider } from "./context/PermissionContext";
 import TeamPermissions from "./containers/TeamPermissions";
 import ProjectPermissions from "./containers/ProjectPermissions";

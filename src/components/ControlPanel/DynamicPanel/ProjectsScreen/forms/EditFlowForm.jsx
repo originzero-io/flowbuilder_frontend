@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form, Label, FormGroup } from "reactstrap";
-import { flowNamespace } from "SocketConnections";
+import { flowNamespace } from "app/SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
-import useAuth from "hooks/useAuth";
+import useAuth from "utils/hooks/useAuth";
 
 export default function EditFlow({ flow }) {
   const dispatch = useDispatch();

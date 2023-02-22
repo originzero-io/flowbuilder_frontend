@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { HorizontalDivider } from "components/StyledComponents/Divider";
-import * as tooltip from "constants/TooltipReference";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setElements,
@@ -13,10 +12,10 @@ import { setRotateAllPath } from "store/reducers/flow/flowGuiSlice";
 import { useStore, useReactFlow } from "reactflow";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
 import { useParams } from "react-router";
-import { elementNamespace } from "SocketConnections";
-import useActiveFlow from "hooks/useActiveFlow";
+import { elementNamespace } from "app/SocketConnections";
+import useActiveFlow from "utils/hooks/useActiveFlow";
 import FlowService from "services/configurationService/flowService";
-import notification from "utils/notificationHelper";
+import notification from "utils/ui/notificationHelper";
 import {
   RedoIcon,
   UndoIcon,
@@ -31,6 +30,7 @@ import {
   ExpandAllIcon,
 } from "./Icons";
 import { MenuItem } from "./NavMenu.style";
+import Tooltip from "components/Shared/Tooltip/Tooltip";
 
 const Menu = styled.div`
   position: absolute;
@@ -122,10 +122,11 @@ export default function ControlMenu() {
         theme={theme}
         onClick={saveFlow}
         data-tip="Save"
-        data-for={tooltip.SAVE}
+        data-for="save"
       >
         <SaveIcon theme={theme} />
       </MenuItem>
+      <Tooltip id="save" place="right" />
       <HorizontalDivider theme={theme} />
       {/* <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO} onClick={undoHandle}>
         <UndoIcon theme={theme} disable={!canUndo} />
@@ -138,58 +139,64 @@ export default function ControlMenu() {
         theme={theme}
         onClick={closeAllNodes}
         data-tip="Close All Nodes"
-        data-for={tooltip.CLOSE_ALL_NODES}
+        data-for="close_nodes"
       >
         <ExpandAllIcon theme={theme} />
       </MenuItem>
+      <Tooltip id="close_nodes" place="right" />
       <MenuItem
         theme={theme}
         onClick={rotateAllHandle}
         data-tip="Rotate All"
-        data-for={tooltip.ROTATE_ALL}
+        data-for="rotate_all"
       >
         <RotateAllIcon theme={theme} />
       </MenuItem>
+      <Tooltip id="rotate_all" place="right" />
 
       <MenuItem
         theme={theme}
         onClick={deleteAllNodes}
         data-tip="Delete All"
-        data-for={tooltip.DELETE_ALL}
+        data-for="delete_all"
       >
         <DeleteIcon theme={theme} />
       </MenuItem>
+      <Tooltip id="delete_all" place="right" />
 
       <HorizontalDivider theme={theme} />
       <MenuItem
         theme={theme}
         onClick={zoomInHandle}
         data-tip="Zoom in"
-        data-for={tooltip.ZOOM_IN}
+        data-for="zoom_in"
       >
         <ZoomInIcon theme={theme} />
       </MenuItem>
+      <Tooltip id="zoom_in" place="right" />
       <MenuItem
         theme={theme}
         onClick={zoomOutHandle}
         data-tip="Zoom out"
-        data-for={tooltip.ZOOM_OUT}
+        data-for="zoom_out"
       >
         <ZoomOutIcon theme={theme} />
       </MenuItem>
+      <Tooltip id="zoom_out" place="right" />
       <MenuItem
         theme={theme}
         onClick={fitViewHandle}
         data-tip="Fit View"
-        data-for={tooltip.FIT_VIEW}
+        data-for="fit_view"
       >
         <FitViewIcon theme={theme} />
       </MenuItem>
+      <Tooltip id="fit_view" place="right" />
       <MenuItem
         theme={theme}
         onClick={lockHandle}
         data-tip="Lock Screen"
-        data-for={tooltip.LOCK_SCREEN}
+        data-for="lock_screen"
       >
         {lock === true ? (
           <UnLockIcon theme={theme} />
@@ -197,6 +204,7 @@ export default function ControlMenu() {
           <LockIcon theme={theme} />
         )}
       </MenuItem>
+      <Tooltip id="lock_screen" place="right" />
     </Menu>
   );
 }

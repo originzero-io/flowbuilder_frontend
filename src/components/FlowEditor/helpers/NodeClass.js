@@ -4,7 +4,7 @@ import {
   // getConnectedEdges,
   isEdge,
 } from "reactflow";
-import notification from "utils/notificationHelper";
+import notification from "utils/ui/notificationHelper";
 import { setElements } from "store/reducers/flow/flowElementsSlice";
 
 export default class Node {

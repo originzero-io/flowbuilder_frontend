@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { noteNamespace } from "SocketConnections";
+import { noteNamespace } from "app/SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
-import useAuth from "hooks/useAuth";
-import useWorkspace from "hooks/useWorkspace";
+import useAuth from "utils/hooks/useAuth";
+import useWorkspace from "utils/hooks/useWorkspace";
 
 const AddNoteForm = () => {
   const dispatch = useDispatch();

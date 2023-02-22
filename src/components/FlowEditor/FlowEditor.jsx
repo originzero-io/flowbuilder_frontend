@@ -21,16 +21,16 @@ import {
 } from "store/reducers/menuSlice";
 import { setNodeList } from "store/reducers/nodeListSlice";
 import PropTypes from "prop-types";
-import useActiveFlow from "hooks/useActiveFlow";
-import notification from "utils/notificationHelper";
+import useActiveFlow from "utils/hooks/useActiveFlow";
+import notification from "utils/ui/notificationHelper";
 import { isConnectionCyclic } from "components/FlowEditor/helpers/flowHelper";
-import themeColor from "constants/ThemeReference";
+import themeColor from "components/Shared/ThemeReference";
 import {
   openElementContextMenu,
   openMultiSelectionContextMenu,
   openPaneContextMenu,
 } from "./helpers/menuHelper";
-import FlowComponents from "./components/FlowComponents";
+import Utils from "./components/Utils";
 import { createNode } from "./helpers/elementHelper";
 import { createCustomNodeObject } from "./helpers/nodeTypeHelper";
 
@@ -183,7 +183,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
       connectionLineStyle={{ stroke: "rgb(22,139,63)", strokeWidth: "2px" }}
       attributionPosition="bottom-left"
     >
-      <FlowComponents miniMapDisplay={miniMapDisplay} />
+      <Utils flowGui={flowGui} />
     </ReactFlow>
   );
 }

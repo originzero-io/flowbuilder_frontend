@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Form, FormGroup } from "reactstrap";
 import { login } from "store/reducers/authSlice";
 import { Redirect } from "react-router-dom";
-import useAuth from "hooks/useAuth";
+import useAuth from "utils/hooks/useAuth";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { Input, Text, Submit, ErrorMessage } from "./LoginForm.style";

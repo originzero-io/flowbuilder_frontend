@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import InitialFetchs from "InitialFetchs.jsx";
-import Modal from "./components/Shared/Modal.jsx";
+import InitialFetchs from "app/InitialFetchs.jsx";
+import Modal from "../components/Shared/Modal/Modal.jsx";
 import SocketConnections from "./SocketConnections";
-import { AppWrapper } from "./components/StyledComponents/AppWrapper";
-import NotFound from "./navigation/NotFound";
-import PrivateRoute from "./navigation/PrivateRoute";
-import AuthPage from "./pages/AuthPage";
-import ControlPanelPage from "./pages/ControlPanelPage";
-import DashboardPage from "./pages/DashboardPage";
-import FlowPage from "./pages/FlowPage";
-import LoadingBar from "./components/Shared/LoadingBar.jsx";
-import ToastNotification from "./components/Shared/ToastNotification.jsx";
+import { AppWrapper } from "../components/StyledComponents/AppWrapper";
+import NotFound from "../routes/NotFound";
+import PrivateRoute from "../routes/PrivateRoute";
+import AuthPage from "../pages/AuthPage";
+import ControlPanelPage from "../pages/ControlPanelPage";
+import DashboardPage from "../pages/DashboardPage";
+import FlowPage from "../pages/FlowPage";
+import LoadingBar from "../components/Shared/LoadingBar/LoadingBar.jsx";
+import ToastNotification from "../components/Shared/Notification/ToastNotification.jsx";
 
 const App = () => (
   <AppWrapper>

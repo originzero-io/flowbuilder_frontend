@@ -28,15 +28,26 @@ const Nodes = {
       icon: TriggerIcon,
     },
   },
-  CONSTANT: {
+  // CONSTANT: {
+  //   engine: {
+  //     targetCount: 0,
+  //     sourceCount: 1,
+  //     ioType: "source",
+  //   },
+  //   ui: {
+  //     component: TriggerNode,
+  //     icon: TriggerIcon,
+  //   },
+  // },
+  COMBINE: {
     engine: {
-      targetCount: 0,
+      targetCount: 1,
       sourceCount: 1,
-      ioType: "source",
+      ioType: "both",
     },
     ui: {
-      component: TriggerNode,
-      icon: TriggerIcon,
+      component: CombineNode,
+      icon: CombineIcon,
     },
   },
   NOTIFICATION: {
@@ -61,17 +72,6 @@ const Nodes = {
       icon: SplitIcon,
     },
   },
-  COMBINE: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: CombineNode,
-      icon: CombineIcon,
-    },
-  },
   CALCULATE: {
     engine: {
       targetCount: 1,
@@ -83,237 +83,237 @@ const Nodes = {
       icon: CalculateIcon,
     },
   },
-  EXCEL_READ: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: ExcelReadNode,
-      icon: ExcelReadIcon,
-    },
-  },
-  EXCEL_WRITE: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: NotificationNode,
-      icon: NotificationIcon,
-    },
-  },
-  SERIAL_READ: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: SerialReadNode,
-      icon: SplitIcon,
-    },
-  },
-  HTTP_REQUEST: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: HttpRequestNode,
-      icon: SplitIcon,
-    },
-  },
-  JSON_PARSE: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: JsonParseNode,
-      icon: SplitIcon,
-    },
-  },
-  CSV_PARSE: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: JsonParseNode,
-      icon: SplitIcon,
-    },
-  },
-  XML_PARSE: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: JsonParseNode,
-      icon: SplitIcon,
-    },
-  },
-  JOIN_PARSE: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: JsonParseNode,
-      icon: SplitIcon,
-    },
-  },
-  SPLICE_PARSE: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: JsonParseNode,
-      icon: SplitIcon,
-    },
-  },
-  SORT_PARSE: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: JsonParseNode,
-      icon: SplitIcon,
-    },
-  },
-  MIN_ARRAY: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: JsonParseNode,
-      icon: SplitIcon,
-    },
-  },
-  MAX_ARRAY: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 1,
-      ioType: "both",
-    },
-    ui: {
-      component: JsonParseNode,
-      icon: SplitIcon,
-    },
-  },
-  TCP_IN: {
-    engine: {
-      targetCount: 0,
-      sourceCount: 1,
-      ioType: "source",
-    },
-    ui: {
-      component: TriggerNode,
-      icon: TriggerIcon,
-    },
-  },
-  TCP_OUT: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 0,
-      ioType: "target",
-    },
-    ui: {
-      component: NotificationNode,
-      icon: NotificationIcon,
-    },
-  },
-  MODBUS_READ: {
-    engine: {
-      targetCount: 0,
-      sourceCount: 1,
-      ioType: "source",
-    },
-    ui: {
-      component: TriggerNode,
-      icon: TriggerIcon,
-    },
-  },
-  MODBUS_WRITE: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 0,
-      ioType: "target",
-    },
-    ui: {
-      component: NotificationNode,
-      icon: NotificationIcon,
-    },
-  },
-  S7_READ: {
-    engine: {
-      targetCount: 0,
-      sourceCount: 1,
-      ioType: "source",
-    },
-    ui: {
-      component: TriggerNode,
-      icon: TriggerIcon,
-    },
-  },
-  S7_WRITE: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 0,
-      ioType: "target",
-    },
-    ui: {
-      component: NotificationNode,
-      icon: NotificationIcon,
-    },
-  },
-  SEND_SMS: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 0,
-      ioType: "target",
-    },
-    ui: {
-      component: NotificationNode,
-      icon: NotificationIcon,
-    },
-  },
-  SEND_MAIL: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 0,
-      ioType: "target",
-    },
-    ui: {
-      component: NotificationNode,
-      icon: NotificationIcon,
-    },
-  },
-  FILE: {
-    engine: {
-      targetCount: 1,
-      sourceCount: 0,
-      ioType: "target",
-    },
-    ui: {
-      component: JsonParseNode,
-      icon: SplitIcon,
-    },
-  },
+  // EXCEL_READ: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: ExcelReadNode,
+  //     icon: ExcelReadIcon,
+  //   },
+  // },
+  // EXCEL_WRITE: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: NotificationNode,
+  //     icon: NotificationIcon,
+  //   },
+  // },
+  // SERIAL_READ: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: SerialReadNode,
+  //     icon: SplitIcon,
+  //   },
+  // },
+  // HTTP_REQUEST: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: HttpRequestNode,
+  //     icon: SplitIcon,
+  //   },
+  // },
+  // JSON_PARSE: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: JsonParseNode,
+  //     icon: SplitIcon,
+  //   },
+  // },
+  // CSV_PARSE: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: JsonParseNode,
+  //     icon: SplitIcon,
+  //   },
+  // },
+  // XML_PARSE: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: JsonParseNode,
+  //     icon: SplitIcon,
+  //   },
+  // },
+  // JOIN_PARSE: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: JsonParseNode,
+  //     icon: SplitIcon,
+  //   },
+  // },
+  // SPLICE_PARSE: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: JsonParseNode,
+  //     icon: SplitIcon,
+  //   },
+  // },
+  // SORT_PARSE: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: JsonParseNode,
+  //     icon: SplitIcon,
+  //   },
+  // },
+  // MIN_ARRAY: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: JsonParseNode,
+  //     icon: SplitIcon,
+  //   },
+  // },
+  // MAX_ARRAY: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 1,
+  //     ioType: "both",
+  //   },
+  //   ui: {
+  //     component: JsonParseNode,
+  //     icon: SplitIcon,
+  //   },
+  // },
+  // TCP_IN: {
+  //   engine: {
+  //     targetCount: 0,
+  //     sourceCount: 1,
+  //     ioType: "source",
+  //   },
+  //   ui: {
+  //     component: TriggerNode,
+  //     icon: TriggerIcon,
+  //   },
+  // },
+  // TCP_OUT: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 0,
+  //     ioType: "target",
+  //   },
+  //   ui: {
+  //     component: NotificationNode,
+  //     icon: NotificationIcon,
+  //   },
+  // },
+  // MODBUS_READ: {
+  //   engine: {
+  //     targetCount: 0,
+  //     sourceCount: 1,
+  //     ioType: "source",
+  //   },
+  //   ui: {
+  //     component: TriggerNode,
+  //     icon: TriggerIcon,
+  //   },
+  // },
+  // MODBUS_WRITE: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 0,
+  //     ioType: "target",
+  //   },
+  //   ui: {
+  //     component: NotificationNode,
+  //     icon: NotificationIcon,
+  //   },
+  // },
+  // S7_READ: {
+  //   engine: {
+  //     targetCount: 0,
+  //     sourceCount: 1,
+  //     ioType: "source",
+  //   },
+  //   ui: {
+  //     component: TriggerNode,
+  //     icon: TriggerIcon,
+  //   },
+  // },
+  // S7_WRITE: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 0,
+  //     ioType: "target",
+  //   },
+  //   ui: {
+  //     component: NotificationNode,
+  //     icon: NotificationIcon,
+  //   },
+  // },
+  // SEND_SMS: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 0,
+  //     ioType: "target",
+  //   },
+  //   ui: {
+  //     component: NotificationNode,
+  //     icon: NotificationIcon,
+  //   },
+  // },
+  // SEND_MAIL: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 0,
+  //     ioType: "target",
+  //   },
+  //   ui: {
+  //     component: NotificationNode,
+  //     icon: NotificationIcon,
+  //   },
+  // },
+  // FILE: {
+  //   engine: {
+  //     targetCount: 1,
+  //     sourceCount: 0,
+  //     ioType: "target",
+  //   },
+  //   ui: {
+  //     component: JsonParseNode,
+  //     icon: SplitIcon,
+  //   },
+  // },
 };
 
 export default Nodes;

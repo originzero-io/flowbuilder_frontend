@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { updateGroup } from "store/reducers/flow/flowGroupsSlice";
 import { SubmitIcon } from "components/Shared/icons";
-import themeColor from "constants/ThemeReference";
+import themeColor from "components/Shared/ThemeReference";
 import PropTypes from "prop-types";
 import { ColorFlag, Submit } from "./GroupBar.style";
 

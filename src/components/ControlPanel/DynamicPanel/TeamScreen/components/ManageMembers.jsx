@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import useUser from "hooks/useUser";
+import useUser from "utils/hooks/useUser";
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
 import { BsPlusCircle } from "react-icons/bs";
 import { TiTickOutline } from "react-icons/ti";
-import useWorkspace from "hooks/useWorkspace";
-import Avatar from "components/Shared/Avatar";
+import useWorkspace from "utils/hooks/useWorkspace";
+import Avatar from "components/Shared/Avatar/Avatar";
 import { useDispatch } from "react-redux";
 import {
   addUserToWorkspace,

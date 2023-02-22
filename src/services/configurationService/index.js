@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import HTTPService from "services/HttpService";
+import HttpClient from "services/httpClient";
 
-export default class ConfigurationService extends HTTPService {
+export default class ConfigurationService extends HttpClient {
   constructor() {
     super();
     this.service = this.createService("configuration");

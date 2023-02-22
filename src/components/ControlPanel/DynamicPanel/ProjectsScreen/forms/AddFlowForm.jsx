@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { flowNamespace } from "SocketConnections";
+import { flowNamespace } from "app/SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
-import useAuth from "hooks/useAuth";
-import useProject from "hooks/useProject";
-import useWorkspace from "hooks/useWorkspace";
+import useAuth from "utils/hooks/useAuth";
+import useProject from "utils/hooks/useProject";
+import useWorkspace from "utils/hooks/useWorkspace";
 
 export default function AddFlowForm() {
   const auth = useAuth();

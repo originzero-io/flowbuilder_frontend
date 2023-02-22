@@ -4,7 +4,7 @@ import { deleteGroup } from "store/reducers/flow/flowGroupsSlice";
 import { selectElements } from "store/reducers/flow/flowElementsSlice";
 import { NameEditIcon } from "components/Shared/icons";
 import PropTypes from "prop-types";
-import useActiveFlow from "hooks/useActiveFlow";
+import useActiveFlow from "utils/hooks/useActiveFlow";
 import { GroupItem, GroupColor, Label } from "./GroupBar.style";
 import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";

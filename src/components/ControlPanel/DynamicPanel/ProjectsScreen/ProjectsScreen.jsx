@@ -7,9 +7,9 @@ import { setModal } from "store/reducers/componentSlice";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import useProject from "hooks/useProject.js";
+import useProject from "utils/hooks/useProject.js";
 import { Alert } from "reactstrap";
-import useAuthPermission from "hooks/useAuthPermission";
+import useAuthPermission from "utils/hooks/useAuthPermission";
 import {
   SearchBar,
   DashboardsContainer,
@@ -23,7 +23,7 @@ import FlowList from "./components/FlowList.jsx";
 const propTypes = {
   flows: PropTypes.array.isRequired,
 };
-export default function Panel({ flows }) {
+export default function ProjectsScreen({ flows }) {
   const dispatch = useDispatch();
   const { projects, activeProject } = useProject();
   const getPermission = useAuthPermission("project");
@@ -85,4 +85,4 @@ export default function Panel({ flows }) {
   );
 }
 
-Panel.propTypes = propTypes;
+ProjectsScreen.propTypes = propTypes;

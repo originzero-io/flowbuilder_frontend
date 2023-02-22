@@ -3,8 +3,8 @@ import { Handle, useUpdateNodeInternals, Position } from "reactflow";
 import { useSelector, useDispatch } from "react-redux";
 import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types";
-import useActiveFlow from "hooks/useActiveFlow";
-import { flowExecutorNamespace } from "SocketConnections";
+import useActiveFlow from "utils/hooks/useActiveFlow";
+import { flowExecutorNamespace } from "app/SocketConnections";
 
 import { Badge } from "reactstrap";
 import { getIconComponent } from "components/FlowEditor/helpers/nodeTypeHelper";
@@ -93,9 +93,6 @@ const NodeGod = ({ self, children, collapsible }) => {
               <NodeIcon width="70px" height="70px" enable={enable} />
             </NodeContent>
           )}
-          <Info>
-            <InfoIcon color="whitesmoke" />
-          </Info>
         </NodeArea>
 
         <SourceWrapper align={align}>

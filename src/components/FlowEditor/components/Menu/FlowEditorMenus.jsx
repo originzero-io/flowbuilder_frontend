@@ -15,4 +15,4 @@ const FlowEditorMenus = () => (
   </>
 );
 
-export default React.memo(FlowEditorMenus);
+export default FlowEditorMenus;

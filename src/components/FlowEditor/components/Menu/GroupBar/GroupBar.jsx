@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import useActiveFlow from "hooks/useActiveFlow";
+import useActiveFlow from "utils/hooks/useActiveFlow";
 import { useParams } from "react-router-dom";
 import { GroupBarWrapper } from "../../../../StyledComponents/AppWrapper";
 import GroupBarIcon from "./GroupBarIcon";

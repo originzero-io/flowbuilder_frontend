@@ -5,7 +5,7 @@ import {
   setGroupSelectedElements,
   setGroupSingle,
 } from "store/reducers/flow/flowElementsSlice";
-import useActiveFlow from "hooks/useActiveFlow";
+import useActiveFlow from "utils/hooks/useActiveFlow";
 import { getSelectedNodes } from "../../../helpers/elementHelper";
 import { GroupColor, Label } from "../GroupBar/GroupBar.style";
 

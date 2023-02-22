@@ -7,7 +7,7 @@ import {
   setElements,
   setNodes,
 } from "store/reducers/flow/flowElementsSlice";
-import useActiveFlow from "hooks/useActiveFlow";
+import useActiveFlow from "utils/hooks/useActiveFlow";
 import { Menu, MenuItem } from "./ElementContextMenu.style";
 
 export default function ElementMenu() {

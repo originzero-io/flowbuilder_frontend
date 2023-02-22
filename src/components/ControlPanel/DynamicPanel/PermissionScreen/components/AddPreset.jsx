@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useDispatch } from "react-redux";
 import PermissionService from "services/configurationService/permissionService";
-import notification from "utils/notificationHelper";
+import notification from "utils/ui/notificationHelper";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,

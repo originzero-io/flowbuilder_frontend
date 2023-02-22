@@ -6,7 +6,7 @@ import {
   setNodeEnable,
   setOutgoersEnable,
 } from "store/reducers/flow/flowElementsSlice";
-import useActiveFlow from "hooks/useActiveFlow";
+import useActiveFlow from "utils/hooks/useActiveFlow";
 import { NameEditIcon } from "components/Shared/icons";
 import toast from "react-hot-toast";
 import RotateButton from "../RotateButton";

@@ -1,7 +1,7 @@
 import io from "socket.io-client";
-import notification from "utils/notificationHelper";
+import notification from "utils/ui/notificationHelper";
 
-class SocketService {
+class SocketIOClient {
   constructor(config) {
     const { namespace = "", path = "", extraOptions } = config;
 
@@ -38,6 +38,6 @@ class SocketService {
   }
 }
 
-const createSocket = (config) => new SocketService(config).socket;
+const createSocket = (config) => new SocketIOClient(config).socket;
 
 export default createSocket;

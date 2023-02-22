@@ -1,6 +1,6 @@
-import Avatar from "components/Shared/Avatar";
+import Avatar from "components/Shared/Avatar/Avatar";
 import { Logo } from "components/Shared/icons";
-import useAuth from "hooks/useAuth";
+import useAuth from "utils/hooks/useAuth";
 import React from "react";
 import { BiBrain } from "react-icons/bi";
 import { FiUsers } from "react-icons/fi";

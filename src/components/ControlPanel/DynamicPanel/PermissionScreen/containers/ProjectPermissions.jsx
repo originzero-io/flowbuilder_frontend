@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import useProject from "hooks/useProject";
+import useProject from "utils/hooks/useProject";
 import PropTypes from "prop-types";
 import CreateDashboardPermission from "../components/ProjectPermissions/CreateDashboardPermission";
 import CreateFlowPermission from "../components/ProjectPermissions/CreateFlowPermission";

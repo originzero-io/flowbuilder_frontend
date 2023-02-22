@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { Button, Table } from "reactstrap";
 import styled from "styled-components";
 import { setModal } from "store/reducers/componentSlice";
-import useUser from "hooks/useUser";
-import useWorkspace from "hooks/useWorkspace";
-import Avatar from "components/Shared/Avatar";
-import useAuthPermission from "hooks/useAuthPermission";
+import useUser from "utils/hooks/useUser";
+import useWorkspace from "utils/hooks/useWorkspace";
+import Avatar from "components/Shared/Avatar/Avatar";
+import useAuthPermission from "utils/hooks/useAuthPermission";
 
 const Box = styled.div`
   margin-top: 3px;

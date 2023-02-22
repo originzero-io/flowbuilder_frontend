@@ -1,10 +1,16 @@
 /* eslint-disable no-undef */
 import axios from "axios";
-import notification from "utils/notificationHelper";
+import notification from "utils/ui/notificationHelper";
 
-export default class HTTPService {
+export default class HttpClient {
   constructor() {
     this.service = axios;
+  }
+
+  static setAuthorizationToken(token) {
+    if (token) {
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    } else delete axios.defaults.headers.common.Authorization;
   }
 
   createService(serviceName) {

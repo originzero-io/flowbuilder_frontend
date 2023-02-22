@@ -5,11 +5,11 @@ import { VscTrash } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { setModal } from "store/reducers/componentSlice";
 import { setActiveProject } from "store/reducers/projectSlice";
-import useAuthPermission from "hooks/useAuthPermission";
-import useProject from "hooks/useProject";
-import useWorkspace from "hooks/useWorkspace";
+import useAuthPermission from "utils/hooks/useAuthPermission";
+import useProject from "utils/hooks/useProject";
+import useWorkspace from "utils/hooks/useWorkspace";
 import { CollapsibleMenuItem } from "components/Shared/Collapsible/CollapsibleMenu";
-import { projectNamespace } from "SocketConnections";
+import { projectNamespace } from "app/SocketConnections";
 import EditProjectForm from "./EditProjectForm";
 
 const propTypes = {

@@ -1,4 +1,4 @@
-import useAuthPermission from "hooks/useAuthPermission.js";
+import useAuthPermission from "utils/hooks/useAuthPermission.js";
 import React from "react";
 import { MdOutlineManageAccounts } from "react-icons/md";
 import { useDispatch } from "react-redux";

@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
-import themeColor from "constants/ThemeReference";
+import themeColor from "components/Shared/ThemeReference";
 import React from "react";
 
 export function RedoIcon({ theme, disable }) {

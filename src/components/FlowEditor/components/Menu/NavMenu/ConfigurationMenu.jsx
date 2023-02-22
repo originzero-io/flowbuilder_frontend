@@ -3,8 +3,7 @@ import { useReactFlow, useStore, useStoreActions } from "reactflow";
 import { BiBrain } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "reactstrap";
-import themeColor from "constants/ThemeReference";
-import * as tooltip from "constants/TooltipReference";
+import themeColor from "components/Shared/ThemeReference";
 import { logOut } from "store/reducers/authSlice";
 import { changeEdgeType } from "store/reducers/flow/flowElementsSlice";
 import {
@@ -12,14 +11,14 @@ import {
   setMiniMapDisplay,
   setTheme,
 } from "store/reducers/flow/flowGuiSlice";
-import useActiveFlow from "hooks/useActiveFlow";
-import useAuth from "hooks/useAuth";
-import Avatar from "components/Shared/Avatar";
+import useActiveFlow from "utils/hooks/useActiveFlow";
+import useAuth from "utils/hooks/useAuth";
+import Avatar from "components/Shared/Avatar/Avatar";
 import { FileInput } from "components/Shared/FileInput/FileInput";
 import { GoDeviceDesktop } from "react-icons/go";
 import { VscRunAll } from "react-icons/vsc";
-import notification from "utils/notificationHelper";
-import { flowExecutorNamespace } from "SocketConnections";
+import notification from "utils/ui/notificationHelper";
+import { flowExecutorNamespace } from "app/SocketConnections";
 import { backendFlowDataBuilder } from "components/FlowEditor/helpers/flowHelper";
 import { useParams } from "react-router-dom";
 import { Menu, MenuItem } from "./NavMenu.style";
@@ -32,6 +31,7 @@ import {
 } from "../../../../StyledComponents/DropdownMenu";
 import { VerticalDivider } from "../../../../StyledComponents/Divider";
 import SwitchButton from "../../../Nodes/shared/SwitchButton";
+import Tooltip from "components/Shared/Tooltip/Tooltip";
 
 const dummyDevices = [
   {
@@ -186,9 +186,11 @@ export default function ConfigurationMenu() {
       </DropdownWrapper>
 
       <DropdownWrapper tabIndex="1">
-        <MenuItem>
+        <MenuItem data-tip="Share" data-for="share">
           <ShareIcon width="25px" height="25px" theme={theme} />
         </MenuItem>
+        <Tooltip id="share" place="bottom" />
+
         <DropdownList>
           <DropdownItem>
             <FileInput onChange={fileUploadHandle} label="Import Flow" />
@@ -198,12 +200,14 @@ export default function ConfigurationMenu() {
       </DropdownWrapper>
       <VerticalDivider />
 
-      <MenuItem data-tip="Settings" data-for={tooltip.SETTINGS}>
+      <MenuItem data-tip="Settings" data-for="settings">
         <TuneIcon color={themeColor[theme].iconColor} />
       </MenuItem>
+      <Tooltip id="settings" place="bottom" />
+
       <VerticalDivider />
 
-      <MenuItem data-tip="Learn" data-for={tooltip.LEARN}>
+      <MenuItem data-tip="Learn" data-for="learn">
         <BiBrain
           style={{
             fontSize: "25px",
@@ -211,6 +215,8 @@ export default function ConfigurationMenu() {
           }}
         />
       </MenuItem>
+      <Tooltip id="learn" place="bottom" />
+
       <DropdownWrapper tabIndex="1">
         <Circle>
           <Avatar avatar={auth.avatar} />

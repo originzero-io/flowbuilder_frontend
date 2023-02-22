@@ -6,7 +6,7 @@ import {
   setEnableSelectedNodes,
 } from "store/reducers/flow/flowElementsSlice";
 import { setMultiSelectionContextMenu } from "store/reducers/menuSlice";
-import useActiveFlow from "hooks/useActiveFlow";
+import useActiveFlow from "utils/hooks/useActiveFlow";
 import NodeGroupMenu from "../../NodeGroupMenu/NodeGroupMenu";
 import { Menu, MenuItem } from "../ElementContext/ElementContextMenu.style";
 

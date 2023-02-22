@@ -1,4 +1,4 @@
-import { store } from "index";
+import store from "index";
 import ConfigurationService from ".";
 
 class PermissionService extends ConfigurationService {

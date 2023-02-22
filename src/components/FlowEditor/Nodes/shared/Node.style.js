@@ -93,11 +93,3 @@ export const Divider = styled.div`
   opacity: 0.1;
   margin-top: -2px;
 `;
-
-export const Info = styled.div`
-  width: 10px;
-  position: absolute;
-  right: 5px;
-  bottom: 0;
-  cursor: "pointer";
-`;

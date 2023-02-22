@@ -1,6 +1,6 @@
-import { getIncomers, getOutgoers } from "reactflow";
+import { getIncomers } from "reactflow";
 import { selectElements } from "store/reducers/flow/flowElementsSlice";
-import { store } from "../../../index";
+import store from "index";
 
 export function backendFlowDataBuilder(flowId, elements) {
   return {

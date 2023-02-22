@@ -1,7 +1,7 @@
 import React from "react";
 import Switch from "react-switch";
 import PropTypes from "prop-types";
-import theme from "constants/ThemeReference";
+import theme from "components/Shared/ThemeReference";
 
 const propTypes = {
   checked: PropTypes.bool.isRequired,

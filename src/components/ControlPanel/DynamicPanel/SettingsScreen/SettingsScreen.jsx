@@ -1,6 +1,6 @@
 import React from "react";
-import useAuth from "hooks/useAuth";
-import Avatar from "components/Shared/Avatar";
+import useAuth from "utils/hooks/useAuth";
+import Avatar from "components/Shared/Avatar/Avatar";
 
 export default function SettingsScreen() {
   const auth = useAuth();

@@ -6,7 +6,7 @@ import {
   flowNamespace,
   elementNamespace,
   noteNamespace,
-} from "SocketConnections";
+} from "app/SocketConnections";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
