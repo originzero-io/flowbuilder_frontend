@@ -21,6 +21,7 @@ import notification from "utils/ui/notificationHelper";
 import { flowExecutorNamespace } from "app/SocketConnections";
 import { backendFlowDataBuilder } from "components/FlowEditor/helpers/flowHelper";
 import { useParams } from "react-router-dom";
+import Tooltip from "components/Shared/Tooltip/Tooltip";
 import { Menu, MenuItem } from "./NavMenu.style";
 import { ShareIcon, TuneIcon } from "./Icons";
 import { Circle } from "../../../../StyledComponents/Shapes";
@@ -31,7 +32,6 @@ import {
 } from "../../../../StyledComponents/DropdownMenu";
 import { VerticalDivider } from "../../../../StyledComponents/Divider";
 import SwitchButton from "../../../Nodes/shared/SwitchButton";
-import Tooltip from "components/Shared/Tooltip/Tooltip";
 
 const dummyDevices = [
   {

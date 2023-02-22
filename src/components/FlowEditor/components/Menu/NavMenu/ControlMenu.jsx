@@ -16,6 +16,7 @@ import { elementNamespace } from "app/SocketConnections";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import FlowService from "services/configurationService/flowService";
 import notification from "utils/ui/notificationHelper";
+import Tooltip from "components/Shared/Tooltip/Tooltip";
 import {
   RedoIcon,
   UndoIcon,
@@ -30,7 +31,6 @@ import {
   ExpandAllIcon,
 } from "./Icons";
 import { MenuItem } from "./NavMenu.style";
-import Tooltip from "components/Shared/Tooltip/Tooltip";
 
 const Menu = styled.div`
   position: absolute;

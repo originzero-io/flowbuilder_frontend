@@ -16,13 +16,13 @@ import useAuth from "utils/hooks/useAuth";
 import useDidMountEffect from "utils/hooks/useDidMountEffect";
 import useWorkspace from "utils/hooks/useWorkspace";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
+import Tooltip from "components/Shared/Tooltip/Tooltip";
 import AddWorkspaceForm from "./AddWorkspaceForm";
 import {
   WorkspaceContainer,
   WorkspaceItem,
   WorkspaceItemWrapper,
 } from "./WorkspacePanel.style";
-import Tooltip from "components/Shared/Tooltip/Tooltip";
 
 const WorkspacePanel = () => {
   const { workspaces, activeWorkspace } = useWorkspace();
