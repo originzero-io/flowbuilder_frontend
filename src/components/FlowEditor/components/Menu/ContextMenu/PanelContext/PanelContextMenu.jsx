@@ -17,7 +17,6 @@ const PanelContextMenu = () => {
   const { flowGui } = useActiveFlow();
   const { rotateAllPath, theme } = flowGui;
   const nodeList = useSelector((state) => state.nodeList);
-  const nodeClass = useSelector((state) => state.nodeClassReducer);
   const dispatch = useDispatch();
 
   const reactFlowInstance = useReactFlow();
@@ -34,7 +33,7 @@ const PanelContextMenu = () => {
       x: panelMenu.x - 200,
       y: panelMenu.y,
     });
-    const newNode = createNode(node.type, position, rotateAllPath, nodeClass);
+    const newNode = createNode(node.type, position, rotateAllPath);
     dispatch(addNewNode(newNode));
   };
   return (

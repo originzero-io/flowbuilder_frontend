@@ -48,7 +48,6 @@ export default function ConfigurationMenu() {
   const auth = useAuth();
   const { miniMapDisplay, theme } = flowGui;
   const reactFlowInstance = useReactFlow();
-  const nodeClass = useSelector((state) => state.nodeClassReducer);
   const setSelectedElements = useStore(
     (actions) => actions.setSelectedElements,
   );

@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import flowElementsReducer from "./flow/flowElementsSlice";
-import nodeClassReducer from "./flow/nodeClassSlice";
 import flowGroupsReducer from "./flow/flowGroupsSlice";
 import flowConfigReducer from "./flow/flowConfigSlice";
 import flowGuiReducer from "./flow/flowGuiSlice";
@@ -37,7 +36,6 @@ const reducers = combineReducers({
   modal: modalReducer,
   loadingBar: loadingBarReducer,
   nodeList: nodeListReducer,
-  nodeClassReducer,
 });
 
 // resetting reducers after user log out
