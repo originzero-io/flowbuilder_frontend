@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
-import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
+import * as Styled from "../PermissionScreen.style";
 import CollapsibleMenu, { CollapsibleMenuItem } from "../CollapsibleMenu";
 
 const propTypes = {
@@ -29,8 +29,8 @@ function CreateFlowPermission({
   }, [permissions.CAN_CREATE_FLOW.length]);
   return (
     <>
-      <PermissionHeader>Flow Create</PermissionHeader>
-      <PermissionContent>
+      <Styled.PermissionHeader>Flow Create</Styled.PermissionHeader>
+      <Styled.PermissionContent>
         <CollapsibleMenu trigger="Projects">
           <CollapsibleMenuItem>
             <CheckboxGroup
@@ -64,7 +64,7 @@ function CreateFlowPermission({
             </CollapsibleMenuItem>
           ))}
         </CollapsibleMenu>
-      </PermissionContent>
+      </Styled.PermissionContent>
     </>
   );
 }

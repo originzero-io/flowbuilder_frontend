@@ -30,9 +30,9 @@ import {
   UnLockIcon,
   ExpandAllIcon,
 } from "./Icons";
-import { MenuItem } from "./NavMenu.style";
+import * as Styled from "./NavMenu.style";
 
-const Menu = styled.div`
+const StyledMenu = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -117,15 +117,15 @@ export default function ControlMenu() {
   //   setInteractive(lock);
   // }, [lock]);
   return (
-    <Menu>
-      <MenuItem
+    <StyledMenu>
+      <Styled.MenuItem
         theme={theme}
         onClick={saveFlow}
         data-tip="Save"
         data-for="save"
       >
         <SaveIcon theme={theme} />
-      </MenuItem>
+      </Styled.MenuItem>
       <Tooltip id="save" place="right" />
       <HorizontalDivider theme={theme} />
       {/* <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO} onClick={undoHandle}>
@@ -135,64 +135,64 @@ export default function ControlMenu() {
         <RedoIcon theme={theme} disable={!canRedo} />
       </MenuItem> */}
       <HorizontalDivider theme={theme} />
-      <MenuItem
+      <Styled.MenuItem
         theme={theme}
         onClick={closeAllNodes}
         data-tip="Close All Nodes"
         data-for="close_nodes"
       >
         <ExpandAllIcon theme={theme} />
-      </MenuItem>
+      </Styled.MenuItem>
       <Tooltip id="close_nodes" place="right" />
-      <MenuItem
+      <Styled.MenuItem
         theme={theme}
         onClick={rotateAllHandle}
         data-tip="Rotate All"
         data-for="rotate_all"
       >
         <RotateAllIcon theme={theme} />
-      </MenuItem>
+      </Styled.MenuItem>
       <Tooltip id="rotate_all" place="right" />
 
-      <MenuItem
+      <Styled.MenuItem
         theme={theme}
         onClick={deleteAllNodes}
         data-tip="Delete All"
         data-for="delete_all"
       >
         <DeleteIcon theme={theme} />
-      </MenuItem>
+      </Styled.MenuItem>
       <Tooltip id="delete_all" place="right" />
 
       <HorizontalDivider theme={theme} />
-      <MenuItem
+      <Styled.MenuItem
         theme={theme}
         onClick={zoomInHandle}
         data-tip="Zoom in"
         data-for="zoom_in"
       >
         <ZoomInIcon theme={theme} />
-      </MenuItem>
+      </Styled.MenuItem>
       <Tooltip id="zoom_in" place="right" />
-      <MenuItem
+      <Styled.MenuItem
         theme={theme}
         onClick={zoomOutHandle}
         data-tip="Zoom out"
         data-for="zoom_out"
       >
         <ZoomOutIcon theme={theme} />
-      </MenuItem>
+      </Styled.MenuItem>
       <Tooltip id="zoom_out" place="right" />
-      <MenuItem
+      <Styled.MenuItem
         theme={theme}
         onClick={fitViewHandle}
         data-tip="Fit View"
         data-for="fit_view"
       >
         <FitViewIcon theme={theme} />
-      </MenuItem>
+      </Styled.MenuItem>
       <Tooltip id="fit_view" place="right" />
-      <MenuItem
+      <Styled.MenuItem
         theme={theme}
         onClick={lockHandle}
         data-tip="Lock Screen"
@@ -203,8 +203,8 @@ export default function ControlMenu() {
         ) : (
           <LockIcon theme={theme} />
         )}
-      </MenuItem>
+      </Styled.MenuItem>
       <Tooltip id="lock_screen" place="right" />
-    </Menu>
+    </StyledMenu>
   );
 }

@@ -9,7 +9,7 @@ import {
   DropdownItem,
   DropdownWrapper,
 } from "../../StyledComponents/DropdownMenu";
-import { CardMoreButton, DetailMenuList } from "./Card.style";
+import * as Styled from "./Card.style";
 
 const propTypes = {
   deleteEvent: PropTypes.func,
@@ -31,10 +31,10 @@ export default function DetailMenu({ deleteEvent, data, getPermission }) {
       tabIndex="1"
       style={{ position: "absolute", right: "12px", top: "3px" }}
     >
-      <CardMoreButton onClick={(e) => e.stopPropagation()}>
+      <Styled.CardMoreButton onClick={(e) => e.stopPropagation()}>
         <FiMoreVertical />
-      </CardMoreButton>
-      <DetailMenuList style={{ border: "1px solid #495057" }}>
+      </Styled.CardMoreButton>
+      <Styled.DetailMenuList style={{ border: "1px solid #495057" }}>
         {getPermission("CAN_EDIT_FLOW", {
           flowId: data._id,
           projectId: data.project._id,
@@ -50,7 +50,7 @@ export default function DetailMenu({ deleteEvent, data, getPermission }) {
             </DropdownItem>
           </>
         )}
-      </DetailMenuList>
+      </Styled.DetailMenuList>
     </DropdownWrapper>
   );
 }

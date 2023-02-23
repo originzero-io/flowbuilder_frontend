@@ -4,12 +4,12 @@ import { SubmitIcon } from "components/Shared/icons";
 import { useDispatch } from "react-redux";
 import { changeNodeName } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types";
-import { Submit } from "../../../components/Menu/GroupBar/GroupBar.style";
+import * as Styled from "../../../components/Menu/GroupBar/GroupBar.style";
 
-const Form = styled.form`
+const StyledForm = styled.form`
   position: relative;
 `;
-const Input = styled.input`
+const StyledInput = styled.input`
   width: 100%;
   background-color: transparent;
   border: 1px dotted #636e72;
@@ -35,18 +35,18 @@ export default function EditNameForm({ self, setEdit }) {
     dispatch(changeNodeName({ node: self, name: editedName }));
   };
   return (
-    <Form onSubmit={onSubmitHandle}>
-      <Input
+    <StyledForm onSubmit={onSubmitHandle}>
+      <StyledInput
         onChange={nameEditChangeHandle}
         value={editedName}
         maxLength={15}
         required
         className="nodrag nowheel"
       />
-      <Submit type="submit">
+      <Styled.Submit type="submit">
         <SubmitIcon width="15px" height="15px" color="whitesmoke" />
-      </Submit>
-    </Form>
+      </Styled.Submit>
+    </StyledForm>
   );
 }
 

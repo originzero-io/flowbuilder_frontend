@@ -2,12 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import PropTypes from "prop-types";
-import {
-  PermissionContainer,
-  PermissionContent,
-  TabContainer,
-  PermissionHeader,
-} from "../components/PermissionScreen.style";
+import * as Styled from "../components/PermissionScreen.style";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,
@@ -20,10 +15,10 @@ export default function TeamPermissions({ permissions, setSinglePermission }) {
     dispatch(setSinglePermission({ event: e, permissionType: "team" }));
   };
   return (
-    <TabContainer>
-      <PermissionContainer>
-        <PermissionHeader>Invite Member</PermissionHeader>
-        <PermissionContent>
+    <Styled.TabContainer>
+      <Styled.PermissionContainer>
+        <Styled.PermissionHeader>Invite Member</Styled.PermissionHeader>
+        <Styled.PermissionContent>
           <Checkbox
             name="CAN_INVITE_MEMBER"
             size="30px"
@@ -33,11 +28,11 @@ export default function TeamPermissions({ permissions, setSinglePermission }) {
             disabled={permissions.EVERYTHING}
             checked={permissions.EVERYTHING || permissions.CAN_INVITE_MEMBER}
           />
-        </PermissionContent>
-      </PermissionContainer>
-      <PermissionContainer>
-        <PermissionHeader>Remove Member</PermissionHeader>
-        <PermissionContent>
+        </Styled.PermissionContent>
+      </Styled.PermissionContainer>
+      <Styled.PermissionContainer>
+        <Styled.PermissionHeader>Remove Member</Styled.PermissionHeader>
+        <Styled.PermissionContent>
           <Checkbox
             name="CAN_REMOVE_MEMBER"
             size="30px"
@@ -47,11 +42,11 @@ export default function TeamPermissions({ permissions, setSinglePermission }) {
             disabled={permissions.EVERYTHING}
             checked={permissions.EVERYTHING || permissions.CAN_REMOVE_MEMBER}
           />
-        </PermissionContent>
-      </PermissionContainer>
-      <PermissionContainer>
-        <PermissionHeader>Assign Permission</PermissionHeader>
-        <PermissionContent>
+        </Styled.PermissionContent>
+      </Styled.PermissionContainer>
+      <Styled.PermissionContainer>
+        <Styled.PermissionHeader>Assign Permission</Styled.PermissionHeader>
+        <Styled.PermissionContent>
           <Checkbox
             name="CAN_ASSIGN_PERMISSION"
             size="30px"
@@ -63,9 +58,9 @@ export default function TeamPermissions({ permissions, setSinglePermission }) {
               permissions.EVERYTHING || permissions.CAN_ASSIGN_PERMISSION
             }
           />
-        </PermissionContent>
-      </PermissionContainer>
-    </TabContainer>
+        </Styled.PermissionContent>
+      </Styled.PermissionContainer>
+    </Styled.TabContainer>
   );
 }
 

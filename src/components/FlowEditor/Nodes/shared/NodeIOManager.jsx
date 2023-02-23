@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateNodeHandles } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types";
-import { Label } from "./Node.style";
+import * as Styled from "./Node.style";
 
 const propTypes = {
   self: PropTypes.object.isRequired,
@@ -29,7 +29,7 @@ export default function NodeIOManager({ self }) {
     <>
       {ioType === "both" ? (
         <>
-          <Label>Target Length</Label>
+          <Styled.Label>Target Length</Styled.Label>
           <input
             type="number"
             name="targetCount"
@@ -38,7 +38,7 @@ export default function NodeIOManager({ self }) {
             value={handleCount.targetCount}
             onChange={handleCountChange}
           />
-          <Label>Source Length</Label>
+          <Styled.Label>Source Length</Styled.Label>
           <input
             type="number"
             name="sourceCount"
@@ -50,7 +50,7 @@ export default function NodeIOManager({ self }) {
         </>
       ) : ioType === "target" ? (
         <>
-          <Label>Target Length</Label>
+          <Styled.Label>Target Length</Styled.Label>
           <input
             type="number"
             name="targetCount"
@@ -63,7 +63,7 @@ export default function NodeIOManager({ self }) {
       ) : (
         ioType === "source" && (
           <>
-            <Label>Source Length</Label>
+            <Styled.Label>Source Length</Styled.Label>
             <input
               type="number"
               name="sourceCount"

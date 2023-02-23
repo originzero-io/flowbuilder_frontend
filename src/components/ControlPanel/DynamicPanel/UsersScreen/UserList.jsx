@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { Badge, Button, Table } from "reactstrap";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "store/reducers/componentSlice";
 import { deleteUser, getAllUsers } from "store/reducers/userSlice";
@@ -10,34 +9,9 @@ import { VscTrash } from "react-icons/vsc";
 import { FaUserCircle } from "react-icons/fa";
 import Avatar from "components/Shared/Avatar/Avatar";
 import useUser from "utils/hooks/useUser";
-import notification from "utils/ui/notificationHelper";
 import EditUserForm from "./EditUserForm";
 import AddUserForm from "./AddUserForm";
-
-const UserListContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const TBody = styled.tbody`
-  &:hover {
-    background-color: rgba(46, 213, 115, 0.2);
-    transition: background-color 0.2s ease-in-out;
-  }
-`;
-const Td = styled.td``;
-const TdItem = styled.span`
-  margin-left: 5px;
-  margin-right: 5px;
-  cursor: pointer;
-`;
-const Box = styled.div`
-  margin-top: 3px;
-  cursor: pointer;
-  width: 25px;
-  height: 25px;
-  background: ${(props) => (props.online ? "#4cd137" : "#95a5a6")};
-  border-radius: 50%;
-`;
+import * as Styled from "./UsersScreen.style";
 
 export default function UserList() {
   const dispatch = useDispatch();
@@ -54,7 +28,7 @@ export default function UserList() {
     dispatch(setModal(<EditUserForm user={user} />));
   };
   return (
-    <UserListContainer>
+    <Styled.UserListContainer>
       <Button onClick={() => dispatch(getAllUsers())}>Get Users</Button>
       <Table dark hover>
         <thead>
@@ -78,7 +52,7 @@ export default function UserList() {
                 <Avatar avatar={user.avatar} />
               </td>
               <td>
-                <Box online={user.online} />
+                <Styled.Box online={user.online} />
               </td>
               <td>{user.name}</td>
               <td>{user.username}</td>
@@ -89,17 +63,17 @@ export default function UserList() {
                   {user.role}
                 </Badge>
               </td>
-              <Td>
-                <TdItem>
+              <Styled.Td>
+                <Styled.TdItem>
                   <BiEdit
                     onClick={() => editUserHandle(user)}
                     style={{ fontSize: "20px" }}
                   />
-                </TdItem>
-                <TdItem onClick={() => deleteUserHandle(user)}>
+                </Styled.TdItem>
+                <Styled.TdItem onClick={() => deleteUserHandle(user)}>
                   <VscTrash style={{ fontSize: "20px" }} />
-                </TdItem>
-              </Td>
+                </Styled.TdItem>
+              </Styled.Td>
             </tr>
           ))}
         </tbody>
@@ -107,6 +81,6 @@ export default function UserList() {
       <Button color="primary" onClick={addUserHandle} style={{ width: "5%" }}>
         <AiOutlineUserAdd style={{ fontSize: "4vh" }} />
       </Button>
-    </UserListContainer>
+    </Styled.UserListContainer>
   );
 }

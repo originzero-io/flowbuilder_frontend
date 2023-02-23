@@ -5,7 +5,7 @@ import { selectElements } from "store/reducers/flow/flowElementsSlice";
 import { NameEditIcon } from "components/Shared/icons";
 import PropTypes from "prop-types";
 import useActiveFlow from "utils/hooks/useActiveFlow";
-import { GroupItem, GroupColor, Label } from "./GroupBar.style";
+import * as Styled from "./GroupBar.style";
 import { DeleteIcon } from "../NavMenu/Icons";
 import EditForm from "./EditForm";
 
@@ -45,7 +45,7 @@ const GroupList = ({ theme, flowId }) => {
     <>
       {flowGroups.length > 0
         ? flowGroups.map((group) => (
-            <GroupItem
+            <Styled.GroupItem
               key={group._id}
               onMouseEnter={() => setHover(group._id)}
               onMouseLeave={() => setHover(null)}
@@ -58,8 +58,14 @@ const GroupList = ({ theme, flowId }) => {
                 />
               ) : (
                 <>
-                  <GroupColor width="22px" height="22px" value={group.color} />
-                  <Label onClick={labelClickHandle}>{group.name}</Label>
+                  <Styled.GroupColor
+                    width="22px"
+                    height="22px"
+                    value={group.color}
+                  />
+                  <Styled.Label onClick={labelClickHandle}>
+                    {group.name}
+                  </Styled.Label>
                 </>
               )}
 
@@ -69,11 +75,15 @@ const GroupList = ({ theme, flowId }) => {
                     width="25px"
                     height="25px"
                     onClick={() => editIconClickHandle(group)}
+                    theme={theme}
                   />
-                  <DeleteIcon onClick={() => deleteIconClickHandle(group)} />
+                  <DeleteIcon
+                    onClick={() => deleteIconClickHandle(group)}
+                    theme={theme}
+                  />
                 </>
               )}
-            </GroupItem>
+            </Styled.GroupItem>
           ))
         : "There is no group"}
     </>

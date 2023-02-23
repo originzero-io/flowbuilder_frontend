@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import { workspaceNamespace } from "app/SocketConnections";
 import useAuth from "utils/hooks/useAuth";
 import useWorkspace from "utils/hooks/useWorkspace";
-import { WorkspaceBrandWrapper } from "./NavigationPanel.style";
+import * as Styled from "./NavigationPanel.style";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
 
 const propTypes = {
@@ -30,7 +30,7 @@ const WorkspaceBrand = ({ workspace }) => {
   };
 
   return (
-    <WorkspaceBrandWrapper>
+    <Styled.WorkspaceBrandWrapper>
       {workspace && (
         <>
           <span style={{ fontSize: "2vmin" }}>{workspace.name}</span>
@@ -49,7 +49,7 @@ const WorkspaceBrand = ({ workspace }) => {
           )}
         </>
       )}
-    </WorkspaceBrandWrapper>
+    </Styled.WorkspaceBrandWrapper>
   );
 };
 

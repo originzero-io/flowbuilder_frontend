@@ -10,7 +10,7 @@ import useNotes from "utils/hooks/useNotes";
 import Avatar from "components/Shared/Avatar/Avatar";
 import AddNoteForm from "./AddNoteForm";
 import EditNoteForm from "./EditNoteForm";
-import { NoteContainer, NoteContent, NoteTitle } from "./NotesScreen.style";
+import * as Styled from "./NotesScreen.style";
 
 export default function NotesScreen() {
   const notes = useNotes();
@@ -35,7 +35,7 @@ export default function NotesScreen() {
         <BsPlusCircle style={{ fontSize: "2.5vmin" }} /> Add Note
       </Button>
       {notes.map((note) => (
-        <NoteContainer
+        <Styled.NoteContainer
           key={note._id}
           onMouseEnter={() => setHoveredNote(note._id)}
           onMouseLeave={() => setHoveredNote(false)}
@@ -43,8 +43,8 @@ export default function NotesScreen() {
         >
           <div style={{ display: "flex", alignItems: "center" }}>
             <div style={{ width: "95%" }}>
-              <NoteTitle>{note.title}</NoteTitle>
-              <NoteContent>{note.content}</NoteContent>
+              <Styled.NoteTitle>{note.title}</Styled.NoteTitle>
+              <Styled.NoteContent>{note.content}</Styled.NoteContent>
             </div>
             {hoveredNote === note._id && note.createdBy._id === auth._id && (
               <div
@@ -77,7 +77,7 @@ export default function NotesScreen() {
               </span>
             </div>
           </div>
-        </NoteContainer>
+        </Styled.NoteContainer>
       ))}
     </>
   );

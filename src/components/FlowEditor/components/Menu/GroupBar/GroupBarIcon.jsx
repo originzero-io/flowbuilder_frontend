@@ -4,7 +4,7 @@ import { setGroupBarDisplay } from "store/reducers/flow/flowGuiSlice";
 import { GroupIcon } from "components/Shared/icons";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import { getGroups } from "store/reducers/flow/flowGroupsSlice";
-import { Container } from "./GroupBar.style";
+import * as Styled from "./GroupBar.style";
 
 export default function GroupBarIcon({ theme, flowId }) {
   const { flowGui } = useActiveFlow();
@@ -19,8 +19,8 @@ export default function GroupBarIcon({ theme, flowId }) {
     }
   };
   return (
-    <Container onClick={groupBarDisplayHandle}>
+    <Styled.Container onClick={groupBarDisplayHandle}>
       <GroupIcon width="50px" height="50px" theme={theme} color="whitesmoke" />
-    </Container>
+    </Styled.Container>
   );
 }

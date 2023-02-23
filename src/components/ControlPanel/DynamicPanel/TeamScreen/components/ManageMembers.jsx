@@ -12,10 +12,10 @@ import {
   removeUserToWorkspace,
 } from "store/reducers/userSlice";
 
-const UserItem = styled.div`
+const StyledUserItem = styled.div`
   margin-left: 10px;
 `;
-const Container = styled.div`
+const StyledContainer = styled.div`
   display: flex;
   padding: 10px;
   align-items: center;
@@ -39,9 +39,9 @@ export default function ManageMembers() {
   return (
     <div>
       {users.map((user) => (
-        <Container key={user._id}>
+        <StyledContainer key={user._id}>
           <Avatar avatar={user.avatar} />
-          <UserItem>{user.username}</UserItem>
+          <StyledUserItem>{user.username}</StyledUserItem>
           {user.workspaces.some(
             (workspace) => workspace === activeWorkspace._id,
           ) ? (
@@ -55,7 +55,7 @@ export default function ManageMembers() {
               onClick={() => addMemberHandle(user)}
             />
           )}
-        </Container>
+        </StyledContainer>
       ))}
     </div>
   );

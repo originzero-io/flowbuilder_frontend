@@ -8,7 +8,7 @@ import {
   setNodes,
 } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
-import { Menu, MenuItem } from "./ElementContextMenu.style";
+import * as Styled from "./ElementContextMenu.style";
 
 export default function ElementMenu() {
   const { flowElements } = useActiveFlow();
@@ -29,11 +29,11 @@ export default function ElementMenu() {
   return (
     <div>
       {elementMenu.state === true && (
-        <Menu x={elementMenu.x} y={elementMenu.y}>
-          <MenuItem>Edit</MenuItem>
-          <MenuItem onClick={rotateItem}>Rotate</MenuItem>
-          <MenuItem onClick={deleteItem}>Delete</MenuItem>
-        </Menu>
+        <Styled.Menu x={elementMenu.x} y={elementMenu.y}>
+          <Styled.MenuItem>Edit</Styled.MenuItem>
+          <Styled.MenuItem onClick={rotateItem}>Rotate</Styled.MenuItem>
+          <Styled.MenuItem onClick={deleteItem}>Delete</Styled.MenuItem>
+        </Styled.Menu>
       )}
     </div>
   );

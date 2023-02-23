@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import { useParams } from "react-router-dom";
-import { GroupBarWrapper } from "../../../../StyledComponents/AppWrapper";
 import GroupBarIcon from "./GroupBarIcon";
 import GroupList from "./GroupList";
 import NewGroupForm from "./NewGroupForm";
 
-const Wrapper = styled.div`
+const StyledWrapper = styled.div`
   position: absolute;
   display: flex;
   flex-direction: row;
@@ -18,18 +17,29 @@ const Wrapper = styled.div`
   max-height: 70vh;
   right: ${({ visible }) => (visible === "visible" ? "0px" : "-25px")};
 `;
+const StyledGroupBarWrapper = styled.div`
+  width: ${({ visible }) => (visible === "visible" ? "250px" : "0px")};
+  max-height: 50vh;
+  transition: width 0.3s ease;
+  padding: 10px;
+  z-index: 5;
+  border-bottom-left-radius: 6px;
+  background: ${(props) => props.theme.menuBackground};
+  overflow-y: auto;
+  overflow-x: hidden;
+`;
 const GroupBar = () => {
   const { flowGui } = useActiveFlow();
   const { groupBarDisplay, theme } = flowGui;
   const { flowId } = useParams();
   return (
-    <Wrapper visible={groupBarDisplay}>
+    <StyledWrapper visible={groupBarDisplay}>
       <GroupBarIcon flowId={flowId} theme={theme} />
-      <GroupBarWrapper visible={groupBarDisplay}>
+      <StyledGroupBarWrapper visible={groupBarDisplay}>
         <NewGroupForm theme={theme} />
         <GroupList flowId={flowId} theme={theme} />
-      </GroupBarWrapper>
-    </Wrapper>
+      </StyledGroupBarWrapper>
+    </StyledWrapper>
   );
 };
 

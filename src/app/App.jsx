@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import InitialFetchs from "app/InitialFetchs.jsx";
 import Modal from "../components/Shared/Modal/Modal.jsx";
 import SocketConnections from "./SocketConnections";
-import { AppWrapper } from "../components/StyledComponents/AppWrapper";
+import * as Styled from "./App.style";
 import NotFound from "../routes/NotFound";
 import PrivateRoute from "../routes/PrivateRoute";
 import AuthPage from "../pages/AuthPage";
@@ -14,7 +14,7 @@ import LoadingBar from "../components/Shared/LoadingBar/LoadingBar.jsx";
 import ToastNotification from "../components/Shared/Notification/ToastNotification.jsx";
 
 const App = () => (
-  <AppWrapper>
+  <Styled.AppWrapper>
     <LoadingBar />
     <Switch>
       <Route exact path="/" component={AuthPage} />
@@ -31,7 +31,7 @@ const App = () => (
     <Modal />
     <SocketConnections />
     <InitialFetchs />
-  </AppWrapper>
+  </Styled.AppWrapper>
 );
 
 export default App;

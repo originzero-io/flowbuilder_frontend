@@ -3,14 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { VscTrash } from "react-icons/vsc";
 import { flowNamespace } from "app/SocketConnections";
-import {
-  CardBody,
-  CardContainer,
-  CardDescription,
-  CardFooter,
-  CardTitle,
-  CardAuthor,
-} from "./Card.style";
+import * as Styled from "./Card.style";
 import DetailMenu from "./DetailMenu";
 
 const propTypes = {
@@ -26,17 +19,21 @@ const Card = ({ data }) => {
     }
   };
   return (
-    <CardContainer>
-      <CardTitle>{data.config.name || ""}</CardTitle>
+    <Styled.CardContainer>
+      <Styled.CardTitle>{data.config.name || ""}</Styled.CardTitle>
       <DetailMenu
         deleteEvent={deleteCardHandler}
         data={data}
         getPermission={getPermission}
       />
-      <CardBody>
-        <CardDescription>{data.config.description || ""}</CardDescription>
-        <CardFooter>
-          <CardAuthor>{data.config.createdBy.username || ""}</CardAuthor>
+      <Styled.CardBody>
+        <Styled.CardDescription>
+          {data.config.description || ""}
+        </Styled.CardDescription>
+        <Styled.CardFooter>
+          <Styled.CardAuthor>
+            {data.config.createdBy.username || ""}
+          </Styled.CardAuthor>
           <div>
             {getPermission("CAN_EDIT_FLOW", {
               flowId: data._id,
@@ -47,9 +44,9 @@ const Card = ({ data }) => {
               </span>
             )}
           </div>
-        </CardFooter>
-      </CardBody>
-    </CardContainer>
+        </Styled.CardFooter>
+      </Styled.CardBody>
+    </Styled.CardContainer>
   );
 };
 

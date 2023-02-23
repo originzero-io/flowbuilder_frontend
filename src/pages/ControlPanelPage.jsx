@@ -5,13 +5,13 @@ import NavigationPanel from "../components/ControlPanel/NavigationPanel/Navigati
 import WorkspacePanel from "../components/ControlPanel/WorkspacePanel/WorkspacePanel.jsx";
 import DynamicPanel, { TopMenu } from "../components/ControlPanel/DynamicPanel";
 
-const Wrapper = styled.div`
+const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100vh;
 `;
-const Content = styled.div`
+const StyledContent = styled.div`
   display: flex;
   height: 100vh;
 `;
@@ -23,13 +23,13 @@ export default function ControlPanelPage() {
     flowExecutorNamespace.removeAllListeners();
   }, []);
   return (
-    <Wrapper>
+    <StyledWrapper>
       <TopMenu />
-      <Content>
+      <StyledContent>
         <WorkspacePanel />
         <NavigationPanel />
         <DynamicPanel />
-      </Content>
-    </Wrapper>
+      </StyledContent>
+    </StyledWrapper>
   );
 }

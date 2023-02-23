@@ -22,7 +22,7 @@ import WorkspaceBrand from "./WorkspaceBrand";
 import ProjectList from "./ProjectList.jsx";
 import NavMenuItem from "./NavMenuItem";
 import AddProjectForm from "./AddProjectForm";
-import { Container, Footer, NavMenu } from "./NavigationPanel.style";
+import * as Styled from "./NavigationPanel.style";
 
 const NavigationPanel = () => {
   const dispatch = useDispatch();
@@ -55,8 +55,8 @@ const NavigationPanel = () => {
     <CollapsibleTrigger label="Settings" icon={<FiSettings />} />
   );
   return (
-    <Container>
-      <NavMenu>
+    <Styled.Container>
+      <Styled.NavMenu>
         <WorkspaceBrand workspace={activeWorkspace} />
         <CollapsibleMenu trigger={projectItem()}>
           <Link to={`${url}/projects`}>
@@ -79,8 +79,8 @@ const NavigationPanel = () => {
             <CollapsibleMenuItem>Preferences</CollapsibleMenuItem>
           </CollapsibleMenu>
         </Link>
-      </NavMenu>
-      <Footer>
+      </Styled.NavMenu>
+      <Styled.Footer>
         <Avatar avatar={avatar} size={24} />
         <div
           style={{
@@ -91,8 +91,8 @@ const NavigationPanel = () => {
         >
           {name}
         </div>
-      </Footer>
-    </Container>
+      </Styled.Footer>
+    </Styled.Container>
   );
 };
 

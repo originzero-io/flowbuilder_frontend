@@ -22,15 +22,11 @@ import { flowExecutorNamespace } from "app/SocketConnections";
 import { backendFlowDataBuilder } from "components/FlowEditor/helpers/flowHelper";
 import { useParams } from "react-router-dom";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
-import { Menu, MenuItem } from "./NavMenu.style";
+import * as StyledDropdown from "components/StyledComponents/DropdownMenu";
+import * as StyledShapes from "components/StyledComponents/Shapes";
+import * as StyledDivider from "components/StyledComponents/Divider";
+import * as Styled from "./NavMenu.style";
 import { ShareIcon, TuneIcon } from "./Icons";
-import { Circle } from "../../../../StyledComponents/Shapes";
-import {
-  DropdownItem,
-  DropdownList,
-  DropdownWrapper,
-} from "../../../../StyledComponents/DropdownMenu";
-import { VerticalDivider } from "../../../../StyledComponents/Divider";
 import SwitchButton from "../../../Nodes/shared/SwitchButton";
 
 const dummyDevices = [
@@ -148,9 +144,9 @@ export default function ConfigurationMenu() {
   };
 
   return (
-    <Menu>
-      <DropdownWrapper tabIndex="1">
-        <MenuItem>
+    <Styled.Menu>
+      <StyledDropdown.DropdownWrapper tabIndex="1">
+        <Styled.MenuItem>
           <Button
             style={{
               width: "100px",
@@ -164,13 +160,16 @@ export default function ConfigurationMenu() {
             <VscRunAll />
             <div onClick={debugFlow}>Debug</div>
           </Button>
-        </MenuItem>
-        <DropdownList>
-          <DropdownItem>
+        </Styled.MenuItem>
+        <StyledDropdown.DropdownList>
+          <StyledDropdown.DropdownItem>
             <div>This PC</div>
-          </DropdownItem>
+          </StyledDropdown.DropdownItem>
           {dummyDevices.map((device) => (
-            <DropdownItem style={{ fontSize: "1.5vmin" }} key={device.id}>
+            <StyledDropdown.DropdownItem
+              style={{ fontSize: "1.5vmin" }}
+              key={device.id}
+            >
               <GoDeviceDesktop
                 style={{ fontSize: "36px", marginRight: "5px" }}
               />
@@ -180,71 +179,77 @@ export default function ConfigurationMenu() {
                   {device.ip}
                 </span>
               </div>
-            </DropdownItem>
+            </StyledDropdown.DropdownItem>
           ))}
-        </DropdownList>
-      </DropdownWrapper>
+        </StyledDropdown.DropdownList>
+      </StyledDropdown.DropdownWrapper>
 
-      <DropdownWrapper tabIndex="1">
-        <MenuItem data-tip="Share" data-for="share">
+      <StyledDropdown.DropdownWrapper tabIndex="1">
+        <Styled.MenuItem data-tip="Share" data-for="share">
           <ShareIcon width="25px" height="25px" theme={theme} />
-        </MenuItem>
+        </Styled.MenuItem>
         <Tooltip id="share" place="bottom" />
 
-        <DropdownList>
-          <DropdownItem>
+        <StyledDropdown.DropdownList>
+          <StyledDropdown.DropdownItem>
             <FileInput onChange={fileUploadHandle} label="Import Flow" />
-          </DropdownItem>
-          <DropdownItem onClick={downloadFlowHandle}>Export Flow</DropdownItem>
-        </DropdownList>
-      </DropdownWrapper>
-      <VerticalDivider />
+          </StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem onClick={downloadFlowHandle}>
+            Export Flow
+          </StyledDropdown.DropdownItem>
+        </StyledDropdown.DropdownList>
+      </StyledDropdown.DropdownWrapper>
+      <StyledDivider.VerticalDivider />
 
-      <MenuItem data-tip="Settings" data-for="settings">
+      <Styled.MenuItem data-tip="Settings" data-for="settings">
         <TuneIcon color={themeColor[theme].iconColor} />
-      </MenuItem>
+      </Styled.MenuItem>
       <Tooltip id="settings" place="bottom" />
 
-      <VerticalDivider />
+      <StyledDivider.VerticalDivider />
 
-      <MenuItem data-tip="Learn" data-for="learn">
+      <Styled.MenuItem data-tip="Learn" data-for="learn">
         <BiBrain
           style={{
             fontSize: "25px",
             color: themeColor[theme].iconColor,
           }}
         />
-      </MenuItem>
+      </Styled.MenuItem>
       <Tooltip id="learn" place="bottom" />
 
-      <DropdownWrapper tabIndex="1">
-        <Circle>
+      <StyledDropdown.DropdownWrapper tabIndex="1">
+        <StyledShapes.Circle>
           <Avatar avatar={auth.avatar} />
-        </Circle>
-        <DropdownList align="right">
-          <DropdownItem>
+        </StyledShapes.Circle>
+        <StyledDropdown.DropdownList align="right">
+          <StyledDropdown.DropdownItem>
             Dark Theme
             <SwitchButton checked={active.theme} onChange={changeTheme} />
-          </DropdownItem>
-          <DropdownItem>
+          </StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem>
             Mini-map
             <SwitchButton
               checked={active.miniMap}
               onChange={changeMiniMapDisplay}
             />
-          </DropdownItem>
-          <DropdownItem>Account Settings</DropdownItem>
-          <DropdownItem onClick={logOutHandle}>Log Out</DropdownItem>
-          <DropdownItem>
+          </StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem>
+            Account Settings
+          </StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem onClick={logOutHandle}>
+            Log Out
+          </StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem>
             <select onChange={edgeTypeHandle} defaultValue="smoothstep">
               <option value="bezier">Bezier</option>
               <option value="step">Step</option>
               <option value="smoothstep">Smooth Step</option>
               <option value="straight">Straight</option>
             </select>
-          </DropdownItem>
-        </DropdownList>
-      </DropdownWrapper>
-    </Menu>
+          </StyledDropdown.DropdownItem>
+        </StyledDropdown.DropdownList>
+      </StyledDropdown.DropdownWrapper>
+    </Styled.Menu>
   );
 }

@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import PropTypes from "prop-types";
-import { PermissionHeader, PermissionContent } from "../PermissionScreen.style";
+import * as Styled from "../PermissionScreen.style";
 import CollapsibleMenu, { CollapsibleMenuItem } from "../CollapsibleMenu";
 import PermissionContext from "../../context/PermissionContext";
 
@@ -40,8 +40,8 @@ export default function EditDevicePermission({
   }, [permissions.CAN_EDIT_PROCESSOR.length]);
   return (
     <>
-      <PermissionHeader>Edit</PermissionHeader>
-      <PermissionContent>
+      <Styled.PermissionHeader>Edit</Styled.PermissionHeader>
+      <Styled.PermissionContent>
         <CollapsibleMenu trigger="Controllers">
           <CollapsibleMenuItem>
             <CheckboxGroup
@@ -110,7 +110,7 @@ export default function EditDevicePermission({
             </CollapsibleMenuItem>
           ))}
         </CollapsibleMenu>
-      </PermissionContent>
+      </Styled.PermissionContent>
     </>
   );
 }

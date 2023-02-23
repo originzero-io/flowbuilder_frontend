@@ -4,10 +4,7 @@ import PropTypes from "prop-types";
 import CreateDevicePermission from "../components/DevicePermissions/CreateDevicePermission";
 import EditDevicePermission from "../components/DevicePermissions/EditDevicePermission";
 import UsageDevicePermission from "../components/DevicePermissions/UsageDevicePermission";
-import {
-  PermissionContainer,
-  TabContainer,
-} from "../components/PermissionScreen.style";
+import * as Styled from "../components/PermissionScreen.style";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,
@@ -36,28 +33,28 @@ export default function DevicePermissions({
   // console.log('device permissions rendered');
 
   return (
-    <TabContainer>
-      <PermissionContainer>
+    <Styled.TabContainer>
+      <Styled.PermissionContainer>
         <CreateDevicePermission
           permissions={permissions}
           handleChange={handleSingleDeviceChange}
         />
-      </PermissionContainer>
-      <PermissionContainer>
+      </Styled.PermissionContainer>
+      <Styled.PermissionContainer>
         <EditDevicePermission
           permissions={permissions}
           handleChange={handleMultiDeviceChange}
           handleAllChange={handleAllChange}
         />
-      </PermissionContainer>
-      <PermissionContainer>
+      </Styled.PermissionContainer>
+      <Styled.PermissionContainer>
         <UsageDevicePermission
           permissions={permissions}
           handleChange={handleMultiDeviceChange}
           handleAllChange={handleAllChange}
         />
-      </PermissionContainer>
-    </TabContainer>
+      </Styled.PermissionContainer>
+    </Styled.TabContainer>
   );
 }
 

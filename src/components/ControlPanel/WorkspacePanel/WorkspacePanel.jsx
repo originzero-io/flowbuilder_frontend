@@ -18,11 +18,7 @@ import useWorkspace from "utils/hooks/useWorkspace";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
 import AddWorkspaceForm from "./AddWorkspaceForm";
-import {
-  WorkspaceContainer,
-  WorkspaceItem,
-  WorkspaceItemWrapper,
-} from "./WorkspacePanel.style";
+import * as Styled from "./WorkspacePanel.style";
 
 const WorkspacePanel = () => {
   const { workspaces, activeWorkspace } = useWorkspace();
@@ -54,32 +50,32 @@ const WorkspacePanel = () => {
     dispatch(setModal(<AddWorkspaceForm />));
   };
   return (
-    <WorkspaceContainer>
+    <Styled.WorkspaceContainer>
       {workspaces.map((workspace) => (
-        <WorkspaceItemWrapper
+        <Styled.WorkspaceItemWrapper
           key={workspace._id}
           active={workspace._id === activeWorkspace._id}
           onClick={() => clickWorkspaceHandler(workspace)}
         >
-          <WorkspaceItem
+          <Styled.WorkspaceItem
             active={workspace._id === activeWorkspace._id}
             data-tip={workspace.name}
             data-for={workspace._id}
           >
             {workspace.name.split("")[0].toUpperCase()}
-          </WorkspaceItem>
+          </Styled.WorkspaceItem>
           <Tooltip id={workspace._id} place="top" type="light" />
-        </WorkspaceItemWrapper>
+        </Styled.WorkspaceItemWrapper>
       ))}
 
       {auth.role === "admin" && (
-        <WorkspaceItemWrapper>
-          <WorkspaceItem onClick={addWorkspaceHandler}>
+        <Styled.WorkspaceItemWrapper>
+          <Styled.WorkspaceItem onClick={addWorkspaceHandler}>
             <VscAdd style={{ color: "white" }} />
-          </WorkspaceItem>
-        </WorkspaceItemWrapper>
+          </Styled.WorkspaceItem>
+        </Styled.WorkspaceItemWrapper>
       )}
-    </WorkspaceContainer>
+    </Styled.WorkspaceContainer>
   );
 };
 

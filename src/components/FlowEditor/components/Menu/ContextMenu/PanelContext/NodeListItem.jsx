@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { NodeElement, IconWrapper, Label } from "./PanelContextMenu.style";
+import * as Styled from "./PanelContextMenu.style";
 import FavIconManager from "./FavIconManager";
 
 const propTypes = {
@@ -16,7 +16,7 @@ export default function NodeListItem({
   favClick,
 }) {
   return (
-    <NodeElement
+    <Styled.NodeElement
       onDragStart={(event) => onDragStart(event, node.name)}
       onDoubleClick={() => addNewNode(node)}
       draggable
@@ -25,7 +25,7 @@ export default function NodeListItem({
         {node.icon}
         <Label>{node.name}</Label>
       </div>
-      <IconWrapper>
+      <Styled.IconWrapper>
         <div onClick={() => addNewNode(node)}>
           <i
             className="fas fa-plus"
@@ -33,8 +33,8 @@ export default function NodeListItem({
           />
         </div>
         <FavIconManager node={node} favClick={favClick} />
-      </IconWrapper>
-    </NodeElement>
+      </Styled.IconWrapper>
+    </Styled.NodeElement>
   );
 }
 

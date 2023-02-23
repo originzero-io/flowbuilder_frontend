@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Logo } from "../components/Shared/icons";
 import LoginForm from "../components/Auth/LoginForm";
 
-const Wrapper = styled.div`
+const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   height: 100vh;
   background: #0e1217;
 `;
-const Content = styled.div`
+const StyledContent = styled.div`
   display: flex;
   flex-direction: row;
   width: auto;
@@ -24,7 +24,7 @@ const Content = styled.div`
   }
   //overflow-y:auto;
 `;
-const FormWrapper = styled.div`
+const StyledFormWrapper = styled.div`
   width: 300px;
   padding: 40px 30px;
   background: #212529;
@@ -32,7 +32,7 @@ const FormWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
 `;
-const LogoWrapper = styled.div`
+const StyledLogoWrapper = styled.div`
   padding: 40px;
   transition: all 0.3s ease;
   &:hover {
@@ -42,15 +42,15 @@ const LogoWrapper = styled.div`
 `;
 export default function LoginPage() {
   return (
-    <Wrapper>
-      <Content>
-        <LogoWrapper>
+    <StyledWrapper>
+      <StyledContent>
+        <StyledLogoWrapper>
           <Logo theme="dark" width="100px" height="100px" />
-        </LogoWrapper>
-        <FormWrapper>
+        </StyledLogoWrapper>
+        <StyledFormWrapper>
           <LoginForm />
-        </FormWrapper>
-      </Content>
-    </Wrapper>
+        </StyledFormWrapper>
+      </StyledContent>
+    </StyledWrapper>
   );
 }

@@ -8,16 +8,16 @@ import { Logo } from "components/Shared/icons";
 import { useReactFlow } from "reactflow";
 import { addSubFlow } from "store/reducers/flow/flowElementsSlice";
 import { toPng } from "html-to-image";
-import { MenuIndex, MenuItem } from "./NavMenu.style";
+import * as Styled from "./NavMenu.style";
 
-const Menu = styled(MenuIndex)`
+const StyledMenu = styled(Styled.MenuIndex)`
   top: 10px;
   left: 50px;
   background: ${(props) => props.theme.menuBackground};
   border-radius: 6px;
   width: 400px;
 `;
-const Circle = styled.div`
+const StyledCircle = styled.div`
   width: 55px;
   height: 55px;
   background: ${(props) => props.theme.menuBackground};
@@ -81,19 +81,23 @@ const MainMenu = () => {
     }).then(downloadImage);
   };
   return (
-    <Menu>
-      <Circle>
+    <StyledMenu>
+      <StyledCircle>
         <Logo theme={theme} />
-      </Circle>
+      </StyledCircle>
       <div onClick={homeClickHandle}>
         <Link to="/panel/projects">
-          <MenuItem>Home</MenuItem>
+          <Styled.MenuItem>Home</Styled.MenuItem>
         </Link>
       </div>
-      <MenuItem onClick={nameClick}>{flowConfig.name}</MenuItem>
-      <MenuItem onClick={() => dispatch(addSubFlow())}>Add sub flow</MenuItem>
-      <MenuItem onClick={downloadPageAsImage}>Export as Image</MenuItem>
-    </Menu>
+      <Styled.MenuItem onClick={nameClick}>{flowConfig.name}</Styled.MenuItem>
+      <Styled.MenuItem onClick={() => dispatch(addSubFlow())}>
+        Add sub flow
+      </Styled.MenuItem>
+      <Styled.MenuItem onClick={downloadPageAsImage}>
+        Export as Image
+      </Styled.MenuItem>
+    </StyledMenu>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { NodeWrapper } from "./PanelContextMenu.style";
+import * as Styled from "./PanelContextMenu.style";
 import NodeListItem from "./NodeListItem";
 
 export default function FavoriteNodes({
@@ -10,7 +10,7 @@ export default function FavoriteNodes({
 }) {
   const favoriteNodes = nodeList.filter((node) => node.fav === true);
   return (
-    <NodeWrapper>
+    <Styled.NodeWrapper>
       {favoriteNodes.length > 0
         ? favoriteNodes.map((node) => (
             <NodeListItem
@@ -22,6 +22,6 @@ export default function FavoriteNodes({
             />
           ))
         : "Click the star button to fav nodes"}
-    </NodeWrapper>
+    </Styled.NodeWrapper>
   );
 }

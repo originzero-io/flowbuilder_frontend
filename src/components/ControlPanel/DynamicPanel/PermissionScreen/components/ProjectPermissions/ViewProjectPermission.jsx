@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
-import { PermissionContent, PermissionHeader } from "../PermissionScreen.style";
+import * as Styled from "../PermissionScreen.style";
 import CollapsibleMenu, {
   CollapsibleMenuItem,
   CollapsibleSubMenu,
@@ -38,8 +38,8 @@ function ViewProjectPermission({
   }, [permissions.CAN_VIEW_PROJECT.length]);
   return (
     <>
-      <PermissionHeader>View</PermissionHeader>
-      <PermissionContent>
+      <Styled.PermissionHeader>View</Styled.PermissionHeader>
+      <Styled.PermissionContent>
         <CollapsibleMenu trigger="Projects">
           <CollapsibleMenuItem>
             <CheckboxGroup
@@ -99,7 +99,7 @@ function ViewProjectPermission({
             </CollapsibleSubMenu>
           ))}
         </CollapsibleMenu>
-      </PermissionContent>
+      </Styled.PermissionContent>
     </>
   );
 }

@@ -11,7 +11,7 @@ import { flowExecutorNamespace } from "app/SocketConnections";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import theme from "components/Shared/ThemeReference";
 
-const FlowWrapper = styled.div`
+const StyledFlowWrapper = styled.div`
   height: 100%;
   width: 100%;
 `;
@@ -35,9 +35,9 @@ const FlowPage = () => {
   return (
     <ReactFlowProvider>
       <ThemeProvider theme={theme[flowGui.theme]}>
-        <FlowWrapper ref={rfWrapper}>
+        <StyledFlowWrapper ref={rfWrapper}>
           <FlowEditor reactFlowWrapper={rfWrapper} />
-        </FlowWrapper>
+        </StyledFlowWrapper>
       </ThemeProvider>
     </ReactFlowProvider>
   );

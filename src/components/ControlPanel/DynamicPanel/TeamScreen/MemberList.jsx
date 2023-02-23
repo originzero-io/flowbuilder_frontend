@@ -9,7 +9,7 @@ import useWorkspace from "utils/hooks/useWorkspace";
 import Avatar from "components/Shared/Avatar/Avatar";
 import useAuthPermission from "utils/hooks/useAuthPermission";
 
-const Box = styled.div`
+const StyledBox = styled.div`
   margin-top: 3px;
   cursor: pointer;
   width: 25px;
@@ -29,7 +29,6 @@ export default function MemberList() {
       ),
     [activeWorkspace, users],
   );
-  console.log("members: ", members);
   return (
     <Table dark hover>
       <thead>
@@ -52,7 +51,7 @@ export default function MemberList() {
               <Avatar avatar={member.avatar} />
             </td>
             <td>
-              <Box online={member.online} />
+              <StyledBox online={member.online} />
             </td>
             <td>{member.name}</td>
             <td>{member.username}</td>

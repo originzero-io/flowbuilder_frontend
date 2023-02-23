@@ -7,9 +7,9 @@ import {
 } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import { getSelectedNodes } from "../../../helpers/elementHelper";
-import { GroupColor, Label } from "../GroupBar/GroupBar.style";
+import * as Styled from "../GroupBar/GroupBar.style";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   position: absolute;
   right: -120px;
   top: -2px;
@@ -18,7 +18,7 @@ const Container = styled.div`
   flex-direction: column;
   flex-wrap: nowrap;
 `;
-const SearchBar = styled.input`
+const StyledSearchBar = styled.input`
   border-radius: 4px;
   width: 70%;
   padding-left: 3px;
@@ -30,7 +30,7 @@ const SearchBar = styled.input`
   font-size: 10px;
   outline: hidden;
 `;
-const GroupItem = styled.div`
+const StyledGroupItem = styled.div`
   color: black;
   display: flex;
   justify-content: space-around;
@@ -40,7 +40,7 @@ const GroupItem = styled.div`
     background: rgb(15, 175, 143);
   }
 `;
-const Content = styled.div`
+const StyledContent = styled.div`
   background: rgb(189, 195, 199);
   margin-top: 2px;
 `;
@@ -75,20 +75,22 @@ export default function GroupMenu({ self }) {
   };
 
   return (
-    <Container>
-      <SearchBar
+    <StyledContainer>
+      <StyledSearchBar
         placeholder="search group"
         className="nodrag nowheel"
         onChange={searchHandle}
       />
-      <Content>
+      <StyledContent>
         {searched.map((group) => (
-          <GroupItem key={group._id} onClick={() => selectGroup(group)}>
-            <Label style={{ fontSize: "12px" }}>{group.name}</Label>
-            <GroupColor width="15px" height="15px" value={group.color} />
-          </GroupItem>
+          <StyledGroupItem key={group._id} onClick={() => selectGroup(group)}>
+            <Styled.Label style={{ fontSize: "12px" }}>
+              {group.name}
+            </Styled.Label>
+            <Styled.GroupColor width="15px" height="15px" value={group.color} />
+          </StyledGroupItem>
         ))}
-      </Content>
-    </Container>
+      </StyledContent>
+    </StyledContainer>
   );
 }

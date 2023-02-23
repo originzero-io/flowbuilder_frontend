@@ -34,7 +34,7 @@ import TeamPermissions from "./containers/TeamPermissions";
 import ProjectPermissions from "./containers/ProjectPermissions";
 import DevicePermissions from "./containers/DevicePermissions";
 import UserHeader from "./components/UserHeader";
-import { AllPermissionsContainer } from "./components/PermissionScreen.style";
+import * as Styled from "./components/PermissionScreen.style";
 import PresetList from "./components/PresetList";
 import AddPreset from "./components/AddPreset";
 
@@ -88,7 +88,7 @@ export default function PermissionScreen() {
     <PermissionProvider>
       <div style={{ height: "90vh" }}>
         <UserHeader member={member} />
-        <AllPermissionsContainer>
+        <Styled.AllPermissionsContainer>
           <CheckboxGroup
             label="This user can do everything"
             labelSize="1.6vmin"
@@ -97,7 +97,7 @@ export default function PermissionScreen() {
             defaultChecked={permissions.CAN_DO_EVERYTHING}
             checked={permissions.CAN_DO_EVERYTHING}
           />
-        </AllPermissionsContainer>
+        </Styled.AllPermissionsContainer>
         <Tabs
           selectedTabClassName="selected-tab"
           style={{ height: "80%" }}

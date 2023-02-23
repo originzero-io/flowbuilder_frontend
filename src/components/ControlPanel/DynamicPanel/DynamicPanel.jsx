@@ -21,14 +21,14 @@ import {
 } from "./index";
 import NotFound from "./NotFound";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 100%;
   height: 100%;
   background: #1a1d21;
   overflow-y: auto;
   overflow-x: hidden;
 `;
-const PanelComponentWrapper = styled.div`
+const StyledPanelComponentWrapper = styled.div`
   padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
@@ -43,8 +43,8 @@ export default function DynamicPanel() {
   }, []);
 
   return (
-    <Container>
-      <PanelComponentWrapper>
+    <StyledContainer>
+      <StyledPanelComponentWrapper>
         <Switch>
           <Route
             exact
@@ -72,7 +72,7 @@ export default function DynamicPanel() {
           <Route exact path={`${route.url}/users`} component={UsersScreen} />
           <Route path="*" component={NotFound} />
         </Switch>
-      </PanelComponentWrapper>
-    </Container>
+      </StyledPanelComponentWrapper>
+    </StyledContainer>
   );
 }

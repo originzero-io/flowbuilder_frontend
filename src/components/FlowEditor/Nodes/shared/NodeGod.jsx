@@ -8,14 +8,7 @@ import { flowExecutorNamespace } from "app/SocketConnections";
 
 import { Badge } from "reactstrap";
 import { getIconComponent } from "components/FlowEditor/helpers/nodeTypeHelper";
-import {
-  NodeArea,
-  NodeContent,
-  NodeWrapper,
-  SourceWrapper,
-  TargetWrapper,
-  Info,
-} from "./Node.style";
+import * as Styled from "./Node.style";
 import NodeHeader from "./NodeHeader/NodeHeader";
 import { InfoIcon } from "./NodeIcons";
 import NodeIOManager from "./NodeIOManager";
@@ -57,8 +50,12 @@ const NodeGod = ({ self, children, collapsible }) => {
   }, []);
   return (
     <>
-      <NodeWrapper align={align} selected={self.selected} enable={enable}>
-        <TargetWrapper align={align}>
+      <Styled.NodeWrapper
+        align={align}
+        selected={self.selected}
+        enable={enable}
+      >
+        <Styled.TargetWrapper align={align}>
           {targets.map((i, index) => (
             <Handle
               key={index}
@@ -79,23 +76,23 @@ const NodeGod = ({ self, children, collapsible }) => {
               }}
             />
           ))}
-        </TargetWrapper>
+        </Styled.TargetWrapper>
 
-        <NodeArea>
+        <Styled.NodeArea>
           <NodeHeader self={self} collapsible={collapsible} />
           {expand ? (
-            <NodeContent>
+            <Styled.NodeContent>
               {children}
               <NodeIOManager self={self} />
-            </NodeContent>
+            </Styled.NodeContent>
           ) : (
-            <NodeContent type="logo">
+            <Styled.NodeContent type="logo">
               <NodeIcon width="70px" height="70px" enable={enable} />
-            </NodeContent>
+            </Styled.NodeContent>
           )}
-        </NodeArea>
+        </Styled.NodeArea>
 
-        <SourceWrapper align={align}>
+        <Styled.SourceWrapper align={align}>
           {sources.map((i, index) => (
             <Handle
               key={index}
@@ -116,8 +113,8 @@ const NodeGod = ({ self, children, collapsible }) => {
               }}
             />
           ))}
-        </SourceWrapper>
-      </NodeWrapper>
+        </Styled.SourceWrapper>
+      </Styled.NodeWrapper>
       <Badge color="success">{serverData.message}</Badge>
     </>
   );

@@ -7,19 +7,8 @@ import { FiUsers } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import { logOut } from "store/reducers/authSlice";
-import {
-  DropdownItem,
-  DropdownWrapper,
-} from "components/StyledComponents/DropdownMenu";
-import {
-  Container,
-  LeftSideContainer,
-  MenuItem,
-  Profile,
-  ProfileList,
-  RightSideContainer,
-  UserInformation,
-} from "./TopMenu.style";
+import * as GlobalStyled from "components/StyledComponents/DropdownMenu";
+import * as Styled from "./TopMenu.style";
 
 export default function TopMenu() {
   const dispatch = useDispatch();
@@ -31,43 +20,45 @@ export default function TopMenu() {
     }
   };
   return (
-    <Container>
-      <LeftSideContainer>
+    <Styled.Container>
+      <Styled.LeftSideContainer>
         <Logo theme="dark" />
-      </LeftSideContainer>
-      <RightSideContainer>
+      </Styled.LeftSideContainer>
+      <Styled.RightSideContainer>
         <Link to={`${url}/learn`}>
-          <MenuItem>
+          <Styled.MenuItem>
             <BiBrain />
             <span style={{ marginLeft: "5px" }}>Learn</span>
-          </MenuItem>
+          </Styled.MenuItem>
         </Link>
         {role === "admin" && (
           <Link to={`${url}/users`}>
-            <MenuItem>
+            <Styled.MenuItem>
               <FiUsers />
               <span style={{ marginLeft: "5px" }}>Users</span>
-            </MenuItem>
+            </Styled.MenuItem>
           </Link>
         )}
-        <DropdownWrapper tabIndex="1">
-          <Profile>
+        <GlobalStyled.DropdownWrapper tabIndex="1">
+          <Styled.Profile>
             <Avatar avatar={avatar} size={36} />
-            <UserInformation>
+            <Styled.UserInformation>
               <div>{name}</div>
               <div style={{ textAlign: "center", opacity: "0.6" }}>{role}</div>
-            </UserInformation>
-          </Profile>
-          <ProfileList>
+            </Styled.UserInformation>
+          </Styled.Profile>
+          <Styled.ProfileList>
             <Link to={`${url}/settings`}>
-              <DropdownItem style={{ color: "white" }}>
+              <GlobalStyled.DropdownItem style={{ color: "white" }}>
                 User settings
-              </DropdownItem>
+              </GlobalStyled.DropdownItem>
             </Link>
-            <DropdownItem onClick={logOutHandle}>Log out</DropdownItem>
-          </ProfileList>
-        </DropdownWrapper>
-      </RightSideContainer>
-    </Container>
+            <GlobalStyled.DropdownItem onClick={logOutHandle}>
+              Log out
+            </GlobalStyled.DropdownItem>
+          </Styled.ProfileList>
+        </GlobalStyled.DropdownWrapper>
+      </Styled.RightSideContainer>
+    </Styled.Container>
   );
 }

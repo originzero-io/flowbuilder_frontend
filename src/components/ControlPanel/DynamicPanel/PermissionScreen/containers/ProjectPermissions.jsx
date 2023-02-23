@@ -8,10 +8,7 @@ import CreateProjectPermission from "../components/ProjectPermissions/CreateProj
 import EditProjectPermission from "../components/ProjectPermissions/EditProjectPermission";
 import UsageProjectPermission from "../components/ProjectPermissions/UsageProjectPermission";
 import ViewProjectPermission from "../components/ProjectPermissions/ViewProjectPermission";
-import {
-  PermissionContainer,
-  TabContainer,
-} from "../components/PermissionScreen.style";
+import * as Styled from "../components/PermissionScreen.style";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,
@@ -61,30 +58,30 @@ export default function ProjectPermissions({
 
   // console.log('projects permissions rendered');
   return (
-    <TabContainer>
-      <PermissionContainer size="50%">
+    <Styled.TabContainer>
+      <Styled.PermissionContainer size="50%">
         <CreateProjectPermission
           permissions={permissions}
           handleChange={handleSingleProjectChange}
         />
-      </PermissionContainer>
-      <PermissionContainer>
+      </Styled.PermissionContainer>
+      <Styled.PermissionContainer>
         <CreateDashboardPermission
           projects={projects}
           permissions={permissions}
           handleChange={handleMultiProjectChange}
           handleSingleAllChange={handleSingleAllChange}
         />
-      </PermissionContainer>
-      <PermissionContainer>
+      </Styled.PermissionContainer>
+      <Styled.PermissionContainer>
         <CreateFlowPermission
           projects={projects}
           permissions={permissions}
           handleChange={handleMultiProjectChange}
           handleSingleAllChange={handleSingleAllChange}
         />
-      </PermissionContainer>
-      <PermissionContainer>
+      </Styled.PermissionContainer>
+      <Styled.PermissionContainer>
         <EditProjectPermission
           projects={projects}
           permissions={permissions}
@@ -93,8 +90,8 @@ export default function ProjectPermissions({
           handleSingleAllChange={handleSingleAllChange}
           handleNestedAllChange={handleNestedAllChange}
         />
-      </PermissionContainer>
-      <PermissionContainer>
+      </Styled.PermissionContainer>
+      <Styled.PermissionContainer>
         <UsageProjectPermission
           projects={projects}
           permissions={permissions}
@@ -103,8 +100,8 @@ export default function ProjectPermissions({
           handleSingleAllChange={handleSingleAllChange}
           handleNestedAllChange={handleNestedAllChange}
         />
-      </PermissionContainer>
-      <PermissionContainer>
+      </Styled.PermissionContainer>
+      <Styled.PermissionContainer>
         <ViewProjectPermission
           projects={projects}
           permissions={permissions}
@@ -113,8 +110,8 @@ export default function ProjectPermissions({
           handleSingleAllChange={handleSingleAllChange}
           handleNestedAllChange={handleNestedAllChange}
         />
-      </PermissionContainer>
-    </TabContainer>
+      </Styled.PermissionContainer>
+    </Styled.TabContainer>
   );
 }
 

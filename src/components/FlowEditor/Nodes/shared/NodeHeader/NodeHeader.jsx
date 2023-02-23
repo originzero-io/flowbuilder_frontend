@@ -6,7 +6,7 @@ import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import { getIncomers, getOutgoers } from "reactflow";
 import GroupMenu from "../../../components/Menu/NodeGroupMenu/NodeGroupMenu";
-import { Content, FeatureIconsWrapper, Header, Label } from "../Node.style";
+import * as Styled from "../Node.style";
 import EditNameForm from "./EditNameForm";
 import FeatureIcons from "./FeatureIcons";
 import Flag from "./NodeFlag";
@@ -52,23 +52,28 @@ export default function NodeHeader({ self }) {
   };
 
   return (
-    <Header onMouseEnter={onMouseEnterHandle} onMouseLeave={onMouseLeaveHandle}>
+    <Styled.Header
+      onMouseEnter={onMouseEnterHandle}
+      onMouseLeave={onMouseLeaveHandle}
+    >
       {/* <button onClick={nodeIncomers}>incomers</button>
         <button onClick={nodeOutgoers}>outgoers</button> */}
       {/* <NodeIcon/> */}
-      <Content>
+      <Styled.Content>
         {edit ? (
           <EditNameForm setEdit={setEdit} self={self} />
         ) : (
-          <Label onDoubleClick={expandHandle}>{self.data.label}</Label>
+          <Styled.Label onDoubleClick={expandHandle}>
+            {self.data.label}
+          </Styled.Label>
         )}
-      </Content>
-      <FeatureIconsWrapper>
+      </Styled.Content>
+      <Styled.FeatureIconsWrapper>
         {hover && <FeatureIcons self={self} edit={edit} setEdit={setEdit} />}
-      </FeatureIconsWrapper>
+      </Styled.FeatureIconsWrapper>
       <Flag self={self} onClick={groupHandle} />
       {showGroup && <GroupMenu self={self} />}
-    </Header>
+    </Styled.Header>
   );
 }
 NodeHeader.propTypes = propTypes;

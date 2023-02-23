@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import useWorkspace from "utils/hooks/useWorkspace";
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-export const Title = styled.div`
+export const StyledTitle = styled.div`
   margin-top: 5px;
   font-size: 2vmin;
 `;
@@ -20,14 +20,14 @@ const propTypes = {
 export default function UserHeader({ member }) {
   const { activeWorkspace } = useWorkspace();
   return (
-    <Container>
+    <StyledContainer>
       <Avatar avatar={member.avatar} size={60} />
-      <Title>
+      <StyledTitle>
         {member.username}
         's Permissions of
         {activeWorkspace.name}
-      </Title>
-    </Container>
+      </StyledTitle>
+    </StyledContainer>
   );
 }
 

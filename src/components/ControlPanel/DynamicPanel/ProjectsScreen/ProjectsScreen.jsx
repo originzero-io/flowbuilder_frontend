@@ -10,12 +10,7 @@ import PropTypes from "prop-types";
 import useProject from "utils/hooks/useProject.js";
 import { Alert } from "reactstrap";
 import useAuthPermission from "utils/hooks/useAuthPermission";
-import {
-  SearchBar,
-  DashboardsContainer,
-  FlowsContainer,
-  Box,
-} from "./ProjectsScreen.style";
+import * as Styled from "./ProjectsScreen.style";
 import AddDashboardForm from "./forms/AddDashboardForm";
 import AddFlowForm from "./forms/AddFlowForm";
 import FlowList from "./components/FlowList.jsx";
@@ -53,27 +48,29 @@ export default function ProjectsScreen({ flows }) {
         <>
           <CollapsibleMenu trigger={flowsCollapseTrigger()} open>
             {flows.length > 0 && (
-              <SearchBar
+              <Styled.SearchBar
                 placeholder="Search flows"
                 spellCheck={false}
                 onChange={searchHandle}
               />
             )}
-            <FlowsContainer>
+            <Styled.FlowsContainer>
               <FlowList flows={searched} />
               {getPermission("CAN_CREATE_FLOW", activeProject._id) && (
-                <Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
+                <Styled.Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
                   <VscAdd />
-                </Box>
+                </Styled.Box>
               )}
-            </FlowsContainer>
+            </Styled.FlowsContainer>
           </CollapsibleMenu>
           <CollapsibleMenu trigger={dashboardCollapseTrigger()} open>
-            <DashboardsContainer>
-              <Box onClick={() => dispatch(setModal(<AddDashboardForm />))}>
+            <Styled.DashboardsContainer>
+              <Styled.Box
+                onClick={() => dispatch(setModal(<AddDashboardForm />))}
+              >
                 <VscAdd />
-              </Box>
-            </DashboardsContainer>
+              </Styled.Box>
+            </Styled.DashboardsContainer>
           </CollapsibleMenu>
         </>
       ) : (

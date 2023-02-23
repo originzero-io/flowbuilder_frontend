@@ -2,7 +2,7 @@ import React from "react";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import PropTypes from "prop-types";
-import { PermissionHeader, PermissionContent } from "../PermissionScreen.style";
+import * as Styled from "../PermissionScreen.style";
 
 const propTypes = {
   permissions: PropTypes.object.isRequired,
@@ -11,8 +11,8 @@ const propTypes = {
 export default function CreateDevicePermission({ permissions, handleChange }) {
   return (
     <>
-      <PermissionHeader>Create</PermissionHeader>
-      <PermissionContent>
+      <Styled.PermissionHeader>Create</Styled.PermissionHeader>
+      <Styled.PermissionContent>
         <CheckboxGroup
           label="Controller"
           name="CAN_CREATE_CONTROLLER"
@@ -30,7 +30,7 @@ export default function CreateDevicePermission({ permissions, handleChange }) {
           disabled={permissions.EVERYTHING}
           checked={permissions.EVERYTHING || permissions.CAN_CREATE_PROCESSOR}
         />
-      </PermissionContent>
+      </Styled.PermissionContent>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import sortBy from "lodash/sortBy";
-import { NodeWrapper, NodeElement } from "./PanelContextMenu.style";
+import * as Styled from "./PanelContextMenu.style";
 import NodeListItem from "./NodeListItem";
 
 export default function RecentNodes({
@@ -16,7 +16,7 @@ export default function RecentNodes({
     setRecentNodes(sortByDate);
   }, [nodeList]);
   return (
-    <NodeWrapper>
+    <Styled.NodeWrapper>
       {recentNodes.map((node) => (
         <NodeListItem
           key={node.id}
@@ -26,6 +26,6 @@ export default function RecentNodes({
           favClick={favClick}
         />
       ))}
-    </NodeWrapper>
+    </Styled.NodeWrapper>
   );
 }

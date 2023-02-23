@@ -12,17 +12,8 @@ import {
   SubmitIcon,
 } from "components/Shared/icons";
 import { selectElements } from "store/reducers/flow/flowElementsSlice";
-import { HorizontalDivider } from "../../../../StyledComponents/Divider";
-import {
-  AddGroupWrapper,
-  ColorInput,
-  Header,
-  IconWrapper,
-  Input,
-  InputWrapper,
-  Submit,
-  Title,
-} from "./GroupBar.style";
+import { HorizontalDivider } from "components/StyledComponents/Divider";
+import * as Styled from "./GroupBar.style";
 
 const NewGroupForm = ({ theme }) => {
   const [formOpen, setFormOpen] = useState(false);
@@ -55,9 +46,9 @@ const NewGroupForm = ({ theme }) => {
     dispatch(selectElements(nonGroups));
   };
   return (
-    <AddGroupWrapper onSubmit={addNewGroup}>
-      <Header>
-        <IconWrapper onClick={() => setFormOpen(!formOpen)}>
+    <Styled.AddGroupWrapper onSubmit={addNewGroup}>
+      <Styled.Header>
+        <Styled.IconWrapper onClick={() => setFormOpen(!formOpen)}>
           {formOpen === true ? (
             <CancelIcon
               width="25px"
@@ -71,19 +62,19 @@ const NewGroupForm = ({ theme }) => {
               color={themeColor[theme].iconColor}
             />
           )}
-        </IconWrapper>
-        <Title>Groups</Title>
+        </Styled.IconWrapper>
+        <Styled.Title>Groups</Styled.Title>
         <NonGroupIcon
           width="40px"
           height="40px"
           onClick={selectNonGroupsHandle}
           theme={theme}
         />
-      </Header>
+      </Styled.Header>
 
       {formOpen && (
-        <InputWrapper>
-          <Input
+        <Styled.InputWrapper>
+          <Styled.Input
             placeholder="Add Group Name"
             required
             onChange={groupHandle}
@@ -91,7 +82,7 @@ const NewGroupForm = ({ theme }) => {
             value={groupInfo.name}
             maxLength={18}
           />
-          <ColorInput
+          <Styled.ColorInput
             type="color"
             onChange={groupHandle}
             name="color"
@@ -99,17 +90,17 @@ const NewGroupForm = ({ theme }) => {
             defaultValue="#2ecc71"
             value={groupInfo.color}
           />
-          <Submit type="submit">
+          <Styled.Submit type="submit">
             <SubmitIcon
               width="22px"
               height="22px"
               color={themeColor[theme].iconColor}
             />
-          </Submit>
-        </InputWrapper>
+          </Styled.Submit>
+        </Styled.InputWrapper>
       )}
       <HorizontalDivider />
-    </AddGroupWrapper>
+    </Styled.AddGroupWrapper>
   );
 };
 export default React.memo(NewGroupForm);

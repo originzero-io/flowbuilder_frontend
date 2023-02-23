@@ -4,7 +4,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import Checkbox from "./Checkbox";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,7 +40,7 @@ export default function CheckboxGroup({
   defaultChecked,
 }) {
   return (
-    <Container disabled={disabled} checked={checked}>
+    <StyledContainer disabled={disabled} checked={checked}>
       <Label
         style={{ userSelect: "none", fontSize: labelSize, margin: "2px" }}
         check
@@ -57,7 +57,7 @@ export default function CheckboxGroup({
         disabled={disabled}
         checked={checked}
       />
-    </Container>
+    </StyledContainer>
   );
 }
 

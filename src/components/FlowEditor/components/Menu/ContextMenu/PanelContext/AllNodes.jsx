@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { NodeWrapper } from "./PanelContextMenu.style";
+import * as Styled from "./PanelContextMenu.style";
 import NodeListItem from "./NodeListItem";
 
 const SearchBar = styled.input`
@@ -33,7 +33,7 @@ export default function AllNodes({
   }, [nodeList]);
 
   return (
-    <NodeWrapper>
+    <Styled.NodeWrapper>
       <SearchBar placeholder="search" onChange={searchHandle} />
       {searched.map((node) => (
         <NodeListItem
@@ -44,6 +44,6 @@ export default function AllNodes({
           favClick={favClick}
         />
       ))}
-    </NodeWrapper>
+    </Styled.NodeWrapper>
   );
 }

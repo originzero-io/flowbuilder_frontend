@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import NodeGod from "./shared/NodeGod";
-import { Label } from "./shared/Node.style";
+import * as Styled from "./shared/Node.style";
 
 const Trigger = React.memo((self) => {
   const [values, setValues] = useState([
@@ -32,7 +32,7 @@ const Trigger = React.memo((self) => {
   };
   return (
     <NodeGod self={self} collapsable>
-      <Label>Payload</Label>
+      <Styled.Label>Payload</Styled.Label>
       <div>
         <input
           type="text"

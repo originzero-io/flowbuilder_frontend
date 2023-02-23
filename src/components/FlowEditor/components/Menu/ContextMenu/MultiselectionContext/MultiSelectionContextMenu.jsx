@@ -8,7 +8,7 @@ import {
 import { setMultiSelectionContextMenu } from "store/reducers/menuSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import NodeGroupMenu from "../../NodeGroupMenu/NodeGroupMenu";
-import { Menu, MenuItem } from "../ElementContext/ElementContextMenu.style";
+import * as Styled from "../ElementContext/ElementContextMenu.style";
 
 export default function MultiSelectionContextMenu() {
   const { multiSelectionMenu } = useSelector((state) => state.menus);
@@ -45,15 +45,15 @@ export default function MultiSelectionContextMenu() {
   return (
     <div>
       {multiSelectionMenu.state && (
-        <Menu x={multiSelectionMenu.x} y={multiSelectionMenu.y}>
-          <MenuItem onClick={rotateHandle}>Rotate</MenuItem>
-          <MenuItem onClick={disableHandle}>Disable</MenuItem>
-          <MenuItem onClick={groupHandle}>
+        <Styled.Menu x={multiSelectionMenu.x} y={multiSelectionMenu.y}>
+          <Styled.MenuItem onClick={rotateHandle}>Rotate</Styled.MenuItem>
+          <Styled.MenuItem onClick={disableHandle}>Disable</Styled.MenuItem>
+          <Styled.MenuItem onClick={groupHandle}>
             {open ? "Group <" : "Group >"}
-          </MenuItem>
-          <MenuItem onClick={deleteItems}>Delete</MenuItem>
+          </Styled.MenuItem>
+          <Styled.MenuItem onClick={deleteItems}>Delete</Styled.MenuItem>
           {showGroup && <NodeGroupMenu self={self} />}
-        </Menu>
+        </Styled.Menu>
       )}
     </div>
   );

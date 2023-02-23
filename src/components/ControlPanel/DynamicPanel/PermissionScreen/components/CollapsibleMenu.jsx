@@ -4,7 +4,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 
-const MenuItem = styled.div`
+const StyledMenuItem = styled.div`
   padding: 2px;
   padding-left: 8px;
   border-bottom: 1px solid rgba(60, 60, 60, 0.6);
@@ -13,10 +13,10 @@ const MenuItem = styled.div`
     //border-radius: 4px;
   }
 `;
-const TriggerLabel = styled.span`
+const StyledTriggerLabel = styled.span`
   padding-left: 7px;
 `;
-const SubMenu = styled.div`
+const StyledSubMenu = styled.div`
   margin-left: 7px;
   background: #292d31;
   border-left: 1px solid #3e464d;
@@ -45,11 +45,11 @@ export default function CollapsibleMenu({ children, trigger, ...rest }) {
       trigger={
         open ? (
           <>
-            <MdExpandLess /> <TriggerLabel>{trigger} </TriggerLabel>
+            <MdExpandLess /> <StyledTriggerLabel>{trigger} </StyledTriggerLabel>
           </>
         ) : (
           <>
-            <MdExpandMore /> <TriggerLabel>{trigger} </TriggerLabel>
+            <MdExpandMore /> <StyledTriggerLabel>{trigger} </StyledTriggerLabel>
           </>
         )
       }
@@ -86,22 +86,22 @@ export function CollapsibleSubMenu({ children, trigger, ...rest }) {
       trigger={
         open ? (
           <>
-            <MdExpandLess /> <TriggerLabel>{trigger} </TriggerLabel>
+            <MdExpandLess /> <StyledTriggerLabel>{trigger} </StyledTriggerLabel>
           </>
         ) : (
           <>
-            <MdExpandMore /> <TriggerLabel>{trigger} </TriggerLabel>
+            <MdExpandMore /> <StyledTriggerLabel>{trigger} </StyledTriggerLabel>
           </>
         )
       }
       {...rest}
     >
-      <SubMenu>{children}</SubMenu>
+      <StyledSubMenu>{children}</StyledSubMenu>
     </Collapsible>
   );
 }
 export function CollapsibleMenuItem({ children, ...rest }) {
-  return <MenuItem {...rest}>{children}</MenuItem>;
+  return <StyledMenuItem {...rest}>{children}</StyledMenuItem>;
 }
 
 CollapsibleMenu.propTypes = {

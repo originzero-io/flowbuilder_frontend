@@ -73,7 +73,10 @@ export const Label = styled.div`
   text-align: start;
   font-size: 16px;
 `;
-
+export const Form = styled.form`
+  position: relative;
+  width: 78%;
+`;
 export const InputWrapper = styled.div`
   position: relative;
   margin-top: 3px;

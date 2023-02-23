@@ -10,7 +10,7 @@ import AllNodes from "./AllNodes";
 import FavoriteNodes from "./FavoriteNodes";
 import RecentNodes from "./RecentNodes";
 import { createNode } from "../../../../helpers/elementHelper";
-import { Container } from "./PanelContextMenu.style";
+import * as Styled from "./PanelContextMenu.style";
 
 const PanelContextMenu = () => {
   const { panelMenu } = useSelector((state) => state.menus);
@@ -40,7 +40,7 @@ const PanelContextMenu = () => {
   return (
     <>
       {panelMenu.state && (
-        <Container x={panelMenu.x} y={panelMenu.y}>
+        <Styled.Container x={panelMenu.x} y={panelMenu.y}>
           <Tabs
             selectedTabClassName="selected-tab"
             style={{
@@ -77,7 +77,7 @@ const PanelContextMenu = () => {
               />
             </TabPanel>
           </Tabs>
-        </Container>
+        </Styled.Container>
       )}
     </>
   );

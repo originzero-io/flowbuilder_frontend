@@ -7,7 +7,8 @@ import { Redirect } from "react-router-dom";
 import useAuth from "utils/hooks/useAuth";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { Input, Text, Submit, ErrorMessage } from "./LoginForm.style";
+import * as Styled from "./LoginForm.style";
+// import { Input, Text, Submit, ErrorMessage } from "./LoginForm.style";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ export default function LoginForm() {
   };
   return (
     <>
-      <Text>Welcome to flow builder.📗 Please login</Text>
+      <Styled.Text>Welcome to flow builder.📗 Please login</Styled.Text>
       <Form onSubmit={(e) => e.preventDefault()}>
         <FormGroup>
           <FaUser
@@ -32,7 +33,7 @@ export default function LoginForm() {
               marginRight: "8px",
             }}
           />
-          <Input
+          <Styled.Input
             defaultValue="akinsibay"
             {...register("username", {
               required: "Username must enter the field",
@@ -40,7 +41,7 @@ export default function LoginForm() {
             placeholder="Username"
           />
           {errors.username && (
-            <ErrorMessage>{errors.username.message}</ErrorMessage>
+            <Styled.ErrorMessage>{errors.username.message}</Styled.ErrorMessage>
           )}
         </FormGroup>
         <FormGroup>
@@ -51,7 +52,7 @@ export default function LoginForm() {
               marginRight: "8px",
             }}
           />
-          <Input
+          <Styled.Input
             defaultValue="1234"
             type="password"
             {...register("password", {
@@ -64,16 +65,16 @@ export default function LoginForm() {
             placeholder="Password"
           />
           {errors.password && (
-            <ErrorMessage>{errors.password.message}</ErrorMessage>
+            <Styled.ErrorMessage>{errors.password.message}</Styled.ErrorMessage>
           )}
         </FormGroup>
-        <Submit type="submit" onClick={handleSubmit(onSubmitHandle)}>
+        <Styled.Submit type="submit" onClick={handleSubmit(onSubmitHandle)}>
           Log in
-        </Submit>
+        </Styled.Submit>
         {isAuthenticated ? (
           <Redirect to="/panel" />
         ) : (
-          <ErrorMessage>{errorMessage}</ErrorMessage>
+          <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
         )}
       </Form>
     </>
