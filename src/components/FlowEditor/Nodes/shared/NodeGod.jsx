@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types";
 import useActiveFlow from "utils/hooks/useActiveFlow";
-//import { flowExecutorNamespace } from "app/SocketConnections";
+// import { flowExecutorNamespace } from "app/SocketConnections";
 
 import { Badge } from "reactstrap";
 import { getIconComponent } from "components/FlowEditor/helpers/nodeTypeHelper";
