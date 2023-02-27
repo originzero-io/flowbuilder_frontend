@@ -72,7 +72,6 @@ export default function ControlMenu() {
       flowId,
       elements: { nodes, edges },
     });
-    notification.success("Flow saved successfully");
   };
 
   const deleteAllNodes = () => {

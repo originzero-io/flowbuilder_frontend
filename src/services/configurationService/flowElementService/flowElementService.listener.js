@@ -4,11 +4,13 @@ import {
   saveElements,
   setElements,
 } from "store/reducers/flow/flowElementsSlice";
+import notificationHelper from "utils/ui/notificationHelper";
 import flowElementServiceSocket from "./flowElementService.socket";
 
 const useFlowElementInitialListener = () => {
   flowElementServiceSocket.onSaveElements((data) => {
     store.dispatch(saveElements(data.data.elements));
+    notificationHelper.success("Flow saved successfully");
   });
   flowElementServiceSocket.onGetElements((data) => {
     store.dispatch(beginTheBar());
