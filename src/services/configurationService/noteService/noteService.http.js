@@ -1,4 +1,4 @@
-import ConfigurationService from ".";
+import ConfigurationService from "../index.http";
 
 class NoteService extends ConfigurationService {
   async getNotes(workspace) {

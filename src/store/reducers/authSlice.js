@@ -1,13 +1,11 @@
 import AuthService from "services/authService";
-import {
-  userNamespace,
-  workspaceNamespace,
-  projectNamespace,
-  flowNamespace,
-  elementNamespace,
-  noteNamespace,
-} from "app/SocketConnections";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import userServiceSocket from "services/configurationService/userService/userService.socket";
+import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.socket";
+import projectServiceSocket from "services/configurationService/projectService/projectService.socket";
+import flowServiceSocket from "services/configurationService/flowService/flowService.socket";
+import noteServiceSocket from "services/configurationService/noteService/noteService.socket";
+import flowElementServiceSocket from "services/configurationService/flowElementService/flowElementService.socket";
 
 const initialState = {
   username: "",
@@ -33,12 +31,12 @@ export const authSlice = createSlice({
       state.user = "";
       state.isAuthenticated = false;
 
-      userNamespace.disconnect();
-      workspaceNamespace.disconnect();
-      projectNamespace.disconnect();
-      flowNamespace.disconnect();
-      noteNamespace.disconnect();
-      elementNamespace.disconnect();
+      userServiceSocket.disconnect();
+      workspaceServiceSocket.disconnect();
+      projectServiceSocket.disconnect();
+      flowServiceSocket.disconnect();
+      noteServiceSocket.disconnect();
+      flowElementServiceSocket.disconnect();
     },
   },
   extraReducers: {

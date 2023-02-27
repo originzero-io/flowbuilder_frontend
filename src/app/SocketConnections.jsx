@@ -1,61 +1,65 @@
 import { useEffect } from "react";
 import createSocket from "services/socketIOClient";
-import { useDispatch } from "react-redux";
-import {
-  elementListener,
-  flowListener,
-  projectListener,
-  workspaceListener,
-  noteListener,
-  userListener,
-} from "../services/configurationService/socketListeners";
+import flowServiceSocket from "services/configurationService/flowService/flowService.socket";
+import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.socket";
+import projectServiceSocket from "services/configurationService/projectService/projectService.socket";
+import flowElementServiceSocket from "services/configurationService/flowElementService/flowElementService.socket";
+import noteServiceSocket from "services/configurationService/noteService/noteService.socket";
+import userServiceSocket from "services/configurationService/userService/userService.socket";
+import flowExecutorSocket from "services/flowExecutorService/flowExecutor.socket";
+import useUserInitialListener from "services/configurationService/userService/userService.listener";
+import useFlowElementInitialListener from "services/configurationService/flowElementService/flowElementService.listener";
+import useFlowInitialListener from "services/configurationService/flowService/flowService.listener";
+import useProjectInitialListener from "services/configurationService/projectService/projectService.listener";
+import useWorkspaceInitialListener from "services/configurationService/workspaceService/workspaceService.listener";
+import useNoteInitialListener from "services/configurationService/noteService/noteService.listener";
 import useAuth from "../utils/hooks/useAuth";
 
-export let elementNamespace;
-export let flowNamespace;
-export let projectNamespace;
-export let workspaceNamespace;
-export let noteNamespace;
-export let userNamespace;
-export let flowExecutorNamespace;
 export default function SocketConnections() {
   const auth = useAuth();
   useEffect(() => {
     if (auth.isAuthenticated) {
-      userNamespace = createSocket({
+      const userNamespace = createSocket({
         path: "/configuration_socket",
         namespace: "users",
       });
-      elementNamespace = createSocket({
+      const elementNamespace = createSocket({
         path: "/configuration_socket",
         namespace: "elements",
       });
-      flowNamespace = createSocket({
+      const flowNamespace = createSocket({
         path: "/configuration_socket",
         namespace: "flows",
       });
-      projectNamespace = createSocket({
+      const projectNamespace = createSocket({
         path: "/configuration_socket",
         namespace: "projects",
       });
-      workspaceNamespace = createSocket({
+      const workspaceNamespace = createSocket({
         path: "/configuration_socket",
         namespace: "workspaces",
       });
-      noteNamespace = createSocket({
+      const noteNamespace = createSocket({
         path: "/configuration_socket",
         namespace: "notes",
       });
-      flowExecutorNamespace = createSocket({
+      const flowExecutorNamespace = createSocket({
         path: "/flowExecutor_socket",
       });
 
-      userListener(userNamespace);
-      elementListener(elementNamespace);
-      flowListener(flowNamespace);
-      projectListener(projectNamespace);
-      workspaceListener(workspaceNamespace);
-      noteListener(noteNamespace);
+      workspaceServiceSocket.injectSocket(workspaceNamespace);
+      projectServiceSocket.injectSocket(projectNamespace);
+      flowServiceSocket.injectSocket(flowNamespace);
+      flowElementServiceSocket.injectSocket(elementNamespace);
+      noteServiceSocket.injectSocket(noteNamespace);
+      userServiceSocket.injectSocket(userNamespace);
+      flowExecutorSocket.injectSocket(flowExecutorNamespace);
+      useUserInitialListener();
+      useFlowElementInitialListener();
+      useFlowInitialListener();
+      useProjectInitialListener();
+      useWorkspaceInitialListener();
+      useNoteInitialListener();
     }
   }, [auth.isAuthenticated]);
   return null;

@@ -2,7 +2,7 @@ import useAuthPermission from "utils/hooks/useAuthPermission";
 import PropTypes from "prop-types";
 import React from "react";
 import { VscTrash } from "react-icons/vsc";
-import { flowNamespace } from "app/SocketConnections";
+import flowServiceSocket from "services/configurationService/flowService/flowService.socket";
 import * as Styled from "./Card.style";
 import DetailMenu from "./DetailMenu";
 
@@ -15,7 +15,7 @@ const Card = ({ data }) => {
   const deleteCardHandler = (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
-      flowNamespace.emit("flows:delete", { flow });
+      flowServiceSocket.deleteFlow({ flow });
     }
   };
   return (

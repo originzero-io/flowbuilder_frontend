@@ -1,4 +1,4 @@
-import WorkspaceService from "services/configurationService/workspaceService";
+import WorkspaceService from "services/configurationService/workspaceService/workspaceService.http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getMyWorkspaces = createAsyncThunk(

@@ -6,10 +6,10 @@ import { useParams } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import FlowEditor from "components/FlowEditor/FlowEditor";
 import { getGroups } from "store/reducers/flow/flowGroupsSlice";
-import { flowExecutorListener } from "services/configurationService/socketListeners";
-import { flowExecutorNamespace } from "app/SocketConnections";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import theme from "components/Shared/ThemeReference";
+import flowExecutorSocket from "services/flowExecutorService/flowExecutor.socket";
+import useFlowExecutorInitialListener from "services/flowExecutorService/flowExecutor.listener";
 
 const StyledFlowWrapper = styled.div`
   height: 100%;
@@ -28,8 +28,8 @@ const FlowPage = () => {
 
   useEffect(() => {
     dispatch(getGroups(flowId));
-    flowExecutorListener(flowExecutorNamespace);
-    flowExecutorNamespace.emit("joinFlowRoom", { flowId });
+    useFlowExecutorInitialListener();
+    flowExecutorSocket.joinRoom(flowId);
   }, []);
 
   return (

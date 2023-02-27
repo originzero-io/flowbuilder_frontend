@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { projectNamespace } from "app/SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useWorkspace from "utils/hooks/useWorkspace";
+import projectServiceSocket from "services/configurationService/projectService/projectService.socket";
 
 const AddProjectForm = () => {
   const { activeWorkspace } = useWorkspace();
@@ -21,7 +21,7 @@ const AddProjectForm = () => {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    projectNamespace.emit("projects:create", { project: projectInfo });
+    projectServiceSocket.createProject({ project: projectInfo });
     dispatch(setModal(false));
   };
   return (

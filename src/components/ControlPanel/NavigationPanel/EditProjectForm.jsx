@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
-import { projectNamespace } from "app/SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useProject from "utils/hooks/useProject";
+import projectServiceSocket from "services/configurationService/projectService/projectService.socket";
 
 const EditProjectForm = ({ project }) => {
   const { activeProject } = useProject();
@@ -16,7 +16,8 @@ const EditProjectForm = ({ project }) => {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    projectNamespace.emit("projects:update", { project, projectInfo });
+    projectServiceSocket.updateProject({ project, projectInfo });
+
     dispatch(setModal(false));
   };
   return (

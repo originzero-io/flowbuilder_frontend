@@ -12,11 +12,11 @@ import { setRotateAllPath } from "store/reducers/flow/flowGuiSlice";
 import { useStore, useReactFlow } from "reactflow";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
 import { useParams } from "react-router";
-import { elementNamespace } from "app/SocketConnections";
 import useActiveFlow from "utils/hooks/useActiveFlow";
-import FlowService from "services/configurationService/flowService";
+import FlowService from "services/configurationService/flowService/flowService.http";
 import notification from "utils/ui/notificationHelper";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
+import flowElementServiceSocket from "services/configurationService/flowElementService/flowElementService.socket";
 import {
   RedoIcon,
   UndoIcon,
@@ -67,7 +67,8 @@ export default function ControlMenu() {
       },
     };
     await FlowService.saveFlowGui(flowId, flow);
-    elementNamespace.emit("elements:save", {
+
+    flowElementServiceSocket.saveElements({
       flowId,
       elements: { nodes, edges },
     });

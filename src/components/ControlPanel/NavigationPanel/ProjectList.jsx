@@ -9,7 +9,7 @@ import useAuthPermission from "utils/hooks/useAuthPermission";
 import useProject from "utils/hooks/useProject";
 import useWorkspace from "utils/hooks/useWorkspace";
 import { CollapsibleMenuItem } from "components/Shared/Collapsible/CollapsibleMenu";
-import { projectNamespace } from "app/SocketConnections";
+import projectServiceSocket from "services/configurationService/projectService/projectService.socket";
 import EditProjectForm from "./EditProjectForm";
 
 const propTypes = {
@@ -28,7 +28,7 @@ export default function ProjectList({ projects }) {
   };
   const deleteProjectHandle = (project) => {
     if (confirm("Sure?")) {
-      projectNamespace.emit("projects:delete", { project });
+      projectServiceSocket.deleteProject({ project });
     }
   };
   const editProjectHandle = (project) => {

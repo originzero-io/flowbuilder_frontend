@@ -1,5 +1,5 @@
 import store from "index";
-import ConfigurationService from ".";
+import ConfigurationService from "../index.http";
 
 class PermissionService extends ConfigurationService {
   async getAllPermissions() {

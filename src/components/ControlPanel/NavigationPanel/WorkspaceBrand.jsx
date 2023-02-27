@@ -5,9 +5,9 @@ import { setActiveWorkspace } from "store/reducers/workspaceSlice";
 import { VscTrash } from "react-icons/vsc";
 import { BiEdit } from "react-icons/bi";
 import PropTypes from "prop-types";
-import { workspaceNamespace } from "app/SocketConnections";
 import useAuth from "utils/hooks/useAuth";
 import useWorkspace from "utils/hooks/useWorkspace";
+import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.socket";
 import * as Styled from "./NavigationPanel.style";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
 
@@ -21,7 +21,7 @@ const WorkspaceBrand = ({ workspace }) => {
   const { workspaces } = useWorkspace();
   const deleteWorkspaceHandler = () => {
     if (confirm(`Would you like to delete ${workspace.name} workspace?`)) {
-      workspaceNamespace.emit("workspaces:delete", { workspace });
+      workspaceServiceSocket.deleteWorkspace({ workspace });
       dispatch(setActiveWorkspace(workspaces[0]));
     }
   };

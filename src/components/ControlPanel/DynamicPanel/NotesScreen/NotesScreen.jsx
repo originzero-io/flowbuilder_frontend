@@ -3,11 +3,11 @@ import { BsPlusCircle } from "react-icons/bs";
 import { VscTrash } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { Button } from "reactstrap";
-import { noteNamespace } from "app/SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useNotes from "utils/hooks/useNotes";
 import Avatar from "components/Shared/Avatar/Avatar";
+import noteServiceSocket from "services/configurationService/noteService/noteService.socket";
 import AddNoteForm from "./AddNoteForm";
 import EditNoteForm from "./EditNoteForm";
 import * as Styled from "./NotesScreen.style";
@@ -23,7 +23,7 @@ export default function NotesScreen() {
   const deleteNoteHandle = (event, note) => {
     event.stopPropagation();
     if (confirm("Sure?")) {
-      noteNamespace.emit("notes:delete", { note });
+      noteServiceSocket.deleteNote({ note });
     }
   };
   const viewNoteHandle = (note) => {

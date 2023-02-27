@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import { createWorkspace } from "store/reducers/workspaceSlice";
 import { setModal } from "store/reducers/componentSlice";
-import { workspaceNamespace } from "app/SocketConnections";
 import useAuth from "utils/hooks/useAuth";
+import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.socket";
 
 export default function AddWorkspaceForm() {
   const auth = useAuth();
@@ -18,7 +18,7 @@ export default function AddWorkspaceForm() {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    workspaceNamespace.emit("workspaces:create", { workspace: workspaceInfo });
+    workspaceServiceSocket.createWorkspace({ workspace: workspaceInfo });
     dispatch(setModal(false));
   };
   return (

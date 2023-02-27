@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form, Label, FormGroup } from "reactstrap";
-import { flowNamespace } from "app/SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
+import flowServiceSocket from "services/configurationService/flowService/flowService.socket";
 
 export default function EditFlow({ flow }) {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function EditFlow({ flow }) {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    flowNamespace.emit("flows:update", { flow, flowConfig });
+    flowServiceSocket.updateFlow({ flow, flowConfig });
     dispatch(setModal(false));
   };
   return (

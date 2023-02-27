@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types";
 import useActiveFlow from "utils/hooks/useActiveFlow";
-import { flowExecutorNamespace } from "app/SocketConnections";
+//import { flowExecutorNamespace } from "app/SocketConnections";
 
 import { Badge } from "reactstrap";
 import { getIconComponent } from "components/FlowEditor/helpers/nodeTypeHelper";
+import flowExecutorSocket from "services/flowExecutorService/flowExecutor.socket";
 import * as Styled from "./Node.style";
 import NodeHeader from "./NodeHeader/NodeHeader";
 import { InfoIcon } from "./NodeIcons";
@@ -38,12 +39,12 @@ const NodeGod = ({ self, children, collapsible }) => {
   }, [enable]);
 
   useEffect(() => {
-    flowExecutorNamespace.emit("nodeComm", {
+    flowExecutorSocket.sendMessage({
       message: `Hi! My type: ${self.type}`,
       id: self.id,
       type: self.type,
     });
-    flowExecutorNamespace.on(self.id, (data) => {
+    flowExecutorSocket.onNodeStatus(self, (data) => {
       console.log(`data from server for ${self.id}: `, data);
       setServerData(data);
     });

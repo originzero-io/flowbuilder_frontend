@@ -18,13 +18,13 @@ import { FileInput } from "components/Shared/FileInput/FileInput";
 import { GoDeviceDesktop } from "react-icons/go";
 import { VscRunAll } from "react-icons/vsc";
 import notification from "utils/ui/notificationHelper";
-import { flowExecutorNamespace } from "app/SocketConnections";
 import { backendFlowDataBuilder } from "components/FlowEditor/helpers/flowHelper";
 import { useParams } from "react-router-dom";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
 import * as StyledDropdown from "components/StyledComponents/DropdownMenu";
 import * as StyledShapes from "components/StyledComponents/Shapes";
 import * as StyledDivider from "components/StyledComponents/Divider";
+import flowExecutorSocket from "services/flowExecutorService/flowExecutor.socket";
 import * as Styled from "./NavMenu.style";
 import { ShareIcon, TuneIcon } from "./Icons";
 import SwitchButton from "../../../Nodes/shared/SwitchButton";
@@ -133,10 +133,7 @@ export default function ConfigurationMenu() {
       (node) => node.type === "TRIGGER",
     );
     if (triggerNodes.length > 0) {
-      flowExecutorNamespace.emit(
-        "debugFlow",
-        backendFlowDataBuilder(flowId, elements),
-      );
+      flowExecutorSocket.debugFlow(backendFlowDataBuilder(flowId, elements));
     } else {
       notification.error("Flow does not contain any trigger node.");
     }

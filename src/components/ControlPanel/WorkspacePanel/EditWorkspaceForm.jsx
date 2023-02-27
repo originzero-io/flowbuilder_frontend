@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import { editWorkspace } from "store/reducers/workspaceSlice";
 import { setModal } from "store/reducers/componentSlice";
-import { workspaceNamespace } from "app/SocketConnections";
 import useWorkspace from "utils/hooks/useWorkspace";
+import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.socket";
 
 export default function EditWorkspaceForm({ workspace }) {
   const { activeWorkspace } = useWorkspace();
@@ -17,7 +17,7 @@ export default function EditWorkspaceForm({ workspace }) {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    workspaceNamespace.emit("workspaces:update", { workspace, workspaceInfo });
+    workspaceServiceSocket.updateWorkspace({ workspace, workspaceInfo });
     dispatch(setModal(false));
   };
   return (

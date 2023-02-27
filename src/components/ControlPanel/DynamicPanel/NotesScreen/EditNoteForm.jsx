@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { noteNamespace } from "app/SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import PropTypes from "prop-types";
+import noteServiceSocket from "services/configurationService/noteService/noteService.socket";
 
 const propTypes = {
   note: PropTypes.object.isRequired,
@@ -18,7 +18,7 @@ const EditNoteForm = ({ note }) => {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    noteNamespace.emit("notes:update", { note: noteInfo });
+    noteServiceSocket.updateNote({ note: noteInfo });
     dispatch(setModal(false));
   };
   return (

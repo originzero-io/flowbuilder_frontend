@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { noteNamespace } from "app/SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useWorkspace from "utils/hooks/useWorkspace";
+import noteServiceSocket from "services/configurationService/noteService/noteService.socket";
 
 const AddNoteForm = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const AddNoteForm = () => {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    noteNamespace.emit("notes:create", { note: noteInfo });
+    noteServiceSocket.createNote({ note: noteInfo });
     dispatch(setModal(false));
   };
   return (

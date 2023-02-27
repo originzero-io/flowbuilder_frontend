@@ -1,4 +1,4 @@
-import ConfigurationService from ".";
+import ConfigurationService from "../index.http";
 
 class ProjectService extends ConfigurationService {
   async getProjects() {

@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { elementNamespace } from "app/SocketConnections";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import { Logo } from "components/Shared/icons";
 import { useReactFlow } from "reactflow";
@@ -53,11 +52,6 @@ const MainMenu = () => {
     // elementNamespace.emit("elements:save", { flowId: flowId, elements: { nodes, edges } });
   };
 
-  const nameClick = () => {
-    elementNamespace.emit("elements:messageFromClient", {
-      message: "Naber elements?",
-    });
-  };
   function downloadImage(dataUrl) {
     const a = document.createElement("a");
 
@@ -90,7 +84,7 @@ const MainMenu = () => {
           <Styled.MenuItem>Home</Styled.MenuItem>
         </Link>
       </div>
-      <Styled.MenuItem onClick={nameClick}>{flowConfig.name}</Styled.MenuItem>
+      <Styled.MenuItem>{flowConfig.name}</Styled.MenuItem>
       <Styled.MenuItem onClick={() => dispatch(addSubFlow())}>
         Add sub flow
       </Styled.MenuItem>

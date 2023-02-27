@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { flowNamespace } from "app/SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useProject from "utils/hooks/useProject";
 import useWorkspace from "utils/hooks/useWorkspace";
+import flowServiceSocket from "services/configurationService/flowService/flowService.socket";
 
 export default function AddFlowForm() {
   const auth = useAuth();
@@ -28,7 +28,7 @@ export default function AddFlowForm() {
   const onSubmitHandle = (e) => {
     e.preventDefault();
     const flow = { config: flowInfo, workspace, project };
-    flowNamespace.emit("flows:create", { flow });
+    flowServiceSocket.createFlow({ flow });
     dispatch(setModal(false));
   };
 

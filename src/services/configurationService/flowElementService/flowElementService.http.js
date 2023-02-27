@@ -1,4 +1,4 @@
-import ConfigurationService from ".";
+import ConfigurationService from "../index.http";
 
 class FlowElementService extends ConfigurationService {
   async getElements(flow_id) {

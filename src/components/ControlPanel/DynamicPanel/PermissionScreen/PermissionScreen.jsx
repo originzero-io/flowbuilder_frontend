@@ -23,7 +23,7 @@ import {
 } from "store/reducers/userPermissionSlice";
 import { Button } from "reactstrap";
 
-import PermissionService from "services/configurationService/permissionService";
+import PermissionService from "services/configurationService/permissionService/permissionService.http";
 import notification from "utils/ui/notificationHelper";
 import { setModal } from "store/reducers/componentSlice";
 import useComponentWillMount from "utils/hooks/useComponentWillMount";

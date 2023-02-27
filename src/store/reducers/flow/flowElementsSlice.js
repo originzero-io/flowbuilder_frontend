@@ -5,7 +5,7 @@ import {
   applyNodeChanges,
   getOutgoers,
 } from "reactflow";
-import FlowElementService from "services/configurationService/flowElementService";
+import FlowElementService from "services/configurationService/flowElementService/flowElementService.http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   isEdgeExist,

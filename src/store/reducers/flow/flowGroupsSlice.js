@@ -1,4 +1,4 @@
-import FlowGroupService from "services/configurationService/groupService";
+import FlowGroupService from "services/configurationService/flowGroupService/flowGroupService.http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import flowElementsSlice, {
   deleteGroupOfElement,

@@ -23,7 +23,7 @@ export default function NodeListItem({
     >
       <div style={{ display: "flex", alignItems: "center" }}>
         {node.icon}
-        <Label>{node.name}</Label>
+        <Styled.Label>{node.name}</Styled.Label>
       </div>
       <Styled.IconWrapper>
         <div onClick={() => addNewNode(node)}>

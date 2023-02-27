@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form } from "reactstrap";
-import { flowNamespace } from "app/SocketConnections";
 import { setModal } from "store/reducers/componentSlice";
 import useProject from "utils/hooks/useProject";
+import flowServiceSocket from "services/configurationService/flowService/flowService.socket";
 
 export default function MoveFlow({ flow }) {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export default function MoveFlow({ flow }) {
 
   const submitHandle = (e) => {
     e.preventDefault();
-    flowNamespace.emit("flows:move", { flow, newProject: selection });
+    flowServiceSocket.moveFlow({ flow, newProject: selection });
     dispatch(setModal(false));
   };
   return (
