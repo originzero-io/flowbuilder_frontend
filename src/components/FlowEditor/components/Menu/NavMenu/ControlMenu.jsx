@@ -192,7 +192,7 @@ export default function ControlMenu() {
         <FitViewIcon theme={theme} />
       </Styled.MenuItem>
       <Tooltip id="fit_view" place="right" />
-      <Styled.MenuItem
+      {/* <Styled.MenuItem
         theme={theme}
         onClick={lockHandle}
         data-tip="Lock Screen"
@@ -204,7 +204,7 @@ export default function ControlMenu() {
           <LockIcon theme={theme} />
         )}
       </Styled.MenuItem>
-      <Tooltip id="lock_screen" place="right" />
+      <Tooltip id="lock_screen" place="right" /> */}
     </StyledMenu>
   );
 }
