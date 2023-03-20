@@ -42,13 +42,25 @@ export default function NodeHeader({ self }) {
   const expandHandle = () => {
     dispatch(expandNode(self));
   };
-  const nodeIncomers = () => {
-    const incomers = getIncomers(self, flowElements.nodes, flowElements.edges);
-    console.log("incomers: ", incomers);
+  // const nodeIncomers = () => {
+  //   const incomers = getIncomers(self, flowElements.nodes, flowElements.edges);
+  //   console.log("incomers: ", incomers);
+  // };
+  // const nodeOutgoers = () => {
+  //   const outgoers = getOutgoers(self, flowElements.nodes, flowElements.edges);
+  //   console.log("outgoers: ", outgoers);
+  // };
+  const sourceEdges = () => {
+    const sources = flowElements.edges.filter(
+      (edge) => edge.source === self.id,
+    );
+    console.log("sources: ", sources);
   };
-  const nodeOutgoers = () => {
-    const outgoers = getOutgoers(self, flowElements.nodes, flowElements.edges);
-    console.log("outgoers: ", outgoers);
+  const targetEdges = () => {
+    const targets = flowElements.edges.filter(
+      (edge) => edge.target === self.id,
+    );
+    console.log("targets: ", targets);
   };
 
   return (
@@ -59,6 +71,8 @@ export default function NodeHeader({ self }) {
       {/* <button onClick={nodeIncomers}>incomers</button>
         <button onClick={nodeOutgoers}>outgoers</button> */}
       {/* <NodeIcon/> */}
+      <button onClick={targetEdges}>TE</button>
+      <button onClick={sourceEdges}>SE</button>
       <Styled.Content>
         {edit ? (
           <EditNameForm setEdit={setEdit} self={self} />

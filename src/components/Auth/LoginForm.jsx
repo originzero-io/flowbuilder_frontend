@@ -34,7 +34,7 @@ export default function LoginForm() {
             }}
           />
           <Styled.Input
-            defaultValue="akinsibay"
+            // defaultValue="akinsibay"
             {...register("username", {
               required: "Username must enter the field",
             })}
@@ -53,7 +53,7 @@ export default function LoginForm() {
             }}
           />
           <Styled.Input
-            defaultValue="1234"
+            // defaultValue="1234"
             type="password"
             {...register("password", {
               required: "Password must enter the field",

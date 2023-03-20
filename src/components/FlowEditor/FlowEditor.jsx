@@ -79,7 +79,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
           type: edgeType,
           group: sourceGroup,
           style: { stroke: sourceGroup?.color, strokeWidth: "2px" },
-          data: { source: "", target: "", payload: "Anaks" },
+          data: "",
         };
 
         const sourceEnable = flowElements.nodes.find(
