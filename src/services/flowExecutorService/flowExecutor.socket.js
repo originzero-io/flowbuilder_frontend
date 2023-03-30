@@ -27,6 +27,10 @@ class FlowExecutorService {
     this.socket.emit("debugFlow", data);
   }
 
+  debugFlowByLabel(data) {
+    this.socket.emit("debugFlowById", data);
+  }
+
   removeAllListeners() {
     this.socket.removeAllListeners();
   }
