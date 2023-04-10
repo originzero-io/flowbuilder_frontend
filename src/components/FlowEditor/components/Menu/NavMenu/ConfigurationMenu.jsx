@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "reactstrap";
 import themeColor from "components/Shared/ThemeReference";
 import { logOut } from "store/reducers/authSlice";
-import { changeEdgeType } from "store/reducers/flow/flowElementsSlice";
+import {
+  changeEdgeType,
+  importFlow,
+} from "store/reducers/flow/flowElementsSlice";
 import {
   setFlowEdgeType,
   setMiniMapDisplay,
@@ -48,9 +51,6 @@ export default function ConfigurationMenu() {
   const auth = useAuth();
   const { miniMapDisplay, theme } = flowGui;
   const reactFlowInstance = useReactFlow();
-  const setSelectedElements = useStore(
-    (actions) => actions.setSelectedElements,
-  );
   const dispatch = useDispatch();
 
   const downloadFlowHandle = () => {
@@ -70,31 +70,19 @@ export default function ConfigurationMenu() {
     }
   };
   const fileUploadHandle = useCallback(
-    // (e) => {
-    //   const fileReader = new FileReader();
-    //   const fileType = e.target.files[0]?.type;
-    //   if (fileType === "application/json") {
-    //     fileReader.readAsText(e.target.files[0], "UTF-8");
-    //     fileReader.onload = (e) => {
-    //       const flow = JSON.parse(e.target.result);
-    //       const newArray = flow.elements.map((els) => {
-    //         return {
-    //           ...els,
-    //           data: {
-    //             ...els.data,
-    //             onChange: loadFunctionsToNode(els.type, nodeClass),
-    //           },
-    //         };
-    //       });
-    //       dispatch(setElements(newArray));
-    //       setSelectedElements(newArray);
-    //     };
-    //   } else
-
-    //   notification.error("This file cannot be imported. Please provide JSON file");
-    // },
     (e) => {
-      console.log(e);
+      const fileReader = new FileReader();
+      const fileType = e.target.files[0]?.type;
+      if (fileType === "application/json") {
+        fileReader.readAsText(e.target.files[0], "UTF-8");
+        fileReader.onload = (event) => {
+          const flow = JSON.parse(event.target.result);
+          dispatch(importFlow(flow));
+        };
+      } else
+        notification.error(
+          "This file cannot be imported. Please provide JSON file",
+        );
     },
     [reactFlowInstance],
   );

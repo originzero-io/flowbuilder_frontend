@@ -28,6 +28,10 @@ export const flowElementsSlice = createSlice({
       const appliedNodes = applyNodeChanges(payload, state.nodes);
       state.nodes = appliedNodes;
     },
+    importFlow(state, { payload }) {
+      state.nodes = payload.nodes;
+      state.edges = payload.edges;
+    },
     setEdges(state, { payload }) {
       const appliedEdges = applyEdgeChanges(payload, state.edges);
       state.edges = appliedEdges;
@@ -301,4 +305,5 @@ export const {
   updateGroupOfElement,
   updateNodeHandles,
   saveElements,
+  importFlow,
 } = flowElementsSlice.actions;
