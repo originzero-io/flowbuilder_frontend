@@ -71,8 +71,8 @@ export default function NodeHeader({ self }) {
       {/* <button onClick={nodeIncomers}>incomers</button>
         <button onClick={nodeOutgoers}>outgoers</button> */}
       {/* <NodeIcon/> */}
-      <button onClick={targetEdges}>TE</button>
-      <button onClick={sourceEdges}>SE</button>
+      {/* <button onClick={targetEdges}>TE</button>
+      <button onClick={sourceEdges}>SE</button> */}
       <Styled.Content>
         {edit ? (
           <EditNameForm setEdit={setEdit} self={self} />
