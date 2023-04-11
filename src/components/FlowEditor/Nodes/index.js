@@ -28,17 +28,17 @@ const Nodes = {
       icon: TriggerIcon,
     },
   },
-  // CONSTANT: {
-  //   engine: {
-  //     targetCount: 0,
-  //     sourceCount: 1,
-  //     ioType: "source",
-  //   },
-  //   ui: {
-  //     component: TriggerNode,
-  //     icon: TriggerIcon,
-  //   },
-  // },
+  CONSTANT: {
+    engine: {
+      targetCount: 0,
+      sourceCount: 1,
+      ioType: "source",
+    },
+    ui: {
+      component: TriggerNode,
+      icon: TriggerIcon,
+    },
+  },
   COMBINE: {
     engine: {
       targetCount: 1,
