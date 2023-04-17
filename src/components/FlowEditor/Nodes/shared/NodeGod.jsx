@@ -61,8 +61,8 @@ const NodeGod = ({ self, children, collapsible }) => {
             <div style={{ color: "gray" }}>trig_in</div>
             <Handle
               key="trig_in"
-              type="source"
-              position={align === "vertical" ? Position.Bottom : Position.Right}
+              type="target"
+              position={align === "vertical" ? Position.Top : Position.Left}
               id="trig_in"
               className={`${
                 align === "vertical"
