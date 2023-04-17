@@ -57,6 +57,27 @@ const NodeGod = ({ self, children, collapsible }) => {
         enable={enable}
       >
         <Styled.TargetWrapper align={align}>
+          <div style={{ display: "flex", position: "relative", right: "35px" }}>
+            <div style={{ color: "gray" }}>trig_in</div>
+            <Handle
+              key="trig_in"
+              type="source"
+              position={align === "vertical" ? Position.Bottom : Position.Right}
+              id={`trig_in`}
+              className={`${
+                align === "vertical"
+                  ? "node-handle vertical"
+                  : "node-handle horizontal"
+              }`}
+              style={{
+                backgroundColor: "orange",
+                visibility:
+                  ioType === "source" || ioType === "both"
+                    ? "visible"
+                    : "hidden",
+              }}
+            />
+          </div>
           {targets.map((i, index) => (
             <Handle
               key={index}
@@ -92,8 +113,49 @@ const NodeGod = ({ self, children, collapsible }) => {
             </Styled.NodeContent>
           )}
         </Styled.NodeArea>
-
         <Styled.SourceWrapper align={align}>
+          <div style={{ display: "flex" }}>
+            <Handle
+              key="status_start"
+              type="source"
+              position={align === "vertical" ? Position.Bottom : Position.Right}
+              id={`status_start`}
+              className={`${
+                align === "vertical"
+                  ? "node-handle vertical"
+                  : "node-handle horizontal"
+              }`}
+              style={{
+                backgroundColor: "green",
+                visibility:
+                  ioType === "source" || ioType === "both"
+                    ? "visible"
+                    : "hidden",
+              }}
+            />
+            <div style={{ color: "gray" }}>source.start</div>
+          </div>
+          <div style={{ display: "flex" }}>
+            <Handle
+              key="status_end"
+              type="source"
+              position={align === "vertical" ? Position.Bottom : Position.Right}
+              id={`status_end`}
+              className={`${
+                align === "vertical"
+                  ? "node-handle vertical"
+                  : "node-handle horizontal"
+              }`}
+              style={{
+                backgroundColor: "green",
+                visibility:
+                  ioType === "source" || ioType === "both"
+                    ? "visible"
+                    : "hidden",
+              }}
+            />
+            <div style={{ color: "gray" }}>status.end</div>
+          </div>
           {sources.map((i, index) => (
             <Handle
               key={index}
