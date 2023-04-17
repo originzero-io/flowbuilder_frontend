@@ -63,7 +63,7 @@ const NodeGod = ({ self, children, collapsible }) => {
               key="trig_in"
               type="source"
               position={align === "vertical" ? Position.Bottom : Position.Right}
-              id={`trig_in`}
+              id="trig_in"
               className={`${
                 align === "vertical"
                   ? "node-handle vertical"
@@ -119,7 +119,7 @@ const NodeGod = ({ self, children, collapsible }) => {
               key="status_start"
               type="source"
               position={align === "vertical" ? Position.Bottom : Position.Right}
-              id={`status_start`}
+              id="status_start"
               className={`${
                 align === "vertical"
                   ? "node-handle vertical"
@@ -140,7 +140,7 @@ const NodeGod = ({ self, children, collapsible }) => {
               key="status_end"
               type="source"
               position={align === "vertical" ? Position.Bottom : Position.Right}
-              id={`status_end`}
+              id="status_end"
               className={`${
                 align === "vertical"
                   ? "node-handle vertical"
