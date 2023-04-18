@@ -133,7 +133,7 @@ const NodeGod = ({ self, children, collapsible }) => {
                     : "hidden",
               }}
             />
-            <div style={{ color: "gray" }}>source.start</div>
+            <div style={{ color: "gray" }}>status.start</div>
           </div>
           <div style={{ display: "flex" }}>
             <Handle
