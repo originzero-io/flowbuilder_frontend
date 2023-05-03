@@ -57,13 +57,13 @@ const NodeGod = ({ self, children, collapsible }) => {
         enable={enable}
       >
         <Styled.TargetWrapper align={align}>
-          <div style={{ display: "flex", position: "relative", right: "35px" }}>
-            <div style={{ color: "gray" }}>trig_in</div>
+          <div style={{ display: "flex", position: "relative", right: "50px" }}>
+            <div style={{ color: "gray" }}>state.trig</div>
             <Handle
-              key="trig_in"
+              key="state.trig"
               type="target"
               position={align === "vertical" ? Position.Top : Position.Left}
-              id="trig_in"
+              id="state.trig"
               className={`${
                 align === "vertical"
                   ? "node-handle vertical"
@@ -116,10 +116,13 @@ const NodeGod = ({ self, children, collapsible }) => {
         <Styled.SourceWrapper align={align}>
           <div style={{ display: "flex" }}>
             <Handle
-              key="status_start"
+              key="state_start"
               type="source"
               position={align === "vertical" ? Position.Bottom : Position.Right}
-              id="status_start"
+              id="state_start"
+              isValidConnection={(connection) =>
+                connection.targetHandle === "state.trig"
+              }
               className={`${
                 align === "vertical"
                   ? "node-handle vertical"
@@ -133,14 +136,17 @@ const NodeGod = ({ self, children, collapsible }) => {
                     : "hidden",
               }}
             />
-            <div style={{ color: "gray" }}>status.start</div>
+            <div style={{ color: "gray" }}>state.start</div>
           </div>
           <div style={{ display: "flex" }}>
             <Handle
-              key="status_end"
+              key="state_end"
               type="source"
               position={align === "vertical" ? Position.Bottom : Position.Right}
-              id="status_end"
+              id="state_end"
+              isValidConnection={(connection) =>
+                connection.targetHandle === "state.trig"
+              }
               className={`${
                 align === "vertical"
                   ? "node-handle vertical"
@@ -154,7 +160,31 @@ const NodeGod = ({ self, children, collapsible }) => {
                     : "hidden",
               }}
             />
-            <div style={{ color: "gray" }}>status.end</div>
+            <div style={{ color: "gray" }}>state.end</div>
+          </div>
+          <div style={{ display: "flex" }}>
+            <Handle
+              key="state_error"
+              type="source"
+              position={align === "vertical" ? Position.Bottom : Position.Right}
+              id="state_error"
+              isValidConnection={(connection) =>
+                connection.targetHandle === "state.trig"
+              }
+              className={`${
+                align === "vertical"
+                  ? "node-handle vertical"
+                  : "node-handle horizontal"
+              }`}
+              style={{
+                backgroundColor: "green",
+                visibility:
+                  ioType === "source" || ioType === "both"
+                    ? "visible"
+                    : "hidden",
+              }}
+            />
+            <div style={{ color: "gray" }}>state.error</div>
           </div>
           {sources.map((i, index) => (
             <Handle
