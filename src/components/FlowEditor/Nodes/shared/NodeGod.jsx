@@ -57,6 +57,48 @@ const NodeGod = ({ self, children, collapsible }) => {
         enable={enable}
       >
         <Styled.TargetWrapper align={align}>
+          <div style={{ display: "flex", position: "relative", right: "97px" }}>
+            <div style={{ color: "gray" }}>state.stop.active</div>
+            <Handle
+              key="state.stop.active"
+              type="target"
+              position={align === "vertical" ? Position.Top : Position.Left}
+              id="state.stop.active"
+              className={`${
+                align === "vertical"
+                  ? "node-handle vertical"
+                  : "node-handle horizontal"
+              }`}
+              style={{
+                backgroundColor: "red",
+                visibility:
+                  ioType === "source" || ioType === "both"
+                    ? "visible"
+                    : "hidden",
+              }}
+            />
+          </div>
+          <div style={{ display: "flex", position: "relative", right: "107px" }}>
+            <div style={{ color: "gray" }}>state.stop.passive</div>
+            <Handle
+              key="state.stop.passive"
+              type="target"
+              position={align === "vertical" ? Position.Top : Position.Left}
+              id="state.stop.passive"
+              className={`${
+                align === "vertical"
+                  ? "node-handle vertical"
+                  : "node-handle horizontal"
+              }`}
+              style={{
+                backgroundColor: "red",
+                visibility:
+                  ioType === "source" || ioType === "both"
+                    ? "visible"
+                    : "hidden",
+              }}
+            />
+          </div>
           <div style={{ display: "flex", position: "relative", right: "50px" }}>
             <div style={{ color: "gray" }}>state.trig</div>
             <Handle
