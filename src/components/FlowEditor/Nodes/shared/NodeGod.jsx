@@ -78,7 +78,9 @@ const NodeGod = ({ self, children, collapsible }) => {
               }}
             />
           </div>
-          <div style={{ display: "flex", position: "relative", right: "107px" }}>
+          <div
+            style={{ display: "flex", position: "relative", right: "107px" }}
+          >
             <div style={{ color: "gray" }}>state.stop.passive</div>
             <Handle
               key="state.stop.passive"
