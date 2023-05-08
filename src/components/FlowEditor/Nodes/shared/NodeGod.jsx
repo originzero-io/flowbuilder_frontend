@@ -28,7 +28,15 @@ const NodeGod = ({ self, children, collapsible }) => {
   const dispatch = useDispatch();
   const { align, expand, enable, group } = self.data;
   const [serverData, setServerData] = useState("");
-
+  const [nodeInputs, setNodeInputs] = useState({
+    state_trig: true,
+    state_start: true,
+    state_end: true,
+    state_error: true,
+    state_stop: false,
+    clear: false,
+    whatever: false,
+  });
   useEffect(() => {
     updateNodeInternals(self.id);
   }, [targetCount, sourceCount, align]);
@@ -57,71 +65,110 @@ const NodeGod = ({ self, children, collapsible }) => {
         enable={enable}
       >
         <Styled.TargetWrapper align={align}>
-          <div style={{ display: "flex", position: "relative", right: "97px" }}>
-            <div style={{ color: "gray" }}>state.stop.active</div>
-            <Handle
-              key="state.stop.active"
-              type="target"
-              position={align === "vertical" ? Position.Top : Position.Left}
-              id="state.stop.active"
-              className={`${
-                align === "vertical"
-                  ? "node-handle vertical"
-                  : "node-handle horizontal"
-              }`}
-              style={{
-                backgroundColor: "red",
-                visibility:
-                  ioType === "source" || ioType === "both"
-                    ? "visible"
-                    : "hidden",
-              }}
-            />
-          </div>
-          <div
-            style={{ display: "flex", position: "relative", right: "107px" }}
-          >
-            <div style={{ color: "gray" }}>state.stop.passive</div>
-            <Handle
-              key="state.stop.passive"
-              type="target"
-              position={align === "vertical" ? Position.Top : Position.Left}
-              id="state.stop.passive"
-              className={`${
-                align === "vertical"
-                  ? "node-handle vertical"
-                  : "node-handle horizontal"
-              }`}
-              style={{
-                backgroundColor: "red",
-                visibility:
-                  ioType === "source" || ioType === "both"
-                    ? "visible"
-                    : "hidden",
-              }}
-            />
-          </div>
-          <div style={{ display: "flex", position: "relative", right: "50px" }}>
-            <div style={{ color: "gray" }}>state.trig</div>
-            <Handle
-              key="state.trig"
-              type="target"
-              position={align === "vertical" ? Position.Top : Position.Left}
-              id="state.trig"
-              className={`${
-                align === "vertical"
-                  ? "node-handle vertical"
-                  : "node-handle horizontal"
-              }`}
-              style={{
-                backgroundColor: "orange",
-                visibility:
-                  ioType === "source" || ioType === "both"
-                    ? "visible"
-                    : "hidden",
-              }}
-            />
-          </div>
+          {nodeInputs.state_stop && (
+            <>
+              <div
+                style={{ display: "flex", position: "relative", right: "97px" }}
+              >
+                <div style={{ color: "gray" }}>state.stop.active</div>
+                <Handle
+                  key="state.stop.active"
+                  type="target"
+                  position={align === "vertical" ? Position.Top : Position.Left}
+                  id="state.stop.active"
+                  className={`${
+                    align === "vertical"
+                      ? "node-handle vertical"
+                      : "node-handle horizontal"
+                  }`}
+                  style={{
+                    backgroundColor: "red",
+                    visibility:
+                      ioType === "source" || ioType === "both"
+                        ? "visible"
+                        : "hidden",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  position: "relative",
+                  right: "107px",
+                }}
+              >
+                <div style={{ color: "gray" }}>state.stop.passive</div>
+                <Handle
+                  key="state.stop.passive"
+                  type="target"
+                  position={align === "vertical" ? Position.Top : Position.Left}
+                  id="state.stop.passive"
+                  className={`${
+                    align === "vertical"
+                      ? "node-handle vertical"
+                      : "node-handle horizontal"
+                  }`}
+                  style={{
+                    backgroundColor: "red",
+                    visibility:
+                      ioType === "source" || ioType === "both"
+                        ? "visible"
+                        : "hidden",
+                  }}
+                />
+              </div>
+            </>
+          )}
+          {nodeInputs.state_trig && (
+            <div
+              style={{ display: "flex", position: "relative", right: "50px" }}
+            >
+              <div style={{ color: "gray" }}>state.trig</div>
+              <Handle
+                key="state.trig"
+                type="target"
+                position={align === "vertical" ? Position.Top : Position.Left}
+                id="state.trig"
+                className={`${
+                  align === "vertical"
+                    ? "node-handle vertical"
+                    : "node-handle horizontal"
+                }`}
+                style={{
+                  backgroundColor: "orange",
+                  visibility:
+                    ioType === "source" || ioType === "both"
+                      ? "visible"
+                      : "hidden",
+                }}
+              />
+            </div>
+          )}
+          {nodeInputs.clear && (
+            <div
+              style={{ display: "flex", position: "relative", right: "25px" }}
+            >
+              <div style={{ color: "gray" }}>clear</div>
+              <Handle
+                key="clear"
+                type="target"
+                position={align === "vertical" ? Position.Top : Position.Left}
+                id="clear"
+                className={`${
+                  align === "vertical"
+                    ? "node-handle vertical"
+                    : "node-handle horizontal"
+                }`}
+                style={{
+                  backgroundColor: "orange",
+                  visibility:
+                    ioType === "source" || ioType === "both"
+                      ? "visible"
+                      : "hidden",
+                }}
+              />
+            </div>
+          )}
           {targets.map((i, index) => (
             <Handle
               key={index}
@@ -149,7 +196,11 @@ const NodeGod = ({ self, children, collapsible }) => {
           {expand ? (
             <Styled.NodeContent>
               {children}
-              <NodeIOManager self={self} />
+              <NodeIOManager
+                self={self}
+                nodeInputs={nodeInputs}
+                setNodeInputs={setNodeInputs}
+              />
             </Styled.NodeContent>
           ) : (
             <Styled.NodeContent type="logo">
@@ -158,78 +209,118 @@ const NodeGod = ({ self, children, collapsible }) => {
           )}
         </Styled.NodeArea>
         <Styled.SourceWrapper align={align}>
-          <div style={{ display: "flex" }}>
-            <Handle
-              key="state_start"
-              type="source"
-              position={align === "vertical" ? Position.Bottom : Position.Right}
-              id="state_start"
-              isValidConnection={(connection) =>
-                connection.targetHandle === "state.trig"
-              }
-              className={`${
-                align === "vertical"
-                  ? "node-handle vertical"
-                  : "node-handle horizontal"
-              }`}
-              style={{
-                backgroundColor: "green",
-                visibility:
-                  ioType === "source" || ioType === "both"
-                    ? "visible"
-                    : "hidden",
-              }}
-            />
-            <div style={{ color: "gray" }}>state.start</div>
-          </div>
-          <div style={{ display: "flex" }}>
-            <Handle
-              key="state_end"
-              type="source"
-              position={align === "vertical" ? Position.Bottom : Position.Right}
-              id="state_end"
-              isValidConnection={(connection) =>
-                connection.targetHandle === "state.trig"
-              }
-              className={`${
-                align === "vertical"
-                  ? "node-handle vertical"
-                  : "node-handle horizontal"
-              }`}
-              style={{
-                backgroundColor: "green",
-                visibility:
-                  ioType === "source" || ioType === "both"
-                    ? "visible"
-                    : "hidden",
-              }}
-            />
-            <div style={{ color: "gray" }}>state.end</div>
-          </div>
-          <div style={{ display: "flex" }}>
-            <Handle
-              key="state_error"
-              type="source"
-              position={align === "vertical" ? Position.Bottom : Position.Right}
-              id="state_error"
-              isValidConnection={(connection) =>
-                connection.targetHandle === "state.trig"
-              }
-              className={`${
-                align === "vertical"
-                  ? "node-handle vertical"
-                  : "node-handle horizontal"
-              }`}
-              style={{
-                backgroundColor: "green",
-                visibility:
-                  ioType === "source" || ioType === "both"
-                    ? "visible"
-                    : "hidden",
-              }}
-            />
-            <div style={{ color: "gray" }}>state.error</div>
-          </div>
+          {nodeInputs.state_start && (
+            <div style={{ display: "flex" }}>
+              <Handle
+                key="state_start"
+                type="source"
+                position={
+                  align === "vertical" ? Position.Bottom : Position.Right
+                }
+                id="state_start"
+                isValidConnection={(connection) =>
+                  connection.targetHandle === "state.trig"
+                }
+                className={`${
+                  align === "vertical"
+                    ? "node-handle vertical"
+                    : "node-handle horizontal"
+                }`}
+                style={{
+                  backgroundColor: "green",
+                  visibility:
+                    ioType === "source" || ioType === "both"
+                      ? "visible"
+                      : "hidden",
+                }}
+              />
+              <div style={{ color: "gray" }}>state.start</div>
+            </div>
+          )}
+          {nodeInputs.state_end && (
+            <div style={{ display: "flex" }}>
+              <Handle
+                key="state_end"
+                type="source"
+                position={
+                  align === "vertical" ? Position.Bottom : Position.Right
+                }
+                id="state_end"
+                isValidConnection={(connection) =>
+                  connection.targetHandle === "state.trig"
+                }
+                className={`${
+                  align === "vertical"
+                    ? "node-handle vertical"
+                    : "node-handle horizontal"
+                }`}
+                style={{
+                  backgroundColor: "green",
+                  visibility:
+                    ioType === "source" || ioType === "both"
+                      ? "visible"
+                      : "hidden",
+                }}
+              />
+              <div style={{ color: "gray" }}>state.end</div>
+            </div>
+          )}
+          {nodeInputs.state_error && (
+            <div style={{ display: "flex" }}>
+              <Handle
+                key="state_error"
+                type="source"
+                position={
+                  align === "vertical" ? Position.Bottom : Position.Right
+                }
+                id="state_error"
+                isValidConnection={(connection) =>
+                  connection.targetHandle === "state.trig"
+                }
+                className={`${
+                  align === "vertical"
+                    ? "node-handle vertical"
+                    : "node-handle horizontal"
+                }`}
+                style={{
+                  backgroundColor: "green",
+                  visibility:
+                    ioType === "source" || ioType === "both"
+                      ? "visible"
+                      : "hidden",
+                }}
+              />
+              <div style={{ color: "gray" }}>state.error</div>
+            </div>
+          )}
+          {nodeInputs.whatever && (
+            <div style={{ display: "flex" }}>
+              <Handle
+                key="whatever"
+                type="source"
+                position={
+                  align === "vertical" ? Position.Bottom : Position.Right
+                }
+                id="whatever"
+                isValidConnection={(connection) =>
+                  connection.targetHandle === "state.trig"
+                }
+                className={`${
+                  align === "vertical"
+                    ? "node-handle vertical"
+                    : "node-handle horizontal"
+                }`}
+                style={{
+                  backgroundColor: "green",
+                  visibility:
+                    ioType === "source" || ioType === "both"
+                      ? "visible"
+                      : "hidden",
+                }}
+              />
+              <div style={{ color: "gray" }}>whatever</div>
+            </div>
+          )}
           {sources.map((i, index) => (
             <Handle
               key={index}

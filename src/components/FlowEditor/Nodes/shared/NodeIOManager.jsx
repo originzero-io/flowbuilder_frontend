@@ -8,7 +8,7 @@ const propTypes = {
   self: PropTypes.object.isRequired,
   ioType: PropTypes.string.isRequired,
 };
-export default function NodeIOManager({ self }) {
+export default function NodeIOManager({ self, nodeInputs, setNodeInputs }) {
   const { sourceCount, targetCount, ioType } = self.data.engine;
 
   const dispatch = useDispatch();
@@ -24,6 +24,12 @@ export default function NodeIOManager({ self }) {
       [name]: value,
     });
     dispatch(updateNodeHandles({ self, name, value }));
+  };
+  const onChangeNodeInputs = (e) => {
+    setNodeInputs({
+      ...nodeInputs,
+      [e.target.name]: e.target.checked,
+    });
   };
   return (
     <>
@@ -75,7 +81,79 @@ export default function NodeIOManager({ self }) {
           </>
         )
       )}
+      <NodeInput name="state_stop">
+        <input
+          type="checkbox"
+          name="state_stop"
+          checked={nodeInputs.state_stop}
+          onChange={onChangeNodeInputs}
+        />
+      </NodeInput>
+      <NodeInput name="state_trig">
+        <input
+          type="checkbox"
+          name="state_trig"
+          checked={nodeInputs.state_trig}
+          onChange={onChangeNodeInputs}
+        />
+      </NodeInput>
+      <NodeInput name="state_start">
+        <input
+          type="checkbox"
+          name="state_start"
+          checked={nodeInputs.state_start}
+          onChange={onChangeNodeInputs}
+        />
+      </NodeInput>
+      <NodeInput name="state_end">
+        <input
+          type="checkbox"
+          name="state_end"
+          checked={nodeInputs.state_end}
+          onChange={onChangeNodeInputs}
+        />
+      </NodeInput>
+      <NodeInput name="state_error">
+        <input
+          type="checkbox"
+          name="state_error"
+          checked={nodeInputs.state_error}
+          onChange={onChangeNodeInputs}
+        />
+      </NodeInput>
+      <NodeInput name="clear">
+        <input
+          type="checkbox"
+          name="clear"
+          checked={nodeInputs.clear}
+          onChange={onChangeNodeInputs}
+        />
+      </NodeInput>
+      <NodeInput name="whatever">
+        <input
+          type="checkbox"
+          name="whatever"
+          checked={nodeInputs.whatever}
+          onChange={onChangeNodeInputs}
+        />
+      </NodeInput>
     </>
+  );
+}
+
+function NodeInput({ children, name }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        width: "100%",
+        marginTop: "10px",
+      }}
+    >
+      <div style={{ color: "whitesmoke" }}>{name}</div>
+      {children}
+    </div>
   );
 }
 
