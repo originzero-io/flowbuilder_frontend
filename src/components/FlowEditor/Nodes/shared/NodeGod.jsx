@@ -65,17 +65,38 @@ const NodeGod = ({ self, children, collapsible }) => {
         enable={enable}
       >
         <Styled.TargetWrapper align={align}>
+          <div style={{ display: "flex", position: "relative", right: "97px" }}>
+            <div style={{ color: "gray" }}>state.stop</div>
+            <Handle
+              key="state.stop"
+              type="target"
+              position={align === "vertical" ? Position.Top : Position.Left}
+              id="state.stop"
+              className={`${
+                align === "vertical"
+                  ? "node-handle vertical"
+                  : "node-handle horizontal"
+              }`}
+              style={{
+                backgroundColor: "red",
+                visibility:
+                  ioType === "source" || ioType === "both"
+                    ? "visible"
+                    : "hidden",
+              }}
+            />
+          </div>
           {nodeInputs.state_stop && (
             <>
               <div
                 style={{ display: "flex", position: "relative", right: "97px" }}
               >
-                <div style={{ color: "gray" }}>state.stop.active</div>
+                <div style={{ color: "gray" }}>state.active</div>
                 <Handle
-                  key="state.stop.active"
+                  key="state.active"
                   type="target"
                   position={align === "vertical" ? Position.Top : Position.Left}
-                  id="state.stop.active"
+                  id="state.active"
                   className={`${
                     align === "vertical"
                       ? "node-handle vertical"
@@ -97,12 +118,12 @@ const NodeGod = ({ self, children, collapsible }) => {
                   right: "107px",
                 }}
               >
-                <div style={{ color: "gray" }}>state.stop.passive</div>
+                <div style={{ color: "gray" }}>state.deactive</div>
                 <Handle
-                  key="state.stop.passive"
+                  key="state.deactive"
                   type="target"
                   position={align === "vertical" ? Position.Top : Position.Left}
-                  id="state.stop.passive"
+                  id="state.passive"
                   className={`${
                     align === "vertical"
                       ? "node-handle vertical"
@@ -218,9 +239,9 @@ const NodeGod = ({ self, children, collapsible }) => {
                   align === "vertical" ? Position.Bottom : Position.Right
                 }
                 id="state_start"
-                isValidConnection={(connection) =>
-                  connection.targetHandle === "state.trig"
-                }
+                // isValidConnection={(connection) =>
+                //   connection.targetHandle === "state.trig"
+                // }
                 className={`${
                   align === "vertical"
                     ? "node-handle vertical"
@@ -246,9 +267,9 @@ const NodeGod = ({ self, children, collapsible }) => {
                   align === "vertical" ? Position.Bottom : Position.Right
                 }
                 id="state_end"
-                isValidConnection={(connection) =>
-                  connection.targetHandle === "state.trig"
-                }
+                // isValidConnection={(connection) =>
+                //   connection.targetHandle === "state.trig"
+                // }
                 className={`${
                   align === "vertical"
                     ? "node-handle vertical"
@@ -274,9 +295,9 @@ const NodeGod = ({ self, children, collapsible }) => {
                   align === "vertical" ? Position.Bottom : Position.Right
                 }
                 id="state_error"
-                isValidConnection={(connection) =>
-                  connection.targetHandle === "state.trig"
-                }
+                // isValidConnection={(connection) =>
+                //   connection.targetHandle === "state.trig"
+                // }
                 className={`${
                   align === "vertical"
                     ? "node-handle vertical"
@@ -302,9 +323,9 @@ const NodeGod = ({ self, children, collapsible }) => {
                   align === "vertical" ? Position.Bottom : Position.Right
                 }
                 id="whatever"
-                isValidConnection={(connection) =>
-                  connection.targetHandle === "state.trig"
-                }
+                // isValidConnection={(connection) =>
+                //   connection.targetHandle === "state.trig"
+                // }
                 className={`${
                   align === "vertical"
                     ? "node-handle vertical"
