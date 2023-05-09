@@ -34,8 +34,8 @@ const NodeGod = ({ self, children, collapsible }) => {
     state_end: true,
     state_error: true,
     state_stop: false,
-    clear: false,
-    whatever: false,
+    state_cancel: true,
+    state_clear: true,
   });
   useEffect(() => {
     updateNodeInternals(self.id);
@@ -65,27 +65,6 @@ const NodeGod = ({ self, children, collapsible }) => {
         enable={enable}
       >
         <Styled.TargetWrapper align={align}>
-          <div style={{ display: "flex", position: "relative", right: "58px" }}>
-            <div style={{ color: "gray" }}>job.cancel</div>
-            <Handle
-              key="state.stop"
-              type="target"
-              position={align === "vertical" ? Position.Top : Position.Left}
-              id="state.stop"
-              className={`${
-                align === "vertical"
-                  ? "node-handle vertical"
-                  : "node-handle horizontal"
-              }`}
-              style={{
-                backgroundColor: "red",
-                visibility:
-                  ioType === "source" || ioType === "both"
-                    ? "visible"
-                    : "hidden",
-              }}
-            />
-          </div>
           {nodeInputs.state_stop && (
             <>
               <div
@@ -165,11 +144,36 @@ const NodeGod = ({ self, children, collapsible }) => {
               />
             </div>
           )}
-          {nodeInputs.clear && (
+          {nodeInputs.state_cancel && (
             <div
-              style={{ display: "flex", position: "relative", right: "72px" }}
+              style={{ display: "flex", position: "relative", right: "70px" }}
             >
-              <div style={{ color: "gray" }}>clearInterval</div>
+              <div style={{ color: "gray" }}>state.cancel</div>
+              <Handle
+                key="state.cancel"
+                type="target"
+                position={align === "vertical" ? Position.Top : Position.Left}
+                id="state.cancel"
+                className={`${
+                  align === "vertical"
+                    ? "node-handle vertical"
+                    : "node-handle horizontal"
+                }`}
+                style={{
+                  backgroundColor: "#8ab7ff",
+                  visibility:
+                    ioType === "source" || ioType === "both"
+                      ? "visible"
+                      : "hidden",
+                }}
+              />
+            </div>
+          )}
+          {nodeInputs.state_clear && (
+            <div
+              style={{ display: "flex", position: "relative", right: "60px" }}
+            >
+              <div style={{ color: "gray" }}>state.clear</div>
               <Handle
                 key="clear"
                 type="target"
@@ -181,7 +185,7 @@ const NodeGod = ({ self, children, collapsible }) => {
                     : "node-handle horizontal"
                 }`}
                 style={{
-                  backgroundColor: "orange",
+                  backgroundColor: "#8ab7ff",
                   visibility:
                     ioType === "source" || ioType === "both"
                       ? "visible"

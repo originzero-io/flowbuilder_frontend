@@ -121,19 +121,19 @@ export default function NodeIOManager({ self, nodeInputs, setNodeInputs }) {
           onChange={onChangeNodeInputs}
         />
       </NodeInput>
-      <NodeInput name="clearInterval">
+      <NodeInput name="state_cancel">
         <input
           type="checkbox"
-          name="clear"
-          checked={nodeInputs.clear}
+          name="state_cancel"
+          checked={nodeInputs.state_cancel}
           onChange={onChangeNodeInputs}
         />
       </NodeInput>
-      <NodeInput name="whatever">
+      <NodeInput name="state_clear">
         <input
           type="checkbox"
-          name="whatever"
-          checked={nodeInputs.whatever}
+          name="state_clear"
+          checked={nodeInputs.state_clear}
           onChange={onChangeNodeInputs}
         />
       </NodeInput>
