@@ -89,7 +89,7 @@ const NodeGod = ({ self, children, collapsible }) => {
           {nodeInputs.state_stop && (
             <>
               <div
-                style={{ display: "flex", position: "relative", right: "97px" }}
+                style={{ display: "flex", position: "relative", right: "66px" }}
               >
                 <div style={{ color: "gray" }}>state.active</div>
                 <Handle
@@ -115,7 +115,7 @@ const NodeGod = ({ self, children, collapsible }) => {
                 style={{
                   display: "flex",
                   position: "relative",
-                  right: "107px",
+                  right: "81px",
                 }}
               >
                 <div style={{ color: "gray" }}>state.deactive</div>
