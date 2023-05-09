@@ -65,7 +65,7 @@ const NodeGod = ({ self, children, collapsible }) => {
         enable={enable}
       >
         <Styled.TargetWrapper align={align}>
-          <div style={{ display: "flex", position: "relative", right: "97px" }}>
+          <div style={{ display: "flex", position: "relative", right: "55px" }}>
             <div style={{ color: "gray" }}>state.stop</div>
             <Handle
               key="state.stop"
