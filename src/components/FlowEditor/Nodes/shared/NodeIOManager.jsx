@@ -81,7 +81,7 @@ export default function NodeIOManager({ self, nodeInputs, setNodeInputs }) {
           </>
         )
       )}
-      <NodeInput name="state_stop">
+      <NodeInput name="state_enable-disable">
         <input
           type="checkbox"
           name="state_stop"
@@ -121,7 +121,7 @@ export default function NodeIOManager({ self, nodeInputs, setNodeInputs }) {
           onChange={onChangeNodeInputs}
         />
       </NodeInput>
-      <NodeInput name="clear">
+      <NodeInput name="clearInterval">
         <input
           type="checkbox"
           name="clear"

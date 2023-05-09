@@ -65,8 +65,8 @@ const NodeGod = ({ self, children, collapsible }) => {
         enable={enable}
       >
         <Styled.TargetWrapper align={align}>
-          <div style={{ display: "flex", position: "relative", right: "55px" }}>
-            <div style={{ color: "gray" }}>state.stop</div>
+          <div style={{ display: "flex", position: "relative", right: "58px" }}>
+            <div style={{ color: "gray" }}>job.cancel</div>
             <Handle
               key="state.stop"
               type="target"
@@ -89,9 +89,9 @@ const NodeGod = ({ self, children, collapsible }) => {
           {nodeInputs.state_stop && (
             <>
               <div
-                style={{ display: "flex", position: "relative", right: "66px" }}
+                style={{ display: "flex", position: "relative", right: "71px" }}
               >
-                <div style={{ color: "gray" }}>state.active</div>
+                <div style={{ color: "gray" }}>state.enable</div>
                 <Handle
                   key="state.active"
                   type="target"
@@ -115,10 +115,10 @@ const NodeGod = ({ self, children, collapsible }) => {
                 style={{
                   display: "flex",
                   position: "relative",
-                  right: "81px",
+                  right: "74px",
                 }}
               >
-                <div style={{ color: "gray" }}>state.deactive</div>
+                <div style={{ color: "gray" }}>state.disable</div>
                 <Handle
                   key="state.deactive"
                   type="target"
@@ -167,9 +167,9 @@ const NodeGod = ({ self, children, collapsible }) => {
           )}
           {nodeInputs.clear && (
             <div
-              style={{ display: "flex", position: "relative", right: "25px" }}
+              style={{ display: "flex", position: "relative", right: "72px" }}
             >
-              <div style={{ color: "gray" }}>clear</div>
+              <div style={{ color: "gray" }}>clearInterval</div>
               <Handle
                 key="clear"
                 type="target"
