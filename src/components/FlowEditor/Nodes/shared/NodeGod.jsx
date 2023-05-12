@@ -33,7 +33,9 @@ const NodeGod = ({ self, children, collapsible }) => {
     state_start: true,
     state_end: true,
     state_error: true,
-    state_stop: false,
+    state_errorVal: true,
+    state_enable: false,
+    state_disable: false,
     state_cancel: true,
     state_clear: true,
   });
@@ -65,17 +67,17 @@ const NodeGod = ({ self, children, collapsible }) => {
         enable={enable}
       >
         <Styled.TargetWrapper align={align}>
-          {nodeInputs.state_stop && (
+          {(nodeInputs.state_enable || nodeInputs.state_disable) && (
             <>
               <div
                 style={{ display: "flex", position: "relative", right: "71px" }}
               >
                 <div style={{ color: "gray" }}>state.enable</div>
                 <Handle
-                  key="state.active"
+                  key="state_enable"
                   type="target"
                   position={align === "vertical" ? Position.Top : Position.Left}
-                  id="state.active"
+                  id="state_enable"
                   className={`${
                     align === "vertical"
                       ? "node-handle vertical"
@@ -99,10 +101,10 @@ const NodeGod = ({ self, children, collapsible }) => {
               >
                 <div style={{ color: "gray" }}>state.disable</div>
                 <Handle
-                  key="state.deactive"
+                  key="state_disable"
                   type="target"
                   position={align === "vertical" ? Position.Top : Position.Left}
-                  id="state.passive"
+                  id="state_disable"
                   className={`${
                     align === "vertical"
                       ? "node-handle vertical"
@@ -125,10 +127,10 @@ const NodeGod = ({ self, children, collapsible }) => {
             >
               <div style={{ color: "gray" }}>state.trig</div>
               <Handle
-                key="state.trig"
+                key="state_trig"
                 type="target"
                 position={align === "vertical" ? Position.Top : Position.Left}
-                id="state.trig"
+                id="state_trig"
                 className={`${
                   align === "vertical"
                     ? "node-handle vertical"
@@ -150,10 +152,10 @@ const NodeGod = ({ self, children, collapsible }) => {
             >
               <div style={{ color: "gray" }}>state.cancel</div>
               <Handle
-                key="state.cancel"
+                key="state_cancel"
                 type="target"
                 position={align === "vertical" ? Position.Top : Position.Left}
-                id="state.cancel"
+                id="state_cancel"
                 className={`${
                   align === "vertical"
                     ? "node-handle vertical"
@@ -175,10 +177,10 @@ const NodeGod = ({ self, children, collapsible }) => {
             >
               <div style={{ color: "gray" }}>state.clear</div>
               <Handle
-                key="clear"
+                key="state_clear"
                 type="target"
                 position={align === "vertical" ? Position.Top : Position.Left}
-                id="clear"
+                id="state_clear"
                 className={`${
                   align === "vertical"
                     ? "node-handle vertical"
@@ -243,9 +245,9 @@ const NodeGod = ({ self, children, collapsible }) => {
                   align === "vertical" ? Position.Bottom : Position.Right
                 }
                 id="state_start"
-                // isValidConnection={(connection) =>
-                //   connection.targetHandle === "state.trig"
-                // }
+                isValidConnection={(connection) =>
+                  Object.keys(nodeInputs).includes(connection.targetHandle)
+                }
                 className={`${
                   align === "vertical"
                     ? "node-handle vertical"
@@ -352,6 +354,9 @@ const NodeGod = ({ self, children, collapsible }) => {
               type="source"
               position={align === "vertical" ? Position.Bottom : Position.Right}
               id={`source${index + 1}`}
+              isValidConnection={(connection) =>
+                !Object.keys(nodeInputs).includes(connection.targetHandle)
+              }
               className={`${
                 align === "vertical"
                   ? "node-handle vertical"

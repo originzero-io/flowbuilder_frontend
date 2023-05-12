@@ -81,11 +81,19 @@ export default function NodeIOManager({ self, nodeInputs, setNodeInputs }) {
           </>
         )
       )}
-      <NodeInput name="state_enable-disable">
+      <NodeInput name="state_enable">
         <input
           type="checkbox"
-          name="state_stop"
-          checked={nodeInputs.state_stop}
+          name="state_enable"
+          checked={nodeInputs.state_enable}
+          onChange={onChangeNodeInputs}
+        />
+      </NodeInput>
+      <NodeInput name="state_disable">
+        <input
+          type="checkbox"
+          name="state_disable"
+          checked={nodeInputs.state_disable}
           onChange={onChangeNodeInputs}
         />
       </NodeInput>

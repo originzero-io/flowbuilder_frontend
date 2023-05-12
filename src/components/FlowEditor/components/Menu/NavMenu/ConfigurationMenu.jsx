@@ -115,26 +115,15 @@ export default function ConfigurationMenu() {
       dispatch(logOut());
     }
   };
-  const debugFlowAll = () => {
+  const debugFlow = () => {
     const elements = reactFlowInstance.toObject();
+
+    // some error checking for debugging
     const triggerNodes = elements.nodes.filter(
       (node) => node.type === "TRIGGER",
     );
     if (triggerNodes.length > 0) {
       flowExecutorSocket.debugFlow(backendFlowDataBuilder(flowId, elements));
-    } else {
-      notification.error("Flow does not contain any trigger node.");
-    }
-  };
-  const debugFlowByLabel = () => {
-    const elements = reactFlowInstance.toObject();
-    const triggerNodes = elements.nodes.filter(
-      (node) => node.type === "TRIGGER",
-    );
-    if (triggerNodes.length > 0) {
-      flowExecutorSocket.debugFlowByLabel(
-        backendFlowDataBuilder(flowId, elements),
-      );
     } else {
       notification.error("Flow does not contain any trigger node.");
     }
@@ -160,13 +149,7 @@ export default function ConfigurationMenu() {
         </Styled.MenuItem>
         <StyledDropdown.DropdownList>
           <StyledDropdown.DropdownItem>
-            <div onClick={debugFlowAll}>Debug all</div>
-          </StyledDropdown.DropdownItem>
-          <StyledDropdown.DropdownItem>
-            <div onClick={debugFlowByLabel}>Debug by Label</div>
-          </StyledDropdown.DropdownItem>
-          <StyledDropdown.DropdownItem>
-            <div>This PC</div>
+            <div onClick={debugFlow}>This PC</div>
           </StyledDropdown.DropdownItem>
           {dummyDevices.map((device) => (
             <StyledDropdown.DropdownItem

@@ -68,8 +68,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
     (params) => {
       if (params.source === params.target) {
         notification.error("Nodes cannot connect itself");
-      } else if (isConnectionCyclic(flowElements, params)) {
-        notification.error("Connection is Cyclic! You should not do this :)");
       } else {
         const sourceGroup = flowElements.nodes.find(
           (els) => els.id === params.source,
