@@ -33,7 +33,7 @@ const NodeGod = ({ self, children, collapsible }) => {
     state_start: true,
     state_end: true,
     state_error: true,
-    state_errorVal: true,
+    errorVal: true,
     state_enable: false,
     state_disable: false,
     state_cancel: true,
@@ -273,9 +273,9 @@ const NodeGod = ({ self, children, collapsible }) => {
                   align === "vertical" ? Position.Bottom : Position.Right
                 }
                 id="state_end"
-                // isValidConnection={(connection) =>
-                //   connection.targetHandle === "state.trig"
-                // }
+                isValidConnection={(connection) =>
+                  Object.keys(nodeInputs).includes(connection.targetHandle)
+                }
                 className={`${
                   align === "vertical"
                     ? "node-handle vertical"
@@ -293,61 +293,62 @@ const NodeGod = ({ self, children, collapsible }) => {
             </div>
           )}
           {nodeInputs.state_error && (
-            <div style={{ display: "flex" }}>
-              <Handle
-                key="state_error"
-                type="source"
-                position={
-                  align === "vertical" ? Position.Bottom : Position.Right
-                }
-                id="state_error"
-                // isValidConnection={(connection) =>
-                //   connection.targetHandle === "state.trig"
-                // }
-                className={`${
-                  align === "vertical"
-                    ? "node-handle vertical"
-                    : "node-handle horizontal"
-                }`}
-                style={{
-                  backgroundColor: "green",
-                  visibility:
-                    ioType === "source" || ioType === "both"
-                      ? "visible"
-                      : "hidden",
-                }}
-              />
-              <div style={{ color: "gray" }}>state.error</div>
-            </div>
+            <>
+              <div style={{ display: "flex" }}>
+                <Handle
+                  key="state_error"
+                  type="source"
+                  position={
+                    align === "vertical" ? Position.Bottom : Position.Right
+                  }
+                  id="state_error"
+                  isValidConnection={(connection) =>
+                    Object.keys(nodeInputs).includes(connection.targetHandle)
+                  }
+                  className={`${
+                    align === "vertical"
+                      ? "node-handle vertical"
+                      : "node-handle horizontal"
+                  }`}
+                  style={{
+                    backgroundColor: "green",
+                    visibility:
+                      ioType === "source" || ioType === "both"
+                        ? "visible"
+                        : "hidden",
+                  }}
+                />
+                <div style={{ color: "gray" }}>state.error</div>
+              </div>
+              <div style={{ display: "flex" }}>
+                <Handle
+                  key="errorVal"
+                  type="source"
+                  position={
+                    align === "vertical" ? Position.Bottom : Position.Right
+                  }
+                  id="errorVal"
+                  isValidConnection={(connection) =>
+                    !Object.keys(nodeInputs).includes(connection.targetHandle)
+                  }
+                  className={`${
+                    align === "vertical"
+                      ? "node-handle vertical"
+                      : "node-handle horizontal"
+                  }`}
+                  style={{
+                    backgroundColor: "gray",
+                    visibility:
+                      ioType === "source" || ioType === "both"
+                        ? "visible"
+                        : "hidden",
+                  }}
+                />
+                <div style={{ color: "gray" }}>errorVal</div>
+              </div>
+            </>
           )}
-          {nodeInputs.whatever && (
-            <div style={{ display: "flex" }}>
-              <Handle
-                key="whatever"
-                type="source"
-                position={
-                  align === "vertical" ? Position.Bottom : Position.Right
-                }
-                id="whatever"
-                // isValidConnection={(connection) =>
-                //   connection.targetHandle === "state.trig"
-                // }
-                className={`${
-                  align === "vertical"
-                    ? "node-handle vertical"
-                    : "node-handle horizontal"
-                }`}
-                style={{
-                  backgroundColor: "green",
-                  visibility:
-                    ioType === "source" || ioType === "both"
-                      ? "visible"
-                      : "hidden",
-                }}
-              />
-              <div style={{ color: "gray" }}>whatever</div>
-            </div>
-          )}
+
           {sources.map((i, index) => (
             <Handle
               key={index}
