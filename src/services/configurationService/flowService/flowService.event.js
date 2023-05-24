@@ -1,6 +1,6 @@
-import ConfigurationSocketService from "../index.socket";
+import SocketEvent from "services/SocketEvent";
 
-class FlowService extends ConfigurationSocketService {
+class FlowEvent extends SocketEvent {
   onCreateFlow(listener) {
     this.socket.on("flows:create", (data) => listener(data));
   }
@@ -34,4 +34,4 @@ class FlowService extends ConfigurationSocketService {
   }
 }
 
-export default new FlowService();
+export default new FlowEvent();

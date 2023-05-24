@@ -9,7 +9,7 @@ import useAuthPermission from "utils/hooks/useAuthPermission";
 import useProject from "utils/hooks/useProject";
 import useWorkspace from "utils/hooks/useWorkspace";
 import { CollapsibleMenuItem } from "components/Shared/Collapsible/CollapsibleMenu";
-import projectServiceSocket from "services/configurationService/projectService/projectService.socket";
+import projectServiceSocket from "services/configurationService/projectService/projectService.event";
 import EditProjectForm from "./EditProjectForm";
 
 const propTypes = {

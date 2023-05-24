@@ -1,11 +1,5 @@
-import AuthService from "services/authService";
+import AuthService from "services/authService/authService";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import userServiceSocket from "services/configurationService/userService/userService.socket";
-import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.socket";
-import projectServiceSocket from "services/configurationService/projectService/projectService.socket";
-import flowServiceSocket from "services/configurationService/flowService/flowService.socket";
-import noteServiceSocket from "services/configurationService/noteService/noteService.socket";
-import flowElementServiceSocket from "services/configurationService/flowElementService/flowElementService.socket";
 
 const initialState = {
   username: "",
@@ -26,17 +20,8 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
     },
     logOut(state, { payload }) {
-      AuthService.logOut();
-
       state.user = "";
       state.isAuthenticated = false;
-
-      userServiceSocket.disconnect();
-      workspaceServiceSocket.disconnect();
-      projectServiceSocket.disconnect();
-      flowServiceSocket.disconnect();
-      noteServiceSocket.disconnect();
-      flowElementServiceSocket.disconnect();
     },
   },
   extraReducers: {

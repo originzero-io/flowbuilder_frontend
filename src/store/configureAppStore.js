@@ -1,9 +1,10 @@
+/* eslint-disable import/no-import-module-exports */
 /* eslint-disable no-undef */
 
 import { configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
-import rootReducer from "./reducers/index";
+import rootReducer from "./rootReducer";
 
 const persistConfig = {
   key: "persist-key",
@@ -25,7 +26,7 @@ export default function configureAppStore() {
   });
 
   if (process.env.REACT_APP_HOST_ENV !== "production" && module.hot) {
-    module.hot.accept("./reducers", () => store.replaceReducer(rootReducer));
+    module.hot.accept("./rootReducer", () => store.replaceReducer(rootReducer));
   }
 
   return store;

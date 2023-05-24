@@ -76,22 +76,22 @@ export const flowElementsSlice = createSlice({
     },
     setRotateAll(state, { payload }) {
       state.nodes.forEach((node) => {
-        node.data.align = payload;
+        node.data.ui.direction = payload;
       });
     },
     setExpandAll(state, { payload }) {
       state.nodes.forEach((node) => {
-        node.data.expand = payload;
+        node.data.ui.expand = payload;
       });
     },
     rotateNode(state, { payload }) {
       const node = payload;
-      const currentAlign = node.data.align;
+      const currentDirection = node.data.ui.direction;
 
       state.nodes.forEach((node) => {
         if (node.id === payload.id) {
-          node.data.align =
-            currentAlign === "vertical" ? "horizontal" : "vertical";
+          node.data.ui.direction =
+            currentDirection === "vertical" ? "horizontal" : "vertical";
         }
       });
     },
@@ -99,7 +99,7 @@ export const flowElementsSlice = createSlice({
       const { path } = payload;
       state.nodes.forEach((node) => {
         if (node.selected) {
-          node.data.align = path;
+          node.data.ui.direction = path;
         }
       });
     },
@@ -110,7 +110,7 @@ export const flowElementsSlice = createSlice({
     expandNode(state, { payload }) {
       state.nodes.forEach((node) => {
         if (node.id === payload.id) {
-          node.data.expand = !payload.data.expand;
+          node.data.ui.expand = !payload.data.ui.expand;
         }
       });
     },
@@ -129,7 +129,7 @@ export const flowElementsSlice = createSlice({
     changeNodeName(state, { payload }) {
       state.nodes.forEach((node) => {
         if (node.id === payload.node.id) {
-          node.data.label = payload.name;
+          node.data.ui.label = payload.name;
         }
       });
     },
@@ -138,7 +138,7 @@ export const flowElementsSlice = createSlice({
 
       state.nodes.forEach((node) => {
         if (node.id === self.id) {
-          node.data.enable = checked;
+          node.data.ui.enable = checked;
         }
       });
     },
@@ -150,7 +150,7 @@ export const flowElementsSlice = createSlice({
     setEnableSelectedNodes(state, { payload }) {
       state.nodes.forEach((node) => {
         if (node.selected) {
-          node.data.enable = !node.data.enable;
+          node.data.ui.enable = !node.data.ui.enable;
         }
       });
     },
@@ -160,27 +160,27 @@ export const flowElementsSlice = createSlice({
       const outgoersIds = outgoers.map((o) => o.id);
       state.nodes.forEach((node) => {
         if (outgoersIds.includes(node.id)) {
-          node.data.enable = enable;
+          node.data.ui.enable = enable;
         }
       });
     },
     setGroupSingle(state, { payload }) {
       state.nodes.forEach((node) => {
         if (node.id === payload.self.id) {
-          node.data.group = payload.group;
+          node.data.ui.group = payload.ui.group;
         }
       });
       state.edges.forEach((edge) => {
         if (edge.source === payload.self.id) {
-          edge.group = payload.group;
-          edge.style.stroke = payload.group.color;
+          edge.group = payload.ui.group;
+          edge.style.stroke = payload.ui.group.color;
         }
       });
     },
     setGroupSelectedElements(state, { payload }) {
       state.nodes.forEach((node) => {
         if (node.selected) {
-          node.data.group = payload;
+          node.data.ui.group = payload;
         }
       });
 
@@ -199,8 +199,8 @@ export const flowElementsSlice = createSlice({
     },
     deleteGroupOfElement(state, { payload }) {
       state.nodes.forEach((node) => {
-        if (node.data.group._id === payload) {
-          node.data.group = { _id: 0 };
+        if (node.data.ui.group._id === payload) {
+          node.data.ui.group = { _id: 0 };
         }
       });
       state.edges.forEach((edge) => {
@@ -211,12 +211,11 @@ export const flowElementsSlice = createSlice({
       });
     },
     updateGroupOfElement(state, { payload }) {
-      console.log("groupOfElement payload: ", payload);
       const group = payload;
       state.nodes.forEach((node) => {
-        if (node.data.group._id === group._id) {
-          node.data.group.name = group.name;
-          node.data.group.color = group.color;
+        if (node.data.ui.group._id === group._id) {
+          node.data.ui.group.name = group.name;
+          node.data.ui.group.color = group.color;
         }
       });
       state.edges.forEach((edge) => {
@@ -230,7 +229,7 @@ export const flowElementsSlice = createSlice({
     updateNodeHandles(state, { payload }) {
       state.nodes.forEach((node) => {
         if (node.id === payload.self.id) {
-          node.data.engine[payload.name] = payload.value;
+          node.data.skeleton.ioEngine[payload.name] = payload.value;
         }
       });
     },

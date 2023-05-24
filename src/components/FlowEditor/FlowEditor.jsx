@@ -19,7 +19,7 @@ import {
   setMultiSelectionContextMenu,
   setPanelContextMenu,
 } from "store/reducers/menuSlice";
-import { setNodeList } from "store/reducers/nodeListSlice";
+import { setNodeList } from "store/reducers/panelNodeListSlice";
 import PropTypes from "prop-types";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import notification from "utils/ui/notificationHelper";
@@ -32,7 +32,7 @@ import {
 } from "./helpers/menuHelper";
 import Utils from "./components/Utils";
 import { createNode } from "./helpers/elementHelper";
-import { createCustomNodeObject } from "./helpers/nodeTypeHelper";
+import { createCustomNodeObject } from "./helpers/nodeObjectHelper";
 
 const propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
@@ -71,7 +71,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
       } else {
         const sourceGroup = flowElements.nodes.find(
           (els) => els.id === params.source,
-        )?.data.group;
+        ).data.ui?.group;
         const edge = {
           ...params,
           type: edgeType,
@@ -82,7 +82,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
 
         const sourceEnable = flowElements.nodes.find(
           (els) => els.id === params.source,
-        ).data.enable;
+        ).data.ui.enable;
         const self = flowElements.nodes.find((els) => els.id === params.target);
         dispatch(addNewEdge(edge));
         dispatch(setNodeEnable({ self, checked: sourceEnable }));
@@ -95,8 +95,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
     (oldEdge, newConnection) => {
       if (newConnection.source === newConnection.target) {
         notification.error("Nodes cannot connect itself");
-      } else if (isConnectionCyclic(flowElements, newConnection)) {
-        notification.error("Connection is Cyclic! You should not do this :)");
       } else {
         dispatch(updateEdgePath({ oldEdge, newConnection }));
       }
@@ -121,7 +119,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
       y: event.clientY - reactFlowBounds.top,
     });
 
-    console.log("type: ", type);
     if (!(type === "")) {
       const newNode = createNode(type, initialPosition, rotateAllPath);
       dispatch(addNewNode(newNode));

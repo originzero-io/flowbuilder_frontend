@@ -1,65 +1,68 @@
 import { useEffect } from "react";
-import createSocket from "services/socketIOClient";
-import flowServiceSocket from "services/configurationService/flowService/flowService.socket";
-import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.socket";
-import projectServiceSocket from "services/configurationService/projectService/projectService.socket";
-import flowElementServiceSocket from "services/configurationService/flowElementService/flowElementService.socket";
-import noteServiceSocket from "services/configurationService/noteService/noteService.socket";
-import userServiceSocket from "services/configurationService/userService/userService.socket";
-import flowExecutorSocket from "services/flowExecutorService/flowExecutor.socket";
-import useUserInitialListener from "services/configurationService/userService/userService.listener";
-import useFlowElementInitialListener from "services/configurationService/flowElementService/flowElementService.listener";
-import useFlowInitialListener from "services/configurationService/flowService/flowService.listener";
-import useProjectInitialListener from "services/configurationService/projectService/projectService.listener";
-import useWorkspaceInitialListener from "services/configurationService/workspaceService/workspaceService.listener";
-import useNoteInitialListener from "services/configurationService/noteService/noteService.listener";
+import connectSocket from "services/SocketIOClient";
+import flowEvent from "services/configurationService/flowService/flowService.event";
+import workspaceEvent from "services/configurationService/workspaceService/workspaceService.event";
+import projectEvent from "services/configurationService/projectService/projectService.event";
+import flowElementEvent from "services/configurationService/flowElementService/flowElementService.event";
+import noteEvent from "services/configurationService/noteService/noteService.event";
+import userEvent from "services/configurationService/userService/userService.event";
+import useUserInitialListener from "services/configurationService/userService/userService.initialListener";
+import useFlowElementInitialListener from "services/configurationService/flowElementService/flowElementService.initialListener";
+import useFlowInitialListener from "services/configurationService/flowService/flowService.initialListener";
+import useProjectInitialListener from "services/configurationService/projectService/projectService.initialListener";
+import useWorkspaceInitialListener from "services/configurationService/workspaceService/workspaceService.initialListener";
+import useNoteInitialListener from "services/configurationService/noteService/noteService.initialListener";
+import useFlowExecutorInitialListener from "services/flowExecutorService/flowExecutor.initialListener";
+import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import useAuth from "../utils/hooks/useAuth";
 
 export default function SocketConnections() {
   const auth = useAuth();
   useEffect(() => {
     if (auth.isAuthenticated) {
-      const userNamespace = createSocket({
+      const userNamespace = connectSocket({
         path: "/configuration_socket",
         namespace: "users",
       });
-      const elementNamespace = createSocket({
+      const elementNamespace = connectSocket({
         path: "/configuration_socket",
         namespace: "elements",
       });
-      const flowNamespace = createSocket({
+      const flowNamespace = connectSocket({
         path: "/configuration_socket",
         namespace: "flows",
       });
-      const projectNamespace = createSocket({
+      const projectNamespace = connectSocket({
         path: "/configuration_socket",
         namespace: "projects",
       });
-      const workspaceNamespace = createSocket({
+      const workspaceNamespace = connectSocket({
         path: "/configuration_socket",
         namespace: "workspaces",
       });
-      const noteNamespace = createSocket({
+      const noteNamespace = connectSocket({
         path: "/configuration_socket",
         namespace: "notes",
       });
-      const flowExecutorNamespace = createSocket({
+      const flowExecutorSocket = connectSocket({
         path: "/flowExecutor_socket",
       });
 
-      workspaceServiceSocket.injectSocket(workspaceNamespace);
-      projectServiceSocket.injectSocket(projectNamespace);
-      flowServiceSocket.injectSocket(flowNamespace);
-      flowElementServiceSocket.injectSocket(elementNamespace);
-      noteServiceSocket.injectSocket(noteNamespace);
-      userServiceSocket.injectSocket(userNamespace);
-      flowExecutorSocket.injectSocket(flowExecutorNamespace);
+      workspaceEvent.injectSocket(workspaceNamespace);
+      projectEvent.injectSocket(projectNamespace);
+      flowEvent.injectSocket(flowNamespace);
+      flowElementEvent.injectSocket(elementNamespace);
+      noteEvent.injectSocket(noteNamespace);
+      userEvent.injectSocket(userNamespace);
+      flowExecutorEvent.injectSocket(flowExecutorSocket);
+
       useUserInitialListener();
       useFlowElementInitialListener();
       useFlowInitialListener();
       useProjectInitialListener();
       useWorkspaceInitialListener();
       useNoteInitialListener();
+      useFlowExecutorInitialListener();
     }
   }, [auth.isAuthenticated]);
   return null;

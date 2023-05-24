@@ -5,7 +5,7 @@ import {
   setElements,
 } from "store/reducers/flow/flowElementsSlice";
 import notificationHelper from "utils/ui/notificationHelper";
-import flowElementServiceSocket from "./flowElementService.socket";
+import flowElementServiceSocket from "./flowElementService.event";
 
 const useFlowElementInitialListener = () => {
   flowElementServiceSocket.onSaveElements((data) => {

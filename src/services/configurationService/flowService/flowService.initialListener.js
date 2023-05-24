@@ -7,7 +7,7 @@ import {
   moveFlow,
 } from "store/reducers/flow/flowSlice";
 import notificationHelper from "utils/ui/notificationHelper";
-import flowServiceSocket from "./flowService.socket";
+import flowServiceSocket from "./flowService.event";
 
 const useFlowInitialListener = () => {
   flowServiceSocket.onCreateFlow((data) => {

@@ -16,7 +16,7 @@ import useActiveFlow from "utils/hooks/useActiveFlow";
 import FlowService from "services/configurationService/flowService/flowService.http";
 import notification from "utils/ui/notificationHelper";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
-import flowElementServiceSocket from "services/configurationService/flowElementService/flowElementService.socket";
+import flowElementServiceSocket from "services/configurationService/flowElementService/flowElementService.event";
 import {
   RedoIcon,
   UndoIcon,

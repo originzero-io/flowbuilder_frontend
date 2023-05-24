@@ -8,8 +8,7 @@ import FlowEditor from "components/FlowEditor/FlowEditor";
 import { getGroups } from "store/reducers/flow/flowGroupsSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import theme from "components/Shared/ThemeReference";
-import flowExecutorSocket from "services/flowExecutorService/flowExecutor.socket";
-import useFlowExecutorInitialListener from "services/flowExecutorService/flowExecutor.listener";
+import flowExecutorSocket from "services/flowExecutorService/flowExecutor.event";
 
 const StyledFlowWrapper = styled.div`
   height: 100%;
@@ -28,7 +27,6 @@ const FlowPage = () => {
 
   useEffect(() => {
     dispatch(getGroups(flowId));
-    useFlowExecutorInitialListener();
     flowExecutorSocket.joinRoom(flowId);
   }, []);
 

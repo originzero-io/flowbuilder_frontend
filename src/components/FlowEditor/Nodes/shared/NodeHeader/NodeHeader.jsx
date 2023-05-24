@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { expandNode } from "store/reducers/flow/flowElementsSlice";
 import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
-import { getIncomers, getOutgoers } from "reactflow";
 import GroupMenu from "../../../components/Menu/NodeGroupMenu/NodeGroupMenu";
 import * as Styled from "../Node.style";
 import EditNameForm from "./EditNameForm";
@@ -21,6 +20,7 @@ export default function NodeHeader({ self }) {
   const { nodeGroupMenuDisplay } = flowGui;
   const [showGroup, setShowGroup] = useState(nodeGroupMenuDisplay);
   const [hover, setHover] = useState(false);
+  const { label, group } = self.data.ui;
   const groupHandle = (e) => {
     setShowGroup(!showGroup);
     dispatch(closeAllNodeGroupMenu(false));
@@ -77,15 +77,13 @@ export default function NodeHeader({ self }) {
         {edit ? (
           <EditNameForm setEdit={setEdit} self={self} />
         ) : (
-          <Styled.Label onDoubleClick={expandHandle}>
-            {self.data.label}
-          </Styled.Label>
+          <Styled.Label onDoubleClick={expandHandle}>{label}</Styled.Label>
         )}
       </Styled.Content>
       <Styled.FeatureIconsWrapper>
         {hover && <FeatureIcons self={self} edit={edit} setEdit={setEdit} />}
       </Styled.FeatureIconsWrapper>
-      <Flag self={self} onClick={groupHandle} />
+      <Flag color={group.color} onClick={groupHandle} />
       {showGroup && <GroupMenu self={self} />}
     </Styled.Header>
   );

@@ -1,14 +1,11 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { getIncomers, getOutgoers } from "reactflow";
+import { getIncomers } from "reactflow";
 import { useDispatch } from "react-redux";
-import {
-  setNodeEnable,
-  setOutgoersEnable,
-} from "store/reducers/flow/flowElementsSlice";
+import { setNodeEnable } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import { NameEditIcon } from "components/Shared/icons";
-import toast from "react-hot-toast";
+import notificationHelper from "utils/ui/notificationHelper";
 import RotateButton from "../RotateButton";
 import SwitchButton from "../SwitchButton";
 
@@ -23,14 +20,16 @@ export default function FeatureIcons({ self, edit, setEdit }) {
   const nameEditHandle = () => {
     setEdit(!edit);
   };
-  const [checked, setChecked] = useState(self.data.enable);
+  const [checked, setChecked] = useState(self.data.ui.enable);
   const enableChangeHandle = (checked) => {
     const incomers = getIncomers(self, flowElements.nodes, flowElements.edges);
     const disableCount = incomers.filter(
-      (incomer) => incomer.data.enable === false,
+      (incomer) => incomer.data.ui.enable === false,
     ).length;
     if (incomers.length > 0 && incomers.length === disableCount) {
-      toast("First, make sure that at least one of your incomers is enabled");
+      notificationHelper.warn(
+        "First, make sure that at least one of your incomers is enabled",
+      );
     } else {
       setChecked(checked);
       dispatch(setNodeEnable({ self, checked }));

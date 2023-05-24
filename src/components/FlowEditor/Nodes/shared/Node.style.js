@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const NodeWrapper = styled.div`
   display: flex;
-  flex-direction: ${(props) => (props.align === "vertical" ? "column" : "row")};
+  flex-direction: ${(props) =>
+    props.direction === "vertical" ? "column" : "row"};
   flex-wrap: wrap;
   justify-content: center;
   padding: 2px 2px;
   padding-bottom: 0px; //Added by "My name is Anıl Akseki"
-  font-size: 12px;
+  font-size: 10px;
   border-radius: 3px;
   text-align: center;
   background-color: #000000;
@@ -26,7 +27,7 @@ export const NodeArea = styled.div`
 `;
 export const Header = styled.div`
   display: flex;
-  min-width: 200px;
+  min-width: 150px;
   justify-content: space-between;
   align-items: center;
   text-align: start; //Added by "My name is Anıl Akseki"
@@ -43,7 +44,7 @@ export const Content = styled.div`
 export const Label = styled.div`
   color: white;
   padding-left: 5px;
-  font-family: "Prime-Light";
+  font-family: "Arial";
 `;
 export const FeatureIconsWrapper = styled.div`
   display: flex;
@@ -68,21 +69,23 @@ export const TargetWrapper = styled.div`
   display: flex;
   position: relative;
   justify-content: center;
-  flex-direction: ${(props) => (props.align === "vertical" ? "row" : "column")};
-  width: ${(props) => (props.align === "vertical" ? "none" : "0px")};
-  height: ${(props) => (props.align === "vertical" ? "0px" : "none")};
-  bottom: ${(props) => (props.align === "vertical" ? "13px" : "none")};
-  right: ${(props) => (props.align === "vertical" ? "none" : "15px")};
+  flex-direction: ${(props) =>
+    props.direction === "vertical" ? "row" : "column"};
+  width: ${(props) => (props.direction === "vertical" ? "none" : "0px")};
+  height: ${(props) => (props.direction === "vertical" ? "0px" : "none")};
+  bottom: ${(props) => (props.direction === "vertical" ? "13px" : "none")};
+  right: ${(props) => (props.direction === "vertical" ? "none" : "15px")};
 `;
 export const SourceWrapper = styled.div`
   display: flex;
   position: relative;
-  flex-direction: ${(props) => (props.align === "vertical" ? "row" : "column")};
+  flex-direction: ${(props) =>
+    props.direction === "vertical" ? "row" : "column"};
   justify-content: center;
-  width: ${(props) => (props.align === "vertical" ? "none" : "0px")};
-  height: ${(props) => (props.align === "vertical" ? "0px" : "none")};
-  top: ${(props) => (props.align === "vertical" ? "5px" : "none")};
-  left: ${(props) => (props.align === "vertical" ? "none" : "7px")};
+  width: ${(props) => (props.direction === "vertical" ? "none" : "0px")};
+  height: ${(props) => (props.direction === "vertical" ? "0px" : "none")};
+  top: ${(props) => (props.direction === "vertical" ? "5px" : "none")};
+  left: ${(props) => (props.direction === "vertical" ? "none" : "7px")};
 `;
 
 export const Divider = styled.div`

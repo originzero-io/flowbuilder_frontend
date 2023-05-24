@@ -1,6 +1,6 @@
-import ConfigurationSocketService from "../index.socket";
+import SocketEvent from "services/SocketEvent";
 
-class UserService extends ConfigurationSocketService {
+class UserEvent extends SocketEvent {
   onOnlineUser(listener) {
     this.socket.on("user:onlineUser", (data) => listener(data));
   }
@@ -18,4 +18,4 @@ class UserService extends ConfigurationSocketService {
   }
 }
 
-export default new UserService();
+export default new UserEvent();

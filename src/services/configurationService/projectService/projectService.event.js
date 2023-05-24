@@ -1,6 +1,6 @@
-import ConfigurationSocketService from "../index.socket";
+import SocketEvent from "services/SocketEvent";
 
-class ProjectService extends ConfigurationSocketService {
+class ProjectEvent extends SocketEvent {
   onCreateProject(listener) {
     this.socket.on("projects:create", (data) => listener(data));
   }
@@ -26,4 +26,4 @@ class ProjectService extends ConfigurationSocketService {
   }
 }
 
-export default new ProjectService();
+export default new ProjectEvent();

@@ -25,7 +25,7 @@ const propTypes = {
 };
 export default function EditNameForm({ self, setEdit }) {
   const dispatch = useDispatch();
-  const [editedName, setEditedName] = useState(self.data.label);
+  const [editedName, setEditedName] = useState(self.data.ui.label);
   const nameEditChangeHandle = (e) => {
     setEditedName(e.target.value);
   };

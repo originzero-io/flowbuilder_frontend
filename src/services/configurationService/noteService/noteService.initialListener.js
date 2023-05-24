@@ -1,7 +1,7 @@
 import store from "index";
 import { createNote, deleteNote, updateNote } from "store/reducers/noteSlice";
 import notificationHelper from "utils/ui/notificationHelper";
-import noteServiceSocket from "./noteService.socket";
+import noteServiceSocket from "./noteService.event";
 
 const useNoteInitialListener = () => {
   noteServiceSocket.onCreateNote((data) => {

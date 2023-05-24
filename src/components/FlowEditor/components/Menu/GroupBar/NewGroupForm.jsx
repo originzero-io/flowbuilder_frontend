@@ -41,7 +41,7 @@ const NewGroupForm = ({ theme }) => {
   };
   const selectNonGroupsHandle = () => {
     const nonGroups = flowElements.nodes.filter(
-      (node) => node.data.group._id === 0,
+      (node) => node.data.ui.group._id === 0,
     );
     dispatch(selectElements(nonGroups));
   };

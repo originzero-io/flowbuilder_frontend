@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import HttpClient from "services/httpClient";
+import HttpClient from "services/HttpClient";
 
 export default class ConfigurationService extends HttpClient {
   constructor() {

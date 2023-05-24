@@ -1,4 +1,4 @@
-export default class ConfigurationSocketService {
+class SocketEvent {
   socket;
 
   injectSocket(socket) {
@@ -9,3 +9,5 @@ export default class ConfigurationSocketService {
     this.socket.disconnect();
   }
 }
+
+export default SocketEvent;

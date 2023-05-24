@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useProject from "utils/hooks/useProject";
-import projectServiceSocket from "services/configurationService/projectService/projectService.socket";
+import projectServiceSocket from "services/configurationService/projectService/projectService.event";
 
 const EditProjectForm = ({ project }) => {
   const { activeProject } = useProject();

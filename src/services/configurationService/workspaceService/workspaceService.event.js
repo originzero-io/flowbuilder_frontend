@@ -1,6 +1,6 @@
-import ConfigurationSocketService from "../index.socket";
+import SocketEvent from "services/SocketEvent";
 
-class WorkspaceService extends ConfigurationSocketService {
+class WorkspaceEvent extends SocketEvent {
   onCreateWorkspace(listener) {
     this.socket.on("workspaces:create", (data) => listener(data));
   }
@@ -26,4 +26,4 @@ class WorkspaceService extends ConfigurationSocketService {
   }
 }
 
-export default new WorkspaceService();
+export default new WorkspaceEvent();

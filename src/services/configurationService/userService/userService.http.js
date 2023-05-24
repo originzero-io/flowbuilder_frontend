@@ -1,4 +1,4 @@
-import ConfigurationService from "../index.http";
+import ConfigurationService from "../configurationService.http";
 
 class UserService extends ConfigurationService {
   async getAllUsers() {

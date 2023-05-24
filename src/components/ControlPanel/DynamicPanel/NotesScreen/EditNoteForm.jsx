@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import PropTypes from "prop-types";
-import noteServiceSocket from "services/configurationService/noteService/noteService.socket";
+import noteServiceSocket from "services/configurationService/noteService/noteService.event";
 
 const propTypes = {
   note: PropTypes.object.isRequired,

@@ -5,7 +5,7 @@ import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useProject from "utils/hooks/useProject";
 import useWorkspace from "utils/hooks/useWorkspace";
-import flowServiceSocket from "services/configurationService/flowService/flowService.socket";
+import flowServiceSocket from "services/configurationService/flowService/flowService.event";
 
 export default function AddFlowForm() {
   const auth = useAuth();

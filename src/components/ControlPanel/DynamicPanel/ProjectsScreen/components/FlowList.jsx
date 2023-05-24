@@ -9,7 +9,7 @@ import useAuthPermission from "utils/hooks/useAuthPermission";
 
 import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
 import useWorkspace from "utils/hooks/useWorkspace";
-import flowElementServiceSocket from "services/configurationService/flowElementService/flowElementService.socket";
+import flowElementServiceSocket from "services/configurationService/flowElementService/flowElementService.event";
 
 const propTypes = {
   flows: PropTypes.oneOfType([PropTypes.array, null]),

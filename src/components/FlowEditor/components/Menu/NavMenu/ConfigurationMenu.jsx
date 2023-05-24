@@ -27,10 +27,10 @@ import Tooltip from "components/Shared/Tooltip/Tooltip";
 import * as StyledDropdown from "components/StyledComponents/DropdownMenu";
 import * as StyledShapes from "components/StyledComponents/Shapes";
 import * as StyledDivider from "components/StyledComponents/Divider";
-import flowExecutorSocket from "services/flowExecutorService/flowExecutor.socket";
+import flowExecutorSocket from "services/flowExecutorService/flowExecutor.event";
 import * as Styled from "./NavMenu.style";
 import { ShareIcon, TuneIcon } from "./Icons";
-import SwitchButton from "../../../Nodes/shared/SwitchButton";
+import SwitchButton from "../../../nodes/shared/SwitchButton";
 
 const dummyDevices = [
   {
@@ -117,7 +117,8 @@ export default function ConfigurationMenu() {
   };
   const debugFlow = () => {
     const elements = reactFlowInstance.toObject();
-
+    notification.warn("Flow is executing...");
+    console.log("elements: ", elements);
     // some error checking for debugging
     const triggerNodes = elements.nodes.filter(
       (node) => node.type === "TRIGGER",

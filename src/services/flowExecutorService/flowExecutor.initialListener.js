@@ -1,7 +1,7 @@
-import flowExecutorSocket from "./flowExecutor.socket";
+import flowExecutorEvent from "./flowExecutor.event";
 
 const useFlowExecutorInitialListener = () => {
-  flowExecutorSocket.onDebugFlow((data) => {
+  flowExecutorEvent.onDebugFlow((data) => {
     console.log(data);
   });
 };

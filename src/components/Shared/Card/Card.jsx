@@ -2,7 +2,7 @@ import useAuthPermission from "utils/hooks/useAuthPermission";
 import PropTypes from "prop-types";
 import React from "react";
 import { VscTrash } from "react-icons/vsc";
-import flowServiceSocket from "services/configurationService/flowService/flowService.socket";
+import flowServiceSocket from "services/configurationService/flowService/flowService.event";
 import * as Styled from "./Card.style";
 import DetailMenu from "./DetailMenu";
 

@@ -1,5 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateNodeHandles } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types";
 import * as Styled from "./Node.style";
@@ -9,7 +10,7 @@ const propTypes = {
   ioType: PropTypes.string.isRequired,
 };
 export default function NodeIOManager({ self, nodeInputs, setNodeInputs }) {
-  const { sourceCount, targetCount, ioType } = self.data.engine;
+  const { sourceCount, targetCount, ioType } = self.data.skeleton.ioEngine;
 
   const dispatch = useDispatch();
   const [handleCount, setHandleCount] = useState({

@@ -2,7 +2,7 @@ import store from "index";
 import { makeMeOnline } from "store/reducers/authSlice";
 import { editUser } from "store/reducers/userSlice";
 import notificationHelper from "utils/ui/notificationHelper";
-import userServiceSocket from "./userService.socket";
+import userServiceSocket from "./userService.event";
 
 const useUserInitialListener = () => {
   userServiceSocket.setOnlineUser("MAKE_ME_ONLINE");

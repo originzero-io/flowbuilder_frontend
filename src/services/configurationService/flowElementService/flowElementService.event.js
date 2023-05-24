@@ -1,6 +1,6 @@
-import ConfigurationSocketService from "../index.socket";
+import SocketEvent from "services/SocketEvent";
 
-class FlowElementService extends ConfigurationSocketService {
+class FlowElementEvent extends SocketEvent {
   onSaveElements(listener) {
     this.socket.on("elements:save", (data) => listener(data));
   }
@@ -18,4 +18,4 @@ class FlowElementService extends ConfigurationSocketService {
   }
 }
 
-export default new FlowElementService();
+export default new FlowElementEvent();

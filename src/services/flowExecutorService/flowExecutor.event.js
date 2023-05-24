@@ -1,6 +1,12 @@
-class FlowExecutorService {
-  injectSocket(socket) {
-    this.socket = socket;
+import store from "index";
+import SocketEvent from "services/SocketEvent";
+import { setSystemNodes } from "store/reducers/systemNodeSlice";
+
+class FlowExecutorEvent extends SocketEvent {
+  getNodeList() {
+    this.socket.emit("getNodeList", (response) => {
+      store.dispatch(setSystemNodes(response));
+    });
   }
 
   onNodeStatus(self, listener) {
@@ -32,4 +38,4 @@ class FlowExecutorService {
   }
 }
 
-export default new FlowExecutorService();
+export default new FlowExecutorEvent();

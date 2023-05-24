@@ -27,7 +27,7 @@ const GroupList = ({ theme, flowId }) => {
   };
   const groupItemClickHandle = (group) => {
     const nodesByGroup = flowElements.nodes.filter(
-      (node) => node.data.group._id === group._id,
+      (node) => node.data.ui.group._id === group._id,
     );
     dispatch(selectElements(nodesByGroup));
   };

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+/* eslint-disable react/jsx-no-useless-fragment */
+import React from "react";
 import themeColor from "components/Shared/ThemeReference";
 import { useSelector, useDispatch } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
-import { addNodeToFavorites, setNodeList } from "store/reducers/nodeListSlice";
+import { addNodeToFavorites } from "store/reducers/panelNodeListSlice";
 import { addNewNode } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import { useReactFlow } from "reactflow";
@@ -16,7 +17,7 @@ const PanelContextMenu = () => {
   const { panelMenu } = useSelector((state) => state.menus);
   const { flowGui } = useActiveFlow();
   const { rotateAllPath, theme } = flowGui;
-  const nodeList = useSelector((state) => state.nodeList);
+  const nodeList = useSelector((state) => state.panelNodeList);
   const dispatch = useDispatch();
 
   const reactFlowInstance = useReactFlow();

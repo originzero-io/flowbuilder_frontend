@@ -7,7 +7,7 @@ import {
   updateProject,
 } from "store/reducers/projectSlice";
 import notificationHelper from "utils/ui/notificationHelper";
-import projectServiceSocket from "./projectService.socket";
+import projectServiceSocket from "./projectService.event";
 
 const useProjectInitialListener = () => {
   projectServiceSocket.onCreateProject((data) => {

@@ -14,8 +14,8 @@ import { Provider } from "react-redux";
 import { ErrorBoundary } from "react-error-boundary";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import configureAppStore from "store/configureAppStore.js";
 import ErrorFallback from "./components/Shared/ErrorFallback";
-import configureAppStore from "./store/configureAppStore";
 import App from "./app/App";
 
 const store = configureAppStore();

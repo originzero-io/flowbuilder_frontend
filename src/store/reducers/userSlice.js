@@ -1,4 +1,4 @@
-import AuthService from "services/authService";
+import AuthService from "services/authService/authService";
 import UserService from "services/configurationService/userService/userService.http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 

@@ -1,6 +1,6 @@
-import ConfigurationSocketService from "../index.socket";
+import SocketEvent from "services/SocketEvent";
 
-class NoteService extends ConfigurationSocketService {
+class NoteEvent extends SocketEvent {
   onCreateNote(listener) {
     this.socket.on("notes:create", (data) => listener(data));
   }
@@ -26,4 +26,4 @@ class NoteService extends ConfigurationSocketService {
   }
 }
 
-export default new NoteService();
+export default new NoteEvent();

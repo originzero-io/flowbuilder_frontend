@@ -7,7 +7,7 @@ import { BiEdit } from "react-icons/bi";
 import PropTypes from "prop-types";
 import useAuth from "utils/hooks/useAuth";
 import useWorkspace from "utils/hooks/useWorkspace";
-import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.socket";
+import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.event";
 import * as Styled from "./NavigationPanel.style";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
 

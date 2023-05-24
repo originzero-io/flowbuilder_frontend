@@ -1,4 +1,4 @@
-import HttpClient from "./httpClient";
+import HttpClient from "../HttpClient";
 
 class AuthService extends HttpClient {
   constructor() {

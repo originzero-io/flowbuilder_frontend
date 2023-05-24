@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import flowExecutorSocket from "services/flowExecutorService/flowExecutor.socket";
+import flowExecutorSocket from "services/flowExecutorService/flowExecutor.event";
 import NavigationPanel from "../components/ControlPanel/NavigationPanel/NavigationPanel";
 import WorkspacePanel from "../components/ControlPanel/WorkspacePanel/WorkspacePanel.jsx";
 import DynamicPanel, { TopMenu } from "../components/ControlPanel/DynamicPanel";
@@ -17,7 +17,6 @@ const StyledContent = styled.div`
 `;
 
 export default function ControlPanelPage() {
-  // console.log("CONTROL_PANEL_PAGE RENDERED")
   useEffect(() => {
     flowExecutorSocket.leaveAllRooms();
     flowExecutorSocket.removeAllListeners();

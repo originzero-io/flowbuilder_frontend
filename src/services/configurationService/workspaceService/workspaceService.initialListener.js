@@ -5,7 +5,7 @@ import {
   editWorkspace,
 } from "store/reducers/workspaceSlice";
 import notificationHelper from "utils/ui/notificationHelper";
-import workspaceServiceSocket from "./workspaceService.socket";
+import workspaceServiceSocket from "./workspaceService.event";
 
 const useWorkspaceInitialListener = () => {
   workspaceServiceSocket.onCreateWorkspace((data) => {

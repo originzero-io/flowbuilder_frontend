@@ -23,9 +23,6 @@ class SocketIOClient {
     this.socket.on("connect", () => {
       notification.success(`${this.namespace} namespace connected`);
     });
-    this.socket.on(`${this.namespace}:welcome`, (data) => {
-      // anything
-    });
     this.socket.on("connect_error", (err) => {
       notification.error(`Connection error: ${err.message}`);
     });
@@ -38,6 +35,6 @@ class SocketIOClient {
   }
 }
 
-const createSocket = (config) => new SocketIOClient(config).socket;
+const connectSocket = (config) => new SocketIOClient(config).socket;
 
-export default createSocket;
+export default connectSocket;

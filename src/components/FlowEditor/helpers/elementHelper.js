@@ -1,18 +1,44 @@
 import uuid from "react-uuid";
-import { getNodeEngineData } from "./nodeTypeHelper";
+import { getNodeSkeleton } from "./nodeObjectHelper";
 
-export const createNode = (type, initialPosition, align) => ({
+export const createNode = (type, initialPosition, direction) => ({
   id: `${type}-${uuid()}`,
   type,
   position: initialPosition,
   data: {
-    engine: getNodeEngineData(type),
-    label: `${type}`,
-    align,
-    expand: false,
-    enable: true,
-    group: { _id: 0, color: null },
+    skeleton: getNodeSkeleton(type),
+    handles: {
+      class: "class1", // trigBehavior ve handleMechanismi belirler
+      trigBehavior: "ignore",
+      handleMechanism: {
+        frozenHandles: [], // silinmesine izin verilmeyecek handlelar
+        stateHandles: {
+          start: true,
+          end: true,
+          error: false,
+          enable: false,
+          disable: false,
+          cancel: false,
+          clear: false,
+          trig: [],
+        },
+      },
+    },
+    ui: {
+      label: `${type}`,
+      direction,
+      expand: false,
+      enable: true,
+      group: { _id: 0, color: "gray" },
+    },
   },
+
+  // ? Reactflow tarafından eklenenler
+  // width,
+  // height,
+  // selected,
+  // positionAbsolute : {x,y},
+  // dragging
 });
 
 export const isEdgeExist = (newConnection, edges) =>
@@ -25,7 +51,8 @@ export const isEdgeExist = (newConnection, edges) =>
   );
 
 export const setSourceNodeColorToEdge = (connection, updatedEdges, nodes) => {
-  const group = nodes.find((node) => node.id === connection.source)?.data.group;
+  const group = nodes.find((node) => node.id === connection.source)?.data.ui
+    .group;
   const newEdges = updatedEdges.map((edge) => {
     if (
       edge.source === connection.source &&
