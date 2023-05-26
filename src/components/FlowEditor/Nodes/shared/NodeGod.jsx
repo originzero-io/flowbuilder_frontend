@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Handle, useUpdateNodeInternals, Position } from "reactflow";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types";
-import useActiveFlow from "utils/hooks/useActiveFlow";
-// import { flowExecutorNamespace } from "app/SocketConnections";
 
 import { Badge } from "reactstrap";
 import { getIconComponent } from "components/FlowEditor/helpers/nodeObjectHelper";
 import flowExecutorSocket from "services/flowExecutorService/flowExecutor.event";
+import { setModal } from "store/reducers/componentSlice";
+import NodeConfigMenu from "components/FlowEditor/components/Menu/NodeConfigMenu/NodeConfigMenu";
 import * as Styled from "./Node.style";
 import NodeHeader from "./NodeHeader/NodeHeader";
-import { InfoIcon } from "./NodeIcons";
 import NodeIOManager from "./NodeIOManager";
 
 const propTypes = {
@@ -23,23 +22,14 @@ const propTypes = {
 const NodeGod = ({ self, children, collapsible }) => {
   const { sourceCount, targetCount, ioType, stateful } =
     self.data.skeleton.ioEngine;
+  const { direction, expand, enable, group } = self.data.ui;
+  const { handleMechanism } = self.data.handles;
   const updateNodeInternals = useUpdateNodeInternals();
   const sources = Array.from(Array(sourceCount).keys());
   const targets = Array.from(Array(targetCount).keys());
   const dispatch = useDispatch();
-  const { direction, expand, enable, group } = self.data.ui;
   const [serverData, setServerData] = useState("");
-  const [nodeInputs, setNodeInputs] = useState({
-    state_trig: true,
-    state_start: true,
-    state_end: true,
-    state_error: false,
-    errorVal: false,
-    state_enable: false,
-    state_disable: false,
-    state_cancel: false,
-    state_clear: false,
-  });
+
   useEffect(() => {
     updateNodeInternals(self.id);
   }, [targetCount, sourceCount, direction]);
@@ -60,19 +50,24 @@ const NodeGod = ({ self, children, collapsible }) => {
       setServerData(data);
     });
   }, []);
+
+  const onDoubleClickHandle = () => {
+    dispatch(setModal(<NodeConfigMenu self={self} />));
+  };
   return (
     <>
       <Styled.NodeWrapper
         direction={direction}
         selected={self.selected}
         enable={enable}
+        onDoubleClick={onDoubleClickHandle}
       >
         <Styled.TargetWrapper direction={direction}>
           {stateful && (
             <InputStateHandles
-              nodeInputs={nodeInputs}
-              direction={direction}
+              handleMechanism={handleMechanism}
               ioType={ioType}
+              direction={direction}
             />
           )}
           {targets.map((i, index) => (
@@ -102,11 +97,7 @@ const NodeGod = ({ self, children, collapsible }) => {
           {expand ? (
             <Styled.NodeContent>
               {children}
-              <NodeIOManager
-                self={self}
-                nodeInputs={nodeInputs}
-                setNodeInputs={setNodeInputs}
-              />
+              <NodeIOManager self={self} />
             </Styled.NodeContent>
           ) : (
             <Styled.NodeContent type="logo">
@@ -117,7 +108,7 @@ const NodeGod = ({ self, children, collapsible }) => {
         <Styled.SourceWrapper direction={direction}>
           {stateful && (
             <OutputStateHandles
-              nodeInputs={nodeInputs}
+              handleMechanism={handleMechanism}
               direction={direction}
               ioType={ioType}
             />
@@ -131,7 +122,9 @@ const NodeGod = ({ self, children, collapsible }) => {
               }
               id={`source${index + 1}`}
               isValidConnection={(connection) =>
-                !Object.keys(nodeInputs).includes(connection.targetHandle)
+                !Object.keys(handleMechanism.stateHandles).includes(
+                  connection.targetHandle,
+                )
               }
               className={`${
                 direction === "vertical"
@@ -158,18 +151,19 @@ export default React.memo(NodeGod);
 
 NodeGod.propTypes = propTypes;
 
-const InputStateHandles = ({ nodeInputs, direction, ioType }) => {
+const InputStateHandles = ({ handleMechanism, ioType, direction }) => {
+  const { stateHandles } = handleMechanism;
   return (
     <>
-      {(nodeInputs.state_enable || nodeInputs.state_disable) && (
+      {(stateHandles.enable || stateHandles.disable) && (
         <>
           <div style={{ display: "flex", position: "relative", right: "61px" }}>
             <div style={{ color: "gray" }}>state.enable</div>
             <Handle
-              key="state_enable"
+              key="enable"
               type="target"
               position={direction === "vertical" ? Position.Top : Position.Left}
-              id="state_enable"
+              id="enable"
               className={`${
                 direction === "vertical"
                   ? "node-handle vertical"
@@ -193,10 +187,10 @@ const InputStateHandles = ({ nodeInputs, direction, ioType }) => {
           >
             <div style={{ color: "gray" }}>state.disable</div>
             <Handle
-              key="state_disable"
+              key="disable"
               type="target"
               position={direction === "vertical" ? Position.Top : Position.Left}
-              id="state_disable"
+              id="disable"
               className={`${
                 direction === "vertical"
                   ? "node-handle vertical"
@@ -213,14 +207,14 @@ const InputStateHandles = ({ nodeInputs, direction, ioType }) => {
           </div>
         </>
       )}
-      {nodeInputs.state_trig && (
+      {stateHandles.trig && (
         <div style={{ display: "flex", position: "relative", right: "42px" }}>
           <div style={{ color: "gray" }}>state.trig</div>
           <Handle
-            key="state_trig"
+            key="trig"
             type="target"
             position={direction === "vertical" ? Position.Top : Position.Left}
-            id="state_trig"
+            id="trig"
             className={`${
               direction === "vertical"
                 ? "node-handle vertical"
@@ -234,14 +228,14 @@ const InputStateHandles = ({ nodeInputs, direction, ioType }) => {
           />
         </div>
       )}
-      {nodeInputs.state_cancel && (
+      {stateHandles.cancel && (
         <div style={{ display: "flex", position: "relative", right: "59px" }}>
           <div style={{ color: "gray" }}>state.cancel</div>
           <Handle
-            key="state_cancel"
+            key="cancel"
             type="target"
             position={direction === "vertical" ? Position.Top : Position.Left}
-            id="state_cancel"
+            id="cancel"
             className={`${
               direction === "vertical"
                 ? "node-handle vertical"
@@ -255,14 +249,14 @@ const InputStateHandles = ({ nodeInputs, direction, ioType }) => {
           />
         </div>
       )}
-      {nodeInputs.state_clear && (
+      {stateHandles.clear && (
         <div style={{ display: "flex", position: "relative", right: "51px" }}>
           <div style={{ color: "gray" }}>state.clear</div>
           <Handle
-            key="state_clear"
+            key="clear"
             type="target"
             position={direction === "vertical" ? Position.Top : Position.Left}
-            id="state_clear"
+            id="clear"
             className={`${
               direction === "vertical"
                 ? "node-handle vertical"
@@ -280,20 +274,21 @@ const InputStateHandles = ({ nodeInputs, direction, ioType }) => {
   );
 };
 
-const OutputStateHandles = ({ nodeInputs, direction, ioType }) => {
+const OutputStateHandles = ({ handleMechanism, ioType, direction }) => {
+  const { stateHandles } = handleMechanism;
   return (
     <>
-      {nodeInputs.state_start && (
+      {stateHandles.start && (
         <div style={{ display: "flex" }}>
           <Handle
-            key="state_start"
+            key="start"
             type="source"
             position={
               direction === "vertical" ? Position.Bottom : Position.Right
             }
-            id="state_start"
+            id="start"
             isValidConnection={(connection) =>
-              Object.keys(nodeInputs).includes(connection.targetHandle)
+              Object.keys(stateHandles).includes(connection.targetHandle)
             }
             className={`${
               direction === "vertical"
@@ -309,17 +304,17 @@ const OutputStateHandles = ({ nodeInputs, direction, ioType }) => {
           <div style={{ color: "gray" }}>state.start</div>
         </div>
       )}
-      {nodeInputs.state_end && (
+      {stateHandles.end && (
         <div style={{ display: "flex" }}>
           <Handle
-            key="state_end"
+            key="end"
             type="source"
             position={
               direction === "vertical" ? Position.Bottom : Position.Right
             }
-            id="state_end"
+            id="end"
             isValidConnection={(connection) =>
-              Object.keys(nodeInputs).includes(connection.targetHandle)
+              Object.keys(stateHandles).includes(connection.targetHandle)
             }
             className={`${
               direction === "vertical"
@@ -335,18 +330,18 @@ const OutputStateHandles = ({ nodeInputs, direction, ioType }) => {
           <div style={{ color: "gray" }}>state.end</div>
         </div>
       )}
-      {nodeInputs.state_error && (
+      {stateHandles.error && (
         <>
           <div style={{ display: "flex" }}>
             <Handle
-              key="state_error"
+              key="error"
               type="source"
               position={
                 direction === "vertical" ? Position.Bottom : Position.Right
               }
-              id="state_error"
+              id="error"
               isValidConnection={(connection) =>
-                Object.keys(nodeInputs).includes(connection.targetHandle)
+                Object.keys(stateHandles).includes(connection.targetHandle)
               }
               className={`${
                 direction === "vertical"
@@ -372,7 +367,7 @@ const OutputStateHandles = ({ nodeInputs, direction, ioType }) => {
               }
               id="errorVal"
               isValidConnection={(connection) =>
-                !Object.keys(nodeInputs).includes(connection.targetHandle)
+                !Object.keys(stateHandles).includes(connection.targetHandle)
               }
               className={`${
                 direction === "vertical"

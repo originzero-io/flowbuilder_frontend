@@ -24,7 +24,8 @@ const customStyles = {
     border: "1px solid rgba(100,100,100,0.6)",
   },
   overlay: {
-    background: "rgba(53, 59, 72,0.4)",
+    //background: "rgba(53, 59, 72,0.4)",
+    background: "transparent",
     zIndex: "6",
   },
 };

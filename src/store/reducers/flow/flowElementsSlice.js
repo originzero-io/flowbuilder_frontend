@@ -267,6 +267,13 @@ export const flowElementsSlice = createSlice({
 
       state.edges.push({ id: "b-c", source: "B", target: "C" });
     },
+    setNodeConfigData(state, { payload }) {
+      state.nodes.forEach((node) => {
+        if (node.id === payload.id) {
+          node.data = payload.data;
+        }
+      });
+    },
   },
   extraReducers: {
     [getElementsByFlow.fulfilled]: (state, { payload }) => payload.elements,
@@ -305,4 +312,5 @@ export const {
   updateNodeHandles,
   saveElements,
   importFlow,
+  setNodeConfigData,
 } = flowElementsSlice.actions;

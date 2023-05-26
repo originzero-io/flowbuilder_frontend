@@ -9,7 +9,7 @@ const propTypes = {
   self: PropTypes.object.isRequired,
   ioType: PropTypes.string.isRequired,
 };
-export default function NodeIOManager({ self, nodeInputs, setNodeInputs }) {
+export default function NodeIOManager({ self }) {
   const { sourceCount, targetCount, ioType } = self.data.skeleton.ioEngine;
 
   const dispatch = useDispatch();
@@ -26,13 +26,8 @@ export default function NodeIOManager({ self, nodeInputs, setNodeInputs }) {
     });
     dispatch(updateNodeHandles({ self, name, value }));
   };
-  const onChangeNodeInputs = (e) => {
-    setNodeInputs({
-      ...nodeInputs,
-      [e.target.name]: e.target.checked,
-    });
-  };
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {ioType === "both" ? (
         <>
@@ -82,87 +77,7 @@ export default function NodeIOManager({ self, nodeInputs, setNodeInputs }) {
           </>
         )
       )}
-      <NodeInput name="state_enable">
-        <input
-          type="checkbox"
-          name="state_enable"
-          checked={nodeInputs.state_enable}
-          onChange={onChangeNodeInputs}
-        />
-      </NodeInput>
-      <NodeInput name="state_disable">
-        <input
-          type="checkbox"
-          name="state_disable"
-          checked={nodeInputs.state_disable}
-          onChange={onChangeNodeInputs}
-        />
-      </NodeInput>
-      <NodeInput name="state_trig">
-        <input
-          type="checkbox"
-          name="state_trig"
-          checked={nodeInputs.state_trig}
-          onChange={onChangeNodeInputs}
-        />
-      </NodeInput>
-      <NodeInput name="state_start">
-        <input
-          type="checkbox"
-          name="state_start"
-          checked={nodeInputs.state_start}
-          onChange={onChangeNodeInputs}
-        />
-      </NodeInput>
-      <NodeInput name="state_end">
-        <input
-          type="checkbox"
-          name="state_end"
-          checked={nodeInputs.state_end}
-          onChange={onChangeNodeInputs}
-        />
-      </NodeInput>
-      <NodeInput name="state_error">
-        <input
-          type="checkbox"
-          name="state_error"
-          checked={nodeInputs.state_error}
-          onChange={onChangeNodeInputs}
-        />
-      </NodeInput>
-      <NodeInput name="state_cancel">
-        <input
-          type="checkbox"
-          name="state_cancel"
-          checked={nodeInputs.state_cancel}
-          onChange={onChangeNodeInputs}
-        />
-      </NodeInput>
-      <NodeInput name="state_clear">
-        <input
-          type="checkbox"
-          name="state_clear"
-          checked={nodeInputs.state_clear}
-          onChange={onChangeNodeInputs}
-        />
-      </NodeInput>
     </>
-  );
-}
-
-function NodeInput({ children, name }) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        width: "100%",
-        marginTop: "10px",
-      }}
-    >
-      <div style={{ color: "whitesmoke" }}>{name}</div>
-      {children}
-    </div>
   );
 }
 

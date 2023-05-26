@@ -5,7 +5,7 @@ import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useProject from "utils/hooks/useProject";
 import useWorkspace from "utils/hooks/useWorkspace";
-import flowServiceSocket from "services/configurationService/flowService/flowService.event";
+import flowEvent from "services/configurationService/flowService/flowService.event";
 
 export default function AddFlowForm() {
   const auth = useAuth();
@@ -28,7 +28,7 @@ export default function AddFlowForm() {
   const onSubmitHandle = (e) => {
     e.preventDefault();
     const flow = { config: flowInfo, workspace, project };
-    flowServiceSocket.createFlow({ flow });
+    flowEvent.createFlow({ flow });
     dispatch(setModal(false));
   };
 

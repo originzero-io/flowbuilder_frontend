@@ -4,6 +4,7 @@ import PanelContextMenu from "./ContextMenu/PanelContext/PanelContextMenu";
 import MultiSelectionContextMenu from "./ContextMenu/MultiselectionContext/MultiSelectionContextMenu";
 import ElementContextMenu from "./ContextMenu/ElementContext/ElementContextMenu";
 import GroupBar from "./GroupBar/GroupBar";
+import NodeConfigMenu from "./NodeConfigMenu/NodeConfigMenu";
 
 const FlowEditorMenus = () => (
   <>
@@ -11,7 +12,7 @@ const FlowEditorMenus = () => (
     <PanelContextMenu />
     <MultiSelectionContextMenu />
     <ElementContextMenu />
-    <GroupBar />
+    {/* <GroupBar /> */}
   </>
 );
 

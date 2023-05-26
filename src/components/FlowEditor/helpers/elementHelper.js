@@ -8,11 +8,12 @@ export const createNode = (type, initialPosition, direction) => ({
   data: {
     skeleton: getNodeSkeleton(type),
     handles: {
-      class: "class1", // trigBehavior ve handleMechanismi belirler
-      trigBehavior: "ignore",
+      class: "class1", // triggerAttributes ve handleMechanismi belirler
+      triggerAttributes: "ignore",
       handleMechanism: {
         frozenHandles: [], // silinmesine izin verilmeyecek handlelar
         stateHandles: {
+          trig: true,
           start: true,
           end: true,
           error: false,
@@ -20,7 +21,7 @@ export const createNode = (type, initialPosition, direction) => ({
           disable: false,
           cancel: false,
           clear: false,
-          trig: [],
+          trigHandles: [],
         },
       },
     },
