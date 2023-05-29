@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
@@ -10,11 +10,10 @@ import * as Styled from "./NodeConfigMenu.style";
 import HandleCountForm from "./HandleCountForm";
 
 function nodeConfigReducer(node, { type, event }) {
-  let newState;
+  let newNode;
   switch (type) {
     case "updateConfigParameters":
-      // newState = { counter: state.counter + 1 };
-      newState = {
+      newNode = {
         ...node,
         data: {
           ...node.data,
@@ -29,7 +28,7 @@ function nodeConfigReducer(node, { type, event }) {
       };
       break;
     case "updateStateHandles":
-      newState = {
+      newNode = {
         ...node,
         data: {
           ...node.data,
@@ -47,7 +46,7 @@ function nodeConfigReducer(node, { type, event }) {
       };
       break;
     case "updateTriggerAttributes":
-      newState = {
+      newNode = {
         ...node,
         data: {
           ...node.data,
@@ -59,7 +58,7 @@ function nodeConfigReducer(node, { type, event }) {
       };
       break;
     case "updateHandleCount":
-      newState = {
+      newNode = {
         ...node,
         data: {
           ...node.data,
@@ -76,7 +75,7 @@ function nodeConfigReducer(node, { type, event }) {
     default:
       throw new Error("There are no action in that name");
   }
-  return newState;
+  return newNode;
 }
 
 export default function NodeConfigMenu({ self }) {
