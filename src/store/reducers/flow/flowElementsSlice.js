@@ -107,13 +107,6 @@ export const flowElementsSlice = createSlice({
       state.nodes = state.nodes.filter((node) => !node.selected);
       state.edges = state.edges.filter((edge) => !edge.selected);
     },
-    expandNode(state, { payload }) {
-      state.nodes.forEach((node) => {
-        if (node.id === payload.id) {
-          node.data.ui.expand = !payload.data.ui.expand;
-        }
-      });
-    },
     selectElements(state, { payload }) {
       const nodeIds = payload.map((p) => p.id);
 
@@ -226,13 +219,6 @@ export const flowElementsSlice = createSlice({
         }
       });
     },
-    updateNodeHandles(state, { payload }) {
-      state.nodes.forEach((node) => {
-        if (node.id === payload.self.id) {
-          node.data.skeleton.ioEngine[payload.name] = payload.value;
-        }
-      });
-    },
     saveElements(state, { payload }) {
       return payload;
     },
@@ -297,7 +283,6 @@ export const {
   rotateNode,
   rotateSelectedNodes,
   deleteSelectedNodes,
-  expandNode,
   selectElements,
   changeNodeName,
   setNodeEnable,
@@ -309,7 +294,6 @@ export const {
   selectAllElements,
   deleteGroupOfElement,
   updateGroupOfElement,
-  updateNodeHandles,
   saveElements,
   importFlow,
   setNodeConfigData,

@@ -16,10 +16,9 @@ import NodeIOManager from "./NodeIOManager";
 const propTypes = {
   self: PropTypes.object.isRequired,
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  collapsible: PropTypes.bool,
 };
 
-const NodeGod = ({ self, children, collapsible }) => {
+const NodeGod = ({ self, children }) => {
   const { sourceCount, targetCount, ioType, stateful } =
     self.data.skeleton.ioEngine;
   const { direction, expand, enable, group } = self.data.ui;
@@ -93,17 +92,10 @@ const NodeGod = ({ self, children, collapsible }) => {
         </Styled.TargetWrapper>
 
         <Styled.NodeArea>
-          <NodeHeader self={self} collapsible={collapsible} />
-          {expand ? (
-            <Styled.NodeContent>
-              {children}
-              <NodeIOManager self={self} />
-            </Styled.NodeContent>
-          ) : (
-            <Styled.NodeContent type="logo">
-              <NodeIcon width="40px" height="40px" enable={enable} />
-            </Styled.NodeContent>
-          )}
+          <NodeHeader self={self} />
+          <Styled.NodeContent type="logo">
+            <NodeIcon width="40px" height="40px" enable={enable} />
+          </Styled.NodeContent>
         </Styled.NodeArea>
         <Styled.SourceWrapper direction={direction}>
           {stateful && (

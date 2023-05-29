@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { expandNode } from "store/reducers/flow/flowElementsSlice";
 import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import GroupMenu from "../../../components/Menu/NodeGroupMenu/NodeGroupMenu";
@@ -39,9 +38,6 @@ export default function NodeHeader({ self }) {
 
   // const NodeIcon = getIconComponent(self.type);
   const [edit, setEdit] = useState(false);
-  const expandHandle = () => {
-    dispatch(expandNode(self));
-  };
   // const nodeIncomers = () => {
   //   const incomers = getIncomers(self, flowElements.nodes, flowElements.edges);
   //   console.log("incomers: ", incomers);
@@ -77,7 +73,7 @@ export default function NodeHeader({ self }) {
         {edit ? (
           <EditNameForm setEdit={setEdit} self={self} />
         ) : (
-          <Styled.Label onDoubleClick={expandHandle}>{label}</Styled.Label>
+          <Styled.Label>{label}</Styled.Label>
         )}
       </Styled.Content>
       <Styled.FeatureIconsWrapper>

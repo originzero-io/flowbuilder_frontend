@@ -7,6 +7,7 @@ import ConfigParametersForm from "./ConfigParametersForm";
 import StateHandlesForm from "./StateHandlesForm";
 import TriggerAttributeForm from "./TriggerAttributeForm";
 import * as Styled from "./NodeConfigMenu.style";
+import HandleCountForm from "./HandleCountForm";
 
 function nodeConfigReducer(node, { type, event }) {
   let newState;
@@ -57,6 +58,21 @@ function nodeConfigReducer(node, { type, event }) {
         },
       };
       break;
+    case "updateHandleCount":
+      newState = {
+        ...node,
+        data: {
+          ...node.data,
+          skeleton: {
+            ...node.data.skeleton,
+            ioEngine: {
+              ...node.data.skeleton.ioEngine,
+              [event.target.name]: Number(event.target.value),
+            },
+          },
+        },
+      };
+      break;
     default:
       throw new Error("There are no action in that name");
   }
@@ -82,6 +98,7 @@ export default function NodeConfigMenu({ self }) {
         <StateHandlesForm node={node} dispatcher={nodeConfigDispatch} />
       )}
       <TriggerAttributeForm node={node} dispatcher={nodeConfigDispatch} />
+      <HandleCountForm node={node} dispatcher={nodeConfigDispatch} />
       <Button onClick={onSubmitHandler}>Save</Button>
     </div>
   );

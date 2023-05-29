@@ -1,74 +1,67 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import PropTypes from "prop-types";
-import * as Styled from "./Node.style";
+import { updateNodeHandles } from "store/reducers/flow/flowElementsSlice";
+import { Form, FormGroup, Input } from "reactstrap";
+import * as Styled from "./NodeConfigMenu.style";
 
-const propTypes = {
-  self: PropTypes.object.isRequired,
-  ioType: PropTypes.string.isRequired,
-};
-export default function NodeIOManager({ self }) {
-  const { sourceCount, targetCount, ioType } = self.data.skeleton.ioEngine;
-
+export default function DynamicHandlesForm({ node, dispatcher }) {
+  const { ioType, targetCount, sourceCount } = node.data.skeleton.ioEngine;
   const dispatch = useDispatch();
-  const [handleCount, setHandleCount] = useState({
-    targetCount,
-    sourceCount,
-  });
+  const handleCountChange = (event) => {
+    dispatcher({ type: "updateHandleCount", event });
+  };
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
+    <Form style={Styled.FormStyle}>
+      <Styled.SectionName>Value Handle Count:</Styled.SectionName>
       {ioType === "both" ? (
         <>
-          <Styled.Label>Target Length</Styled.Label>
-          <input
+          <div>Target Length</div>
+          <Input
             type="number"
             name="targetCount"
             min={1}
             className="nodrag nowheel"
-            value={handleCount.targetCount}
+            value={targetCount}
             onChange={handleCountChange}
           />
-          <Styled.Label>Source Length</Styled.Label>
-          <input
+          <div>Source Length</div>
+          <Input
             type="number"
             name="sourceCount"
             min={1}
             className="nodrag nowheel"
-            value={handleCount.sourceCount}
+            value={sourceCount}
             onChange={handleCountChange}
           />
         </>
       ) : ioType === "target" ? (
         <>
-          <Styled.Label>Target Length</Styled.Label>
-          <input
+          <div>Target Length</div>
+          <Input
             type="number"
             name="targetCount"
             min={1}
             className="nodrag nowheel"
-            value={handleCount.targetCount}
+            value={targetCount}
             onChange={handleCountChange}
           />
         </>
       ) : (
         ioType === "source" && (
           <>
-            <Styled.Label>Source Length</Styled.Label>
-            <input
+            <div>Source Length</div>
+            <Input
               type="number"
               name="sourceCount"
               min={1}
               className="nodrag nowheel"
-              value={handleCount.sourceCount}
+              value={sourceCount}
               onChange={handleCountChange}
             />
           </>
         )
       )}
-    </>
+    </Form>
   );
 }
-
-NodeIOManager.propTypes = propTypes;

@@ -28,7 +28,6 @@ export const createNode = (type, initialPosition, direction) => ({
     ui: {
       label: `${type}`,
       direction,
-      expand: false,
       enable: true,
       group: { _id: 0, color: "gray" },
     },
