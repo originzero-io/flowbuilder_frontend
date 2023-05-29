@@ -1,20 +1,18 @@
 /* eslint-disable no-nested-ternary */
 import React from "react";
-import { useDispatch } from "react-redux";
-import { updateNodeHandles } from "store/reducers/flow/flowElementsSlice";
-import { Form, FormGroup, Input } from "reactstrap";
+import { Form, Input } from "reactstrap";
 import * as Styled from "./NodeConfigMenu.style";
 
 export default function DynamicHandlesForm({ node, dispatcher }) {
-  const { ioType, targetCount, sourceCount } = node.data.skeleton.ioEngine;
-  const dispatch = useDispatch();
+  const { targetCount, sourceCount, dynamicInput, dynamicOutput } =
+    node.data.skeleton.ioEngine;
   const handleCountChange = (event) => {
     dispatcher({ type: "updateHandleCount", event });
   };
   return (
     <Form style={Styled.FormStyle}>
       <Styled.SectionName>Value Handle Count:</Styled.SectionName>
-      {ioType === "both" ? (
+      {dynamicInput && dynamicOutput ? (
         <>
           <div>Target Length</div>
           <Input
@@ -35,7 +33,7 @@ export default function DynamicHandlesForm({ node, dispatcher }) {
             onChange={handleCountChange}
           />
         </>
-      ) : ioType === "target" ? (
+      ) : dynamicInput ? (
         <>
           <div>Target Length</div>
           <Input
@@ -48,7 +46,7 @@ export default function DynamicHandlesForm({ node, dispatcher }) {
           />
         </>
       ) : (
-        ioType === "source" && (
+        dynamicOutput && (
           <>
             <div>Source Length</div>
             <Input

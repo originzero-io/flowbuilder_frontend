@@ -11,7 +11,6 @@ import { setModal } from "store/reducers/componentSlice";
 import NodeConfigMenu from "components/FlowEditor/components/Menu/NodeConfigMenu/NodeConfigMenu";
 import * as Styled from "./Node.style";
 import NodeHeader from "./NodeHeader/NodeHeader";
-import NodeIOManager from "./NodeIOManager";
 
 const propTypes = {
   self: PropTypes.object.isRequired,

@@ -81,7 +81,7 @@ function nodeConfigReducer(node, { type, event }) {
 export default function NodeConfigMenu({ self }) {
   const [node, nodeConfigDispatch] = useReducer(nodeConfigReducer, self);
   const dispatch = useDispatch();
-
+  const { dynamicInput, dynamicOutput, stateful } = node.data.skeleton.ioEngine;
   const onSubmitHandler = (event) => {
     event.preventDefault();
     dispatch(setNodeConfigData(node));
@@ -92,12 +92,19 @@ export default function NodeConfigMenu({ self }) {
     <div>
       <Styled.Header>Node Configuration Menu</Styled.Header>
       <div style={{ marginBottom: "30px" }}>{self.id}</div>
+
       <ConfigParametersForm node={node} dispatcher={nodeConfigDispatch} />
-      {node.data.skeleton.ioEngine.stateful && (
+
+      {stateful && (
         <StateHandlesForm node={node} dispatcher={nodeConfigDispatch} />
       )}
+
       <TriggerAttributeForm node={node} dispatcher={nodeConfigDispatch} />
-      <HandleCountForm node={node} dispatcher={nodeConfigDispatch} />
+
+      {(dynamicInput || dynamicOutput) && (
+        <HandleCountForm node={node} dispatcher={nodeConfigDispatch} />
+      )}
+
       <Button onClick={onSubmitHandler}>Save</Button>
     </div>
   );
