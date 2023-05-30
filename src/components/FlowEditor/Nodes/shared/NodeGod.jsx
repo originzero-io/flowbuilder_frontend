@@ -28,7 +28,7 @@ const NodeGod = ({ self, children }) => {
 
   useEffect(() => {
     updateNodeInternals(self.id);
-  }, [inputParameters, outputValues]);
+  }, [self.data.skeleton]);
 
   const NodeIcon = getIconComponent(self.type);
   useEffect(() => {
