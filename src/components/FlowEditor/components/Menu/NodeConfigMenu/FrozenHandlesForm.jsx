@@ -1,8 +1,6 @@
 import React from "react";
-import { Badge, Form, FormGroup, Input, Label } from "reactstrap";
+import { Badge, Form } from "reactstrap";
 import * as Styled from "./NodeConfigMenu.style";
-import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
-import Checkbox from "components/Shared/SwitchInput/Checkbox";
 
 export default function FrozenHandlesForm({ node, dispatcher }) {
   const { frozenHandles, skeleton } = node.data;
