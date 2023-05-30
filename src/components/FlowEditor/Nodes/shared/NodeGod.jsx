@@ -21,16 +21,14 @@ const propTypes = {
 const NodeGod = ({ self, children }) => {
   const { sourceCount, targetCount, ioType } = self.data.skeleton.ioEngine;
   const { enable, group } = self.data.ui;
-  const { stateHandles } = self.data.skeleton;
+  const { stateHandles, inputParameters, outputValues } = self.data.skeleton;
   const updateNodeInternals = useUpdateNodeInternals();
-  const sources = Array.from(Array(sourceCount).keys());
-  const targets = Array.from(Array(targetCount).keys());
   const dispatch = useDispatch();
   const [serverData, setServerData] = useState("");
 
   useEffect(() => {
     updateNodeInternals(self.id);
-  }, [targetCount, sourceCount]);
+  }, [inputParameters, outputValues]);
 
   const NodeIcon = getIconComponent(self.type);
   useEffect(() => {
@@ -56,20 +54,9 @@ const NodeGod = ({ self, children }) => {
     <Styled.NodeWrapper>
       <Styled.TargetHandleWrapper>
         <InputStateHandles stateHandles={stateHandles} />
-        {targets.map((i, index) => (
-          <Handle
-            key={index}
-            type="target"
-            position={Position.Left}
-            className="node-handle horizontal"
-            id={`target${index + 1}`}
-            style={{
-              backgroundColor: group.color || "gray",
-              visibility:
-                ioType === "target" || ioType === "both" ? "visible" : "hidden",
-            }}
-          />
-        ))}
+        {inputParameters && (
+          <InputParameterHandles inputParameters={inputParameters} />
+        )}
       </Styled.TargetHandleWrapper>
       <Styled.NodeArea
         selected={self.selected}
@@ -91,23 +78,7 @@ const NodeGod = ({ self, children }) => {
         {stateHandles.outputs && (
           <OutputStateHandles stateHandles={stateHandles} />
         )}
-        {sources.map((i, index) => (
-          <Handle
-            key={index}
-            type="source"
-            position={Position.Right}
-            id={`source${index + 1}`}
-            isValidConnection={(connection) =>
-              !connection.targetHandle.includes("status_")
-            }
-            className="node-handle horizontal"
-            style={{
-              backgroundColor: group.color || "gray",
-              visibility:
-                ioType === "source" || ioType === "both" ? "visible" : "hidden",
-            }}
-          />
-        ))}
+        {outputValues && <OutputValueHandles outputValues={outputValues} />}
       </Styled.SourceHandleWrapper>
     </Styled.NodeWrapper>
   );
@@ -136,9 +107,7 @@ const InputStateHandles = ({ stateHandles }) => {
                 type="target"
                 position={Position.Left}
                 className="node-handle horizontal"
-                style={{
-                  backgroundColor: "green",
-                }}
+                style={{ backgroundColor: "green" }}
               />
             </div>
           )}
@@ -165,15 +134,70 @@ const OutputStateHandles = ({ stateHandles }) => {
                   connection.targetHandle.includes("status_")
                 }
                 className="node-handle horizontal"
-                style={{
-                  backgroundColor: "green",
-                }}
+                style={{ backgroundColor: "green" }}
               />
               <div style={{ color: "gray" }}>{outputState[0]}</div>
             </div>
           )}
         </>
       ))}
+    </>
+  );
+};
+
+const InputParameterHandles = ({ inputParameters }) => {
+  const parameters = Object.entries(inputParameters);
+  return (
+    <>
+      {parameters.map((parameter) => {
+        return (
+          <div style={{ display: "flex" }}>
+            <div style={{ color: "gray" }}>{parameter[0]}</div>
+            <Handle
+              key={parameter[0]}
+              type="target"
+              position={Position.Left}
+              className="node-handle horizontal"
+              id={`${parameter[1]}_${parameter[0]}`}
+              style={{ backgroundColor: "gray" }}
+            />
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+const OutputValueHandles = ({ outputValues }) => {
+  const values = Object.entries(outputValues);
+
+  const isValid = (connection) => {
+    const sourceType = connection.sourceHandle.split("_")[0];
+    const targetType = connection.targetHandle.split("_")[0];
+
+    const isSameDataType = sourceType === targetType;
+    const isNotStatusHandle = !connection.targetHandle.includes("status_");
+
+    return isSameDataType && isNotStatusHandle;
+  };
+  return (
+    <>
+      {values.map((value) => {
+        return (
+          <div style={{ display: "flex" }}>
+            <Handle
+              key={value[0]}
+              type="source"
+              position={Position.Right}
+              id={`${value[1]}_${value[0]}`}
+              isValidConnection={isValid}
+              className="node-handle horizontal"
+              style={{ backgroundColor: "gray" }}
+            />
+            <div style={{ color: "gray" }}>{value[0]}</div>
+          </div>
+        );
+      })}
     </>
   );
 };

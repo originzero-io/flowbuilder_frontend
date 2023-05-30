@@ -16,8 +16,8 @@ export default function StateHandlesForm({ node, dispatcher }) {
     <Form style={Styled.FormStyle}>
       <Styled.SectionName>State Handles:</Styled.SectionName>
       <div style={{ color: "aqua" }}>Inputs: </div>
-      {Object.entries(inputs).map((input, index) => (
-        <NodeInput name={input[0]} key={index[0]}>
+      {Object.entries(inputs).map((input) => (
+        <NodeInput name={input[0]} key={input[0]}>
           <input
             type="checkbox"
             name={input[0]}
@@ -30,8 +30,8 @@ export default function StateHandlesForm({ node, dispatcher }) {
         <>
           <div style={{ color: "aqua" }}>Outputs: </div>
           {outputs &&
-            Object.entries(outputs).map((output, index) => (
-              <NodeInput name={output[0]} key={index[0]}>
+            Object.entries(outputs).map((output) => (
+              <NodeInput name={output[0]} key={output[0]}>
                 <input
                   type="checkbox"
                   name={output[0]}
