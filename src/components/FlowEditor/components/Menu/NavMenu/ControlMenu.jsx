@@ -1,14 +1,12 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { HorizontalDivider } from "components/StyledComponents/Divider";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setElements,
-  setRotateAll,
   setExpandAll,
   deleteAllElements,
 } from "store/reducers/flow/flowElementsSlice";
-import { setRotateAllPath } from "store/reducers/flow/flowGuiSlice";
 import { useStore, useReactFlow } from "reactflow";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
 import { useParams } from "react-router";
@@ -16,13 +14,12 @@ import useActiveFlow from "utils/hooks/useActiveFlow";
 import FlowService from "services/configurationService/flowService/flowService.http";
 import notification from "utils/ui/notificationHelper";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
-import flowElementServiceSocket from "services/configurationService/flowElementService/flowElementService.event";
+import flowEvent from "services/configurationService/flowElementService/flowElementService.event";
 import {
   RedoIcon,
   UndoIcon,
   SaveIcon,
   DeleteIcon,
-  RotateAllIcon,
   FitViewIcon,
   ZoomInIcon,
   ZoomOutIcon,
@@ -43,8 +40,8 @@ const StyledMenu = styled.div`
   background: ${(props) => props.theme.menuBackground};
 `;
 export default function ControlMenu() {
-  const { flowGui, flowConfig, flowElements } = useActiveFlow();
-  const { rotateAllPath, theme } = flowGui;
+  const { flowGui, flowConfig } = useActiveFlow();
+  const { theme } = flowGui;
   const reactFlowInstance = useReactFlow();
   // const canUndo = flowElements.past.length > 0;
   // const canRedo = flowElements.future.length > 0;
@@ -68,7 +65,7 @@ export default function ControlMenu() {
     };
     await FlowService.saveFlowGui(flowId, flow);
 
-    flowElementServiceSocket.saveElements({
+    flowEvent.saveElements({
       flowId,
       elements: { nodes, edges },
     });
@@ -82,17 +79,6 @@ export default function ControlMenu() {
   const closeAllNodes = () => {
     dispatch(setExpandAll(false));
   };
-
-  const rotateAllHandle = () => {
-    if (rotateAllPath === "vertical") {
-      dispatch(setRotateAllPath("horizontal"));
-    } else {
-      dispatch(setRotateAllPath("vertical"));
-    }
-  };
-  useEffect(() => {
-    dispatch(setRotateAll(rotateAllPath));
-  }, [rotateAllPath]);
 
   const zoomInHandle = () => {
     reactFlowInstance.zoomIn();
@@ -144,15 +130,6 @@ export default function ControlMenu() {
         <ExpandAllIcon theme={theme} />
       </Styled.MenuItem>
       <Tooltip id="close_nodes" place="right" />
-      <Styled.MenuItem
-        theme={theme}
-        onClick={rotateAllHandle}
-        data-tip="Rotate All"
-        data-for="rotate_all"
-      >
-        <RotateAllIcon theme={theme} />
-      </Styled.MenuItem>
-      <Tooltip id="rotate_all" place="right" />
 
       <Styled.MenuItem
         theme={theme}

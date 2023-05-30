@@ -6,7 +6,6 @@ import { setNodeEnable } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import { NameEditIcon } from "components/Shared/icons";
 import notificationHelper from "utils/ui/notificationHelper";
-import RotateButton from "../RotateButton";
 import SwitchButton from "../SwitchButton";
 
 const propTypes = {
@@ -49,7 +48,6 @@ export default function FeatureIcons({ self, edit, setEdit }) {
         width="15px"
         height="15px"
       />
-      <RotateButton self={self} />
     </>
   );
 }

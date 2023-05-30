@@ -16,7 +16,7 @@ import * as Styled from "./PanelContextMenu.style";
 const PanelContextMenu = () => {
   const { panelMenu } = useSelector((state) => state.menus);
   const { flowGui } = useActiveFlow();
-  const { rotateAllPath, theme } = flowGui;
+  const { theme } = flowGui;
   const nodeList = useSelector((state) => state.panelNodeList);
   const dispatch = useDispatch();
 
@@ -34,7 +34,7 @@ const PanelContextMenu = () => {
       x: panelMenu.x - 200,
       y: panelMenu.y,
     });
-    const newNode = createNode(node.type, position, rotateAllPath);
+    const newNode = createNode(node.type, position);
     dispatch(addNewNode(newNode));
   };
   return (

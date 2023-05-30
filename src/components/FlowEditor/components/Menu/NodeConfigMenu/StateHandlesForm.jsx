@@ -1,79 +1,50 @@
 import React from "react";
-import { Form } from "reactstrap";
+import { Button, Form } from "reactstrap";
 import * as Styled from "./NodeConfigMenu.style";
 
 export default function StateHandlesForm({ node, dispatcher }) {
-  const { stateHandles } = node.data.handles.handleMechanism;
+  const { stateHandles } = node.data.skeleton;
+  const { inputs, outputs } = stateHandles;
+
   const onChangeNodeInputsHandler = (event) => {
-    dispatcher({ type: "updateStateHandles", event });
+    dispatcher({ type: "updateInputStateHandles", event });
+  };
+  const onChangeNodeOutputsHandler = (event) => {
+    dispatcher({ type: "updateOutputStateHandles", event });
   };
   return (
     <Form style={Styled.FormStyle}>
       <Styled.SectionName>State Handles:</Styled.SectionName>
-      <NodeInput name="enable">
-        <input
-          type="checkbox"
-          name="enable"
-          checked={stateHandles.enable}
-          onChange={onChangeNodeInputsHandler}
-        />
-      </NodeInput>
-      <NodeInput name="disable">
-        <input
-          type="checkbox"
-          name="disable"
-          checked={stateHandles.disable}
-          onChange={onChangeNodeInputsHandler}
-        />
-      </NodeInput>
-      <NodeInput name="trig">
-        <input
-          type="checkbox"
-          name="trig"
-          checked={stateHandles.trig}
-          onChange={onChangeNodeInputsHandler}
-        />
-      </NodeInput>
-      <NodeInput name="start">
-        <input
-          type="checkbox"
-          name="start"
-          checked={stateHandles.start}
-          onChange={onChangeNodeInputsHandler}
-        />
-      </NodeInput>
-      <NodeInput name="end">
-        <input
-          type="checkbox"
-          name="end"
-          checked={stateHandles.end}
-          onChange={onChangeNodeInputsHandler}
-        />
-      </NodeInput>
-      <NodeInput name="error">
-        <input
-          type="checkbox"
-          name="error"
-          checked={stateHandles.error}
-          onChange={onChangeNodeInputsHandler}
-        />
-      </NodeInput>
-      <NodeInput name="cancel">
-        <input
-          type="checkbox"
-          name="cancel"
-          checked={stateHandles.cancel}
-          onChange={onChangeNodeInputsHandler}
-        />
-      </NodeInput>
-      <NodeInput name="clear">
-        <input
-          type="checkbox"
-          name="clear"
-          checked={stateHandles.clear}
-          onChange={onChangeNodeInputsHandler}
-        />
-      </NodeInput>
+      <div style={{ color: "aqua" }}>Inputs: </div>
+      {Object.entries(inputs).map((input, index) => (
+        <NodeInput name={input[0]} key={index[0]}>
+          <input
+            type="checkbox"
+            name={input[0]}
+            checked={input[1]}
+            onChange={onChangeNodeInputsHandler}
+          />
+        </NodeInput>
+      ))}
+      {outputs && (
+        <>
+          <div style={{ color: "aqua" }}>Outputs: </div>
+          {outputs &&
+            Object.entries(outputs).map((output, index) => (
+              <NodeInput name={output[0]} key={index[0]}>
+                <input
+                  type="checkbox"
+                  name={output[0]}
+                  checked={output[1]}
+                  onChange={onChangeNodeOutputsHandler}
+                />
+              </NodeInput>
+            ))}
+        </>
+      )}
+      <Button size="sm" color="success" style={{ marginTop: "15px" }}>
+        Add new trig
+      </Button>
     </Form>
   );
 }

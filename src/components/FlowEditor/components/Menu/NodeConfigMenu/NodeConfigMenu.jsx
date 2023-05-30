@@ -27,17 +27,35 @@ function nodeConfigReducer(node, { type, event }) {
         },
       };
       break;
-    case "updateStateHandles":
+    case "updateInputStateHandles":
       newNode = {
         ...node,
         data: {
           ...node.data,
-          handles: {
-            ...node.data.handles,
-            handleMechanism: {
-              ...node.data.handles.handleMechanism,
-              stateHandles: {
-                ...node.data.handles.handleMechanism.stateHandles,
+          skeleton: {
+            ...node.data.skeleton,
+            stateHandles: {
+              ...node.data.skeleton.stateHandles,
+              inputs: {
+                ...node.data.skeleton.stateHandles.inputs,
+                [event.target.name]: event.target.checked,
+              },
+            },
+          },
+        },
+      };
+      break;
+    case "updateOutputStateHandles":
+      newNode = {
+        ...node,
+        data: {
+          ...node.data,
+          skeleton: {
+            ...node.data.skeleton,
+            stateHandles: {
+              ...node.data.skeleton.stateHandles,
+              outputs: {
+                ...node.data.skeleton.stateHandles.outputs,
                 [event.target.name]: event.target.checked,
               },
             },
@@ -50,10 +68,7 @@ function nodeConfigReducer(node, { type, event }) {
         ...node,
         data: {
           ...node.data,
-          handles: {
-            ...node.data.handles,
-            triggerAttributes: event.target.value,
-          },
+          triggerAttributes: event.target.value,
         },
       };
       break;
@@ -81,7 +96,7 @@ function nodeConfigReducer(node, { type, event }) {
 export default function NodeConfigMenu({ self }) {
   const [node, nodeConfigDispatch] = useReducer(nodeConfigReducer, self);
   const dispatch = useDispatch();
-  const { dynamicInput, dynamicOutput, stateful } = node.data.skeleton.ioEngine;
+  const { dynamicInput, dynamicOutput } = node.data.skeleton.ioEngine;
   const onSubmitHandler = (event) => {
     event.preventDefault();
     dispatch(setNodeConfigData(node));
@@ -95,9 +110,7 @@ export default function NodeConfigMenu({ self }) {
 
       <ConfigParametersForm node={node} dispatcher={nodeConfigDispatch} />
 
-      {stateful && (
-        <StateHandlesForm node={node} dispatcher={nodeConfigDispatch} />
-      )}
+      <StateHandlesForm node={node} dispatcher={nodeConfigDispatch} />
 
       <TriggerAttributeForm node={node} dispatcher={nodeConfigDispatch} />
 

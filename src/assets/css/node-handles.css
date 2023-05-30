@@ -1,14 +1,14 @@
 .node-handle {
   border: none !important;
   box-shadow: 0.174px 0.8px 2px 0px rgba(0, 0, 0, 1) !important;
-  width: 10px !important;
-  height: 10px !important;
+  width: 8px !important;
+  height: 8px !important;
   position: static !important;
   border-radius: 2px !important;
 }
 .node-handle:hover {
-  width: 11px !important;
-  height: 11px !important;
+  width: 9px !important;
+  height: 9px !important;
 }
 
 .vertical {

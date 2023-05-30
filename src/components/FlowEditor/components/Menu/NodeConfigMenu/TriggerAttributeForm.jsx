@@ -3,7 +3,7 @@ import { Form, FormGroup, Input } from "reactstrap";
 import * as Styled from "./NodeConfigMenu.style";
 
 export default function TriggerAttributeForm({ node, dispatcher }) {
-  const { triggerAttributes } = node.data.handles;
+  const { triggerAttributes } = node.data;
 
   const onChangeTriggerAttributesHandler = (event) => {
     dispatcher({ type: "updateTriggerAttributes", event });

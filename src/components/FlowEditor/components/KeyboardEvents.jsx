@@ -9,14 +9,13 @@ import {
   pasteNodes,
   selectAllElements,
 } from "store/reducers/flow/flowElementsSlice";
-import { setRotateAllPath } from "store/reducers/flow/flowGuiSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 
 const KeyboardEvents = () => {
   const dispatch = useDispatch();
   const { flowGui, flowElements } = useActiveFlow();
   const { copiedNodes } = useSelector((state) => state.controlPanel);
-  const { paneClickPosition, rotateAllPath } = flowGui;
+  const { paneClickPosition } = flowGui;
 
   const reactFlowInstance = useReactFlow();
 
@@ -31,16 +30,6 @@ const KeyboardEvents = () => {
       dispatch(selectAllElements());
     }
   }, [ctrlAndAPressed]);
-
-  useEffect(() => {
-    if (shiftAndRPressed) {
-      if (rotateAllPath === "vertical") {
-        dispatch(setRotateAllPath("horizontal"));
-      } else {
-        dispatch(setRotateAllPath("vertical"));
-      }
-    }
-  }, [shiftAndRPressed]);
 
   useEffect(() => {
     if (f2Pressed) {

@@ -74,33 +74,9 @@ export const flowElementsSlice = createSlice({
     pasteNodes(state, { payload }) {
       state.nodes.push(...payload);
     },
-    setRotateAll(state, { payload }) {
-      state.nodes.forEach((node) => {
-        node.data.ui.direction = payload;
-      });
-    },
     setExpandAll(state, { payload }) {
       state.nodes.forEach((node) => {
         node.data.ui.expand = payload;
-      });
-    },
-    rotateNode(state, { payload }) {
-      const node = payload;
-      const currentDirection = node.data.ui.direction;
-
-      state.nodes.forEach((node) => {
-        if (node.id === payload.id) {
-          node.data.ui.direction =
-            currentDirection === "vertical" ? "horizontal" : "vertical";
-        }
-      });
-    },
-    rotateSelectedNodes(state, { payload }) {
-      const { path } = payload;
-      state.nodes.forEach((node) => {
-        if (node.selected) {
-          node.data.ui.direction = path;
-        }
       });
     },
     deleteSelectedNodes(state, { payload }) {
@@ -278,10 +254,7 @@ export const {
   deleteAllElements,
   updateEdgePath,
   pasteNodes,
-  setRotateAll,
   setExpandAll,
-  rotateNode,
-  rotateSelectedNodes,
   deleteSelectedNodes,
   selectElements,
   changeNodeName,

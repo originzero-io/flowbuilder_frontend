@@ -2,15 +2,14 @@ import styled from "styled-components";
 
 export const NodeWrapper = styled.div`
   display: flex;
-  flex-direction: ${(props) =>
-    props.direction === "vertical" ? "column" : "row"};
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: row;
+`;
+export const NodeArea = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 2px 2px;
-  padding-bottom: 0px; //Added by "My name is Anıl Akseki"
   font-size: 10px;
   border-radius: 3px;
-  text-align: center;
   background-color: #000000;
   box-shadow: 0.261px 1.5px 3px 0px rgba(0, 0, 0, 0.996);
   opacity: ${(props) => (props.enable ? "1" : "0.5")};
@@ -19,12 +18,24 @@ export const NodeWrapper = styled.div`
     props.selected
       ? "linear-gradient(355deg,rgb(7,46,21) 0%,rgb(22,139,63) 80%)"
       : "linear-gradient(355deg,#323232 0%,#505050 80%)"};
+  position: relative;
 `;
 
-export const NodeArea = styled.div`
+export const TargetHandleWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 4px;
+  font-size: 10px;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding-top: 23px;
 `;
+export const SourceHandleWrapper = styled.div`
+  margin-left: 4px;
+  font-size: 10px;
+  padding-top: 23px;
+`;
+
 export const Header = styled.div`
   display: flex;
   min-width: 150px;
@@ -49,7 +60,7 @@ export const Label = styled.div`
 export const FeatureIconsWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 60px;
   position: absolute;
   right: 20px;
@@ -63,29 +74,6 @@ export const NodeContent = styled.div`
   justify-content: center;
   align-items: center;
   flex-grow: ${(props) => (props.type === "logo" ? "1" : "none")};
-`;
-
-export const TargetWrapper = styled.div`
-  display: flex;
-  position: relative;
-  justify-content: center;
-  flex-direction: ${(props) =>
-    props.direction === "vertical" ? "row" : "column"};
-  width: ${(props) => (props.direction === "vertical" ? "none" : "0px")};
-  height: ${(props) => (props.direction === "vertical" ? "0px" : "none")};
-  bottom: ${(props) => (props.direction === "vertical" ? "13px" : "none")};
-  right: ${(props) => (props.direction === "vertical" ? "none" : "15px")};
-`;
-export const SourceWrapper = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: ${(props) =>
-    props.direction === "vertical" ? "row" : "column"};
-  justify-content: center;
-  width: ${(props) => (props.direction === "vertical" ? "none" : "0px")};
-  height: ${(props) => (props.direction === "vertical" ? "0px" : "none")};
-  top: ${(props) => (props.direction === "vertical" ? "5px" : "none")};
-  left: ${(props) => (props.direction === "vertical" ? "none" : "7px")};
 `;
 
 export const Divider = styled.div`

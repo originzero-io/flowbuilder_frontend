@@ -42,7 +42,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const nodeList = useSelector((state) => state.nodeList);
 
   const { flowElements, flowGui } = useActiveFlow();
-  const { rotateAllPath, miniMapDisplay, edgeType, theme } = flowGui;
+  const { miniMapDisplay, edgeType, theme } = flowGui;
 
   const reactFlowInstance = useReactFlow();
 
@@ -120,7 +120,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     });
 
     if (!(type === "")) {
-      const newNode = createNode(type, initialPosition, rotateAllPath);
+      const newNode = createNode(type, initialPosition);
       dispatch(addNewNode(newNode));
       updateRecentStatus(type);
     }

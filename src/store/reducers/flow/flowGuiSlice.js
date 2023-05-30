@@ -4,7 +4,6 @@ const flowGuiSlice = createSlice({
   name: "flowGui",
   initialState: {
     viewport: { x: 0, y: 0, zoom: 1 },
-    rotateAllPath: "vertical",
     miniMapDisplay: true,
     groupBarDisplay: false,
     edgeType: "step",
@@ -25,9 +24,6 @@ const flowGuiSlice = createSlice({
     setMiniMapDisplay(state, { payload }) {
       state.miniMapDisplay = payload;
     },
-    setRotateAllPath(state, { payload }) {
-      state.rotateAllPath = payload;
-    },
     setFlowEdgeType(state, { payload }) {
       state.edgeType = payload;
     },
@@ -47,7 +43,6 @@ export const {
   setReactFlowInstance,
   setTheme,
   setMiniMapDisplay,
-  setRotateAllPath,
   setFlowEdgeType,
   setGroupBarDisplay,
   closeAllNodeGroupMenu,

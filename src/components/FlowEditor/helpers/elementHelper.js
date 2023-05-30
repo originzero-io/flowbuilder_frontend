@@ -1,45 +1,44 @@
 import uuid from "react-uuid";
 import { getNodeSkeleton } from "./nodeObjectHelper";
 
-export const createNode = (type, initialPosition, direction) => ({
-  id: `${type}-${uuid()}`,
-  type,
-  position: initialPosition,
-  data: {
-    skeleton: getNodeSkeleton(type),
-    handles: {
-      class: "class1", // triggerAttributes ve handleMechanismi belirler
-      triggerAttributes: "ignore",
-      handleMechanism: {
-        frozenHandles: [], // silinmesine izin verilmeyecek handlelar
+export const createNode = (type, initialPosition) => {
+  const nodeSkeleton = getNodeSkeleton(type);
+  return {
+    id: `${type}-${uuid()}`,
+    type,
+    position: initialPosition,
+    data: {
+      skeleton: {
+        ...nodeSkeleton,
         stateHandles: {
-          trig: true,
-          start: true,
-          end: true,
-          error: false,
-          enable: false,
-          disable: false,
-          cancel: false,
-          clear: false,
+          ...nodeSkeleton?.stateHandles,
           trigHandles: [],
+          inputs: {
+            trig: false,
+            enable: false,
+            disable: false,
+            ...nodeSkeleton?.stateHandles?.inputs,
+          },
         },
       },
+      triggerAttributes: "ignore",
+      frozenHandles: [], // silinmesine izin verilmeyecek handlelar
+      preferencesClass: "class1", // triggerAttributes ve handleMechanismi belirler
+      ui: {
+        label: `${type}`,
+        enable: true,
+        group: { _id: 0, color: "gray" },
+      },
     },
-    ui: {
-      label: `${type}`,
-      direction,
-      enable: true,
-      group: { _id: 0, color: "gray" },
-    },
-  },
 
-  // ? Reactflow tarafından eklenenler
-  // width,
-  // height,
-  // selected,
-  // positionAbsolute : {x,y},
-  // dragging
-});
+    // ? Reactflow tarafından eklenenler
+    // width,
+    // height,
+    // selected,
+    // positionAbsolute : {x,y},
+    // dragging
+  };
+};
 
 export const isEdgeExist = (newConnection, edges) =>
   edges.some(
