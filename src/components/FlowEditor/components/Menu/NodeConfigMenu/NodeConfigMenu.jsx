@@ -8,6 +8,7 @@ import StateHandlesForm from "./StateHandlesForm";
 import TriggerAttributeForm from "./TriggerAttributeForm";
 import * as Styled from "./NodeConfigMenu.style";
 import HandleCountForm from "./HandleCountForm";
+import FrozenHandlesForm from "./FrozenHandlesForm";
 
 function nodeConfigReducer(node, { type, event }) {
   let newNode;
@@ -87,6 +88,28 @@ function nodeConfigReducer(node, { type, event }) {
         },
       };
       break;
+    case "freezeHandle":
+      newNode = {
+        ...node,
+        data: {
+          ...node.data,
+          frozenHandles: [...node.data.frozenHandles, event.target.name],
+        },
+      };
+      break;
+    case "unFreezeHandle":
+      newNode = {
+        ...node,
+        data: {
+          ...node.data,
+          frozenHandles: [
+            ...node.data.frozenHandles.filter(
+              (handle) => handle !== event.target.name,
+            ),
+          ],
+        },
+      };
+      break;
     default:
       throw new Error("There are no action in that name");
   }
@@ -113,6 +136,8 @@ export default function NodeConfigMenu({ self }) {
       <StateHandlesForm node={node} dispatcher={nodeConfigDispatch} />
 
       <TriggerAttributeForm node={node} dispatcher={nodeConfigDispatch} />
+
+      <FrozenHandlesForm node={node} dispatcher={nodeConfigDispatch} />
 
       {(dynamicInput || dynamicOutput) && (
         <HandleCountForm node={node} dispatcher={nodeConfigDispatch} />
