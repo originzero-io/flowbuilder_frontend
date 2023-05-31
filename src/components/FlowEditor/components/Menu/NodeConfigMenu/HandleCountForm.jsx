@@ -7,7 +7,7 @@ export default function DynamicHandlesForm({ node, dispatcher }) {
   const { targetCount, sourceCount, dynamicInput, dynamicOutput } =
     node.data.skeleton.ioEngine;
   const handleCountChange = (event) => {
-    dispatcher({ type: "updateHandleCount", event });
+    dispatcher({ type: "updateHandleCount", payload: event });
   };
   return (
     <Form style={Styled.FormStyle}>

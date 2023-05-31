@@ -9,7 +9,7 @@ export default function ConfigParametersForm({ node, dispatcher }) {
   const parameterEntries = Object.entries(configParameter);
 
   const onChangeConfigParametersHandler = (event) => {
-    dispatcher({ type: "updateConfigParameters", event });
+    dispatcher({ type: "updateConfigParameters", payload: event });
   };
 
   return (

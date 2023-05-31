@@ -8,9 +8,9 @@ export default function FrozenHandlesForm({ node, dispatcher }) {
 
   const onCheckFrozenHandleHandler = (event) => {
     if (event.target.checked) {
-      dispatcher({ type: "freezeHandle", event });
+      dispatcher({ type: "freezeHandle", payload: event });
     } else {
-      dispatcher({ type: "unFreezeHandle", event });
+      dispatcher({ type: "unFreezeHandle", payload: event });
     }
   };
   return (

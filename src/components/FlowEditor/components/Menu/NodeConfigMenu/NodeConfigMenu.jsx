@@ -5,12 +5,12 @@ import { setModal } from "store/reducers/componentSlice";
 import { setNodeConfigData } from "store/reducers/flow/flowElementsSlice";
 import ConfigParametersForm from "./ConfigParametersForm";
 import StateHandlesForm from "./StateHandlesForm";
-import TriggerAttributeForm from "./TriggerAttributeForm";
+import TriggerForm from "./TriggerForm";
 import * as Styled from "./NodeConfigMenu.style";
 import HandleCountForm from "./HandleCountForm";
 import FrozenHandlesForm from "./FrozenHandlesForm";
 
-function nodeConfigReducer(node, { type, event }) {
+function nodeConfigReducer(node, { type, payload }) {
   let newNode;
   switch (type) {
     case "updateConfigParameters":
@@ -22,7 +22,7 @@ function nodeConfigReducer(node, { type, event }) {
             ...node.data.skeleton,
             configParameters: {
               ...node.data.skeleton.configParameters,
-              [event.target.name]: event.target.value,
+              [payload.target.name]: payload.target.value,
             },
           },
         },
@@ -39,7 +39,7 @@ function nodeConfigReducer(node, { type, event }) {
               ...node.data.skeleton.stateHandles,
               inputs: {
                 ...node.data.skeleton.stateHandles.inputs,
-                [event.target.name]: event.target.checked,
+                [payload.target.name]: payload.target.checked,
               },
             },
           },
@@ -57,7 +57,7 @@ function nodeConfigReducer(node, { type, event }) {
               ...node.data.skeleton.stateHandles,
               outputs: {
                 ...node.data.skeleton.stateHandles.outputs,
-                [event.target.name]: event.target.checked,
+                [payload.target.name]: payload.target.checked,
               },
             },
           },
@@ -69,7 +69,7 @@ function nodeConfigReducer(node, { type, event }) {
         ...node,
         data: {
           ...node.data,
-          triggerAttributes: event.target.value,
+          triggerAttributes: payload.target.value,
         },
       };
       break;
@@ -82,7 +82,7 @@ function nodeConfigReducer(node, { type, event }) {
             ...node.data.skeleton,
             ioEngine: {
               ...node.data.skeleton.ioEngine,
-              [event.target.name]: Number(event.target.value),
+              [payload.target.name]: Number(payload.target.value),
             },
           },
         },
@@ -93,7 +93,7 @@ function nodeConfigReducer(node, { type, event }) {
         ...node,
         data: {
           ...node.data,
-          frozenHandles: [...node.data.frozenHandles, event.target.name],
+          frozenHandles: [...node.data.frozenHandles, payload.target.name],
         },
       };
       break;
@@ -104,9 +104,39 @@ function nodeConfigReducer(node, { type, event }) {
           ...node.data,
           frozenHandles: [
             ...node.data.frozenHandles.filter(
-              (handle) => handle !== event.target.name,
+              (handle) => handle !== payload.target.name,
             ),
           ],
+        },
+      };
+      break;
+    case "addTriggerHandle":
+      newNode = {
+        ...node,
+        data: {
+          ...node.data,
+          skeleton: {
+            ...node.data.skeleton,
+            trigHandles: {
+              ...node.data.skeleton.trigHandles,
+              [payload]: false,
+            },
+          },
+        },
+      };
+      break;
+    case "updateTriggerHandles":
+      newNode = {
+        ...node,
+        data: {
+          ...node.data,
+          skeleton: {
+            ...node.data.skeleton,
+            trigHandles: {
+              ...node.data.skeleton.trigHandles,
+              [payload.target.name]: payload.target.checked,
+            },
+          },
         },
       };
       break;
@@ -135,7 +165,7 @@ export default function NodeConfigMenu({ self }) {
 
       <StateHandlesForm node={node} dispatcher={nodeConfigDispatch} />
 
-      <TriggerAttributeForm node={node} dispatcher={nodeConfigDispatch} />
+      <TriggerForm node={node} dispatcher={nodeConfigDispatch} />
 
       <FrozenHandlesForm node={node} dispatcher={nodeConfigDispatch} />
 

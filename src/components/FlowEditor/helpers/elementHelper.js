@@ -1,6 +1,8 @@
 import uuid from "react-uuid";
 import { getNodeSkeleton } from "./nodeObjectHelper";
 
+// const trigHandles = [{ name: "trig1", active: true }];
+
 export const createNode = (type, initialPosition) => {
   const nodeSkeleton = getNodeSkeleton(type);
   return {
@@ -10,11 +12,13 @@ export const createNode = (type, initialPosition) => {
     data: {
       skeleton: {
         ...nodeSkeleton,
+        trigHandles: {
+          trig1: false,
+          trig2: true,
+        },
         stateHandles: {
           ...nodeSkeleton?.stateHandles,
-          trigHandles: [],
           inputs: {
-            trig: false,
             enable: false,
             disable: false,
             ...nodeSkeleton?.stateHandles?.inputs,

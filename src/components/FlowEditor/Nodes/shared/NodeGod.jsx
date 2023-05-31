@@ -21,7 +21,8 @@ const propTypes = {
 const NodeGod = ({ self, children }) => {
   const { sourceCount, targetCount } = self.data.skeleton.ioEngine;
   const { enable, group } = self.data.ui;
-  const { stateHandles, inputParameters, outputValues } = self.data.skeleton;
+  const { trigHandles, stateHandles, inputParameters, outputValues } =
+    self.data.skeleton;
   const updateNodeInternals = useUpdateNodeInternals();
   const dispatch = useDispatch();
   const [serverData, setServerData] = useState("");
@@ -59,7 +60,10 @@ const NodeGod = ({ self, children }) => {
   return (
     <Styled.NodeWrapper>
       <Styled.TargetHandleWrapper>
-        <InputStateHandles stateHandles={stateHandles} />
+        <InputStateHandles
+          trigHandles={trigHandles}
+          stateHandles={stateHandles}
+        />
         {inputParameters && (
           <InputParameterHandles
             inputParameters={inputParameters}
@@ -102,10 +106,34 @@ export default React.memo(NodeGod);
 
 NodeGod.propTypes = propTypes;
 
-const InputStateHandles = ({ stateHandles }) => {
+const InputStateHandles = ({ trigHandles, stateHandles }) => {
+  // const trigHandl = Object.entries(stateHandles.inputs);
   const inputStates = Object.entries(stateHandles.inputs);
   return (
     <>
+      {Object.entries(trigHandles).map((trigHandle) => {
+        return (
+          <>
+            {trigHandle[1] && (
+              <div
+                style={{
+                  display: "flex",
+                }}
+              >
+                <div style={{ color: "gray" }}>{trigHandle[0]}</div>
+                <Handle
+                  key={trigHandle[0]}
+                  id={`trig_${trigHandle[0]}`}
+                  type="target"
+                  position={Position.Left}
+                  className="node-handle horizontal"
+                  style={{ backgroundColor: "#40916c" }}
+                />
+              </div>
+            )}
+          </>
+        );
+      })}
       {inputStates.map((inputState) => (
         <>
           {inputState[1] && (
@@ -133,6 +161,9 @@ const InputStateHandles = ({ stateHandles }) => {
 
 const OutputStateHandles = ({ stateHandles }) => {
   const outputStates = Object.entries(stateHandles.outputs);
+
+  const isValid = (connection) =>
+    connection.targetHandle.split("_")[0] === "trig";
   return (
     <>
       {outputStates.map((outputState) => (
@@ -144,9 +175,7 @@ const OutputStateHandles = ({ stateHandles }) => {
                 id={`status_${outputState[0]}`}
                 type="source"
                 position={Position.Right}
-                isValidConnection={(connection) =>
-                  connection.targetHandle.includes("status_")
-                }
+                isValidConnection={isValid}
                 className="node-handle horizontal"
                 style={{ backgroundColor: "#40916c" }}
               />
@@ -195,9 +224,9 @@ const OutputValueHandles = ({ outputValues, handleColor }) => {
 
     const isSameDataType =
       sourceType === targetType || sourceType === "any" || targetType === "any";
-    const isNotStatusHandle = !connection.targetHandle.includes("status_");
 
-    return isSameDataType && isNotStatusHandle;
+    const isNotTrigHandle = targetType !== "trig";
+    return isSameDataType && isNotTrigHandle;
   };
   return (
     <>
