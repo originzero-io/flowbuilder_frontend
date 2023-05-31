@@ -20,6 +20,7 @@ export default function FrozenHandlesForm({ node, dispatcher }) {
         Object.entries(outputValues).map((output) => {
           return (
             <div
+              key={output}
               style={{
                 display: "flex",
                 justifyContent: "space-between",

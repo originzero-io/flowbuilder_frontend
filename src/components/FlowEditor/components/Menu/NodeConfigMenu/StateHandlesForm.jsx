@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form } from "reactstrap";
 import * as Styled from "./NodeConfigMenu.style";
 
 export default function StateHandlesForm({ node, dispatcher }) {
   const { stateHandles } = node.data.skeleton;
   const { inputs, outputs } = stateHandles;
-
+  const [showTrigForm, setShowTrigForm] = useState(false);
   const onChangeNodeInputsHandler = (event) => {
     dispatcher({ type: "updateInputStateHandles", event });
   };
   const onChangeNodeOutputsHandler = (event) => {
     dispatcher({ type: "updateOutputStateHandles", event });
+  };
+  const addNewTrigHandler = (event) => {
+    event.preventDefault();
+    const trigName = prompt("Enter trig name: ");
+    console.log("trig name: ", trigName);
   };
   return (
     <Form style={Styled.FormStyle}>
@@ -42,9 +47,16 @@ export default function StateHandlesForm({ node, dispatcher }) {
             ))}
         </>
       )}
-      <Button size="sm" color="success" style={{ marginTop: "15px" }}>
-        Add new trig
-      </Button>
+      <div>
+        <Button
+          size="sm"
+          color="success"
+          style={{ marginTop: "15px" }}
+          onClick={addNewTrigHandler}
+        >
+          Add new trig
+        </Button>
+      </div>
     </Form>
   );
 }

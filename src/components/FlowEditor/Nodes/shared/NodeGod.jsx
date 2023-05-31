@@ -19,12 +19,18 @@ const propTypes = {
 };
 
 const NodeGod = ({ self, children }) => {
-  const { sourceCount, targetCount, ioType } = self.data.skeleton.ioEngine;
+  const { sourceCount, targetCount } = self.data.skeleton.ioEngine;
   const { enable, group } = self.data.ui;
   const { stateHandles, inputParameters, outputValues } = self.data.skeleton;
   const updateNodeInternals = useUpdateNodeInternals();
   const dispatch = useDispatch();
   const [serverData, setServerData] = useState("");
+  const [handleColor, setHandleColor] = useState({
+    string: "#00b4d8",
+    int: "tomato",
+    boolean: "orange",
+    any: "gray",
+  });
 
   useEffect(() => {
     updateNodeInternals(self.id);
@@ -55,7 +61,10 @@ const NodeGod = ({ self, children }) => {
       <Styled.TargetHandleWrapper>
         <InputStateHandles stateHandles={stateHandles} />
         {inputParameters && (
-          <InputParameterHandles inputParameters={inputParameters} />
+          <InputParameterHandles
+            inputParameters={inputParameters}
+            handleColor={handleColor}
+          />
         )}
       </Styled.TargetHandleWrapper>
       <Styled.NodeArea
@@ -78,7 +87,12 @@ const NodeGod = ({ self, children }) => {
         {stateHandles.outputs && (
           <OutputStateHandles stateHandles={stateHandles} />
         )}
-        {outputValues && <OutputValueHandles outputValues={outputValues} />}
+        {outputValues && (
+          <OutputValueHandles
+            outputValues={outputValues}
+            handleColor={handleColor}
+          />
+        )}
       </Styled.SourceHandleWrapper>
     </Styled.NodeWrapper>
   );
@@ -107,7 +121,7 @@ const InputStateHandles = ({ stateHandles }) => {
                 type="target"
                 position={Position.Left}
                 className="node-handle horizontal"
-                style={{ backgroundColor: "green" }}
+                style={{ backgroundColor: "#40916c" }}
               />
             </div>
           )}
@@ -134,9 +148,11 @@ const OutputStateHandles = ({ stateHandles }) => {
                   connection.targetHandle.includes("status_")
                 }
                 className="node-handle horizontal"
-                style={{ backgroundColor: "green" }}
+                style={{ backgroundColor: "#40916c" }}
               />
-              <div style={{ color: "gray" }}>{outputState[0]}</div>
+              <div style={{ color: "gray", marginLeft: "2px" }}>
+                {outputState[0]}
+              </div>
             </div>
           )}
         </>
@@ -145,21 +161,23 @@ const OutputStateHandles = ({ stateHandles }) => {
   );
 };
 
-const InputParameterHandles = ({ inputParameters }) => {
+const InputParameterHandles = ({ inputParameters, handleColor }) => {
   const parameters = Object.entries(inputParameters);
   return (
     <>
       {parameters.map((parameter) => {
         return (
           <div style={{ display: "flex" }}>
-            <div style={{ color: "gray" }}>{parameter[0]}</div>
+            <div style={{ color: "gray", marginLeft: "2px" }}>
+              {parameter[0]}
+            </div>
             <Handle
               key={parameter[0]}
               type="target"
               position={Position.Left}
               className="node-handle horizontal"
               id={`${parameter[1]}_${parameter[0]}`}
-              style={{ backgroundColor: "gray" }}
+              style={{ backgroundColor: handleColor[parameter[1]] }}
             />
           </div>
         );
@@ -168,14 +186,15 @@ const InputParameterHandles = ({ inputParameters }) => {
   );
 };
 
-const OutputValueHandles = ({ outputValues }) => {
+const OutputValueHandles = ({ outputValues, handleColor }) => {
   const values = Object.entries(outputValues);
 
   const isValid = (connection) => {
     const sourceType = connection.sourceHandle.split("_")[0];
     const targetType = connection.targetHandle.split("_")[0];
 
-    const isSameDataType = sourceType === targetType;
+    const isSameDataType =
+      sourceType === targetType || sourceType === "any" || targetType === "any";
     const isNotStatusHandle = !connection.targetHandle.includes("status_");
 
     return isSameDataType && isNotStatusHandle;
@@ -192,9 +211,9 @@ const OutputValueHandles = ({ outputValues }) => {
               id={`${value[1]}_${value[0]}`}
               isValidConnection={isValid}
               className="node-handle horizontal"
-              style={{ backgroundColor: "gray" }}
+              style={{ backgroundColor: handleColor[value[1]] }}
             />
-            <div style={{ color: "gray" }}>{value[0]}</div>
+            <div style={{ color: "gray", marginLeft: "2px" }}>{value[0]}</div>
           </div>
         );
       })}
