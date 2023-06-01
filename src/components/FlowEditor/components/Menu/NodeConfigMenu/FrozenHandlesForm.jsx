@@ -3,8 +3,7 @@ import { Badge, Form } from "reactstrap";
 import * as Styled from "./NodeConfigMenu.style";
 
 export default function FrozenHandlesForm({ node, dispatcher }) {
-  const { frozenHandles, skeleton } = node.data;
-  const { outputValues } = skeleton;
+  const { frozenHandles, outputValues } = node.data;
 
   const onCheckFrozenHandleHandler = (event) => {
     if (event.target.checked) {

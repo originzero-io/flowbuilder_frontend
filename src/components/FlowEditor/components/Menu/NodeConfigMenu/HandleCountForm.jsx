@@ -5,7 +5,7 @@ import * as Styled from "./NodeConfigMenu.style";
 
 export default function DynamicHandlesForm({ node, dispatcher }) {
   const { targetCount, sourceCount, dynamicInput, dynamicOutput } =
-    node.data.skeleton.ioEngine;
+    node.data.ioEngine;
   const handleCountChange = (event) => {
     dispatcher({ type: "updateHandleCount", payload: event });
   };

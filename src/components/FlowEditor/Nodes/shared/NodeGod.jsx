@@ -19,10 +19,10 @@ const propTypes = {
 };
 
 const NodeGod = ({ self, children }) => {
-  const { sourceCount, targetCount } = self.data.skeleton.ioEngine;
+  const { sourceCount, targetCount } = self.data.ioEngine;
   const { enable, group } = self.data.ui;
   const { trigHandles, stateHandles, inputParameters, outputValues } =
-    self.data.skeleton;
+    self.data;
   const updateNodeInternals = useUpdateNodeInternals();
   const dispatch = useDispatch();
   const [serverData, setServerData] = useState("");
@@ -35,7 +35,7 @@ const NodeGod = ({ self, children }) => {
 
   useEffect(() => {
     updateNodeInternals(self.id);
-  }, [self.data.skeleton]);
+  }, [self.data]);
 
   const NodeIcon = getIconComponent(self.type);
   useEffect(() => {
@@ -107,7 +107,6 @@ export default React.memo(NodeGod);
 NodeGod.propTypes = propTypes;
 
 const InputStateHandles = ({ trigHandles, stateHandles }) => {
-  // const trigHandl = Object.entries(stateHandles.inputs);
   const inputStates = Object.entries(stateHandles.inputs);
   return (
     <>

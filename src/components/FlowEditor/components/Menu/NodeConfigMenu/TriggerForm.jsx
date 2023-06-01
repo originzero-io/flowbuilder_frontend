@@ -13,7 +13,7 @@ export default function TriggerForm({ node, dispatcher }) {
 }
 
 function TriggerInputHandleForm({ node, dispatcher }) {
-  const { trigHandles } = node.data.skeleton;
+  const { trigHandles } = node.data;
 
   const onChangeTriggerInputActiveHandler = (event) => {
     dispatcher({ type: "updateTriggerHandles", payload: event });

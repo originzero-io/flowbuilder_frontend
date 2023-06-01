@@ -18,12 +18,9 @@ function nodeConfigReducer(node, { type, payload }) {
         ...node,
         data: {
           ...node.data,
-          skeleton: {
-            ...node.data.skeleton,
-            configParameters: {
-              ...node.data.skeleton.configParameters,
-              [payload.target.name]: payload.target.value,
-            },
+          configParameters: {
+            ...node.data.configParameters,
+            [payload.target.name]: payload.target.value,
           },
         },
       };
@@ -33,14 +30,11 @@ function nodeConfigReducer(node, { type, payload }) {
         ...node,
         data: {
           ...node.data,
-          skeleton: {
-            ...node.data.skeleton,
-            stateHandles: {
-              ...node.data.skeleton.stateHandles,
-              inputs: {
-                ...node.data.skeleton.stateHandles.inputs,
-                [payload.target.name]: payload.target.checked,
-              },
+          stateHandles: {
+            ...node.data.stateHandles,
+            inputs: {
+              ...node.data.stateHandles.inputs,
+              [payload.target.name]: payload.target.checked,
             },
           },
         },
@@ -51,14 +45,11 @@ function nodeConfigReducer(node, { type, payload }) {
         ...node,
         data: {
           ...node.data,
-          skeleton: {
-            ...node.data.skeleton,
-            stateHandles: {
-              ...node.data.skeleton.stateHandles,
-              outputs: {
-                ...node.data.skeleton.stateHandles.outputs,
-                [payload.target.name]: payload.target.checked,
-              },
+          stateHandles: {
+            ...node.data.stateHandles,
+            outputs: {
+              ...node.data.stateHandles.outputs,
+              [payload.target.name]: payload.target.checked,
             },
           },
         },
@@ -78,12 +69,9 @@ function nodeConfigReducer(node, { type, payload }) {
         ...node,
         data: {
           ...node.data,
-          skeleton: {
-            ...node.data.skeleton,
-            ioEngine: {
-              ...node.data.skeleton.ioEngine,
-              [payload.target.name]: Number(payload.target.value),
-            },
+          ioEngine: {
+            ...node.data.ioEngine,
+            [payload.target.name]: Number(payload.target.value),
           },
         },
       };
@@ -115,12 +103,9 @@ function nodeConfigReducer(node, { type, payload }) {
         ...node,
         data: {
           ...node.data,
-          skeleton: {
-            ...node.data.skeleton,
-            trigHandles: {
-              ...node.data.skeleton.trigHandles,
-              [payload]: false,
-            },
+          trigHandles: {
+            ...node.data.trigHandles,
+            [payload]: false,
           },
         },
       };
@@ -130,12 +115,9 @@ function nodeConfigReducer(node, { type, payload }) {
         ...node,
         data: {
           ...node.data,
-          skeleton: {
-            ...node.data.skeleton,
-            trigHandles: {
-              ...node.data.skeleton.trigHandles,
-              [payload.target.name]: payload.target.checked,
-            },
+          trigHandles: {
+            ...node.data.trigHandles,
+            [payload.target.name]: payload.target.checked,
           },
         },
       };
@@ -149,7 +131,7 @@ function nodeConfigReducer(node, { type, payload }) {
 export default function NodeConfigMenu({ self }) {
   const [node, nodeConfigDispatch] = useReducer(nodeConfigReducer, self);
   const dispatch = useDispatch();
-  const { dynamicInput, dynamicOutput } = node.data.skeleton.ioEngine;
+  const { dynamicInput, dynamicOutput } = node.data.ioEngine;
   const onSubmitHandler = (event) => {
     event.preventDefault();
     dispatch(setNodeConfigData(node));

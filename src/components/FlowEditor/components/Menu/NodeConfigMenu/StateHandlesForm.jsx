@@ -3,7 +3,7 @@ import { Form } from "reactstrap";
 import * as Styled from "./NodeConfigMenu.style";
 
 export default function StateHandlesForm({ node, dispatcher }) {
-  const { stateHandles } = node.data.skeleton;
+  const { stateHandles } = node.data;
   const { inputs, outputs } = stateHandles;
   const onChangeNodeInputsHandler = (event) => {
     dispatcher({ type: "updateInputStateHandles", payload: event });

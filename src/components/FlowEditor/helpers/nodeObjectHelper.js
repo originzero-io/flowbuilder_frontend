@@ -28,7 +28,7 @@ export const createPanelNodeList = () => {
 
 export const getIconComponent = (type) => NodeUI[type].icon;
 
-export const getNodeSkeleton = (type) => {
+export const getNodeData = (type) => {
   const { systemNodes } = store.getState();
   return systemNodes[type];
 };

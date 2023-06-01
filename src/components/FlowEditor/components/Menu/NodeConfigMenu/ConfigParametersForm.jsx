@@ -3,10 +3,8 @@ import { Col, Form, FormGroup, Input, Label } from "reactstrap";
 import * as Styled from "./NodeConfigMenu.style";
 
 export default function ConfigParametersForm({ node, dispatcher }) {
-  // const { skeleton } = self.data;
-  const { skeleton } = node.data;
-  const configParameter = skeleton.configParameters;
-  const parameterEntries = Object.entries(configParameter);
+  const { configParameters } = node.data;
+  const parameterEntries = Object.entries(configParameters);
 
   const onChangeConfigParametersHandler = (event) => {
     dispatcher({ type: "updateConfigParameters", payload: event });

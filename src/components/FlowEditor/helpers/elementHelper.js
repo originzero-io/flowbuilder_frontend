@@ -1,33 +1,29 @@
 import uuid from "react-uuid";
-import { getNodeSkeleton } from "./nodeObjectHelper";
-
-// const trigHandles = [{ name: "trig1", active: true }];
+import { getNodeData } from "./nodeObjectHelper";
 
 export const createNode = (type, initialPosition) => {
-  const nodeSkeleton = getNodeSkeleton(type);
+  const nodeData = getNodeData(type);
   return {
     id: `${type}-${uuid()}`,
     type,
     position: initialPosition,
     data: {
-      skeleton: {
-        ...nodeSkeleton,
-        trigHandles: {
-          trig1: false,
-          trig2: true,
-        },
-        stateHandles: {
-          ...nodeSkeleton?.stateHandles,
-          inputs: {
-            enable: false,
-            disable: false,
-            ...nodeSkeleton?.stateHandles?.inputs,
-          },
-        },
+      ...nodeData,
+      trigHandles: {
+        trig1: false,
+        trig2: true,
       },
       triggerAttributes: "ignore",
-      frozenHandles: [], // silinmesine izin verilmeyecek handlelar
-      preferencesClass: "class1", // triggerAttributes ve handleMechanismi belirler
+      stateHandles: {
+        ...nodeData?.stateHandles,
+        inputs: {
+          enable: false,
+          disable: false,
+          ...nodeData?.stateHandles?.inputs,
+        },
+      },
+      frozenHandles: [],
+      preferencesClass: "class1",
       ui: {
         label: `${type}`,
         enable: true,
