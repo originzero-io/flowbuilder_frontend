@@ -143,7 +143,9 @@ export default function ConfigurationMenu() {
       );
     } else {
       notification.warn("Flow is executing...");
-      // flowExecutorSocket.debugFlow(backendFlowDataBuilder(flowId, elements));
+      flowExecutorSocket.debugFlow(
+        backendFlowDataBuilder(flowId, { nodes, edges }),
+      );
     }
   };
 

@@ -3,26 +3,27 @@ import { selectElements } from "store/reducers/flow/flowElementsSlice";
 import store from "index";
 
 export function backendFlowDataBuilder(flowId, elements) {
-  return {
+  const flowBackendData = {
     flowId,
-    nodes: elements.nodes.map((node) => ({
-      id: node.id,
-      type: node.type,
-      data: {
-        engine: node.data.engine,
-        label: node.data.label,
-        enable: node.data.enable,
-      },
-    })),
-    edges: elements.edges.map((edge) => ({
-      id: edge.id,
-      source: edge.source,
-      sourceHandle: edge.sourceHandle,
-      target: edge.target,
-      targetHandle: edge.targetHandle,
-      data: edge.data,
-    })),
+    nodes: elements.nodes.map((node) => {
+      const { id, type, data } = node;
+      const { ui, ...rest } = data;
+      return {
+        id,
+        type,
+        data: {
+          ...rest,
+        },
+      };
+    }),
+    edges: elements.edges.map((edge) => {
+      const { group, style, type, ...rest } = edge;
+      return {
+        ...rest,
+      };
+    }),
   };
+  return flowBackendData;
 }
 
 export function findNodeById(nodeId, elements) {
