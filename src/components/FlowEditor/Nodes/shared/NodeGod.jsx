@@ -21,7 +21,7 @@ const propTypes = {
 const NodeGod = ({ self, children }) => {
   const { sourceCount, targetCount } = self.data.ioEngine;
   const { enable, group } = self.data.ui;
-  const { trigHandles, stateHandles, inputParameters, outputValues } =
+  const { trigHandles, statusHandles, inputParameters, outputValues } =
     self.data;
   const updateNodeInternals = useUpdateNodeInternals();
   const dispatch = useDispatch();
@@ -60,9 +60,9 @@ const NodeGod = ({ self, children }) => {
   return (
     <Styled.NodeWrapper>
       <Styled.TargetHandleWrapper>
-        <InputStateHandles
+        <InputStatusHandles
           trigHandles={trigHandles}
-          stateHandles={stateHandles}
+          statusHandles={statusHandles}
         />
         {inputParameters && (
           <InputParameterHandles
@@ -88,8 +88,8 @@ const NodeGod = ({ self, children }) => {
         </Badge>
       </Styled.NodeArea>
       <Styled.SourceHandleWrapper>
-        {stateHandles.outputs && (
-          <OutputStateHandles stateHandles={stateHandles} />
+        {statusHandles?.outputs && (
+          <OutputStatusHandles statusHandles={statusHandles} />
         )}
         {outputValues && (
           <OutputValueHandles
@@ -106,8 +106,8 @@ export default React.memo(NodeGod);
 
 NodeGod.propTypes = propTypes;
 
-const InputStateHandles = ({ trigHandles, stateHandles }) => {
-  const inputStates = Object.entries(stateHandles.inputs);
+const InputStatusHandles = ({ trigHandles, statusHandles }) => {
+  const inputStatusHandles = Object.entries(statusHandles.inputs);
   return (
     <>
       {Object.entries(trigHandles).map((trigHandle) => {
@@ -133,18 +133,18 @@ const InputStateHandles = ({ trigHandles, stateHandles }) => {
           </>
         );
       })}
-      {inputStates.map((inputState) => (
+      {inputStatusHandles.map((inputStatusHandle) => (
         <>
-          {inputState[1] && (
+          {inputStatusHandle[1] && (
             <div
               style={{
                 display: "flex",
               }}
             >
-              <div style={{ color: "gray" }}>{inputState[0]}</div>
+              <div style={{ color: "gray" }}>{inputStatusHandle[0]}</div>
               <Handle
-                key={inputState[0]}
-                id={`status_${inputState[0]}`}
+                key={inputStatusHandle[0]}
+                id={`status_${inputStatusHandle[0]}`}
                 type="target"
                 position={Position.Left}
                 className="node-handle horizontal"
@@ -158,20 +158,24 @@ const InputStateHandles = ({ trigHandles, stateHandles }) => {
   );
 };
 
-const OutputStateHandles = ({ stateHandles }) => {
-  const outputStates = Object.entries(stateHandles.outputs);
+const OutputStatusHandles = ({ statusHandles }) => {
+  const outputStatusHandles = Object.entries(statusHandles.outputs);
 
-  const isValid = (connection) =>
-    connection.targetHandle.split("_")[0] === "trig";
+  const isValid = (connection) => {
+    const targetHandle = connection.targetHandle.split("_")[0];
+    const isStatusHandle = targetHandle === "trig" || targetHandle === "status";
+    return isStatusHandle;
+  };
+
   return (
     <>
-      {outputStates.map((outputState) => (
+      {outputStatusHandles.map((outputStatusHandle) => (
         <>
-          {outputState[1] && (
+          {outputStatusHandle[1] && (
             <div style={{ display: "flex" }}>
               <Handle
-                key={outputState[0]}
-                id={`status_${outputState[0]}`}
+                key={outputStatusHandle[0]}
+                id={`status_${outputStatusHandle[0]}`}
                 type="source"
                 position={Position.Right}
                 isValidConnection={isValid}
@@ -179,7 +183,7 @@ const OutputStateHandles = ({ stateHandles }) => {
                 style={{ backgroundColor: "#40916c" }}
               />
               <div style={{ color: "gray", marginLeft: "2px" }}>
-                {outputState[0]}
+                {outputStatusHandle[0]}
               </div>
             </div>
           )}
@@ -224,8 +228,9 @@ const OutputValueHandles = ({ outputValues, handleColor }) => {
     const isSameDataType =
       sourceType === targetType || sourceType === "any" || targetType === "any";
 
-    const isNotTrigHandle = targetType !== "trig";
-    return isSameDataType && isNotTrigHandle;
+    const isNotStatusHandle = targetType !== "trig" && targetType !== "status";
+
+    return isSameDataType && isNotStatusHandle;
   };
   return (
     <>

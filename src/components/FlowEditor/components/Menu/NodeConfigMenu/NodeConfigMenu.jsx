@@ -4,7 +4,7 @@ import { Button } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import { setNodeConfigData } from "store/reducers/flow/flowElementsSlice";
 import ConfigParametersForm from "./ConfigParametersForm";
-import StateHandlesForm from "./StateHandlesForm";
+import StatusHandlesForm from "./StatusHandlesForm";
 import TriggerForm from "./TriggerForm";
 import * as Styled from "./NodeConfigMenu.style";
 import HandleCountForm from "./HandleCountForm";
@@ -25,30 +25,30 @@ function nodeConfigReducer(node, { type, payload }) {
         },
       };
       break;
-    case "updateInputStateHandles":
+    case "updateInputStatusHandles":
       newNode = {
         ...node,
         data: {
           ...node.data,
-          stateHandles: {
-            ...node.data.stateHandles,
+          statusHandles: {
+            ...node.data.statusHandles,
             inputs: {
-              ...node.data.stateHandles.inputs,
+              ...node.data.statusHandles.inputs,
               [payload.target.name]: payload.target.checked,
             },
           },
         },
       };
       break;
-    case "updateOutputStateHandles":
+    case "updateOutputStatusHandles":
       newNode = {
         ...node,
         data: {
           ...node.data,
-          stateHandles: {
-            ...node.data.stateHandles,
+          statusHandles: {
+            ...node.data.statusHandles,
             outputs: {
-              ...node.data.stateHandles.outputs,
+              ...node.data.statusHandles.outputs,
               [payload.target.name]: payload.target.checked,
             },
           },
@@ -145,7 +145,7 @@ export default function NodeConfigMenu({ self }) {
 
       <ConfigParametersForm node={node} dispatcher={nodeConfigDispatch} />
 
-      <StateHandlesForm node={node} dispatcher={nodeConfigDispatch} />
+      <StatusHandlesForm node={node} dispatcher={nodeConfigDispatch} />
 
       <TriggerForm node={node} dispatcher={nodeConfigDispatch} />
 

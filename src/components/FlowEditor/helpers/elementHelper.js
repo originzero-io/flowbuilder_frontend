@@ -14,12 +14,12 @@ export const createNode = (type, initialPosition) => {
         trig2: true,
       },
       triggerAttributes: "ignore",
-      stateHandles: {
-        ...nodeData?.stateHandles,
+      statusHandles: {
+        ...nodeData?.statusHandles,
         inputs: {
           enable: false,
           disable: false,
-          ...nodeData?.stateHandles?.inputs,
+          ...nodeData?.statusHandles?.inputs,
         },
       },
       frozenHandles: [],

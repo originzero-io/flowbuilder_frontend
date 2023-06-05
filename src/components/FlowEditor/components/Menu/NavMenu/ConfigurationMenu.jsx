@@ -1,5 +1,10 @@
 import React, { useCallback, useState } from "react";
-import { useReactFlow, useStore, useStoreActions } from "reactflow";
+import {
+  getIncomers,
+  useReactFlow,
+  useStore,
+  useStoreActions,
+} from "reactflow";
 import { BiBrain } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "reactstrap";
@@ -28,6 +33,12 @@ import * as StyledDropdown from "components/StyledComponents/DropdownMenu";
 import * as StyledShapes from "components/StyledComponents/Shapes";
 import * as StyledDivider from "components/StyledComponents/Divider";
 import flowExecutorSocket from "services/flowExecutorService/flowExecutor.event";
+import {
+  checkIfTriggerNode,
+  checkUnconnectedNodes,
+  getFunctionalNodes,
+  valueEdgesConnectedToMe,
+} from "components/FlowEditor/helpers/debugHelpers";
 import * as Styled from "./NavMenu.style";
 import { ShareIcon, TuneIcon } from "./Icons";
 import SwitchButton from "../../../nodes/shared/SwitchButton";
@@ -116,17 +127,23 @@ export default function ConfigurationMenu() {
     }
   };
   const debugFlow = () => {
-    const elements = reactFlowInstance.toObject();
-    notification.warn("Flow is executing...");
-    console.log("elements: ", elements);
-    // some error checking for debugging
-    const triggerNodes = elements.nodes.filter(
-      (node) => node.type === "TRIGGER",
-    );
-    if (triggerNodes.length > 0) {
-      flowExecutorSocket.debugFlow(backendFlowDataBuilder(flowId, elements));
-    } else {
+    const { nodes, edges } = reactFlowInstance.toObject();
+    const functionalNodes = getFunctionalNodes(nodes);
+
+    const unconnectedNodes = checkUnconnectedNodes(functionalNodes, edges);
+
+    if (!checkIfTriggerNode(nodes)) {
       notification.error("Flow does not contain any trigger node.");
+    } else if (unconnectedNodes.exist) {
+      notification.error(
+        `This flow contains unconnected nodes. Please make sure to connect all nodes. Unconnected nodes: 
+        ${unconnectedNodes.nodes.map((node) => {
+          return `\n - ${node.type}`;
+        })}`,
+      );
+    } else {
+      notification.warn("Flow is executing...");
+      // flowExecutorSocket.debugFlow(backendFlowDataBuilder(flowId, elements));
     }
   };
 
