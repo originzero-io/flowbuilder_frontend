@@ -39,7 +39,7 @@ const propTypes = {
 };
 export default function FlowEditor({ reactFlowWrapper }) {
   const dispatch = useDispatch();
-  const nodeList = useSelector((state) => state.nodeList);
+  const nodeList = useSelector((state) => state.panelNodeList);
 
   const { flowElements, flowGui } = useActiveFlow();
   const { miniMapDisplay, edgeType, theme } = flowGui;
