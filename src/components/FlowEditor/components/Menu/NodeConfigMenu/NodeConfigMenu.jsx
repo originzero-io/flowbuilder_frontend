@@ -9,6 +9,7 @@ import TriggerForm from "./TriggerForm";
 import * as Styled from "./NodeConfigMenu.style";
 import HandleCountForm from "./HandleCountForm";
 import FrozenHandlesForm from "./FrozenHandlesForm";
+import IncomersOutgoers from "./IncomersOutgoers";
 
 function nodeConfigReducer(node, { type, payload }) {
   let newNode;
@@ -132,6 +133,7 @@ export default function NodeConfigMenu({ self }) {
   const [node, nodeConfigDispatch] = useReducer(nodeConfigReducer, self);
   const dispatch = useDispatch();
   const { dynamicInput, dynamicOutput } = node.data.ioEngine;
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
     dispatch(setNodeConfigData(node));
@@ -142,6 +144,8 @@ export default function NodeConfigMenu({ self }) {
     <div>
       <Styled.Header>Node Configuration Menu</Styled.Header>
       <div style={{ marginBottom: "30px" }}>{self.id}</div>
+
+      <IncomersOutgoers node={self} />
 
       <ConfigParametersForm node={node} dispatcher={nodeConfigDispatch} />
 
