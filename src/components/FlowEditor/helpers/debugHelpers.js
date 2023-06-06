@@ -12,7 +12,10 @@ export const getFunctionalNodes = (nodes) => {
 // ? nodun value girişlerine yapılmış bağlantıları verir
 export const getMyConnectedValueEdges = (node, edges) => {
   const myValueEdges = edges.filter(
-    (edge) => edge.target === node.id && !edge.targetHandle.includes("trig_"),
+    (edge) =>
+      edge.target === node.id &&
+      !edge.targetHandle.includes("trig_") &&
+      !edge.targetHandle.includes("status_"),
   );
 
   // ? Aynı inputa yapılmış olan bağlantıları temizler. Duplice bağlantıları kaldırır
