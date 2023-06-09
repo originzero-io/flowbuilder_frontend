@@ -17,7 +17,7 @@ const customStyles = {
     overflowX: "hidden",
     padding: "25px",
     background: "#1C1F26",
-    minWidth: "30%",
+    minWidth: "40%",
     maxHeight: "70%",
     boxShadow: "-1px 1px 16px -9px rgba(0,0,0,0.75)",
     color: "white",
