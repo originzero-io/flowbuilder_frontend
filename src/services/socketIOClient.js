@@ -21,7 +21,7 @@ class SocketIOClient {
       ...extraOptions,
     });
     this.socket.on("connect", () => {
-      notification.success(`${this.namespace} namespace connected`);
+      // notification.success(`${this.namespace} namespace connected`);
     });
     this.socket.on("connect_error", (err) => {
       notification.error(`Connection error: ${err.message}`);

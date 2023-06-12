@@ -31,8 +31,9 @@ import {
   openPaneContextMenu,
 } from "./helpers/menuHelper";
 import Utils from "./components/Utils";
-import { createNode } from "./helpers/elementHelper";
+import { createNode, isHandleAlreadyConnected } from "./helpers/elementHelper";
 import { createCustomNodeObject } from "./helpers/nodeObjectHelper";
+import notificationHelper from "utils/ui/notificationHelper";
 
 const propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
@@ -66,8 +67,11 @@ export default function FlowEditor({ reactFlowWrapper }) {
 
   const onConnect = useCallback(
     (params) => {
+      console.log("params: ", params);
       if (params.source === params.target) {
         notification.error("Nodes cannot connect itself");
+      } else if (isHandleAlreadyConnected(params, flowElements.edges)) {
+        notificationHelper.error("hop noluyor");
       } else {
         const sourceGroup = flowElements.nodes.find(
           (els) => els.id === params.source,

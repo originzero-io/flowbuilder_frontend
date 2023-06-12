@@ -48,6 +48,12 @@ export const isEdgeExist = (newConnection, edges) =>
       edge.sourceHandle === newConnection.sourceHandle &&
       edge.targetHandle === newConnection.targetHandle,
   );
+export const isHandleAlreadyConnected = (newConnection, edges) =>
+  edges.some(
+    (edge) =>
+      edge.target === newConnection.target &&
+      edge.targetHandle === newConnection.targetHandle,
+  );
 
 export const setSourceNodeColorToEdge = (connection, updatedEdges, nodes) => {
   const group = nodes.find((node) => node.id === connection.source)?.data.ui

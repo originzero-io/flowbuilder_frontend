@@ -19,7 +19,7 @@ const propTypes = {
 };
 
 const NodeGod = ({ self, children }) => {
-  const { sourceCount, targetCount } = self.data.ioEngine;
+  // const { sourceCount, targetCount } = self.data.ioEngine;
   const { enable, group } = self.data.ui;
   const { trigHandles, statusHandles, inputParameters, outputValues } =
     self.data;
