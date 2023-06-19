@@ -81,7 +81,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
           type: edgeType,
           group: sourceGroup,
           style: { stroke: sourceGroup?.color, strokeWidth: "2px" },
-          data: Math.floor(Math.random() * 10000),
+          data: null,
         };
 
         const sourceEnable = flowElements.nodes.find(
