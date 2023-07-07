@@ -37,6 +37,10 @@ const NodeUI = {
     component: SplitNode,
     icon: SplitIcon,
   },
+  HTTP_REQUEST: {
+    component: SplitNode,
+    icon: SplitIcon,
+  },
   CALCULATE: {
     component: CalculateNode,
     icon: CalculateIcon,

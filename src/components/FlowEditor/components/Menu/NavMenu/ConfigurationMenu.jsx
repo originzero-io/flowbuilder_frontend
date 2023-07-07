@@ -134,17 +134,21 @@ export default function ConfigurationMenu() {
 
     if (!checkIfTriggerNode(nodes)) {
       notification.error("Flow does not contain any trigger node.");
-    } else if (unconnectedNodes.exist) {
-      notification.error(
-        `This flow contains unconnected nodes. Please make sure to connect all nodes. Unconnected nodes: 
-        ${unconnectedNodes.nodes.map((node) => {
-          return `\n - ${node.type}`;
-        })}`,
-      );
-    } else {
-      notification.warn("Flow is executing...");
+    }
+    // else if (unconnectedNodes.exist) {
+    //   notification.error(
+    //     `This flow contains unconnected nodes. Please make sure to connect all nodes. Unconnected nodes:
+    //     ${unconnectedNodes.nodes.map((node) => {
+    //       return `\n - ${node.type}`;
+    //     })}`,
+    //   );
+    // }
+    else {
       flowExecutorSocket.debugFlow(
         backendFlowDataBuilder(flowId, { nodes, edges }),
+        (response) => {
+          notification.warn(response);
+        },
       );
     }
   };

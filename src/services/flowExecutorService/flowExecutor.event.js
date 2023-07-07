@@ -29,8 +29,10 @@ class FlowExecutorEvent extends SocketEvent {
     this.socket.on("debugFlow:response", (data) => listener(data));
   }
 
-  debugFlow(data) {
-    this.socket.emit("debugFlow", data);
+  debugFlow(data, listener) {
+    this.socket.emit("debugFlow", data, (response) => {
+      listener(response);
+    });
   }
 
   removeAllListeners() {

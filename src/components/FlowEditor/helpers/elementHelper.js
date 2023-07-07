@@ -21,8 +21,14 @@ export const createNode = (type, initialPosition) => {
           disable: false,
           ...nodeData?.statusHandles?.inputs,
         },
+        outputs: {
+          ...nodeData?.statusHandles?.outputs,
+          error: false,
+          errorVal: false,
+        },
       },
       frozenHandles: [],
+      enable: true,
       preferencesClass: "class1",
       ui: {
         label: `${type}`,
@@ -48,12 +54,16 @@ export const isEdgeExist = (newConnection, edges) =>
       edge.sourceHandle === newConnection.sourceHandle &&
       edge.targetHandle === newConnection.targetHandle,
   );
-export const isHandleAlreadyConnected = (newConnection, edges) =>
-  edges.some(
+export const isHandleAlreadyConnected = (newConnection, edges) => {
+  const handleType = newConnection.targetHandle.split("_")[0];
+  return edges.some(
     (edge) =>
+      handleType !== "trig" &&
+      handleType !== "status" &&
       edge.target === newConnection.target &&
       edge.targetHandle === newConnection.targetHandle,
   );
+};
 
 export const setSourceNodeColorToEdge = (connection, updatedEdges, nodes) => {
   const group = nodes.find((node) => node.id === connection.source)?.data.ui
