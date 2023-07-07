@@ -89,7 +89,10 @@ const NodeGod = ({ self, children }) => {
       </Styled.NodeArea>
       <Styled.SourceHandleWrapper>
         {statusHandles?.outputs && (
-          <OutputStatusHandles statusHandles={statusHandles} />
+          <OutputStatusHandles
+            statusHandles={statusHandles}
+            handleColor={handleColor}
+          />
         )}
         {outputValues && (
           <OutputValueHandles
@@ -158,13 +161,19 @@ const InputStatusHandles = ({ trigHandles, statusHandles }) => {
   );
 };
 
-const OutputStatusHandles = ({ statusHandles }) => {
+const OutputStatusHandles = ({ statusHandles, handleColor }) => {
   const outputStatusHandles = Object.entries(statusHandles.outputs);
 
   const isValid = (connection) => {
-    const targetHandle = connection.targetHandle.split("_")[0];
-    const isStatusHandle = targetHandle === "trig" || targetHandle === "status";
-    return isStatusHandle;
+    const [targetType] = connection.targetHandle.split("_");
+    const [sourceType, sourceName] = connection.sourceHandle.split("_");
+    const isStatusConnection =
+      (sourceType === "trig" || sourceType === "status") &&
+      (targetType === "trig" || targetType === "status");
+
+    const isErrorValConnection =
+      sourceName === "errorVal" && targetType !== "trig";
+    return isStatusConnection || isErrorValConnection;
   };
 
   return (
@@ -175,12 +184,21 @@ const OutputStatusHandles = ({ statusHandles }) => {
             <div style={{ display: "flex" }}>
               <Handle
                 key={outputStatusHandle[0]}
-                id={`status_${outputStatusHandle[0]}`}
+                id={
+                  outputStatusHandle[0] === "errorVal"
+                    ? "string_errorVal"
+                    : `status_${outputStatusHandle[0]}`
+                }
                 type="source"
                 position={Position.Right}
                 isValidConnection={isValid}
                 className="node-handle horizontal"
-                style={{ backgroundColor: "#40916c" }}
+                style={{
+                  backgroundColor:
+                    outputStatusHandle[0] === "errorVal"
+                      ? handleColor.string
+                      : "#40916c",
+                }}
               />
               <div style={{ color: "gray", marginLeft: "2px" }}>
                 {outputStatusHandle[0]}
