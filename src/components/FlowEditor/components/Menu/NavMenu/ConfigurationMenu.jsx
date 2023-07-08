@@ -34,6 +34,7 @@ import * as StyledShapes from "components/StyledComponents/Shapes";
 import * as StyledDivider from "components/StyledComponents/Divider";
 import flowExecutorSocket from "services/flowExecutorService/flowExecutor.event";
 import {
+  checkAllConnectedTrigsHandles,
   checkIfTriggerNode,
   checkUnconnectedNodes,
   getFunctionalNodes,
@@ -131,6 +132,7 @@ export default function ConfigurationMenu() {
     const functionalNodes = getFunctionalNodes(nodes);
 
     const unconnectedNodes = checkUnconnectedNodes(functionalNodes, edges);
+    const unconnectedTrigHandles = checkAllConnectedTrigsHandles(nodes, edges);
 
     if (!checkIfTriggerNode(nodes)) {
       notification.error("Flow does not contain any trigger node.");
@@ -143,7 +145,14 @@ export default function ConfigurationMenu() {
     //     })}`,
     //   );
     // }
-    else {
+    else if (unconnectedTrigHandles.exist) {
+      notification.error(
+        `Some nodes have unconnected trig handles. These nodes: 
+            ${unconnectedTrigHandles.nodes.map((node) => {
+              return `\n - ${node}`;
+            })}`,
+      );
+    } else {
       flowExecutorSocket.debugFlow(
         backendFlowDataBuilder(flowId, { nodes, edges }),
         (response) => {

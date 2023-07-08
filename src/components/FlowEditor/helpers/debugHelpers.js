@@ -29,6 +29,22 @@ export const getMyConnectedValueEdges = (node, edges) => {
   return myNonDuplicatedValueEdges;
 };
 
+export const getMyTrigEdges = (node, edges) => {
+  const myValueEdges = edges.filter(
+    (edge) => edge.target === node.id && edge.targetHandle.includes("trig_"),
+  );
+
+  // ? Aynı inputa yapılmış olan bağlantıları temizler. Duplice bağlantıları kaldırır
+  // const myNonDuplicatedValueEdges = myValueEdges.filter(
+  //   (edge, index) =>
+  //     myValueEdges.findIndex(
+  //       (item) => item.targetHandle === edge.targetHandle,
+  //     ) === index,
+  // );
+
+  return myValueEdges;
+};
+
 export const checkUnconnectedNodes = (functionalNodes, edges) => {
   const unConnectedNodes = [];
   functionalNodes.forEach((node) => {
@@ -42,5 +58,27 @@ export const checkUnconnectedNodes = (functionalNodes, edges) => {
   return {
     exist: existNotConnectedNodes,
     nodes: unConnectedNodes,
+  };
+};
+
+export const checkAllConnectedTrigsHandles = (nodes, edges) => {
+  //* Trig handle sayısı 1den fazlaysa, bütün handleların bağlanıp bağlanmadığını döndürür
+  const unConnectedTrigHandles = [];
+  nodes.forEach((node) => {
+    const connectedTrigHandles = getMyTrigEdges(node, edges);
+    const enableTrigHandles = Object.values(node.data.trigHandles).filter(
+      (th) => th === true,
+    );
+    if (
+      enableTrigHandles.length > 1 &&
+      connectedTrigHandles.length < enableTrigHandles.length
+    ) {
+      unConnectedTrigHandles.push(node.id);
+    }
+  });
+  const existNotConnectedTrigHandles = unConnectedTrigHandles.length > 0;
+  return {
+    exist: existNotConnectedTrigHandles,
+    nodes: unConnectedTrigHandles,
   };
 };
