@@ -35,14 +35,14 @@ export const getMyTrigEdges = (node, edges) => {
   );
 
   // ? Aynı inputa yapılmış olan bağlantıları temizler. Duplice bağlantıları kaldırır
-  // const myNonDuplicatedValueEdges = myValueEdges.filter(
-  //   (edge, index) =>
-  //     myValueEdges.findIndex(
-  //       (item) => item.targetHandle === edge.targetHandle,
-  //     ) === index,
-  // );
+  const myNonDuplicatedTrigEdges = myValueEdges.filter(
+    (edge, index) =>
+      myValueEdges.findIndex(
+        (item) => item.targetHandle === edge.targetHandle,
+      ) === index,
+  );
 
-  return myValueEdges;
+  return myNonDuplicatedTrigEdges;
 };
 
 export const checkUnconnectedNodes = (functionalNodes, edges) => {
@@ -69,6 +69,7 @@ export const checkAllConnectedTrigsHandles = (nodes, edges) => {
     const enableTrigHandles = Object.values(node.data.trigHandles).filter(
       (th) => th === true,
     );
+
     if (
       enableTrigHandles.length > 1 &&
       connectedTrigHandles.length < enableTrigHandles.length
