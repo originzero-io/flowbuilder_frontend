@@ -16,9 +16,12 @@ const Utils = ({ flowGui }) => {
       <FlowEditorMenus />
       <Background
         variant="dots"
-        color={
-          flowGui.theme === "rgba(53, 59, 72,0.8)" ? "red" : "rgb(170,170,170)"
-        }
+        // gap={25}
+        size={1}
+        // color={
+        //   flowGui.theme === "rgba(53, 59, 72,0.8)" ? "red" : "rgb(170,170,170)"
+        // }
+        color="rgba(100,100,100,0.8)"
       />
       <MiniMap
         nodeColor="gray"
