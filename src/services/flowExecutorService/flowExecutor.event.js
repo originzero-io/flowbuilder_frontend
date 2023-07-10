@@ -35,6 +35,10 @@ class FlowExecutorEvent extends SocketEvent {
     });
   }
 
+  startByTrigger(trigId) {
+    this.socket.emit("startBySpesificTrigger", trigId);
+  }
+
   removeAllListeners() {
     this.socket.removeAllListeners();
   }

@@ -3,45 +3,33 @@ import { useDispatch, useSelector } from "react-redux";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import NodeGod from "./shared/NodeGod";
 import * as Styled from "./shared/Node.style";
+import { Button } from "antd";
+import { MdPlayCircleOutline } from "react-icons/md";
+import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
+import notificationHelper from "utils/ui/notificationHelper";
 
 const Trigger = React.memo((self) => {
-  const [values, setValues] = useState([
-    {
-      source1: "Anaks",
-    },
-  ]);
-  const [text, setText] = useState("Anaks");
   const [checked, setChecked] = useState(false);
 
   const checkboxChange = (e) => {
     setChecked(!checked);
-    // const { edges } = getNodesAndEdges(elements);
-    // const mySources = edges.filter((edge) => edge.source === self.id);
-    // const handles = mySources.map((s) => s.sourceHandle);
-    // //console.log("my-handles", handles);
-    // const src = handles.map((h) => {
-    //   return { [h]: text };
-    // });
-    // //-console.log("src:", src);
-    // if (src.length > 0) {
-    //   setValues([...src]);
-    // }
   };
   const textChange = (e) => {
     setText(e.target.value);
   };
+  const startTrig = (e) => {
+    notificationHelper.success("Node is trigged...");
+    flowExecutorEvent.startByTrigger(self.id);
+  };
   return (
     <NodeGod self={self} collapsable>
-      <Styled.Label>Payload</Styled.Label>
-      <div>
-        <input
-          type="text"
-          className="nodrag nowheel"
-          value={text}
-          onChange={textChange}
-        />
-        <input type="checkbox" onChange={checkboxChange} value={checked} />
-      </div>
+      {/* <input type="checkbox" onChange={checkboxChange} value={checked} /> */}
+      <Button
+        onClick={startTrig}
+        type="primary"
+        shape="round"
+        icon={<MdPlayCircleOutline />}
+      />
     </NodeGod>
   );
 });

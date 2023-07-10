@@ -79,6 +79,7 @@ const NodeGod = ({ self, children }) => {
         <NodeHeader self={self} />
         <Styled.NodeContent type="logo">
           <NodeIcon width="40px" height="40px" enable={enable} />
+          {children}
         </Styled.NodeContent>
         <Badge
           color="success"
