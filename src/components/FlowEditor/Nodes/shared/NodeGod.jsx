@@ -43,11 +43,6 @@ const NodeGod = ({ self, children }) => {
   }, [enable]);
 
   useEffect(() => {
-    flowExecutorSocket.sendMessage({
-      message: `Hi! My type: ${self.type}`,
-      id: self.id,
-      type: self.type,
-    });
     flowExecutorSocket.onNodeStatus(self, (data) => {
       console.log(`data from server for ${self.id}: `, data);
       setServerData(data);
@@ -71,21 +66,14 @@ const NodeGod = ({ self, children }) => {
           />
         )}
       </Styled.TargetHandleWrapper>
-      <Styled.NodeArea
-        selected={self.selected}
-        enable={enable}
-        onDoubleClick={onDoubleClickHandle}
-      >
-        <NodeHeader self={self} />
+      <Styled.NodeArea selected={self.selected} enable={enable}>
+        <NodeHeader self={self} onDoubleClick={onDoubleClickHandle} />
         <Styled.NodeContent type="logo">
           <NodeIcon width="40px" height="40px" enable={enable} />
           {children}
         </Styled.NodeContent>
-        <Badge
-          color="success"
-          style={{ position: "absolute", bottom: "-15px" }}
-        >
-          {serverData.message}
+        <Badge color="danger" style={{ position: "absolute", bottom: "-15px" }}>
+          {serverData}
         </Badge>
       </Styled.NodeArea>
       <Styled.SourceHandleWrapper>

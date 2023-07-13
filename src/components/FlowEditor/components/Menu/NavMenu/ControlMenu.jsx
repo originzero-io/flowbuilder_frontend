@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { HorizontalDivider } from "components/StyledComponents/Divider";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   setElements,
   setExpandAll,
   deleteAllElements,
 } from "store/reducers/flow/flowElementsSlice";
-import { useStore, useReactFlow } from "reactflow";
+import { useReactFlow } from "reactflow";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
 import { useParams } from "react-router";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import FlowService from "services/configurationService/flowService/flowService.http";
-import notification from "utils/ui/notificationHelper";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
 import flowEvent from "services/configurationService/flowElementService/flowElementService.event";
 import {

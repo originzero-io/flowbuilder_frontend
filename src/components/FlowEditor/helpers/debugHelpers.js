@@ -74,7 +74,7 @@ export const checkAllConnectedTrigsHandles = (nodes, edges) => {
       enableTrigHandles.length > 1 &&
       connectedTrigHandles.length < enableTrigHandles.length
     ) {
-      unConnectedTrigHandles.push(node.id);
+      unConnectedTrigHandles.push(node);
     }
   });
   const existNotConnectedTrigHandles = unConnectedTrigHandles.length > 0;

@@ -13,7 +13,7 @@ const propTypes = {
   self: PropTypes.object.isRequired,
   selectedElements: PropTypes.bool,
 };
-export default function NodeHeader({ self }) {
+export default function NodeHeader({ self, onDoubleClick }) {
   const dispatch = useDispatch();
   const { flowGui, flowElements } = useActiveFlow();
   const { nodeGroupMenuDisplay } = flowGui;
@@ -63,6 +63,7 @@ export default function NodeHeader({ self }) {
     <Styled.Header
       onMouseEnter={onMouseEnterHandle}
       onMouseLeave={onMouseLeaveHandle}
+      onDoubleClick={onDoubleClick}
     >
       {/* <button onClick={nodeIncomers}>incomers</button>
         <button onClick={nodeOutgoers}>outgoers</button> */}

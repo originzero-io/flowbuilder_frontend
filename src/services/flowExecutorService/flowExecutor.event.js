@@ -13,8 +13,8 @@ class FlowExecutorEvent extends SocketEvent {
     this.socket.on(self.id, (data) => listener(data));
   }
 
-  sendMessage(message) {
-    this.socket.emit("nodeComm", message);
+  onFlowError(listener) {
+    this.socket.on("flowError", (data) => listener(data));
   }
 
   joinRoom(flowId) {
@@ -29,10 +29,8 @@ class FlowExecutorEvent extends SocketEvent {
     this.socket.on("debugFlow:response", (data) => listener(data));
   }
 
-  debugFlow(data, listener) {
-    this.socket.emit("debugFlow", data, (response) => {
-      listener(response);
-    });
+  debugFlow(data) {
+    this.socket.emit("debugFlow", data);
   }
 
   startByTrigger(trigId) {
@@ -41,6 +39,10 @@ class FlowExecutorEvent extends SocketEvent {
 
   removeAllListeners() {
     this.socket.removeAllListeners();
+  }
+
+  onClassMessage(listener) {
+    this.socket.on("NODE_NEW", (data) => listener(data));
   }
 }
 

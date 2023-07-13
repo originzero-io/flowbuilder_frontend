@@ -95,6 +95,16 @@ export const flowElementsSlice = createSlice({
         }
       });
     },
+    //!
+    showRunningNode(state, { payload }) {
+      // firstly, all nodes deselected
+      // state.nodes.forEach((node) => (node.selected = false));
+      state.nodes.forEach((node) => {
+        if (node.id === payload) {
+          node.selected = true;
+        }
+      });
+    },
     changeNodeName(state, { payload }) {
       state.nodes.forEach((node) => {
         if (node.id === payload.node.id) {
@@ -257,6 +267,7 @@ export const {
   setExpandAll,
   deleteSelectedNodes,
   selectElements,
+  showRunningNode,
   changeNodeName,
   setNodeEnable,
   setEnableSelectedNodes,

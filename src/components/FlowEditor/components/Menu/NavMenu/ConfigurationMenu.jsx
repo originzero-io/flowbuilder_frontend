@@ -13,6 +13,7 @@ import { logOut } from "store/reducers/authSlice";
 import {
   changeEdgeType,
   importFlow,
+  selectElements,
 } from "store/reducers/flow/flowElementsSlice";
 import {
   setFlowEdgeType,
@@ -43,6 +44,8 @@ import {
 import * as Styled from "./NavMenu.style";
 import { ShareIcon, TuneIcon } from "./Icons";
 import SwitchButton from "../../../nodes/shared/SwitchButton";
+import FlowService from "services/configurationService/flowService/flowService.http";
+import flowEvent from "services/configurationService/flowElementService/flowElementService.event";
 
 const dummyDevices = [
   {
@@ -127,8 +130,8 @@ export default function ConfigurationMenu() {
       dispatch(logOut());
     }
   };
-  const debugFlow = () => {
-    const { nodes, edges } = reactFlowInstance.toObject();
+  const debugFlow = async () => {
+    const { nodes, edges, viewport } = reactFlowInstance.toObject();
     const functionalNodes = getFunctionalNodes(nodes);
 
     const unconnectedNodes = checkUnconnectedNodes(functionalNodes, edges);
@@ -136,29 +139,32 @@ export default function ConfigurationMenu() {
 
     if (!checkIfTriggerNode(nodes)) {
       notification.error("Flow does not contain any trigger node.");
-    }
-    // else if (unconnectedNodes.exist) {
-    //   notification.error(
-    //     `This flow contains unconnected nodes. Please make sure to connect all nodes. Unconnected nodes:
-    //     ${unconnectedNodes.nodes.map((node) => {
-    //       return `\n - ${node.type}`;
-    //     })}`,
-    //   );
-    // }
-    else if (unconnectedTrigHandles.exist) {
+    } else if (unconnectedNodes.exist) {
       notification.error(
-        `Some nodes have unconnected trig handles. These nodes: 
-            ${unconnectedTrigHandles.nodes.map((node) => {
-              return `\n - ${node}`;
-            })}`,
+        "This flow contains unconnected nodes. Please make sure to connect all nodes.",
       );
+      dispatch(selectElements(unconnectedNodes.nodes));
+    } else if (unconnectedTrigHandles.exist) {
+      notification.error("Some nodes have unconnected trig handles");
+      dispatch(selectElements(unconnectedTrigHandles.nodes));
     } else {
       flowExecutorSocket.debugFlow(
         backendFlowDataBuilder(flowId, { nodes, edges }),
-        (response) => {
-          notification.warn(response);
-        },
       );
+
+      const flow = {
+        config: flowConfig,
+        gui: {
+          ...flowGui,
+          viewport,
+        },
+      };
+      await FlowService.saveFlowGui(flowId, flow);
+
+      flowEvent.saveElements({
+        flowId,
+        elements: { nodes, edges },
+      });
     }
   };
 

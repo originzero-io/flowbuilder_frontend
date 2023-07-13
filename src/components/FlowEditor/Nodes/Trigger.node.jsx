@@ -17,8 +17,8 @@ const Trigger = React.memo((self) => {
   const textChange = (e) => {
     setText(e.target.value);
   };
-  const startTrig = (e) => {
-    notificationHelper.success("Node is trigged...");
+  const startTrig = () => {
+    // notificationHelper.success("Node is trigged...");
     flowExecutorEvent.startByTrigger(self.id);
   };
   return (

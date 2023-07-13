@@ -12,6 +12,7 @@ import {
   setEdges,
   setNodeEnable,
   updateEdgePath,
+  showRunningNode,
 } from "store/reducers/flow/flowElementsSlice";
 import {
   setElementContextMenu,
@@ -25,6 +26,8 @@ import useActiveFlow from "utils/hooks/useActiveFlow";
 import notification from "utils/ui/notificationHelper";
 import { isConnectionCyclic } from "components/FlowEditor/helpers/flowHelper";
 import themeColor from "components/Shared/ThemeReference";
+import notificationHelper from "utils/ui/notificationHelper";
+import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import {
   openElementContextMenu,
   openMultiSelectionContextMenu,
@@ -33,7 +36,6 @@ import {
 import Utils from "./components/Utils";
 import { createNode, isHandleAlreadyConnected } from "./helpers/elementHelper";
 import { createCustomNodeObject } from "./helpers/nodeObjectHelper";
-import notificationHelper from "utils/ui/notificationHelper";
 
 const propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
@@ -46,6 +48,21 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const { miniMapDisplay, edgeType, theme } = flowGui;
 
   const reactFlowInstance = useReactFlow();
+
+  useEffect(() => {
+    flowExecutorEvent.onFlowError((data) => {
+      notificationHelper.error(data);
+    });
+
+    flowExecutorEvent.onDebugFlow((data) => {
+      notificationHelper.success(data);
+    });
+
+    flowExecutorEvent.onClassMessage((data) => {
+      // notificationHelper.success(data);
+      dispatch(showRunningNode(data));
+    });
+  }, []);
 
   const onNodesChange = useCallback(
     (changes) => {
