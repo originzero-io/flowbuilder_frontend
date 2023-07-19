@@ -20,40 +20,20 @@ export default function SocketConnections() {
   const auth = useAuth();
   useEffect(() => {
     if (auth.isAuthenticated) {
-      const userNamespace = connectSocket({
+      const configurationSocket = connectSocket({
         path: "/configuration_socket",
-        namespace: "users",
-      });
-      const elementNamespace = connectSocket({
-        path: "/configuration_socket",
-        namespace: "elements",
-      });
-      const flowNamespace = connectSocket({
-        path: "/configuration_socket",
-        namespace: "flows",
-      });
-      const projectNamespace = connectSocket({
-        path: "/configuration_socket",
-        namespace: "projects",
-      });
-      const workspaceNamespace = connectSocket({
-        path: "/configuration_socket",
-        namespace: "workspaces",
-      });
-      const noteNamespace = connectSocket({
-        path: "/configuration_socket",
-        namespace: "notes",
       });
       const flowExecutorSocket = connectSocket({
         path: "/flowExecutor_socket",
       });
 
-      workspaceEvent.injectSocket(workspaceNamespace);
-      projectEvent.injectSocket(projectNamespace);
-      flowEvent.injectSocket(flowNamespace);
-      flowElementEvent.injectSocket(elementNamespace);
-      noteEvent.injectSocket(noteNamespace);
-      userEvent.injectSocket(userNamespace);
+      workspaceEvent.injectSocket(configurationSocket);
+      projectEvent.injectSocket(configurationSocket);
+      flowEvent.injectSocket(configurationSocket);
+      flowElementEvent.injectSocket(configurationSocket);
+      noteEvent.injectSocket(configurationSocket);
+      userEvent.injectSocket(configurationSocket);
+
       flowExecutorEvent.injectSocket(flowExecutorSocket);
 
       useUserInitialListener();
