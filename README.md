@@ -4,6 +4,8 @@
 
 Create .env file to root directory:
 
+```ini
 VITE_GATEWAY_CLOUD_URL = XXXX
 VITE_GATEWAY_LOCAL_URL = XXXX
 VITE_HOST_ENV= (development or production or test)
+```
