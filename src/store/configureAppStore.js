@@ -22,12 +22,12 @@ export default function configureAppStore() {
       getDefaultMiddleware({
         serializableCheck: false,
       }),
-    devTools: process.env.REACT_APP_HOST_ENV === "development",
+    devTools: import.meta.env.VITE_HOST_ENV === "development",
   });
 
-  if (process.env.REACT_APP_HOST_ENV !== "production" && module.hot) {
-    module.hot.accept("./rootReducer", () => store.replaceReducer(rootReducer));
-  }
+  // if (import.meta.env.VITE_HOST_ENV !== "production" && module.hot) {
+  //   module.hot.accept("./rootReducer", () => store.replaceReducer(rootReducer));
+  // }
 
   return store;
 }

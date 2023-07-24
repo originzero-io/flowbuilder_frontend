@@ -1,14 +1,28 @@
-import React, { useCallback, useState } from "react";
 import {
-  getIncomers,
-  useReactFlow,
-  useStore,
-  useStoreActions,
-} from "reactflow";
-import { BiBrain } from "react-icons/bi";
-import { useDispatch, useSelector } from "react-redux";
-import { Button } from "reactstrap";
+  checkAllConnectedTrigsHandles,
+  checkIfTriggerNode,
+  checkUnconnectedNodes,
+  getFunctionalNodes,
+} from "components/FlowEditor/helpers/debugHelpers";
+import { backendFlowDataBuilder } from "components/FlowEditor/helpers/flowHelper";
+import Avatar from "components/Shared/Avatar/Avatar";
+import { FileInput } from "components/Shared/FileInput/FileInput";
 import themeColor from "components/Shared/ThemeReference";
+import Tooltip from "components/Shared/Tooltip/Tooltip";
+import * as StyledDivider from "components/StyledComponents/Divider";
+import * as StyledDropdown from "components/StyledComponents/DropdownMenu";
+import * as StyledShapes from "components/StyledComponents/Shapes";
+import { useCallback, useState } from "react";
+import { BiBrain } from "react-icons/bi";
+import { GoDeviceDesktop } from "react-icons/go";
+import { VscRunAll } from "react-icons/vsc";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useReactFlow } from "reactflow";
+import { Button } from "reactstrap";
+import flowEvent from "services/configurationService/flowElementService/flowElementService.event";
+import FlowService from "services/configurationService/flowService/flowService.http";
+import flowExecutorSocket from "services/flowExecutorService/flowExecutor.event";
 import { logOut } from "store/reducers/authSlice";
 import {
   changeEdgeType,
@@ -22,30 +36,10 @@ import {
 } from "store/reducers/flow/flowGuiSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import useAuth from "utils/hooks/useAuth";
-import Avatar from "components/Shared/Avatar/Avatar";
-import { FileInput } from "components/Shared/FileInput/FileInput";
-import { GoDeviceDesktop } from "react-icons/go";
-import { VscRunAll } from "react-icons/vsc";
 import notification from "utils/ui/notificationHelper";
-import { backendFlowDataBuilder } from "components/FlowEditor/helpers/flowHelper";
-import { useParams } from "react-router-dom";
-import Tooltip from "components/Shared/Tooltip/Tooltip";
-import * as StyledDropdown from "components/StyledComponents/DropdownMenu";
-import * as StyledShapes from "components/StyledComponents/Shapes";
-import * as StyledDivider from "components/StyledComponents/Divider";
-import flowExecutorSocket from "services/flowExecutorService/flowExecutor.event";
-import {
-  checkAllConnectedTrigsHandles,
-  checkIfTriggerNode,
-  checkUnconnectedNodes,
-  getFunctionalNodes,
-  valueEdgesConnectedToMe,
-} from "components/FlowEditor/helpers/debugHelpers";
-import * as Styled from "./NavMenu.style";
-import { ShareIcon, TuneIcon } from "./Icons";
 import SwitchButton from "../../../nodes/shared/SwitchButton";
-import FlowService from "services/configurationService/flowService/flowService.http";
-import flowEvent from "services/configurationService/flowElementService/flowElementService.event";
+import { ShareIcon, TuneIcon } from "./Icons";
+import * as Styled from "./NavMenu.style";
 
 const dummyDevices = [
   {
@@ -75,7 +69,7 @@ export default function ConfigurationMenu() {
         console.log("elements: ", reactFlowInstance.toObject());
         const hiddenElement = document.createElement("a");
         hiddenElement.href = `data:application/octet-stream;base64,${window.btoa(
-          JSON.stringify(elements),
+          JSON.stringify(elements)
         )}`;
         hiddenElement.target = "_blank";
         hiddenElement.download = `${flowConfig.name}.json`;
@@ -96,10 +90,10 @@ export default function ConfigurationMenu() {
         };
       } else
         notification.error(
-          "This file cannot be imported. Please provide JSON file",
+          "This file cannot be imported. Please provide JSON file"
         );
     },
-    [reactFlowInstance],
+    [reactFlowInstance]
   );
   const [active, setActive] = useState({
     theme: false,
@@ -141,7 +135,7 @@ export default function ConfigurationMenu() {
       notification.error("Flow does not contain any trigger node.");
     } else if (unconnectedNodes.exist) {
       notification.error(
-        "This flow contains unconnected nodes. Please make sure to connect all nodes.",
+        "This flow contains unconnected nodes. Please make sure to connect all nodes."
       );
       dispatch(selectElements(unconnectedNodes.nodes));
     } else if (unconnectedTrigHandles.exist) {
@@ -149,7 +143,7 @@ export default function ConfigurationMenu() {
       dispatch(selectElements(unconnectedTrigHandles.nodes));
     } else {
       flowExecutorSocket.debugFlow(
-        backendFlowDataBuilder(flowId, { nodes, edges }),
+        backendFlowDataBuilder(flowId, { nodes, edges })
       );
 
       const flow = {

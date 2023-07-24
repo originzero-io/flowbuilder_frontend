@@ -15,8 +15,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import configureAppStore from "store/configureAppStore.js";
-import ErrorFallback from "./components/Shared/ErrorFallback";
-import App from "./app/App";
+import ErrorFallback from "./components/Shared/ErrorFallback.jsx";
+import App from "./app/App.jsx";
 
 const store = configureAppStore();
 export default store;
@@ -35,7 +35,7 @@ root.render(
         <App />
       </ErrorBoundary>
     </BrowserRouter>
-  </Provider>,
+  </Provider>
 );
 // ReactDOM.render(
 //   <Provider store={store}>

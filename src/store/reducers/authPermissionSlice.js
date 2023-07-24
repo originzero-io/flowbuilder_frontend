@@ -10,11 +10,11 @@ export const getMyPermissionInThisWorkspace = createAsyncThunk(
     const { permission } =
       await PermissionService.getUserPermissionInThisWorkspace(
         workspace._id,
-        me._id,
+        me._id
       );
     endTheBar();
     return permission;
-  },
+  }
 );
 export const authPermissionSlice = createSlice({
   name: "authPermission",

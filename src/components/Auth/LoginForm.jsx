@@ -40,7 +40,7 @@ export default function LoginForm() {
             })}
             placeholder="Username"
             defaultValue={
-              process.env.REACT_APP_HOST_ENV === "development"
+              import.meta.env.VITE_HOST_ENV === "development"
                 ? "akinsibay"
                 : null
             }
@@ -69,7 +69,7 @@ export default function LoginForm() {
             })}
             placeholder="Password"
             defaultValue={
-              process.env.REACT_APP_HOST_ENV === "development" ? "1234" : null
+              import.meta.env.VITE_HOST_ENV === "development" ? "1234" : null
             }
           />
           {errors.password && (

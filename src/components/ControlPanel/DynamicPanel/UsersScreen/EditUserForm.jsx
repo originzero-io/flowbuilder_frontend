@@ -32,9 +32,9 @@ export default function EditUserForm({ user }) {
         <Avatar
           size={108}
           src={`${
-            process.env.REACT_APP_HOST_ENV === "development"
-              ? process.env.REACT_APP_GATEWAY_LOCAL_URL
-              : process.env.REACT_APP_GATEWAY_CLOUD_URL
+            import.meta.env.VITE_HOST_ENV === "development"
+              ? import.meta.env.VITE_GATEWAY_LOCAL_URL
+              : import.meta.env.VITE_GATEWAY_CLOUD_URL
           }/uploads/${user.avatar}`}
           icon={<FaUserCheck style={{ fontSize: "48px" }} />}
         />

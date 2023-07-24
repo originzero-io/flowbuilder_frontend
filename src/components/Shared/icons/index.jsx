@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 // test
 import themeColor from "components/Shared/ThemeReference";
-import React from "react-redux";
+// import React from "react-redux";
 
 export function Logo({ theme, width = "26px", height = "30px" }) {
   return (

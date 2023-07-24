@@ -9,9 +9,9 @@ class SocketIOClient {
     this.extraOptions = extraOptions;
 
     const URL = `${
-      process.env.REACT_APP_HOST_ENV === "development"
-        ? process.env.REACT_APP_GATEWAY_LOCAL_URL
-        : process.env.REACT_APP_GATEWAY_CLOUD_URL
+      import.meta.env.VITE_HOST_ENV === "development"
+        ? import.meta.env.VITE_GATEWAY_LOCAL_URL
+        : import.meta.env.VITE_GATEWAY_CLOUD_URL
     }`;
     this.socket = io.connect(`${URL}/${namespace}`, {
       transports: ["websocket"],
@@ -21,6 +21,7 @@ class SocketIOClient {
       ...extraOptions,
     });
     this.socket.on("connect", () => {
+      console.log(path);
       // notification.success(`${path} namespace connected`);
     });
     this.socket.on("connect_error", (err) => {

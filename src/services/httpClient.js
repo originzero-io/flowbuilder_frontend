@@ -17,9 +17,9 @@ export default class HttpClient {
     if (typeof serviceName !== "undefined") {
       this.service = axios.create({
         baseURL: `${
-          process.env.REACT_APP_HOST_ENV === "development"
-            ? process.env.REACT_APP_GATEWAY_LOCAL_URL
-            : process.env.REACT_APP_GATEWAY_CLOUD_URL
+          import.meta.env.VITE_HOST_ENV === "development"
+            ? import.meta.env.VITE_GATEWAY_LOCAL_URL
+            : import.meta.env.VITE_GATEWAY_CLOUD_URL
         }/${serviceName}`,
         timeout: 3000,
       });
@@ -38,7 +38,7 @@ export default class HttpClient {
           // Do something with response error
           notification.error(error.response.data.message);
           return Promise.reject(error);
-        },
+        }
       );
       return this.service;
     }

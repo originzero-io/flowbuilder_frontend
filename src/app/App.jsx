@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import InitialFetchs from "app/InitialFetchs.jsx";
+import InitialFetchs from "app/InitialFetchs";
 import Modal from "../components/Shared/Modal/Modal.jsx";
-import SocketConnections from "./SocketConnections";
+import SocketConnections from "./SocketConnections.jsx";
 import AppWrapper from "./App.style";
-import NotFound from "../routes/NotFound";
-import PrivateRoute from "../routes/PrivateRoute";
-import AuthPage from "../pages/AuthPage";
-import ControlPanelPage from "../pages/ControlPanelPage";
-import DashboardPage from "../pages/DashboardPage";
-import FlowPage from "../pages/FlowPage";
+import NotFound from "../routes/NotFound.jsx";
+import PrivateRoute from "../routes/PrivateRoute.jsx";
+import AuthPage from "../pages/AuthPage.jsx";
+import ControlPanelPage from "../pages/ControlPanelPage.jsx";
+import DashboardPage from "../pages/DashboardPage.jsx";
+import FlowPage from "../pages/FlowPage.jsx";
 import LoadingBar from "../components/Shared/LoadingBar/LoadingBar.jsx";
 import ToastNotification from "../components/Shared/Notification/ToastNotification.jsx";
 
