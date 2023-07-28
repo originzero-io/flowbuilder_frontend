@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 function ToastNotification() {
   return (
     <Toaster
-      position="top-right"
+      position="bottom-right"
       reverseOrder={false}
       gutter={8}
       containerClassName=""
