@@ -8,6 +8,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "airbnb-base",
     "prettier",
+    "eslint-plugin-import",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
