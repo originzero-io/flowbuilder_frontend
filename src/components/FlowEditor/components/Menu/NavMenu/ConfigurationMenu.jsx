@@ -156,7 +156,7 @@ export default function ConfigurationMenu() {
       await FlowService.saveFlowGui(flowId, flow);
 
       flowEvent.saveElements({
-        flowId,
+        id: flowId,
         elements: { nodes, edges },
       });
     }

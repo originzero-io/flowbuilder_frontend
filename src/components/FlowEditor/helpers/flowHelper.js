@@ -4,7 +4,7 @@ import store from "index";
 
 export function backendFlowDataBuilder(flowId, elements) {
   const flowBackendData = {
-    flowId,
+    id: flowId,
     nodes: elements.nodes.map((node) => {
       const { id, type, data } = node;
       const { ui, ...rest } = data;
