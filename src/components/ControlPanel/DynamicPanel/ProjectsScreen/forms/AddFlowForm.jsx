@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useProject from "utils/hooks/useProject";
 import useWorkspace from "utils/hooks/useWorkspace";
 import flowEvent from "services/configurationService/flowService/flowService.event";
+import dockerizeServiceHttp from "services/dockerizeService/dockerizeService.http";
+import notificationHelper from "utils/ui/notificationHelper";
+import flowServiceHttp from "services/configurationService/flowService/flowService.http";
+import { createFlow } from "store/reducers/flow/flowSlice";
+import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
 
 export default function AddFlowForm() {
   const auth = useAuth();
@@ -25,11 +30,43 @@ export default function AddFlowForm() {
     // setFlowInfo({ ...flowInfo, [e.target.name]: e.target.value });
     setFlowInfo({ ...flowInfo, [e.target.name]: e.target.value });
   };
-  const onSubmitHandle = (e) => {
+  const onSubmitHandle = async (e) => {
     e.preventDefault();
-    const flow = { config: flowInfo, workspace, project };
-    flowEvent.createFlow({ flow });
-    dispatch(setModal(false));
+    // const { port } = await dockerizeServiceHttp.getAvailablePort();
+    // console.log("PORT:", port);
+    // const flow = { config: flowInfo, workspace, project, port };
+    // flowEvent.createFlow({ flow });
+
+    // await dockerizeServiceHttp.dockerizeFlow(flowId)
+
+    // dockerizeServiceHttp.getAvailablePort()
+    // .then(({port})=>{
+    //   const flow = { config: flowInfo, workspace, project, port };
+    //   return flowServiceHttp.createFlow(flow)
+    // })
+    // .then((flow)=>{
+    //   return dockerizeServiceHttp.dockerizeFlow(flow._id)
+    // })
+    // .catch(console.log)
+    try {
+      const { port } = await dockerizeServiceHttp.getAvailablePort();
+      console.log("PORT:", port);
+      const flow = { config: flowInfo, workspace, project, port };
+      const createdFlow = await flowServiceHttp.createFlow(flow);
+      await dockerizeServiceHttp.dockerizeFlow(createdFlow._id);
+      dispatch(createFlow(createdFlow));
+      dispatch(
+        getMyPermissionInThisWorkspace({
+          workspace: activeWorkspace,
+          me: auth,
+        })
+      );
+      notificationHelper.success("Flow created successfully");
+      dispatch(setModal(false));
+    } catch (error) {
+      console.log(error);
+      notificationHelper.success("Fuck cinema of your life");
+    }
   };
 
   return (

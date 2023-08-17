@@ -5,6 +5,12 @@ import { VscTrash } from "react-icons/vsc";
 import flowServiceSocket from "services/configurationService/flowService/flowService.event";
 import * as Styled from "./Card.style";
 import DetailMenu from "./DetailMenu";
+import flowServiceHttp from "services/configurationService/flowService/flowService.http";
+import dockerizeServiceHttp from "services/dockerizeService/dockerizeService.http";
+import { deleteFlow } from "store/reducers/flow/flowSlice";
+import { useDispatch } from "react-redux";
+import notificationHelper from "utils/ui/notificationHelper";
+import { beginTheBar, endTheBar } from "store/reducers/componentSlice";
 
 const propTypes = {
   data: PropTypes.object.isRequired,
@@ -12,10 +18,15 @@ const propTypes = {
 
 const Card = ({ data }) => {
   const getPermission = useAuthPermission("project");
-  const deleteCardHandler = (e, flow) => {
+  const dispatch = useDispatch();
+  const deleteCardHandler = async (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
-      flowServiceSocket.deleteFlow({ flow });
+      // flowServiceSocket.deleteFlow({ flow });
+      await flowServiceHttp.deleteFlow(flow._id);
+      await dockerizeServiceHttp.deleteFlowContainer(flow._id);
+      dispatch(deleteFlow(flow._id));
+      notificationHelper.success("Flow deleted successfully");
     }
   };
   return (
@@ -31,9 +42,7 @@ const Card = ({ data }) => {
           {data.config.description || ""}
         </Styled.CardDescription>
         <Styled.CardFooter>
-          <Styled.CardAuthor>
-            {data.config.createdBy.username || ""}
-          </Styled.CardAuthor>
+          <Styled.CardAuthor>{data.port}</Styled.CardAuthor>
           <div>
             {getPermission("CAN_EDIT_FLOW", {
               flowId: data._id,

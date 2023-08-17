@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 import axios from "axios";
+import store from "index";
+import { beginTheBar, endTheBar } from "store/reducers/componentSlice";
 import notification from "utils/ui/notificationHelper";
 
 export default class HttpClient {
@@ -21,22 +23,28 @@ export default class HttpClient {
             ? import.meta.env.VITE_GATEWAY_LOCAL_URL
             : import.meta.env.VITE_GATEWAY_CLOUD_URL
         }/${serviceName}`,
-        timeout: 3000,
       });
       this.service.interceptors.request.use((config) => {
+        store.dispatch(beginTheBar());
         const token = localStorage.getItem("token");
         config.headers.Authorization = token ? `Bearer ${token}` : "";
         return config;
       });
       this.service.interceptors.response.use(
-        (response) =>
+        (response) => {
           // Any status code that lie within the range of 2xx cause this function to trigger
           // Do something with response data
-          response,
+          store.dispatch(endTheBar());
+          return response;
+        },
         (error) => {
           // Any status codes that falls outside the range of 2xx cause this function to trigger
           // Do something with response error
-          notification.error(error.response.data.message);
+          notification.error(
+            error.response.data.message || error.response.data
+          );
+          console.log("Http-client-error: ", error);
+          store.dispatch(endTheBar());
           return Promise.reject(error);
         }
       );

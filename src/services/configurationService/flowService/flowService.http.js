@@ -1,8 +1,8 @@
 import ConfigurationService from "../configurationService.http";
 
 class FlowService extends ConfigurationService {
-  async getFlow(flow_id) {
-    const response = await this.service.get(`/flows/${flow_id}`);
+  async getFlow(flowId) {
+    const response = await this.service.get(`/flows/${flowId}`);
     return response.data;
   }
 
@@ -18,13 +18,23 @@ class FlowService extends ConfigurationService {
 
   async getFlowsByWorkspace(workspace) {
     const response = await this.service.get(
-      `/flows/workspace/${workspace._id}`,
+      `/flows/workspace/${workspace._id}`
     );
     return response.data;
   }
 
-  async saveFlowGui(flow_id, flow) {
-    const response = await this.service.put(`/flows/${flow_id}`, flow);
+  async createFlow(flow) {
+    const response = await this.service.post("/flows", flow);
+    return response.data;
+  }
+
+  async deleteFlow(flowId) {
+    const response = await this.service.delete(`/flows/${flowId}`);
+    return response.data;
+  }
+
+  async saveFlowGui(flowId, flow) {
+    const response = await this.service.put(`/flows/${flowId}`, flow);
     return response.data;
   }
 }

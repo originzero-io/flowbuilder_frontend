@@ -8,16 +8,18 @@ import {
 } from "store/reducers/flow/flowSlice";
 import notificationHelper from "utils/ui/notificationHelper";
 import flowServiceSocket from "./flowService.event";
+import dockerizeServiceHttp from "services/dockerizeService/dockerizeService.http";
 
 const useFlowInitialListener = () => {
-  flowServiceSocket.onCreateFlow((data) => {
+  flowServiceSocket.onCreateFlow(async (data) => {
     const { auth, workspaces } = store.getState();
+
     store.dispatch(createFlow(data.flow));
     store.dispatch(
       getMyPermissionInThisWorkspace({
         workspace: workspaces.activeWorksapce,
         me: auth,
-      }),
+      })
     );
     notificationHelper.success("Flow created successfully");
   });

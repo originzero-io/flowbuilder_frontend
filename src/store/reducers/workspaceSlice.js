@@ -2,7 +2,7 @@ import WorkspaceService from "services/configurationService/workspaceService/wor
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getMyWorkspaces = createAsyncThunk("workspaces/get", async () =>
-  WorkspaceService.getMyWorkspaces(),
+  WorkspaceService.getMyWorkspaces()
 );
 
 const initialState = {
@@ -21,13 +21,13 @@ export const workspaceSlice = createSlice({
     },
     editWorkspace(state, { payload }) {
       const index = state.workspaces.findIndex(
-        (workspace) => workspace._id === payload._id,
+        (workspace) => workspace._id === payload._id
       );
       state.workspaces[index] = payload;
     },
     deleteWorkspace(state, { payload }) {
       state.workspaces = state.workspaces.filter(
-        (workspace) => workspace._id !== payload,
+        (workspace) => workspace._id !== payload
       );
     },
   },
