@@ -22,7 +22,7 @@ import { useReactFlow } from "reactflow";
 import { Button } from "reactstrap";
 import flowEvent from "services/configurationService/flowElementService/flowElementService.event";
 import FlowService from "services/configurationService/flowService/flowService.http";
-import flowExecutorSocket from "services/flowExecutorService/flowExecutor.event";
+import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { logOut } from "store/reducers/authSlice";
 import {
   changeEdgeType,
@@ -142,9 +142,11 @@ export default function ConfigurationMenu() {
       notification.error("Some nodes have unconnected trig handles");
       dispatch(selectElements(unconnectedTrigHandles.nodes));
     } else {
-      flowExecutorSocket.debugFlow(
-        backendFlowDataBuilder(flowId, { nodes, edges })
-      );
+      //! tüm data gönderilecek!
+      // flowExecutorEvent.debugFlow(
+      //   backendFlowDataBuilder(flowId, { nodes, edges })
+      // );
+      flowExecutorEvent.debugFlow({ id: flowId, nodes, edges });
 
       const flow = {
         config: flowConfig,
