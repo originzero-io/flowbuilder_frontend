@@ -1,17 +1,12 @@
+import Card from "components/Shared/Card/Card";
+import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import PropTypes from "prop-types";
-import Card from "components/Shared/Card/Card";
-import { setCurrentFlowGui } from "store/reducers/flow/flowGuiSlice";
-import { setCurrentFlowConfig } from "store/reducers/flow/flowConfigSlice";
 import useAuthPermission from "utils/hooks/useAuthPermission";
 
 import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
 import useWorkspace from "utils/hooks/useWorkspace";
-import flowElementServiceSocket from "services/configurationService/flowElementService/flowElementService.event";
-import FlowContainerHttpService from "services/flowContainer/flowContainer.http";
-import { setElements } from "store/reducers/flow/flowElementsSlice";
 
 const propTypes = {
   flows: PropTypes.oneOfType([PropTypes.array, null]),
@@ -24,17 +19,6 @@ const FlowList = ({ flows }) => {
 
   const getPermission = useAuthPermission("project");
   const openPageHandler = async (flow) => {
-    flowElementServiceSocket.getElements({ flow_id: flow._id });
-
-    //* bunlar yeni
-    // const flowContainerHttp = new FlowContainerHttpService(flow.port);
-    // const elements = await flowContainerHttp.getElements();
-    // console.log(elements);
-    // dispatch(setElements(elements));
-
-    //bunlar vardı
-    dispatch(setCurrentFlowConfig(flow.config));
-    dispatch(setCurrentFlowGui(flow.gui));
     history.push(`/flow/${flow._id}/${flow.port}`);
   };
   useEffect(() => {

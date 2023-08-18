@@ -10,6 +10,9 @@ import useActiveFlow from "utils/hooks/useActiveFlow";
 import theme from "components/Shared/ThemeReference";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import createSocket from "services/createSocket";
+import { setCurrentFlowConfig } from "store/reducers/flow/flowConfigSlice";
+import flowElementServiceEvent from "services/configurationService/flowElementService/flowElementService.event";
+import { setCurrentFlowGui } from "store/reducers/flow/flowGuiSlice";
 
 const StyledFlowWrapper = styled.div`
   height: 100%;
@@ -25,7 +28,8 @@ export let flowExecutorSocket = null;
 const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowId, port } = useParams();
-  const { flowGui } = useActiveFlow();
+  // port da ActiveFlow dan alınabilir ?
+  const { flowConfig, flowGui } = useActiveFlow();
   const rfWrapper = useRef(null);
 
   useEffect(() => {
@@ -36,6 +40,20 @@ const FlowPage = () => {
     });
     flowExecutorEvent.injectSocket(flowExecutorSocket);
     flowExecutorEvent.getNodeList();
+
+    //Todo: configuration service den türetilmiş event den elementler çekiliyor!
+    //Todo: bağlanmış containerdan elementler çekilmeli
+    flowElementServiceEvent.getElements({ flow_id: flowId });
+
+    //* bunlar yeni
+    // const flowContainerHttp = new FlowContainerHttpService(flow.port);
+    // const elements = await flowContainerHttp.getElements();
+    // console.log(elements);
+    // dispatch(setElements(elements));
+
+    //bunlar vardı
+    dispatch(setCurrentFlowConfig(flowConfig));
+    dispatch(setCurrentFlowGui(flowGui));
     return () => {
       flowExecutorSocket.disconnect(); // Sayfa değiştiğinde bağlantıyı kapat
     };
