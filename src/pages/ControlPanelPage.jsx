@@ -18,8 +18,8 @@ const StyledContent = styled.div`
 
 export default function ControlPanelPage() {
   useEffect(() => {
-    flowExecutorSocket.leaveAllRooms();
-    flowExecutorSocket.removeAllListeners();
+    // flowExecutorSocket.leaveAllRooms();
+    // flowExecutorSocket.removeAllListeners();
   }, []);
   return (
     <StyledWrapper>

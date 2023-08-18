@@ -17,10 +17,6 @@ class FlowExecutorEvent extends SocketEvent {
     this.socket.on("flowError", (data) => listener(data));
   }
 
-  joinRoom(flowId) {
-    this.socket.emit("joinFlowRoom", flowId);
-  }
-
   leaveAllRooms() {
     this.socket.emit("leaveAllFlowRooms");
   }

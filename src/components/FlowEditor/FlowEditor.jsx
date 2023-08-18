@@ -36,6 +36,7 @@ import {
 import Utils from "./components/Utils";
 import { createNode, isHandleAlreadyConnected } from "./helpers/elementHelper";
 import { createCustomNodeObject } from "./helpers/nodeObjectHelper";
+import { flowExecutorSocket } from "pages/FlowPage";
 
 const propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
@@ -50,33 +51,35 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const reactFlowInstance = useReactFlow();
 
   useEffect(() => {
-    flowExecutorEvent.onFlowError((data) => {
-      notificationHelper.error(data);
-    });
+    if (flowExecutorSocket) {
+      flowExecutorEvent.onFlowError((data) => {
+        notificationHelper.error(data);
+      });
 
-    flowExecutorEvent.onDebugFlow((data) => {
-      notificationHelper.success(data);
-      console.log(data);
-    });
+      flowExecutorEvent.onDebugFlow((data) => {
+        notificationHelper.success(data);
+        console.log(data);
+      });
 
-    flowExecutorEvent.onClassMessage((data) => {
-      // notificationHelper.success(data);
-      dispatch(showRunningNode(data));
-    });
-  }, []);
+      flowExecutorEvent.onClassMessage((data) => {
+        // notificationHelper.success(data);
+        dispatch(showRunningNode(data));
+      });
+    }
+  }, [flowExecutorSocket]);
 
   const onNodesChange = useCallback(
     (changes) => {
       dispatch(setNodes(changes));
     },
-    [setNodes],
+    [setNodes]
   );
 
   const onEdgesChange = useCallback(
     (changes) => {
       dispatch(setEdges(changes));
     },
-    [setEdges],
+    [setEdges]
   );
 
   const flowStyle = {
@@ -92,7 +95,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         notificationHelper.error("hop noluyor");
       } else {
         const sourceGroup = flowElements.nodes.find(
-          (els) => els.id === params.source,
+          (els) => els.id === params.source
         ).data.ui?.group;
         const edge = {
           ...params,
@@ -103,14 +106,14 @@ export default function FlowEditor({ reactFlowWrapper }) {
         };
 
         const sourceEnable = flowElements.nodes.find(
-          (els) => els.id === params.source,
+          (els) => els.id === params.source
         ).data.ui.enable;
         const self = flowElements.nodes.find((els) => els.id === params.target);
         dispatch(addNewEdge(edge));
         dispatch(setNodeEnable({ self, checked: sourceEnable }));
       }
     },
-    [addNewEdge, flowElements],
+    [addNewEdge, flowElements]
   );
 
   const onEdgeUpdate = useCallback(
@@ -121,7 +124,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         dispatch(updateEdgePath({ oldEdge, newConnection }));
       }
     },
-    [updateEdgePath, flowElements],
+    [updateEdgePath, flowElements]
   );
 
   const onInitHandle = (reactFlowInstance) => {
@@ -149,7 +152,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
   const updateRecentStatus = (type) => {
     const newList = nodeList.map((node) =>
-      node.name === type ? { ...node, createdDate: Date.now() } : node,
+      node.name === type ? { ...node, createdDate: Date.now() } : node
     );
     dispatch(setNodeList(newList));
   };

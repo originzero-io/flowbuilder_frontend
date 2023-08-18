@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import connectSocket from "services/SocketIOClient";
+import createSocket from "services/createSocket";
 import flowEvent from "services/configurationService/flowService/flowService.event";
 import workspaceEvent from "services/configurationService/workspaceService/workspaceService.event";
 import projectEvent from "services/configurationService/projectService/projectService.event";
@@ -20,11 +20,8 @@ export default function SocketConnections() {
   const auth = useAuth();
   useEffect(() => {
     if (auth.isAuthenticated) {
-      const configurationSocket = connectSocket({
-        path: "/configuration_socket",
-      });
-      const flowExecutorSocket = connectSocket({
-        path: "/flowExecutor_socket",
+      const configurationSocket = createSocket({
+        url: import.meta.env.VITE_CONFIGURATION_SERVICE_URL,
       });
 
       workspaceEvent.injectSocket(configurationSocket);
@@ -34,15 +31,12 @@ export default function SocketConnections() {
       noteEvent.injectSocket(configurationSocket);
       userEvent.injectSocket(configurationSocket);
 
-      flowExecutorEvent.injectSocket(flowExecutorSocket);
-
       useUserInitialListener();
       useFlowElementInitialListener();
       useFlowInitialListener();
       useProjectInitialListener();
       useWorkspaceInitialListener();
       useNoteInitialListener();
-      useFlowExecutorInitialListener();
     }
   }, [auth.isAuthenticated]);
   return null;

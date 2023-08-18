@@ -3,26 +3,21 @@ import notification from "utils/ui/notificationHelper";
 
 class SocketIOClient {
   constructor(config) {
-    const { namespace = "", path = "", extraOptions } = config;
+    const { url = "", namespace = "", path = "", extraOptions } = config;
 
+    this.url = url;
     this.namespace = namespace;
     this.extraOptions = extraOptions;
 
-    const URL = `${
-      import.meta.env.VITE_HOST_ENV === "development"
-        ? import.meta.env.VITE_GATEWAY_LOCAL_URL
-        : import.meta.env.VITE_GATEWAY_CLOUD_URL
-    }`;
-    this.socket = io.connect(`${URL}/${namespace}`, {
+    this.socket = io.connect(`${this.url}/${this.namespace}`, {
       transports: ["websocket"],
       path,
       reconnectionAttempts: 3,
       auth: { token: localStorage.getItem("token") },
-      ...extraOptions,
+      ...this.extraOptions,
     });
     this.socket.on("connect", () => {
-      console.log(path);
-      // notification.success(`${path} namespace connected`);
+      notification.success(`socket connected: ${this.url}`);
     });
     this.socket.on("connect_error", (err) => {
       notification.error(`Connection error: ${err.message}`);
@@ -36,6 +31,6 @@ class SocketIOClient {
   }
 }
 
-const connectSocket = (config) => new SocketIOClient(config).socket;
+const createSocket = (config) => new SocketIOClient(config).socket;
 
-export default connectSocket;
+export default createSocket;

@@ -19,7 +19,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={AuthPage} />
       <PrivateRoute path="/panel" component={ControlPanelPage} />
-      <PrivateRoute exact path="/flow/:flowId" component={FlowPage} />
+      <PrivateRoute exact path="/flow/:flowId/:port" component={FlowPage} />
       <PrivateRoute
         exact
         path="/dashboard/:dashboardId"

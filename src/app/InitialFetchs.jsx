@@ -12,7 +12,6 @@ export default function InitialFetchs() {
     if (auth.isAuthenticated) {
       // add all initial fetch request below
       dispatch(getAllUsers());
-      flowExecutorEvent.getNodeList();
     }
   }, [auth.isAuthenticated]);
   return null;

@@ -8,7 +8,8 @@ import FlowEditor from "components/FlowEditor/FlowEditor";
 import { getGroups } from "store/reducers/flow/flowGroupsSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import theme from "components/Shared/ThemeReference";
-import flowExecutorSocket from "services/flowExecutorService/flowExecutor.event";
+import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
+import createSocket from "services/createSocket";
 
 const StyledFlowWrapper = styled.div`
   height: 100%;
@@ -19,15 +20,25 @@ const propTypes = {
   match: PropTypes.object,
 };
 
+export let flowExecutorSocket = null;
+
 const FlowPage = () => {
   const dispatch = useDispatch();
-  const { flowId } = useParams();
+  const { flowId, port } = useParams();
   const { flowGui } = useActiveFlow();
   const rfWrapper = useRef(null);
 
   useEffect(() => {
     dispatch(getGroups(flowId));
-    flowExecutorSocket.joinRoom(flowId);
+
+    flowExecutorSocket = createSocket({
+      url: `http://localhost:${port}`,
+    });
+    flowExecutorEvent.injectSocket(flowExecutorSocket);
+    flowExecutorEvent.getNodeList();
+    return () => {
+      flowExecutorSocket.disconnect(); // Sayfa değiştiğinde bağlantıyı kapat
+    };
   }, []);
 
   return (

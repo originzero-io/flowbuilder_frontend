@@ -142,10 +142,6 @@ export default function ConfigurationMenu() {
       notification.error("Some nodes have unconnected trig handles");
       dispatch(selectElements(unconnectedTrigHandles.nodes));
     } else {
-      //! tüm data gönderilecek!
-      // flowExecutorEvent.debugFlow(
-      //   backendFlowDataBuilder(flowId, { nodes, edges })
-      // );
       flowExecutorEvent.debugFlow({ id: flowId, nodes, edges });
 
       const flow = {

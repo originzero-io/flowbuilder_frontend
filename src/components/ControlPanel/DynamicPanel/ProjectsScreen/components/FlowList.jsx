@@ -35,7 +35,7 @@ const FlowList = ({ flows }) => {
     //bunlar vardı
     dispatch(setCurrentFlowConfig(flow.config));
     dispatch(setCurrentFlowGui(flow.gui));
-    history.push(`/flow/${flow._id}`);
+    history.push(`/flow/${flow._id}/${flow.port}`);
   };
   useEffect(() => {
     dispatch(getFlowsByWorkspace(activeWorkspace));
