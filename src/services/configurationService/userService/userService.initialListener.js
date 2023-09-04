@@ -2,11 +2,11 @@ import store from "index";
 import { makeMeOnline } from "store/reducers/authSlice";
 import { editUser } from "store/reducers/userSlice";
 import notificationHelper from "utils/ui/notificationHelper";
-import userServiceSocket from "./userService.event";
+import userEvent from "./userService.event";
 
-const useUserInitialListener = () => {
-  userServiceSocket.setOnlineUser("MAKE_ME_ONLINE");
-  userServiceSocket.onOnlineUser((data) => {
+const userInitialListener = () => {
+  userEvent.setOnlineUser("MAKE_ME_ONLINE");
+  userEvent.onOnlineUser((data) => {
     const { auth } = store.getState();
     if (auth._id !== data._id) {
       store.dispatch(editUser(data));
@@ -16,7 +16,7 @@ const useUserInitialListener = () => {
       store.dispatch(makeMeOnline(data));
     }
   });
-  userServiceSocket.onOfflineUser((data) => {
+  userEvent.onOfflineUser((data) => {
     const { auth } = store.getState();
     if (auth._id !== data._id) {
       store.dispatch(editUser(data));
@@ -25,4 +25,4 @@ const useUserInitialListener = () => {
   });
 };
 
-export default useUserInitialListener;
+export default userInitialListener;

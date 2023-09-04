@@ -4,7 +4,6 @@ import {
   checkUnconnectedNodes,
   getFunctionalNodes,
 } from "components/FlowEditor/helpers/debugHelpers";
-import { backendFlowDataBuilder } from "components/FlowEditor/helpers/flowHelper";
 import Avatar from "components/Shared/Avatar/Avatar";
 import { FileInput } from "components/Shared/FileInput/FileInput";
 import themeColor from "components/Shared/ThemeReference";
@@ -17,11 +16,8 @@ import { BiBrain } from "react-icons/bi";
 import { GoDeviceDesktop } from "react-icons/go";
 import { VscRunAll } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import { useReactFlow } from "reactflow";
 import { Button } from "reactstrap";
-import flowEvent from "services/configurationService/flowElementService/flowElementService.event";
-import FlowService from "services/configurationService/flowService/flowService.http";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { logOut } from "store/reducers/authSlice";
 import {
@@ -37,6 +33,7 @@ import {
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import useAuth from "utils/hooks/useAuth";
 import notification from "utils/ui/notificationHelper";
+import notificationHelper from "utils/ui/notificationHelper";
 import SwitchButton from "../../../nodes/shared/SwitchButton";
 import { ShareIcon, TuneIcon } from "./Icons";
 import * as Styled from "./NavMenu.style";
@@ -56,7 +53,6 @@ const dummyDevices = [
 
 export default function ConfigurationMenu() {
   const { flowGui, flowConfig } = useActiveFlow();
-  const { flowId } = useParams();
   const auth = useAuth();
   const { miniMapDisplay, theme } = flowGui;
   const reactFlowInstance = useReactFlow();
@@ -69,7 +65,7 @@ export default function ConfigurationMenu() {
         console.log("elements: ", reactFlowInstance.toObject());
         const hiddenElement = document.createElement("a");
         hiddenElement.href = `data:application/octet-stream;base64,${window.btoa(
-          JSON.stringify(elements)
+          JSON.stringify(elements),
         )}`;
         hiddenElement.target = "_blank";
         hiddenElement.download = `${flowConfig.name}.json`;
@@ -90,10 +86,10 @@ export default function ConfigurationMenu() {
         };
       } else
         notification.error(
-          "This file cannot be imported. Please provide JSON file"
+          "This file cannot be imported. Please provide JSON file",
         );
     },
-    [reactFlowInstance]
+    [reactFlowInstance],
   );
   const [active, setActive] = useState({
     theme: false,
@@ -124,7 +120,7 @@ export default function ConfigurationMenu() {
       dispatch(logOut());
     }
   };
-  const debugFlow = async () => {
+  const debugFlowHandler = async () => {
     const { nodes, edges, viewport } = reactFlowInstance.toObject();
     const functionalNodes = getFunctionalNodes(nodes);
 
@@ -135,29 +131,29 @@ export default function ConfigurationMenu() {
       notification.error("Flow does not contain any trigger node.");
     } else if (unconnectedNodes.exist) {
       notification.error(
-        "This flow contains unconnected nodes. Please make sure to connect all nodes."
+        "This flow contains unconnected nodes. Please make sure to connect all nodes.",
       );
       dispatch(selectElements(unconnectedNodes.nodes));
     } else if (unconnectedTrigHandles.exist) {
       notification.error("Some nodes have unconnected trig handles");
       dispatch(selectElements(unconnectedTrigHandles.nodes));
     } else {
-      flowExecutorEvent.debugFlow({ id: flowId, nodes, edges });
-
-      const flow = {
-        config: flowConfig,
-        gui: {
-          ...flowGui,
-          viewport,
-        },
+      const gui = {
+        ...flowGui,
+        viewport,
       };
-      await FlowService.saveFlowGui(flowId, flow);
 
-      flowEvent.saveElements({
-        id: flowId,
-        elements: { nodes, edges },
+      flowExecutorEvent.saveGUISettings(gui, (response) => {
+        notificationHelper.success(response);
       });
+      flowExecutorEvent.debugFlow({ nodes, edges });
     }
+  };
+
+  const stopExecutionHandler = async () => {
+    flowExecutorEvent.stopExecution((data) => {
+      notificationHelper.success(data);
+    });
   };
 
   return (
@@ -166,7 +162,7 @@ export default function ConfigurationMenu() {
         <Styled.MenuItem>
           <Button
             style={{
-              width: "100px",
+              width: "90px",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -180,7 +176,7 @@ export default function ConfigurationMenu() {
         </Styled.MenuItem>
         <StyledDropdown.DropdownList>
           <StyledDropdown.DropdownItem>
-            <div onClick={debugFlow}>This PC</div>
+            <div onClick={debugFlowHandler}>This PC</div>
           </StyledDropdown.DropdownItem>
           {dummyDevices.map((device) => (
             <StyledDropdown.DropdownItem
@@ -201,6 +197,22 @@ export default function ConfigurationMenu() {
         </StyledDropdown.DropdownList>
       </StyledDropdown.DropdownWrapper>
 
+      <Styled.MenuItem>
+        <Button
+          style={{
+            width: "80px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "5px",
+          }}
+          color="warning"
+          onClick={stopExecutionHandler}
+        >
+          <VscRunAll />
+          <div>Stop</div>
+        </Button>
+      </Styled.MenuItem>
       <StyledDropdown.DropdownWrapper tabIndex="1">
         <Styled.MenuItem data-tip="Share" data-for="share">
           <ShareIcon width="25px" height="25px" theme={theme} />

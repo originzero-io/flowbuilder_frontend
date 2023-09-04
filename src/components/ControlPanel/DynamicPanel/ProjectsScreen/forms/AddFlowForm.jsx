@@ -27,7 +27,6 @@ export default function AddFlowForm() {
   });
   const dispatch = useDispatch();
   const onChangeHandler = (e) => {
-    // setFlowInfo({ ...flowInfo, [e.target.name]: e.target.value });
     setFlowInfo({ ...flowInfo, [e.target.name]: e.target.value });
   };
   const onSubmitHandle = async (e) => {
@@ -51,7 +50,7 @@ export default function AddFlowForm() {
     try {
       const { port } = await dockerizeServiceHttp.getAvailablePort();
       console.log("PORT:", port);
-      const flow = { config: flowInfo, workspace, project, port };
+      const flow = { ...flowInfo, workspace, project, port };
       const createdFlow = await flowServiceHttp.createFlow(flow);
       await dockerizeServiceHttp.dockerizeFlow(createdFlow._id);
       dispatch(createFlow(createdFlow));
@@ -59,13 +58,13 @@ export default function AddFlowForm() {
         getMyPermissionInThisWorkspace({
           workspace: activeWorkspace,
           me: auth,
-        })
+        }),
       );
       notificationHelper.success("Flow created successfully");
       dispatch(setModal(false));
     } catch (error) {
       console.log(error);
-      notificationHelper.success("Fuck cinema of your life");
+      notificationHelper.error(error.message);
     }
   };
 

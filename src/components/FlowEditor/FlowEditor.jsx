@@ -20,7 +20,6 @@ import {
   setMultiSelectionContextMenu,
   setPanelContextMenu,
 } from "store/reducers/menuSlice";
-import { setNodeList } from "store/reducers/panelNodeListSlice";
 import PropTypes from "prop-types";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import notification from "utils/ui/notificationHelper";
@@ -28,6 +27,11 @@ import { isConnectionCyclic } from "components/FlowEditor/helpers/flowHelper";
 import themeColor from "components/Shared/ThemeReference";
 import notificationHelper from "utils/ui/notificationHelper";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
+import { flowExecutorSocket } from "pages/FlowPage";
+import {
+  loadPanelNodeList,
+  setNodeList,
+} from "store/reducers/panelNodeListSlice";
 import {
   openElementContextMenu,
   openMultiSelectionContextMenu,
@@ -36,7 +40,6 @@ import {
 import Utils from "./components/Utils";
 import { createNode, isHandleAlreadyConnected } from "./helpers/elementHelper";
 import { createCustomNodeObject } from "./helpers/nodeObjectHelper";
-import { flowExecutorSocket } from "pages/FlowPage";
 
 const propTypes = {
   reactFlowWrapper: PropTypes.object.isRequired,
@@ -51,6 +54,9 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const reactFlowInstance = useReactFlow();
 
   useEffect(() => {
+    // load panel context menu node list when flow editor page loads
+    dispatch(loadPanelNodeList());
+    // socket listeners
     if (flowExecutorSocket) {
       flowExecutorEvent.onFlowError((data) => {
         notificationHelper.error(data);
@@ -62,24 +68,26 @@ export default function FlowEditor({ reactFlowWrapper }) {
       });
 
       flowExecutorEvent.onClassMessage((data) => {
-        // notificationHelper.success(data);
         dispatch(showRunningNode(data));
       });
     }
+    return () => {
+      flowExecutorSocket.removeAllListeners();
+    };
   }, [flowExecutorSocket]);
 
   const onNodesChange = useCallback(
     (changes) => {
       dispatch(setNodes(changes));
     },
-    [setNodes]
+    [setNodes],
   );
 
   const onEdgesChange = useCallback(
     (changes) => {
       dispatch(setEdges(changes));
     },
-    [setEdges]
+    [setEdges],
   );
 
   const flowStyle = {
@@ -95,7 +103,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         notificationHelper.error("hop noluyor");
       } else {
         const sourceGroup = flowElements.nodes.find(
-          (els) => els.id === params.source
+          (els) => els.id === params.source,
         ).data.ui?.group;
         const edge = {
           ...params,
@@ -106,14 +114,14 @@ export default function FlowEditor({ reactFlowWrapper }) {
         };
 
         const sourceEnable = flowElements.nodes.find(
-          (els) => els.id === params.source
+          (els) => els.id === params.source,
         ).data.ui.enable;
         const self = flowElements.nodes.find((els) => els.id === params.target);
         dispatch(addNewEdge(edge));
         dispatch(setNodeEnable({ self, checked: sourceEnable }));
       }
     },
-    [addNewEdge, flowElements]
+    [addNewEdge, flowElements],
   );
 
   const onEdgeUpdate = useCallback(
@@ -124,7 +132,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         dispatch(updateEdgePath({ oldEdge, newConnection }));
       }
     },
-    [updateEdgePath, flowElements]
+    [updateEdgePath, flowElements],
   );
 
   const onInitHandle = (reactFlowInstance) => {
@@ -152,7 +160,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
   };
   const updateRecentStatus = (type) => {
     const newList = nodeList.map((node) =>
-      node.name === type ? { ...node, createdDate: Date.now() } : node
+      node.name === type ? { ...node, createdDate: Date.now() } : node,
     );
     dispatch(setNodeList(newList));
   };

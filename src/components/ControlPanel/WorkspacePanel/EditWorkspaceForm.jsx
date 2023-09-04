@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Input } from "reactstrap";
 import { editWorkspace } from "store/reducers/workspaceSlice";
 import { setModal } from "store/reducers/componentSlice";
 import useWorkspace from "utils/hooks/useWorkspace";
-import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.event";
+import workspaceEvent from "services/configurationService/workspaceService/workspaceService.event";
 
 export default function EditWorkspaceForm({ workspace }) {
   const { activeWorkspace } = useWorkspace();
@@ -17,7 +17,7 @@ export default function EditWorkspaceForm({ workspace }) {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    workspaceServiceSocket.updateWorkspace({ workspace, workspaceInfo });
+    workspaceEvent.updateWorkspace({ workspace, workspaceInfo });
     dispatch(setModal(false));
   };
   return (

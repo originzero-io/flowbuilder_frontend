@@ -7,7 +7,7 @@ import { BiEdit } from "react-icons/bi";
 import PropTypes from "prop-types";
 import useAuth from "utils/hooks/useAuth";
 import useWorkspace from "utils/hooks/useWorkspace";
-import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.event";
+import workspaceEvent from "services/configurationService/workspaceService/workspaceService.event";
 import * as Styled from "./NavigationPanel.style";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
 
@@ -21,7 +21,7 @@ const WorkspaceBrand = ({ workspace }) => {
   const { workspaces } = useWorkspace();
   const deleteWorkspaceHandler = () => {
     if (confirm(`Would you like to delete ${workspace.name} workspace?`)) {
-      workspaceServiceSocket.deleteWorkspace({ workspace });
+      workspaceEvent.deleteWorkspace({ workspace });
       dispatch(setActiveWorkspace(workspaces[0]));
     }
   };

@@ -1,12 +1,8 @@
-import store from "index";
 import SocketEvent from "services/SocketEvent";
-import { setSystemNodes } from "store/reducers/systemNodeSlice";
 
 class FlowExecutorEvent extends SocketEvent {
-  getNodeList() {
-    this.socket.emit("getNodeList", (response) => {
-      store.dispatch(setSystemNodes(response));
-    });
+  getNodeList(listener) {
+    this.socket.emit("nodeList:get", listener);
   }
 
   onNodeStatus(self, listener) {
@@ -14,31 +10,48 @@ class FlowExecutorEvent extends SocketEvent {
   }
 
   onFlowError(listener) {
-    this.socket.on("flowError", (data) => listener(data));
-  }
-
-  leaveAllRooms() {
-    this.socket.emit("leaveAllFlowRooms");
+    this.socket.on("flow:error", (data) => listener(data));
   }
 
   onDebugFlow(listener) {
-    this.socket.on("debugFlow:response", (data) => listener(data));
+    this.socket.on("flow:debug", listener);
   }
 
   debugFlow(data) {
-    this.socket.emit("debugFlow", data);
+    this.socket.emit("flow:debug", data);
   }
 
   startByTrigger(trigId) {
-    this.socket.emit("startBySpesificTrigger", trigId);
+    this.socket.emit("flow:startBySpesificTrigger", trigId);
   }
 
-  removeAllListeners() {
-    this.socket.removeAllListeners();
+  //! NEW
+  stopExecution(listener) {
+    this.socket.emit("flow:stop", listener);
   }
 
   onClassMessage(listener) {
-    this.socket.on("NODE_NEW", (data) => listener(data));
+    this.socket.on("NODE_NEW", listener);
+  }
+
+  // onGetElements(listener) {
+  //   this.socket.on("elements:get", (data) => listener(data));
+  // }
+
+  getElements(data) {
+    this.socket.emit("elements:get", data);
+  }
+
+  saveElements(data, listener) {
+    this.socket.emit("elements:save", data, listener);
+  }
+
+  getGUISettings(listener) {
+    this.socket.emit("gui:get", listener);
+  }
+
+  saveGUISettings(data, listener) {
+    this.socket.emit("gui:save", data, listener);
   }
 }
 

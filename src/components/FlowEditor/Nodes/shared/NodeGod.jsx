@@ -4,12 +4,12 @@ import { Handle, useUpdateNodeInternals, Position } from "reactflow";
 import { useDispatch } from "react-redux";
 import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import PropTypes from "prop-types";
-
 import { Badge } from "reactstrap";
 import { getIconComponent } from "components/FlowEditor/helpers/nodeObjectHelper";
-import flowExecutorSocket from "services/flowExecutorService/flowExecutor.event";
 import { setModal } from "store/reducers/componentSlice";
 import NodeConfigMenu from "components/FlowEditor/components/Menu/NodeConfigMenu/NodeConfigMenu";
+import { flowExecutorSocket } from "pages/FlowPage";
+import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import * as Styled from "./Node.style";
 import NodeHeader from "./NodeHeader/NodeHeader";
 
@@ -43,10 +43,16 @@ const NodeGod = ({ self, children }) => {
   }, [enable]);
 
   useEffect(() => {
-    flowExecutorSocket.onNodeStatus(self, (data) => {
+    flowExecutorEvent.injectSocket(flowExecutorSocket);
+    console.log(flowExecutorSocket);
+    console.log(self);
+
+    flowExecutorEvent.onNodeStatus(self, (data) => {
       console.log(`data from server for ${self.id}: `, data);
       setServerData(data);
     });
+    if (flowExecutorSocket) {
+    }
   }, []);
 
   const onDoubleClickHandle = () => {

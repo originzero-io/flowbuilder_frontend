@@ -7,11 +7,10 @@ import {
   moveFlow,
 } from "store/reducers/flow/flowSlice";
 import notificationHelper from "utils/ui/notificationHelper";
-import flowServiceSocket from "./flowService.event";
-import dockerizeServiceHttp from "services/dockerizeService/dockerizeService.http";
+import flowExent from "./flowService.event";
 
-const useFlowInitialListener = () => {
-  flowServiceSocket.onCreateFlow(async (data) => {
+const flowInitialListener = () => {
+  flowExent.onCreateFlow(async (data) => {
     const { auth, workspaces } = store.getState();
 
     store.dispatch(createFlow(data.flow));
@@ -19,21 +18,21 @@ const useFlowInitialListener = () => {
       getMyPermissionInThisWorkspace({
         workspace: workspaces.activeWorksapce,
         me: auth,
-      })
+      }),
     );
     notificationHelper.success("Flow created successfully");
   });
-  flowServiceSocket.onUpdateFlow((data) => {
+  flowExent.onUpdateFlow((data) => {
     store.dispatch(editFlow(data.flow));
     notificationHelper.success("Flow updated successfully");
   });
-  flowServiceSocket.onDeleteFlow((data) => {
+  flowExent.onDeleteFlow((data) => {
     store.dispatch(deleteFlow(data.flowId));
     notificationHelper.success("Flow deleted successfully");
   });
-  flowServiceSocket.onMoveFlow((data) => {
+  flowExent.onMoveFlow((data) => {
     store.dispatch(moveFlow(data.flow));
     notificationHelper.success("Flow moved successfully");
   });
 };
-export default useFlowInitialListener;
+export default flowInitialListener;

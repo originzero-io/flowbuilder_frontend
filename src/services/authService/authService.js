@@ -3,7 +3,7 @@ import HttpClient from "../HttpClient";
 class AuthService extends HttpClient {
   constructor() {
     super();
-    this.service = this.createService("");
+    this.service = this.createService({ port: 8000 });
   }
 
   async logIn(user) {

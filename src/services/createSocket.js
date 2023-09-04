@@ -1,4 +1,6 @@
+import store from "index";
 import io from "socket.io-client";
+import { beginTheBar, endTheBar } from "store/reducers/componentSlice";
 import notification from "utils/ui/notificationHelper";
 
 class SocketIOClient {
@@ -20,13 +22,16 @@ class SocketIOClient {
       notification.success(`socket connected: ${this.url}`);
     });
     this.socket.on("connect_error", (err) => {
-      notification.error(`Connection error: ${err.message}`);
+      notification.error(`Connection error: ${err.message} -> ${this.url}`);
     });
     this.socket.onAny((event, data) => {
+      store.dispatch(beginTheBar());
       if (data.isError) {
         notification.error(`socket event error: ${data.errorMessage}`);
         throw new Error(`socket event error: ${event}`);
       }
+      notification.warn(`socket event: ${event}`);
+      store.dispatch(endTheBar());
     });
   }
 }

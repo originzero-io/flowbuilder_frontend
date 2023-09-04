@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { HorizontalDivider } from "components/StyledComponents/Divider";
 import { useDispatch } from "react-redux";
 import {
-  setElements,
   setExpandAll,
   deleteAllElements,
 } from "store/reducers/flow/flowElementsSlice";
@@ -13,7 +12,6 @@ import { useParams } from "react-router";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import FlowService from "services/configurationService/flowService/flowService.http";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
-import flowEvent from "services/configurationService/flowElementService/flowElementService.event";
 import {
   RedoIcon,
   UndoIcon,
@@ -27,6 +25,8 @@ import {
   ExpandAllIcon,
 } from "./Icons";
 import * as Styled from "./NavMenu.style";
+import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
+import notificationHelper from "utils/ui/notificationHelper";
 
 const StyledMenu = styled.div`
   position: absolute;
@@ -39,7 +39,7 @@ const StyledMenu = styled.div`
   background: ${(props) => props.theme.menuBackground};
 `;
 export default function ControlMenu() {
-  const { flowGui, flowConfig } = useActiveFlow();
+  const { flowGui } = useActiveFlow();
   const { theme } = flowGui;
   const reactFlowInstance = useReactFlow();
   // const canUndo = flowElements.past.length > 0;
@@ -51,22 +51,19 @@ export default function ControlMenu() {
   // const setInteractive = useStore((actions) => actions.setInteractive);
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
-  const { flowId } = useParams();
   const saveFlow = async () => {
-    // saveToDb(flowConfig,flowGui);
     const { nodes, edges, viewport } = reactFlowInstance.toObject();
-    const flow = {
-      config: flowConfig,
-      gui: {
-        ...flowGui,
-        viewport,
-      },
-    };
-    await FlowService.saveFlowGui(flowId, flow);
 
-    flowEvent.saveElements({
-      flowId,
-      elements: { nodes, edges },
+    const gui = {
+      ...flowGui,
+      viewport,
+    };
+
+    flowExecutorEvent.saveGUISettings(gui, (response) => {
+      notificationHelper.success(response);
+    });
+    flowExecutorEvent.saveElements({ nodes, edges }, (response) => {
+      notificationHelper.success(response);
     });
   };
 

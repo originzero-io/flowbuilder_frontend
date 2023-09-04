@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useWorkspace from "utils/hooks/useWorkspace";
-import noteServiceSocket from "services/configurationService/noteService/noteService.event";
+import noteEvent from "services/configurationService/noteService/noteService.event";
 
 const AddNoteForm = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const AddNoteForm = () => {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    noteServiceSocket.createNote({ note: noteInfo });
+    noteEvent.createNote({ note: noteInfo });
     dispatch(setModal(false));
   };
   return (

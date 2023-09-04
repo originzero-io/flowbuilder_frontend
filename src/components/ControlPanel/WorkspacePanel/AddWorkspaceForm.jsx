@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Input } from "reactstrap";
 import { createWorkspace } from "store/reducers/workspaceSlice";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
-import workspaceServiceSocket from "services/configurationService/workspaceService/workspaceService.event";
+import workspaceEvent from "services/configurationService/workspaceService/workspaceService.event";
 
 export default function AddWorkspaceForm() {
   const auth = useAuth();
@@ -18,7 +18,7 @@ export default function AddWorkspaceForm() {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    workspaceServiceSocket.createWorkspace({ workspace: workspaceInfo });
+    workspaceEvent.createWorkspace({ workspace: workspaceInfo });
     dispatch(setModal(false));
   };
   return (

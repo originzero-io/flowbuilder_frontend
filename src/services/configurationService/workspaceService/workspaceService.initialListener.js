@@ -5,21 +5,21 @@ import {
   editWorkspace,
 } from "store/reducers/workspaceSlice";
 import notificationHelper from "utils/ui/notificationHelper";
-import workspaceServiceSocket from "./workspaceService.event";
+import workspaceEvent from "./workspaceService.event";
 
-const useWorkspaceInitialListener = () => {
-  workspaceServiceSocket.onCreateWorkspace((data) => {
+const workspaceInitialListener = () => {
+  workspaceEvent.onCreateWorkspace((data) => {
     store.dispatch(createWorkspace(data.workspace));
     notificationHelper.success("Workspace created successfully");
   });
-  workspaceServiceSocket.onUpdateWorkspace((data) => {
+  workspaceEvent.onUpdateWorkspace((data) => {
     store.dispatch(editWorkspace(data.workspace));
     notificationHelper.success("Workspace updated successfully");
   });
-  workspaceServiceSocket.onDeleteWorkspace((data) => {
+  workspaceEvent.onDeleteWorkspace((data) => {
     store.dispatch(deleteWorkspace(data.workspaceId));
     notificationHelper.success("Workspace deleted successfully");
   });
 };
 
-export default useWorkspaceInitialListener;
+export default workspaceInitialListener;

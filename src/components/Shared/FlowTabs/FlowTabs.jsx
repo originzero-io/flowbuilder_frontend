@@ -16,7 +16,6 @@ const FlowTabs = () => {
   const onClickHandle = (id) => {
     const { position, zoom, elements } = reactFlowInstance.toObject();
     const flow = {
-      config: flowConfig,
       workspace: { ...flowGui, position, zoom },
       elements,
       groups: flowGroups,
@@ -30,8 +29,8 @@ const FlowTabs = () => {
   }, [flows]);
   // const closeFlowHandle = (event, flow) => {
   //   event.stopPropagation();
-  //   dispatch(closeFlow(flow.config));
-  //   if (flowConfig.id === flow.config.id) {
+  //   dispatch(closeFlow(flow));
+  //   if (flowConfig.id === flow.id) {
   //     const { position, zoom, elements } = reactFlowInstance.toObject();
   //     const flowx = {
   //       config: flowConfig,
@@ -46,13 +45,13 @@ const FlowTabs = () => {
   return (
     <Container>
       {openedFlows.map((flow) => (
-        <div key={flow.config.id} onClick={() => onClickHandle(flow.config.id)}>
+        <div key={flow.id} onClick={() => onClickHandle(flow.id)}>
           <TabItem
-            disabled={flowConfig.id === flow.config.id}
-            selected={flowConfig.id === flow.config.id}
-            key={flow.config.id}
+            disabled={flowConfig.id === flow.id}
+            selected={flowConfig.id === flow.id}
+            key={flow.id}
           >
-            <div style={{ paddingRight: "20px" }}>{flow.config.name}</div>
+            <div style={{ paddingRight: "20px" }}>{flow.name}</div>
           </TabItem>
         </div>
       ))}

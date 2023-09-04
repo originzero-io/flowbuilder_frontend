@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import PropTypes from "prop-types";
-import noteServiceSocket from "services/configurationService/noteService/noteService.event";
+import noteEvent from "services/configurationService/noteService/noteService.event";
 
 const propTypes = {
   note: PropTypes.object.isRequired,
@@ -18,7 +18,7 @@ const EditNoteForm = ({ note }) => {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    noteServiceSocket.updateNote({ note: noteInfo });
+    noteEvent.updateNote({ note: noteInfo });
     dispatch(setModal(false));
   };
   return (

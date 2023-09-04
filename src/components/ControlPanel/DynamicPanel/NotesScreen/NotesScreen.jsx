@@ -7,7 +7,7 @@ import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useNotes from "utils/hooks/useNotes";
 import Avatar from "components/Shared/Avatar/Avatar";
-import noteServiceSocket from "services/configurationService/noteService/noteService.event";
+import noteEvent from "services/configurationService/noteService/noteService.event";
 import AddNoteForm from "./AddNoteForm";
 import EditNoteForm from "./EditNoteForm";
 import * as Styled from "./NotesScreen.style";
@@ -23,7 +23,7 @@ export default function NotesScreen() {
   const deleteNoteHandle = (event, note) => {
     event.stopPropagation();
     if (confirm("Sure?")) {
-      noteServiceSocket.deleteNote({ note });
+      noteEvent.deleteNote({ note });
     }
   };
   const viewNoteHandle = (note) => {

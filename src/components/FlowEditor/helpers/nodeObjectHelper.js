@@ -14,16 +14,14 @@ export const createCustomNodeObject = () => {
 
 export const createPanelNodeList = () => {
   const entries = Object.entries(NodeUI);
-  return entries.map((e, index) => {
-    return {
-      id: index,
-      name: e[0],
-      type: e[0],
-      icon: React.createElement(e[1].icon),
-      fav: false,
-      createdDate: undefined,
-    };
-  });
+  return entries.map((e, index) => ({
+    id: index,
+    name: e[0],
+    type: e[0],
+    icon: React.createElement(e[1].icon),
+    fav: false,
+    createdDate: undefined,
+  }));
 };
 
 export const getIconComponent = (type) => NodeUI[type].icon;

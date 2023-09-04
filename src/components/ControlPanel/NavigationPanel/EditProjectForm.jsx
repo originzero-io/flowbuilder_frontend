@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useProject from "utils/hooks/useProject";
-import projectServiceSocket from "services/configurationService/projectService/projectService.event";
+import projectEvent from "services/configurationService/projectService/projectService.event";
+import wrapWithTryCatch from "utils/wrapWithTryCatch";
 
 const EditProjectForm = ({ project }) => {
   const { activeProject } = useProject();
@@ -14,12 +15,11 @@ const EditProjectForm = ({ project }) => {
   const onChangeHandler = (e) => {
     setprojectInfo({ ...projectInfo, [e.target.name]: e.target.value });
   };
-  const onSubmitHandle = (e) => {
+  const onSubmitHandle = wrapWithTryCatch((e) => {
     e.preventDefault();
-    projectServiceSocket.updateProject({ project, projectInfo });
-
+    projectEvent.updateProject({ project, projectInfo });
     dispatch(setModal(false));
-  };
+  });
   return (
     <Form onSubmit={onSubmitHandle}>
       <FormGroup>

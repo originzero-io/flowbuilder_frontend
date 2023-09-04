@@ -22,16 +22,15 @@ const Card = ({ data }) => {
   const deleteCardHandler = async (e, flow) => {
     e.stopPropagation();
     if (confirm("Sure?")) {
-      // flowServiceSocket.deleteFlow({ flow });
       await flowServiceHttp.deleteFlow(flow._id);
-      await dockerizeServiceHttp.deleteFlowContainer(flow._id);
       dispatch(deleteFlow(flow._id));
       notificationHelper.success("Flow deleted successfully");
+      await dockerizeServiceHttp.deleteFlowContainer(flow._id);
     }
   };
   return (
     <Styled.CardContainer>
-      <Styled.CardTitle>{data.config.name || ""}</Styled.CardTitle>
+      <Styled.CardTitle>{data.name || ""}</Styled.CardTitle>
       <DetailMenu
         deleteEvent={deleteCardHandler}
         data={data}
@@ -39,7 +38,7 @@ const Card = ({ data }) => {
       />
       <Styled.CardBody>
         <Styled.CardDescription>
-          {data.config.description || ""}
+          {data.description || ""}
         </Styled.CardDescription>
         <Styled.CardFooter>
           <Styled.CardAuthor>{data.port}</Styled.CardAuthor>

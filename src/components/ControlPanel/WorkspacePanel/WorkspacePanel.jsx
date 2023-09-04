@@ -34,12 +34,11 @@ const WorkspacePanel = () => {
     }
   }, [workspaces]);
   useDidMountEffect(() => {
-    dispatch(getFlowsByWorkspace(activeWorkspace));
     dispatch(getProjectsByWorkspace(activeWorkspace));
     dispatch(getNotesByWorkspace(activeWorkspace));
     dispatch(setActiveProject(""));
     dispatch(
-      getMyPermissionInThisWorkspace({ workspace: activeWorkspace, me: auth })
+      getMyPermissionInThisWorkspace({ workspace: activeWorkspace, me: auth }),
     );
   }, [auth, activeWorkspace]);
 
@@ -62,7 +61,7 @@ const WorkspacePanel = () => {
             data-tip={workspace.name}
             data-for={workspace._id}
           >
-            {workspace.name.split("")[0].toUpperCase()}
+            {workspace.name ? workspace.name.split("")[0].toUpperCase() : ""}
           </Styled.WorkspaceItem>
           <Tooltip id={workspace._id} place="top" type="light" />
         </Styled.WorkspaceItemWrapper>

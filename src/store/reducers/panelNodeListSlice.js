@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createPanelNodeList } from "components/FlowEditor/helpers/nodeObjectHelper";
 
-const panelNodeList = createPanelNodeList();
+// const panelNodeList = await createPanelNodeList();
 
 export const panelNodeListSlice = createSlice({
   name: "panelNodeListReducer",
-  initialState: panelNodeList,
+  initialState: [],
   reducers: {
+    loadPanelNodeList(state, { payload }) {
+      return createPanelNodeList();
+    },
     setNodeList(state, { payload }) {
       return payload;
     },
@@ -18,5 +21,6 @@ export const panelNodeListSlice = createSlice({
   },
 });
 
-export const { setNodeList, addNodeToFavorites } = panelNodeListSlice.actions;
 export default panelNodeListSlice.reducer;
+export const { setNodeList, addNodeToFavorites, loadPanelNodeList } =
+  panelNodeListSlice.actions;

@@ -2,7 +2,7 @@
   "endOfLine": "auto",
   "tabWidth": 2,
   "useTabs": false,
-  "trailingComma": "es5",
+  "trailingComma": "all",
   "printWidth": 80,
   "semi": true,
   "singleQuote": false

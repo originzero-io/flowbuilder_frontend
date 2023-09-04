@@ -15,16 +15,19 @@ export default class HttpClient {
     } else delete axios.defaults.headers.common.Authorization;
   }
 
-  createService(serviceName) {
-    if (typeof serviceName !== "undefined") {
+  createService({ port, basePath = "" }) {
+    if (port) {
+      const host =
+        import.meta.env.VITE_HOST_ENV === "development"
+          ? "http://localhost"
+          : "https://www.flowbuilder.site";
+
       this.service = axios.create({
-        baseURL: `${
-          import.meta.env.VITE_HOST_ENV === "development"
-            ? import.meta.env.VITE_GATEWAY_LOCAL_URL
-            : import.meta.env.VITE_GATEWAY_CLOUD_URL
-        }/${serviceName}`,
+        baseURL: `${host}:${port}/${basePath}`,
       });
+
       this.service.interceptors.request.use((config) => {
+        notification.warn(`${config.method} - ${config.url}`);
         store.dispatch(beginTheBar());
         const token = localStorage.getItem("token");
         config.headers.Authorization = token ? `Bearer ${token}` : "";
@@ -41,15 +44,15 @@ export default class HttpClient {
           // Any status codes that falls outside the range of 2xx cause this function to trigger
           // Do something with response error
           notification.error(
-            error.response.data.message || error.response.data
+            error.response.data.message || error.response.data,
           );
-          console.log("Http-client-error: ", error);
+          console.error("Http-client-error: ", error);
           store.dispatch(endTheBar());
           return Promise.reject(error);
-        }
+        },
       );
       return this.service;
     }
-    throw new Error("Provide service name to create service");
+    throw new Error("Port must be provided to call service");
   }
 }

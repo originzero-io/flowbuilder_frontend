@@ -2,7 +2,9 @@ import { getIncomers } from "reactflow";
 import { selectElements } from "store/reducers/flow/flowElementsSlice";
 import store from "index";
 
-export function backendFlowDataBuilder(flowId, elements) {
+export function backendFlowDataBuilder({ flowId, elements }) {
+  console.log("FLOWID: ", flowId);
+  console.log("ELEMENTS: ", elements);
   const flowBackendData = {
     id: flowId,
     nodes: elements.nodes.map((node) => {

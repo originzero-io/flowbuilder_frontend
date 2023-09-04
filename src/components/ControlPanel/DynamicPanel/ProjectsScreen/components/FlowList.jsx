@@ -5,8 +5,9 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import useAuthPermission from "utils/hooks/useAuthPermission";
 
-import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
-import useWorkspace from "utils/hooks/useWorkspace";
+import { getFlowsByProject } from "store/reducers/flow/flowSlice";
+import { setActiveFlowConfig } from "store/reducers/flow/flowConfigSlice";
+import useProject from "utils/hooks/useProject";
 
 const propTypes = {
   flows: PropTypes.oneOfType([PropTypes.array, null]),
@@ -15,14 +16,15 @@ const propTypes = {
 const FlowList = ({ flows }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { activeWorkspace } = useWorkspace();
+  const { activeProject } = useProject();
 
   const getPermission = useAuthPermission("project");
   const openPageHandler = async (flow) => {
-    history.push(`/flow/${flow._id}/${flow.port}`);
+    dispatch(setActiveFlowConfig(flow));
+    history.push(`/flow/${flow._id}`);
   };
   useEffect(() => {
-    dispatch(getFlowsByWorkspace(activeWorkspace));
+    dispatch(getFlowsByProject(activeProject));
   }, []);
 
   return (

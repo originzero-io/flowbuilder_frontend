@@ -84,7 +84,7 @@ const MainMenu = () => {
           <Styled.MenuItem>Home</Styled.MenuItem>
         </Link>
       </div>
-      <Styled.MenuItem>{flowConfig.name}</Styled.MenuItem>
+      <Styled.MenuItem>{flowConfig.name || "NO - DATA"}</Styled.MenuItem>
       <Styled.MenuItem onClick={() => dispatch(addSubFlow())}>
         Add sub flow
       </Styled.MenuItem>

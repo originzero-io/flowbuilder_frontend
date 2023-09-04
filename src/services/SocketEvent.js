@@ -4,10 +4,6 @@ class SocketEvent {
   injectSocket(socket) {
     this.socket = socket;
   }
-
-  disconnect() {
-    this.socket.disconnect();
-  }
 }
 
 export default SocketEvent;

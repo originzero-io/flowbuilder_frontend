@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./assets/css/index.js";
 import "reactflow/dist/style.css";
@@ -35,7 +35,7 @@ root.render(
         <App />
       </ErrorBoundary>
     </BrowserRouter>
-  </Provider>
+  </Provider>,
 );
 // ReactDOM.render(
 //   <Provider store={store}>

@@ -2,17 +2,22 @@ import PropTypes from "prop-types";
 import React, { useRef, useEffect } from "react";
 import { ReactFlowProvider } from "reactflow";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import FlowEditor from "components/FlowEditor/FlowEditor";
-import { getGroups } from "store/reducers/flow/flowGroupsSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import theme from "components/Shared/ThemeReference";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import createSocket from "services/createSocket";
-import { setCurrentFlowConfig } from "store/reducers/flow/flowConfigSlice";
-import flowElementServiceEvent from "services/configurationService/flowElementService/flowElementService.event";
-import { setCurrentFlowGui } from "store/reducers/flow/flowGuiSlice";
+import { setActiveFlowConfig } from "store/reducers/flow/flowConfigSlice";
+import {
+  resetActiveFlowGui,
+  setActiveFlowGui,
+} from "store/reducers/flow/flowGuiSlice";
+import {
+  resetActiveFlowElements,
+  setActiveFlowElements,
+} from "store/reducers/flow/flowElementsSlice";
+import { setSystemNodes } from "store/reducers/systemNodeSlice";
 
 const StyledFlowWrapper = styled.div`
   height: 100%;
@@ -27,35 +32,33 @@ export let flowExecutorSocket = null;
 
 const FlowPage = () => {
   const dispatch = useDispatch();
-  const { flowId, port } = useParams();
-  // port da ActiveFlow dan alınabilir ?
-  const { flowConfig, flowGui } = useActiveFlow();
+  const { flowGui, flowConfig } = useActiveFlow();
   const rfWrapper = useRef(null);
 
   useEffect(() => {
-    dispatch(getGroups(flowId));
-
     flowExecutorSocket = createSocket({
-      url: `http://localhost:${port}`,
+      url: `http://localhost:${flowConfig.port}`,
     });
+    // flowExecutorSocket = createSocket({
+    //   url: `http://localhost:5003`,
+    // });
+
     flowExecutorEvent.injectSocket(flowExecutorSocket);
-    flowExecutorEvent.getNodeList();
+    flowExecutorEvent.getNodeList((data) => {
+      dispatch(setSystemNodes(data));
+    });
 
-    //Todo: configuration service den türetilmiş event den elementler çekiliyor!
-    //Todo: bağlanmış containerdan elementler çekilmeli
-    flowElementServiceEvent.getElements({ flow_id: flowId });
-
-    //* bunlar yeni
-    // const flowContainerHttp = new FlowContainerHttpService(flow.port);
-    // const elements = await flowContainerHttp.getElements();
-    // console.log(elements);
-    // dispatch(setElements(elements));
-
-    //bunlar vardı
-    dispatch(setCurrentFlowConfig(flowConfig));
-    dispatch(setCurrentFlowGui(flowGui));
+    flowExecutorEvent.getGUISettings((data) => {
+      dispatch(setActiveFlowGui(data));
+    });
+    flowExecutorEvent.getElements((data) => {
+      dispatch(setActiveFlowElements(data));
+    });
     return () => {
-      flowExecutorSocket.disconnect(); // Sayfa değiştiğinde bağlantıyı kapat
+      flowExecutorSocket.disconnect(); // close connection when page changes
+      dispatch(setActiveFlowConfig({}));
+      dispatch(resetActiveFlowGui());
+      dispatch(resetActiveFlowElements());
     };
   }, []);
 

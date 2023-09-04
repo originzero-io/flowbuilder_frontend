@@ -84,7 +84,7 @@ function FlowList({
           {flows.map((flow) => (
             <CollapsibleMenuItem key={flow._id}>
               <CheckboxGroup
-                label={flow.config.name}
+                label={flow.name}
                 name={CAN_X_FLOW}
                 id={flow._id}
                 onChange={(e) => handleMultiChange(e, flow)}

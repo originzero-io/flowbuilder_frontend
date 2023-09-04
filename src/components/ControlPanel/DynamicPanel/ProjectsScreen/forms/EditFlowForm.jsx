@@ -9,8 +9,8 @@ export default function EditFlow({ flow }) {
   const dispatch = useDispatch();
   const auth = useAuth();
   const [flowConfig, setFlowConfig] = useState({
-    name: flow.config.name,
-    description: flow.config.description,
+    name: flow.name,
+    description: flow.description,
     createdBy: auth._id,
   });
 

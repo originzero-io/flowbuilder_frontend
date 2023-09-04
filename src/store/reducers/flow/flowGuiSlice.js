@@ -1,18 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const INITIAL_GUI = {
+  viewport: { x: 0, y: 0, zoom: 1 },
+  miniMapDisplay: true,
+  groupBarDisplay: false,
+  edgeType: "step",
+  theme: "dark",
+  nodeGroupMenuDisplay: false,
+  paneClickPosition: { x: 0, y: 0 },
+};
+
 const flowGuiSlice = createSlice({
   name: "flowGui",
-  initialState: {
-    viewport: { x: 0, y: 0, zoom: 1 },
-    miniMapDisplay: true,
-    groupBarDisplay: false,
-    edgeType: "step",
-    theme: "dark",
-    nodeGroupMenuDisplay: false,
-    paneClickPosition: { x: 0, y: 0 },
-  },
+  initialState: INITIAL_GUI,
   reducers: {
-    setCurrentFlowGui(state, { payload }) {
+    resetActiveFlowGui(state) {
+      return INITIAL_GUI;
+    },
+    setActiveFlowGui(state, { payload }) {
       return payload;
     },
     setPaneClickPosition(state, { payload }) {
@@ -38,7 +43,8 @@ const flowGuiSlice = createSlice({
 
 export default flowGuiSlice.reducer;
 export const {
-  setCurrentFlowGui,
+  resetActiveFlowGui,
+  setActiveFlowGui,
   setPaneClickPosition,
   setReactFlowInstance,
   setTheme,

@@ -5,24 +5,26 @@ import {
   applyNodeChanges,
   getOutgoers,
 } from "reactflow";
-import FlowElementService from "services/configurationService/flowElementService/flowElementService.http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   isEdgeExist,
   setSourceNodeColorToEdge,
 } from "components/FlowEditor/helpers/elementHelper";
+import FlowExecutorHttpService from "services/flowExecutorService/flowExecutor.http";
 
 export const getElementsByFlow = createAsyncThunk(
   "elements/getByFlow",
-  async (flow) => await FlowElementService.getElements(flow._id),
+  async () => FlowExecutorHttpService.getElements(),
 );
+
+const INITIAL_FLOW = {
+  nodes: [],
+  edges: [],
+};
 
 export const flowElementsSlice = createSlice({
   name: "elements",
-  initialState: {
-    nodes: [],
-    edges: [],
-  },
+  initialState: INITIAL_FLOW,
   reducers: {
     setNodes(state, { payload }) {
       const appliedNodes = applyNodeChanges(payload, state.nodes);
@@ -36,8 +38,11 @@ export const flowElementsSlice = createSlice({
       const appliedEdges = applyEdgeChanges(payload, state.edges);
       state.edges = appliedEdges;
     },
-    setElements(state, { payload }) {
+    setActiveFlowElements(state, { payload }) {
       return payload;
+    },
+    resetActiveFlowElements(state) {
+      return INITIAL_FLOW;
     },
     addNewNode(state, { payload }) {
       state.nodes.push(payload);
@@ -248,14 +253,15 @@ export const flowElementsSlice = createSlice({
     },
   },
   extraReducers: {
-    [getElementsByFlow.fulfilled]: (state, { payload }) => payload.elements,
+    [getElementsByFlow.fulfilled]: (state, { payload }) => payload,
   },
 });
 
 export default flowElementsSlice.reducer;
 export const {
   addSubFlow,
-  setElements,
+  setActiveFlowElements,
+  resetActiveFlowElements,
   setNodes,
   setEdges,
   addNewNode,

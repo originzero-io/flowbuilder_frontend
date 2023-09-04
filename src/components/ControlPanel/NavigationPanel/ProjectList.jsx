@@ -9,8 +9,9 @@ import useAuthPermission from "utils/hooks/useAuthPermission";
 import useProject from "utils/hooks/useProject";
 import useWorkspace from "utils/hooks/useWorkspace";
 import { CollapsibleMenuItem } from "components/Shared/Collapsible/CollapsibleMenu";
-import projectServiceSocket from "services/configurationService/projectService/projectService.event";
+import projectEvent from "services/configurationService/projectService/projectService.event";
 import EditProjectForm from "./EditProjectForm";
+import { getFlowsByProject } from "store/reducers/flow/flowSlice";
 
 const propTypes = {
   projects: PropTypes.array.isRequired,
@@ -24,11 +25,11 @@ export default function ProjectList({ projects }) {
 
   const clickProjectHandle = (project) => {
     dispatch(setActiveProject(project));
-    // dispatch(getFlowsByProject(project));
+    dispatch(getFlowsByProject(project));
   };
   const deleteProjectHandle = (project) => {
     if (confirm("Sure?")) {
-      projectServiceSocket.deleteProject({ project });
+      projectEvent.deleteProject({ project });
     }
   };
   const editProjectHandle = (project) => {

@@ -17,7 +17,7 @@ export const Menu = styled(MenuIndex)`
   border-radius: 6px;
   top: 10px;
   right: 45px;
-  width: 160px;
+  width: 360px;
 `;
 export const MenuItem = styled.button`
   background: none;

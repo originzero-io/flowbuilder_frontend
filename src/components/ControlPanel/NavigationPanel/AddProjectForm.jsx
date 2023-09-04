@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useWorkspace from "utils/hooks/useWorkspace";
-import projectServiceSocket from "services/configurationService/projectService/projectService.event";
+import projectEvent from "services/configurationService/projectService/projectService.event";
 
 const AddProjectForm = () => {
   const { activeWorkspace } = useWorkspace();
@@ -21,7 +21,7 @@ const AddProjectForm = () => {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    projectServiceSocket.createProject({ project: projectInfo });
+    projectEvent.createProject({ project: projectInfo });
     dispatch(setModal(false));
   };
   return (
