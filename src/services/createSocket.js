@@ -30,7 +30,7 @@ class SocketIOClient {
         notification.error(`socket event error: ${data.errorMessage}`);
         throw new Error(`socket event error: ${event}`);
       }
-      notification.warn(`socket event: ${event}`);
+      // notification.warn(`socket event: ${event}`);
       store.dispatch(endTheBar());
     });
   }

@@ -44,8 +44,6 @@ const NodeGod = ({ self, children }) => {
 
   useEffect(() => {
     flowExecutorEvent.injectSocket(flowExecutorSocket);
-    console.log(flowExecutorSocket);
-    console.log(self);
 
     flowExecutorEvent.onNodeStatus(self, (data) => {
       console.log(`data from server for ${self.id}: `, data);

@@ -15,6 +15,7 @@ import NotificationNode from "./Notification.node";
 import SerialReadNode from "./SerialRead.node";
 import TriggerNode from "./Trigger.node";
 import SplitNode from "./Split.node";
+import MqttOutNode from "./MqttOut.node";
 
 const NodeUI = {
   TRIGGER: {
@@ -44,6 +45,14 @@ const NodeUI = {
   CALCULATE: {
     component: CalculateNode,
     icon: CalculateIcon,
+  },
+  MQTT_OUT: {
+    component: MqttOutNode,
+    icon: SplitIcon,
+  },
+  DELAY: {
+    component: MqttOutNode,
+    icon: SplitIcon,
   },
   // EXCEL_READ: {
   //   component: ExcelReadNode,

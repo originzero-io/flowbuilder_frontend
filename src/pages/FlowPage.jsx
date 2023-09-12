@@ -36,15 +36,16 @@ const FlowPage = () => {
   const rfWrapper = useRef(null);
 
   useEffect(() => {
-    flowExecutorSocket = createSocket({
-      url: `http://localhost:${flowConfig.port}`,
-    });
     // flowExecutorSocket = createSocket({
-    //   url: `http://localhost:5003`,
+    //   url: `http://localhost:${flowConfig.port}`,
     // });
+    flowExecutorSocket = createSocket({
+      url: `http://localhost:5003`,
+    });
 
     flowExecutorEvent.injectSocket(flowExecutorSocket);
     flowExecutorEvent.getNodeList((data) => {
+      console.log("data:", data);
       dispatch(setSystemNodes(data));
     });
 

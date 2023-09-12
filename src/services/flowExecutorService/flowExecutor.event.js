@@ -13,6 +13,10 @@ class FlowExecutorEvent extends SocketEvent {
     this.socket.on("flow:error", (data) => listener(data));
   }
 
+  onFlowNotification(listener) {
+    this.socket.on("flow:notification", (data) => listener(data));
+  }
+
   onDebugFlow(listener) {
     this.socket.on("flow:debug", listener);
   }

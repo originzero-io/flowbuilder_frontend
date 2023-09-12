@@ -13,23 +13,21 @@ export default function ConfigParametersForm({ node, dispatcher }) {
   return (
     <Form style={Styled.FormStyle}>
       <Styled.SectionName>Parameters:</Styled.SectionName>
-      {parameterEntries.map((entry, index) => {
-        return (
-          <FormGroup row key={index}>
-            <Label sm={6}>{entry[0]} : </Label>
-            <Col sm={6}>
-              <Input
-                id={entry[0]}
-                name={entry[0]}
-                placeholder={entry[1]}
-                type={typeof entry[1]}
-                defaultValue={entry[1]}
-                onChange={onChangeConfigParametersHandler}
-              />
-            </Col>
-          </FormGroup>
-        );
-      })}
+      {parameterEntries.map((entry, index) => (
+        <FormGroup row key={index}>
+          <Label sm={6}>{entry[0]} : </Label>
+          <Col sm={6}>
+            <Input
+              id={entry[0]}
+              name={entry[0]}
+              placeholder={entry[1]}
+              type={typeof entry[1]}
+              defaultValue={entry[1]}
+              onChange={onChangeConfigParametersHandler}
+            />
+          </Col>
+        </FormGroup>
+      ))}
     </Form>
   );
 }

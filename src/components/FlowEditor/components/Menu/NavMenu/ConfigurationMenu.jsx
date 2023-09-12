@@ -123,7 +123,6 @@ export default function ConfigurationMenu() {
   const debugFlowHandler = async () => {
     const { nodes, edges, viewport } = reactFlowInstance.toObject();
     const functionalNodes = getFunctionalNodes(nodes);
-
     const unconnectedNodes = checkUnconnectedNodes(functionalNodes, edges);
     const unconnectedTrigHandles = checkAllConnectedTrigsHandles(nodes, edges);
 

@@ -62,6 +62,10 @@ export default function FlowEditor({ reactFlowWrapper }) {
         notificationHelper.error(data);
       });
 
+      flowExecutorEvent.onFlowNotification((data) => {
+        notificationHelper.success(data);
+      });
+
       flowExecutorEvent.onDebugFlow((data) => {
         notificationHelper.success(data);
         console.log(data);

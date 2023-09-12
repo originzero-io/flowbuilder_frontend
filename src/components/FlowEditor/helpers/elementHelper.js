@@ -3,6 +3,7 @@ import { getNodeData } from "./nodeObjectHelper";
 
 export const createNode = (type, initialPosition) => {
   const nodeData = getNodeData(type);
+  //* if there is no type of this node then return default node
   return {
     id: `${type}-${uuid()}`,
     type,

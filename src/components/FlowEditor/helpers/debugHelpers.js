@@ -48,10 +48,12 @@ export const getMyTrigEdges = (node, edges) => {
 export const checkUnconnectedNodes = (functionalNodes, edges) => {
   const unConnectedNodes = [];
   functionalNodes.forEach((node) => {
-    const inputCount = Object.keys(node.data.inputParameters).length;
-    const myValueEdges = getMyConnectedValueEdges(node, edges).length;
-    if (inputCount > myValueEdges) {
-      unConnectedNodes.push(node);
+    if (node.data.inputParameters) {
+      const inputCount = Object.keys(node.data.inputParameters).length;
+      const myValueEdges = getMyConnectedValueEdges(node, edges).length;
+      if (inputCount > myValueEdges) {
+        unConnectedNodes.push(node);
+      }
     }
   });
   const existNotConnectedNodes = unConnectedNodes.length > 0;
@@ -60,6 +62,23 @@ export const checkUnconnectedNodes = (functionalNodes, edges) => {
     nodes: unConnectedNodes,
   };
 };
+// export const checkUnconnectedNodes = (functionalNodes, edges) => {
+//   const unConnectedNodes = [];
+//   functionalNodes.forEach((node) => {
+//     const inputCount = Object.keys(node.data.inputParameters).length;
+//     console.log("inputCount", inputCount);
+//     //! inputCount 0 olan nodelar için bir şey yap
+//     const myValueEdges = getMyConnectedValueEdges(node, edges).length;
+//     if (inputCount > myValueEdges) {
+//       unConnectedNodes.push(node);
+//     }
+//   });
+//   const existNotConnectedNodes = unConnectedNodes.length > 0;
+//   return {
+//     exist: existNotConnectedNodes,
+//     nodes: unConnectedNodes,
+//   };
+// };
 
 export const checkAllConnectedTrigsHandles = (nodes, edges) => {
   //* Trig handle sayısı 1den fazlaysa, bütün handleların bağlanıp bağlanmadığını döndürür
