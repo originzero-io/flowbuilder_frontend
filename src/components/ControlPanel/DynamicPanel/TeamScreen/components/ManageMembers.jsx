@@ -7,10 +7,7 @@ import { TiTickOutline } from "react-icons/ti";
 import useWorkspace from "utils/hooks/useWorkspace";
 import Avatar from "components/Shared/Avatar/Avatar";
 import { useDispatch } from "react-redux";
-import {
-  addUserToWorkspace,
-  removeUserToWorkspace,
-} from "store/reducers/userSlice";
+import { addUserToWorkspace, removeUserToWorkspace } from "store/reducers/userSlice";
 
 const StyledUserItem = styled.div`
   margin-left: 10px;
@@ -27,14 +24,10 @@ export default function ManageMembers() {
   const users = useUser();
   const { activeWorkspace } = useWorkspace();
   const addMemberHandle = (user) => {
-    dispatch(
-      addUserToWorkspace({ userInfo: user, workspace: activeWorkspace })
-    );
+    dispatch(addUserToWorkspace({ userInfo: user, workspace: activeWorkspace }));
   };
   const removeMemberHandle = (user) => {
-    dispatch(
-      removeUserToWorkspace({ userInfo: user, workspace: activeWorkspace })
-    );
+    dispatch(removeUserToWorkspace({ userInfo: user, workspace: activeWorkspace }));
   };
   return (
     <div>
@@ -42,18 +35,10 @@ export default function ManageMembers() {
         <StyledContainer key={user._id}>
           <Avatar avatar={user.avatar} />
           <StyledUserItem>{user.username}</StyledUserItem>
-          {user.workspaces.some(
-            (workspace) => workspace === activeWorkspace._id
-          ) ? (
-            <TiTickOutline
-              style={{ fontSize: "30px" }}
-              onClick={() => removeMemberHandle(user)}
-            />
+          {user.workspaces.some((workspace) => workspace === activeWorkspace._id) ? (
+            <TiTickOutline style={{ fontSize: "30px" }} onClick={() => removeMemberHandle(user)} />
           ) : (
-            <BsPlusCircle
-              style={{ fontSize: "24px" }}
-              onClick={() => addMemberHandle(user)}
-            />
+            <BsPlusCircle style={{ fontSize: "24px" }} onClick={() => addMemberHandle(user)} />
           )}
         </StyledContainer>
       ))}

@@ -2,12 +2,7 @@ import React from "react";
 import * as Styled from "./PanelContextMenu.style";
 import NodeListItem from "./NodeListItem";
 
-export default function FavoriteNodes({
-  nodeList,
-  favClick,
-  onDragStart,
-  addNewNode,
-}) {
+export default function FavoriteNodes({ nodeList, favClick, onDragStart, addNewNode }) {
   const favoriteNodes = nodeList.filter((node) => node.fav === true);
   return (
     <Styled.NodeWrapper>

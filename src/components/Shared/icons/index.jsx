@@ -195,18 +195,8 @@ export function GroupIcon({ width, height, color, theme }) {
       height={height}
       className="GroupBar-icon"
     >
-      <circle
-        cx="54.69"
-        cy="124.92"
-        r="23"
-        fill={themeColor[theme].iconColor}
-      />
-      <circle
-        cx="153.26"
-        cy="170.92"
-        r="23"
-        fill={themeColor[theme].iconColor}
-      />
+      <circle cx="54.69" cy="124.92" r="23" fill={themeColor[theme].iconColor} />
+      <circle cx="153.26" cy="170.92" r="23" fill={themeColor[theme].iconColor} />
       <circle cx="153.26" cy="59.2" r="23" fill={themeColor[theme].iconColor} />
       <circle
         cx="76.04"
@@ -285,12 +275,7 @@ export function GroupIcon({ width, height, color, theme }) {
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
-      <circle
-        cx="120.4"
-        cy="115.06"
-        r="23"
-        fill={themeColor[theme].iconColor}
-      />
+      <circle cx="120.4" cy="115.06" r="23" fill={themeColor[theme].iconColor} />
       <line
         x1="97.4"
         y1="153.39"
@@ -316,24 +301,9 @@ export function NonGroupIcon({ width, height, color, onClick, theme }) {
       style={{ cursor: "pointer" }}
       onClick={onClick}
     >
-      <circle
-        cx="180.83"
-        cy="102.87"
-        r="26.72"
-        fill={themeColor[theme].iconColor}
-      />
-      <circle
-        cx="66.33"
-        cy="49.44"
-        r="26.72"
-        fill={themeColor[theme].iconColor}
-      />
-      <circle
-        cx="66.33"
-        cy="179.21"
-        r="26.72"
-        fill={themeColor[theme].iconColor}
-      />
+      <circle cx="180.83" cy="102.87" r="26.72" fill={themeColor[theme].iconColor} />
+      <circle cx="66.33" cy="49.44" r="26.72" fill={themeColor[theme].iconColor} />
+      <circle cx="66.33" cy="179.21" r="26.72" fill={themeColor[theme].iconColor} />
       <line
         x1="91.03"
         y1="137.28"
@@ -364,12 +334,7 @@ export function NonGroupIcon({ width, height, color, onClick, theme }) {
         strokeMiterlimit="10"
         strokeWidth="7px"
       />
-      <circle
-        cx="104.5"
-        cy="114.32"
-        r="26.72"
-        fill={themeColor[theme].iconColor}
-      />
+      <circle cx="104.5" cy="114.32" r="26.72" fill={themeColor[theme].iconColor} />
       <path
         d="M201,176.62a33.11,33.11,0,1,1-33.11-33.1A33.11,33.11,0,0,1,201,176.62Z"
         transform="translate(-8 -7)"

@@ -22,9 +22,7 @@ export default function PresetList() {
   };
   const handlePresetChange = (e) => {
     console.log("submitt", e.target.value);
-    const selected = presets.find(
-      (preset) => preset.name === e.target.value
-    ).preset;
+    const selected = presets.find((preset) => preset.name === e.target.value).preset;
     setSelectedPreset(selected);
   };
   return (

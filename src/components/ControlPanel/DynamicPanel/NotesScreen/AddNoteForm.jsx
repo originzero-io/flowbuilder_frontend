@@ -28,12 +28,7 @@ const AddNoteForm = () => {
     <Form onSubmit={onSubmitHandle}>
       <FormGroup>
         <Label>Title</Label>
-        <Input
-          name="title"
-          placeholder="Title"
-          onChange={onChangeHandler}
-          required
-        />
+        <Input name="title" placeholder="Title" onChange={onChangeHandler} required />
       </FormGroup>
       <FormGroup>
         <Label>Content</Label>

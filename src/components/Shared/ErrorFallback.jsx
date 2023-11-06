@@ -46,9 +46,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
     >
       <StyledErrorContainer>
         <StyledErrorHeading>Oops, something went wrong!</StyledErrorHeading>
-        <StyledErrorText>
-          Sorry, an error occurred while rendering this component.
-        </StyledErrorText>
+        <StyledErrorText>Sorry, an error occurred while rendering this component.</StyledErrorText>
         <StyledErrorMessage>{error.message}</StyledErrorMessage>
         <Button onClick={resetErrorBoundary}>Refresh the page</Button>
       </StyledErrorContainer>

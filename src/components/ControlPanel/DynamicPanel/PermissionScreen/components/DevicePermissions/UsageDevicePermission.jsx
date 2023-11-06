@@ -11,11 +11,7 @@ const propTypes = {
   handleAllChange: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
-export default function UsageDevicePermission({
-  permissions,
-  handleAllChange,
-  handleChange,
-}) {
+export default function UsageDevicePermission({ permissions, handleAllChange, handleChange }) {
   const { controllers, processors } = useContext(PermissionContext);
   useEffect(() => {
     if (permissions.CAN_USAGE_CONTROLLER.length === controllers.length) {
@@ -49,9 +45,7 @@ export default function UsageDevicePermission({
               onChange={handleAllChange}
               defaultChecked={permissions.CAN_USAGE_CONTROLLER_ALL}
               disabled={permissions.EVERYTHING}
-              checked={
-                permissions.EVERYTHING || permissions.CAN_USAGE_CONTROLLER_ALL
-              }
+              checked={permissions.EVERYTHING || permissions.CAN_USAGE_CONTROLLER_ALL}
             />
           </CollapsibleMenuItem>
           {controllers.map((controller) => (
@@ -61,9 +55,7 @@ export default function UsageDevicePermission({
                 name="CAN_USAGE_CONTROLLER"
                 id={controller._id}
                 onChange={(e) => handleChange(e)}
-                defaultChecked={permissions.CAN_USAGE_CONTROLLER.includes(
-                  controller._id
-                )}
+                defaultChecked={permissions.CAN_USAGE_CONTROLLER.includes(controller._id)}
                 disabled={permissions.EVERYTHING}
                 checked={
                   permissions.EVERYTHING ||
@@ -82,9 +74,7 @@ export default function UsageDevicePermission({
               onChange={(e) => handleAllChange(e, controllers)}
               defaultChecked={permissions.CAN_USAGE_PROCESSOR_ALL}
               disabled={permissions.EVERYTHING}
-              checked={
-                permissions.EVERYTHING || permissions.CAN_USAGE_PROCESSOR_ALL
-              }
+              checked={permissions.EVERYTHING || permissions.CAN_USAGE_PROCESSOR_ALL}
             />
           </CollapsibleMenuItem>
           {processors.map((processor) => (
@@ -95,9 +85,7 @@ export default function UsageDevicePermission({
                 id={processor._id}
                 onChange={(e) => handleChange(e)}
                 // checked={processor.canUse}
-                defaultChecked={permissions.CAN_USAGE_PROCESSOR.includes(
-                  processor._id
-                )}
+                defaultChecked={permissions.CAN_USAGE_PROCESSOR.includes(processor._id)}
                 disabled={permissions.EVERYTHING}
                 checked={
                   permissions.EVERYTHING ||

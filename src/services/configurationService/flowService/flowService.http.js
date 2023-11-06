@@ -17,9 +17,7 @@ class FlowService extends ConfigurationService {
   }
 
   async getFlowsByWorkspace(workspace) {
-    const response = await this.service.get(
-      `/flows/workspace/${workspace._id}`
-    );
+    const response = await this.service.get(`/flows/workspace/${workspace._id}`);
     return response.data;
   }
 

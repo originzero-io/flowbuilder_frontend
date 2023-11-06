@@ -1,10 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import ReactFlow, { updateEdge, useEdgesState, useReactFlow } from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setPaneClickPosition,
-  closeAllNodeGroupMenu,
-} from "store/reducers/flow/flowGuiSlice";
+import { setPaneClickPosition, closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
 import {
   addNewNode,
   addNewEdge,
@@ -82,14 +79,14 @@ export default function FlowEditor({ reactFlowWrapper }) {
     (changes) => {
       dispatch(setNodes(changes));
     },
-    [setNodes]
+    [setNodes],
   );
 
   const onEdgesChange = useCallback(
     (changes) => {
       dispatch(setEdges(changes));
     },
-    [setEdges]
+    [setEdges],
   );
 
   const flowStyle = {
@@ -104,9 +101,8 @@ export default function FlowEditor({ reactFlowWrapper }) {
       } else if (isHandleAlreadyConnected(params, flowElements.edges)) {
         notificationHelper.error("One handle should have only one connection");
       } else {
-        const sourceGroup = flowElements.nodes.find(
-          (els) => els.id === params.source
-        ).data.ui?.group;
+        const sourceGroup = flowElements.nodes.find((els) => els.id === params.source).data.ui
+          ?.group;
         const edge = {
           ...params,
           type: edgeType,
@@ -115,15 +111,13 @@ export default function FlowEditor({ reactFlowWrapper }) {
           data: null,
         };
 
-        const sourceEnable = flowElements.nodes.find(
-          (els) => els.id === params.source
-        ).data.enable;
+        const sourceEnable = flowElements.nodes.find((els) => els.id === params.source).data.enable;
         const self = flowElements.nodes.find((els) => els.id === params.target);
         dispatch(addNewEdge(edge));
         dispatch(setNodeEnable({ self, checked: sourceEnable }));
       }
     },
-    [addNewEdge, flowElements]
+    [addNewEdge, flowElements],
   );
 
   const onEdgeUpdate = useCallback(
@@ -134,7 +128,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         dispatch(updateEdgePath({ oldEdge, newConnection }));
       }
     },
-    [updateEdgePath, flowElements]
+    [updateEdgePath, flowElements],
   );
 
   const onDragOver = (event) => {
@@ -157,13 +151,11 @@ export default function FlowEditor({ reactFlowWrapper }) {
     }
   };
 
-  const onNodeContextMenu = (event, node) =>
-    openElementContextMenu(event, node);
+  const onNodeContextMenu = (event, node) => openElementContextMenu(event, node);
 
   const onPaneContextMenu = (event) => openPaneContextMenu(event);
 
-  const onSelectionContextMenu = (event) =>
-    openMultiSelectionContextMenu(event);
+  const onSelectionContextMenu = (event) => openMultiSelectionContextMenu(event);
 
   const onDoubleClick = () => {
     // dispatch(setPanelContextMenu(false));

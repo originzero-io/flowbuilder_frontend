@@ -59,16 +59,11 @@ export default function UserList() {
               <td>{user.email}</td>
               <td>{user.phone}</td>
               <td>
-                <Badge color={user.role === "admin" ? "primary" : "warning"}>
-                  {user.role}
-                </Badge>
+                <Badge color={user.role === "admin" ? "primary" : "warning"}>{user.role}</Badge>
               </td>
               <Styled.Td>
                 <Styled.TdItem>
-                  <BiEdit
-                    onClick={() => editUserHandle(user)}
-                    style={{ fontSize: "20px" }}
-                  />
+                  <BiEdit onClick={() => editUserHandle(user)} style={{ fontSize: "20px" }} />
                 </Styled.TdItem>
                 <Styled.TdItem onClick={() => deleteUserHandle(user)}>
                   <VscTrash style={{ fontSize: "20px" }} />

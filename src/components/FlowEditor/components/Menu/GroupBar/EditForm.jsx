@@ -63,11 +63,7 @@ export default function EditForm({ editableItem, setEditableItem, theme }) {
         value={editableItem.group.color}
       />
       <Styled.Submit type="submit">
-        <SubmitIcon
-          width="22px"
-          height="22px"
-          color={themeColor[theme].iconColor}
-        />
+        <SubmitIcon width="22px" height="22px" color={themeColor[theme].iconColor} />
       </Styled.Submit>
     </Styled.Form>
   );

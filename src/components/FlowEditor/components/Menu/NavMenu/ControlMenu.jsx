@@ -95,12 +95,7 @@ export default function ControlMenu() {
   // }, [lock]);
   return (
     <StyledMenu>
-      <Styled.MenuItem
-        theme={theme}
-        onClick={saveFlow}
-        data-tip="Save"
-        data-for="save"
-      >
+      <Styled.MenuItem theme={theme} onClick={saveFlow} data-tip="Save" data-for="save">
         <SaveIcon theme={theme} />
       </Styled.MenuItem>
       <Tooltip id="save" place="right" />
@@ -121,12 +116,7 @@ export default function ControlMenu() {
       </Styled.MenuItem>
       <Tooltip id="delete_all" place="right" />
 
-      <Styled.MenuItem
-        theme={theme}
-        onClick={zoomInHandle}
-        data-tip="Zoom in"
-        data-for="zoom_in"
-      >
+      <Styled.MenuItem theme={theme} onClick={zoomInHandle} data-tip="Zoom in" data-for="zoom_in">
         <ZoomInIcon theme={theme} />
       </Styled.MenuItem>
       <Tooltip id="zoom_in" place="right" />

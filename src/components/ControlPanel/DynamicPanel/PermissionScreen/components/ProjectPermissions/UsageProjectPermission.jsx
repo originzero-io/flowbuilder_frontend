@@ -3,10 +3,7 @@ import PropTypes from "prop-types";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import * as Styled from "../PermissionScreen.style";
-import CollapsibleMenu, {
-  CollapsibleMenuItem,
-  CollapsibleSubMenu,
-} from "../CollapsibleMenu";
+import CollapsibleMenu, { CollapsibleMenuItem, CollapsibleSubMenu } from "../CollapsibleMenu";
 import FlowList from "../FlowList";
 import DashboardList from "../DashboardList";
 
@@ -47,12 +44,8 @@ function UsageProjectPermission({
               name="CAN_USAGE_PROJECT"
               onChange={handleSingleAllChange}
               defaultChecked={permissions.CAN_USAGE_PROJECT_ALL}
-              disabled={
-                permissions.EVERYTHING || permissions.CAN_EDIT_PROJECT_ALL
-              }
-              checked={
-                permissions.EVERYTHING || permissions.CAN_USAGE_PROJECT_ALL
-              }
+              disabled={permissions.EVERYTHING || permissions.CAN_EDIT_PROJECT_ALL}
+              checked={permissions.EVERYTHING || permissions.CAN_USAGE_PROJECT_ALL}
             />
           </CollapsibleMenuItem>
           {projects.map((project) => (
@@ -63,9 +56,7 @@ function UsageProjectPermission({
                   name="CAN_USAGE_PROJECT"
                   id={project._id}
                   onChange={(e) => handleChange(e)}
-                  defaultChecked={permissions.CAN_USAGE_PROJECT.includes(
-                    project._id
-                  )}
+                  defaultChecked={permissions.CAN_USAGE_PROJECT.includes(project._id)}
                   disabled={
                     permissions.EVERYTHING ||
                     permissions.CAN_EDIT_PROJECT_ALL ||

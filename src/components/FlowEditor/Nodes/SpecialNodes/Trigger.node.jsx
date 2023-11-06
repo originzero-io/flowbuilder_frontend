@@ -13,10 +13,7 @@ const Trigger = ({ self }) => {
     <NodeGod self={self}>
       {/* <Button onClick={startTrig} type="primary" shape="round" icon={<MdPlayCircleOutline />} /> */}
       {/* <MdPlayCircleOutline onClick={startTrig} style={{ color: "#D086EB", fontSize: "40px" }} /> */}
-      <AiFillPlayCircle
-        onClick={startTrig}
-        style={{ color: "#65cd1a", fontSize: "40px" }}
-      />
+      <AiFillPlayCircle onClick={startTrig} style={{ color: "#65cd1a", fontSize: "40px" }} />
     </NodeGod>
   );
 };

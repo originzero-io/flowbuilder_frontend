@@ -4,14 +4,8 @@ import { useDispatch } from "react-redux";
 import { setModal } from "store/reducers/componentSlice";
 import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
 import { getNotesByWorkspace } from "store/reducers/noteSlice";
-import {
-  getProjectsByWorkspace,
-  setActiveProject,
-} from "store/reducers/projectSlice";
-import {
-  getMyWorkspaces,
-  setActiveWorkspace,
-} from "store/reducers/workspaceSlice";
+import { getProjectsByWorkspace, setActiveProject } from "store/reducers/projectSlice";
+import { getMyWorkspaces, setActiveWorkspace } from "store/reducers/workspaceSlice";
 import useAuth from "utils/hooks/useAuth";
 import useDidMountEffect from "utils/hooks/useDidMountEffect";
 import useWorkspace from "utils/hooks/useWorkspace";
@@ -37,9 +31,7 @@ const WorkspacePanel = () => {
     dispatch(getProjectsByWorkspace(activeWorkspace));
     dispatch(getNotesByWorkspace(activeWorkspace));
     dispatch(setActiveProject(""));
-    dispatch(
-      getMyPermissionInThisWorkspace({ workspace: activeWorkspace, me: auth })
-    );
+    dispatch(getMyPermissionInThisWorkspace({ workspace: activeWorkspace, me: auth }));
   }, [auth, activeWorkspace]);
 
   const clickWorkspaceHandler = (workspace) => {

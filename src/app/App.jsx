@@ -34,11 +34,7 @@ const App = () => {
         <Route exact path="/" component={AuthPage} />
         <PrivateRoute path="/panel" component={ControlPanelPage} />
         <PrivateRoute exact path="/flow/:flowId/" component={FlowPage} />
-        <PrivateRoute
-          exact
-          path="/dashboard/:dashboardId"
-          component={DashboardPage}
-        />
+        <PrivateRoute exact path="/dashboard/:dashboardId" component={DashboardPage} />
         <Route path="*" component={NotFound} />
       </Switch>
       <ToastNotification />

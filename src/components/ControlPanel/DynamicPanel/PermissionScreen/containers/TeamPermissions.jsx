@@ -54,9 +54,7 @@ export default function TeamPermissions({ permissions, setSinglePermission }) {
             center
             onChange={(e) => handleChange(e)}
             disabled={permissions.EVERYTHING}
-            checked={
-              permissions.EVERYTHING || permissions.CAN_ASSIGN_PERMISSION
-            }
+            checked={permissions.EVERYTHING || permissions.CAN_ASSIGN_PERMISSION}
           />
         </Styled.PermissionContent>
       </Styled.PermissionContainer>

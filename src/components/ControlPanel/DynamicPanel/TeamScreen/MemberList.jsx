@@ -25,9 +25,9 @@ export default function MemberList() {
   const members = useMemo(
     () =>
       users.filter(({ workspaces }) =>
-        workspaces.some((workspace) => workspace === activeWorkspace._id)
+        workspaces.some((workspace) => workspace === activeWorkspace._id),
       ),
-    [activeWorkspace, users]
+    [activeWorkspace, users],
   );
   return (
     <Table dark hover>

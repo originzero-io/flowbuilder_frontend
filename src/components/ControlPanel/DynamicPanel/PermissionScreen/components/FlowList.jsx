@@ -34,7 +34,7 @@ function FlowList({
   }, []);
 
   const flowInThisProject = permissions[CAN_X_FLOW].filter(
-    (flow) => flow.projectId === project._id
+    (flow) => flow.projectId === project._id,
   );
 
   useDidMountEffect(() => {
@@ -93,9 +93,7 @@ function FlowList({
                   permissions[CAN_X_PROJECT_ALL] ||
                   permissions[CAN_X_PROJECT].includes(flow.project._id) ||
                   ((permissionName === "VIEW" || permissionName === "USAGE") &&
-                    (permissions.CAN_EDIT_FLOW.some(
-                      (f) => f.flowId === flow._id
-                    ) ||
+                    (permissions.CAN_EDIT_FLOW.some((f) => f.flowId === flow._id) ||
                       // permissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
 
                       // permissions.CAN_USAGE_FLOW_ALL.includes(project._id) ||
@@ -109,18 +107,14 @@ function FlowList({
                   permissions[CAN_X_FLOW].some((f) => f.flowId === flow._id) ||
                   ((permissionName === "VIEW" || permissionName === "USAGE") &&
                     // permissions.CAN_USAGE_FLOW.some(f=>f.flowId === flow._id) ||
-                    permissions.CAN_EDIT_FLOW.some(
-                      (f) => f.flowId === flow._id
-                    ))
+                    permissions.CAN_EDIT_FLOW.some((f) => f.flowId === flow._id))
                 }
               />
             </CollapsibleMenuItem>
           ))}
         </>
       ) : (
-        <div style={{ paddingLeft: "10px", fontSize: "1.3vmin" }}>
-          No flow in this project
-        </div>
+        <div style={{ paddingLeft: "10px", fontSize: "1.3vmin" }}>No flow in this project</div>
       )}
     </>
   );

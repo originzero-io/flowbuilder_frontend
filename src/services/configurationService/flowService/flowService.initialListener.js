@@ -1,11 +1,6 @@
 import store from "index";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
-import {
-  createFlow,
-  deleteFlow,
-  editFlow,
-  moveFlow,
-} from "store/reducers/flow/flowSlice";
+import { createFlow, deleteFlow, editFlow, moveFlow } from "store/reducers/flow/flowSlice";
 import notificationHelper from "utils/ui/notificationHelper";
 import flowExent from "./flowService.event";
 
@@ -18,7 +13,7 @@ const flowInitialListener = () => {
       getMyPermissionInThisWorkspace({
         workspace: workspaces.activeWorksapce,
         me: auth,
-      })
+      }),
     );
     notificationHelper.success("Flow created successfully");
   });

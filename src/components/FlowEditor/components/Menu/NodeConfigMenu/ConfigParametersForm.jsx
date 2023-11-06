@@ -28,9 +28,7 @@ export default function ConfigParametersForm({ node, dispatcher }) {
               placeholder={entry[1]}
               type={typeof entry[1]}
               defaultValue={entry[1]}
-              onChange={(event) =>
-                onChangeConfigParametersHandler(event, typeof entry[1])
-              }
+              onChange={(event) => onChangeConfigParametersHandler(event, typeof entry[1])}
             />
           </Col>
         </FormGroup>

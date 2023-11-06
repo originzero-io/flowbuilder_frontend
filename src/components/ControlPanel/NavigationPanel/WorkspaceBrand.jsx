@@ -36,10 +36,7 @@ const WorkspaceBrand = ({ workspace }) => {
           <span style={{ fontSize: "2vmin" }}>{workspace.name}</span>
           {role === "admin" && (
             <div>
-              <span
-                onClick={editWorkspaceHandler}
-                style={{ marginRight: "5px" }}
-              >
+              <span onClick={editWorkspaceHandler} style={{ marginRight: "5px" }}>
                 <BiEdit style={{ fontSize: "2.5vmin" }} />
               </span>
               <span onClick={deleteWorkspaceHandler}>

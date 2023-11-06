@@ -28,20 +28,11 @@ const AddProjectForm = () => {
     <Form onSubmit={onSubmitHandle}>
       <FormGroup>
         <Label>Project Name</Label>
-        <Input
-          name="name"
-          placeholder="project name"
-          onChange={onChangeHandler}
-          required
-        />
+        <Input name="name" placeholder="project name" onChange={onChangeHandler} required />
       </FormGroup>
       <FormGroup>
         <Label>Description</Label>
-        <Input
-          name="description"
-          placeholder="description"
-          onChange={onChangeHandler}
-        />
+        <Input name="description" placeholder="description" onChange={onChangeHandler} />
       </FormGroup>
       <Button type="submit">Submit</Button>
     </Form>

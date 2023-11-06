@@ -29,15 +29,11 @@ export default function EditorRightMenu() {
 
   const toggleMenu = () => {
     if (nodeConfigMenu.state === true) {
-      dispatch(
-        setNodeConfigMenu({ element: nodeConfigMenu.element, state: false })
-      );
+      dispatch(setNodeConfigMenu({ element: nodeConfigMenu.element, state: false }));
     } else {
       console.log("falseee");
       console.log(nodeConfigMenu.element);
-      dispatch(
-        setNodeConfigMenu({ element: nodeConfigMenu.element, state: true })
-      );
+      dispatch(setNodeConfigMenu({ element: nodeConfigMenu.element, state: true }));
     }
   };
 

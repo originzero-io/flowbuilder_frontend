@@ -19,7 +19,7 @@ export const openPaneContextMenu = (event) => {
         state: true,
         x: event.clientX - 250,
         y: event.clientY,
-      })
+      }),
     );
   }
   // soldan taşma
@@ -29,7 +29,7 @@ export const openPaneContextMenu = (event) => {
         state: true,
         x: event.clientX,
         y: event.clientY,
-      })
+      }),
     );
   }
   // alttan taşma
@@ -39,7 +39,7 @@ export const openPaneContextMenu = (event) => {
         state: true,
         x: event.clientX,
         y: event.clientY - 400,
-      })
+      }),
     );
   }
   // normal
@@ -49,7 +49,7 @@ export const openPaneContextMenu = (event) => {
         state: true,
         x: event.clientX,
         y: event.clientY,
-      })
+      }),
     );
   }
 };
@@ -61,7 +61,7 @@ export const openMultiSelectionContextMenu = (event) => {
       state: true,
       x: event.clientX,
       y: event.clientY,
-    })
+    }),
   );
 };
 
@@ -73,6 +73,6 @@ export const openElementContextMenu = (event, node) => {
       x: event.clientX,
       y: event.clientY,
       element: node,
-    })
+    }),
   );
 };

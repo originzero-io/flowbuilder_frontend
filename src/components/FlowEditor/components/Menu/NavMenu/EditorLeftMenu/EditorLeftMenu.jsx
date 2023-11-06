@@ -83,7 +83,7 @@ export default function EditorLeftMenu({ showMenu, setShowMenu }) {
 
     for (const category in categories) {
       const categoryItems = categories[category].filter((item) =>
-        item.name.toLowerCase().includes(value.toLowerCase())
+        item.name.toLowerCase().includes(value.toLowerCase()),
       );
 
       if (categoryItems.length > 0) {

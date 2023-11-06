@@ -27,9 +27,7 @@ function DashboardList({ project }) {
           ))}
         </>
       ) : (
-        <div style={{ paddingLeft: "10px", fontSize: "1.3vmin" }}>
-          No dashboard in this project
-        </div>
+        <div style={{ paddingLeft: "10px", fontSize: "1.3vmin" }}>No dashboard in this project</div>
       )}
     </>
   );

@@ -49,8 +49,7 @@ const HandleWrapper = styled.div`
   z-index: 1000;
   font-size: 10px;
   justify-content: center;
-  align-items: ${(props) =>
-    props.handleType === "source" ? "flex-start" : "flex-end"};
+  align-items: ${(props) => (props.handleType === "source" ? "flex-start" : "flex-end")};
   padding-top: 28px;
 `;
 
@@ -71,8 +70,7 @@ const propTypes = {
 const NodeGod = ({ self, children }) => {
   // const { sourceCount, targetCount } = self.data.ioEngine;
   const { enable } = self.data;
-  const { trigHandles, statusHandles, inputParameters, outputValues } =
-    self.data;
+  const { trigHandles, statusHandles, inputParameters, outputValues } = self.data;
   const updateNodeInternals = useUpdateNodeInternals();
   const dispatch = useDispatch();
   const [serverData, setServerData] = useState("");
@@ -113,10 +111,7 @@ const NodeGod = ({ self, children }) => {
   return (
     <NodeWrapper nodeType={self.type}>
       <HandleWrapper handleType="target">
-        <InputStatusHandles
-          trigHandles={trigHandles}
-          statusHandles={statusHandles}
-        />
+        <InputStatusHandles trigHandles={trigHandles} statusHandles={statusHandles} />
         {inputParameters && (
           <InputParameterHandles
             nodeId={self.id}
@@ -144,16 +139,10 @@ const NodeGod = ({ self, children }) => {
       </NodeArea>
       <HandleWrapper handleType="source">
         {statusHandles?.outputs && (
-          <OutputStatusHandles
-            statusHandles={statusHandles}
-            handleColor={handleColor}
-          />
+          <OutputStatusHandles statusHandles={statusHandles} handleColor={handleColor} />
         )}
         {outputValues && (
-          <OutputValueHandles
-            outputValues={outputValues}
-            handleColor={handleColor}
-          />
+          <OutputValueHandles outputValues={outputValues} handleColor={handleColor} />
         )}
       </HandleWrapper>
     </NodeWrapper>

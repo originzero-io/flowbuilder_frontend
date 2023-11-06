@@ -48,7 +48,7 @@ export const isEdgeExist = (newConnection, edges) =>
       edge.source === newConnection.source &&
       edge.target === newConnection.target &&
       edge.sourceHandle === newConnection.sourceHandle &&
-      edge.targetHandle === newConnection.targetHandle
+      edge.targetHandle === newConnection.targetHandle,
   );
 export const isHandleAlreadyConnected = (newConnection, edges) => {
   const handleType = newConnection.targetHandle.split("_")[0];
@@ -57,18 +57,14 @@ export const isHandleAlreadyConnected = (newConnection, edges) => {
       handleType !== "trig" &&
       handleType !== "status" &&
       edge.target === newConnection.target &&
-      edge.targetHandle === newConnection.targetHandle
+      edge.targetHandle === newConnection.targetHandle,
   );
 };
 
 export const setSourceNodeColorToEdge = (connection, updatedEdges, nodes) => {
-  const group = nodes.find((node) => node.id === connection.source)?.data.ui
-    .group;
+  const group = nodes.find((node) => node.id === connection.source)?.data.ui.group;
   const newEdges = updatedEdges.map((edge) => {
-    if (
-      edge.source === connection.source &&
-      edge.target === connection.target
-    ) {
+    if (edge.source === connection.source && edge.target === connection.target) {
       return {
         ...edge,
         group,
@@ -83,5 +79,4 @@ export const setSourceNodeColorToEdge = (connection, updatedEdges, nodes) => {
   return newEdges;
 };
 
-export const getSelectedNodes = (nodes) =>
-  nodes.filter((node) => node.selected === true);
+export const getSelectedNodes = (nodes) => nodes.filter((node) => node.selected === true);

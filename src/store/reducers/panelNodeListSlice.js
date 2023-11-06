@@ -14,13 +14,10 @@ export const panelNodeListSlice = createSlice({
       return payload;
     },
     addNodeToFavorites(state, { payload }) {
-      return state.map((node) =>
-        node.id === payload.id ? { ...node, fav: !node.fav } : node
-      );
+      return state.map((node) => (node.id === payload.id ? { ...node, fav: !node.fav } : node));
     },
   },
 });
 
 export default panelNodeListSlice.reducer;
-export const { setNodeList, addNodeToFavorites, loadPanelNodeList } =
-  panelNodeListSlice.actions;
+export const { setNodeList, addNodeToFavorites, loadPanelNodeList } = panelNodeListSlice.actions;

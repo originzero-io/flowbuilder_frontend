@@ -5,10 +5,7 @@ import { useDispatch } from "react-redux";
 import { setModal } from "store/reducers/componentSlice";
 import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/EditFlowForm";
 import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/MoveFlowForm";
-import {
-  DropdownItem,
-  DropdownWrapper,
-} from "../../StyledComponents/DropdownMenu";
+import { DropdownItem, DropdownWrapper } from "../../StyledComponents/DropdownMenu";
 import * as Styled from "./Card.style";
 
 const propTypes = {
@@ -27,10 +24,7 @@ export default function DetailMenu({ deleteEvent, data, getPermission }) {
     dispatch(setModal(<EditFlow flow={data} />));
   };
   return (
-    <DropdownWrapper
-      tabIndex="1"
-      style={{ position: "absolute", right: "12px", top: "3px" }}
-    >
+    <DropdownWrapper tabIndex="1" style={{ position: "absolute", right: "12px", top: "3px" }}>
       <Styled.CardMoreButton onClick={(e) => e.stopPropagation()}>
         <FiMoreVertical />
       </Styled.CardMoreButton>
@@ -42,12 +36,8 @@ export default function DetailMenu({ deleteEvent, data, getPermission }) {
           <>
             <DropdownItem onClick={moveHandler}>Move</DropdownItem>
             <DropdownItem onClick={editHandler}>Edit</DropdownItem>
-            <DropdownItem onClick={(e) => e.stopPropagation()}>
-              Duplicate
-            </DropdownItem>
-            <DropdownItem onClick={(e) => deleteEvent(e, data)}>
-              Delete
-            </DropdownItem>
+            <DropdownItem onClick={(e) => e.stopPropagation()}>Duplicate</DropdownItem>
+            <DropdownItem onClick={(e) => deleteEvent(e, data)}>Delete</DropdownItem>
           </>
         )}
       </Styled.DetailMenuList>

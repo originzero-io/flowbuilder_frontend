@@ -11,12 +11,7 @@ const propTypes = {
   handleSingleAllChange: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
-function CreateFlowPermission({
-  projects,
-  permissions,
-  handleSingleAllChange,
-  handleChange,
-}) {
+function CreateFlowPermission({ projects, permissions, handleSingleAllChange, handleChange }) {
   useEffect(() => {
     if (permissions.CAN_CREATE_FLOW.length === projects.length) {
       handleSingleAllChange({
@@ -39,9 +34,7 @@ function CreateFlowPermission({
               onChange={handleSingleAllChange}
               defaultChecked={permissions.CAN_CREATE_FLOW_ALL}
               disabled={permissions.EVERYTHING}
-              checked={
-                permissions.EVERYTHING || permissions.CAN_CREATE_FLOW_ALL
-              }
+              checked={permissions.EVERYTHING || permissions.CAN_CREATE_FLOW_ALL}
             />
           </CollapsibleMenuItem>
           {projects.map((project) => (
@@ -51,9 +44,7 @@ function CreateFlowPermission({
                 name="CAN_CREATE_FLOW"
                 id={project._id}
                 onChange={(e) => handleChange(e)}
-                defaultChecked={permissions.CAN_CREATE_FLOW.includes(
-                  project._id
-                )}
+                defaultChecked={permissions.CAN_CREATE_FLOW.includes(project._id)}
                 disabled={permissions.EVERYTHING}
                 checked={
                   permissions.EVERYTHING ||

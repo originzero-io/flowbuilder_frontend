@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  deleteSelectedNodes,
-  setEnableSelectedNodes,
-} from "store/reducers/flow/flowElementsSlice";
+import { deleteSelectedNodes, setEnableSelectedNodes } from "store/reducers/flow/flowElementsSlice";
 import { setMultiSelectionContextMenu } from "store/reducers/menuSlice";
 import NodeGroupMenu from "../../NodeGroupMenu/NodeGroupMenu";
 import * as Styled from "../ElementContext/ElementContextMenu.style";
@@ -39,9 +36,7 @@ export default function MultiSelectionContextMenu() {
       {multiSelectionMenu.state && (
         <Styled.Menu x={multiSelectionMenu.x} y={multiSelectionMenu.y}>
           <Styled.MenuItem onClick={disableHandle}>Disable</Styled.MenuItem>
-          <Styled.MenuItem onClick={groupHandle}>
-            {open ? "Group <" : "Group >"}
-          </Styled.MenuItem>
+          <Styled.MenuItem onClick={groupHandle}>{open ? "Group <" : "Group >"}</Styled.MenuItem>
           <Styled.MenuItem onClick={deleteItems}>Delete</Styled.MenuItem>
           {showGroup && <NodeGroupMenu self={self} />}
         </Styled.Menu>

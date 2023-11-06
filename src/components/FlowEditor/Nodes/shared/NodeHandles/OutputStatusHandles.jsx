@@ -10,8 +10,7 @@ const OutputStatusHandles = ({ statusHandles, handleColor }) => {
       (sourceType === "trig" || sourceType === "status") &&
       (targetType === "trig" || targetType === "status");
 
-    const isErrorValConnection =
-      sourceName === "errorVal" && targetType !== "trig";
+    const isErrorValConnection = sourceName === "errorVal" && targetType !== "trig";
     return isStatusConnection || isErrorValConnection;
   };
 
@@ -34,14 +33,10 @@ const OutputStatusHandles = ({ statusHandles, handleColor }) => {
                 className="node-status-handle horizontal"
                 style={{
                   backgroundColor:
-                    outputStatusHandle[0] === "errorVal"
-                      ? handleColor.string
-                      : "#40916c",
+                    outputStatusHandle[0] === "errorVal" ? handleColor.string : "#40916c",
                 }}
               />
-              <div style={{ color: "gray", marginLeft: "2px" }}>
-                {outputStatusHandle[0]}
-              </div>
+              <div style={{ color: "gray", marginLeft: "2px" }}>{outputStatusHandle[0]}</div>
             </div>
           )}
         </div>

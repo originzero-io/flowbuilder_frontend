@@ -40,10 +40,7 @@ const NavigationPanel = () => {
     } else alert("Firstly, create a workspace.");
   };
   const projectItem = () => (
-    <CollapsibleTrigger
-      label={`Projects (${projects.length})`}
-      icon={<AiOutlineProject />}
-    >
+    <CollapsibleTrigger label={`Projects (${projects.length})`} icon={<AiOutlineProject />}>
       {getPermission("CAN_CREATE_PROJECT") && (
         <div onClick={(e) => showModalHandle(e)}>
           <BsPlusCircle style={{ fontSize: "2vmin" }} />
@@ -51,9 +48,7 @@ const NavigationPanel = () => {
       )}
     </CollapsibleTrigger>
   );
-  const settingsItem = () => (
-    <CollapsibleTrigger label="Settings" icon={<FiSettings />} />
-  );
+  const settingsItem = () => <CollapsibleTrigger label="Settings" icon={<FiSettings />} />;
   return (
     <Styled.Container>
       <Styled.NavMenu>

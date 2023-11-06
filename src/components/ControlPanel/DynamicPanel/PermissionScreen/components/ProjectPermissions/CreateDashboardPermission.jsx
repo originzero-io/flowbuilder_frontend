@@ -11,12 +11,7 @@ const propTypes = {
   handleSingleAllChange: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
-function CreateDashboardPermission({
-  projects,
-  permissions,
-  handleSingleAllChange,
-  handleChange,
-}) {
+function CreateDashboardPermission({ projects, permissions, handleSingleAllChange, handleChange }) {
   useEffect(() => {
     if (permissions.CAN_CREATE_DASHBOARD.length === projects.length) {
       handleSingleAllChange({
@@ -39,9 +34,7 @@ function CreateDashboardPermission({
               onChange={handleSingleAllChange}
               defaultChecked={permissions.CAN_CREATE_DASHBOARD_ALL}
               disabled={permissions.EVERYTHING}
-              checked={
-                permissions.EVERYTHING || permissions.CAN_CREATE_DASHBOARD_ALL
-              }
+              checked={permissions.EVERYTHING || permissions.CAN_CREATE_DASHBOARD_ALL}
             />
           </CollapsibleMenuItem>
           {projects.map((project) => (
@@ -51,9 +44,7 @@ function CreateDashboardPermission({
                 name="CAN_CREATE_DASHBOARD"
                 id={project._id}
                 onChange={(e) => handleChange(e)}
-                defaultChecked={permissions.CAN_CREATE_DASHBOARD.includes(
-                  project._id
-                )}
+                defaultChecked={permissions.CAN_CREATE_DASHBOARD.includes(project._id)}
                 disabled={permissions.EVERYTHING}
                 checked={
                   permissions.EVERYTHING ||

@@ -14,17 +14,12 @@ const SearchBar = styled.input`
   caret-color: green;
   user-select: none;
 `;
-export default function AllNodes({
-  nodeList,
-  favClick,
-  onDragStart,
-  addNewNode,
-}) {
+export default function AllNodes({ nodeList, favClick, onDragStart, addNewNode }) {
   const [searched, setSearched] = useState(nodeList);
   const searchHandle = (e) => {
     const { value } = e.target;
     const filtered = nodeList.filter((node) =>
-      node.name.toLowerCase().includes(value.toLowerCase())
+      node.name.toLowerCase().includes(value.toLowerCase()),
     );
     setSearched(filtered);
   };

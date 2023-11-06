@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  AiOutlineFundProjectionScreen,
-  AiOutlineTeam,
-  AiOutlineSave,
-} from "react-icons/ai";
+import { AiOutlineFundProjectionScreen, AiOutlineTeam, AiOutlineSave } from "react-icons/ai";
 import { MdDevicesOther, MdOutlineAssignmentInd } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -56,7 +52,7 @@ export default function PermissionScreen() {
       getUserPermissionInThisWorkspace({
         workspace: activeWorkspace,
         user: member,
-      })
+      }),
     );
   }, [activeWorkspace._id, member._id]);
 
@@ -73,7 +69,7 @@ export default function PermissionScreen() {
         getMyPermissionInThisWorkspace({
           workspace: activeWorkspace,
           me: auth,
-        })
+        }),
       );
     }
     notification.success("Permissions saved");
@@ -98,11 +94,7 @@ export default function PermissionScreen() {
             checked={permissions.CAN_DO_EVERYTHING}
           />
         </Styled.AllPermissionsContainer>
-        <Tabs
-          selectedTabClassName="selected-tab"
-          style={{ height: "80%" }}
-          forceRenderTabPanel
-        >
+        <Tabs selectedTabClassName="selected-tab" style={{ height: "80%" }} forceRenderTabPanel>
           <TabList
             style={{
               marginBottom: "0px",
@@ -157,22 +149,12 @@ export default function PermissionScreen() {
           </TabPanel>
         </Tabs>
         <Button color="success" onClick={handleSavePermissions}>
-          <AiOutlineSave style={{ fontSize: "24px" }} /> Assign this to{" "}
-          {member.username}
+          <AiOutlineSave style={{ fontSize: "24px" }} /> Assign this to {member.username}
         </Button>
-        <Button
-          outline
-          style={{ marginLeft: "15px" }}
-          onClick={handleSavePreset}
-        >
+        <Button outline style={{ marginLeft: "15px" }} onClick={handleSavePreset}>
           <MdOutlineAssignmentInd style={{ fontSize: "24px" }} /> Save as preset
         </Button>
-        <Button
-          outline
-          color="warning"
-          style={{ marginLeft: "15px" }}
-          onClick={handleLoadPreset}
-        >
+        <Button outline color="warning" style={{ marginLeft: "15px" }} onClick={handleLoadPreset}>
           <MdOutlineAssignmentInd style={{ fontSize: "24px" }} /> Load Preset
         </Button>
       </div>

@@ -67,8 +67,6 @@ export default function Checkbox({
     //   />
     // </div>
   );
-  return (
-    <>{center ? <div style={centeredStyle}>{checkbox()}</div> : checkbox()}</>
-  );
+  return <>{center ? <div style={centeredStyle}>{checkbox()}</div> : checkbox()}</>;
 }
 Checkbox.propTypes = propTypes;

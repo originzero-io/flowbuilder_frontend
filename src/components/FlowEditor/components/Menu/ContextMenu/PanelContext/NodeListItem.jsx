@@ -9,12 +9,7 @@ const propTypes = {
   addNewNode: PropTypes.func.isRequired,
   favClick: PropTypes.func.isRequired,
 };
-export default function NodeListItem({
-  node,
-  onDragStart,
-  addNewNode,
-  favClick,
-}) {
+export default function NodeListItem({ node, onDragStart, addNewNode, favClick }) {
   return (
     <Styled.NodeElement
       onDragStart={(event) => onDragStart(event, node.name)}
@@ -27,10 +22,7 @@ export default function NodeListItem({
       </div>
       <Styled.IconWrapper>
         <div onClick={() => addNewNode(node)}>
-          <i
-            className="fas fa-plus"
-            style={{ width: "15px", height: "15px" }}
-          />
+          <i className="fas fa-plus" style={{ width: "15px", height: "15px" }} />
         </div>
         <FavIconManager node={node} favClick={favClick} />
       </Styled.IconWrapper>

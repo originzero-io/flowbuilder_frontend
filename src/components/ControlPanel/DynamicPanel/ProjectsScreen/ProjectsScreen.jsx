@@ -1,9 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect, useState } from "react";
-import {
-  CollapsibleMenu,
-  CollapsibleTrigger,
-} from "components/Shared/Collapsible/CollapsibleMenu";
+import { CollapsibleMenu, CollapsibleTrigger } from "components/Shared/Collapsible/CollapsibleMenu";
 import { setModal } from "store/reducers/componentSlice";
 import { VscAdd } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
@@ -24,10 +21,7 @@ export default function ProjectsScreen({ flows }) {
   const { projects, activeProject } = useProject();
   const getPermission = useAuthPermission("project");
   const flowsCollapseTrigger = () => (
-    <CollapsibleTrigger
-      label={`Flows (${flows.length})`}
-      style={{ color: "white" }}
-    />
+    <CollapsibleTrigger label={`Flows (${flows.length})`} style={{ color: "white" }} />
   );
   const dashboardCollapseTrigger = () => (
     <CollapsibleTrigger label="Dashboards" style={{ color: "white" }} />
@@ -35,9 +29,7 @@ export default function ProjectsScreen({ flows }) {
   const [searched, setSearched] = useState(flows);
   const searchHandle = (e) => {
     const { value } = e.target;
-    const filtered = flows.filter((flow) =>
-      flow.name.toLowerCase().includes(value.toLowerCase())
-    );
+    const filtered = flows.filter((flow) => flow.name.toLowerCase().includes(value.toLowerCase()));
     setSearched(filtered);
   };
   useEffect(() => {
@@ -66,9 +58,7 @@ export default function ProjectsScreen({ flows }) {
           </CollapsibleMenu>
           <CollapsibleMenu trigger={dashboardCollapseTrigger()} open>
             <Styled.DashboardsContainer>
-              <Styled.Box
-                onClick={() => dispatch(setModal(<AddDashboardForm />))}
-              >
+              <Styled.Box onClick={() => dispatch(setModal(<AddDashboardForm />))}>
                 <VscAdd />
               </Styled.Box>
             </Styled.DashboardsContainer>

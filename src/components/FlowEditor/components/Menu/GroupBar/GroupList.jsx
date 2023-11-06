@@ -26,9 +26,7 @@ const GroupList = ({ theme, flowId }) => {
     }
   };
   const groupItemClickHandle = (group) => {
-    const nodesByGroup = flowElements.nodes.filter(
-      (node) => node.data.ui.group._id === group._id
-    );
+    const nodesByGroup = flowElements.nodes.filter((node) => node.data.ui.group._id === group._id);
     dispatch(selectElements(nodesByGroup));
   };
   const editIconClickHandle = (group) => {
@@ -52,20 +50,11 @@ const GroupList = ({ theme, flowId }) => {
               onClick={() => groupItemClickHandle(group)}
             >
               {editableItem.state && editableItem.group._id === group._id ? (
-                <EditForm
-                  editableItem={editableItem}
-                  setEditableItem={setEditableItem}
-                />
+                <EditForm editableItem={editableItem} setEditableItem={setEditableItem} />
               ) : (
                 <>
-                  <Styled.GroupColor
-                    width="22px"
-                    height="22px"
-                    value={group.color}
-                  />
-                  <Styled.Label onClick={labelClickHandle}>
-                    {group.name}
-                  </Styled.Label>
+                  <Styled.GroupColor width="22px" height="22px" value={group.color} />
+                  <Styled.Label onClick={labelClickHandle}>{group.name}</Styled.Label>
                 </>
               )}
 
@@ -77,10 +66,7 @@ const GroupList = ({ theme, flowId }) => {
                     onClick={() => editIconClickHandle(group)}
                     theme={theme}
                   />
-                  <DeleteIcon
-                    onClick={() => deleteIconClickHandle(group)}
-                    theme={theme}
-                  />
+                  <DeleteIcon onClick={() => deleteIconClickHandle(group)} theme={theme} />
                 </>
               )}
             </Styled.GroupItem>

@@ -35,10 +35,7 @@ export default function DevicePermissions({
   return (
     <Styled.TabContainer>
       <Styled.PermissionContainer>
-        <CreateDevicePermission
-          permissions={permissions}
-          handleChange={handleSingleDeviceChange}
-        />
+        <CreateDevicePermission permissions={permissions} handleChange={handleSingleDeviceChange} />
       </Styled.PermissionContainer>
       <Styled.PermissionContainer>
         <EditDevicePermission

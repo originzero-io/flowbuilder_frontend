@@ -17,16 +17,8 @@ import { useReactFlow } from "reactflow";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { logOut } from "store/reducers/authSlice";
 import { setModal } from "store/reducers/componentSlice";
-import {
-  changeEdgeType,
-  importFlow,
-  selectElements,
-} from "store/reducers/flow/flowElementsSlice";
-import {
-  setFlowEdgeType,
-  setMiniMapDisplay,
-  setTheme,
-} from "store/reducers/flow/flowGuiSlice";
+import { changeEdgeType, importFlow, selectElements } from "store/reducers/flow/flowElementsSlice";
+import { setFlowEdgeType, setMiniMapDisplay, setTheme } from "store/reducers/flow/flowGuiSlice";
 import styled from "styled-components";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import useAuth from "utils/hooks/useAuth";
@@ -78,7 +70,7 @@ export default function EditorTopRightMenu() {
         console.log("elements: ", reactFlowInstance.toObject());
         const hiddenElement = document.createElement("a");
         hiddenElement.href = `data:application/octet-stream;base64,${window.btoa(
-          JSON.stringify(elements)
+          JSON.stringify(elements),
         )}`;
         hiddenElement.target = "_blank";
         hiddenElement.download = `${flowConfig.name}.json`;
@@ -97,12 +89,9 @@ export default function EditorTopRightMenu() {
           const flow = JSON.parse(event.target.result);
           dispatch(importFlow(flow));
         };
-      } else
-        notification.error(
-          "This file cannot be imported. Please provide JSON file"
-        );
+      } else notification.error("This file cannot be imported. Please provide JSON file");
     },
-    [reactFlowInstance]
+    [reactFlowInstance],
   );
   const [active, setActive] = useState({
     theme: false,
@@ -144,7 +133,7 @@ export default function EditorTopRightMenu() {
       setExecutionStatus("error");
     } else if (unconnectedNodes.exist) {
       notification.error(
-        "This flow contains unconnected nodes. Please make sure to connect all nodes."
+        "This flow contains unconnected nodes. Please make sure to connect all nodes.",
       );
       dispatch(selectElements(unconnectedNodes.nodes));
       setExecutionStatus("error");
@@ -208,11 +197,7 @@ export default function EditorTopRightMenu() {
         </StyledDropdown.DropdownList>
       </StyledDropdown.DropdownWrapper>
 
-      <Styled.MenuItem
-        data-tip="Settings"
-        data-for="settings"
-        onClick={onSettingsHandler}
-      >
+      <Styled.MenuItem data-tip="Settings" data-for="settings" onClick={onSettingsHandler}>
         <LuSettings2 fontSize={"2.5vmin"} />
       </Styled.MenuItem>
       <Tooltip id="settings" place="bottom" />
@@ -231,17 +216,10 @@ export default function EditorTopRightMenu() {
           </StyledDropdown.DropdownItem>
           <StyledDropdown.DropdownItem>
             Mini-map
-            <SwitchButton
-              checked={active.miniMap}
-              onChange={changeMiniMapDisplay}
-            />
+            <SwitchButton checked={active.miniMap} onChange={changeMiniMapDisplay} />
           </StyledDropdown.DropdownItem>
-          <StyledDropdown.DropdownItem>
-            Account Settings
-          </StyledDropdown.DropdownItem>
-          <StyledDropdown.DropdownItem onClick={logOutHandle}>
-            Log Out
-          </StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem>Account Settings</StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem onClick={logOutHandle}>Log Out</StyledDropdown.DropdownItem>
           <StyledDropdown.DropdownItem>
             <select onChange={edgeTypeHandle} defaultValue="smoothstep">
               <option value="bezier">Bezier</option>

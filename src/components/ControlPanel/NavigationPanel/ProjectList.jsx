@@ -66,9 +66,7 @@ export default function ProjectList({ projects }) {
           </CollapsibleMenuItem>
         ))
       ) : (
-        <span
-          style={{ color: "white", fontSize: "1.5vmin", paddingLeft: "10%" }}
-        >
+        <span style={{ color: "white", fontSize: "1.5vmin", paddingLeft: "10%" }}>
           No projects found
         </span>
       )}

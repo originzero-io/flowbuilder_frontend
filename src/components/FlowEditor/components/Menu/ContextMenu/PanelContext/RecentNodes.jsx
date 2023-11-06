@@ -3,12 +3,7 @@ import sortBy from "lodash/sortBy";
 import * as Styled from "./PanelContextMenu.style";
 import NodeListItem from "./NodeListItem";
 
-export default function RecentNodes({
-  nodeList,
-  favClick,
-  onDragStart,
-  addNewNode,
-}) {
+export default function RecentNodes({ nodeList, favClick, onDragStart, addNewNode }) {
   const recent = nodeList.filter((node) => node.createdDate !== undefined);
   const [recentNodes, setRecentNodes] = useState([]);
   useEffect(() => {

@@ -53,15 +53,11 @@ export default function NodeHeader({ self }) {
   //   console.log("outgoers: ", outgoers);
   // };
   const sourceEdges = () => {
-    const sources = flowElements.edges.filter(
-      (edge) => edge.source === self.id
-    );
+    const sources = flowElements.edges.filter((edge) => edge.source === self.id);
     console.log("sources: ", sources);
   };
   const targetEdges = () => {
-    const targets = flowElements.edges.filter(
-      (edge) => edge.target === self.id
-    );
+    const targets = flowElements.edges.filter((edge) => edge.target === self.id);
     console.log("targets: ", targets);
   };
 
@@ -77,21 +73,13 @@ export default function NodeHeader({ self }) {
       {/* <NodeIcon/> */}
       {/* <button onClick={targetEdges}>TE</button>
       <button onClick={sourceEdges}>SE</button> */}
-      <MenuBar
-        nodeType={self.type}
-        selected={self.selected}
-        onClick={onShowNodeMenuHandle}
-      >
+      <MenuBar nodeType={self.type} selected={self.selected} onClick={onShowNodeMenuHandle}>
         <RxHamburgerMenu></RxHamburgerMenu>
         {showNodeMenu && <NodeMenu self={self}></NodeMenu>}
       </MenuBar>
 
       <Content>
-        {edit ? (
-          <EditNameForm setEdit={setEdit} self={self} />
-        ) : (
-          <Label>{label}</Label>
-        )}
+        {edit ? <EditNameForm setEdit={setEdit} self={self} /> : <Label>{label}</Label>}
       </Content>
       <FeatureIconsWrapper>
         {hover && <FeatureIcons self={self} edit={edit} setEdit={setEdit} />}
@@ -110,9 +98,7 @@ export const Header = styled.div`
   margin: -2px;
 
   border-bottom: ${({ nodeType }) =>
-    nodeType === "TRIGGER"
-      ? "1px solid #65cd1a"
-      : "1px solid rgba(81, 92, 133, 1)"};
+    nodeType === "TRIGGER" ? "1px solid #65cd1a" : "1px solid rgba(81, 92, 133, 1)"};
 
   // border-bottom: 1px solid pink;
   /* border-bottom: ${({ selected }) =>
@@ -121,8 +107,7 @@ export const Header = styled.div`
 export const MenuBar = styled.div`
   width: 32px;
   height: 100%;
-  /* background-color: ${({ selected }) =>
-    selected ? "#A6B3E8" : "rgba(81, 92, 133, 1)"}; */
+  /* background-color: ${({ selected }) => (selected ? "#A6B3E8" : "rgba(81, 92, 133, 1)")}; */
   background-color: ${({ nodeType }) =>
     nodeType === "TRIGGER" ? "#65cd1a" : "rgba(81, 92, 133, 1)"};
   border-radius: 4px 0px 0px 0px;

@@ -50,12 +50,7 @@ function TriggerInputHandleForm({ node, dispatcher }) {
             </div>
           );
         })}
-      <Button
-        size="sm"
-        color="success"
-        style={{ marginTop: "15px" }}
-        onClick={addNewTrigHandler}
-      >
+      <Button size="sm" color="success" style={{ marginTop: "15px" }} onClick={addNewTrigHandler}>
         Add trig handle
       </Button>
     </div>

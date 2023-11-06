@@ -52,15 +52,9 @@ export default function LoginForm() {
               required: "Username must enter the field",
             })}
             placeholder="Username"
-            defaultValue={
-              import.meta.env.VITE_HOST_ENV === "development"
-                ? "akinsibay"
-                : null
-            }
+            defaultValue={import.meta.env.VITE_HOST_ENV === "development" ? "akinsibay" : null}
           />
-          {errors.username && (
-            <Styled.ErrorMessage>{errors.username.message}</Styled.ErrorMessage>
-          )}
+          {errors.username && <Styled.ErrorMessage>{errors.username.message}</Styled.ErrorMessage>}
         </FormGroup>
         <FormGroup>
           <RiLockPasswordFill
@@ -81,13 +75,9 @@ export default function LoginForm() {
               },
             })}
             placeholder="Password"
-            defaultValue={
-              import.meta.env.VITE_HOST_ENV === "development" ? "1234" : null
-            }
+            defaultValue={import.meta.env.VITE_HOST_ENV === "development" ? "1234" : null}
           />
-          {errors.password && (
-            <Styled.ErrorMessage>{errors.password.message}</Styled.ErrorMessage>
-          )}
+          {errors.password && <Styled.ErrorMessage>{errors.password.message}</Styled.ErrorMessage>}
         </FormGroup>
         <Styled.Submit type="submit" onClick={handleSubmit(onSubmitHandle)}>
           Log in

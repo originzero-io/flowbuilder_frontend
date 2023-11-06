@@ -1,20 +1,10 @@
-import {
-  addEdge,
-  updateEdge,
-  applyEdgeChanges,
-  applyNodeChanges,
-  getOutgoers,
-} from "reactflow";
+import { addEdge, updateEdge, applyEdgeChanges, applyNodeChanges, getOutgoers } from "reactflow";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  isEdgeExist,
-  setSourceNodeColorToEdge,
-} from "components/FlowEditor/helpers/elementHelper";
+import { isEdgeExist, setSourceNodeColorToEdge } from "components/FlowEditor/helpers/elementHelper";
 import FlowExecutorHttpService from "services/flowExecutorService/flowExecutor.http";
 
-export const getElementsByFlow = createAsyncThunk(
-  "elements/getByFlow",
-  async () => FlowExecutorHttpService.getElements()
+export const getElementsByFlow = createAsyncThunk("elements/getByFlow", async () =>
+  FlowExecutorHttpService.getElements(),
 );
 
 const INITIAL_FLOW = {
@@ -65,11 +55,7 @@ export const flowElementsSlice = createSlice({
       } else {
         // update edge
         const updatedEdges = updateEdge(oldEdge, newConnection, state.edges);
-        const newArray = setSourceNodeColorToEdge(
-          newConnection,
-          updatedEdges,
-          state.nodes
-        );
+        const newArray = setSourceNodeColorToEdge(newConnection, updatedEdges, state.nodes);
         state.edges = newArray;
       }
     },
@@ -231,7 +217,7 @@ export const flowElementsSlice = createSlice({
           position: { x: 10, y: 90 },
           parentNode: "A",
           extent: "parent",
-        }
+        },
       );
 
       state.edges.push({ id: "b-c", source: "B", target: "C" });

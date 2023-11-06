@@ -8,9 +8,7 @@ class PermissionService extends ConfigurationService {
   }
 
   async getUserPermissionInThisWorkspace(workspaceId, userId) {
-    const response = await this.service.get(
-      `/permissions/workspace/${workspaceId}/user/${userId}`
-    );
+    const response = await this.service.get(`/permissions/workspace/${workspaceId}/user/${userId}`);
     return response.data;
   }
 

@@ -26,12 +26,7 @@ export default function AddDashboardForm() {
     <Form onSubmit={onSubmitHandle}>
       <FormGroup>
         <Label>Dashboard Name</Label>
-        <Input
-          name="name"
-          placeholder="dashboard name"
-          onChange={onChangeHandler}
-          required
-        />
+        <Input name="name" placeholder="dashboard name" onChange={onChangeHandler} required />
       </FormGroup>
       <FormGroup>
         <Label>Description</Label>

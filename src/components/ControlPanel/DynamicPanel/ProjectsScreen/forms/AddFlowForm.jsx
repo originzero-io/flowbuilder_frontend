@@ -58,7 +58,7 @@ export default function AddFlowForm() {
         getMyPermissionInThisWorkspace({
           workspace: activeWorkspace,
           me: auth,
-        })
+        }),
       );
       notificationHelper.success("Flow created successfully");
       dispatch(setModal(false));

@@ -52,11 +52,7 @@ export function PermissionProvider({ children }) {
     processors,
   };
 
-  return (
-    <PermissionContext.Provider value={value}>
-      {children}
-    </PermissionContext.Provider>
-  );
+  return <PermissionContext.Provider value={value}>{children}</PermissionContext.Provider>;
 }
 
 PermissionProvider.propTypes = propTypes;

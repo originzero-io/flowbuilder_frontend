@@ -4,9 +4,7 @@ export const checkIfTriggerNode = (nodes) => {
   return nodes.some((node) => node.type === "TRIGGER");
 };
 export const getFunctionalNodes = (nodes) => {
-  return nodes.filter(
-    (node) => node.type !== "CONSTANT" && node.type !== "TRIGGER"
-  );
+  return nodes.filter((node) => node.type !== "CONSTANT" && node.type !== "TRIGGER");
 };
 
 // ? nodun value girişlerine yapılmış bağlantıları verir
@@ -15,15 +13,13 @@ export const getMyConnectedValueEdges = (node, edges) => {
     (edge) =>
       edge.target === node.id &&
       !edge.targetHandle.includes("trig_") &&
-      !edge.targetHandle.includes("status_")
+      !edge.targetHandle.includes("status_"),
   );
 
   // ? Aynı inputa yapılmış olan bağlantıları temizler. Duplice bağlantıları kaldırır
   const myNonDuplicatedValueEdges = myValueEdges.filter(
     (edge, index) =>
-      myValueEdges.findIndex(
-        (item) => item.targetHandle === edge.targetHandle
-      ) === index
+      myValueEdges.findIndex((item) => item.targetHandle === edge.targetHandle) === index,
   );
 
   return myNonDuplicatedValueEdges;
@@ -31,15 +27,13 @@ export const getMyConnectedValueEdges = (node, edges) => {
 
 export const getMyTrigEdges = (node, edges) => {
   const myValueEdges = edges.filter(
-    (edge) => edge.target === node.id && edge.targetHandle.includes("trig_")
+    (edge) => edge.target === node.id && edge.targetHandle.includes("trig_"),
   );
 
   // ? Aynı inputa yapılmış olan bağlantıları temizler. Duplice bağlantıları kaldırır
   const myNonDuplicatedTrigEdges = myValueEdges.filter(
     (edge, index) =>
-      myValueEdges.findIndex(
-        (item) => item.targetHandle === edge.targetHandle
-      ) === index
+      myValueEdges.findIndex((item) => item.targetHandle === edge.targetHandle) === index,
   );
 
   return myNonDuplicatedTrigEdges;
@@ -85,14 +79,9 @@ export const checkAllConnectedTrigsHandles = (nodes, edges) => {
   const unConnectedTrigHandles = [];
   nodes.forEach((node) => {
     const connectedTrigHandles = getMyTrigEdges(node, edges);
-    const enableTrigHandles = Object.values(node.data.trigHandles).filter(
-      (th) => th === true
-    );
+    const enableTrigHandles = Object.values(node.data.trigHandles).filter((th) => th === true);
 
-    if (
-      enableTrigHandles.length > 1 &&
-      connectedTrigHandles.length < enableTrigHandles.length
-    ) {
+    if (enableTrigHandles.length > 1 && connectedTrigHandles.length < enableTrigHandles.length) {
       unConnectedTrigHandles.push(node);
     }
   });

@@ -1,32 +1,23 @@
 import FlowGroupService from "services/configurationService/flowGroupService/flowGroupService.http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import flowElementsSlice, {
-  deleteGroupOfElement,
-  updateGroupOfElement,
-} from "./flowElementsSlice";
+import flowElementsSlice, { deleteGroupOfElement, updateGroupOfElement } from "./flowElementsSlice";
 
 export const getGroups = createAsyncThunk(
   "groups/get",
-  async (flow_id) => await FlowGroupService.getGroups(flow_id)
+  async (flow_id) => await FlowGroupService.getGroups(flow_id),
 );
 export const createGroup = createAsyncThunk(
   "groups/create",
-  async ({ flowId, group }) => await FlowGroupService.createGroup(flowId, group)
+  async ({ flowId, group }) => await FlowGroupService.createGroup(flowId, group),
 );
-export const updateGroup = createAsyncThunk(
-  "groups/update",
-  async (currentGroup, thunkApi) => {
-    thunkApi.dispatch(updateGroupOfElement(currentGroup));
-    return await FlowGroupService.updateGroup(currentGroup);
-  }
-);
-export const deleteGroup = createAsyncThunk(
-  "groups/delete",
-  async (group, thunkApi) => {
-    thunkApi.dispatch(deleteGroupOfElement(group._id));
-    return await FlowGroupService.deleteGroup(group);
-  }
-);
+export const updateGroup = createAsyncThunk("groups/update", async (currentGroup, thunkApi) => {
+  thunkApi.dispatch(updateGroupOfElement(currentGroup));
+  return await FlowGroupService.updateGroup(currentGroup);
+});
+export const deleteGroup = createAsyncThunk("groups/delete", async (group, thunkApi) => {
+  thunkApi.dispatch(deleteGroupOfElement(group._id));
+  return await FlowGroupService.deleteGroup(group);
+});
 
 export const flowGroupsSlice = createSlice({
   name: "flowGroups",

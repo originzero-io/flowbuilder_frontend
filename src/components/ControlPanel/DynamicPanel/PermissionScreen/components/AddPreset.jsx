@@ -31,11 +31,7 @@ export default function AddPreset({ permissions }) {
     <Form onSubmit={onSubmitHandle}>
       <FormGroup>
         <Label>Assign name for this permission preferences</Label>
-        <Input
-          name="presetName"
-          placeholder="name"
-          onChange={onChangeHandler}
-        />
+        <Input name="presetName" placeholder="name" onChange={onChangeHandler} />
       </FormGroup>
       <Button type="submit">Submit</Button>
     </Form>

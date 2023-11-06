@@ -44,30 +44,15 @@ export default function AddUserForm() {
           name="avatar"
           onChange={profilePictureHandle}
         />
-        <Input
-          name="name"
-          placeholder="Full Name"
-          onChange={onChangeHandler}
-          required
-        />
+        <Input name="name" placeholder="Full Name" onChange={onChangeHandler} required />
       </FormGroup>
       <FormGroup>
         <Label>Username</Label>
-        <Input
-          name="username"
-          placeholder="Username"
-          onChange={onChangeHandler}
-          required
-        />
+        <Input name="username" placeholder="Username" onChange={onChangeHandler} required />
       </FormGroup>
       <FormGroup>
         <Label>E mail</Label>
-        <Input
-          name="email"
-          placeholder="Email"
-          onChange={onChangeHandler}
-          required
-        />
+        <Input name="email" placeholder="Email" onChange={onChangeHandler} required />
       </FormGroup>
       <FormGroup>
         <Label>Password</Label>

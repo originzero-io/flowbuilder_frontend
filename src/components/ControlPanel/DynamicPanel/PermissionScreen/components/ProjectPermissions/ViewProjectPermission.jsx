@@ -3,10 +3,7 @@ import PropTypes from "prop-types";
 import Checkbox from "components/Shared/SwitchInput/Checkbox";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import * as Styled from "../PermissionScreen.style";
-import CollapsibleMenu, {
-  CollapsibleMenuItem,
-  CollapsibleSubMenu,
-} from "../CollapsibleMenu";
+import CollapsibleMenu, { CollapsibleMenuItem, CollapsibleSubMenu } from "../CollapsibleMenu";
 import FlowList from "../FlowList";
 import DashboardList from "../DashboardList";
 
@@ -68,9 +65,7 @@ function ViewProjectPermission({
                   name="CAN_VIEW_PROJECT"
                   id={project._id}
                   onChange={(e) => handleChange(e)}
-                  defaultChecked={permissions.CAN_VIEW_PROJECT.includes(
-                    project._id
-                  )}
+                  defaultChecked={permissions.CAN_VIEW_PROJECT.includes(project._id)}
                   disabled={
                     permissions.EVERYTHING ||
                     permissions.CAN_VIEW_PROJECT_ALL ||

@@ -24,12 +24,7 @@ export default function AddWorkspaceForm() {
   return (
     <Form onSubmit={onSubmitHandle}>
       <FormGroup>
-        <Input
-          name="name"
-          placeholder="Workspace name"
-          onChange={onChangeHandler}
-          required
-        />
+        <Input name="name" placeholder="Workspace name" onChange={onChangeHandler} required />
       </FormGroup>
       <Button type="submit">Submit</Button>
     </Form>

@@ -1,9 +1,5 @@
 import store from "index";
-import {
-  createWorkspace,
-  deleteWorkspace,
-  editWorkspace,
-} from "store/reducers/workspaceSlice";
+import { createWorkspace, deleteWorkspace, editWorkspace } from "store/reducers/workspaceSlice";
 import notificationHelper from "utils/ui/notificationHelper";
 import workspaceEvent from "./workspaceService.event";
 

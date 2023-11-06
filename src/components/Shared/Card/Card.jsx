@@ -31,15 +31,9 @@ const Card = ({ data }) => {
   return (
     <Styled.CardContainer>
       <Styled.CardTitle>{data.name || ""}</Styled.CardTitle>
-      <DetailMenu
-        deleteEvent={deleteCardHandler}
-        data={data}
-        getPermission={getPermission}
-      />
+      <DetailMenu deleteEvent={deleteCardHandler} data={data} getPermission={getPermission} />
       <Styled.CardBody>
-        <Styled.CardDescription>
-          {data.description || ""}
-        </Styled.CardDescription>
+        <Styled.CardDescription>{data.description || ""}</Styled.CardDescription>
         <Styled.CardFooter>
           <Styled.CardAuthor>{data.port}</Styled.CardAuthor>
           <div>

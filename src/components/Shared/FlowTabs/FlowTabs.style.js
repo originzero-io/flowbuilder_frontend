@@ -19,8 +19,7 @@ export const TabItem = styled.button`
   margin-right: 5px;
   padding: 2px;
   text-align: center;
-  background: ${(props) =>
-    props.selected ? props.theme.hoverColor : "rgba(189, 195, 199,0.6)"};
+  background: ${(props) => (props.selected ? props.theme.hoverColor : "rgba(189, 195, 199,0.6)")};
   position: relative;
   &:hover {
     transform: scale(1.1);
