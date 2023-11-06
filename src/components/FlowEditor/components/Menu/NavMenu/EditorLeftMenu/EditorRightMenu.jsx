@@ -3,7 +3,13 @@ import styled from "styled-components";
 import { GoTriangleRight, GoTriangleLeft } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { setNodeConfigMenu } from "store/reducers/menuSlice";
-import { Flexboard, FlexboardProvider, FlexboardFrame, ResizerType, Position } from "@dorbus/flexboard";
+import {
+  Flexboard,
+  FlexboardProvider,
+  FlexboardFrame,
+  ResizerType,
+  Position,
+} from "@dorbus/flexboard";
 import NodeConfigMenu from "../../NodeConfigMenu/NodeConfigMenu";
 
 const ShowMenuButton = styled.div`
@@ -23,11 +29,15 @@ export default function EditorRightMenu() {
 
   const toggleMenu = () => {
     if (nodeConfigMenu.state === true) {
-      dispatch(setNodeConfigMenu({ element: nodeConfigMenu.element, state: false }));
+      dispatch(
+        setNodeConfigMenu({ element: nodeConfigMenu.element, state: false })
+      );
     } else {
       console.log("falseee");
       console.log(nodeConfigMenu.element);
-      dispatch(setNodeConfigMenu({ element: nodeConfigMenu.element, state: true }));
+      dispatch(
+        setNodeConfigMenu({ element: nodeConfigMenu.element, state: true })
+      );
     }
   };
 
@@ -59,7 +69,9 @@ export default function EditorRightMenu() {
           <ShowMenuButton showMenu={nodeConfigMenu.state} onClick={toggleMenu}>
             {nodeConfigMenu.state ? <GoTriangleRight /> : <GoTriangleLeft />}
           </ShowMenuButton>
-          {Object.hasOwn(nodeConfigMenu.element, "id") && <NodeConfigMenu self={nodeConfigMenu.element} />}
+          {Object.hasOwn(nodeConfigMenu.element, "id") && (
+            <NodeConfigMenu self={nodeConfigMenu.element} />
+          )}
         </Flexboard>
       ) : (
         <div style={{ position: "relative" }}>

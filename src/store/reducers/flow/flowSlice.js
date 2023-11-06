@@ -3,11 +3,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getFlowsByWorkspace = createAsyncThunk(
   "flows/getByWorkspace",
-  async (workspace) => FlowService.getFlowsByWorkspace(workspace),
+  async (workspace) => FlowService.getFlowsByWorkspace(workspace)
 );
 export const getFlowsByProject = createAsyncThunk(
   "flows/getByProject",
-  async (project) => FlowService.getFlowsByProject(project),
+  async (project) => FlowService.getFlowsByProject(project)
 );
 
 export const flowSlice = createSlice({

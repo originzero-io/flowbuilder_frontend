@@ -56,7 +56,7 @@ export default function PermissionScreen() {
       getUserPermissionInThisWorkspace({
         workspace: activeWorkspace,
         user: member,
-      }),
+      })
     );
   }, [activeWorkspace._id, member._id]);
 
@@ -73,7 +73,7 @@ export default function PermissionScreen() {
         getMyPermissionInThisWorkspace({
           workspace: activeWorkspace,
           me: auth,
-        }),
+        })
       );
     }
     notification.success("Permissions saved");

@@ -23,11 +23,11 @@ export default function FeatureIcons({ self, edit, setEdit }) {
   const enableChangeHandle = (checked) => {
     const incomers = getIncomers(self, flowElements.nodes, flowElements.edges);
     const disableCount = incomers.filter(
-      (incomer) => incomer.data.enable === false,
+      (incomer) => incomer.data.enable === false
     ).length;
     if (incomers.length > 0 && incomers.length === disableCount) {
       notificationHelper.warn(
-        "First, make sure that at least one of your incomers is enabled",
+        "First, make sure that at least one of your incomers is enabled"
       );
     } else {
       setChecked(checked);

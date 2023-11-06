@@ -52,7 +52,7 @@ export default function ProjectPermissions({
         event: e,
         flowData,
         permissionType: "project",
-      }),
+      })
     );
   };
 

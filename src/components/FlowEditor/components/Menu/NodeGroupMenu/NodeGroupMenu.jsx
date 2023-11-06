@@ -58,7 +58,7 @@ export default function GroupMenu({ self }) {
   const searchHandle = (e) => {
     const { value } = e.target;
     const filtered = flowGroups.filter((group) =>
-      group.name.toLowerCase().includes(value.toLowerCase()),
+      group.name.toLowerCase().includes(value.toLowerCase())
     );
     if (value === "") {
       setSearched([]);

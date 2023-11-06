@@ -50,9 +50,13 @@ export default function TopMenu() {
           </Styled.Profile>
           <Styled.ProfileList>
             <Link to={`${url}/settings`}>
-              <GlobalStyled.DropdownItem style={{ color: "white" }}>User settings</GlobalStyled.DropdownItem>
+              <GlobalStyled.DropdownItem style={{ color: "white" }}>
+                User settings
+              </GlobalStyled.DropdownItem>
             </Link>
-            <GlobalStyled.DropdownItem onClick={logOutHandle}>Log out</GlobalStyled.DropdownItem>
+            <GlobalStyled.DropdownItem onClick={logOutHandle}>
+              Log out
+            </GlobalStyled.DropdownItem>
           </Styled.ProfileList>
         </GlobalStyled.DropdownWrapper>
       </Styled.RightSideContainer>

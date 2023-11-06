@@ -9,8 +9,14 @@ import theme from "components/Shared/ThemeReference";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import createSocket from "services/createSocket";
 import { setActiveFlowConfig } from "store/reducers/flow/flowConfigSlice";
-import { resetActiveFlowGui, setActiveFlowGui } from "store/reducers/flow/flowGuiSlice";
-import { resetActiveFlowElements, setActiveFlowElements } from "store/reducers/flow/flowElementsSlice";
+import {
+  resetActiveFlowGui,
+  setActiveFlowGui,
+} from "store/reducers/flow/flowGuiSlice";
+import {
+  resetActiveFlowElements,
+  setActiveFlowElements,
+} from "store/reducers/flow/flowElementsSlice";
 import { setSystemNodes } from "store/reducers/systemNodeSlice";
 import EditorTopLeftMenu from "components/FlowEditor/components/Menu/NavMenu/EditorTopMenu/EditorTopLeftMenu";
 import EditorTopRightMenu from "components/FlowEditor/components/Menu/NavMenu/EditorTopMenu/EditorTopRightMenu";
@@ -92,7 +98,10 @@ const FlowPage = () => {
         </FlowTopMenuWrapper>
 
         <StyledFlowWrapper ref={rfWrapper}>
-          <EditorLeftMenu showMenu={showMenu} setShowMenu={showLeftMenuHandler} />
+          <EditorLeftMenu
+            showMenu={showMenu}
+            setShowMenu={showLeftMenuHandler}
+          />
           <FlowEditor reactFlowWrapper={rfWrapper} />
           <EditorRightMenu />
         </StyledFlowWrapper>

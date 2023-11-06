@@ -48,7 +48,7 @@ export const isEdgeExist = (newConnection, edges) =>
       edge.source === newConnection.source &&
       edge.target === newConnection.target &&
       edge.sourceHandle === newConnection.sourceHandle &&
-      edge.targetHandle === newConnection.targetHandle,
+      edge.targetHandle === newConnection.targetHandle
   );
 export const isHandleAlreadyConnected = (newConnection, edges) => {
   const handleType = newConnection.targetHandle.split("_")[0];
@@ -57,7 +57,7 @@ export const isHandleAlreadyConnected = (newConnection, edges) => {
       handleType !== "trig" &&
       handleType !== "status" &&
       edge.target === newConnection.target &&
-      edge.targetHandle === newConnection.targetHandle,
+      edge.targetHandle === newConnection.targetHandle
   );
 };
 

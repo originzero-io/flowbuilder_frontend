@@ -15,7 +15,7 @@ export const panelNodeListSlice = createSlice({
     },
     addNodeToFavorites(state, { payload }) {
       return state.map((node) =>
-        node.id === payload.id ? { ...node, fav: !node.fav } : node,
+        node.id === payload.id ? { ...node, fav: !node.fav } : node
       );
     },
   },

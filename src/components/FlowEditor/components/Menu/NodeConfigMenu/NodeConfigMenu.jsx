@@ -93,7 +93,7 @@ function nodeConfigReducer(node, { type, payload }) {
           ...node.data,
           frozenHandles: [
             ...node.data.frozenHandles.filter(
-              (handle) => handle !== payload.target.name,
+              (handle) => handle !== payload.target.name
             ),
           ],
         },

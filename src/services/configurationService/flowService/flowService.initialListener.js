@@ -18,7 +18,7 @@ const flowInitialListener = () => {
       getMyPermissionInThisWorkspace({
         workspace: workspaces.activeWorksapce,
         me: auth,
-      }),
+      })
     );
     notificationHelper.success("Flow created successfully");
   });

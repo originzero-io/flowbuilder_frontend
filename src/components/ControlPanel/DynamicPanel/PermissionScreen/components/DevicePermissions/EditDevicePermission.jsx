@@ -64,7 +64,7 @@ export default function EditDevicePermission({
                 onChange={(e) => handleChange(e)}
                 // checked={controller.canEdit}
                 defaultChecked={permissions.CAN_EDIT_CONTROLLER.includes(
-                  controller._id,
+                  controller._id
                 )}
                 disabled={permissions.EVERYTHING}
                 checked={
@@ -98,7 +98,7 @@ export default function EditDevicePermission({
                 onChange={(e) => handleChange(e)}
                 // checked={processor.canEdit}
                 defaultChecked={permissions.CAN_EDIT_PROCESSOR.includes(
-                  processor._id,
+                  processor._id
                 )}
                 disabled={permissions.EVERYTHING}
                 checked={

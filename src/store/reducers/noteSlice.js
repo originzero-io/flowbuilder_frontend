@@ -6,7 +6,7 @@ export const getNotesByWorkspace = createAsyncThunk(
   async (workspace) => {
     const notes = await NoteService.getNotes(workspace);
     return notes;
-  },
+  }
 );
 
 export const noteSlice = createSlice({

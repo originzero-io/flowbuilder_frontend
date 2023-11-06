@@ -62,7 +62,7 @@ export default function UsageDevicePermission({
                 id={controller._id}
                 onChange={(e) => handleChange(e)}
                 defaultChecked={permissions.CAN_USAGE_CONTROLLER.includes(
-                  controller._id,
+                  controller._id
                 )}
                 disabled={permissions.EVERYTHING}
                 checked={
@@ -96,7 +96,7 @@ export default function UsageDevicePermission({
                 onChange={(e) => handleChange(e)}
                 // checked={processor.canUse}
                 defaultChecked={permissions.CAN_USAGE_PROCESSOR.includes(
-                  processor._id,
+                  processor._id
                 )}
                 disabled={permissions.EVERYTHING}
                 checked={

@@ -38,7 +38,7 @@ const WorkspacePanel = () => {
     dispatch(getNotesByWorkspace(activeWorkspace));
     dispatch(setActiveProject(""));
     dispatch(
-      getMyPermissionInThisWorkspace({ workspace: activeWorkspace, me: auth }),
+      getMyPermissionInThisWorkspace({ workspace: activeWorkspace, me: auth })
     );
   }, [auth, activeWorkspace]);
 

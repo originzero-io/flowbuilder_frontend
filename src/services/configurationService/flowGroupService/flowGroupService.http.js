@@ -14,7 +14,7 @@ class FlowGroupService extends ConfigurationService {
   async updateGroup(group) {
     const response = await this.service.put(
       `/flows/groups/${group._id}`,
-      group,
+      group
     );
     return response.data;
   }

@@ -14,7 +14,7 @@ import FlowExecutorHttpService from "services/flowExecutorService/flowExecutor.h
 
 export const getElementsByFlow = createAsyncThunk(
   "elements/getByFlow",
-  async () => FlowExecutorHttpService.getElements(),
+  async () => FlowExecutorHttpService.getElements()
 );
 
 const INITIAL_FLOW = {
@@ -68,7 +68,7 @@ export const flowElementsSlice = createSlice({
         const newArray = setSourceNodeColorToEdge(
           newConnection,
           updatedEdges,
-          state.nodes,
+          state.nodes
         );
         state.edges = newArray;
       }
@@ -231,7 +231,7 @@ export const flowElementsSlice = createSlice({
           position: { x: 10, y: 90 },
           parentNode: "A",
           extent: "parent",
-        },
+        }
       );
 
       state.edges.push({ id: "b-c", source: "B", target: "C" });

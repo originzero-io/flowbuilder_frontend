@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getProjectsByWorkspace = createAsyncThunk(
   "projects/getByWorkspaces",
-  async (workspace) => await ProjectService.getProjectsByWorkspace(workspace),
+  async (workspace) => await ProjectService.getProjectsByWorkspace(workspace)
 );
 
 const initialState = {
@@ -23,13 +23,13 @@ export const projectSlice = createSlice({
     },
     updateProject(state, { payload }) {
       const index = state.projects.findIndex(
-        (project) => project._id === payload._id,
+        (project) => project._id === payload._id
       );
       state.projects[index] = payload;
     },
     deleteProject(state, { payload }) {
       state.projects = state.projects.filter(
-        (project) => project._id !== payload,
+        (project) => project._id !== payload
       );
     },
   },

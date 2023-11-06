@@ -1,4 +1,9 @@
-import { checkAllConnectedTrigsHandles, checkIfTriggerNode, checkUnconnectedNodes, getFunctionalNodes } from "components/FlowEditor/helpers/debugHelpers";
+import {
+  checkAllConnectedTrigsHandles,
+  checkIfTriggerNode,
+  checkUnconnectedNodes,
+  getFunctionalNodes,
+} from "components/FlowEditor/helpers/debugHelpers";
 import Avatar from "components/Shared/Avatar/Avatar";
 import { FileInput } from "components/Shared/FileInput/FileInput";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
@@ -12,12 +17,23 @@ import { useReactFlow } from "reactflow";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { logOut } from "store/reducers/authSlice";
 import { setModal } from "store/reducers/componentSlice";
-import { changeEdgeType, importFlow, selectElements } from "store/reducers/flow/flowElementsSlice";
-import { setFlowEdgeType, setMiniMapDisplay, setTheme } from "store/reducers/flow/flowGuiSlice";
+import {
+  changeEdgeType,
+  importFlow,
+  selectElements,
+} from "store/reducers/flow/flowElementsSlice";
+import {
+  setFlowEdgeType,
+  setMiniMapDisplay,
+  setTheme,
+} from "store/reducers/flow/flowGuiSlice";
 import styled from "styled-components";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import useAuth from "utils/hooks/useAuth";
-import { default as notification, default as notificationHelper } from "utils/ui/notificationHelper";
+import {
+  default as notification,
+  default as notificationHelper,
+} from "utils/ui/notificationHelper";
 import SwitchButton from "../../../../nodes/shared/SwitchButton";
 import ConnectionMenu from "../../ConnectionMenu/ConnectionMenu";
 import * as Styled from "../NavMenu.style";
@@ -61,7 +77,9 @@ export default function EditorTopRightMenu() {
         const elements = reactFlowInstance.toObject();
         console.log("elements: ", reactFlowInstance.toObject());
         const hiddenElement = document.createElement("a");
-        hiddenElement.href = `data:application/octet-stream;base64,${window.btoa(JSON.stringify(elements))}`;
+        hiddenElement.href = `data:application/octet-stream;base64,${window.btoa(
+          JSON.stringify(elements)
+        )}`;
         hiddenElement.target = "_blank";
         hiddenElement.download = `${flowConfig.name}.json`;
         hiddenElement.click();
@@ -79,7 +97,10 @@ export default function EditorTopRightMenu() {
           const flow = JSON.parse(event.target.result);
           dispatch(importFlow(flow));
         };
-      } else notification.error("This file cannot be imported. Please provide JSON file");
+      } else
+        notification.error(
+          "This file cannot be imported. Please provide JSON file"
+        );
     },
     [reactFlowInstance]
   );
@@ -122,7 +143,9 @@ export default function EditorTopRightMenu() {
       notification.error("Flow does not contain any trigger node.");
       setExecutionStatus("error");
     } else if (unconnectedNodes.exist) {
-      notification.error("This flow contains unconnected nodes. Please make sure to connect all nodes.");
+      notification.error(
+        "This flow contains unconnected nodes. Please make sure to connect all nodes."
+      );
       dispatch(selectElements(unconnectedNodes.nodes));
       setExecutionStatus("error");
     } else if (unconnectedTrigHandles.exist) {
@@ -159,7 +182,11 @@ export default function EditorTopRightMenu() {
   return (
     <Menu>
       <Styled.MenuItem>
-        <ExecuteStopSwitchButton executionStatus={executionStatus} executeFlowHandler={executeFlowHandler} stopFlowHandler={stopExecutionHandler} />
+        <ExecuteStopSwitchButton
+          executionStatus={executionStatus}
+          executeFlowHandler={executeFlowHandler}
+          stopFlowHandler={stopExecutionHandler}
+        />
       </Styled.MenuItem>
       <Styled.MenuItem>
         <EditViewSwitchButton />
@@ -175,11 +202,17 @@ export default function EditorTopRightMenu() {
           <StyledDropdown.DropdownItem>
             <FileInput onChange={fileUploadHandle} label="Import Flow" />
           </StyledDropdown.DropdownItem>
-          <StyledDropdown.DropdownItem onClick={downloadFlowHandle}>Export Flow</StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem onClick={downloadFlowHandle}>
+            Export Flow
+          </StyledDropdown.DropdownItem>
         </StyledDropdown.DropdownList>
       </StyledDropdown.DropdownWrapper>
 
-      <Styled.MenuItem data-tip="Settings" data-for="settings" onClick={onSettingsHandler}>
+      <Styled.MenuItem
+        data-tip="Settings"
+        data-for="settings"
+        onClick={onSettingsHandler}
+      >
         <LuSettings2 fontSize={"2.5vmin"} />
       </Styled.MenuItem>
       <Tooltip id="settings" place="bottom" />
@@ -198,10 +231,17 @@ export default function EditorTopRightMenu() {
           </StyledDropdown.DropdownItem>
           <StyledDropdown.DropdownItem>
             Mini-map
-            <SwitchButton checked={active.miniMap} onChange={changeMiniMapDisplay} />
+            <SwitchButton
+              checked={active.miniMap}
+              onChange={changeMiniMapDisplay}
+            />
           </StyledDropdown.DropdownItem>
-          <StyledDropdown.DropdownItem>Account Settings</StyledDropdown.DropdownItem>
-          <StyledDropdown.DropdownItem onClick={logOutHandle}>Log Out</StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem>
+            Account Settings
+          </StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem onClick={logOutHandle}>
+            Log Out
+          </StyledDropdown.DropdownItem>
           <StyledDropdown.DropdownItem>
             <select onChange={edgeTypeHandle} defaultValue="smoothstep">
               <option value="bezier">Bezier</option>

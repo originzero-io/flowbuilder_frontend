@@ -95,11 +95,11 @@ export const getUserPermissionInThisWorkspace = createAsyncThunk(
     thunkApi.dispatch(beginTheBar());
     const permission = await PermissionService.getUserPermissionInThisWorkspace(
       workspace._id,
-      user._id,
+      user._id
     );
     thunkApi.dispatch(endTheBar());
     return permission;
-  },
+  }
 );
 
 export const userPermissionSlice = createSlice({
@@ -149,7 +149,7 @@ export const userPermissionSlice = createSlice({
         }
       } else if (!checked) {
         state[permissionType][name] = state[permissionType][name].filter(
-          (p) => p !== id,
+          (p) => p !== id
         );
         state[permissionType][`${name}_ALL`] = false;
 
@@ -178,23 +178,23 @@ export const userPermissionSlice = createSlice({
         ) {
           if (
             !state.project.CAN_VIEW_FLOW.some(
-              (p) => p.flowId === flowData.flowId,
+              (p) => p.flowId === flowData.flowId
             ) &&
             !state.project.CAN_USAGE_FLOW.some(
-              (p) => p.flowId === flowData.flowId,
+              (p) => p.flowId === flowData.flowId
             )
           ) {
             state.project.CAN_VIEW_FLOW.push(flowData);
             state.project.CAN_USAGE_FLOW.push(flowData);
           } else if (
             !state.project.CAN_USAGE_FLOW.some(
-              (p) => p.flowId === flowData.flowId,
+              (p) => p.flowId === flowData.flowId
             )
           ) {
             state.project.CAN_USAGE_FLOW.push(flowData);
           } else if (
             !state.project.CAN_VIEW_FLOW.some(
-              (p) => p.flowId === flowData.flowId,
+              (p) => p.flowId === flowData.flowId
             )
           ) {
             state.project.CAN_VIEW_FLOW.push(flowData);
@@ -202,7 +202,7 @@ export const userPermissionSlice = createSlice({
         }
       } else if (!checked) {
         state[permissionType][name] = state[permissionType][name].filter(
-          (p) => p.flowId !== flowData.flowId,
+          (p) => p.flowId !== flowData.flowId
         );
         state[permissionType][`${name}_ALL`] = state[permissionType][
           `${name}_ALL`
@@ -210,10 +210,10 @@ export const userPermissionSlice = createSlice({
 
         if (name === "CAN_EDIT_FLOW") {
           state.project.CAN_VIEW_FLOW = state.project.CAN_VIEW_FLOW.filter(
-            (p) => p.flowId !== flowData.flowId,
+            (p) => p.flowId !== flowData.flowId
           );
           state.project.CAN_USAGE_FLOW = state.project.CAN_USAGE_FLOW.filter(
-            (p) => p.flowId !== flowData.flowId,
+            (p) => p.flowId !== flowData.flowId
           );
         }
       }

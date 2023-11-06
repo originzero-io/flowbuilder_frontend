@@ -8,7 +8,7 @@ class ProjectService extends ConfigurationService {
 
   async getProjectsByWorkspace(workspace) {
     const response = await this.service.get(
-      `/projects/workspace/${workspace._id}`,
+      `/projects/workspace/${workspace._id}`
     );
     return response.data;
   }

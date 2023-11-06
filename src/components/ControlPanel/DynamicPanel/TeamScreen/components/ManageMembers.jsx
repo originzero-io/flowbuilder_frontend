@@ -28,12 +28,12 @@ export default function ManageMembers() {
   const { activeWorkspace } = useWorkspace();
   const addMemberHandle = (user) => {
     dispatch(
-      addUserToWorkspace({ userInfo: user, workspace: activeWorkspace }),
+      addUserToWorkspace({ userInfo: user, workspace: activeWorkspace })
     );
   };
   const removeMemberHandle = (user) => {
     dispatch(
-      removeUserToWorkspace({ userInfo: user, workspace: activeWorkspace }),
+      removeUserToWorkspace({ userInfo: user, workspace: activeWorkspace })
     );
   };
   return (
@@ -43,7 +43,7 @@ export default function ManageMembers() {
           <Avatar avatar={user.avatar} />
           <StyledUserItem>{user.username}</StyledUserItem>
           {user.workspaces.some(
-            (workspace) => workspace === activeWorkspace._id,
+            (workspace) => workspace === activeWorkspace._id
           ) ? (
             <TiTickOutline
               style={{ fontSize: "30px" }}

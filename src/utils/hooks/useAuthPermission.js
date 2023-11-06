@@ -47,7 +47,7 @@ export default function useAuthPermission(permissionType) {
 
         const flowAllState = permissionAllState.includes(entity.projectId);
         const thisProjectAllState = thisProjectAllArray.includes(
-          entity.projectId,
+          entity.projectId
         );
 
         if (projectAllState) {

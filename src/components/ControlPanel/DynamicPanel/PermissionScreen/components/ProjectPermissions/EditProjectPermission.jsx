@@ -62,7 +62,7 @@ function EditProjectPermission({
                   id={project._id}
                   onChange={(e) => handleChange(e)}
                   defaultChecked={permissions.CAN_EDIT_PROJECT.includes(
-                    project._id,
+                    project._id
                   )}
                   disabled={permissions.EVERYTHING}
                   checked={

@@ -52,7 +52,7 @@ function CreateFlowPermission({
                 id={project._id}
                 onChange={(e) => handleChange(e)}
                 defaultChecked={permissions.CAN_CREATE_FLOW.includes(
-                  project._id,
+                  project._id
                 )}
                 disabled={permissions.EVERYTHING}
                 checked={

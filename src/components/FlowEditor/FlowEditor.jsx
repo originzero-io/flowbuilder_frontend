@@ -1,9 +1,24 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import ReactFlow, { updateEdge, useEdgesState, useReactFlow } from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
-import { setPaneClickPosition, closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
-import { addNewNode, addNewEdge, setNodes, setEdges, setNodeEnable, updateEdgePath, showRunningNode } from "store/reducers/flow/flowElementsSlice";
-import { setElementContextMenu, setMultiSelectionContextMenu, setPanelContextMenu } from "store/reducers/menuSlice";
+import {
+  setPaneClickPosition,
+  closeAllNodeGroupMenu,
+} from "store/reducers/flow/flowGuiSlice";
+import {
+  addNewNode,
+  addNewEdge,
+  setNodes,
+  setEdges,
+  setNodeEnable,
+  updateEdgePath,
+  showRunningNode,
+} from "store/reducers/flow/flowElementsSlice";
+import {
+  setElementContextMenu,
+  setMultiSelectionContextMenu,
+  setPanelContextMenu,
+} from "store/reducers/menuSlice";
 import PropTypes from "prop-types";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import notification from "utils/ui/notificationHelper";
@@ -13,7 +28,11 @@ import notificationHelper from "utils/ui/notificationHelper";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { flowExecutorSocket } from "pages/FlowPage";
 import { loadPanelNodeList } from "store/reducers/panelNodeListSlice";
-import { openElementContextMenu, openMultiSelectionContextMenu, openPaneContextMenu } from "./helpers/menuHelper";
+import {
+  openElementContextMenu,
+  openMultiSelectionContextMenu,
+  openPaneContextMenu,
+} from "./helpers/menuHelper";
 import FlowUtils from "./components/FlowUtils/FlowUtils";
 import { createNode, isHandleAlreadyConnected } from "./helpers/elementHelper";
 import { createCustomNodeObject } from "./helpers/nodeObjectHelper";
@@ -85,7 +104,9 @@ export default function FlowEditor({ reactFlowWrapper }) {
       } else if (isHandleAlreadyConnected(params, flowElements.edges)) {
         notificationHelper.error("One handle should have only one connection");
       } else {
-        const sourceGroup = flowElements.nodes.find((els) => els.id === params.source).data.ui?.group;
+        const sourceGroup = flowElements.nodes.find(
+          (els) => els.id === params.source
+        ).data.ui?.group;
         const edge = {
           ...params,
           type: edgeType,
@@ -94,7 +115,9 @@ export default function FlowEditor({ reactFlowWrapper }) {
           data: null,
         };
 
-        const sourceEnable = flowElements.nodes.find((els) => els.id === params.source).data.enable;
+        const sourceEnable = flowElements.nodes.find(
+          (els) => els.id === params.source
+        ).data.enable;
         const self = flowElements.nodes.find((els) => els.id === params.target);
         dispatch(addNewEdge(edge));
         dispatch(setNodeEnable({ self, checked: sourceEnable }));
@@ -134,11 +157,13 @@ export default function FlowEditor({ reactFlowWrapper }) {
     }
   };
 
-  const onNodeContextMenu = (event, node) => openElementContextMenu(event, node);
+  const onNodeContextMenu = (event, node) =>
+    openElementContextMenu(event, node);
 
   const onPaneContextMenu = (event) => openPaneContextMenu(event);
 
-  const onSelectionContextMenu = (event) => openMultiSelectionContextMenu(event);
+  const onSelectionContextMenu = (event) =>
+    openMultiSelectionContextMenu(event);
 
   const onDoubleClick = () => {
     // dispatch(setPanelContextMenu(false));

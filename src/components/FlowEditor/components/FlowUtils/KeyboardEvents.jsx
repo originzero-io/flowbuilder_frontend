@@ -5,7 +5,10 @@ import uuid from "react-uuid";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
 import notification from "utils/ui/notificationHelper";
 import { setCopiedNodes } from "store/reducers/controlPanelSlice";
-import { pasteNodes, selectAllElements } from "store/reducers/flow/flowElementsSlice";
+import {
+  pasteNodes,
+  selectAllElements,
+} from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 
 const KeyboardEvents = () => {

@@ -36,7 +36,7 @@ export default function ProjectsScreen({ flows }) {
   const searchHandle = (e) => {
     const { value } = e.target;
     const filtered = flows.filter((flow) =>
-      flow.name.toLowerCase().includes(value.toLowerCase()),
+      flow.name.toLowerCase().includes(value.toLowerCase())
     );
     setSearched(filtered);
   };

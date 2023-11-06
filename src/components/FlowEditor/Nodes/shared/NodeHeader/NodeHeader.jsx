@@ -54,13 +54,13 @@ export default function NodeHeader({ self }) {
   // };
   const sourceEdges = () => {
     const sources = flowElements.edges.filter(
-      (edge) => edge.source === self.id,
+      (edge) => edge.source === self.id
     );
     console.log("sources: ", sources);
   };
   const targetEdges = () => {
     const targets = flowElements.edges.filter(
-      (edge) => edge.target === self.id,
+      (edge) => edge.target === self.id
     );
     console.log("targets: ", targets);
   };

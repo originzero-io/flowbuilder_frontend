@@ -35,7 +35,7 @@ root.render(
         <App />
       </ErrorBoundary>
     </BrowserRouter>
-  </Provider>,
+  </Provider>
 );
 // ReactDOM.render(
 //   <Provider store={store}>

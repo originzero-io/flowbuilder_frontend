@@ -19,14 +19,14 @@ export const addUserToWorkspace = createAsyncThunk(
   async ({ userInfo, workspace }) => {
     const user = await UserService.addUserToWorkspace(userInfo, workspace);
     return user;
-  },
+  }
 );
 export const removeUserToWorkspace = createAsyncThunk(
   "users/remove_from_workspace",
   async ({ userInfo, workspace }) => {
     const user = await UserService.removeUserToWorkspace(userInfo, workspace);
     return user;
-  },
+  }
 );
 export const deleteUser = createAsyncThunk("users/delete", async (user) => {
   await UserService.deleteUser(user);

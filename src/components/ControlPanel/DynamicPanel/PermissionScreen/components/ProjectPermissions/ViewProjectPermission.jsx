@@ -69,7 +69,7 @@ function ViewProjectPermission({
                   id={project._id}
                   onChange={(e) => handleChange(e)}
                   defaultChecked={permissions.CAN_VIEW_PROJECT.includes(
-                    project._id,
+                    project._id
                   )}
                   disabled={
                     permissions.EVERYTHING ||

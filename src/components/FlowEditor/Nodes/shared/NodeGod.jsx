@@ -31,7 +31,14 @@ const NodeArea = styled.div`
   box-shadow: 0px 4px 4px #00000040;
   opacity: ${(props) => (props.enable ? "1" : "0.5")};
   position: relative;
-  background: ${(props) => (props.selected ? (props.nodeType === "TRIGGER" ? "rgba(67, 177, 4,0.3)" : "rgba(166, 179, 232,0.3)") : props.nodeType === "TRIGGER" ? "#2d2d2d" : "rgba(52, 55, 75, 1)")};
+  background: ${(props) =>
+    props.selected
+      ? props.nodeType === "TRIGGER"
+        ? "rgba(67, 177, 4,0.3)"
+        : "rgba(166, 179, 232,0.3)"
+      : props.nodeType === "TRIGGER"
+      ? "#2d2d2d"
+      : "rgba(52, 55, 75, 1)"};
 `;
 
 const HandleWrapper = styled.div`
@@ -42,7 +49,8 @@ const HandleWrapper = styled.div`
   z-index: 1000;
   font-size: 10px;
   justify-content: center;
-  align-items: ${(props) => (props.handleType === "source" ? "flex-start" : "flex-end")};
+  align-items: ${(props) =>
+    props.handleType === "source" ? "flex-start" : "flex-end"};
   padding-top: 28px;
 `;
 
@@ -63,7 +71,8 @@ const propTypes = {
 const NodeGod = ({ self, children }) => {
   // const { sourceCount, targetCount } = self.data.ioEngine;
   const { enable } = self.data;
-  const { trigHandles, statusHandles, inputParameters, outputValues } = self.data;
+  const { trigHandles, statusHandles, inputParameters, outputValues } =
+    self.data;
   const updateNodeInternals = useUpdateNodeInternals();
   const dispatch = useDispatch();
   const [serverData, setServerData] = useState("");
@@ -104,8 +113,17 @@ const NodeGod = ({ self, children }) => {
   return (
     <NodeWrapper nodeType={self.type}>
       <HandleWrapper handleType="target">
-        <InputStatusHandles trigHandles={trigHandles} statusHandles={statusHandles} />
-        {inputParameters && <InputParameterHandles nodeId={self.id} inputParameters={inputParameters} handleColor={handleColor} />}
+        <InputStatusHandles
+          trigHandles={trigHandles}
+          statusHandles={statusHandles}
+        />
+        {inputParameters && (
+          <InputParameterHandles
+            nodeId={self.id}
+            inputParameters={inputParameters}
+            handleColor={handleColor}
+          />
+        )}
       </HandleWrapper>
       <NodeArea nodeType={self.type} selected={self.selected} enable={enable}>
         <NodeHeader self={self} />
@@ -125,8 +143,18 @@ const NodeGod = ({ self, children }) => {
         </Badge>
       </NodeArea>
       <HandleWrapper handleType="source">
-        {statusHandles?.outputs && <OutputStatusHandles statusHandles={statusHandles} handleColor={handleColor} />}
-        {outputValues && <OutputValueHandles outputValues={outputValues} handleColor={handleColor} />}
+        {statusHandles?.outputs && (
+          <OutputStatusHandles
+            statusHandles={statusHandles}
+            handleColor={handleColor}
+          />
+        )}
+        {outputValues && (
+          <OutputValueHandles
+            outputValues={outputValues}
+            handleColor={handleColor}
+          />
+        )}
       </HandleWrapper>
     </NodeWrapper>
   );

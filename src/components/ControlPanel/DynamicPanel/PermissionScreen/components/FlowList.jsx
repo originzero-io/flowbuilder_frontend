@@ -34,7 +34,7 @@ function FlowList({
   }, []);
 
   const flowInThisProject = permissions[CAN_X_FLOW].filter(
-    (flow) => flow.projectId === project._id,
+    (flow) => flow.projectId === project._id
   );
 
   useDidMountEffect(() => {
@@ -94,7 +94,7 @@ function FlowList({
                   permissions[CAN_X_PROJECT].includes(flow.project._id) ||
                   ((permissionName === "VIEW" || permissionName === "USAGE") &&
                     (permissions.CAN_EDIT_FLOW.some(
-                      (f) => f.flowId === flow._id,
+                      (f) => f.flowId === flow._id
                     ) ||
                       // permissions.CAN_USAGE_FLOW.some(f=>f.id === flow._id) ||
 
@@ -110,7 +110,7 @@ function FlowList({
                   ((permissionName === "VIEW" || permissionName === "USAGE") &&
                     // permissions.CAN_USAGE_FLOW.some(f=>f.flowId === flow._id) ||
                     permissions.CAN_EDIT_FLOW.some(
-                      (f) => f.flowId === flow._id,
+                      (f) => f.flowId === flow._id
                     ))
                 }
               />

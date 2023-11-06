@@ -44,12 +44,12 @@ export default class HttpClient {
           // Any status codes that falls outside the range of 2xx cause this function to trigger
           // Do something with response error
           notification.error(
-            error.response.data.message || error.response.data,
+            error.response.data.message || error.response.data
           );
           console.error("Http-client-error: ", error);
           store.dispatch(endTheBar());
           return Promise.reject(error);
-        },
+        }
       );
       return this.service;
     }
