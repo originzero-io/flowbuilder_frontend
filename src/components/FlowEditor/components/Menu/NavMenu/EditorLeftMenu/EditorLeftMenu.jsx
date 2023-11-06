@@ -82,9 +82,7 @@ export default function EditorLeftMenu({ showMenu, setShowMenu }) {
     const filteredObject = {};
 
     for (const category in categories) {
-      const categoryItems = categories[category].filter((item) =>
-        item.name.toLowerCase().includes(value.toLowerCase()),
-      );
+      const categoryItems = categories[category].filter((item) => item.name.toLowerCase().includes(value.toLowerCase()));
 
       if (categoryItems.length > 0) {
         filteredObject[category] = categoryItems;
@@ -152,8 +150,7 @@ const StyledMenuItem = styled.div`
   background: #262626;
   border-radius: 4px;
   border: 1px #43b104 solid;
-  border: ${({ nodeType }) =>
-    nodeType === "TRIGGER" ? "1px #43b104 solid;" : "1px #515C85 solid"};
+  border: ${({ nodeType }) => (nodeType === "TRIGGER" ? "1px #43b104 solid;" : "1px #515C85 solid")};
   color: ${({ nodeType }) => (nodeType === "TRIGGER" ? "#65CD1A" : "#A6B3E8")};
   margin: 4px;
   font-size: 12.1px;
@@ -182,16 +179,12 @@ function LeftMenuItem({ node }) {
     event.dataTransfer.effectAllowed = "move";
   };
   return (
-    <StyledMenuItem
-      nodeType={node.type}
-      onDragStart={(event) => onDragStart(event, node.type)}
-      draggable
-      data-tip={node.name}
-      data-for={`pnl-${node.id}`}
-    >
-      <div>{node.icon}</div>
-      <NodeLabel>{node.name}</NodeLabel>
+    <>
+      <StyledMenuItem nodeType={node.type} onDragStart={(event) => onDragStart(event, node.type)} draggable data-tip={node.name} data-for={`pnl-${node.id}`}>
+        <div>{node.icon}</div>
+        <NodeLabel>{node.name}</NodeLabel>
+      </StyledMenuItem>
       <Tooltip id={`pnl-${node.id}`} place="top" type="light" />
-    </StyledMenuItem>
+    </>
   );
 }
