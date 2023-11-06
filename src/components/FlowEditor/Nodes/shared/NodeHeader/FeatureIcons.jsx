@@ -19,11 +19,11 @@ export default function FeatureIcons({ self, edit, setEdit }) {
   const nameEditHandle = () => {
     setEdit(!edit);
   };
-  const [checked, setChecked] = useState(self.data.ui.enable);
+  const [checked, setChecked] = useState(self.data.enable);
   const enableChangeHandle = (checked) => {
     const incomers = getIncomers(self, flowElements.nodes, flowElements.edges);
     const disableCount = incomers.filter(
-      (incomer) => incomer.data.ui.enable === false,
+      (incomer) => incomer.data.enable === false,
     ).length;
     if (incomers.length > 0 && incomers.length === disableCount) {
       notificationHelper.warn(

@@ -25,7 +25,7 @@ export const WorkspaceItem = styled.div`
   color: white;
   font-size: 1.5vmin;
   border-radius: 50%;
-  background: ${(props) => (props.active ? "rgb(22, 139, 63)" : "#343A40")};
+  background: ${(props) => (props.active ? "#43b104" : "#343A40")};
   width: 50%;
   padding: 2px;
   text-align: center;

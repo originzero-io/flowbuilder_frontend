@@ -1,16 +1,15 @@
 /* SELECTION BOX */
 .react-flow__selection {
-  border-radius: 12px !important;
-  background-color: transparent !important;
-  background-color: rgba(180, 180, 180, 0.1) !important;
-  border:2px dashed #1DB954 !important
+  padding: 20px !important;
+  border-radius: 0px !important;
+  background-color: #C2FFAC33 !important;
+  border: 1px solid #65CD1A !important;
 }
 /* SELECTED NODES */
 .react-flow__nodesselection-rect {
-  padding: 20px !important;
-  border-radius: 12px !important;
-  background-color: transparent !important;
-  border: none !important;
+  border-radius: 0px !important;
+  background-color: #C2FFAC33 !important;
+  border: 1px solid #65CD1A !important;
 }
 .react-flow__edge-path:hover {
   stroke: #487eb0 !important;

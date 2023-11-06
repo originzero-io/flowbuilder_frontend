@@ -34,7 +34,7 @@ export const NavMenuItemWrapper = styled.button`
     background-color: #343a40;
   }
   &:focus {
-    background-color: rgba(22, 139, 63, 0.6);
+    background-color: #43b104;
   }
 `;
 
@@ -45,7 +45,7 @@ export const WorkspaceBrandWrapper = styled.div`
   align-items: center;
   letter-spacing: 5px;
   cursor: pointer;
-  color: #2ecc71;
+  color: #43b104;
   height: 5vh;
   user-select: none;
   position: relative;

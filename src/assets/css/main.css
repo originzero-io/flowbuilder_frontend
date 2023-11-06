@@ -1,5 +1,16 @@
 body {
   margin: 0px;
+  cursor: url(../images/cursor.svg), move;
+}
+
+::-moz-selection { /* Code for Firefox */
+  /* color: red; */
+  background: #9754AF !important;
+}
+
+::selection {
+  /* color: red; */
+  background: #9754AF !important;
 }
 /* @font-face {
   font-family: "Prime-Regular";
@@ -13,6 +24,12 @@ body {
       url("../fonts/Prime-Light.ttf")
       format("truetype");
 } */
+@font-face {
+  font-family: "NunitoSans-Regular";
+  src:
+      url("../fonts/NunitoSans-Regular.ttf")
+      format("truetype");
+}
 *,
 *::before,
 *::after {
@@ -20,8 +37,8 @@ body {
   padding: 0;
   box-sizing: border-box;
   /* font-family: "Prime-Regular"; */
-  font-family: Arial, Helvetica, sans-serif;
-  letter-spacing: 1px;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: 'NunitoSans-Regular', Helvetica;
 }
 input[type="color" i] {
   border: none;
@@ -40,7 +57,6 @@ input[type="color"]::-webkit-color-swatch {
 .group-bar-icon:hover{
   transform: scale(1.1);
 }
-
 
 a{
   text-decoration: none !important;

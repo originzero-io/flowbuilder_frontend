@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { GroupFlagIcon } from "../NodeIcons";
 
 const propTypes = {
-  color: PropTypes.object.isRequired,
+  color: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 function Flag({ color, onClick }) {

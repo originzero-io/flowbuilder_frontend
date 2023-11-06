@@ -11,8 +11,10 @@ import * as Styled from "../ElementContext/ElementContextMenu.style";
 export default function MultiSelectionContextMenu() {
   const { multiSelectionMenu } = useSelector((state) => state.menus);
   const dispatch = useDispatch();
+
   const deleteItems = () => {
     if (confirm("Are you sure?")) {
+      console.log("menu: ", multiSelectionMenu);
       dispatch(deleteSelectedNodes());
       dispatch(setMultiSelectionContextMenu(false));
     }

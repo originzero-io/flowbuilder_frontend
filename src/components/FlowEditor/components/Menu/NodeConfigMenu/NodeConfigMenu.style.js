@@ -12,7 +12,6 @@ export const SectionName = styled.div`
   margin-bottom: 10px;
 `;
 export const FormStyle = {
-  border: "1px dashed white",
   padding: "20px",
   marginBottom: "6px",
 };

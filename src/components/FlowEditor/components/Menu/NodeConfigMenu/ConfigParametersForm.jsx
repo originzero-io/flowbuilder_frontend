@@ -6,7 +6,12 @@ export default function ConfigParametersForm({ node, dispatcher }) {
   const { configParameters } = node.data;
   const parameterEntries = Object.entries(configParameters);
 
-  const onChangeConfigParametersHandler = (event) => {
+  const onChangeConfigParametersHandler = (event, inputType) => {
+    console.log(inputType);
+    if (inputType === "number") {
+      event.target.value = parseInt(event.target.value, 10);
+      console.log("targetValue: ", event.target.value);
+    }
     dispatcher({ type: "updateConfigParameters", payload: event });
   };
 
@@ -23,7 +28,9 @@ export default function ConfigParametersForm({ node, dispatcher }) {
               placeholder={entry[1]}
               type={typeof entry[1]}
               defaultValue={entry[1]}
-              onChange={onChangeConfigParametersHandler}
+              onChange={(event) =>
+                onChangeConfigParametersHandler(event, typeof entry[1])
+              }
             />
           </Col>
         </FormGroup>

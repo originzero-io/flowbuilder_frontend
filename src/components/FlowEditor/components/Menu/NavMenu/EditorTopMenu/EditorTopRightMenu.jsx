@@ -1,42 +1,36 @@
-import {
-  checkAllConnectedTrigsHandles,
-  checkIfTriggerNode,
-  checkUnconnectedNodes,
-  getFunctionalNodes,
-} from "components/FlowEditor/helpers/debugHelpers";
+import { checkAllConnectedTrigsHandles, checkIfTriggerNode, checkUnconnectedNodes, getFunctionalNodes } from "components/FlowEditor/helpers/debugHelpers";
 import Avatar from "components/Shared/Avatar/Avatar";
 import { FileInput } from "components/Shared/FileInput/FileInput";
-import themeColor from "components/Shared/ThemeReference";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
-import * as StyledDivider from "components/StyledComponents/Divider";
 import * as StyledDropdown from "components/StyledComponents/DropdownMenu";
-import * as StyledShapes from "components/StyledComponents/Shapes";
 import { useCallback, useState } from "react";
 import { BiBrain } from "react-icons/bi";
-import { GoDeviceDesktop } from "react-icons/go";
-import { VscRunAll } from "react-icons/vsc";
+import { BsFillShareFill } from "react-icons/bs";
+import { LuSettings2 } from "react-icons/lu";
 import { useDispatch } from "react-redux";
 import { useReactFlow } from "reactflow";
-import { Button } from "reactstrap";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { logOut } from "store/reducers/authSlice";
-import {
-  changeEdgeType,
-  importFlow,
-  selectElements,
-} from "store/reducers/flow/flowElementsSlice";
-import {
-  setFlowEdgeType,
-  setMiniMapDisplay,
-  setTheme,
-} from "store/reducers/flow/flowGuiSlice";
+import { setModal } from "store/reducers/componentSlice";
+import { changeEdgeType, importFlow, selectElements } from "store/reducers/flow/flowElementsSlice";
+import { setFlowEdgeType, setMiniMapDisplay, setTheme } from "store/reducers/flow/flowGuiSlice";
+import styled from "styled-components";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import useAuth from "utils/hooks/useAuth";
-import notification from "utils/ui/notificationHelper";
-import notificationHelper from "utils/ui/notificationHelper";
-import SwitchButton from "../../../nodes/shared/SwitchButton";
-import { ShareIcon, TuneIcon } from "./Icons";
-import * as Styled from "./NavMenu.style";
+import { default as notification, default as notificationHelper } from "utils/ui/notificationHelper";
+import SwitchButton from "../../../../nodes/shared/SwitchButton";
+import ConnectionMenu from "../../ConnectionMenu/ConnectionMenu";
+import * as Styled from "../NavMenu.style";
+import EditViewSwitchButton from "./EditViewSwitchButton";
+import ExecuteStopSwitchButton from "./ExecuteStopSwitchButton";
+
+const Menu = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10px;
+`;
 
 const dummyDevices = [
   {
@@ -51,12 +45,15 @@ const dummyDevices = [
   },
 ];
 
-export default function ConfigurationMenu() {
+export default function EditorTopRightMenu() {
   const { flowGui, flowConfig } = useActiveFlow();
   const auth = useAuth();
   const { miniMapDisplay, theme } = flowGui;
   const reactFlowInstance = useReactFlow();
   const dispatch = useDispatch();
+
+  // ? "executing" , "paused", "error"
+  const [executionStatus, setExecutionStatus] = useState("paused");
 
   const downloadFlowHandle = () => {
     if (confirm("Download?")) {
@@ -64,9 +61,7 @@ export default function ConfigurationMenu() {
         const elements = reactFlowInstance.toObject();
         console.log("elements: ", reactFlowInstance.toObject());
         const hiddenElement = document.createElement("a");
-        hiddenElement.href = `data:application/octet-stream;base64,${window.btoa(
-          JSON.stringify(elements),
-        )}`;
+        hiddenElement.href = `data:application/octet-stream;base64,${window.btoa(JSON.stringify(elements))}`;
         hiddenElement.target = "_blank";
         hiddenElement.download = `${flowConfig.name}.json`;
         hiddenElement.click();
@@ -84,12 +79,9 @@ export default function ConfigurationMenu() {
           const flow = JSON.parse(event.target.result);
           dispatch(importFlow(flow));
         };
-      } else
-        notification.error(
-          "This file cannot be imported. Please provide JSON file",
-        );
+      } else notification.error("This file cannot be imported. Please provide JSON file");
     },
-    [reactFlowInstance],
+    [reactFlowInstance]
   );
   const [active, setActive] = useState({
     theme: false,
@@ -120,7 +112,7 @@ export default function ConfigurationMenu() {
       dispatch(logOut());
     }
   };
-  const debugFlowHandler = async () => {
+  const executeFlowHandler = async () => {
     const { nodes, edges, viewport } = reactFlowInstance.toObject();
     const functionalNodes = getFunctionalNodes(nodes);
     const unconnectedNodes = checkUnconnectedNodes(functionalNodes, edges);
@@ -128,14 +120,15 @@ export default function ConfigurationMenu() {
 
     if (!checkIfTriggerNode(nodes)) {
       notification.error("Flow does not contain any trigger node.");
+      setExecutionStatus("error");
     } else if (unconnectedNodes.exist) {
-      notification.error(
-        "This flow contains unconnected nodes. Please make sure to connect all nodes.",
-      );
+      notification.error("This flow contains unconnected nodes. Please make sure to connect all nodes.");
       dispatch(selectElements(unconnectedNodes.nodes));
+      setExecutionStatus("error");
     } else if (unconnectedTrigHandles.exist) {
       notification.error("Some nodes have unconnected trig handles");
       dispatch(selectElements(unconnectedTrigHandles.nodes));
+      setExecutionStatus("error");
     } else {
       const gui = {
         ...flowGui,
@@ -146,75 +139,35 @@ export default function ConfigurationMenu() {
         notificationHelper.success(response);
       });
       flowExecutorEvent.debugFlow({ nodes, edges });
+      setExecutionStatus("executing");
     }
   };
 
-  const stopExecutionHandler = async () => {
-    flowExecutorEvent.stopExecution((data) => {
-      notificationHelper.success(data);
-    });
+  const stopExecutionHandler = () => {
+    if (confirm("Flow will be stopped. Are you sure ?")) {
+      flowExecutorEvent.stopExecution((data) => {
+        notificationHelper.success(data);
+        setExecutionStatus("paused");
+      });
+    } else setExecutionStatus("executing");
+  };
+
+  const onSettingsHandler = () => {
+    dispatch(setModal(<ConnectionMenu />));
   };
 
   return (
-    <Styled.Menu>
-      <StyledDropdown.DropdownWrapper tabIndex="1">
-        <Styled.MenuItem>
-          <Button
-            style={{
-              width: "90px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "5px",
-            }}
-            color="success"
-          >
-            <VscRunAll />
-            <div>Debug</div>
-          </Button>
-        </Styled.MenuItem>
-        <StyledDropdown.DropdownList>
-          <StyledDropdown.DropdownItem>
-            <div onClick={debugFlowHandler}>This PC</div>
-          </StyledDropdown.DropdownItem>
-          {dummyDevices.map((device) => (
-            <StyledDropdown.DropdownItem
-              style={{ fontSize: "1.5vmin" }}
-              key={device.id}
-            >
-              <GoDeviceDesktop
-                style={{ fontSize: "36px", marginRight: "5px" }}
-              />
-              <div>
-                {device.name}{" "}
-                <span style={{ color: "gray", fontSize: "1.2vmin" }}>
-                  {device.ip}
-                </span>
-              </div>
-            </StyledDropdown.DropdownItem>
-          ))}
-        </StyledDropdown.DropdownList>
-      </StyledDropdown.DropdownWrapper>
-
+    <Menu>
       <Styled.MenuItem>
-        <Button
-          style={{
-            width: "80px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "5px",
-          }}
-          color="warning"
-          onClick={stopExecutionHandler}
-        >
-          <VscRunAll />
-          <div>Stop</div>
-        </Button>
+        <ExecuteStopSwitchButton executionStatus={executionStatus} executeFlowHandler={executeFlowHandler} stopFlowHandler={stopExecutionHandler} />
       </Styled.MenuItem>
+      <Styled.MenuItem>
+        <EditViewSwitchButton />
+      </Styled.MenuItem>
+
       <StyledDropdown.DropdownWrapper tabIndex="1">
         <Styled.MenuItem data-tip="Share" data-for="share">
-          <ShareIcon width="25px" height="25px" theme={theme} />
+          <BsFillShareFill fontSize={"2.5vmin"} />
         </Styled.MenuItem>
         <Tooltip id="share" place="bottom" />
 
@@ -222,34 +175,22 @@ export default function ConfigurationMenu() {
           <StyledDropdown.DropdownItem>
             <FileInput onChange={fileUploadHandle} label="Import Flow" />
           </StyledDropdown.DropdownItem>
-          <StyledDropdown.DropdownItem onClick={downloadFlowHandle}>
-            Export Flow
-          </StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem onClick={downloadFlowHandle}>Export Flow</StyledDropdown.DropdownItem>
         </StyledDropdown.DropdownList>
       </StyledDropdown.DropdownWrapper>
-      <StyledDivider.VerticalDivider />
 
-      <Styled.MenuItem data-tip="Settings" data-for="settings">
-        <TuneIcon color={themeColor[theme].iconColor} />
+      <Styled.MenuItem data-tip="Settings" data-for="settings" onClick={onSettingsHandler}>
+        <LuSettings2 fontSize={"2.5vmin"} />
       </Styled.MenuItem>
       <Tooltip id="settings" place="bottom" />
 
-      <StyledDivider.VerticalDivider />
-
       <Styled.MenuItem data-tip="Learn" data-for="learn">
-        <BiBrain
-          style={{
-            fontSize: "25px",
-            color: themeColor[theme].iconColor,
-          }}
-        />
+        <BiBrain fontSize={"2.5vmin"} />
       </Styled.MenuItem>
       <Tooltip id="learn" place="bottom" />
 
       <StyledDropdown.DropdownWrapper tabIndex="1">
-        <StyledShapes.Circle>
-          <Avatar avatar={auth.avatar} />
-        </StyledShapes.Circle>
+        <Avatar style={{ marginLeft: "10px" }} avatar={auth.avatar} size={28} />
         <StyledDropdown.DropdownList align="right">
           <StyledDropdown.DropdownItem>
             Dark Theme
@@ -257,17 +198,10 @@ export default function ConfigurationMenu() {
           </StyledDropdown.DropdownItem>
           <StyledDropdown.DropdownItem>
             Mini-map
-            <SwitchButton
-              checked={active.miniMap}
-              onChange={changeMiniMapDisplay}
-            />
+            <SwitchButton checked={active.miniMap} onChange={changeMiniMapDisplay} />
           </StyledDropdown.DropdownItem>
-          <StyledDropdown.DropdownItem>
-            Account Settings
-          </StyledDropdown.DropdownItem>
-          <StyledDropdown.DropdownItem onClick={logOutHandle}>
-            Log Out
-          </StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem>Account Settings</StyledDropdown.DropdownItem>
+          <StyledDropdown.DropdownItem onClick={logOutHandle}>Log Out</StyledDropdown.DropdownItem>
           <StyledDropdown.DropdownItem>
             <select onChange={edgeTypeHandle} defaultValue="smoothstep">
               <option value="bezier">Bezier</option>
@@ -278,6 +212,6 @@ export default function ConfigurationMenu() {
           </StyledDropdown.DropdownItem>
         </StyledDropdown.DropdownList>
       </StyledDropdown.DropdownWrapper>
-    </Styled.Menu>
+    </Menu>
   );
 }

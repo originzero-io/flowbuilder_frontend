@@ -26,7 +26,7 @@ class FlowExecutorEvent extends SocketEvent {
   }
 
   startByTrigger(trigId) {
-    this.socket.emit("flow:startBySpesificTrigger", trigId);
+    this.socket.emit("flow:startByTrigger", trigId);
   }
 
   //! NEW

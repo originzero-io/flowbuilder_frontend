@@ -1,17 +1,5 @@
 import styled from "styled-components";
 
-export const Text = styled.div`
-  letter-spacing: 2px;
-  color: whitesmoke;
-  font-size: 2vmin;
-  ::-moz-selection {
-    background: rgba(29, 185, 84, 1);
-  }
-
-  ::selection {
-    background: rgba(29, 185, 84, 1);
-  }
-`;
 export const Input = styled.input`
   width: 85%;
   color: whitesmoke;

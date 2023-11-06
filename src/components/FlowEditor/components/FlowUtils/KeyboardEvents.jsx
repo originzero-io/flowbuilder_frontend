@@ -5,10 +5,7 @@ import uuid from "react-uuid";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
 import notification from "utils/ui/notificationHelper";
 import { setCopiedNodes } from "store/reducers/controlPanelSlice";
-import {
-  pasteNodes,
-  selectAllElements,
-} from "store/reducers/flow/flowElementsSlice";
+import { pasteNodes, selectAllElements } from "store/reducers/flow/flowElementsSlice";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 
 const KeyboardEvents = () => {
@@ -48,6 +45,14 @@ const KeyboardEvents = () => {
     }
   }, [ctrlAndCPressed]);
 
+  const getPosition = (index) => {
+    const position = reactFlowInstance.project({
+      x: paneClickPosition.x - index * 200 - 100,
+      y: paneClickPosition.y,
+    });
+    return position;
+  };
+
   useEffect(() => {
     if (ctrlAndVPressed) {
       const copiedNodesArray = copiedNodes.map((els, index) => ({
@@ -58,14 +63,6 @@ const KeyboardEvents = () => {
       dispatch(pasteNodes(copiedNodesArray));
     }
   }, [ctrlAndVPressed]);
-
-  const getPosition = (index) => {
-    const position = reactFlowInstance.project({
-      x: paneClickPosition.x - index * 200 - 100,
-      y: paneClickPosition.y,
-    });
-    return position;
-  };
 
   return null;
 };

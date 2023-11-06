@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import React from "react";
 import ReactTooltip from "react-tooltip";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 
@@ -16,8 +15,8 @@ export default function Tooltip({ id, place, ...others }) {
       place={place}
       type={flowGui.theme === "dark" ? "light" : "dark"}
       effect="solid"
-      delayHide={120}
-      delayShow={50}
+      delayHide={30}
+      delayShow={30}
       className="custom-tooltip"
       {...others}
     />

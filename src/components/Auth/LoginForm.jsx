@@ -7,8 +7,21 @@ import { Redirect } from "react-router-dom";
 import useAuth from "utils/hooks/useAuth";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
+import styled from "styled-components";
 import * as Styled from "./LoginForm.style";
-// import { Input, Text, Submit, ErrorMessage } from "./LoginForm.style";
+
+const Text = styled.div`
+  letter-spacing: 2px;
+  color: whitesmoke;
+  font-size: 2vmin;
+  ::-moz-selection {
+    background: rgba(29, 185, 84, 1);
+  }
+
+  ::selection {
+    background: rgba(29, 185, 84, 1);
+  }
+`;
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -23,7 +36,7 @@ export default function LoginForm() {
   };
   return (
     <>
-      <Styled.Text>Welcome to flow builder.📗 Please login</Styled.Text>
+      <Text>Welcome to flow builder.📗 Please login</Text>
       <Form onSubmit={(e) => e.preventDefault()}>
         <FormGroup>
           <FaUser
@@ -39,15 +52,9 @@ export default function LoginForm() {
               required: "Username must enter the field",
             })}
             placeholder="Username"
-            defaultValue={
-              import.meta.env.VITE_HOST_ENV === "development"
-                ? "akinsibay"
-                : null
-            }
+            defaultValue={import.meta.env.VITE_HOST_ENV === "development" ? "akinsibay" : null}
           />
-          {errors.username && (
-            <Styled.ErrorMessage>{errors.username.message}</Styled.ErrorMessage>
-          )}
+          {errors.username && <Styled.ErrorMessage>{errors.username.message}</Styled.ErrorMessage>}
         </FormGroup>
         <FormGroup>
           <RiLockPasswordFill
@@ -68,22 +75,14 @@ export default function LoginForm() {
               },
             })}
             placeholder="Password"
-            defaultValue={
-              import.meta.env.VITE_HOST_ENV === "development" ? "1234" : null
-            }
+            defaultValue={import.meta.env.VITE_HOST_ENV === "development" ? "1234" : null}
           />
-          {errors.password && (
-            <Styled.ErrorMessage>{errors.password.message}</Styled.ErrorMessage>
-          )}
+          {errors.password && <Styled.ErrorMessage>{errors.password.message}</Styled.ErrorMessage>}
         </FormGroup>
         <Styled.Submit type="submit" onClick={handleSubmit(onSubmitHandle)}>
           Log in
         </Styled.Submit>
-        {isAuthenticated ? (
-          <Redirect to="/panel" />
-        ) : (
-          <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
-        )}
+        {isAuthenticated ? <Redirect to="/panel" /> : <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>}
       </Form>
     </>
   );

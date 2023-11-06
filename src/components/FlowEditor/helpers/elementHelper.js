@@ -11,8 +11,8 @@ export const createNode = (type, initialPosition) => {
     data: {
       ...nodeData,
       trigHandles: {
-        trig1: false,
-        trig2: true,
+        trig1: true,
+        trig2: false,
       },
       triggerAttributes: "ignore",
       statusHandles: {
@@ -31,11 +31,6 @@ export const createNode = (type, initialPosition) => {
       frozenHandles: [],
       enable: true,
       preferencesClass: "class1",
-      ui: {
-        label: `${type}`,
-        enable: true,
-        group: { _id: 0, color: "gray" },
-      },
     },
 
     // ? Reactflow tarafından eklenenler

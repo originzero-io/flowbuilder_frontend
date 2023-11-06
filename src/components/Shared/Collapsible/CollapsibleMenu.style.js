@@ -20,10 +20,10 @@ export const CollapsableItem = styled(CollapseIndex)`
   margin-right: 3px;
   padding-left: 13%;
   border-radius: 3px;
-  background: ${(props) => (props.active ? "rgba(22, 139, 63,0.6)" : "none")};
+  background: ${(props) => (props.active ? "#43b104" : "none")};
   border-bottom: 1px solid rgb(50, 50, 50);
   &:focus {
-    background-color: rgba(22, 139, 63, 0.6);
+    background-color: #43b104;
   }
 `;
 export const TriggerWrapper = styled(CollapseIndex)`

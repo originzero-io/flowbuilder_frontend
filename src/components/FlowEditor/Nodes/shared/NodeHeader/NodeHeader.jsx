@@ -1,24 +1,26 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { useDispatch } from "react-redux";
 import { closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
+import styled from "styled-components";
 import useActiveFlow from "utils/hooks/useActiveFlow";
-import GroupMenu from "../../../components/Menu/NodeGroupMenu/NodeGroupMenu";
-import * as Styled from "../Node.style";
 import EditNameForm from "./EditNameForm";
 import FeatureIcons from "./FeatureIcons";
-import Flag from "./NodeFlag";
+import NodeMenu from "../NodeMenu/NodeMenu";
 
 const propTypes = {
   self: PropTypes.object.isRequired,
   selectedElements: PropTypes.bool,
 };
-export default function NodeHeader({ self, onDoubleClick }) {
+export default function NodeHeader({ self }) {
   const dispatch = useDispatch();
   const { flowGui, flowElements } = useActiveFlow();
   const { nodeGroupMenuDisplay } = flowGui;
   const [showGroup, setShowGroup] = useState(nodeGroupMenuDisplay);
   const [hover, setHover] = useState(false);
+  const [showNodeMenu, setShowNodeMenu] = useState(false);
+
   const { label, group } = self.data.ui;
   const groupHandle = (e) => {
     setShowGroup(!showGroup);
@@ -34,6 +36,10 @@ export default function NodeHeader({ self, onDoubleClick }) {
   };
   const onMouseLeaveHandle = () => {
     setHover(false);
+  };
+
+  const onShowNodeMenuHandle = () => {
+    setShowNodeMenu(!showNodeMenu);
   };
 
   // const NodeIcon = getIconComponent(self.type);
@@ -60,29 +66,85 @@ export default function NodeHeader({ self, onDoubleClick }) {
   };
 
   return (
-    <Styled.Header
+    <Header
       onMouseEnter={onMouseEnterHandle}
       onMouseLeave={onMouseLeaveHandle}
-      onDoubleClick={onDoubleClick}
+      selected={self.selected}
+      nodeType={self.type}
     >
       {/* <button onClick={nodeIncomers}>incomers</button>
         <button onClick={nodeOutgoers}>outgoers</button> */}
       {/* <NodeIcon/> */}
       {/* <button onClick={targetEdges}>TE</button>
       <button onClick={sourceEdges}>SE</button> */}
-      <Styled.Content>
+      <MenuBar
+        nodeType={self.type}
+        selected={self.selected}
+        onClick={onShowNodeMenuHandle}
+      >
+        <RxHamburgerMenu></RxHamburgerMenu>
+        {showNodeMenu && <NodeMenu self={self}></NodeMenu>}
+      </MenuBar>
+
+      <Content>
         {edit ? (
           <EditNameForm setEdit={setEdit} self={self} />
         ) : (
-          <Styled.Label>{label}</Styled.Label>
+          <Label>{label}</Label>
         )}
-      </Styled.Content>
-      <Styled.FeatureIconsWrapper>
+      </Content>
+      <FeatureIconsWrapper>
         {hover && <FeatureIcons self={self} edit={edit} setEdit={setEdit} />}
-      </Styled.FeatureIconsWrapper>
-      <Flag color={group.color} onClick={groupHandle} />
-      {showGroup && <GroupMenu self={self} />}
-    </Styled.Header>
+      </FeatureIconsWrapper>
+    </Header>
   );
 }
 NodeHeader.propTypes = propTypes;
+
+export const Header = styled.div`
+  display: flex;
+  min-width: 150px;
+  height: 24px;
+  // justify-content: space-between;
+  align-items: center;
+  margin: -2px;
+
+  border-bottom: ${({ nodeType }) =>
+    nodeType === "TRIGGER"
+      ? "1px solid #65cd1a"
+      : "1px solid rgba(81, 92, 133, 1)"};
+
+  // border-bottom: 1px solid pink;
+  /* border-bottom: ${({ selected }) =>
+    selected ? "1px solid #515c84" : "1px solid rgba(81, 92, 133, 1)"}; */
+`;
+export const MenuBar = styled.div`
+  width: 32px;
+  height: 100%;
+  /* background-color: ${({ selected }) =>
+    selected ? "#A6B3E8" : "rgba(81, 92, 133, 1)"}; */
+  background-color: ${({ nodeType }) =>
+    nodeType === "TRIGGER" ? "#65cd1a" : "rgba(81, 92, 133, 1)"};
+  border-radius: 4px 0px 0px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  // color: ${({ selected }) => (selected ? "black" : "#A6B3E8")};
+  color: ${({ nodeType }) => (nodeType === "TRIGGER" ? "black" : "#A6B3E8")};
+`;
+export const Content = styled.div``;
+
+export const Label = styled.div`
+  padding-left: 4px;
+  font-size: 11px;
+  font-weight: 400;
+`;
+export const FeatureIconsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 60px;
+  flex: 1;
+  padding-right: 8px;
+`;

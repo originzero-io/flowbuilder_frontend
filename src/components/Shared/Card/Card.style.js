@@ -18,7 +18,7 @@ export const CardContainer = styled.div`
   color: white;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
   &:hover {
-    border: 2px solid rgb(22, 139, 63);
+    border: 2px solid #43b104;
   }
   display: flex;
   flex-direction: column;
@@ -48,10 +48,11 @@ export const CardTitle = styled.div`
 export const CardAuthor = styled.div`
   display: flex;
   justify-content: center;
-  background: rgb(22, 139, 63);
+  background: #43b104;
   margin-left: 6px;
   padding: 5px;
   font-size: 1.1vmin;
+  border-radius: 3px;
 `;
 export const CardDescription = styled.div`
   font-size: 1.2vmin;
@@ -77,7 +78,7 @@ export const CardMoreButton = styled.div`
   right: 2px;
   top: 1px;
   &:hover {
-    color: rgb(46, 204, 113);
+    color: #43b104;
   }
 `;
 export const DetailMenuList = styled(DropdownList)`

@@ -13,9 +13,10 @@ export const DropdownList = styled.ul`
   display: none;
   flex-direction: column;
   min-width: 120px;
-  background: ${(props) => props.theme.menuBackground};
+  // background: ${(props) => props.theme.menuBackground};
+  background: #393939;
   color: ${(props) => props.theme.iconColor};
-  right: ${(props) => (props.align === "right" ? "-50px" : "none")};
+  right: ${(props) => (props.align === "right" ? "-10px" : "none")};
   left: ${(props) => (props.align === "right" ? "none" : "0px")};
   list-style: none;
   border-radius: 4px;

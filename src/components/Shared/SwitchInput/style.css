@@ -37,6 +37,6 @@ input[type="checkbox"]:checked::before {
 } */
 
 /* disabeling... */
-input[type="checkbox"]:disabled::before {
+/* input[type="checkbox"]:disabled::before {
   cursor: not-allowed;
-}
+} */

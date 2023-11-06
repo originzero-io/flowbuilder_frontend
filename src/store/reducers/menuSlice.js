@@ -14,6 +14,7 @@ export const menuSlice = createSlice({
     multiSelectionMenu: initialState,
     elementMenu: initialState,
     groupMenu: initialState,
+    nodeConfigMenu: initialState,
   },
   reducers: {
     setPanelContextMenu(state, { payload }) {
@@ -25,6 +26,10 @@ export const menuSlice = createSlice({
     setMultiSelectionContextMenu(state, { payload }) {
       state.multiSelectionMenu = payload;
     },
+    setNodeConfigMenu(state, { payload }) {
+      state.nodeConfigMenu.state = payload.state;
+      state.nodeConfigMenu.element = payload.element;
+    },
     setGroupMenu(state, { payload }) {
       state.groupMenu = payload;
     },
@@ -35,6 +40,8 @@ export const {
   setPanelContextMenu,
   setElementContextMenu,
   setMultiSelectionContextMenu,
+
+  setNodeConfigMenu,
   setGroupMenu,
 } = menuSlice.actions;
 export default menuSlice.reducer;

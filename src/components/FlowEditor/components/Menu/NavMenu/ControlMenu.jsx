@@ -2,28 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { HorizontalDivider } from "components/StyledComponents/Divider";
 import { useDispatch } from "react-redux";
-import {
-  setExpandAll,
-  deleteAllElements,
-} from "store/reducers/flow/flowElementsSlice";
+import { deleteAllElements } from "store/reducers/flow/flowElementsSlice";
 import { useReactFlow } from "reactflow";
 import { ActionCreators as UndoActionCreators } from "redux-undo";
 import { useParams } from "react-router";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import FlowService from "services/configurationService/flowService/flowService.http";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
-import {
-  RedoIcon,
-  UndoIcon,
-  SaveIcon,
-  DeleteIcon,
-  FitViewIcon,
-  ZoomInIcon,
-  ZoomOutIcon,
-  LockIcon,
-  UnLockIcon,
-  ExpandAllIcon,
-} from "./Icons";
+import { RedoIcon, UndoIcon, SaveIcon, DeleteIcon, FitViewIcon, ZoomInIcon, ZoomOutIcon, LockIcon, UnLockIcon, ExpandAllIcon } from "./Icons";
 import * as Styled from "./NavMenu.style";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import notificationHelper from "utils/ui/notificationHelper";
@@ -31,22 +17,23 @@ import notificationHelper from "utils/ui/notificationHelper";
 const StyledMenu = styled.div`
   position: absolute;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   z-index: 6;
   bottom: 10px;
-  left: 10px;
+  left: 40%;
   padding: 4px;
-  background: ${(props) => props.theme.menuBackground};
+  min-width: 20%;
+  background: #323232;
+  border-radius: 4px;
 `;
+
 export default function ControlMenu() {
   const { flowGui } = useActiveFlow();
   const { theme } = flowGui;
   const reactFlowInstance = useReactFlow();
   // const canUndo = flowElements.past.length > 0;
   // const canRedo = flowElements.future.length > 0;
-
-  // Todo: useReactFlow();
-  // const { zoomIn, zoomOut, fitView } = useReactFlow();
 
   // const setInteractive = useStore((actions) => actions.setInteractive);
   const dispatch = useDispatch();
@@ -71,9 +58,6 @@ export default function ControlMenu() {
     if (confirm("Are you sure?")) {
       dispatch(deleteAllElements());
     }
-  };
-  const closeAllNodes = () => {
-    dispatch(setExpandAll(false));
   };
 
   const zoomInHandle = () => {
@@ -100,68 +84,31 @@ export default function ControlMenu() {
   // }, [lock]);
   return (
     <StyledMenu>
-      <Styled.MenuItem
-        theme={theme}
-        onClick={saveFlow}
-        data-tip="Save"
-        data-for="save"
-      >
+      <Styled.MenuItem theme={theme} onClick={saveFlow} data-tip="Save" data-for="save">
         <SaveIcon theme={theme} />
       </Styled.MenuItem>
       <Tooltip id="save" place="right" />
-      <HorizontalDivider theme={theme} />
       {/* <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO} onClick={undoHandle}>
         <UndoIcon theme={theme} disable={!canUndo} />
       </MenuItem>
       <MenuItem theme={theme} data-tip="Redo" data-for={tooltip.REDO} onClick={redoHandle}>
         <RedoIcon theme={theme} disable={!canRedo} />
       </MenuItem> */}
-      <HorizontalDivider theme={theme} />
-      <Styled.MenuItem
-        theme={theme}
-        onClick={closeAllNodes}
-        data-tip="Close All Nodes"
-        data-for="close_nodes"
-      >
-        <ExpandAllIcon theme={theme} />
-      </Styled.MenuItem>
-      <Tooltip id="close_nodes" place="right" />
 
-      <Styled.MenuItem
-        theme={theme}
-        onClick={deleteAllNodes}
-        data-tip="Delete All"
-        data-for="delete_all"
-      >
+      <Styled.MenuItem theme={theme} onClick={deleteAllNodes} data-tip="Delete All" data-for="delete_all">
         <DeleteIcon theme={theme} />
       </Styled.MenuItem>
       <Tooltip id="delete_all" place="right" />
 
-      <HorizontalDivider theme={theme} />
-      <Styled.MenuItem
-        theme={theme}
-        onClick={zoomInHandle}
-        data-tip="Zoom in"
-        data-for="zoom_in"
-      >
+      <Styled.MenuItem theme={theme} onClick={zoomInHandle} data-tip="Zoom in" data-for="zoom_in">
         <ZoomInIcon theme={theme} />
       </Styled.MenuItem>
       <Tooltip id="zoom_in" place="right" />
-      <Styled.MenuItem
-        theme={theme}
-        onClick={zoomOutHandle}
-        data-tip="Zoom out"
-        data-for="zoom_out"
-      >
+      <Styled.MenuItem theme={theme} onClick={zoomOutHandle} data-tip="Zoom out" data-for="zoom_out">
         <ZoomOutIcon theme={theme} />
       </Styled.MenuItem>
       <Tooltip id="zoom_out" place="right" />
-      <Styled.MenuItem
-        theme={theme}
-        onClick={fitViewHandle}
-        data-tip="Fit View"
-        data-for="fit_view"
-      >
+      <Styled.MenuItem theme={theme} onClick={fitViewHandle} data-tip="Fit View" data-for="fit_view">
         <FitViewIcon theme={theme} />
       </Styled.MenuItem>
       <Tooltip id="fit_view" place="right" />

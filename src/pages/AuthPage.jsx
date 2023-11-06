@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Logo } from "../components/Shared/icons";
+import CompanyLogo from "components/Shared/CompanyLogo";
 import LoginForm from "../components/Auth/LoginForm";
 
 const StyledWrapper = styled.div`
@@ -45,7 +45,7 @@ export default function LoginPage() {
     <StyledWrapper>
       <StyledContent>
         <StyledLogoWrapper>
-          <Logo theme="dark" width="100px" height="100px" />
+          <CompanyLogo size={200} />
         </StyledLogoWrapper>
         <StyledFormWrapper>
           <LoginForm />

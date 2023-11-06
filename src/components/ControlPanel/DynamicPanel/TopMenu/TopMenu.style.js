@@ -1,8 +1,5 @@
 import styled from "styled-components";
-import {
-  DropdownWrapper,
-  DropdownList,
-} from "components/StyledComponents/DropdownMenu";
+import { DropdownWrapper, DropdownList } from "components/StyledComponents/DropdownMenu";
 
 export const Container = styled.div`
   //padding: 2px;

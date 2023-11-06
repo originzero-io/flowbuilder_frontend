@@ -145,8 +145,6 @@ export default function NodeConfigMenu({ self }) {
       <Styled.Header>Node Configuration Menu</Styled.Header>
       <div style={{ marginBottom: "30px" }}>{self.id}</div>
 
-      <IncomersOutgoers node={self} />
-
       <ConfigParametersForm node={node} dispatcher={nodeConfigDispatch} />
 
       <StatusHandlesForm node={node} dispatcher={nodeConfigDispatch} />

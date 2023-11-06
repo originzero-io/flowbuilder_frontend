@@ -51,9 +51,6 @@ export const flowElementsSlice = createSlice({
       const newEdges = addEdge(payload, state.edges);
       state.edges = newEdges;
     },
-    deleteNode(state, { payload }) {
-      state.nodes = state.nodes.filter((node) => node.id !== payload.id);
-    },
     deleteAllElements(state, { payload }) {
       state.nodes = [];
       state.edges = [];
@@ -78,11 +75,6 @@ export const flowElementsSlice = createSlice({
     },
     pasteNodes(state, { payload }) {
       state.nodes.push(...payload);
-    },
-    setExpandAll(state, { payload }) {
-      state.nodes.forEach((node) => {
-        node.data.ui.expand = payload;
-      });
     },
     deleteSelectedNodes(state, { payload }) {
       state.nodes = state.nodes.filter((node) => !node.selected);
@@ -122,7 +114,7 @@ export const flowElementsSlice = createSlice({
 
       state.nodes.forEach((node) => {
         if (node.id === self.id) {
-          node.data.ui.enable = checked;
+          node.data.enable = checked;
         }
       });
     },
@@ -134,7 +126,7 @@ export const flowElementsSlice = createSlice({
     setEnableSelectedNodes(state, { payload }) {
       state.nodes.forEach((node) => {
         if (node.selected) {
-          node.data.ui.enable = !node.data.ui.enable;
+          node.data.enable = !node.data.enable;
         }
       });
     },
@@ -144,7 +136,7 @@ export const flowElementsSlice = createSlice({
       const outgoersIds = outgoers.map((o) => o.id);
       state.nodes.forEach((node) => {
         if (outgoersIds.includes(node.id)) {
-          node.data.ui.enable = enable;
+          node.data.enable = enable;
         }
       });
     },
@@ -266,11 +258,9 @@ export const {
   setEdges,
   addNewNode,
   addNewEdge,
-  deleteNode,
   deleteAllElements,
   updateEdgePath,
   pasteNodes,
-  setExpandAll,
   deleteSelectedNodes,
   selectElements,
   showRunningNode,

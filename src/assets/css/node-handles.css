@@ -1,21 +1,27 @@
 .node-handle {
-  border: none !important;
-  box-shadow: 0.174px 0.8px 2px 0px rgba(0, 0, 0, 1) !important;
-  width: 8px !important;
-  height: 8px !important;
+  background-color: #64cd1a !important;
+  width: 10px !important;
+  height: 10px !important;
   position: static !important;
-  border-radius: 2px !important;
-}
-.node-handle:hover {
-  width: 9px !important;
-  height: 9px !important;
+  border: 1px solid !important;
+  border-color: rgba(52, 55, 75, 1) !important;
+  border-radius: 4px !important;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 
-.vertical {
-  margin-left: 8px;
-  margin-right: 8px;
-}
-.horizontal {
-  margin-top: 8px;
-  margin-bottom: 8px;
+.node-status-handle {
+  /* background-color: #D086EB !important; */
+  background-color: #64cd1a !important;
+  width: 10px !important;
+  height: 10px !important;
+  position: static !important;
+  border: 1px solid !important;
+  border-color: rgba(52, 55, 75, 1) !important;
+  /* rotate: 45deg !important; */
+  transform: rotate(-45deg) !important;
+  border-radius: 1px !important;
+  margin-right: 0.5px;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }

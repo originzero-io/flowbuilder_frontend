@@ -12,21 +12,24 @@ export const MenuIndex = styled.div`
   font-size: 15px;
   padding: 4px;
 `;
-export const Menu = styled(MenuIndex)`
-  background: ${(props) => props.theme.menuBackground};
-  border-radius: 6px;
-  top: 10px;
-  right: 45px;
-  width: 360px;
+export const Menu = styled.div`
+  // background: ${(props) => props.theme.menuBackground};
+  width: 300px;
+  z-index: 6;
+  background: red;
+  display: flex;
+  flex-direction: row;
+  // justify-content: flex-end;
+  align-items: center;
 `;
 export const MenuItem = styled.button`
   background: none;
   border: none;
   user-select: none;
-  margin: 2px;
-  color: ${(props) => props.theme.iconColor};
+  padding: 5px;
+  //color: ${(props) => props.theme.iconColor};
   cursor: pointer;
-  &:hover {
+  /* &:hover {
     transform: scale(1.1);
-  }
+  } */
 `;

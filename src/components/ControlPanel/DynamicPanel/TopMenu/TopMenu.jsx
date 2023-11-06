@@ -1,5 +1,4 @@
 import Avatar from "components/Shared/Avatar/Avatar";
-import { Logo } from "components/Shared/icons";
 import * as GlobalStyled from "components/StyledComponents/DropdownMenu";
 import { BiBrain } from "react-icons/bi";
 import { FiUsers } from "react-icons/fi";
@@ -8,6 +7,7 @@ import { Link, useRouteMatch } from "react-router-dom";
 import AuthService from "services/authService/authService";
 import { logOut } from "store/reducers/authSlice";
 import useAuth from "utils/hooks/useAuth";
+import CompanyLogo from "components/Shared/CompanyLogo";
 import * as Styled from "./TopMenu.style";
 
 export default function TopMenu() {
@@ -23,7 +23,7 @@ export default function TopMenu() {
   return (
     <Styled.Container>
       <Styled.LeftSideContainer>
-        <Logo theme="dark" />
+        <CompanyLogo size={40} />
       </Styled.LeftSideContainer>
       <Styled.RightSideContainer>
         <Link to={`${url}/learn`}>
@@ -50,13 +50,9 @@ export default function TopMenu() {
           </Styled.Profile>
           <Styled.ProfileList>
             <Link to={`${url}/settings`}>
-              <GlobalStyled.DropdownItem style={{ color: "white" }}>
-                User settings
-              </GlobalStyled.DropdownItem>
+              <GlobalStyled.DropdownItem style={{ color: "white" }}>User settings</GlobalStyled.DropdownItem>
             </Link>
-            <GlobalStyled.DropdownItem onClick={logOutHandle}>
-              Log out
-            </GlobalStyled.DropdownItem>
+            <GlobalStyled.DropdownItem onClick={logOutHandle}>Log out</GlobalStyled.DropdownItem>
           </Styled.ProfileList>
         </GlobalStyled.DropdownWrapper>
       </Styled.RightSideContainer>
