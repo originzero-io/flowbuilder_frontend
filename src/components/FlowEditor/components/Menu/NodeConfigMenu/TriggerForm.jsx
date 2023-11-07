@@ -2,6 +2,8 @@ import React from "react";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import * as Styled from "./NodeConfigMenu.style";
 import notificationHelper from "utils/ui/notificationHelper";
+import { BsPlusSquare } from "react-icons/bs";
+import styled from "styled-components";
 
 export default function TriggerForm({ node, dispatcher }) {
   return (
@@ -34,29 +36,39 @@ function TriggerInputHandleForm({ node, dispatcher }) {
 
   return (
     <div style={{ marginBottom: "20px" }}>
-      <Styled.SectionName>Trigger Handles:</Styled.SectionName>
+      <Styled.SectionName>Trigger Handles</Styled.SectionName>
       {trigHandles &&
-        Object.entries(trigHandles).map((trigHandle) => {
-          return (
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div>{trigHandle[0]}</div>
-              <input
-                type="checkbox"
-                name={trigHandle[0]}
-                defaultChecked={trigHandle[1]}
-                checked={trigHandle[1]}
-                onChange={onChangeTriggerInputActiveHandler}
-              />
-            </div>
-          );
-        })}
-      <Button size="sm" color="success" style={{ marginTop: "15px" }} onClick={addNewTrigHandler}>
-        Add trig handle
-      </Button>
+        Object.entries(trigHandles).map((trigHandle, i) => (
+          <div
+            style={{ display: "flex", justifyContent: "space-between", marginBottom: "7px" }}
+            key={i}
+          >
+            <div>{trigHandle[0]}</div>
+            <input
+              type="checkbox"
+              name={trigHandle[0]}
+              defaultChecked={trigHandle[1]}
+              checked={trigHandle[1]}
+              onChange={onChangeTriggerInputActiveHandler}
+            />
+          </div>
+        ))}
+      <BsPlusSquare
+        style={{ color: "white", fontSize: "24px", marginTop: "8px" }}
+        onClick={addNewTrigHandler}
+      />
     </div>
   );
 }
-
+const SelectStyled = styled.select`
+  background-color: #262626;
+  border-radius: 2px;
+  width: 100%;
+  padding: 7px 4px 7px 4px;
+  border: 1px solid #393939;
+  font-size: 15px;
+  outline: none;
+`;
 function TriggerAttributeForm({ node, dispatcher }) {
   const { triggerAttributes } = node.data;
 
@@ -66,17 +78,13 @@ function TriggerAttributeForm({ node, dispatcher }) {
 
   return (
     <div>
-      <Styled.SectionName>Trigger Attributes:</Styled.SectionName>
+      <Styled.SectionName>Trigger Attributes</Styled.SectionName>
       <FormGroup>
-        <Input
-          type="select"
-          onChange={onChangeTriggerAttributesHandler}
-          defaultValue={triggerAttributes}
-        >
+        <SelectStyled onChange={onChangeTriggerAttributesHandler} value={triggerAttributes}>
           <option>Restart operation</option>
           <option>Queue</option>
           <option>Ignore</option>
-        </Input>
+        </SelectStyled>
       </FormGroup>
     </div>
   );

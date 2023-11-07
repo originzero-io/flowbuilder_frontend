@@ -1,44 +1,50 @@
-import React from "react";
 import { Badge, Form } from "reactstrap";
+import { CiLock, CiUnlock } from "react-icons/ci";
+import styled from "styled-components";
 import * as Styled from "./NodeConfigMenu.style";
 
+const LockWrapper = styled.div`
+  color: ${({ checked }) => (checked ? "#43B104" : "#757575")};
+  font-size: 26px;
+  display: flex;
+`;
 export default function FrozenHandlesForm({ node, dispatcher }) {
   const { frozenHandles, outputValues } = node.data;
 
-  const onCheckFrozenHandleHandler = (event) => {
-    if (event.target.checked) {
-      dispatcher({ type: "freezeHandle", payload: event });
+  const onCheckFrozenHandleHandler = (handleName, checked) => {
+    if (!checked) {
+      dispatcher({ type: "freezeHandle", payload: handleName });
     } else {
-      dispatcher({ type: "unFreezeHandle", payload: event });
+      dispatcher({ type: "unFreezeHandle", payload: handleName });
     }
   };
   return (
     <Form style={Styled.FormStyle}>
-      <Styled.SectionName>Frozen Handles:</Styled.SectionName>
+      <Styled.SectionName>Frozen Handles</Styled.SectionName>
       {outputValues &&
-        Object.entries(outputValues).map((output) => {
-          return (
-            <div
-              key={output}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <div style={{ display: "flex" }}>
-                <div>{output[0]}</div>
-                <Badge style={{ marginLeft: "10px" }}> {output[1]}</Badge>
-              </div>
-              <input
-                type="checkbox"
-                name={output[0]}
-                checked={frozenHandles.includes(output[0])}
-                onChange={onCheckFrozenHandleHandler}
-              />
+        Object.entries(outputValues).map((output) => (
+          <div
+            key={output}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div>{output[0]}</div>
+              <Badge style={{ marginLeft: "10px" }}> {output[1]}</Badge>
             </div>
-          );
-        })}
+            <LockWrapper
+              checked={frozenHandles.includes(output[0])}
+              onClick={() =>
+                onCheckFrozenHandleHandler(output[0], frozenHandles.includes(output[0]))
+              }
+            >
+              {frozenHandles.includes(output[0]) ? <CiLock /> : <CiUnlock />}
+            </LockWrapper>
+          </div>
+        ))}
     </Form>
   );
 }

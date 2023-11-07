@@ -4,7 +4,7 @@ input[type="checkbox"] {
   background-color: transparent;
   margin: 0;
   padding: 2px;
-  border: 1.5px solid #F4F4F4;
+  border: 1.5px solid #757575;
   border-radius: 4px;
   display: flex;
   justify-content: center;
@@ -20,6 +20,9 @@ input[type="checkbox"]::before {
   transform: scale(0);
   transition: 10ms transform ease-in-out;
   background-color: #43B104;
+}
+input[type="checkbox"]:checked {
+  border: 1.5px solid #b0afaf;
 }
 /* checking... */
 input[type="checkbox"]:checked::before {

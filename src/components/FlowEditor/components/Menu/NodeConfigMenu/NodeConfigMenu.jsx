@@ -1,16 +1,14 @@
 import React, { useEffect, useState, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "reactstrap";
-import { setModal } from "store/reducers/componentSlice";
 import { setNodeConfigData } from "store/reducers/flow/flowElementsSlice";
+import notificationHelper from "utils/ui/notificationHelper";
+import styled from "styled-components";
 import ConfigParametersForm from "./ConfigParametersForm";
 import StatusHandlesForm from "./StatusHandlesForm";
 import TriggerForm from "./TriggerForm";
-import * as Styled from "./NodeConfigMenu.style";
 import HandleCountForm from "./HandleCountForm";
 import FrozenHandlesForm from "./FrozenHandlesForm";
 import IncomersOutgoers from "./IncomersOutgoers";
-import styled from "styled-components";
 
 function nodeConfigReducer(node, { type, payload }) {
   let newNode;
@@ -86,7 +84,7 @@ function nodeConfigReducer(node, { type, payload }) {
         ...node,
         data: {
           ...node.data,
-          frozenHandles: [...node.data.frozenHandles, payload.target.name],
+          frozenHandles: [...node.data.frozenHandles, payload],
         },
       };
       break;
@@ -95,9 +93,7 @@ function nodeConfigReducer(node, { type, payload }) {
         ...node,
         data: {
           ...node.data,
-          frozenHandles: [
-            ...node.data.frozenHandles.filter((handle) => handle !== payload.target.name),
-          ],
+          frozenHandles: [...node.data.frozenHandles.filter((handle) => handle !== payload)],
         },
       };
       break;
@@ -135,6 +131,7 @@ const ConfigurationTabWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   font-size: 18px;
+  margin-bottom: 20px;
 `;
 const ConfigurationTab = styled.div`
   padding: 0px 30px 0px 30px;
@@ -142,6 +139,21 @@ const ConfigurationTab = styled.div`
     border-bottom: 1px solid gray;
   }
   border-bottom: ${({ active }) => active && "1px solid #c1c1c1"};
+`;
+
+const SaveButton = styled.div`
+  border-radius: 4px;
+  // border: 1px solid white;
+  background-color: #c1c1c1;
+  color: #2d2d2d;
+  width: 60px;
+  text-align: center;
+  font-size: 16px;
+  padding: 2px;
+  cursor: pointer;
+  &:hover {
+    background-color: #65cd1a;
+  }
 `;
 
 export default function NodeConfigMenu() {
@@ -159,12 +171,14 @@ export default function NodeConfigMenu() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     dispatch(setNodeConfigData(node));
-    dispatch(setModal(false));
+    notificationHelper.success("Configurations saved");
   };
 
   return (
     <div>
-      <Button onClick={onSubmitHandler}>Save</Button>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <SaveButton onClick={onSubmitHandler}>Save</SaveButton>
+      </div>
 
       <ConfigurationTabWrapper>
         <ConfigurationTab
@@ -189,9 +203,9 @@ export default function NodeConfigMenu() {
 
           <FrozenHandlesForm node={node} dispatcher={nodeConfigDispatch} />
 
-          {(dynamicInput || dynamicOutput) && (
+          {/* {(dynamicInput || dynamicOutput) && (
             <HandleCountForm node={node} dispatcher={nodeConfigDispatch} />
-          )}
+          )} */}
         </div>
       ) : (
         <ConfigParametersForm node={node} dispatcher={nodeConfigDispatch} />

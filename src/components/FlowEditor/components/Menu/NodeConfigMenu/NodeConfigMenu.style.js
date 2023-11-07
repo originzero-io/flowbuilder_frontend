@@ -8,10 +8,11 @@ export const Header = styled.div`
 `;
 export const SectionName = styled.div`
   font-weight: bold;
-  text-decoration: underline;
+  font-size: 16px;
   margin-bottom: 10px;
+  border-bottom: 1px solid #262626;
+  padding-bottom: 8px;
 `;
 export const FormStyle = {
-  padding: "20px",
-  marginBottom: "6px",
+  padding: "12px",
 };
