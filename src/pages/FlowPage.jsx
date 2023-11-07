@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useRef, useEffect, useState } from "react";
 import { ReactFlowProvider } from "reactflow";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled, { ThemeProvider } from "styled-components";
 import FlowEditor from "components/FlowEditor/FlowEditor";
 import useActiveFlow from "utils/hooks/useActiveFlow";
@@ -19,6 +19,10 @@ import EditorTopLeftMenu from "components/FlowEditor/components/Menu/NavMenu/Edi
 import EditorTopRightMenu from "components/FlowEditor/components/Menu/NavMenu/EditorTopMenu/EditorTopRightMenu";
 import EditorLeftMenu from "components/FlowEditor/components/Menu/NavMenu/EditorLeftMenu/EditorLeftMenu";
 import EditorRightMenu from "components/FlowEditor/components/Menu/NavMenu/EditorLeftMenu/EditorRightMenu";
+import { PanelGroup, Panel } from "react-resizable-panels";
+import ResizeHandle from "./ResizeHandle";
+import { GoTriangleRight, GoTriangleLeft } from "react-icons/go";
+import { toggleNodeConfigMenu } from "store/reducers/menuSlice";
 
 const StyledFlowWrapper = styled.div`
   height: 95%;
@@ -41,6 +45,14 @@ const FlowNameWrapper = styled.div`
   margin-left: 120px;
 `;
 
+const ShowRightMenuButton = styled.div`
+  color: #757575;
+  font-size: 2.5vmin;
+  position: absolute;
+  top: 40%;
+  right: 0;
+`;
+
 const propTypes = {
   match: PropTypes.object,
 };
@@ -51,7 +63,7 @@ const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowGui, flowConfig } = useActiveFlow();
   const rfWrapper = useRef(null);
-  const [showMenu, setShowMenu] = useState(true);
+  const [showLeftMenu, setShowLeftMenu] = useState(true);
 
   useEffect(() => {
     // flowExecutorSocket = createSocket({
@@ -63,7 +75,6 @@ const FlowPage = () => {
 
     flowExecutorEvent.injectSocket(flowExecutorSocket);
     flowExecutorEvent.getNodeList((data) => {
-      console.log("data:", data);
       dispatch(setSystemNodes(data));
     });
 
@@ -82,7 +93,17 @@ const FlowPage = () => {
   }, [dispatch]);
 
   const showLeftMenuHandler = () => {
-    setShowMenu(!showMenu);
+    setShowLeftMenu(!showLeftMenu);
+  };
+
+  const { nodeConfigMenu } = useSelector((state) => state.menus);
+
+  const toggleRightMenu = () => {
+    if (nodeConfigMenu.state === true) {
+      dispatch(toggleNodeConfigMenu({ element: {}, state: false }));
+    } else {
+      dispatch(toggleNodeConfigMenu({ element: nodeConfigMenu.element, state: true }));
+    }
   };
 
   return (
@@ -95,9 +116,41 @@ const FlowPage = () => {
         </FlowTopMenuWrapper>
 
         <StyledFlowWrapper ref={rfWrapper}>
-          <EditorLeftMenu showMenu={showMenu} setShowMenu={showLeftMenuHandler} />
-          <FlowEditor reactFlowWrapper={rfWrapper} />
-          <EditorRightMenu />
+          <EditorLeftMenu showMenu={showLeftMenu} setShowMenu={showLeftMenuHandler} />
+          <PanelGroup direction="horizontal">
+            <Panel
+              defaultSize={20}
+              minSize={20}
+              style={{
+                backgroundColor: "#2d2d2d",
+                color: "whitesmoke",
+                overflowY: "auto",
+                position: "relative",
+              }}
+            >
+              <FlowEditor reactFlowWrapper={rfWrapper} />
+              <ShowRightMenuButton onClick={toggleRightMenu}>
+                {nodeConfigMenu.state ? <GoTriangleRight /> : <GoTriangleLeft />}
+              </ShowRightMenuButton>
+            </Panel>
+            <ResizeHandle />
+
+            {nodeConfigMenu.state && (
+              <Panel
+                defaultSize={30}
+                minSize={30}
+                style={{
+                  backgroundColor: "#2d2d2d",
+                  color: "whitesmoke",
+                  // marginRight: "-2px",
+                  overflowY: "auto",
+                  position: "relative",
+                }}
+              >
+                <EditorRightMenu />
+              </Panel>
+            )}
+          </PanelGroup>
         </StyledFlowWrapper>
       </ThemeProvider>
     </ReactFlowProvider>

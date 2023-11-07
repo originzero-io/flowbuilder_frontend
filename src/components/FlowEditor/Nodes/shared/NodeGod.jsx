@@ -10,7 +10,7 @@ import { Badge } from "reactstrap";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { setModal } from "store/reducers/componentSlice";
 import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
-import { setNodeConfigMenu } from "store/reducers/menuSlice";
+import { toggleNodeConfigMenu } from "store/reducers/menuSlice";
 import styled from "styled-components";
 import InputParameterHandles from "./NodeHandles/InputParameterHandles";
 import InputStatusHandles from "./NodeHandles/InputStatusHandles";
@@ -102,8 +102,8 @@ const NodeGod = ({ self, children }) => {
 
   const onDoubleClickHandle = (e) => {
     e.stopPropagation();
-    dispatch(setModal(<NodeConfigMenu self={self} />));
-    dispatch(setNodeConfigMenu({ element: self, state: true }));
+    // dispatch(setModal(<NodeConfigMenu self={self} />));
+    dispatch(toggleNodeConfigMenu({ element: self, state: true }));
   };
 
   const NodeIcon = getIconComponent(self.type);

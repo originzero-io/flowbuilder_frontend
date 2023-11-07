@@ -14,18 +14,18 @@ module.exports = {
   plugins: ["react-refresh", "prettier", "only-warn"],
   rules: {
     "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-    "prettier/prettier": [
-      "error",
-      {
-        printWidth: 100,
-        endOfLine: "auto",
-        tabWidth: 2,
-        useTabs: false,
-        trailingComma: "all",
-        semi: true,
-        singleQuote: false,
-      },
-    ],
+    // "prettier/prettier": [
+    //   "error",
+    //   {
+    //     printWidth: 100,
+    //     endOfLine: "auto",
+    //     tabWidth: 2,
+    //     useTabs: false,
+    //     trailingComma: "all",
+    //     semi: true,
+    //     singleQuote: false,
+    //   },
+    // ],
     quotes: "off",
     "max-len": [
       "error",

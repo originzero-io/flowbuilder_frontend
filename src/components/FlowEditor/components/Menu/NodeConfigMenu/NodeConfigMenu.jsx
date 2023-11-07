@@ -1,5 +1,5 @@
-import React, { useReducer } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useReducer } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import { setNodeConfigData } from "store/reducers/flow/flowElementsSlice";
@@ -14,6 +14,9 @@ import IncomersOutgoers from "./IncomersOutgoers";
 function nodeConfigReducer(node, { type, payload }) {
   let newNode;
   switch (type) {
+    case "loadNode":
+      newNode = payload;
+      break;
     case "updateConfigParameters":
       newNode = {
         ...node,
@@ -128,9 +131,14 @@ function nodeConfigReducer(node, { type, payload }) {
 }
 
 export default function NodeConfigMenu({ self }) {
-  const [node, nodeConfigDispatch] = useReducer(nodeConfigReducer, self);
+  const { nodeConfigMenu } = useSelector((state) => state.menus);
+  const [node, nodeConfigDispatch] = useReducer(nodeConfigReducer, nodeConfigMenu.element);
   const dispatch = useDispatch();
   const { dynamicInput, dynamicOutput } = node.data.ioEngine;
+
+  useEffect(() => {
+    nodeConfigDispatch({ type: "loadNode", payload: nodeConfigMenu.element });
+  }, [nodeConfigMenu.element, nodeConfigMenu.state, node]);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -141,7 +149,7 @@ export default function NodeConfigMenu({ self }) {
   return (
     <div>
       <Styled.Header>Node Configuration Menu</Styled.Header>
-      <div style={{ marginBottom: "30px" }}>{self.id}</div>
+      <div style={{ marginBottom: "30px" }}>{node.id}</div>
 
       <ConfigParametersForm node={node} dispatcher={nodeConfigDispatch} />
 
