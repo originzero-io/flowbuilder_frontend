@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
@@ -10,6 +10,7 @@ import * as Styled from "./NodeConfigMenu.style";
 import HandleCountForm from "./HandleCountForm";
 import FrozenHandlesForm from "./FrozenHandlesForm";
 import IncomersOutgoers from "./IncomersOutgoers";
+import styled from "styled-components";
 
 function nodeConfigReducer(node, { type, payload }) {
   let newNode;
@@ -130,11 +131,26 @@ function nodeConfigReducer(node, { type, payload }) {
   return newNode;
 }
 
+const ConfigurationTabWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  font-size: 18px;
+`;
+const ConfigurationTab = styled.div`
+  padding: 0px 30px 0px 30px;
+  &:hover {
+    border-bottom: 1px solid gray;
+  }
+  border-bottom: ${({ active }) => active && "1px solid #c1c1c1"};
+`;
+
 export default function NodeConfigMenu() {
   const { nodeConfigMenu } = useSelector((state) => state.menus);
   const [node, nodeConfigDispatch] = useReducer(nodeConfigReducer, nodeConfigMenu.element);
   const dispatch = useDispatch();
   const { dynamicInput, dynamicOutput } = node.data.ioEngine;
+
+  const [configurationTab, setConfigurationTab] = useState("Events");
 
   useEffect(() => {
     nodeConfigDispatch({ type: "loadNode", payload: nodeConfigMenu.element });
@@ -148,22 +164,39 @@ export default function NodeConfigMenu() {
 
   return (
     <div>
-      <Styled.Header>Node Configuration Menu</Styled.Header>
-      <div style={{ marginBottom: "30px" }}>{node.id}</div>
-
-      <ConfigParametersForm node={node} dispatcher={nodeConfigDispatch} />
-
-      <StatusHandlesForm node={node} dispatcher={nodeConfigDispatch} />
-
-      <TriggerForm node={node} dispatcher={nodeConfigDispatch} />
-
-      <FrozenHandlesForm node={node} dispatcher={nodeConfigDispatch} />
-
-      {(dynamicInput || dynamicOutput) && (
-        <HandleCountForm node={node} dispatcher={nodeConfigDispatch} />
-      )}
-
       <Button onClick={onSubmitHandler}>Save</Button>
+
+      <ConfigurationTabWrapper>
+        <ConfigurationTab
+          onClick={() => setConfigurationTab("Events")}
+          active={configurationTab === "Events"}
+        >
+          Events
+        </ConfigurationTab>
+        <ConfigurationTab
+          onClick={() => setConfigurationTab("Values")}
+          active={configurationTab === "Values"}
+        >
+          Values
+        </ConfigurationTab>
+      </ConfigurationTabWrapper>
+
+      {configurationTab === "Events" ? (
+        <div>
+          <StatusHandlesForm node={node} dispatcher={nodeConfigDispatch} />
+
+          <TriggerForm node={node} dispatcher={nodeConfigDispatch} />
+
+          <FrozenHandlesForm node={node} dispatcher={nodeConfigDispatch} />
+
+          {(dynamicInput || dynamicOutput) && (
+            <HandleCountForm node={node} dispatcher={nodeConfigDispatch} />
+          )}
+        </div>
+      ) : (
+        <ConfigParametersForm node={node} dispatcher={nodeConfigDispatch} />
+      )}
+      <div style={{ marginBottom: "30px" }}>{node.id}</div>
     </div>
   );
 }
