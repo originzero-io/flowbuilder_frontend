@@ -22,10 +22,7 @@ import { setFlowEdgeType, setMiniMapDisplay, setTheme } from "store/reducers/flo
 import styled from "styled-components";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import useAuth from "utils/hooks/useAuth";
-import {
-  default as notification,
-  default as notificationHelper,
-} from "utils/ui/notificationHelper";
+import notificationHelper from "utils/ui/notificationHelper";
 import SwitchButton from "../../../../nodes/shared/SwitchButton";
 import ConnectionMenu from "../../ConnectionMenu/ConnectionMenu";
 import * as Styled from "../NavMenu.style";
@@ -89,7 +86,7 @@ export default function EditorTopRightMenu() {
           const flow = JSON.parse(event.target.result);
           dispatch(importFlow(flow));
         };
-      } else notification.error("This file cannot be imported. Please provide JSON file");
+      } else notificationHelper.error("This file cannot be imported. Please provide JSON file");
     },
     [reactFlowInstance],
   );
@@ -129,16 +126,16 @@ export default function EditorTopRightMenu() {
     const unconnectedTrigHandles = checkAllConnectedTrigsHandles(nodes, edges);
 
     if (!checkIfTriggerNode(nodes)) {
-      notification.error("Flow does not contain any trigger node.");
+      notificationHelper.error("Flow does not contain any trigger node.");
       setExecutionStatus("error");
     } else if (unconnectedNodes.exist) {
-      notification.error(
+      notificationHelper.error(
         "This flow contains unconnected nodes. Please make sure to connect all nodes.",
       );
       dispatch(selectElements(unconnectedNodes.nodes));
       setExecutionStatus("error");
     } else if (unconnectedTrigHandles.exist) {
-      notification.error("Some nodes have unconnected trig handles");
+      notificationHelper.error("Some nodes have unconnected trig handles");
       dispatch(selectElements(unconnectedTrigHandles.nodes));
       setExecutionStatus("error");
     } else {
