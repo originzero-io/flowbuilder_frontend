@@ -1,4 +1,3 @@
-import React from "react";
 import { Col, Form, FormGroup, Input, Label } from "reactstrap";
 import * as Styled from "./NodeConfigMenu.style";
 
@@ -12,7 +11,6 @@ export default function ConfigParametersForm({ node, dispatcher }) {
     }
     dispatcher({ type: "updateConfigParameters", payload: event });
   };
-
   return (
     <Form style={Styled.FormStyle}>
       <Styled.SectionName>Parameters:</Styled.SectionName>
@@ -23,9 +21,8 @@ export default function ConfigParametersForm({ node, dispatcher }) {
             <Input
               id={entry[0]}
               name={entry[0]}
-              placeholder={entry[1]}
               type={typeof entry[1]}
-              defaultValue={entry[1]}
+              value={entry[1]}
               onChange={(event) => onChangeConfigParametersHandler(event, typeof entry[1])}
             />
           </Col>

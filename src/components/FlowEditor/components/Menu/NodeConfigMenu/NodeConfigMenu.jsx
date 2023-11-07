@@ -130,7 +130,7 @@ function nodeConfigReducer(node, { type, payload }) {
   return newNode;
 }
 
-export default function NodeConfigMenu({ self }) {
+export default function NodeConfigMenu() {
   const { nodeConfigMenu } = useSelector((state) => state.menus);
   const [node, nodeConfigDispatch] = useReducer(nodeConfigReducer, nodeConfigMenu.element);
   const dispatch = useDispatch();
@@ -138,7 +138,7 @@ export default function NodeConfigMenu({ self }) {
 
   useEffect(() => {
     nodeConfigDispatch({ type: "loadNode", payload: nodeConfigMenu.element });
-  }, [nodeConfigMenu.element, nodeConfigMenu.state, node]);
+  }, [nodeConfigMenu.element, nodeConfigMenu.state]);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();

@@ -13,7 +13,7 @@ export default function EditorRightMenu() {
   return (
     <EditorRightMenuWrapper>
       {Object.hasOwn(nodeConfigMenu.element, "id") ? (
-        <NodeConfigMenu self={nodeConfigMenu.element} />
+        <NodeConfigMenu />
       ) : (
         <div>Select any node</div>
       )}

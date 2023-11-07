@@ -100,7 +100,7 @@ const FlowPage = () => {
 
   const toggleRightMenu = () => {
     if (nodeConfigMenu.state === true) {
-      dispatch(toggleNodeConfigMenu({ element: {}, state: false }));
+      dispatch(toggleNodeConfigMenu({ element: nodeConfigMenu.element, state: false }));
     } else {
       dispatch(toggleNodeConfigMenu({ element: nodeConfigMenu.element, state: true }));
     }
