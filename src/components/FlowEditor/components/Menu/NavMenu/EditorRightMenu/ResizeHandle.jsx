@@ -1,7 +1,5 @@
 import { PanelResizeHandle } from "react-resizable-panels";
 
-import styles from "./styles.module.css";
-
 export default function ResizeHandle() {
   return (
     <PanelResizeHandle

@@ -18,9 +18,9 @@ import { setSystemNodes } from "store/reducers/systemNodeSlice";
 import EditorTopLeftMenu from "components/FlowEditor/components/Menu/NavMenu/EditorTopMenu/EditorTopLeftMenu";
 import EditorTopRightMenu from "components/FlowEditor/components/Menu/NavMenu/EditorTopMenu/EditorTopRightMenu";
 import EditorLeftMenu from "components/FlowEditor/components/Menu/NavMenu/EditorLeftMenu/EditorLeftMenu";
-import EditorRightMenu from "components/FlowEditor/components/Menu/NavMenu/EditorLeftMenu/EditorRightMenu";
+import EditorRightMenu from "components/FlowEditor/components/Menu/NavMenu/EditorRightMenu/EditorRightMenu";
 import { PanelGroup, Panel } from "react-resizable-panels";
-import ResizeHandle from "./ResizeHandle";
+import ResizeHandle from "../components/FlowEditor/components/Menu/NavMenu/EditorRightMenu/ResizeHandle";
 import { GoTriangleRight, GoTriangleLeft } from "react-icons/go";
 import { toggleNodeConfigMenu } from "store/reducers/menuSlice";
 
