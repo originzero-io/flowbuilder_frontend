@@ -51,6 +51,7 @@ const SearchBar = styled.input`
   background-color: #262626;
   border: none;
   color: #757575;
+  outline: none;
 `;
 
 const CategoryWrapper = styled.div`

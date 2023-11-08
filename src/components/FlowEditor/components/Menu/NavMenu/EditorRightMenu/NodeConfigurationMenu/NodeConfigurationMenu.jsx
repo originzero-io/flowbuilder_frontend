@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setNodeConfigData } from "store/reducers/flow/flowElementsSlice";
 import notificationHelper from "utils/ui/notificationHelper";
 import styled from "styled-components";
+import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
 import ConfigParametersForm from "./ConfigParametersForm";
 import StatusHandlesForm from "./StatusHandlesForm";
 import TriggerForm from "./TriggerForm";
@@ -141,17 +142,18 @@ const ConfigurationTab = styled.div`
   border-bottom: ${({ active }) => active && "1px solid #c1c1c1"};
 `;
 
-const SaveButton = styled.div`
+const ButtonStyled = styled.div`
   border-radius: 4px;
-  background-color: rgba(85, 243, 29, 0.2);
-  color: #65cd1a;
+  background-color: ${({ type }) => (type === "save" ? "rgba(85, 243, 29, 0.2)" : "#393939")};
+  color: ${({ type }) => (type === "save" ? "#65cd1a" : "#c1c1c1")};
   width: 60px;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   padding: 2px;
+  margin: 2px;
   cursor: pointer;
   &:hover {
-    background-color: rgba(85, 243, 29, 0.4);
+    background-color: ${({ type }) => (type === "save" ? "rgba(85, 243, 29, 0.4)" : "#4f4f4f")};
   }
 `;
 const NodeId = styled.div`
@@ -184,10 +186,20 @@ export default function NodeConfigurationMenu() {
     notificationHelper.success("Configurations saved");
   };
 
+  const onClosePanelHandler = (event) => {
+    event.preventDefault();
+    dispatch(toggleNodeConfigurationMenu({ element: nodeConfigurationMenu.element, state: false }));
+  };
+
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <SaveButton onClick={onSubmitHandler}>Save</SaveButton>
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "18px" }}>
+        <ButtonStyled type="cancel" onClick={onClosePanelHandler}>
+          Cancel
+        </ButtonStyled>
+        <ButtonStyled type="save" onClick={onSubmitHandler}>
+          Save
+        </ButtonStyled>
       </div>
 
       <ConfigurationTabWrapper>

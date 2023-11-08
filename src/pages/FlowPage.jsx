@@ -146,7 +146,6 @@ const FlowPage = () => {
                 style={{
                   backgroundColor: "#2d2d2d",
                   color: "whitesmoke",
-                  // marginRight: "-2px",
                   overflowY: "auto",
                   position: "relative",
                 }}
