@@ -12,7 +12,7 @@ const propTypes = {
 const Utils = ({ flowGui }) => (
   <>
     <FlowEditorMenus />
-    <Background offset={0} />
+    <Background offset={1} color="#373737" gap={20} />
     <MiniMap
       nodeColor="gray"
       maskColor="rgba(189, 195, 199,0.5)"
