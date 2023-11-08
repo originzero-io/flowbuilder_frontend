@@ -6,7 +6,7 @@ import { BiSolidEdit } from "react-icons/bi";
 import { MdSettings } from "react-icons/md";
 import { useReactFlow } from "reactflow";
 import { useDispatch } from "react-redux";
-import { toggleNodeConfigMenu } from "store/reducers/menuSlice";
+import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
 
 const NodeMenuWrapper = styled.div`
   position: absolute;
@@ -51,7 +51,7 @@ export default function NodeMenu({ self }) {
     }
   };
   const openConfigurationMenu = () => {
-    dispatch(toggleNodeConfigMenu({ element: self, state: true }));
+    dispatch(toggleNodeConfigurationMenu({ element: self, state: true }));
   };
   return (
     <NodeMenuWrapper>

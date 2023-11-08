@@ -22,7 +22,7 @@ import EditorRightMenu from "components/FlowEditor/components/Menu/NavMenu/Edito
 import { PanelGroup, Panel } from "react-resizable-panels";
 import ResizeHandle from "../components/FlowEditor/components/Menu/NavMenu/EditorRightMenu/ResizeHandle";
 import { GoTriangleRight, GoTriangleLeft } from "react-icons/go";
-import { toggleNodeConfigMenu } from "store/reducers/menuSlice";
+import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
 
 const StyledFlowWrapper = styled.div`
   height: 95%;
@@ -96,13 +96,17 @@ const FlowPage = () => {
     setShowLeftMenu(!showLeftMenu);
   };
 
-  const { nodeConfigMenu } = useSelector((state) => state.menus);
+  const { nodeConfigurationMenu } = useSelector((state) => state.menus);
 
   const toggleRightMenu = () => {
-    if (nodeConfigMenu.state === true) {
-      dispatch(toggleNodeConfigMenu({ element: nodeConfigMenu.element, state: false }));
+    if (nodeConfigurationMenu.state === true) {
+      dispatch(
+        toggleNodeConfigurationMenu({ element: nodeConfigurationMenu.element, state: false }),
+      );
     } else {
-      dispatch(toggleNodeConfigMenu({ element: nodeConfigMenu.element, state: true }));
+      dispatch(
+        toggleNodeConfigurationMenu({ element: nodeConfigurationMenu.element, state: true }),
+      );
     }
   };
 
@@ -130,12 +134,12 @@ const FlowPage = () => {
             >
               <FlowEditor reactFlowWrapper={rfWrapper} />
               <ShowRightMenuButton onClick={toggleRightMenu}>
-                {nodeConfigMenu.state ? <GoTriangleRight /> : <GoTriangleLeft />}
+                {nodeConfigurationMenu.state ? <GoTriangleRight /> : <GoTriangleLeft />}
               </ShowRightMenuButton>
             </Panel>
             <ResizeHandle />
 
-            {nodeConfigMenu.state && (
+            {nodeConfigurationMenu.state && (
               <Panel
                 defaultSize={30}
                 minSize={30}

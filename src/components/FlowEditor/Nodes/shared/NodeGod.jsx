@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import NodeConfigMenu from "components/FlowEditor/components/Menu/NodeConfigMenu/NodeConfigMenu";
 import { getIconComponent } from "components/FlowEditor/helpers/nodeObjectHelper";
 import { flowExecutorSocket } from "pages/FlowPage";
 import PropTypes from "prop-types";
@@ -8,9 +7,8 @@ import { useDispatch } from "react-redux";
 import { useUpdateNodeInternals } from "reactflow";
 import { Badge } from "reactstrap";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
-import { setModal } from "store/reducers/componentSlice";
 import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
-import { toggleNodeConfigMenu } from "store/reducers/menuSlice";
+import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
 import styled from "styled-components";
 import InputParameterHandles from "./NodeHandles/InputParameterHandles";
 import InputStatusHandles from "./NodeHandles/InputStatusHandles";
@@ -102,8 +100,7 @@ const NodeGod = ({ self, children }) => {
 
   const onDoubleClickHandle = (e) => {
     e.stopPropagation();
-    // dispatch(setModal(<NodeConfigMenu self={self} />));
-    dispatch(toggleNodeConfigMenu({ element: self, state: true }));
+    dispatch(toggleNodeConfigurationMenu({ element: self, state: true }));
   };
 
   const NodeIcon = getIconComponent(self.type);

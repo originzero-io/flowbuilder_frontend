@@ -1,15 +1,17 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import NodeConfigMenu from "../../NodeConfigMenu/NodeConfigMenu";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { LuSettings2 } from "react-icons/lu";
-import { BiInfoCircle } from "react-icons/bi";
 import { PiTreeStructure } from "react-icons/pi";
 import { useState } from "react";
+import NodeConfigurationMenu from "./NodeConfigurationMenu/NodeConfigurationMenu";
+import FlowInformationMenu from "./FlowInformationMenu/FlowInformationMenu";
 
 const EditorRightMenuWrapper = styled.div`
   padding: 12px;
   position: relative;
+  color: #e7e5e5;
+  height: 100%;
 `;
 const TabName = styled.div`
   position: absolute;
@@ -23,24 +25,20 @@ const TabName = styled.div`
 `;
 
 export default function EditorRightMenu() {
-  const { nodeConfigMenu } = useSelector((state) => state.menus);
-  const [tabName, setTabName] = useState("Properties");
-  const dispatch = useDispatch();
+  const { nodeConfigurationMenu } = useSelector((state) => state.menus);
+  const [tabName, setTabName] = useState("Node Configuration");
 
   return (
     <EditorRightMenuWrapper>
       <TabName>{tabName}</TabName>
-      <Tabs defaultIndex={1} selectedTabClassName="selected-tab">
+      <Tabs defaultIndex={0} selectedTabClassName="selected-tab" style={{ height: "100%" }}>
         <TabList
           style={{
             display: "flex",
             justifyContent: "flex-end",
           }}
         >
-          <Tab onClick={() => setTabName("Info")}>
-            <BiInfoCircle />
-          </Tab>
-          <Tab onClick={() => setTabName("Properties")}>
+          <Tab onClick={() => setTabName("Node Configuration")}>
             <LuSettings2 />
           </Tab>
           <Tab onClick={() => setTabName("Flow")}>
@@ -49,14 +47,14 @@ export default function EditorRightMenu() {
         </TabList>
 
         <TabPanel>
-          <h2>Any content 1</h2>
-        </TabPanel>
-        <TabPanel>
-          {Object.hasOwn(nodeConfigMenu.element, "id") ? (
-            <NodeConfigMenu />
+          {Object.hasOwn(nodeConfigurationMenu.element, "id") ? (
+            <NodeConfigurationMenu />
           ) : (
             <div>Select any node</div>
           )}
+        </TabPanel>
+        <TabPanel>
+          <FlowInformationMenu />
         </TabPanel>
       </Tabs>
     </EditorRightMenuWrapper>

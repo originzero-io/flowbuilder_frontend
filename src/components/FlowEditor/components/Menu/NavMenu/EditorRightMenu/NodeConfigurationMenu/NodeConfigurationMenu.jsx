@@ -143,30 +143,40 @@ const ConfigurationTab = styled.div`
 
 const SaveButton = styled.div`
   border-radius: 4px;
-  // border: 1px solid white;
-  background-color: #c1c1c1;
-  color: #2d2d2d;
+  background-color: rgba(85, 243, 29, 0.2);
+  color: #65cd1a;
   width: 60px;
   text-align: center;
   font-size: 16px;
   padding: 2px;
   cursor: pointer;
   &:hover {
-    background-color: #65cd1a;
+    background-color: rgba(85, 243, 29, 0.4);
   }
 `;
+const NodeId = styled.div`
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  background: #393939;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  padding: 7px;
+  color: #a6b3e8;
+  margin-left: -12px;
+  text-align: center;
+`;
 
-export default function NodeConfigMenu() {
-  const { nodeConfigMenu } = useSelector((state) => state.menus);
-  const [node, nodeConfigDispatch] = useReducer(nodeConfigReducer, nodeConfigMenu.element);
+export default function NodeConfigurationMenu() {
+  const { nodeConfigurationMenu } = useSelector((state) => state.menus);
+  const [node, nodeConfigDispatch] = useReducer(nodeConfigReducer, nodeConfigurationMenu.element);
   const dispatch = useDispatch();
   const { dynamicInput, dynamicOutput } = node.data.ioEngine;
 
   const [configurationTab, setConfigurationTab] = useState("Events");
 
   useEffect(() => {
-    nodeConfigDispatch({ type: "loadNode", payload: nodeConfigMenu.element });
-  }, [nodeConfigMenu.element, nodeConfigMenu.state]);
+    nodeConfigDispatch({ type: "loadNode", payload: nodeConfigurationMenu.element });
+  }, [nodeConfigurationMenu.element, nodeConfigurationMenu.state]);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -194,7 +204,6 @@ export default function NodeConfigMenu() {
           Values
         </ConfigurationTab>
       </ConfigurationTabWrapper>
-
       {configurationTab === "Events" ? (
         <div>
           <StatusHandlesForm node={node} dispatcher={nodeConfigDispatch} />
@@ -210,7 +219,7 @@ export default function NodeConfigMenu() {
       ) : (
         <ConfigParametersForm node={node} dispatcher={nodeConfigDispatch} />
       )}
-      <div style={{ marginBottom: "30px" }}>{node.id}</div>
+      <NodeId>{node.id}</NodeId>
     </div>
   );
 }
