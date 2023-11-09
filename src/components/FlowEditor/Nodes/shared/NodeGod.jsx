@@ -15,7 +15,6 @@ import InputStatusHandles from "./NodeHandles/InputStatusHandles";
 import NodeHeader from "./NodeHeader/NodeHeader";
 import OutputStatusHandles from "./NodeHandles/OutputStatusHandles";
 import OutputValueHandles from "./NodeHandles/OutputValueHandles";
-import defaultIcon from "./defaultIcon";
 
 const NodeWrapper = styled.div`
   display: flex;
@@ -122,7 +121,7 @@ const NodeGod = ({ self, children }) => {
         <NodeHeader self={self} />
         <NodeContent type="logo" onDoubleClick={onDoubleClickHandle}>
           <DynamicSVG
-            svgContent={nodeSvg || defaultIcon}
+            svgContent={nodeSvg}
             color={self.type === "TRIGGER" ? "#65CD1A" : "#A6B3E8"}
             size={40}
           />

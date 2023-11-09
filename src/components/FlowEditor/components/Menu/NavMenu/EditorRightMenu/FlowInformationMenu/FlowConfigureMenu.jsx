@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import { HiCube } from "react-icons/hi";
-import { BiChip, BiInfoCircle } from "react-icons/bi";
+import { BiInfoCircle, BiCheckCircle } from "react-icons/bi";
 import { FiMapPin } from "react-icons/fi";
-import { BiCheckCircle } from "react-icons/bi";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { selectElements } from "store/reducers/flow/flowElementsSlice";
+import DynamicSVG from "components/Shared/DynamicSVG";
 
 const FlowHeader = styled.div`
   display: flex;
@@ -92,7 +92,7 @@ export default function FlowConfigureMenu() {
                   padding: "2px",
                 }}
               >
-                <BiChip />
+                <DynamicSVG svgContent={node.data.ui.icon} color="#65CD1A" size={25} />
               </div>
               <div
                 style={{
@@ -161,7 +161,11 @@ function NodeInformationSection({ clickedNode }) {
       <NodeHeader>
         <div style={{ display: "flex", alignItems: "center" }}>
           <NodeIconWrapper>
-            <BiChip />
+            <DynamicSVG
+              svgContent={clickedNode.data.ui.icon}
+              color={self.type === "TRIGGER" ? "#65CD1A" : "#A6B3E8"}
+              size={25}
+            />
           </NodeIconWrapper>
           <div style={{ marginLeft: "5px" }}>{clickedNode.data.ui.label || "NO-CLICKED"}</div>
         </div>

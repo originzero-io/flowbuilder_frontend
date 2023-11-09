@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
 import DynamicSVG from "components/Shared/DynamicSVG";
 import { createPanelNodeList } from "components/FlowEditor/helpers/nodeObjectHelper";
-import defaultIcon from "components/FlowEditor/nodes/shared/defaultIcon";
 
 const Wrapper = styled.div`
   position: relative;
@@ -202,7 +201,7 @@ function LeftMenuItem({ node }) {
       >
         <div>
           <DynamicSVG
-            svgContent={nodeSvg || defaultIcon}
+            svgContent={nodeSvg}
             color={node.type === "TRIGGER" ? "#65CD1A" : "#A6B3E8"}
             size={34}
           />
