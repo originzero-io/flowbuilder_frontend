@@ -4,6 +4,9 @@ import { GoTriangleRight, GoTriangleLeft } from "react-icons/go";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
+import DynamicSVG from "components/Shared/DynamicSVG";
+import { createPanelNodeList } from "components/FlowEditor/helpers/nodeObjectHelper";
+import defaultIcon from "components/FlowEditor/nodes/shared/defaultIcon";
 
 const Wrapper = styled.div`
   position: relative;
@@ -73,10 +76,10 @@ const NodeItemWrapper = styled.div`
 `;
 
 export default function EditorLeftMenu({ showMenu, setShowMenu }) {
-  const nodeList = useSelector((state) => state.panelNodeList);
+  const nodeList = useSelector((state) => state.systemNodes);
+
   const [filteredCategories, setFilteredCategories] = useState({});
   const [categories, setCategories] = useState({});
-
   const searchHandle = (e) => {
     const { value } = e.target;
 
@@ -84,7 +87,7 @@ export default function EditorLeftMenu({ showMenu, setShowMenu }) {
 
     for (const category in categories) {
       const categoryItems = categories[category].filter((item) =>
-        item.name.toLowerCase().includes(value.toLowerCase()),
+        item.type.toLowerCase().includes(value.toLowerCase()),
       );
 
       if (categoryItems.length > 0) {
@@ -97,7 +100,10 @@ export default function EditorLeftMenu({ showMenu, setShowMenu }) {
 
   useEffect(() => {
     const groupedCategories = {};
-    nodeList.forEach((node) => {
+
+    const nodes = createPanelNodeList(nodeList);
+
+    nodes.forEach((node) => {
       const { category } = node;
 
       if (!groupedCategories[category]) {
@@ -157,7 +163,7 @@ const StyledMenuItem = styled.div`
     nodeType === "TRIGGER" ? "1px #43b104 solid;" : "1px #515C85 solid"};
   color: ${({ nodeType }) => (nodeType === "TRIGGER" ? "#65CD1A" : "#A6B3E8")};
   margin: 4px;
-  font-size: 12.1px;
+  // font-size: 12.1px;
   font-weight: 400;
   display: flex;
   flex-direction: column;
@@ -170,14 +176,17 @@ const StyledMenuItem = styled.div`
 const NodeLabel = styled.div`
   margin-top: 7px;
   font-size: 9px;
-  overflow: hidden;
-  padding: 5px;
+  // padding: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
   width: 100%;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  text-align: center;
 `;
 function LeftMenuItem({ node }) {
+  const nodeSvg = node.icon;
   const onDragStart = (event, nodeType) => {
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.effectAllowed = "move";
@@ -188,11 +197,17 @@ function LeftMenuItem({ node }) {
         nodeType={node.type}
         onDragStart={(event) => onDragStart(event, node.type)}
         draggable
-        data-tip={node.name}
+        data-tip={node.label}
         data-for={`pnl-${node.id}`}
       >
-        <div>{node.icon}</div>
-        <NodeLabel>{node.name}</NodeLabel>
+        <div>
+          <DynamicSVG
+            svgContent={nodeSvg || defaultIcon}
+            color={node.type === "TRIGGER" ? "#65CD1A" : "#A6B3E8"}
+            size={34}
+          />
+        </div>
+        <NodeLabel>{node.type}</NodeLabel>
       </StyledMenuItem>
       <Tooltip id={`pnl-${node.id}`} place="top" type="light" />
     </>

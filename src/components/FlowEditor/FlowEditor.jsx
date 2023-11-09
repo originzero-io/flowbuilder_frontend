@@ -24,7 +24,6 @@ import themeColor from "components/Shared/ThemeReference";
 import notificationHelper from "utils/ui/notificationHelper";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { flowExecutorSocket } from "pages/FlowPage";
-import { loadPanelNodeList } from "store/reducers/panelNodeListSlice";
 import {
   openElementContextMenu,
   openMultiSelectionContextMenu,
@@ -43,11 +42,11 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const { flowElements, flowGui } = useActiveFlow();
   const { edgeType, theme } = flowGui;
 
+  const nodeList = useSelector((state) => state.systemNodes);
+
   const reactFlowInstance = useReactFlow();
 
   useEffect(() => {
-    // load panel context menu node list when flow editor page loads
-    dispatch(loadPanelNodeList());
     // socket listeners
     if (flowExecutorSocket) {
       flowExecutorEvent.onFlowError((data) => {
@@ -166,7 +165,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setElementContextMenu(false));
     dispatch(closeAllNodeGroupMenu(true));
   };
-  const customNodes = useMemo(() => createCustomNodeObject(), []);
+  const customNodes = useMemo(() => createCustomNodeObject(nodeList), [nodeList]);
 
   return (
     <ReactFlow

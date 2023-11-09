@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { getIconComponent } from "components/FlowEditor/helpers/nodeObjectHelper";
 import { flowExecutorSocket } from "pages/FlowPage";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
@@ -10,11 +9,13 @@ import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
 import styled from "styled-components";
+import DynamicSVG from "components/Shared/DynamicSVG";
 import InputParameterHandles from "./NodeHandles/InputParameterHandles";
 import InputStatusHandles from "./NodeHandles/InputStatusHandles";
 import NodeHeader from "./NodeHeader/NodeHeader";
 import OutputStatusHandles from "./NodeHandles/OutputStatusHandles";
 import OutputValueHandles from "./NodeHandles/OutputValueHandles";
+import defaultIcon from "./defaultIcon";
 
 const NodeWrapper = styled.div`
   display: flex;
@@ -103,7 +104,7 @@ const NodeGod = ({ self, children }) => {
     dispatch(toggleNodeConfigurationMenu({ element: self, state: true }));
   };
 
-  const NodeIcon = getIconComponent(self.type);
+  const nodeSvg = self.data.ui.icon;
 
   return (
     <NodeWrapper nodeType={self.type}>
@@ -120,7 +121,11 @@ const NodeGod = ({ self, children }) => {
       <NodeArea nodeType={self.type} selected={self.selected} enable={enable}>
         <NodeHeader self={self} />
         <NodeContent type="logo" onDoubleClick={onDoubleClickHandle}>
-          <NodeIcon width="40px" height="40px" enable={enable} />
+          <DynamicSVG
+            svgContent={nodeSvg || defaultIcon}
+            color={self.type === "TRIGGER" ? "#65CD1A" : "#A6B3E8"}
+            size={40}
+          />
           {children}
         </NodeContent>
         <Badge
