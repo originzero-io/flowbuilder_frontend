@@ -123,7 +123,7 @@ const NodeGod = ({ self, children }) => {
           <DynamicSVG
             svgContent={nodeSvg}
             color={self.type === "TRIGGER" ? "#65CD1A" : "#A6B3E8"}
-            size={40}
+            size={"40px"}
           />
           {children}
         </NodeContent>

@@ -138,8 +138,10 @@ const ConfigurationTab = styled.div`
   padding: 0px 30px 0px 30px;
   &:hover {
     border-bottom: 1px solid gray;
+    color: #c1c1c1;
   }
   border-bottom: ${({ active }) => active && "1px solid #c1c1c1"};
+  color: ${({ active }) => !active && "gray"};
 `;
 
 const ButtonStyled = styled.div`

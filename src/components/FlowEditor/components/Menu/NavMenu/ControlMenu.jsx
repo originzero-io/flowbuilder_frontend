@@ -1,29 +1,14 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { HorizontalDivider } from "components/StyledComponents/Divider";
-import { useDispatch } from "react-redux";
-import { deleteAllElements } from "store/reducers/flow/flowElementsSlice";
-import { useReactFlow } from "reactflow";
-import { ActionCreators as UndoActionCreators } from "redux-undo";
-import { useParams } from "react-router";
-import useActiveFlow from "utils/hooks/useActiveFlow";
-import FlowService from "services/configurationService/flowService/flowService.http";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
-import {
-  RedoIcon,
-  UndoIcon,
-  SaveIcon,
-  DeleteIcon,
-  FitViewIcon,
-  ZoomInIcon,
-  ZoomOutIcon,
-  LockIcon,
-  UnLockIcon,
-  ExpandAllIcon,
-} from "./Icons";
-import * as Styled from "./NavMenu.style";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useReactFlow } from "reactflow";
 import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
+import { deleteAllElements } from "store/reducers/flow/flowElementsSlice";
+import styled from "styled-components";
+import useActiveFlow from "utils/hooks/useActiveFlow";
 import notificationHelper from "utils/ui/notificationHelper";
+import { DeleteIcon, FitViewIcon, SaveIcon, ZoomInIcon, ZoomOutIcon } from "./Icons";
+import * as Styled from "./NavMenu.style";
 
 const StyledMenu = styled.div`
   position: absolute;
@@ -99,12 +84,6 @@ export default function ControlMenu() {
         <SaveIcon theme={theme} />
       </Styled.MenuItem>
       <Tooltip id="save" place="right" />
-      {/* <MenuItem theme={theme} data-tip="Undo" data-for={tooltip.UNDO} onClick={undoHandle}>
-        <UndoIcon theme={theme} disable={!canUndo} />
-      </MenuItem>
-      <MenuItem theme={theme} data-tip="Redo" data-for={tooltip.REDO} onClick={redoHandle}>
-        <RedoIcon theme={theme} disable={!canRedo} />
-      </MenuItem> */}
 
       <Styled.MenuItem
         theme={theme}
