@@ -1,9 +1,9 @@
+import { useEntityManagerSocket } from "context/EntityManagerSocketProvider";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form, Label, FormGroup } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
-import flowServiceSocket from "services/entityManagerService/flowService/flowService.event";
 
 export default function EditFlow({ flow }) {
   const dispatch = useDispatch();
@@ -13,6 +13,7 @@ export default function EditFlow({ flow }) {
     description: flow.description,
     createdBy: auth._id,
   });
+  const { flowEvent } = useEntityManagerSocket();
 
   const onChangeHandler = (e) => {
     setFlowConfig({
@@ -22,7 +23,7 @@ export default function EditFlow({ flow }) {
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
-    flowServiceSocket.updateFlow({ flow, flowConfig });
+    flowEvent.updateFlow({ flow, flowConfig });
     dispatch(setModal(false));
   };
   return (

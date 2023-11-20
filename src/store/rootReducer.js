@@ -16,6 +16,7 @@ import workspaceReducer from "./reducers/workspaceSlice";
 import projectReducer from "./reducers/projectSlice";
 import notesReducer from "./reducers/noteSlice";
 import systemNodeSlice from "./reducers/systemNodeSlice";
+import selectedFlowReducer from "./reducers/flow/selectedFlowSlice";
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -26,6 +27,7 @@ const reducers = combineReducers({
   workspaces: workspaceReducer,
   projects: projectReducer,
   flows: flowReducer,
+  selectedFlow: selectedFlowReducer,
   activeFlow: combineReducers({
     flowConfig: flowConfigReducer,
     flowGui: flowGuiReducer,

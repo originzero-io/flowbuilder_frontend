@@ -20,6 +20,7 @@ import AddProjectForm from "./AddProjectForm";
 import NavMenuItem from "./NavMenuItem";
 import ProjectList from "./ProjectList.jsx";
 import WorkspaceBrand from "./WorkspaceBrand";
+import { convertDate } from "utils/helpers/date";
 
 const Container = styled.div`
   display: flex;
@@ -134,16 +135,16 @@ const InfoValue = styled.div`
   color: #a6b3e8;
 `;
 function DescriptionPanel({ workspace }) {
-  const convertDate = (date) => {
-    const originalDate = new Date(date);
+  // const convertDate = (date) => {
+  //   const originalDate = new Date(date);
 
-    const day = originalDate.getDate();
-    const month = originalDate.getMonth() + 1;
-    const year = originalDate.getFullYear();
+  //   const day = originalDate.getDate();
+  //   const month = originalDate.getMonth() + 1;
+  //   const year = originalDate.getFullYear();
 
-    const formattedDate = `${day < 10 ? "0" : ""}${day}.${month < 10 ? "0" : ""}${month}.${year}`;
-    return formattedDate;
-  };
+  //   const formattedDate = `${day < 10 ? "0" : ""}${day}.${month < 10 ? "0" : ""}${month}.${year}`;
+  //   return formattedDate;
+  // };
 
   if (workspace.name) {
     return (

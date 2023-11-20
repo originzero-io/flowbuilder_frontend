@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Switch, Route, useRouteMatch, useHistory, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import useWorkspace from "utils/hooks/useWorkspace";
+import { Panel, PanelGroup } from "react-resizable-panels";
 import {
   LearnScreen,
   NotesScreen,
@@ -13,6 +14,9 @@ import {
   PermissionScreen,
 } from "./index";
 import NotFound from "./NotFound";
+import ResizeHandle from "./ProjectsScreen/ResizeHandle";
+import FlowInformationPanel from "./ProjectsScreen/FlowInformationPanel";
+import FlowPanel from "./ProjectsScreen/FlowPanel";
 
 const StyledContainer = styled.div`
   width: 80%;
@@ -23,10 +27,11 @@ const StyledContainer = styled.div`
   border-top-left-radius: 10px;
 `;
 const StyledPanelComponentWrapper = styled.div`
+  color: white;
+  width: 100%;
+  height: 100%;
   padding-top: 15px;
   padding-left: 15px;
-  padding-right: 15px;
-  color: white;
 `;
 export default function DynamicPanel() {
   const route = useRouteMatch();
@@ -40,7 +45,7 @@ export default function DynamicPanel() {
     <StyledContainer>
       <StyledPanelComponentWrapper>
         <Switch>
-          <Route exact path={`${route.url}/projects`} component={FlowsByProjectPanel} />
+          <Route exact path={`${route.url}/projects`} component={FlowPanel} />
           <Route exact path={`${route.url}/team`} component={TeamScreen} />
           <Route exact path={`${route.url}/permissions/:member_id`} component={PermissionScreen} />
           <Route exact path={`${route.url}/learn`} component={LearnScreen} />

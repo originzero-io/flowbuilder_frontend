@@ -6,6 +6,7 @@ import { deleteFlow } from "store/reducers/flow/flowSlice";
 import { useDispatch } from "react-redux";
 import notificationHelper from "utils/ui/notificationHelper";
 import styled from "styled-components";
+import { selectFlow } from "store/reducers/flow/selectedFlowSlice";
 import DetailMenu from "./DetailMenu";
 import FlowStatusSwitch from "./FlowStatusSwitch";
 
@@ -62,8 +63,14 @@ const Card = ({ data }) => {
       await dockerizeServiceHttp.deleteFlowContainer(flow._id);
     }
   };
+  const onClickCardHandler = async (e, flow) => {
+    dispatch(selectFlow(flow));
+  };
   return (
-    <CardContainer onContextMenu={(e) => e.preventDefault()}>
+    <CardContainer
+      onContextMenu={(e) => e.preventDefault()}
+      onClick={(e) => onClickCardHandler(e, data)}
+    >
       <DetailMenu deleteEvent={deleteCardHandler} data={data} getPermission={getPermission} />
       <CardHeader>
         <CardName>{data.name || ""}</CardName>

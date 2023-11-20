@@ -23,9 +23,9 @@ import { PanelGroup, Panel } from "react-resizable-panels";
 import { GoTriangleRight, GoTriangleLeft } from "react-icons/go";
 import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
 import { useFlowExecutorSocket } from "context/FlowExecutorSocketProvider";
-import ResizeHandle from "../components/FlowEditor/components/Menu/NavMenu/EditorRightMenu/ResizeHandle";
 import notificationHelper from "utils/ui/notificationHelper";
 import { beginTheBar } from "store/reducers/componentSlice";
+import ResizeHandle from "../components/FlowEditor/components/Menu/NavMenu/EditorRightMenu/ResizeHandle";
 
 const StyledFlowWrapper = styled.div`
   height: 95%;

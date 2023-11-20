@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { setModal } from "store/reducers/componentSlice";
-import { MdDeleteOutline,MdDriveFolderUpload } from "react-icons/md";
+import { MdDeleteOutline, MdDriveFolderUpload } from "react-icons/md";
 import { LuFileEdit } from "react-icons/lu";
 import { HiOutlineDuplicate } from "react-icons/hi";
 import { GoQuestion } from "react-icons/go";
@@ -10,6 +10,7 @@ import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/EditF
 import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/MoveFlowForm";
 import { DropdownItem, DropdownWrapper } from "../../StyledComponents/DropdownMenu";
 import * as Styled from "./Card.style";
+import { selectFlow } from "store/reducers/flow/selectedFlowSlice";
 
 const propTypes = {
   deleteEvent: PropTypes.func,
@@ -26,12 +27,16 @@ export default function DetailMenu({ deleteEvent, data, getPermission }) {
     e.stopPropagation();
     dispatch(setModal(<EditFlow flow={data} />));
   };
+  const selectFlowHandler = (e) => {
+    // e.stopPropagation();
+    dispatch(selectFlow(data));
+  };
   return (
     <DropdownWrapper tabIndex="1" style={{ position: "absolute", right: "12px", top: "3px" }}>
       <Styled.CardMoreButton onClick={(e) => e.stopPropagation()}>
         <FiMoreHorizontal />
       </Styled.CardMoreButton>
-      <Styled.DetailMenuList>
+      <Styled.DetailMenuList onClick={(e) => e.stopPropagation()}>
         {getPermission("CAN_EDIT_FLOW", {
           flowId: data._id,
           projectId: data.project._id,
@@ -49,7 +54,7 @@ export default function DetailMenu({ deleteEvent, data, getPermission }) {
               <HiOutlineDuplicate />
               <Styled.DetailMenuText>Duplicate</Styled.DetailMenuText>
             </DropdownItem>
-            <DropdownItem>
+            <DropdownItem onClick={selectFlowHandler}>
               <GoQuestion />
               <Styled.DetailMenuText>Info</Styled.DetailMenuText>
             </DropdownItem>
