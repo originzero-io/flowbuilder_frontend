@@ -8,6 +8,7 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100vh;
+  background-color: #2d2d2d;
 `;
 const StyledContent = styled.div`
   display: flex;

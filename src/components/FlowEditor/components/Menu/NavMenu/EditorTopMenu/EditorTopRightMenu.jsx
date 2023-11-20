@@ -14,7 +14,6 @@ import { BsFillShareFill } from "react-icons/bs";
 import { LuSettings2 } from "react-icons/lu";
 import { useDispatch } from "react-redux";
 import { useReactFlow } from "reactflow";
-import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { logOut } from "store/reducers/authSlice";
 import { setModal } from "store/reducers/componentSlice";
 import { changeEdgeType, importFlow, selectElements } from "store/reducers/flow/flowElementsSlice";
@@ -23,6 +22,8 @@ import styled from "styled-components";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import useAuth from "utils/hooks/useAuth";
 import notificationHelper from "utils/ui/notificationHelper";
+import { useFlowExecutorSocket } from "context/FlowExecutorSocketProvider";
+import { SelectStyled } from "components/StyledComponents/Select";
 import SwitchButton from "../../../../nodes/shared/SwitchButton";
 import ConnectionMenu from "../../ConnectionMenu/ConnectionMenu";
 import * as Styled from "../NavMenu.style";
@@ -56,6 +57,7 @@ export default function EditorTopRightMenu() {
   const { miniMapDisplay, theme } = flowGui;
   const reactFlowInstance = useReactFlow();
   const dispatch = useDispatch();
+  const { flowExecutorEvent } = useFlowExecutorSocket();
 
   // ? "executing" , "paused", "error"
   const [executionStatus, setExecutionStatus] = useState("paused");
@@ -147,7 +149,7 @@ export default function EditorTopRightMenu() {
       flowExecutorEvent.saveGUISettings(gui, (response) => {
         notificationHelper.success(response);
       });
-      flowExecutorEvent.debugFlow({ nodes, edges });
+      flowExecutorEvent.executeFlow({ nodes, edges });
       setExecutionStatus("executing");
     }
   };
@@ -206,24 +208,23 @@ export default function EditorTopRightMenu() {
 
       <StyledDropdown.DropdownWrapper tabIndex="1">
         <Avatar style={{ marginLeft: "10px" }} avatar={auth.avatar} size={28} />
-        <StyledDropdown.DropdownList align="right">
+        <StyledDropdown.DropdownList align="right" style={{ width: "140px", top: "5px" }}>
           <StyledDropdown.DropdownItem>
-            Dark Theme
+            <div style={{ marginRight: "10px" }}>Dark theme</div>
             <SwitchButton checked={active.theme} onChange={changeTheme} />
           </StyledDropdown.DropdownItem>
           <StyledDropdown.DropdownItem>
-            Mini-map
+            <div style={{ marginRight: "10px" }}>Minimap</div>
             <SwitchButton checked={active.miniMap} onChange={changeMiniMapDisplay} />
           </StyledDropdown.DropdownItem>
-          <StyledDropdown.DropdownItem>Account Settings</StyledDropdown.DropdownItem>
           <StyledDropdown.DropdownItem onClick={logOutHandle}>Log Out</StyledDropdown.DropdownItem>
           <StyledDropdown.DropdownItem>
-            <select onChange={edgeTypeHandle} defaultValue="smoothstep">
+            <SelectStyled onChange={edgeTypeHandle} defaultValue="smoothstep">
               <option value="bezier">Bezier</option>
               <option value="step">Step</option>
               <option value="smoothstep">Smooth Step</option>
               <option value="straight">Straight</option>
-            </select>
+            </SelectStyled>
           </StyledDropdown.DropdownItem>
         </StyledDropdown.DropdownList>
       </StyledDropdown.DropdownWrapper>

@@ -9,7 +9,6 @@ import {
   setEdges,
   setNodeEnable,
   updateEdgePath,
-  showRunningNode,
 } from "store/reducers/flow/flowElementsSlice";
 import {
   setElementContextMenu,
@@ -22,8 +21,6 @@ import notification from "utils/ui/notificationHelper";
 import { isConnectionCyclic } from "components/FlowEditor/helpers/flowHelper";
 import themeColor from "components/Shared/ThemeReference";
 import notificationHelper from "utils/ui/notificationHelper";
-import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
-import { flowExecutorSocket } from "pages/FlowPage";
 import {
   openElementContextMenu,
   openMultiSelectionContextMenu,
@@ -45,30 +42,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const nodeList = useSelector((state) => state.systemNodes);
 
   const reactFlowInstance = useReactFlow();
-
-  useEffect(() => {
-    // socket listeners
-    if (flowExecutorSocket) {
-      flowExecutorEvent.onFlowError((data) => {
-        notificationHelper.error(data);
-      });
-
-      flowExecutorEvent.onFlowNotification((data) => {
-        notificationHelper.success(data);
-      });
-
-      flowExecutorEvent.onDebugFlow((data) => {
-        notificationHelper.success(data);
-      });
-
-      flowExecutorEvent.onClassMessage((data) => {
-        dispatch(showRunningNode(data));
-      });
-    }
-    return () => {
-      flowExecutorSocket.removeAllListeners();
-    };
-  }, [flowExecutorSocket]);
 
   useEffect(() => {
     reactFlowInstance.setViewport(flowGui.viewport);

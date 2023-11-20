@@ -1,15 +1,14 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { flowExecutorSocket } from "pages/FlowPage";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useUpdateNodeInternals } from "reactflow";
 import { Badge } from "reactstrap";
-import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
 import styled from "styled-components";
 import DynamicSVG from "components/Shared/DynamicSVG";
+import { useFlowExecutorSocket } from "context/FlowExecutorSocketProvider";
 import InputParameterHandles from "./NodeHandles/InputParameterHandles";
 import InputStatusHandles from "./NodeHandles/InputStatusHandles";
 import NodeHeader from "./NodeHeader/NodeHeader";
@@ -78,6 +77,7 @@ const NodeGod = ({ self, children }) => {
     boolean: "orange",
     any: "gray",
   });
+  const { flowExecutorEvent } = useFlowExecutorSocket();
 
   useEffect(() => {
     updateNodeInternals(self.id);
@@ -88,14 +88,10 @@ const NodeGod = ({ self, children }) => {
   }, [enable]);
 
   useEffect(() => {
-    flowExecutorEvent.injectSocket(flowExecutorSocket);
-
     flowExecutorEvent.onNodeStatus(self, (data) => {
       console.log(`data from server for ${self.id}: `, data);
       setServerData(data);
     });
-    // if (flowExecutorSocket) {
-    // }
   }, []);
 
   const onDoubleClickHandle = (e) => {

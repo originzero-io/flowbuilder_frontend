@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
-import { editWorkspace } from "store/reducers/workspaceSlice";
+import { useEntityManagerSocket } from "context/EntityManagerSocketProvider";
 import { setModal } from "store/reducers/componentSlice";
 import useWorkspace from "utils/hooks/useWorkspace";
-import workspaceEvent from "services/configurationService/workspaceService/workspaceService.event";
 
 export default function EditWorkspaceForm({ workspace }) {
   const { activeWorkspace } = useWorkspace();
@@ -12,6 +11,8 @@ export default function EditWorkspaceForm({ workspace }) {
     name: null,
   });
   const dispatch = useDispatch();
+  const { workspaceEvent } = useEntityManagerSocket();
+
   const onChangeHandler = (e) => {
     setworkspaceInfo({ ...workspaceInfo, [e.target.name]: e.target.value });
   };

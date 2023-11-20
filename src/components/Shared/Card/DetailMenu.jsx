@@ -1,8 +1,11 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { FiMoreVertical } from "react-icons/fi";
+import { FiMoreHorizontal } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { setModal } from "store/reducers/componentSlice";
+import { MdDeleteOutline,MdDriveFolderUpload } from "react-icons/md";
+import { LuFileEdit } from "react-icons/lu";
+import { HiOutlineDuplicate } from "react-icons/hi";
+import { GoQuestion } from "react-icons/go";
 import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/EditFlowForm";
 import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/MoveFlowForm";
 import { DropdownItem, DropdownWrapper } from "../../StyledComponents/DropdownMenu";
@@ -26,18 +29,34 @@ export default function DetailMenu({ deleteEvent, data, getPermission }) {
   return (
     <DropdownWrapper tabIndex="1" style={{ position: "absolute", right: "12px", top: "3px" }}>
       <Styled.CardMoreButton onClick={(e) => e.stopPropagation()}>
-        <FiMoreVertical />
+        <FiMoreHorizontal />
       </Styled.CardMoreButton>
-      <Styled.DetailMenuList style={{ border: "1px solid #495057" }}>
+      <Styled.DetailMenuList>
         {getPermission("CAN_EDIT_FLOW", {
           flowId: data._id,
           projectId: data.project._id,
         }) && (
           <>
-            <DropdownItem onClick={moveHandler}>Move</DropdownItem>
-            <DropdownItem onClick={editHandler}>Edit</DropdownItem>
-            <DropdownItem onClick={(e) => e.stopPropagation()}>Duplicate</DropdownItem>
-            <DropdownItem onClick={(e) => deleteEvent(e, data)}>Delete</DropdownItem>
+            <DropdownItem onClick={moveHandler}>
+              <MdDriveFolderUpload />
+              <Styled.DetailMenuText>Move</Styled.DetailMenuText>
+            </DropdownItem>
+            <DropdownItem onClick={editHandler}>
+              <LuFileEdit />
+              <Styled.DetailMenuText>Edit</Styled.DetailMenuText>
+            </DropdownItem>
+            <DropdownItem>
+              <HiOutlineDuplicate />
+              <Styled.DetailMenuText>Duplicate</Styled.DetailMenuText>
+            </DropdownItem>
+            <DropdownItem>
+              <GoQuestion />
+              <Styled.DetailMenuText>Info</Styled.DetailMenuText>
+            </DropdownItem>
+            <DropdownItem onClick={(e) => deleteEvent(e, data)}>
+              <MdDeleteOutline />
+              <Styled.DetailMenuText>Delete</Styled.DetailMenuText>
+            </DropdownItem>
           </>
         )}
       </Styled.DetailMenuList>

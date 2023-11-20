@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import NodeGod from "../shared/NodeGod";
-import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import notificationHelper from "utils/ui/notificationHelper";
+import { useFlowExecutorSocket } from "context/FlowExecutorSocketProvider";
 
 const NotificationNode = ({ self }) => {
+  const { flowExecutorSocket } = useFlowExecutorSocket();
+
   useEffect(() => {
-    flowExecutorEvent.socket.on(`LOG-${self.id}`, (data) => {
+    flowExecutorSocket.socket.on(`LOG-${self.id}`, (data) => {
       const log = JSON.stringify(data.value);
       notificationHelper.warn(`${self.id} \n ${log}`);
     });

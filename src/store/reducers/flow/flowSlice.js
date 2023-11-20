@@ -1,4 +1,4 @@
-import FlowService from "services/configurationService/flowService/flowService.http";
+import FlowService from "services/entityManagerService/flowService/flowService.http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getFlowsByWorkspace = createAsyncThunk("flows/getByWorkspace", async (workspace) =>

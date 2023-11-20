@@ -7,7 +7,7 @@ import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useNotes from "utils/hooks/useNotes";
 import Avatar from "components/Shared/Avatar/Avatar";
-import noteEvent from "services/configurationService/noteService/noteService.event";
+import { useEntityManagerSocket } from "context/EntityManagerSocketProvider";
 import AddNoteForm from "./AddNoteForm";
 import EditNoteForm from "./EditNoteForm";
 import * as Styled from "./NotesScreen.style";
@@ -17,6 +17,8 @@ export default function NotesScreen() {
   const auth = useAuth();
   const dispatch = useDispatch();
   const [hoveredNote, setHoveredNote] = useState("");
+  const { noteEvent } = useEntityManagerSocket();
+
   const addNoteHandle = () => {
     dispatch(setModal(<AddNoteForm />));
   };

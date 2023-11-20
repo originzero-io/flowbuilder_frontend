@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "reactstrap";
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -10,7 +9,7 @@ const StyledErrorContainer = styled.div`
   padding: 20px;
   border: 1px solid tomato;
   border-radius: 5px;
-  background-color: black;
+  background-color: #2d2d2d;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 const StyledErrorHeading = styled.h2`
@@ -26,6 +25,15 @@ const StyledErrorText = styled.p`
 const StyledErrorMessage = styled.p`
   font-size: 16px;
   color: whitesmoke;
+`;
+const StyledRefreshButton = styled(Button)`
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+  font-size: 16px;
+  &:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+  }
 `;
 
 const propTypes = {
@@ -48,7 +56,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
         <StyledErrorHeading>Oops, something went wrong!</StyledErrorHeading>
         <StyledErrorText>Sorry, an error occurred while rendering this component.</StyledErrorText>
         <StyledErrorMessage>{error.message}</StyledErrorMessage>
-        <Button onClick={resetErrorBoundary}>Refresh the page</Button>
+        <StyledRefreshButton onClick={resetErrorBoundary}>Refresh the page</StyledRefreshButton>
       </StyledErrorContainer>
     </div>
   );

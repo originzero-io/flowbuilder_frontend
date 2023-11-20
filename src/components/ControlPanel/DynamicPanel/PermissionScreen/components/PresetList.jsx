@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Input } from "reactstrap";
-import PermissionService from "services/configurationService/permissionService/permissionService.http";
+import PermissionService from "services/entityManagerService/permissionService/permissionService.http";
 import { setModal } from "store/reducers/componentSlice";
 import { loadUserPermission } from "store/reducers/userPermissionSlice";
 

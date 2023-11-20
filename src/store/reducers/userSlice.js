@@ -1,5 +1,5 @@
-import AuthService from "services/authService/authService";
-import UserService from "services/configurationService/userService/userService.http";
+import AuthService from "services/authService/authService.http";
+import UserService from "services/entityManagerService/userService/userService.http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getAllUsers = createAsyncThunk("users/getAll", async () => {

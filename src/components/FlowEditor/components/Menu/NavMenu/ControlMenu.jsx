@@ -2,11 +2,11 @@ import Tooltip from "components/Shared/Tooltip/Tooltip";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useReactFlow } from "reactflow";
-import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
 import { deleteAllElements } from "store/reducers/flow/flowElementsSlice";
 import styled from "styled-components";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import notificationHelper from "utils/ui/notificationHelper";
+import { useFlowExecutorSocket } from "context/FlowExecutorSocketProvider";
 import { DeleteIcon, FitViewIcon, SaveIcon, ZoomInIcon, ZoomOutIcon } from "./Icons";
 import * as Styled from "./NavMenu.style";
 
@@ -34,6 +34,8 @@ export default function ControlMenu() {
   // const setInteractive = useStore((actions) => actions.setInteractive);
   const dispatch = useDispatch();
   const [lock, setLock] = useState(true);
+  const { flowExecutorEvent } = useFlowExecutorSocket();
+
   const saveFlow = async () => {
     const { nodes, edges, viewport } = reactFlowInstance.toObject();
 

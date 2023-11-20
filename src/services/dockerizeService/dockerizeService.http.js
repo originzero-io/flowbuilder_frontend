@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import HttpClient from "services/HttpClient";
+import HttpConnectionManager from "services/HttpConnectionManager";
 
-class DockerizeService extends HttpClient {
+class DockerizeService extends HttpConnectionManager {
   constructor() {
     super();
     this.service = this.createService({ port: 5002, basePath: "dockerize" });

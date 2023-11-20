@@ -5,12 +5,12 @@ import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useProject from "utils/hooks/useProject";
 import useWorkspace from "utils/hooks/useWorkspace";
-import flowEvent from "services/configurationService/flowService/flowService.event";
 import dockerizeServiceHttp from "services/dockerizeService/dockerizeService.http";
 import notificationHelper from "utils/ui/notificationHelper";
-import flowServiceHttp from "services/configurationService/flowService/flowService.http";
+import flowServiceHttp from "services/entityManagerService/flowService/flowService.http";
 import { createFlow } from "store/reducers/flow/flowSlice";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
+import { useEntityManagerSocket } from "context/EntityManagerSocketProvider";
 
 export default function AddFlowForm() {
   const auth = useAuth();
@@ -26,6 +26,8 @@ export default function AddFlowForm() {
     createdBy: auth._id,
   });
   const dispatch = useDispatch();
+  const { flowEvent } = useEntityManagerSocket();
+
   const onChangeHandler = (e) => {
     setFlowInfo({ ...flowInfo, [e.target.name]: e.target.value });
   };

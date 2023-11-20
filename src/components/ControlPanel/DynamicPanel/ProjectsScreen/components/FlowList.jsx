@@ -38,7 +38,7 @@ const FlowList = ({ flows }) => {
             })
           ) {
             return (
-              <div key={flow._id} onClick={() => openPageHandler(flow)}>
+              <div key={flow._id} onDoubleClick={() => openPageHandler(flow)}>
                 <Card key={flow._id} data={flow} />
               </div>
             );

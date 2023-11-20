@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useProject from "utils/hooks/useProject";
-import projectEvent from "services/configurationService/projectService/projectService.event";
 import wrapWithTryCatch from "utils/wrapWithTryCatch";
+import { useEntityManagerSocket } from "context/EntityManagerSocketProvider";
 
 const EditProjectForm = ({ project }) => {
   const { activeProject } = useProject();
@@ -12,6 +12,8 @@ const EditProjectForm = ({ project }) => {
     name: null,
   });
   const dispatch = useDispatch();
+  const { projectEvent } = useEntityManagerSocket();
+
   const onChangeHandler = (e) => {
     setprojectInfo({ ...projectInfo, [e.target.name]: e.target.value });
   };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import FlowService from "services/configurationService/flowService/flowService.http";
+import FlowService from "services/entityManagerService/flowService/flowService.http";
 import CheckboxGroup from "components/Shared/SwitchInput/CheckboxGroup";
 import useDidMountEffect from "utils/hooks/useDidMountEffect";
 import { CollapsibleMenuItem } from "./CollapsibleMenu";

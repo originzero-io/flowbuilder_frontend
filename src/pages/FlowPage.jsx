@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import PropTypes from "prop-types";
 import React, { useRef, useEffect, useState } from "react";
 import { ReactFlowProvider } from "reactflow";
@@ -6,13 +7,12 @@ import styled, { ThemeProvider } from "styled-components";
 import FlowEditor from "components/FlowEditor/FlowEditor";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import theme from "components/Shared/ThemeReference";
-import flowExecutorEvent from "services/flowExecutorService/flowExecutor.event";
-import createSocket from "services/createSocket";
 import { setActiveFlowConfig } from "store/reducers/flow/flowConfigSlice";
 import { resetActiveFlowGui, setActiveFlowGui } from "store/reducers/flow/flowGuiSlice";
 import {
   resetActiveFlowElements,
   setActiveFlowElements,
+  showRunningNode,
 } from "store/reducers/flow/flowElementsSlice";
 import { setSystemNodes } from "store/reducers/systemNodeSlice";
 import EditorTopLeftMenu from "components/FlowEditor/components/Menu/NavMenu/EditorTopMenu/EditorTopLeftMenu";
@@ -20,9 +20,12 @@ import EditorTopRightMenu from "components/FlowEditor/components/Menu/NavMenu/Ed
 import EditorLeftMenu from "components/FlowEditor/components/Menu/NavMenu/EditorLeftMenu/EditorLeftMenu";
 import EditorRightMenu from "components/FlowEditor/components/Menu/NavMenu/EditorRightMenu/EditorRightMenu";
 import { PanelGroup, Panel } from "react-resizable-panels";
-import ResizeHandle from "../components/FlowEditor/components/Menu/NavMenu/EditorRightMenu/ResizeHandle";
 import { GoTriangleRight, GoTriangleLeft } from "react-icons/go";
 import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
+import { useFlowExecutorSocket } from "context/FlowExecutorSocketProvider";
+import ResizeHandle from "../components/FlowEditor/components/Menu/NavMenu/EditorRightMenu/ResizeHandle";
+import notificationHelper from "utils/ui/notificationHelper";
+import { beginTheBar } from "store/reducers/componentSlice";
 
 const StyledFlowWrapper = styled.div`
   height: 95%;
@@ -57,32 +60,31 @@ const propTypes = {
   match: PropTypes.object,
 };
 
-export let flowExecutorSocket = null;
+// export let flowExecutorSocket = null;
 
 const FlowPage = () => {
   const dispatch = useDispatch();
   const { flowGui, flowConfig } = useActiveFlow();
   const rfWrapper = useRef(null);
   const [showLeftMenu, setShowLeftMenu] = useState(true);
+  const { flowExecutorSocket, flowExecutorEvent } = useFlowExecutorSocket();
 
   useEffect(() => {
-    // flowExecutorSocket = createSocket({
-    //   url: `http://localhost:${flowConfig.port}`,
-    // });
-    flowExecutorSocket = createSocket({
-      url: `http://localhost:5003`,
+    dispatch(beginTheBar());
+    flowExecutorEvent.onFlowError((data) => {
+      notificationHelper.error(data);
     });
 
-    flowExecutorEvent.injectSocket(flowExecutorSocket);
-    flowExecutorEvent.getNodeList((data) => {
-      dispatch(setSystemNodes(data));
+    flowExecutorEvent.onFlowNotification((data) => {
+      notificationHelper.success(data);
     });
 
-    flowExecutorEvent.getGUISettings((data) => {
-      dispatch(setActiveFlowGui(data));
+    flowExecutorEvent.onExecuteFlow((data) => {
+      notificationHelper.success(data);
     });
-    flowExecutorEvent.getElements((data) => {
-      dispatch(setActiveFlowElements(data));
+
+    flowExecutorEvent.onNodeRunningStatus((data) => {
+      dispatch(showRunningNode(data));
     });
     return () => {
       flowExecutorSocket.disconnect(); // close connection when page changes
@@ -90,7 +92,7 @@ const FlowPage = () => {
       dispatch(resetActiveFlowGui());
       dispatch(resetActiveFlowElements());
     };
-  }, [dispatch]);
+  }, []);
 
   const showLeftMenuHandler = () => {
     setShowLeftMenu(!showLeftMenu);
@@ -137,6 +139,7 @@ const FlowPage = () => {
                 {nodeConfigurationMenu.state ? <GoTriangleRight /> : <GoTriangleLeft />}
               </ShowRightMenuButton>
             </Panel>
+
             <ResizeHandle />
 
             {nodeConfigurationMenu.state && (

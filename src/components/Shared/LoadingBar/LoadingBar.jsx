@@ -8,7 +8,8 @@ function LoadingBar() {
   const loadingBar = useSelector((state) => state.loadingBar);
   return (
     <ReactTopLoadingBar
-      color="#28b485"
+      // color="#52bf04"
+      color="#E838BF"
       progress={loadingBar.progress}
       loaderSpeed={300}
       waitingTime={400}

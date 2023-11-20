@@ -176,7 +176,7 @@ export default function NodeConfigurationMenu() {
   const dispatch = useDispatch();
   const { dynamicInput, dynamicOutput } = node.data.ioEngine;
 
-  const [configurationTab, setConfigurationTab] = useState("Events");
+  const [configurationTab, setConfigurationTab] = useState("Values");
 
   useEffect(() => {
     nodeConfigDispatch({ type: "loadNode", payload: nodeConfigurationMenu.element });
@@ -206,16 +206,16 @@ export default function NodeConfigurationMenu() {
 
       <ConfigurationTabWrapper>
         <ConfigurationTab
-          onClick={() => setConfigurationTab("Events")}
-          active={configurationTab === "Events"}
-        >
-          Events
-        </ConfigurationTab>
-        <ConfigurationTab
           onClick={() => setConfigurationTab("Values")}
           active={configurationTab === "Values"}
         >
           Values
+        </ConfigurationTab>
+        <ConfigurationTab
+          onClick={() => setConfigurationTab("Events")}
+          active={configurationTab === "Events"}
+        >
+          Events
         </ConfigurationTab>
       </ConfigurationTabWrapper>
       {configurationTab === "Events" ? (

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form, Label, FormGroup } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
-import flowServiceSocket from "services/configurationService/flowService/flowService.event";
+import flowServiceSocket from "services/entityManagerService/flowService/flowService.event";
 
 export default function EditFlow({ flow }) {
   const dispatch = useDispatch();

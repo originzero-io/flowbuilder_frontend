@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
 import useWorkspace from "utils/hooks/useWorkspace";
-import projectEvent from "services/configurationService/projectService/projectService.event";
+import { useEntityManagerSocket } from "context/EntityManagerSocketProvider";
 
 const AddProjectForm = () => {
   const { activeWorkspace } = useWorkspace();
@@ -16,6 +16,9 @@ const AddProjectForm = () => {
     workspace: activeWorkspace._id,
   });
   const dispatch = useDispatch();
+
+  const { projectEvent } = useEntityManagerSocket();
+
   const onChangeHandler = (e) => {
     setProjectInfo({ ...projectInfo, [e.target.name]: e.target.value });
   };

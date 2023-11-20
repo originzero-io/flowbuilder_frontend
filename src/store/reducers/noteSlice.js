@@ -1,4 +1,4 @@
-import NoteService from "services/configurationService/noteService/noteService.http";
+import NoteService from "services/entityManagerService/noteService/noteService.http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getNotesByWorkspace = createAsyncThunk("notes/getByWorkspace", async (workspace) => {

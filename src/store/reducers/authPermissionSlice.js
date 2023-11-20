@@ -1,4 +1,4 @@
-import PermissionService from "services/configurationService/permissionService/permissionService.http";
+import PermissionService from "services/entityManagerService/permissionService/permissionService.http";
 import { beginTheBar, endTheBar } from "store/reducers/componentSlice";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { defaultPermissions } from "./userPermissionSlice";

@@ -7,10 +7,22 @@ import { BiEdit } from "react-icons/bi";
 import PropTypes from "prop-types";
 import useAuth from "utils/hooks/useAuth";
 import useWorkspace from "utils/hooks/useWorkspace";
-import workspaceEvent from "services/configurationService/workspaceService/workspaceService.event";
-import * as Styled from "./NavigationPanel.style";
+import styled from "styled-components";
+import { useEntityManagerSocket } from "context/EntityManagerSocketProvider";
 import EditWorkspaceForm from "../WorkspacePanel/EditWorkspaceForm";
 
+const WorkspaceBrandWrapper = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: 2px;
+  cursor: pointer;
+  color: #43b104;
+  height: 5vh;
+  user-select: none;
+  position: relative;
+`;
 const propTypes = {
   workspace: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 };
@@ -19,6 +31,8 @@ const WorkspaceBrand = ({ workspace }) => {
   const { role } = useAuth();
   const dispatch = useDispatch();
   const { workspaces } = useWorkspace();
+  const { workspaceEvent } = useEntityManagerSocket();
+
   const deleteWorkspaceHandler = () => {
     if (confirm(`Would you like to delete ${workspace.name} workspace?`)) {
       workspaceEvent.deleteWorkspace({ workspace });
@@ -30,7 +44,7 @@ const WorkspaceBrand = ({ workspace }) => {
   };
 
   return (
-    <Styled.WorkspaceBrandWrapper>
+    <WorkspaceBrandWrapper>
       {workspace && (
         <>
           <span style={{ fontSize: "2vmin" }}>{workspace.name}</span>
@@ -46,7 +60,7 @@ const WorkspaceBrand = ({ workspace }) => {
           )}
         </>
       )}
-    </Styled.WorkspaceBrandWrapper>
+    </WorkspaceBrandWrapper>
   );
 };
 

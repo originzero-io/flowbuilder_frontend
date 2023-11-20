@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CollapseIndex = styled.button`
-  background: none;
+  background: transparent;
   border: none;
   width: 100%;
   color: white;
@@ -10,9 +10,6 @@ export const CollapseIndex = styled.button`
   align-items: center;
   padding: 5px;
   cursor: pointer;
-  &:hover {
-    background-color: #343a40;
-  }
 `;
 export const CollapsableItem = styled(CollapseIndex)`
   font-size: 1.5vmin;
@@ -20,10 +17,10 @@ export const CollapsableItem = styled(CollapseIndex)`
   margin-right: 3px;
   padding-left: 13%;
   border-radius: 3px;
-  background: ${(props) => (props.active ? "#43b104" : "none")};
+  background: ${(props) => (props.active ? "#439c03" : "none")};
   border-bottom: 1px solid rgb(50, 50, 50);
   &:focus {
-    background-color: #43b104;
+    background-color: #439c03;
   }
 `;
 export const TriggerWrapper = styled(CollapseIndex)`

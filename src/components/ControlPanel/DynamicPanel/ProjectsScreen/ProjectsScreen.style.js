@@ -4,9 +4,9 @@ import { CardContainer } from "components/Shared/Card/Card.style";
 export const ProjectsContainerIndex = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding: 5px;
+  padding: 15px;
   color: white;
-  //min-height: 200px;
+  background-color: #ffff;
 `;
 export const Box = styled(CardContainer)`
   font-size: 48px;
@@ -34,5 +34,9 @@ export const SearchBar = styled.input`
   user-select: none;
   outline-color: green;
 `;
-export const FlowsContainer = styled(ProjectsContainerIndex)``;
+export const FlowsContainer = styled(ProjectsContainerIndex)`
+  display: flex;
+  flex-direction: column;
+  color: green;
+`;
 export const DashboardsContainer = styled(ProjectsContainerIndex)``;

@@ -1,28 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import {
   CollapsibleMenu,
   CollapsibleMenuItem,
   CollapsibleTrigger,
 } from "components/Shared/Collapsible/CollapsibleMenu";
 import { AiOutlineProject } from "react-icons/ai";
-import { CgNotes } from "react-icons/cg";
-import { MdDevicesOther } from "react-icons/md";
-import { FiSettings } from "react-icons/fi";
 import { BsPlusCircle } from "react-icons/bs";
+import { CgNotes } from "react-icons/cg";
+import { FiSettings } from "react-icons/fi";
+import { MdDevicesOther } from "react-icons/md";
 import { RiTeamLine } from "react-icons/ri";
-import { setModal } from "store/reducers/componentSlice";
+import { useDispatch } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
-import useAuth from "utils/hooks/useAuth";
-import useWorkspace from "utils/hooks/useWorkspace";
+import { setModal } from "store/reducers/componentSlice";
+import styled from "styled-components";
 import useAuthPermission from "utils/hooks/useAuthPermission";
 import useProject from "utils/hooks/useProject";
-import Avatar from "components/Shared/Avatar/Avatar";
-import WorkspaceBrand from "./WorkspaceBrand";
-import ProjectList from "./ProjectList.jsx";
-import NavMenuItem from "./NavMenuItem";
+import useWorkspace from "utils/hooks/useWorkspace";
 import AddProjectForm from "./AddProjectForm";
-import * as Styled from "./NavigationPanel.style";
+import NavMenuItem from "./NavMenuItem";
+import ProjectList from "./ProjectList.jsx";
+import WorkspaceBrand from "./WorkspaceBrand";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  // flex-basis: 18%;
+  background-color: #2d2d2d;
+  position: relative;
+  width: 20%;
+  padding: 15px;
+  padding-top: 0px;
+  overflow-y: auto;
+`;
+const NavMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 26px;
+  background: #393939;
+  border-top-right-radius: 10px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+`;
 
 const NavigationPanel = () => {
   const dispatch = useDispatch();
@@ -30,7 +48,6 @@ const NavigationPanel = () => {
   const { url } = useRouteMatch();
   const { activeWorkspace } = useWorkspace();
   const { projects } = useProject();
-  const { name, avatar } = useAuth();
   // console.log("NAVIGATION_PANEL RENDERED");
   const showModalHandle = (e) => {
     e.preventDefault();
@@ -50,8 +67,8 @@ const NavigationPanel = () => {
   );
   const settingsItem = () => <CollapsibleTrigger label="Settings" icon={<FiSettings />} />;
   return (
-    <Styled.Container>
-      <Styled.NavMenu>
+    <Container>
+      <NavMenu>
         <WorkspaceBrand workspace={activeWorkspace} />
         <CollapsibleMenu trigger={projectItem()}>
           <Link to={`${url}/projects`}>
@@ -74,21 +91,84 @@ const NavigationPanel = () => {
             <CollapsibleMenuItem>Preferences</CollapsibleMenuItem>
           </CollapsibleMenu>
         </Link>
-      </Styled.NavMenu>
-      <Styled.Footer>
-        <Avatar avatar={avatar} size={24} />
-        <div
-          style={{
-            color: "whitesmoke",
-            letterSpacing: "2px",
-            paddingLeft: "10px",
-          }}
-        >
-          {name}
-        </div>
-      </Styled.Footer>
-    </Styled.Container>
+      </NavMenu>
+
+      <NavMenu style={{ marginTop: "15px" }}>
+        <DescriptionPanel workspace={activeWorkspace} />
+      </NavMenu>
+    </Container>
   );
 };
 
 export default NavigationPanel;
+
+const DescriptionPanelContainer = styled.div`
+  padding: 16px;
+  // user-select: contain;
+`;
+const Title = styled.div`
+  color: #c1c1c1;
+  font-size: 14px;
+  font-weight: 300;
+  font-style: italic;
+`;
+const Description = styled.div`
+  font-size: 14px;
+  color: #fff;
+  margin-top: 10px;
+`;
+const InfoSection = styled.div`
+  font-size: 14px;
+  margin-top: 10px;
+`;
+const InfoItem = styled.div`
+  // border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+`;
+const InfoKey = styled.div`
+  color: #c1c1c1;
+`;
+const InfoValue = styled.div`
+  color: #a6b3e8;
+`;
+function DescriptionPanel({ workspace }) {
+  const convertDate = (date) => {
+    const originalDate = new Date(date);
+
+    const day = originalDate.getDate();
+    const month = originalDate.getMonth() + 1;
+    const year = originalDate.getFullYear();
+
+    const formattedDate = `${day < 10 ? "0" : ""}${day}.${month < 10 ? "0" : ""}${month}.${year}`;
+    return formattedDate;
+  };
+
+  if (workspace.name) {
+    return (
+      <DescriptionPanelContainer>
+        <Title>Description</Title>
+        <Description>
+          This section contains information about the aim of this workspace or relevant output going
+          to be achieved. Or to inform newcomers, colleagues that are going to be onboard in the
+          workspace
+        </Description>
+        <InfoSection>
+          <InfoItem>
+            <InfoKey>Date of Creation: </InfoKey>
+            <InfoValue>{convertDate(workspace.createdAt)}</InfoValue>
+          </InfoItem>
+          <InfoItem>
+            <InfoKey>Created By: </InfoKey>
+            <InfoValue>{workspace.createdBy.name}</InfoValue>
+          </InfoItem>
+          <InfoItem>
+            <InfoKey>Number of Flows </InfoKey>
+            <InfoValue>7</InfoValue>
+          </InfoItem>
+        </InfoSection>
+      </DescriptionPanelContainer>
+    );
+  } else return null;
+}

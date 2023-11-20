@@ -28,12 +28,17 @@ export const DropdownList = styled.ul`
 export const DropdownItem = styled.li`
   padding: 8px;
   user-select: none;
+  width: 100%;
   //color:whitesmoke;
   cursor: pointer;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
   &:hover {
-    background: ${(props) => props.theme.hoverColor};
+    background: #434343;
   }
 `;

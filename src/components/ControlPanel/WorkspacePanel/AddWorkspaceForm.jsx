@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Form, FormGroup, Input } from "reactstrap";
-import { createWorkspace } from "store/reducers/workspaceSlice";
+import { createWorkspace, getMyWorkspaces } from "store/reducers/workspaceSlice";
 import { setModal } from "store/reducers/componentSlice";
 import useAuth from "utils/hooks/useAuth";
-import workspaceEvent from "services/configurationService/workspaceService/workspaceService.event";
+import { useEntityManagerSocket } from "context/EntityManagerSocketProvider";
 
 export default function AddWorkspaceForm() {
   const auth = useAuth();
@@ -13,12 +13,15 @@ export default function AddWorkspaceForm() {
     createdBy: auth._id,
   });
   const dispatch = useDispatch();
+  const { workspaceEvent } = useEntityManagerSocket();
+
   const onChangeHandler = (e) => {
     setWorkspaceInfo({ ...workspaceInfo, [e.target.name]: e.target.value });
   };
   const onSubmitHandle = (e) => {
     e.preventDefault();
     workspaceEvent.createWorkspace({ workspace: workspaceInfo });
+    dispatch(getMyWorkspaces());
     dispatch(setModal(false));
   };
   return (

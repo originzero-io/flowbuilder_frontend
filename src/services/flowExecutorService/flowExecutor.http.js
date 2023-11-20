@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import HttpClient from "services/HttpClient";
+import HttpConnectionManager from "services/HttpConnectionManager";
 
-class FlowExecutorHttpService extends HttpClient {
+class FlowExecutorHttpService extends HttpConnectionManager {
   constructor(port) {
     super();
     this.service = this.createService({ port });

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { GoTriangleRight, GoTriangleLeft } from "react-icons/go";
-import { AiOutlineSearch } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
 import DynamicSVG from "components/Shared/DynamicSVG";
 import { createPanelNodeList } from "components/FlowEditor/helpers/nodeObjectHelper";
+import SearchBar from "components/Shared/SearchBar/SearchBar";
 
 const Wrapper = styled.div`
   position: relative;
@@ -14,10 +14,10 @@ const Wrapper = styled.div`
   background-color: #2d2d2d;
   box-shadow: 5px 3px 15px -7px rgba(0, 0, 0, 0.5);
   transition: all 0.2s ease;
-  z-index: ${({ showMenu }) => (showMenu ? "1000" : "none")};
 `;
 const EditorLeftMenuWrapper = styled.div`
-  display: flex;
+  display: ${({ showMenu }) => (showMenu ? "flex" : "none")};
+
   flex-direction: column;
 `;
 const EditorMenuItemWrapper = styled.div`
@@ -36,24 +36,6 @@ const ShowMenuButton = styled.div`
   top: 40%;
   right: -10px;
   z-index: 1000;
-`;
-
-const SearchBarWrapper = styled.div`
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 17px;
-  position: relative;
-  color: #a8a8a8;
-`;
-const SearchBar = styled.input`
-  border-radius: 4px;
-  width: 100%;
-  padding: 6px;
-  padding-left: 35px;
-  background-color: #262626;
-  border: none;
-  color: #757575;
-  outline: none;
 `;
 
 const CategoryWrapper = styled.div`
@@ -121,19 +103,9 @@ export default function EditorLeftMenu({ showMenu, setShowMenu }) {
       <ShowMenuButton showMenu={showMenu} onClick={setShowMenu}>
         {showMenu ? <GoTriangleLeft /> : <GoTriangleRight />}
       </ShowMenuButton>
-      <EditorLeftMenuWrapper>
-        {/* <button onClick={groupNodesByCategory}>group</button> */}
-        <SearchBarWrapper>
-          <SearchBar placeholder="Filter nodes" onChange={searchHandle} />
-          <AiOutlineSearch
-            style={{
-              position: "absolute",
-              top: "18%",
-              left: "2%",
-              fontSize: "22px",
-            }}
-          />
-        </SearchBarWrapper>
+      <EditorLeftMenuWrapper showMenu={showMenu}>
+        <SearchBar placeholder="Filter Nodes" onChange={searchHandle} />
+
         <EditorMenuItemWrapper>
           {Object.keys(filteredCategories).map((category) => (
             <CategoryWrapper key={category}>
@@ -157,7 +129,6 @@ const StyledMenuItem = styled.div`
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.4);
   background: #262626;
   border-radius: 4px;
-  border: 1px #43b104 solid;
   border: ${({ nodeType }) =>
     nodeType === "TRIGGER" ? "1px #43b104 solid;" : "1px #515C85 solid"};
   color: ${({ nodeType }) => (nodeType === "TRIGGER" ? "#65CD1A" : "#A6B3E8")};
@@ -175,7 +146,6 @@ const StyledMenuItem = styled.div`
 const NodeLabel = styled.div`
   margin-top: 7px;
   font-size: 9px;
-  // padding: 1px;
   padding-left: 5px;
   padding-right: 5px;
   text-align: center;

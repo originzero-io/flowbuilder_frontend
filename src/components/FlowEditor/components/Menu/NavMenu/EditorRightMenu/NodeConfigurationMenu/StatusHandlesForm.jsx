@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "reactstrap";
-import * as Styled from "./NodeConfigMenu.style";
 import styled from "styled-components";
+import * as Styled from "./NodeConfigMenu.style";
 
 const Wrapper = styled.div`
   display: flex;

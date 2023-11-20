@@ -1,8 +1,14 @@
-import SocketEvent from "services/SocketEvent";
+export default class FlowExecutorEvent {
+  constructor(socket) {
+    this.socket = socket;
+  }
 
-class FlowExecutorEvent extends SocketEvent {
   getNodeList(listener) {
     this.socket.emit("nodeList:get", listener);
+  }
+
+  onNodeRunningStatus(listener) {
+    this.socket.on("node:runningStatus", listener);
   }
 
   onNodeStatus(self, listener) {
@@ -17,30 +23,25 @@ class FlowExecutorEvent extends SocketEvent {
     this.socket.on("flow:notification", (data) => listener(data));
   }
 
-  onDebugFlow(listener) {
-    this.socket.on("flow:debug", listener);
+  onExecuteFlow(listener) {
+    this.socket.on("flow:execute", listener);
   }
 
-  debugFlow(data) {
-    this.socket.emit("flow:debug", data);
+  executeFlow(data) {
+    this.socket.emit("flow:execute", data);
+  }
+
+  stopExecution(listener) {
+    this.socket.emit("flow:stop", listener);
   }
 
   startByTrigger(trigId) {
     this.socket.emit("flow:startByTrigger", trigId);
   }
 
-  //! NEW
-  stopExecution(listener) {
-    this.socket.emit("flow:stop", listener);
+  onGetElements(listener) {
+    this.socket.on("elements:get", (data) => listener(data));
   }
-
-  onClassMessage(listener) {
-    this.socket.on("NODE_NEW", listener);
-  }
-
-  // onGetElements(listener) {
-  //   this.socket.on("elements:get", (data) => listener(data));
-  // }
 
   getElements(data) {
     this.socket.emit("elements:get", data);
@@ -58,5 +59,3 @@ class FlowExecutorEvent extends SocketEvent {
     this.socket.emit("gui:save", data, listener);
   }
 }
-
-export default new FlowExecutorEvent();

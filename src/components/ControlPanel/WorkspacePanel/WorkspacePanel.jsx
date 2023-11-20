@@ -11,8 +11,80 @@ import useDidMountEffect from "utils/hooks/useDidMountEffect";
 import useWorkspace from "utils/hooks/useWorkspace";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
+import styled from "styled-components";
+import { IoIosArrowBack } from "react-icons/io";
 import AddWorkspaceForm from "./AddWorkspaceForm";
-import * as Styled from "./WorkspacePanel.style";
+
+const WorkspacePanelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 4%;
+  position: relative;
+`;
+const Item = styled.div`
+  padding: 7px 7px 7px 2px;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+`;
+const WorkspaceListContainer = styled.div`
+  position: relative;
+  background: linear-gradient(180deg, #2d2d2d 5.92%, #52bf04);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  border-bottom-right-radius: 32px;
+  height: 65%;
+`;
+const WorkspaceListItemWrapper = styled(Item)`
+  background: ${(props) => (props.active ? "#343a40" : "none")};
+  display: flex;
+  justify-content: center;
+`;
+const WorkspaceListItem = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5vmin;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  background: ${(props) => (props.active ? "#43b104" : "#343A40")};
+  padding: 2px;
+  text-align: center;
+  box-shadow: 2px -1px 42px -15px rgba(168, 168, 168, 1);
+`;
+const MiddleSection = styled.div`
+  background: #52bf04;
+  height: 10%;
+`;
+const BottomSection = styled.div`
+  background: linear-gradient(180deg, #52bf04, #3b8e00 86.4%);
+  border-top-right-radius: 32px;
+  height: 25%;
+`;
+const VisibilityButton = styled.div`
+  position: absolute;
+  background-color: #2d2d2d;
+  bottom: 25%;
+  left: 10px;
+  width: 100%;
+  height: 10%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #565656;
+  font-size: 24px;
+  &:hover {
+    color: #a0a0a0;
+  }
+`;
 
 const WorkspacePanel = () => {
   const { workspaces, activeWorkspace } = useWorkspace();
@@ -41,32 +113,39 @@ const WorkspacePanel = () => {
     dispatch(setModal(<AddWorkspaceForm />));
   };
   return (
-    <Styled.WorkspaceContainer>
-      {workspaces.map((workspace) => (
-        <Styled.WorkspaceItemWrapper
-          key={workspace._id}
-          active={workspace._id === activeWorkspace._id}
-          onClick={() => clickWorkspaceHandler(workspace)}
-        >
-          <Styled.WorkspaceItem
+    <WorkspacePanelContainer>
+      <WorkspaceListContainer>
+        {workspaces.map((workspace) => (
+          <WorkspaceListItemWrapper
+            key={workspace._id}
             active={workspace._id === activeWorkspace._id}
-            data-tip={workspace.name}
-            data-for={workspace._id}
+            onClick={() => clickWorkspaceHandler(workspace)}
           >
-            {workspace.name ? workspace.name.split("")[0].toUpperCase() : ""}
-          </Styled.WorkspaceItem>
-          <Tooltip id={workspace._id} place="top" type="light" />
-        </Styled.WorkspaceItemWrapper>
-      ))}
+            <WorkspaceListItem
+              active={workspace._id === activeWorkspace._id}
+              data-tip={workspace.name}
+              data-for={workspace._id}
+            >
+              {workspace.name ? workspace.name.split("")[0].toUpperCase() : ""}
+            </WorkspaceListItem>
+            <Tooltip id={workspace._id} place="top" type="light" />
+          </WorkspaceListItemWrapper>
+        ))}
 
-      {auth.role === "admin" && (
-        <Styled.WorkspaceItemWrapper>
-          <Styled.WorkspaceItem onClick={addWorkspaceHandler}>
-            <VscAdd style={{ color: "white" }} />
-          </Styled.WorkspaceItem>
-        </Styled.WorkspaceItemWrapper>
-      )}
-    </Styled.WorkspaceContainer>
+        {auth.role === "admin" && (
+          <WorkspaceListItemWrapper>
+            <WorkspaceListItem onClick={addWorkspaceHandler}>
+              <VscAdd style={{ color: "white" }} />
+            </WorkspaceListItem>
+          </WorkspaceListItemWrapper>
+        )}
+      </WorkspaceListContainer>
+      <MiddleSection></MiddleSection>
+      <BottomSection></BottomSection>
+      <VisibilityButton>
+        <IoIosArrowBack />
+      </VisibilityButton>
+    </WorkspacePanelContainer>
   );
 };
 

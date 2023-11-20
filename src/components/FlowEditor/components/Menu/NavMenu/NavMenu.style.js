@@ -6,7 +6,6 @@ export const MenuIndex = styled.div`
   z-index: 6;
   display: flex;
   flex-direction: row;
-  background: #fefefe;
   justify-content: space-around;
   align-items: center;
   font-size: 15px;
@@ -14,7 +13,7 @@ export const MenuIndex = styled.div`
 `;
 export const Menu = styled.div`
   // background: ${(props) => props.theme.menuBackground};
-  width: 300px;
+  width: 21%;
   z-index: 6;
   background: red;
   display: flex;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Form } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useProject from "utils/hooks/useProject";
-import flowServiceSocket from "services/configurationService/flowService/flowService.event";
+import flowServiceSocket from "services/entityManagerService/flowService/flowService.event";
 
 export default function MoveFlow({ flow }) {
   const dispatch = useDispatch();

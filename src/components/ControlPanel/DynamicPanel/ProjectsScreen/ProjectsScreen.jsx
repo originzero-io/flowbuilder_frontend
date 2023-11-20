@@ -12,6 +12,7 @@ import * as Styled from "./ProjectsScreen.style";
 import AddDashboardForm from "./forms/AddDashboardForm";
 import AddFlowForm from "./forms/AddFlowForm";
 import FlowList from "./components/FlowList.jsx";
+import { TiFlowSwitch } from "react-icons/ti";
 
 const propTypes = {
   flows: PropTypes.array.isRequired,
@@ -21,10 +22,10 @@ export default function ProjectsScreen({ flows }) {
   const { projects, activeProject } = useProject();
   const getPermission = useAuthPermission("project");
   const flowsCollapseTrigger = () => (
-    <CollapsibleTrigger label={`Flows (${flows.length})`} style={{ color: "white" }} />
+    <CollapsibleTrigger label={`Flows (${flows.length})`} style={{ color: "#288818" }} />
   );
   const dashboardCollapseTrigger = () => (
-    <CollapsibleTrigger label="Dashboards" style={{ color: "white" }} />
+    <CollapsibleTrigger label="Dashboards" style={{ color: "#288818" }} />
   );
   const [searched, setSearched] = useState(flows);
   const searchHandle = (e) => {
@@ -39,30 +40,27 @@ export default function ProjectsScreen({ flows }) {
     <>
       {activeProject ? (
         <>
-          <CollapsibleMenu trigger={flowsCollapseTrigger()} open>
-            {flows.length > 0 && (
-              <Styled.SearchBar
-                placeholder="Search flows"
-                spellCheck={false}
-                onChange={searchHandle}
-              />
-            )}
-            <Styled.FlowsContainer>
+          <Styled.FlowsContainer>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                fontSize: "24px",
+                marginBottom: "12px",
+              }}
+            >
+              <TiFlowSwitch />
+              <div style={{ marginLeft: "5px" }}>Flows</div>
+            </div>
+            <div style={{ display: "flex", flexDirection: "row" }}>
               <FlowList flows={searched} />
               {getPermission("CAN_CREATE_FLOW", activeProject._id) && (
                 <Styled.Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
                   <VscAdd />
                 </Styled.Box>
               )}
-            </Styled.FlowsContainer>
-          </CollapsibleMenu>
-          <CollapsibleMenu trigger={dashboardCollapseTrigger()} open>
-            <Styled.DashboardsContainer>
-              <Styled.Box onClick={() => dispatch(setModal(<AddDashboardForm />))}>
-                <VscAdd />
-              </Styled.Box>
-            </Styled.DashboardsContainer>
-          </CollapsibleMenu>
+            </div>
+          </Styled.FlowsContainer>
         </>
       ) : (
         <Alert color="info" style={{ marginLeft: "10px" }}>

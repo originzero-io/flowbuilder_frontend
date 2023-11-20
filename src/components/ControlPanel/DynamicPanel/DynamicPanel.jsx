@@ -15,11 +15,12 @@ import {
 import NotFound from "./NotFound";
 
 const StyledContainer = styled.div`
-  width: 100%;
+  width: 80%;
   height: 100%;
-  background: #1a1d21;
+  background: #f4f4f4;
   overflow-y: auto;
   overflow-x: hidden;
+  border-top-left-radius: 10px;
 `;
 const StyledPanelComponentWrapper = styled.div`
   padding-top: 15px;

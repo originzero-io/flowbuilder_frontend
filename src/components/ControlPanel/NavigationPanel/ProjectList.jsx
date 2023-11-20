@@ -9,9 +9,9 @@ import useAuthPermission from "utils/hooks/useAuthPermission";
 import useProject from "utils/hooks/useProject";
 import useWorkspace from "utils/hooks/useWorkspace";
 import { CollapsibleMenuItem } from "components/Shared/Collapsible/CollapsibleMenu";
-import projectEvent from "services/configurationService/projectService/projectService.event";
-import EditProjectForm from "./EditProjectForm";
 import { getFlowsByProject } from "store/reducers/flow/flowSlice";
+import { useEntityManagerSocket } from "context/EntityManagerSocketProvider";
+import EditProjectForm from "./EditProjectForm";
 
 const propTypes = {
   projects: PropTypes.array.isRequired,
@@ -21,6 +21,8 @@ export default function ProjectList({ projects }) {
   const getPermission = useAuthPermission("project");
   const { activeProject } = useProject();
   const { activeWorkspace } = useWorkspace();
+  const { projectEvent } = useEntityManagerSocket();
+
   // console.log("PROJECT_LIST RENDERED");
 
   const clickProjectHandle = (project) => {

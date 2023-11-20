@@ -1,4 +1,4 @@
-import ProjectService from "services/configurationService/projectService/projectService.http";
+import ProjectService from "services/entityManagerService/projectService/projectService.http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getProjectsByWorkspace = createAsyncThunk(
