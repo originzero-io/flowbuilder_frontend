@@ -8,7 +8,7 @@ import Avatar from "components/Shared/Avatar/Avatar";
 import { FileInput } from "components/Shared/FileInput/FileInput";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
 import * as StyledDropdown from "components/StyledComponents/DropdownMenu";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BiBrain } from "react-icons/bi";
 import { BsFillShareFill } from "react-icons/bs";
 import { LuSettings2 } from "react-icons/lu";
@@ -61,6 +61,12 @@ export default function EditorTopRightMenu() {
 
   // ? "executing" , "paused", "error"
   const [executionStatus, setExecutionStatus] = useState("paused");
+
+  useEffect(() => {
+    flowExecutorEvent.onFlowExecutionStatus((data) => {
+      setExecutionStatus(data);
+    });
+  }, []);
 
   const downloadFlowHandle = () => {
     if (confirm("Download?")) {
@@ -150,7 +156,7 @@ export default function EditorTopRightMenu() {
         notificationHelper.success(response);
       });
       flowExecutorEvent.executeFlow({ nodes, edges });
-      setExecutionStatus("executing");
+      // setExecutionStatus("executing");
     }
   };
 
@@ -158,9 +164,14 @@ export default function EditorTopRightMenu() {
     if (confirm("Flow will be stopped. Are you sure ?")) {
       flowExecutorEvent.stopExecution((data) => {
         notificationHelper.success(data);
-        setExecutionStatus("paused");
       });
-    } else setExecutionStatus("executing");
+    }
+    // if (confirm("Flow will be stopped. Are you sure ?")) {
+    //   flowExecutorEvent.stopExecution((data) => {
+    //     notificationHelper.success(data);
+    //     setExecutionStatus("paused");
+    //   });
+    // } else setExecutionStatus("executing");
   };
 
   const onSettingsHandler = () => {

@@ -58,4 +58,8 @@ export default class FlowExecutorEvent {
   saveGUISettings(data, listener) {
     this.socket.emit("gui:save", data, listener);
   }
+
+  onFlowExecutionStatus(listener) {
+    this.socket.on("flow:executionStatus", (data) => listener(data));
+  }
 }
