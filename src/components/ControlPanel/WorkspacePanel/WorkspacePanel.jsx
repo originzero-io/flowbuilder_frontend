@@ -12,7 +12,7 @@ import useWorkspace from "utils/hooks/useWorkspace";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
 import styled from "styled-components";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoIosSettings, IoIosInformationCircle } from "react-icons/io";
 import AddWorkspaceForm from "./AddWorkspaceForm";
 
 const WorkspacePanelContainer = styled.div`
@@ -66,6 +66,20 @@ const BottomSection = styled.div`
   background: linear-gradient(180deg, #52bf04, #3b8e00 86.4%);
   border-top-right-radius: 32px;
   height: 25%;
+  position: relative;
+`;
+const IconWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28px;
+  width: 100%;
+  height: 32%;
+  position: absolute;
+  bottom: 20%;
+  opacity: 0.7;
+  cursor: pointer;
 `;
 const VisibilityButton = styled.div`
   position: absolute;
@@ -141,7 +155,12 @@ const WorkspacePanel = () => {
         )}
       </WorkspaceListContainer>
       <MiddleSection></MiddleSection>
-      <BottomSection></BottomSection>
+      <BottomSection>
+        <IconWrapper>
+          <IoIosSettings />
+          <IoIosInformationCircle />
+        </IconWrapper>
+      </BottomSection>
       <VisibilityButton>
         <IoIosArrowBack />
       </VisibilityButton>
