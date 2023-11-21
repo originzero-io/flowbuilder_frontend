@@ -37,7 +37,7 @@ export default function ProjectsScreen({ flows }) {
     setSearched(flows);
   }, [flows]);
   return (
-    <div style={{ paddingRight: "15px" }}>
+    <div style={{ marginRight: "15px", boxShadow: "0px 3px 15px -3px rgba(0,0,0,0.1)" }}>
       {activeProject ? (
         <>
           <Styled.FlowsContainer>
@@ -52,7 +52,13 @@ export default function ProjectsScreen({ flows }) {
               <TiFlowSwitch />
               <div style={{ marginLeft: "5px" }}>Flows</div>
             </div>
-            <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+              }}
+            >
               <FlowList flows={searched} />
               {getPermission("CAN_CREATE_FLOW", activeProject._id) && (
                 <Styled.Box onClick={() => dispatch(setModal(<AddFlowForm />))}>

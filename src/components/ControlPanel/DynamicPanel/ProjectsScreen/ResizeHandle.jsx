@@ -9,6 +9,8 @@ export default function ResizeHandle() {
         width: "7px",
         opacity: "1",
         position: "relative",
+        boxShadow: "-3px 0px 15px -3px rgba(0,0,0,0.1)",
+
         // background: "green",
       }}
     >

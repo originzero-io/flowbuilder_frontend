@@ -12,7 +12,6 @@ const PanelContainer = styled.div`
 `;
 const Header = styled.div`
   font-weight: 600;
-
   font-size: 18px;
   width: 100%;
 `;
@@ -21,14 +20,17 @@ const SectionContainer = styled.div`
   padding-bottom: 10px;
   margin-bottom: 10px;
 `;
-const SectionContent = styled.div``;
+const SectionContent = styled.div`
+  padding-top: 5px;
+  padding-bottom: 5px;
+`;
 const SectionRow = styled.div`
   padding: 4px;
 `;
 const InfoKey = styled.span`
   color: #515c85;
-  font-weight: 500;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 14px;
 `;
 
 export default function FlowInformationPanel() {
