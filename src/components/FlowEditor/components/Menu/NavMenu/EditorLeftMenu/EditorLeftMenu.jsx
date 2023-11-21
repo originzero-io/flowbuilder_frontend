@@ -12,8 +12,8 @@ const Wrapper = styled.div`
   min-width: ${({ showMenu }) => (showMenu ? "270px" : "0")};
   max-width: ${({ showMenu }) => (showMenu ? "270px" : "0")};
   background-color: #2d2d2d;
-  box-shadow: 5px 3px 15px -7px rgba(0, 0, 0, 0.5);
   transition: all 0.2s ease;
+  border-right: 0.5px solid black;
 `;
 const EditorLeftMenuWrapper = styled.div`
   display: ${({ showMenu }) => (showMenu ? "flex" : "none")};
