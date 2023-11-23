@@ -95,7 +95,7 @@ const NodeGod = ({ self, children }) => {
     any: "gray",
   });
   const { flowExecutorEvent } = useFlowExecutorSocket();
-  const { setSyncedFlow } = useFlowContext();
+  const { setSyncedFlow, executionStatus } = useFlowContext();
 
   const prevSelfValuesRef = useRef({ data: null });
 
@@ -134,6 +134,12 @@ const NodeGod = ({ self, children }) => {
       setServerData(data);
     });
   }, []);
+
+  useEffect(() => {
+    if (executionStatus === "executing") {
+      setServerData("");
+    }
+  }, [executionStatus]);
 
   const onDoubleClickHandle = (e) => {
     e.stopPropagation();
