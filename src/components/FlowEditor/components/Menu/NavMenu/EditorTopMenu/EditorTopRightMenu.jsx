@@ -64,10 +64,7 @@ export default function EditorTopRightMenu() {
   const reactFlowInstance = useReactFlow();
   const dispatch = useDispatch();
   const { flowExecutorEvent } = useFlowExecutorSocket();
-
-  // ? "executing" , "paused", "error"
-  const [executionStatus, setExecutionStatus] = useState("paused");
-  const { setSyncedFlow } = useFlowContext();
+  const { setSyncedFlow, setExecutionStatus } = useFlowContext();
 
   useEffect(() => {
     flowExecutorEvent.onFlowExecutionStatus((data) => {
@@ -190,7 +187,6 @@ export default function EditorTopRightMenu() {
     <Menu>
       <Styled.MenuItem>
         <ExecuteStopSwitchButton
-          executionStatus={executionStatus}
           executeFlowHandler={executeFlowHandler}
           stopFlowHandler={stopExecutionHandler}
         />

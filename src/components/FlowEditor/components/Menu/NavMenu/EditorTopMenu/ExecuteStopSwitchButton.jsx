@@ -5,17 +5,14 @@ import { BsFillPlayFill } from "react-icons/bs";
 import { GiPauseButton } from "react-icons/gi";
 import { IoIosInformation } from "react-icons/io";
 import PropTypes from "prop-types";
+import { useFlowContext } from "context/FlowDataProvider";
 
 const propTypes = {
-  executionStatus: PropTypes.string.isRequired,
   executeFlowHandler: PropTypes.func.isRequired,
   stopFlowHandler: PropTypes.func.isRequired,
 };
-export default function ExecuteStopSwitchButton({
-  executionStatus,
-  executeFlowHandler,
-  stopFlowHandler,
-}) {
+export default function ExecuteStopSwitchButton({ executeFlowHandler, stopFlowHandler }) {
+  const { executionStatus } = useFlowContext();
   const handleExecuteChange = (nextChecked) => {
     if (nextChecked === true) {
       executeFlowHandler();
