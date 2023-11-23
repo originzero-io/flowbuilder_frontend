@@ -97,7 +97,7 @@ const NodeGod = ({ self, children }) => {
   const { flowExecutorEvent } = useFlowExecutorSocket();
   const { setSyncedFlow } = useFlowContext();
 
-  const prevSelfValuesRef = useRef({ data: null, xPos: null, yPos: null });
+  const prevSelfValuesRef = useRef({ data: null });
 
   useEffect(() => {
     const prevValues = prevSelfValuesRef.current;
@@ -117,7 +117,7 @@ const NodeGod = ({ self, children }) => {
       }
     }
 
-    prevSelfValuesRef.current = { data: self.data, xPos: self.xPos, yPos: self.yPos };
+    prevSelfValuesRef.current = { data: self.data };
   }, [self.data]);
 
   useEffect(() => {
