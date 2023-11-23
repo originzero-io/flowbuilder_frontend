@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo } from "react";
-import ReactFlow, { updateEdge, useEdgesState, useReactFlow } from "reactflow";
+import ReactFlow, { useReactFlow } from "reactflow";
 import { useDispatch, useSelector } from "react-redux";
 import { setPaneClickPosition, closeAllNodeGroupMenu } from "store/reducers/flow/flowGuiSlice";
 import {
@@ -9,6 +9,7 @@ import {
   setEdges,
   setNodeEnable,
   updateEdgePath,
+  deSyncNode,
 } from "store/reducers/flow/flowElementsSlice";
 import {
   setElementContextMenu,
@@ -21,6 +22,7 @@ import notification from "utils/ui/notificationHelper";
 import { isConnectionCyclic } from "components/FlowEditor/helpers/flowHelper";
 import themeColor from "components/Shared/ThemeReference";
 import notificationHelper from "utils/ui/notificationHelper";
+import { useFlowContext } from "context/FlowDataProvider";
 import {
   openElementContextMenu,
   openMultiSelectionContextMenu,
@@ -40,8 +42,9 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const { edgeType, theme } = flowGui;
 
   const nodeList = useSelector((state) => state.systemNodes);
-
   const reactFlowInstance = useReactFlow();
+
+  const { setSyncedFlow } = useFlowContext();
 
   useEffect(() => {
     reactFlowInstance.setViewport(flowGui.viewport);
@@ -61,9 +64,17 @@ export default function FlowEditor({ reactFlowWrapper }) {
     [setEdges],
   );
 
-  const flowStyle = {
-    background: themeColor[theme].paneBackground,
-  };
+  const onNodesDelete = useCallback((deletedNode) => {
+    setSyncedFlow(false);
+  }, []);
+  const onNodeDrag = useCallback((event, node, nodes) => {
+    dispatch(deSyncNode({ id: node.id }));
+    setSyncedFlow(false);
+  }, []);
+
+  const onEdgesDelete = useCallback((deletedEdge) => {
+    setSyncedFlow(false);
+  }, []);
 
   const onConnect = useCallback(
     (params) => {
@@ -87,6 +98,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         const self = flowElements.nodes.find((els) => els.id === params.target);
         dispatch(addNewEdge(edge));
         dispatch(setNodeEnable({ self, checked: sourceEnable }));
+        setSyncedFlow(false);
       }
     },
     [addNewEdge, flowElements],
@@ -98,6 +110,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
         notification.error("Nodes cannot connect itself");
       } else {
         dispatch(updateEdgePath({ oldEdge, newConnection }));
+        setSyncedFlow(false);
       }
     },
     [updateEdgePath, flowElements],
@@ -138,6 +151,10 @@ export default function FlowEditor({ reactFlowWrapper }) {
     dispatch(setElementContextMenu(false));
     dispatch(closeAllNodeGroupMenu(true));
   };
+
+  const flowStyle = {
+    background: themeColor[theme].paneBackground,
+  };
   const customNodes = useMemo(() => createCustomNodeObject(nodeList), [nodeList]);
 
   return (
@@ -147,7 +164,10 @@ export default function FlowEditor({ reactFlowWrapper }) {
       nodes={flowElements.nodes}
       edges={flowElements.edges}
       onNodesChange={onNodesChange}
+      onNodeDrag={onNodeDrag}
+      onNodesDelete={onNodesDelete}
       onEdgesChange={onEdgesChange}
+      onEdgesDelete={onEdgesDelete}
       onConnect={onConnect}
       onDrop={onDrop}
       onDoubleClick={onDoubleClick}

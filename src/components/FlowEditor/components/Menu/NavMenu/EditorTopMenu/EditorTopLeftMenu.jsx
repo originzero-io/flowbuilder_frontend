@@ -1,17 +1,15 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import styled from "styled-components";
-import useActiveFlow from "utils/hooks/useActiveFlow";
-import { Logo } from "components/Shared/icons";
-import { useReactFlow } from "reactflow";
-import { addSubFlow } from "store/reducers/flow/flowElementsSlice";
+import CompanyLogo from "components/Shared/CompanyLogo";
+import { useFlowContext } from "context/FlowDataProvider";
 import { toPng } from "html-to-image";
-import { VscTypeHierarchySub } from "react-icons/vsc";
+import React from "react";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { RiScreenshot2Line } from "react-icons/ri";
+import { VscTypeHierarchySub } from "react-icons/vsc";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { addSubFlow } from "store/reducers/flow/flowElementsSlice";
+import styled from "styled-components";
 import * as Styled from "../NavMenu.style";
-import CompanyLogo from "components/Shared/CompanyLogo";
 
 const StyledMenu = styled.div`
   // background: ${(props) => props.theme.menuBackground};
@@ -24,9 +22,9 @@ const StyledMenu = styled.div`
 `;
 
 const EditorTopLeftMenu = () => {
-  const { flowGui, flowConfig } = useActiveFlow();
-  const { theme } = flowGui;
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { syncedFlow } = useFlowContext();
 
   function downloadImage(dataUrl) {
     const a = document.createElement("a");
@@ -50,16 +48,27 @@ const EditorTopLeftMenu = () => {
       },
     }).then(downloadImage);
   };
+  const goToHomePage = () => {
+    if (!syncedFlow) {
+      if (
+        confirm(
+          "There are unsynchronized changes in Flow. Unsaved changes will be lost. Do you approve?",
+        )
+      ) {
+        history.push("/panel/projects");
+      }
+    } else {
+      history.push("/panel/projects");
+    }
+  };
   return (
     <StyledMenu>
       {/* <Logo theme={theme} /> */}
       <CompanyLogo size={50} />
-      <div>
-        <Link to="/panel/projects">
-          <Styled.MenuItem>
-            <BiHomeAlt2 style={{ color: "#43b104", fontSize: "2.5vmin" }} />
-          </Styled.MenuItem>
-        </Link>
+      <div onClick={goToHomePage}>
+        <Styled.MenuItem>
+          <BiHomeAlt2 style={{ color: "#43b104", fontSize: "2.5vmin" }} />
+        </Styled.MenuItem>
       </div>
 
       <Styled.MenuItem onClick={() => dispatch(addSubFlow())}>

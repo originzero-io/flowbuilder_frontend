@@ -1,6 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import { EntityManagerSocketProvider } from "context/EntityManagerSocketProvider.jsx";
 import { FlowExecutorSocketProvider } from "context/FlowExecutorSocketProvider.jsx";
+import { FlowDataProvider } from "context/FlowDataProvider.jsx";
 import LoadingBar from "../components/Shared/LoadingBar/LoadingBar.jsx";
 import Modal from "../components/Shared/Modal/Modal.jsx";
 import ToastNotification from "../components/Shared/Notification/ToastNotification.jsx";
@@ -21,7 +22,9 @@ const App = () => (
         <PrivateRoute path="/panel" component={ControlPanelPage} />
         <PrivateRoute exact path="/flow/:flowId/">
           <FlowExecutorSocketProvider>
-            <FlowPage />
+            <FlowDataProvider>
+              <FlowPage />
+            </FlowDataProvider>
           </FlowExecutorSocketProvider>
         </PrivateRoute>
         <PrivateRoute exact path="/dashboard/:dashboardId" component={DashboardPage} />

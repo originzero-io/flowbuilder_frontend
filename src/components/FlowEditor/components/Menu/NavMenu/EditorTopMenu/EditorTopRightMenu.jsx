@@ -16,7 +16,12 @@ import { useDispatch } from "react-redux";
 import { useReactFlow } from "reactflow";
 import { logOut } from "store/reducers/authSlice";
 import { setModal } from "store/reducers/componentSlice";
-import { changeEdgeType, importFlow, selectElements } from "store/reducers/flow/flowElementsSlice";
+import {
+  changeEdgeType,
+  importFlow,
+  selectElements,
+  syncAllNodes,
+} from "store/reducers/flow/flowElementsSlice";
 import { setFlowEdgeType, setMiniMapDisplay, setTheme } from "store/reducers/flow/flowGuiSlice";
 import styled from "styled-components";
 import useActiveFlow from "utils/hooks/useActiveFlow";
@@ -24,6 +29,7 @@ import useAuth from "utils/hooks/useAuth";
 import notificationHelper from "utils/ui/notificationHelper";
 import { useFlowExecutorSocket } from "context/FlowExecutorSocketProvider";
 import { SelectStyled } from "components/StyledComponents/Select";
+import { useFlowContext } from "context/FlowDataProvider";
 import SwitchButton from "../../../../nodes/shared/SwitchButton";
 import ConnectionMenu from "../../ConnectionMenu/ConnectionMenu";
 import * as Styled from "../NavMenu.style";
@@ -61,6 +67,7 @@ export default function EditorTopRightMenu() {
 
   // ? "executing" , "paused", "error"
   const [executionStatus, setExecutionStatus] = useState("paused");
+  const { setSyncedFlow } = useFlowContext();
 
   useEffect(() => {
     flowExecutorEvent.onFlowExecutionStatus((data) => {
@@ -127,8 +134,16 @@ export default function EditorTopRightMenu() {
       dispatch(logOut());
     }
   };
+
   const executeFlowHandler = async () => {
+    dispatch(syncAllNodes());
+    setSyncedFlow(true);
     const { nodes, edges, viewport } = reactFlowInstance.toObject();
+    const nodesSynced = nodes.map((node) => ({
+      ...node,
+      data: { ...node.data, syncedWithServer: true },
+    }));
+
     const functionalNodes = getFunctionalNodes(nodes);
     const unconnectedNodes = checkUnconnectedNodes(functionalNodes, edges);
     const unconnectedTrigHandles = checkAllConnectedTrigsHandles(nodes, edges);
@@ -155,8 +170,7 @@ export default function EditorTopRightMenu() {
       flowExecutorEvent.saveGUISettings(gui, (response) => {
         notificationHelper.success(response);
       });
-      flowExecutorEvent.executeFlow({ nodes, edges });
-      // setExecutionStatus("executing");
+      flowExecutorEvent.executeFlow({ nodes: nodesSynced, edges });
     }
   };
 
@@ -166,12 +180,6 @@ export default function EditorTopRightMenu() {
         notificationHelper.success(data);
       });
     }
-    // if (confirm("Flow will be stopped. Are you sure ?")) {
-    //   flowExecutorEvent.stopExecution((data) => {
-    //     notificationHelper.success(data);
-    //     setExecutionStatus("paused");
-    //   });
-    // } else setExecutionStatus("executing");
   };
 
   const onSettingsHandler = () => {

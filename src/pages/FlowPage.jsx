@@ -7,8 +7,8 @@ import styled, { ThemeProvider } from "styled-components";
 import FlowEditor from "components/FlowEditor/FlowEditor";
 import useActiveFlow from "utils/hooks/useActiveFlow";
 import theme from "components/Shared/ThemeReference";
-import { setActiveFlowConfig } from "store/reducers/flow/flowConfigSlice";
-import { resetActiveFlowGui, setActiveFlowGui } from "store/reducers/flow/flowGuiSlice";
+import { resetActiveFlowConfig } from "store/reducers/flow/flowConfigSlice";
+import { resetActiveFlowGui } from "store/reducers/flow/flowGuiSlice";
 import {
   resetActiveFlowElements,
   setActiveFlowElements,
@@ -25,6 +25,9 @@ import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
 import { useFlowExecutorSocket } from "context/FlowExecutorSocketProvider";
 import notificationHelper from "utils/ui/notificationHelper";
 import { beginTheBar } from "store/reducers/componentSlice";
+import { useFlowContext } from "context/FlowDataProvider";
+import { IoAlertOutline } from "react-icons/io5";
+import { TiTick } from "react-icons/ti";
 import ResizeHandle from "../components/FlowEditor/components/Menu/NavMenu/EditorRightMenu/ResizeHandle";
 
 const StyledFlowWrapper = styled.div`
@@ -46,6 +49,8 @@ const FlowTopMenuWrapper = styled.div`
 const FlowNameWrapper = styled.div`
   font-size: 2.5vmin;
   margin-left: 120px;
+  display: flex;
+  align-items: center;
 `;
 
 const ShowRightMenuButton = styled.div`
@@ -56,11 +61,30 @@ const ShowRightMenuButton = styled.div`
   right: 0;
 `;
 
+const SyncStatusWrapper = styled.div`
+  background: ${({ sync }) => (sync ? "green" : "#f51c1c")};
+  background: ${({ sync }) => (sync ? "#43b104" : "rgb(0,188,255)")};
+  border-radius: 50%;
+  // border: 1px solid gray;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  color: rgba(53, 59, 72, 0.8);
+  color: ${({ sync }) => (sync ? "#2d2d2d" : "#2d2d2d")};
+  opacity: 0.8;
+  font-size: 18px;
+`;
+
+const FlowName = styled.div`
+  font-style: ${({ sync }) => (sync ? "normal" : "italic")};
+`;
+
 const propTypes = {
   match: PropTypes.object,
 };
-
-// export let flowExecutorSocket = null;
 
 const FlowPage = () => {
   const dispatch = useDispatch();
@@ -68,6 +92,7 @@ const FlowPage = () => {
   const rfWrapper = useRef(null);
   const [showLeftMenu, setShowLeftMenu] = useState(true);
   const { flowExecutorSocket, flowExecutorEvent } = useFlowExecutorSocket();
+  const { syncedFlow } = useFlowContext();
 
   useEffect(() => {
     dispatch(beginTheBar());
@@ -88,7 +113,7 @@ const FlowPage = () => {
     });
     return () => {
       flowExecutorSocket.disconnect(); // close connection when page changes
-      dispatch(setActiveFlowConfig({}));
+      dispatch(resetActiveFlowConfig());
       dispatch(resetActiveFlowGui());
       dispatch(resetActiveFlowElements());
     };
@@ -117,7 +142,15 @@ const FlowPage = () => {
       <ThemeProvider theme={theme[flowGui.theme]}>
         <FlowTopMenuWrapper>
           <EditorTopLeftMenu />
-          <FlowNameWrapper>{flowConfig.name || "NO - DATA"}</FlowNameWrapper>
+          <FlowNameWrapper>
+            <SyncStatusWrapper sync={syncedFlow}>
+              {syncedFlow ? <TiTick /> : <IoAlertOutline />}
+            </SyncStatusWrapper>
+            <FlowName sync={syncedFlow}>
+              {flowConfig.name || "NO - DATA"}
+              {!syncedFlow && "*"}
+            </FlowName>
+          </FlowNameWrapper>
           <EditorTopRightMenu />
         </FlowTopMenuWrapper>
 

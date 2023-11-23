@@ -188,9 +188,6 @@ export const flowElementsSlice = createSlice({
         }
       });
     },
-    saveElements(state, { payload }) {
-      return payload;
-    },
     addSubFlow(state, { payload }) {
       state.nodes.push(
         {
@@ -229,6 +226,18 @@ export const flowElementsSlice = createSlice({
         }
       });
     },
+    deSyncNode(state, { payload }) {
+      state.nodes.forEach((node) => {
+        if (node.id === payload.id) {
+          node.data.syncedWithServer = false;
+        }
+      });
+    },
+    syncAllNodes(state, { payload }) {
+      state.nodes.forEach((node) => {
+        node.data.syncedWithServer = true;
+      });
+    },
   },
   extraReducers: {
     [getElementsByFlow.fulfilled]: (state, { payload }) => payload,
@@ -260,7 +269,8 @@ export const {
   selectAllElements,
   deleteGroupOfElement,
   updateGroupOfElement,
-  saveElements,
   importFlow,
   setNodeConfigData,
+  deSyncNode,
+  syncAllNodes,
 } = flowElementsSlice.actions;

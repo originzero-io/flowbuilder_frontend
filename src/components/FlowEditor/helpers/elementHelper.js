@@ -8,6 +8,7 @@ export const createNode = (type, initialPosition) => {
     id: `${type}-${uuid()}`,
     type,
     position: initialPosition,
+
     data: {
       ...nodeData,
       trigHandles: {
@@ -31,8 +32,9 @@ export const createNode = (type, initialPosition) => {
       frozenHandles: [],
       enable: true,
       preferencesClass: "class1",
+      syncedWithServer: false,
     },
-
+    selected: false,
     // ? Reactflow tarafından eklenenler
     // width,
     // height,

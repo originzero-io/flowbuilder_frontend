@@ -1,14 +1,16 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useUpdateNodeInternals } from "reactflow";
 import { Badge } from "reactstrap";
-import { setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
+import { deSyncNode, setOutgoersEnable } from "store/reducers/flow/flowElementsSlice";
 import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
 import styled from "styled-components";
 import DynamicSVG from "components/Shared/DynamicSVG";
 import { useFlowExecutorSocket } from "context/FlowExecutorSocketProvider";
+import { useFlowContext } from "context/FlowDataProvider";
+import { MdOutlineSyncProblem } from "react-icons/md";
 import InputParameterHandles from "./NodeHandles/InputParameterHandles";
 import InputStatusHandles from "./NodeHandles/InputStatusHandles";
 import NodeHeader from "./NodeHeader/NodeHeader";
@@ -59,6 +61,21 @@ const NodeContent = styled.div`
   flex-grow: ${(props) => (props.type === "logo" ? "1" : "none")};
 `;
 
+const NodeSyncStatus = styled.div`
+  position: absolute;
+  background-color: rgb(0, 188, 255);
+  width: 16px;
+  height: 16px;
+  right: 7px;
+  top: -8px;
+  border-radius: 50%;
+  display: ${(props) => (!props.sync ? "flex" : "none")};
+  justify-content: center;
+  align-items: center;
+  color: rgb(53, 59, 72);
+  font-size: 12px;
+`;
+
 const propTypes = {
   self: PropTypes.object.isRequired,
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
@@ -66,8 +83,8 @@ const propTypes = {
 
 const NodeGod = ({ self, children }) => {
   // const { sourceCount, targetCount } = self.data.ioEngine;
-  const { enable } = self.data;
-  const { trigHandles, statusHandles, inputParameters, outputValues } = self.data;
+  const { trigHandles, statusHandles, inputParameters, outputValues, enable, syncedWithServer } =
+    self.data;
   const updateNodeInternals = useUpdateNodeInternals();
   const dispatch = useDispatch();
   const [serverData, setServerData] = useState("");
@@ -78,6 +95,30 @@ const NodeGod = ({ self, children }) => {
     any: "gray",
   });
   const { flowExecutorEvent } = useFlowExecutorSocket();
+  const { setSyncedFlow } = useFlowContext();
+
+  const prevSelfValuesRef = useRef({ data: null, xPos: null, yPos: null });
+
+  useEffect(() => {
+    const prevValues = prevSelfValuesRef.current;
+
+    // İlk açılışta node synced değilse flowa bunu bildir
+    if (!self.data.syncedWithServer) {
+      setSyncedFlow(false);
+    }
+
+    // Nodun data objesinde bir değişiklik olduğunda işlemi gerçekleştir
+    if (prevValues.data && prevValues.data !== self.data) {
+      // Datanın içerisindeki syncedWithServer değerinin değişimini dikkate alma
+
+      if (!self.data.syncedWithServer !== prevValues.data.syncedWithServer) {
+        dispatch(deSyncNode({ id: self.id }));
+        setSyncedFlow(false);
+      }
+    }
+
+    prevSelfValuesRef.current = { data: self.data, xPos: self.xPos, yPos: self.yPos };
+  }, [self.data]);
 
   useEffect(() => {
     updateNodeInternals(self.id);
@@ -114,6 +155,9 @@ const NodeGod = ({ self, children }) => {
         )}
       </HandleWrapper>
       <NodeArea nodeType={self.type} selected={self.selected} enable={enable}>
+        <NodeSyncStatus sync={syncedWithServer}>
+          <MdOutlineSyncProblem />
+        </NodeSyncStatus>
         <NodeHeader self={self} />
         <NodeContent type="logo" onDoubleClick={onDoubleClickHandle}>
           <DynamicSVG

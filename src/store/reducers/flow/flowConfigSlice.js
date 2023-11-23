@@ -7,8 +7,11 @@ export const flowConfigSlice = createSlice({
     setActiveFlowConfig(state, { payload }) {
       return payload;
     },
+    resetActiveFlowConfig(state, { payload }) {
+      return {};
+    },
   },
 });
 
 export default flowConfigSlice.reducer;
-export const { setActiveFlowConfig } = flowConfigSlice.actions;
+export const { setActiveFlowConfig, resetActiveFlowConfig } = flowConfigSlice.actions;
