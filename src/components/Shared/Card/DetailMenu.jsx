@@ -6,11 +6,11 @@ import { MdDeleteOutline, MdDriveFolderUpload } from "react-icons/md";
 import { LuFileEdit } from "react-icons/lu";
 import { HiOutlineDuplicate } from "react-icons/hi";
 import { GoQuestion } from "react-icons/go";
+import { selectFlow } from "store/reducers/controlPanelSlice";
 import EditFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/EditFlowForm";
 import MoveFlow from "../../ControlPanel/DynamicPanel/ProjectsScreen/forms/MoveFlowForm";
 import { DropdownItem, DropdownWrapper } from "../../StyledComponents/DropdownMenu";
 import * as Styled from "./Card.style";
-import { selectFlow } from "store/reducers/flow/selectedFlowSlice";
 
 const propTypes = {
   deleteEvent: PropTypes.func,

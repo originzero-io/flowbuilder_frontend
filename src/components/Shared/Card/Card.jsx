@@ -6,7 +6,7 @@ import { deleteFlow } from "store/reducers/flow/flowSlice";
 import { useDispatch } from "react-redux";
 import notificationHelper from "utils/ui/notificationHelper";
 import styled from "styled-components";
-import { selectFlow } from "store/reducers/flow/selectedFlowSlice";
+import { selectFlow } from "store/reducers/controlPanelSlice";
 import DetailMenu from "./DetailMenu";
 import FlowStatusSwitch from "./FlowStatusSwitch";
 

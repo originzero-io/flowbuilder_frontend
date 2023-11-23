@@ -1,9 +1,9 @@
 import { IoCloseSharp } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { Panel, PanelGroup } from "react-resizable-panels";
-import { selectFlow } from "store/reducers/flow/selectedFlowSlice";
 import styled from "styled-components";
 import useSelectedFlow from "utils/hooks/useSelectedFlow";
+import { selectFlow } from "store/reducers/controlPanelSlice";
 import { FlowsByProjectPanel } from "..";
 import FlowInformationMenu from "./FlowInformationPanel";
 import ResizeHandle from "./ResizeHandle";
