@@ -1,21 +1,23 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Input, Button, Form } from "reactstrap";
 import { setModal } from "store/reducers/componentSlice";
 import useProject from "utils/hooks/useProject";
-import flowServiceSocket from "services/entityManagerService/flowService/flowService.event";
+import { useEntityManagerSocket } from "context/EntityManagerSocketProvider";
 
 export default function MoveFlow({ flow }) {
   const dispatch = useDispatch();
   const { projects } = useProject();
   const [selection, setSelection] = useState(flow.project);
+  const { flowEvent } = useEntityManagerSocket();
+
   const changeHandle = (e) => {
     setSelection(e.target.value);
   };
 
   const submitHandle = (e) => {
     e.preventDefault();
-    flowServiceSocket.moveFlow({ flow, newProject: selection });
+    flowEvent.moveFlow({ flow, newProject: selection });
     dispatch(setModal(false));
   };
   return (
