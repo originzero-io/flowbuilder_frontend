@@ -47,10 +47,32 @@ export default function ProjectsScreen({ flows }) {
                 alignItems: "center",
                 fontSize: "24px",
                 marginBottom: "12px",
+                justifyContent: "space-between",
               }}
             >
-              <TiFlowSwitch />
-              <div style={{ marginLeft: "5px" }}>Flows</div>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <TiFlowSwitch />
+                <div style={{ marginLeft: "5px" }}>Flows</div>
+              </div>
+              {getPermission("CAN_CREATE_FLOW", activeProject._id) && (
+                <div onClick={() => dispatch(setModal(<AddFlowForm />))}>
+                  <svg
+                    style={{ cursor: "pointer" }}
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M4 2H9C10.1046 2 11 2.89543 11 4V9C11 10.1046 10.1046 11 9 11H4C2.89543 11 2 10.1046 2 9V4C2 2.89543 2.89543 2 4 2ZM4 13H9C10.1046 13 11 13.8954 11 15V20C11 21.1046 10.1046 22 9 22H4C2.89543 22 2 21.1046 2 20V15C2 13.8954 2.89543 13 4 13ZM18 13H16V16H13V18H16V21H18V18H21V16H18V13ZM4 20V15H9V20H4ZM4 9V4H9V9H4ZM15 2H20C21.1046 2 22 2.89543 22 4V9C22 10.1046 21.1046 11 20 11H15C13.8954 11 13 10.1046 13 9V4C13 2.89543 13.8954 2 15 2ZM15 9V4H20V9H15Z"
+                      fill="#43B104"
+                    />
+                  </svg>
+                </div>
+              )}
             </div>
             <div
               style={{
@@ -60,11 +82,6 @@ export default function ProjectsScreen({ flows }) {
               }}
             >
               <FlowList flows={searched} />
-              {getPermission("CAN_CREATE_FLOW", activeProject._id) && (
-                <Styled.Box onClick={() => dispatch(setModal(<AddFlowForm />))}>
-                  <VscAdd />
-                </Styled.Box>
-              )}
             </div>
           </Styled.FlowsContainer>
         </>

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { CardContainer } from "components/Shared/Card/Card.style";
 
 export const ProjectsContainerIndex = styled.div`
   display: flex;
@@ -7,17 +6,6 @@ export const ProjectsContainerIndex = styled.div`
   padding: 15px;
   color: white;
   background-color: #ffff;
-`;
-export const Box = styled(CardContainer)`
-  font-size: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease-in-out;
-  &:hover {
-    background-color: rgb(22, 137, 63);
-    transition: background-color 0.2s ease-in-out;
-  }
 `;
 
 export const SearchBar = styled.input`
