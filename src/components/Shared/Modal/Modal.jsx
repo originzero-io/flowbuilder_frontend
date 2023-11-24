@@ -16,23 +16,22 @@ const customStyles = {
     overflowY: "auto",
     overflowX: "hidden",
     padding: "25px",
-    background: "#2d2d2d",
+    background: "#fff",
     minWidth: "40%",
     maxHeight: "70%",
-    boxShadow: "-1px 1px 16px -9px rgba(0,0,0,0.75)",
-    color: "white",
+    boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.25);",
+    color: "#757575",
     border: "1px solid rgba(100,100,100,0.6)",
   },
   overlay: {
-    //background: "rgba(53, 59, 72,0.4)",
-    background: "transparent",
+    background: "rgba(0,0,0,0.4)",
     zIndex: "6",
   },
 };
 const closeButtonWrapperStyle = {
   position: "absolute",
-  top: "0px",
-  right: "1px",
+  top: "4px",
+  right: "4px",
   cursor: "pointer",
 };
 const childrenStyle = {
