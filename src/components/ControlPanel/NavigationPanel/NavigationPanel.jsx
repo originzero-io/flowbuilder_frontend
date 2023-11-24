@@ -23,17 +23,18 @@ import ProjectList from "./ProjectList.jsx";
 import WorkspaceBrand from "./WorkspaceBrand";
 
 const Container = styled.div`
-  display: ${({ show }) => (show ? "flex" : "none")};
+  display: flex;
   flex-direction: column;
   z-index: 1;
   // flex-basis: 18%;
   background-color: #2d2d2d;
   position: relative;
-  width: 20%;
-  padding: 15px;
+  width: ${({ show }) => (show ? "20%" : "0")};
+  padding: ${({ show }) => (show ? "15px" : "0")};
   padding-top: 0px;
   overflow-y: auto;
   margin-bottom: 3%;
+  transition: width 0.2s ease;
 `;
 const NavMenu = styled.div`
   display: flex;
