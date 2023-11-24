@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { VscAdd } from "react-icons/vsc";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "store/reducers/componentSlice";
 import { getFlowsByWorkspace } from "store/reducers/flow/flowSlice";
 import { getNotesByWorkspace } from "store/reducers/noteSlice";
@@ -12,13 +12,20 @@ import useWorkspace from "utils/hooks/useWorkspace";
 import { getMyPermissionInThisWorkspace } from "store/reducers/authPermissionSlice";
 import Tooltip from "components/Shared/Tooltip/Tooltip";
 import styled from "styled-components";
-import { IoIosArrowBack, IoIosSettings, IoIosInformationCircle } from "react-icons/io";
+import {
+  IoIosArrowBack,
+  IoIosArrowForward,
+  IoIosSettings,
+  IoIosInformationCircle,
+} from "react-icons/io";
+import { setShowNavigationMenu } from "store/reducers/controlPanelSlice";
 import AddWorkspaceForm from "./AddWorkspaceForm";
 
 const WorkspacePanelContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 4%;
+  min-width: 4%;
+  max-width: 4%;
   position: relative;
 `;
 const Item = styled.div`
@@ -36,7 +43,7 @@ const WorkspaceListContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  border-bottom-right-radius: 32px;
+  border-bottom-right-radius: 24px;
   height: 65%;
 `;
 const WorkspaceListItemWrapper = styled(Item)`
@@ -64,7 +71,7 @@ const MiddleSection = styled.div`
 `;
 const BottomSection = styled.div`
   background: linear-gradient(180deg, #52bf04, #3b8e00 86.4%);
-  border-top-right-radius: 32px;
+  border-top-right-radius: 24px;
   height: 25%;
   position: relative;
 `;
@@ -85,11 +92,11 @@ const VisibilityButton = styled.div`
   position: absolute;
   background-color: #2d2d2d;
   bottom: 25%;
-  left: 10px;
+  left: 12px;
   width: 100%;
   height: 10%;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,11 +105,13 @@ const VisibilityButton = styled.div`
   &:hover {
     color: #a0a0a0;
   }
+  z-index: 1;
 `;
 
 const WorkspacePanel = () => {
   const { workspaces, activeWorkspace } = useWorkspace();
   const auth = useAuth();
+  const { showNavigationMenu } = useSelector((state) => state.controlPanel);
   const dispatch = useDispatch();
   // console.log("WORKSPACE_LIST RENDERED");
   useEffect(() => {
@@ -126,6 +135,10 @@ const WorkspacePanel = () => {
   const addWorkspaceHandler = () => {
     dispatch(setModal(<AddWorkspaceForm />));
   };
+  const showNavigationMenuHandler = () => {
+    dispatch(setShowNavigationMenu(!showNavigationMenu));
+  };
+
   return (
     <WorkspacePanelContainer>
       <WorkspaceListContainer>
@@ -161,8 +174,8 @@ const WorkspacePanel = () => {
           <IoIosInformationCircle />
         </IconWrapper>
       </BottomSection>
-      <VisibilityButton>
-        <IoIosArrowBack />
+      <VisibilityButton onClick={showNavigationMenuHandler}>
+        {showNavigationMenu ? <IoIosArrowBack /> : <IoIosArrowForward />}
       </VisibilityButton>
     </WorkspacePanelContainer>
   );

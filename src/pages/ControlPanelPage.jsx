@@ -9,10 +9,11 @@ const StyledWrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #2d2d2d;
+  overflow: hidden;
 `;
 const StyledContent = styled.div`
   display: flex;
-  height: 100vh;
+  height: 100%;
 `;
 
 export default function ControlPanelPage() {

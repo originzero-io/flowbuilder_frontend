@@ -1,30 +1,26 @@
-import React, { useEffect } from "react";
-import { Switch, Route, useRouteMatch, useHistory, useLocation, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
-import useWorkspace from "utils/hooks/useWorkspace";
-import { Panel, PanelGroup } from "react-resizable-panels";
+import NotFound from "./NotFound";
+import FlowPanel from "./ProjectsScreen/FlowPanel";
 import {
+  DevicesScreen,
   LearnScreen,
   NotesScreen,
-  FlowsByProjectPanel,
-  SettingsScreen,
-  DevicesScreen,
-  UsersScreen,
-  TeamScreen,
   PermissionScreen,
+  SettingsScreen,
+  TeamScreen,
+  UsersScreen,
 } from "./index";
-import NotFound from "./NotFound";
-import ResizeHandle from "./ProjectsScreen/ResizeHandle";
-import FlowInformationPanel from "./ProjectsScreen/FlowInformationPanel";
-import FlowPanel from "./ProjectsScreen/FlowPanel";
 
 const StyledContainer = styled.div`
-  width: 80%;
+  width: 100%;
   height: 100%;
   background: #f4f4f4;
   overflow-y: auto;
   overflow-x: hidden;
   border-top-left-radius: 10px;
+  z-index: 2;
 `;
 const StyledPanelComponentWrapper = styled.div`
   color: white;

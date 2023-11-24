@@ -9,21 +9,21 @@ import { CgNotes } from "react-icons/cg";
 import { FiSettings } from "react-icons/fi";
 import { MdDevicesOther } from "react-icons/md";
 import { RiTeamLine } from "react-icons/ri";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import { setModal } from "store/reducers/componentSlice";
 import styled from "styled-components";
 import useAuthPermission from "utils/hooks/useAuthPermission";
 import useProject from "utils/hooks/useProject";
 import useWorkspace from "utils/hooks/useWorkspace";
+import { convertDate } from "utils/helpers/date";
 import AddProjectForm from "./AddProjectForm";
 import NavMenuItem from "./NavMenuItem";
 import ProjectList from "./ProjectList.jsx";
 import WorkspaceBrand from "./WorkspaceBrand";
-import { convertDate } from "utils/helpers/date";
 
 const Container = styled.div`
-  display: flex;
+  display: ${({ show }) => (show ? "flex" : "none")};
   flex-direction: column;
   z-index: 1;
   // flex-basis: 18%;
@@ -33,6 +33,7 @@ const Container = styled.div`
   padding: 15px;
   padding-top: 0px;
   overflow-y: auto;
+  margin-bottom: 3%;
 `;
 const NavMenu = styled.div`
   display: flex;
@@ -49,6 +50,8 @@ const NavigationPanel = () => {
   const { url } = useRouteMatch();
   const { activeWorkspace } = useWorkspace();
   const { projects } = useProject();
+  const { showNavigationMenu } = useSelector((state) => state.controlPanel);
+
   // console.log("NAVIGATION_PANEL RENDERED");
   const showModalHandle = (e) => {
     e.preventDefault();
@@ -68,7 +71,7 @@ const NavigationPanel = () => {
   );
   const settingsItem = () => <CollapsibleTrigger label="Settings" icon={<FiSettings />} />;
   return (
-    <Container>
+    <Container show={showNavigationMenu}>
       <NavMenu>
         <WorkspaceBrand workspace={activeWorkspace} />
         <CollapsibleMenu trigger={projectItem()}>
@@ -135,17 +138,6 @@ const InfoValue = styled.div`
   color: #a6b3e8;
 `;
 function DescriptionPanel({ workspace }) {
-  // const convertDate = (date) => {
-  //   const originalDate = new Date(date);
-
-  //   const day = originalDate.getDate();
-  //   const month = originalDate.getMonth() + 1;
-  //   const year = originalDate.getFullYear();
-
-  //   const formattedDate = `${day < 10 ? "0" : ""}${day}.${month < 10 ? "0" : ""}${month}.${year}`;
-  //   return formattedDate;
-  // };
-
   if (workspace.name) {
     return (
       <DescriptionPanelContainer>

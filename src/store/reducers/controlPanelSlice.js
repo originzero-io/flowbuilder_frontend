@@ -6,6 +6,7 @@ export const controlPanelSlice = createSlice({
     activeProject: {},
     copiedNodes: [],
     selectedFlow: {},
+    showNavigationMenu: true,
   },
   reducers: {
     setCopiedNodes(state, { payload }) {
@@ -14,8 +15,11 @@ export const controlPanelSlice = createSlice({
     selectFlow(state, { payload }) {
       state.selectedFlow = payload;
     },
+    setShowNavigationMenu(state, { payload }) {
+      state.showNavigationMenu = payload;
+    },
   },
 });
 
-export const { setCopiedNodes, selectFlow } = controlPanelSlice.actions;
+export const { setCopiedNodes, selectFlow, setShowNavigationMenu } = controlPanelSlice.actions;
 export default controlPanelSlice.reducer;
