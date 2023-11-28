@@ -37,7 +37,7 @@ const Container = styled.div`
   transition: width 0.2s ease;
 `;
 const NavMenu = styled.div`
-  display: flex;
+  display: ${({ show }) => (show ? "flex" : "none")};
   flex-direction: column;
   font-size: 26px;
   background: #393939;
@@ -73,7 +73,7 @@ const NavigationPanel = () => {
   const settingsItem = () => <CollapsibleTrigger label="Settings" icon={<FiSettings />} />;
   return (
     <Container show={showNavigationMenu}>
-      <NavMenu>
+      <NavMenu show={showNavigationMenu}>
         <WorkspaceBrand workspace={activeWorkspace} />
         <CollapsibleMenu trigger={projectItem()}>
           <Link to={`${url}/projects`}>
@@ -98,7 +98,7 @@ const NavigationPanel = () => {
         </Link>
       </NavMenu>
 
-      <NavMenu style={{ marginTop: "15px" }}>
+      <NavMenu style={{ marginTop: "15px" }} show={showNavigationMenu}>
         <DescriptionPanel workspace={activeWorkspace} />
       </NavMenu>
     </Container>
