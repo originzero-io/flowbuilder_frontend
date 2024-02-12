@@ -8,11 +8,13 @@ import PropTypes from "prop-types";
 import useProject from "utils/hooks/useProject.js";
 import { Alert } from "reactstrap";
 import useAuthPermission from "utils/hooks/useAuthPermission";
+// import { LuLayoutPanelLeft } from "react-icons/lu";
 import * as Styled from "./ProjectsScreen.style";
-import AddDashboardForm from "./forms/AddDashboardForm";
+import AddDashboardFormx from "./forms/AddDashboardForm";
 import AddFlowForm from "./forms/AddFlowForm";
 import FlowList from "./components/FlowList.jsx";
 import { TiFlowSwitch } from "react-icons/ti";
+import StarMetalLogo from "assets/images/star-metal-logo.png";
 
 const propTypes = {
   flows: PropTypes.array.isRequired,
@@ -36,6 +38,10 @@ export default function ProjectsScreen({ flows }) {
   useEffect(() => {
     setSearched(flows);
   }, [flows]);
+
+  const openStarMetalApp = () => {
+    window.open("http://localhost:5174", "_blank");
+  };
   return (
     <div style={{ marginRight: "15px", boxShadow: "0px 3px 15px -3px rgba(0,0,0,0.1)" }}>
       {activeProject ? (
@@ -84,6 +90,30 @@ export default function ProjectsScreen({ flows }) {
               <FlowList flows={searched} />
             </div>
           </Styled.FlowsContainer>
+          {/* <Styled.FlowsContainer style={{ marginTop: "10px" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                fontSize: "24px",
+                marginBottom: "12px",
+              }}
+            >
+              <TiFlowSwitch />
+              <div style={{ marginLeft: "5px" }}>Applications</div>
+            </div>
+
+            <div
+              onClick={openStarMetalApp}
+              style={{
+                border: "1px solid gray",
+                width: "150px",
+                cursor: "pointer",
+              }}
+            >
+              <img src={StarMetalLogo} width={150} height={100} />
+            </div>
+          </Styled.FlowsContainer> */}
         </>
       ) : (
         <Alert color="info" style={{ marginLeft: "10px" }}>
