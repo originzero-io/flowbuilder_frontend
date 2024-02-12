@@ -1,5 +1,5 @@
 import store from "index";
-import BaseCustomNode from "../nodes/BaseCustom.node";
+import BaseCustomNode from "../nodes/BaseCustom.node.jsx";
 
 // return {"node_type": NodeComponent}
 export const createCustomNodeObject = (systemNodes) => {
