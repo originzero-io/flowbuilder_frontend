@@ -52,7 +52,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write '**/*.{js,jsx,json}'",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pm2": "pm2 start vite --name frontend --watch"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
