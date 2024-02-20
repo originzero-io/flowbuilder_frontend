@@ -178,7 +178,7 @@ const NodeGod = ({ self, children }) => {
           style={{
             background: serverData.color,
             position: "absolute",
-            bottom: "-15px",
+            bottom: "-20px",
           }}
         >
           {serverData.message}
