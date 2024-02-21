@@ -63,7 +63,7 @@ export default function MathVariables({ node, dispatcher }) {
       {variables.map((variable, i) => (
         <VariableContainerStyled key={variable}>
           <VariableLabelStyled>Variable {1 + i}: </VariableLabelStyled>
-          <InputStyled style={{ width: "40%", marginRight: "6px" }} defaultValue={variable} />
+          <InputStyled style={{ width: "40%", marginRight: "6px" }} value={variable} />
           <BsXCircleFill
             style={{ fontSize: "16px", cursor: "pointer" }}
             onClick={() => deleteVariable(variable)}
