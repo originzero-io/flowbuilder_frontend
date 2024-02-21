@@ -19,7 +19,13 @@ function TriggerInputHandleForm({ node, dispatcher }) {
   const { trigHandles } = node.data;
 
   const onChangeTriggerInputActiveHandler = (event) => {
-    dispatcher({ type: "updateTriggerHandles", payload: event });
+    dispatcher({
+      type: "updateTriggerHandles",
+      payload: {
+        name: event.target.name,
+        value: event.target.checked,
+      },
+    });
   };
 
   const addNewTrigHandler = (event) => {
@@ -67,7 +73,12 @@ function TriggerAttributeForm({ node, dispatcher }) {
   const { triggerAttributes } = node.data;
 
   const onChangeTriggerAttributesHandler = (event) => {
-    dispatcher({ type: "updateTriggerAttributes", payload: event });
+    dispatcher({
+      type: "updateTriggerAttributes",
+      payload: {
+        value: event.target.value,
+      },
+    });
   };
 
   return (

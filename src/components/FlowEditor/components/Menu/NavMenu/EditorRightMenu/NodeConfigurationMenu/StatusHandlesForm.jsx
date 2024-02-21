@@ -21,10 +21,22 @@ export default function StatusHandlesForm({ node, dispatcher }) {
   const { statusHandles } = node.data;
   const { inputs, outputs } = statusHandles;
   const onChangeNodeInputsHandler = (event) => {
-    dispatcher({ type: "updateInputStatusHandles", payload: event });
+    dispatcher({
+      type: "updateInputStatusHandles",
+      payload: {
+        name: event.target.name,
+        value: event.target.checked,
+      },
+    });
   };
   const onChangeNodeOutputsHandler = (event) => {
-    dispatcher({ type: "updateOutputStatusHandles", payload: event });
+    dispatcher({
+      type: "updateOutputStatusHandles",
+      payload: {
+        name: event.target.name,
+        value: event.target.checked,
+      },
+    });
   };
   return (
     <Wrapper>

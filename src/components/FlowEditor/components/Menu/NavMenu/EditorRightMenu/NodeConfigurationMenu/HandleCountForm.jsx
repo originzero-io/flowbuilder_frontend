@@ -6,7 +6,13 @@ import * as Styled from "./NodeConfigMenu.style";
 export default function DynamicHandlesForm({ node, dispatcher }) {
   const { targetCount, sourceCount, dynamicInput, dynamicOutput } = node.data.ioEngine;
   const handleCountChange = (event) => {
-    dispatcher({ type: "updateHandleCount", payload: event });
+    dispatcher({
+      type: "updateHandleCount",
+      payload: {
+        name: event.target.name,
+        value: event.target.value,
+      },
+    });
   };
   return (
     <Form style={Styled.FormStyle}>

@@ -38,7 +38,7 @@ function nodeConfigReducer(node, { type, payload }) {
             ...node.data.statusHandles,
             inputs: {
               ...node.data.statusHandles.inputs,
-              [payload.target.name]: payload.target.checked,
+              [payload.name]: payload.value,
             },
           },
         },
@@ -53,7 +53,7 @@ function nodeConfigReducer(node, { type, payload }) {
             ...node.data.statusHandles,
             outputs: {
               ...node.data.statusHandles.outputs,
-              [payload.target.name]: payload.target.checked,
+              [payload.name]: payload.value,
             },
           },
         },
@@ -64,7 +64,7 @@ function nodeConfigReducer(node, { type, payload }) {
         ...node,
         data: {
           ...node.data,
-          triggerAttributes: payload.target.value,
+          triggerAttributes: payload.value,
         },
       };
       break;
@@ -75,7 +75,7 @@ function nodeConfigReducer(node, { type, payload }) {
           ...node.data,
           ioEngine: {
             ...node.data.ioEngine,
-            [payload.target.name]: Number(payload.target.value),
+            [payload.name]: Number(payload.value),
           },
         },
       };
@@ -140,7 +140,7 @@ function nodeConfigReducer(node, { type, payload }) {
           ...node.data,
           trigHandles: {
             ...node.data.trigHandles,
-            [payload.target.name]: payload.target.checked,
+            [payload.name]: payload.value,
           },
         },
       };
