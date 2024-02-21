@@ -18,7 +18,7 @@ const NodeMenuWrapper = styled.div`
   border-radius: 4px;
   width: 60%;
   padding: 2px;
-  color: #65cd1a;
+  color: ${(props) => (props.nodeType === "TRIGGER" ? "#65cd1a" : "#A6B3E8")};
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
   font-size: 16px;
 `;
@@ -54,7 +54,7 @@ export default function NodeMenu({ self }) {
     dispatch(toggleNodeConfigurationMenu({ element: self, state: true }));
   };
   return (
-    <NodeMenuWrapper>
+    <NodeMenuWrapper nodeType={self.type}>
       <NodeMenuList onClick={openConfigurationMenu}>
         <MdSettings />
       </NodeMenuList>
