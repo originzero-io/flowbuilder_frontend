@@ -26,12 +26,14 @@ function TriggerInputHandleForm({ node, dispatcher }) {
     event.preventDefault();
 
     const trigName = prompt("Enter trig name: ");
-    const currentTrigHandles = Object.keys(trigHandles);
+    if (trigName) {
+      const currentTrigHandles = Object.keys(trigHandles);
 
-    if (currentTrigHandles.includes(trigName)) {
-      notificationHelper.warn("There are already trig in that name.");
-    } else {
-      dispatcher({ type: "addTriggerHandle", payload: trigName });
+      if (currentTrigHandles.includes(trigName)) {
+        notificationHelper.warn("There are already trig in that name.");
+      } else {
+        dispatcher({ type: "addTriggerHandle", payload: trigName });
+      }
     }
   };
 

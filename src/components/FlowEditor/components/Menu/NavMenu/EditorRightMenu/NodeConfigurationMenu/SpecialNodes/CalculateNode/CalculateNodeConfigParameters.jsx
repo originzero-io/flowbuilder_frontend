@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { addStyles, EditableMathField } from "react-mathquill";
+/* eslint-disable no-alert */
+import { useEffect, useState } from "react";
+import { EditableMathField, addStyles } from "react-mathquill";
 import "./MathField.css";
 import MathKeyboard from "./MathKeyboard";
+import MathVariables from "./MathVariables";
 
 addStyles();
 
@@ -11,7 +13,7 @@ export default function CalculateNodeConfigParameters({ node, dispatcher }) {
 
   useEffect(() => {
     setLatex(node.data.configParameters.formula);
-  }, [node]);
+  }, [node.data]);
 
   const handleChange = (mathFieldInstance) => {
     setLatex(mathFieldInstance.latex());
@@ -37,6 +39,8 @@ export default function CalculateNodeConfigParameters({ node, dispatcher }) {
       />
 
       <MathKeyboard mathField={mathField} />
+
+      <MathVariables node={node} dispatcher={dispatcher} />
 
       {/* <div className="math-latex" id="latex" value={latex}>
         {latex}

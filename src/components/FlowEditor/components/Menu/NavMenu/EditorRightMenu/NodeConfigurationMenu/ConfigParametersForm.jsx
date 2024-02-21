@@ -1,25 +1,7 @@
 import { Col, Form, FormGroup, Label } from "reactstrap";
-import styled from "styled-components";
 import * as Styled from "./NodeConfigMenu.style";
 import CalculateNodeConfigParameters from "./SpecialNodes/CalculateNode/CalculateNodeConfigParameters";
 
-// const InputWrapper = styled.div`
-//   color: #a8a8a8;
-//   border-radius: 4px;
-// `;
-// const InputStyled = styled.input`
-//   border-radius: 4px;
-//   width: 100%;
-//   padding: 6px;
-//   padding-left: 10px;
-//   background-color: #262626;
-//   border: 1px solid #3a3a3a;
-//   color: #c1c1c1;
-//   outline: none;
-//   &:focus {
-//     border: 1px solid #43b104;
-//   }
-// `;
 export default function ConfigParametersForm({ node, dispatcher }) {
   const { configParameters } = node.data;
   const parameterEntries = Object.entries(configParameters);

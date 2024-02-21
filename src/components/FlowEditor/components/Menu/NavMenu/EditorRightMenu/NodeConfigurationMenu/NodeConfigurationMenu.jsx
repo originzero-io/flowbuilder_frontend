@@ -80,6 +80,29 @@ function nodeConfigReducer(node, { type, payload }) {
         },
       };
       break;
+    case "addInputParameter":
+      newNode = {
+        ...node,
+        data: {
+          ...node.data,
+          inputParameters: {
+            ...node.data.inputParameters,
+            ...payload,
+          },
+        },
+      };
+      break;
+    case "deleteInputParameter":
+      newNode = {
+        ...node,
+        data: {
+          ...node.data,
+          inputParameters: {
+            ...payload,
+          },
+        },
+      };
+      break;
     case "freezeHandle":
       newNode = {
         ...node,
