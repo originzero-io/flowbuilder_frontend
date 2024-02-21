@@ -182,15 +182,14 @@ const ButtonStyled = styled.div`
   }
 `;
 const NodeId = styled.div`
-  position: absolute;
-  bottom: 0px;
   width: 100%;
   background: #393939;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
   padding: 7px;
   color: #a6b3e8;
-  margin-left: -12px;
   text-align: center;
+  margin-bottom: 10px;
+  border-radius: 4px;
 `;
 
 export default function NodeConfigurationMenu() {
@@ -218,6 +217,7 @@ export default function NodeConfigurationMenu() {
 
   return (
     <div>
+      <NodeId>{node.id}</NodeId>
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "18px" }}>
         <ButtonStyled type="cancel" onClick={onClosePanelHandler}>
           Cancel
@@ -256,7 +256,6 @@ export default function NodeConfigurationMenu() {
       ) : (
         <ConfigParametersForm node={node} dispatcher={nodeConfigDispatch} />
       )}
-      <NodeId>{node.id}</NodeId>
     </div>
   );
 }
