@@ -21,10 +21,8 @@ export default function CalculateNodeConfigParameters({ node, dispatcher }) {
     dispatcher({
       type: "updateConfigParameters",
       payload: {
-        target: {
-          name: "formula",
-          value: mathFieldInstance.latex(),
-        },
+        name: "formula",
+        value: mathFieldInstance.latex(),
       },
     });
   };

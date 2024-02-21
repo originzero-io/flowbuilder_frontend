@@ -24,7 +24,7 @@ function nodeConfigReducer(node, { type, payload }) {
           ...node.data,
           configParameters: {
             ...node.data.configParameters,
-            [payload.target.name]: payload.target.value,
+            [payload.name]: payload.value,
           },
         },
       };

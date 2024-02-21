@@ -7,10 +7,11 @@ export default function ConfigParametersForm({ node, dispatcher }) {
   const parameterEntries = Object.entries(configParameters);
 
   const onChangeConfigParametersHandler = (event, inputType) => {
-    if (inputType === "number") {
-      event.target.value = parseInt(event.target.value, 10);
-    }
-    dispatcher({ type: "updateConfigParameters", payload: event });
+    const value = inputType === "number" ? parseInt(event.target.value, 10) : event.target.value;
+    dispatcher({
+      type: "updateConfigParameters",
+      payload: { name: event.target.name, value: value },
+    });
   };
 
   return (
