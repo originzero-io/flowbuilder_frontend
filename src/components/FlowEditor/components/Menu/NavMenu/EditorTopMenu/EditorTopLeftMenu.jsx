@@ -67,7 +67,7 @@ const EditorTopLeftMenu = () => {
       <CompanyLogo size={50} />
       <div onClick={goToHomePage}>
         <Styled.MenuItem>
-          <BiHomeAlt2 style={{ color: "#43b104", fontSize: "2.5vmin" }} />
+          <BiHomeAlt2 style={{ color: "#c1c1c1", fontSize: "2.5vmin" }} />
         </Styled.MenuItem>
       </div>
 

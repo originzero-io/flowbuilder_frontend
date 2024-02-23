@@ -40,7 +40,7 @@ const FlowTopMenuWrapper = styled.div`
   height: 5%;
   width: 100%;
   background: #2d2d2d;
-  color: #43b104;
+  color: #c1c1c1;
   display: flex;
   justify-content: space-between;
   align-items: center;
