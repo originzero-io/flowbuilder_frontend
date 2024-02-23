@@ -36,10 +36,6 @@ const propTypes = {
 // prettier-ignore
 const keys = [
   {
-    text: "\\frac{1}{\\sqrt{2}}\\cdot 2",
-    latex: "\\frac{1}{\\sqrt{2}}\\cdot 2",
-  },
-  {
     text: "\\left(\\right)^2",
     latex: "\\left(\\right)^2",
   },
@@ -54,6 +50,34 @@ const keys = [
   {
     text: "\\sqrt[]{}",
     latex: "\\sqrt[]{ }",
+  },
+  {
+    text: "\\left|\\right|",
+    latex: "\\left|\\right|",
+  },
+  {
+    text: "\\log _{ }\\left(\\right)",
+    latex: "\\log _{ }\\left(\\right)",
+  },
+  {
+    text: "ln",
+    latex: "\\ln \\left(\\right)",
+  },
+  {
+    text: "e^{ }",
+    latex: "e^{ }",
+  },
+  {
+    text: "\\pi",
+    latex: "\\pi",
+  },
+  {
+    text: "\\theta",
+    latex: "\\theta",
+  },
+  {
+    text: "\\infty",
+    latex: "\\infty",
   },
   {
     text: "sum",
@@ -80,8 +104,12 @@ const keys = [
     latex: "\\int _{ }^{ }",
   },
   {
-    text: "ln",
-    latex: "\\ln \\left(\\right)",
+    text: "lim",
+    latex: "\\lim _{x\\to \\infty }\\left(\\right)",
+  },
+  {
+    text: "\\frac{\\partial }{\\partial x}",
+    latex: "\\frac{\\partial }{\\partial x}\\left(\\right)",
   },
   {
     text: "\\frac{d}{dx}",

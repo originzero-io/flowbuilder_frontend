@@ -177,8 +177,8 @@ const FlowPage = () => {
 
             {nodeConfigurationMenu.state && (
               <Panel
-                defaultSize={30}
-                minSize={30}
+                defaultSize={40}
+                minSize={40}
                 style={{
                   backgroundColor: "#2d2d2d",
                   color: "whitesmoke",
