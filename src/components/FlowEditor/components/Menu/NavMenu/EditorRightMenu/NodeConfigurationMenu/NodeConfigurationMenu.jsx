@@ -1,16 +1,17 @@
 import React, { useEffect, useState, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useFlowContext } from "context/FlowDataProvider";
 import { deSyncNode, setNodeConfigData } from "store/reducers/flow/flowElementsSlice";
 import notificationHelper from "utils/ui/notificationHelper";
 import styled from "styled-components";
 import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
+import GlobalButtonStyled from "components/StyledComponents/Button";
 import ConfigParametersForm from "./ConfigParametersForm";
 import StatusHandlesForm from "./StatusHandlesForm";
 import TriggerForm from "./TriggerForm";
 import HandleCountForm from "./HandleCountForm";
 import FrozenHandlesForm from "./FrozenHandlesForm";
 import IncomersOutgoers from "./IncomersOutgoers";
-import { useFlowContext } from "context/FlowDataProvider";
 
 function nodeConfigReducer(node, { type, payload }) {
   let newNode;
@@ -167,21 +168,6 @@ const ConfigurationTab = styled.div`
   border-bottom: ${({ active }) => active && "1px solid #c1c1c1"};
   color: ${({ active }) => !active && "gray"};
 `;
-
-const ButtonStyled = styled.div`
-  border-radius: 4px;
-  background-color: ${({ type }) => (type === "save" ? "rgba(85, 243, 29, 0.2)" : "#393939")};
-  color: ${({ type }) => (type === "save" ? "#65cd1a" : "#c1c1c1")};
-  width: 60px;
-  text-align: center;
-  font-size: 14px;
-  padding: 2px;
-  margin: 2px;
-  cursor: pointer;
-  &:hover {
-    background-color: ${({ type }) => (type === "save" ? "rgba(85, 243, 29, 0.4)" : "#4f4f4f")};
-  }
-`;
 const NodeId = styled.div`
   width: 100%;
   background: #393939;
@@ -223,12 +209,10 @@ export default function NodeConfigurationMenu() {
     <div>
       <NodeId>{node.id}</NodeId>
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "18px" }}>
-        <ButtonStyled type="cancel" onClick={onClosePanelHandler}>
-          Cancel
-        </ButtonStyled>
-        <ButtonStyled type="save" onClick={onSubmitHandler}>
+        <GlobalButtonStyled onClick={onClosePanelHandler}>Cancel</GlobalButtonStyled>
+        <GlobalButtonStyled type="primary" onClick={onSubmitHandler}>
           Save
-        </ButtonStyled>
+        </GlobalButtonStyled>
       </div>
 
       <ConfigurationTabWrapper>
