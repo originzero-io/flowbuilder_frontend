@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setNodeConfigData } from "store/reducers/flow/flowElementsSlice";
+import { deSyncNode, setNodeConfigData } from "store/reducers/flow/flowElementsSlice";
 import notificationHelper from "utils/ui/notificationHelper";
 import styled from "styled-components";
 import { toggleNodeConfigurationMenu } from "store/reducers/menuSlice";
@@ -10,6 +10,7 @@ import TriggerForm from "./TriggerForm";
 import HandleCountForm from "./HandleCountForm";
 import FrozenHandlesForm from "./FrozenHandlesForm";
 import IncomersOutgoers from "./IncomersOutgoers";
+import { useFlowContext } from "context/FlowDataProvider";
 
 function nodeConfigReducer(node, { type, payload }) {
   let newNode;
@@ -197,6 +198,7 @@ export default function NodeConfigurationMenu() {
   const [node, nodeConfigDispatch] = useReducer(nodeConfigReducer, nodeConfigurationMenu.element);
   const dispatch = useDispatch();
   const { dynamicInput, dynamicOutput } = node.data.ioEngine;
+  const { setSyncedFlow } = useFlowContext();
 
   const [configurationTab, setConfigurationTab] = useState("Values");
 
@@ -207,6 +209,8 @@ export default function NodeConfigurationMenu() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     dispatch(setNodeConfigData(node));
+    dispatch(deSyncNode({ id: node.id }));
+    setSyncedFlow(false);
     notificationHelper.success("Configurations saved");
   };
 

@@ -233,7 +233,7 @@ export const flowElementsSlice = createSlice({
         }
       });
     },
-    syncAllNodes(state, { payload }) {
+    syncAllNodes(state) {
       state.nodes.forEach((node) => {
         node.data.syncedWithServer = true;
       });

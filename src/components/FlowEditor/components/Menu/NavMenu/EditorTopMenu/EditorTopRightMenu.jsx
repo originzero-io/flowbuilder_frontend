@@ -133,8 +133,6 @@ export default function EditorTopRightMenu() {
   };
 
   const executeFlowHandler = async () => {
-    dispatch(syncAllNodes());
-    setSyncedFlow(true);
     const { nodes, edges, viewport } = reactFlowInstance.toObject();
     const nodesSynced = nodes.map((node) => ({
       ...node,
@@ -166,6 +164,8 @@ export default function EditorTopRightMenu() {
 
       flowExecutorEvent.saveGUISettings(gui, (response) => {
         notificationHelper.success(response);
+        dispatch(syncAllNodes());
+        setSyncedFlow(true);
       });
       flowExecutorEvent.executeFlow({ nodes: nodesSynced, edges });
     }

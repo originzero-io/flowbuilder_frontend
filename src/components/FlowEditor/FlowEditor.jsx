@@ -67,10 +67,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
   const onNodesDelete = useCallback((deletedNode) => {
     setSyncedFlow(false);
   }, []);
-  const onNodeDrag = useCallback((event, node, nodes) => {
-    dispatch(deSyncNode({ id: node.id }));
-    setSyncedFlow(false);
-  }, []);
 
   const onEdgesDelete = useCallback((deletedEdge) => {
     setSyncedFlow(false);
@@ -133,6 +129,7 @@ export default function FlowEditor({ reactFlowWrapper }) {
     if (!(type === "")) {
       const newNode = createNode(type, initialPosition);
       dispatch(addNewNode(newNode));
+      setSyncedFlow(false);
     }
   };
 
@@ -164,7 +161,6 @@ export default function FlowEditor({ reactFlowWrapper }) {
       nodes={flowElements.nodes}
       edges={flowElements.edges}
       onNodesChange={onNodesChange}
-      onNodeDrag={onNodeDrag}
       onNodesDelete={onNodesDelete}
       onEdgesChange={onEdgesChange}
       onEdgesDelete={onEdgesDelete}

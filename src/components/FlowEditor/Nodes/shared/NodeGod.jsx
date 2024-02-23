@@ -95,30 +95,7 @@ const NodeGod = ({ self, children }) => {
     any: "gray",
   });
   const { flowExecutorEvent } = useFlowExecutorSocket();
-  const { setSyncedFlow, executionStatus } = useFlowContext();
-
-  const prevSelfValuesRef = useRef({ data: null });
-
-  useEffect(() => {
-    const prevValues = prevSelfValuesRef.current;
-
-    // İlk açılışta node synced değilse flowa bunu bildir
-    if (!self.data.syncedWithServer) {
-      setSyncedFlow(false);
-    }
-
-    // Nodun data objesinde bir değişiklik olduğunda işlemi gerçekleştir
-    if (prevValues.data && prevValues.data !== self.data) {
-      // Datanın içerisindeki syncedWithServer değerinin değişimini dikkate alma
-
-      if (!self.data.syncedWithServer !== prevValues.data.syncedWithServer) {
-        dispatch(deSyncNode({ id: self.id }));
-        setSyncedFlow(false);
-      }
-    }
-
-    prevSelfValuesRef.current = { data: self.data };
-  }, [self.data]);
+  const { executionStatus } = useFlowContext();
 
   useEffect(() => {
     updateNodeInternals(self.id);
